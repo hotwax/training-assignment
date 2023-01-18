@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 class My_LinkedList{
   
   Node head,curr;
