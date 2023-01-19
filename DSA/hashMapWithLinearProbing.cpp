@@ -32,17 +32,17 @@ class HashMap
     // size
     int size;
 
-    // Dummy Node
+    // counting collisions
 
-    HashNode *dummy;
+    int collisions;
 
 public:
     // Constructor
-    HashMap()
+    HashMap(int capacity)
     {
-        capacity = 20;
+        this->capacity = capacity;
         size = 0;
-
+        collisions = 0;
         // creating hashNode array
         arr = new HashNode *[capacity];
 
@@ -52,10 +52,6 @@ public:
         {
             arr[i] = NULL;
         }
-
-        // dummy node
-
-        dummy = new HashNode(-1, -1);
     }
 
     // print function
@@ -82,22 +78,30 @@ public:
         int hashIndex = hashCode(key);
 
         // finding the free space
+        // bool if collision detected
+        bool collisionExist = false;
+
+        // Using linear Probing
 
         while (arr[hashIndex] != NULL && arr[hashIndex]->key != key)
         {
-
+            collisionExist = true;
             // incrementing hashIndex and again making a hashcode for indexing
             hashIndex++;
             hashIndex %= capacity;
+        }
+
+        if (collisionExist)
+        {
+            this->collisions++;
         }
 
         if (arr[hashIndex] == NULL)
         {
             // increasing the size of HashMap
             size++;
+            arr[hashIndex] = temp;
         }
-
-        arr[hashIndex] = temp;
     }
 
     // switch case function for insertion
@@ -231,6 +235,13 @@ public:
             }
         }
     }
+
+    // function to see collision
+
+    void seeCollision()
+    {
+        cout << this->collisions;
+    }
 };
 
 // Print function
@@ -244,12 +255,17 @@ void print(string message)
 int main()
 {
 
-    HashMap map;
+    int capacity;
+    print("Enter the capacity for which the key will be moded to and array will crested on this - ");
+    cin >> capacity;
+    HashMap map(capacity);
 
     // while for menu --
 
     while (true)
     {
+        print("Collisions - ");
+        map.seeCollision();
         print("Your Hash Map -- ");
         map.display();
 
