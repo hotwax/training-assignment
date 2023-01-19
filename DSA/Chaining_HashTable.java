@@ -1,8 +1,7 @@
 import java.util.*;
 public class Chaining_HashTable {
     LinkedList<Pair> arr[];
-    int total=0;
-    int capacity;
+    int m,n;
     int collisions;
     class Pair{
         int key;
@@ -12,20 +11,22 @@ public class Chaining_HashTable {
             val=v;
         }
     }
-    public Chaining_HashTable(Integer x){
-        capacity=x;
+    public Chaining_HashTable(Integer m){
+        this.m=m;
+        this.n=n;
         collisions=0;
-        arr=new LinkedList[x];
+        //creating bucket of size m
+        arr=new LinkedList[m];
     }
     public int getCollisions(){
         int bucketElements=0;
-        
+        // total no. of collision is equal to the 
+        //sibmisiion of size of all linkedList(chains) excluding first element
         for(int i=0;i<arr.length;i++){
               if(arr[i]!=null && arr[i].size()>1){
                   bucketElements++;
               }
         }
-        System.out.println(bucketElements+" - "+total);
         return bucketElements;
     }
     public void put(Integer k, Integer v){
@@ -33,50 +34,60 @@ public class Chaining_HashTable {
         if(arr[hashValue]==null){
             arr[hashValue]=new LinkedList<>();
         }
-        
-            for(Pair p:arr[hashValue]){
-                if(p.key==k){
-                    p.val=v;
-                    return;
-                }
+        for(Pair p:arr[hashValue]){
+            if(p.key==k){
+                p.val=v;
+                return;
             }
-            total++;
-            arr[hashValue].add(new Pair(k,v));
+        }
+        //adding key to chain
+        arr[hashValue].add(new Pair(k,v));
         
-        //if(arr[hashValue]!=null && arr[hashValue].key!=k) collisions++;
     }
     public int hash(Integer k){
-        //System.out.println(k+"---"+k.hashCode()%capacity);
-        return (k.hashCode()%capacity);
+        return (k.hashCode()%m);
     }
-    public int get(Integer k){
-        //System.out.println(" "+arr[hash(k)]key);
+    public int get(Integer k){ //O(size of chain)
+        //iterate to chain stored at hash location to find value of provided key
+        
         for(Pair p:arr[hash(k)]){
             if(p.key==k) return p.val;
         }
         return -1;
     }
     public static void main(String args[]){
-        Chaining_HashTable map=new Chaining_HashTable(10);
-        int val=10,key=1;
-//        Set<Integer> s=new HashSet<>();
-//        Random rand =new Random();
-//        for(int i=0;i<10000;i++){
-//            int r=rand.nextInt((1000000-1)+1)+1;
-//            if(!s.contains(r))
-//            map.put(r, val++);
-//            s.add(r);
-//        }
-        map.put(1,10);
-        map.put(2,20);
-        map.put(3,30);
-        map.put(11,40);
-        map.put(8686, 789);
-        System.out.println(map.get(1));
-        System.out.println(map.get(2));
-        System.out.println(map.get(3));
-        System.out.println(map.get(11));
-        System.out.println(map.getCollisions());
+        
+        Scanner sc=new Scanner(System.in);
+        boolean flag=true;
+        System.out.println("Enter size of bucket");
+        int m=sc.nextInt();
+        Chaining_HashTable map=new Chaining_HashTable(m);
+        System.out.println("\n1: put");
+        System.out.println("2: get");
+        System.out.println("3: delete");
+        System.out.println("4: get collisions");
+        System.out.println("5: terminate the program");
+        while(flag){
+            int x=sc.nextInt();
+            switch(x){
+                case 1:// put
+                    System.out.println("enter key and value to put");
+                    map.put(sc.nextInt(),sc.nextInt());
+                    break;
+               case 2:// get
+                    System.out.println("enter key");
+                    System.out.println("value= "+map.get(sc.nextInt()));
+                    break;
+               case 4:// get collision
+                    System.out.println("total collisions= "+map.getCollisions());
+                    break;
+               case 5:// terminate program
+                    flag=false;
+                    break;
+               default:
+                   System.out.println("invalid input");
+            }
+        }
     }
 }
 
