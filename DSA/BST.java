@@ -10,9 +10,8 @@ class BST
 	{
 		root=insert(root,x);
 	}
-	BST insert(BST temp,int x)
+	BST insert(BST temp,int x) //insert  node in BST
 	{
-		
 		if(temp==null)
 		{
 			temp=new BST();
@@ -28,7 +27,7 @@ class BST
 	
 		return temp;
 	}
-	void inOrder(BST temp)
+	void inOrder(BST temp) // inorder to print it in sorted way
 	{
 		if(temp==null)return;
 		inOrder(temp.left);
@@ -36,7 +35,7 @@ class BST
 		inOrder(temp.right);
 	}
 
-	void delete(int x)
+	void delete(int x)  //deletion main function
 	{
 	root=delete(root,x);	
 	}
@@ -63,7 +62,7 @@ class BST
         return root;
     }
  
-    int subTree(BST temp)
+    int subTree(BST temp) //to fetch a subTree
     {
         int a= temp.data;
         while (temp.left != null) {
@@ -73,7 +72,7 @@ class BST
         return a;
     }
 	
-	BST search(BST temp,int x)
+	BST search(BST temp,int x) //helping function to check if an element is present or not
 	{
 		if(temp!=null)
 		{
@@ -87,20 +86,20 @@ class BST
 		return null;
 	}
 	 
-	 boolean searchBST(int x)
+	 boolean searchBST(int x) //main function to search
 	 {
 		 BST temp=search(root,x);
 		 if(temp!=null)return true;
 		 else return false;
 	 }
 	 
-	void update(int pre,int nw)
+	void update(int pre,int nw) // update value of a node
 	{
 		delete(pre);
 		insert(nw);
 	}
 	
-	void showAll()
+	void showAll() //to display value
 	{
 		inOrder(root);
 		System.out.println();
