@@ -6,7 +6,7 @@ class linkedlist
 	
 	static linkedlist start=null;
 	
-    int countlinkedlist()
+    int countlinkedlist() //count nodes
     {
 	int c=0;
 	linkedlist temp=start;
@@ -18,7 +18,7 @@ class linkedlist
 	return c;
     }
 	
-	linkedlist msort(linkedlist a, linkedlist b)
+	linkedlist msort(linkedlist a, linkedlist b) //merge sort to merge two sorted linkedlist
     {
         linkedlist result;
         if (a == null)
@@ -37,18 +37,19 @@ class linkedlist
         }
         return result;
     }
-    void sort()
+    void sort() // main method to sort
 	{
 		start=split(start);
+		showAll();
 	}
-    linkedlist split(linkedlist h)
+    linkedlist split(linkedlist h) // to break a linkedlist into two parts
     {
         if (h == null || h.next == null) 
 		{
             return h;
         }
   
-        linkedlist a = getMiddle(h);
+        linkedlist a = getMiddle(h); // to find middle
         linkedlist b = a.next;
   
         a.next = null;
@@ -60,7 +61,7 @@ class linkedlist
         return sortedlist;
     }
   
-    public static linkedlist getMiddle(linkedlist head)
+    public static linkedlist getMiddle(linkedlist head) //method to find middle
     {
         if (head == null)
             return head;
@@ -75,7 +76,7 @@ class linkedlist
     }
 
 	
-	void update(int pre,int nw)
+	void update(int pre,int nw) // method to update a linkedlist
 	{
 		linkedlist temp=start;
 		while(temp!=null && temp.data!=pre)
@@ -88,7 +89,7 @@ class linkedlist
 			temp.data=nw;
 	}
 	
-    void showAll()
+    void showAll() //method to print 
    {
 	linkedlist temp=start;
 	while(temp!=null)
@@ -99,7 +100,7 @@ class linkedlist
 	    System.out.println();
 	}
 	
-	void deleteAtB()
+	void deleteAtB() //deletion at beginning
     {
 	if(start==null)
 	{
@@ -111,7 +112,7 @@ class linkedlist
 	temp1=null;
     }
 	
-	void deleteAtE()
+	void deleteAtE() // deletion at ending
 	{
 	if(start==null || start.next==null)
 	{
@@ -129,7 +130,7 @@ class linkedlist
 	temp1=null;
 	}
 	 
-	 void deleteAtSP(int p)
+	 void deleteAtSP(int p) // deletion at specific point
 	{
 	if(p<=1)
 	{
@@ -153,7 +154,7 @@ class linkedlist
 	t=null;
 	}
 	
-	void insertAtB(int x)
+	void insertAtB(int x) // insertion at beginning
 	{
 	linkedlist temp=new linkedlist();
 	temp.data=x;
@@ -161,7 +162,7 @@ class linkedlist
 	start=temp;
 	}
 	
-	void insertAtE(int x)
+	void insertAtE(int x) // insertion at ending
 	{
 	if(start==null)
 	{
@@ -178,7 +179,7 @@ class linkedlist
 	temp1.next=temp;
 	}
 	
-	boolean search(int x)
+	boolean search(int x) // searching an element 
 	{
 		linkedlist temp=start;
 		while(temp!=null)
@@ -190,7 +191,7 @@ class linkedlist
 	}
 	
 	
-	void insertAtSP(int x,int p)
+	void insertAtSP(int x,int p) // insertion at specific point
 	{
 	if(p<=1)
 	{
@@ -232,7 +233,8 @@ class Demo
 	System.out.println("7.Update");
 	System.out.println("8.Search");
 	System.out.println("9.ShowAll");
-	System.out.println("10.Exit");
+	System.out.println("10. Sort");
+	System.out.println("11.Exit");
 	System.out.println("===========================");
 	
 	Scanner sc=new Scanner(System.in);
@@ -299,6 +301,10 @@ class Demo
 		break;
 		
 		case 10:
+		start.sort();
+		break;
+		
+		case 11:
 		System.exit(0);
 		break;
 		
