@@ -44,6 +44,18 @@ public class Chaining_HashTable {
         arr[hashValue].add(new Pair(k,v));
         
     }
+    public void delete(Integer k){
+        int hashValue=hash(k);
+        if(arr[hashValue]==null) return ;
+        //iterating to find matching key
+        for(Pair p:arr[hashValue]){
+            //if found pair with given key, then removing it
+            if(p.key==k){
+                arr[hashValue].remove(p);
+                return;
+            }
+        }
+    }
     public int hash(Integer k){
         return (k.hashCode()%m);
     }
@@ -77,6 +89,11 @@ public class Chaining_HashTable {
                case 2:// get
                     System.out.println("enter key");
                     System.out.println("value= "+map.get(sc.nextInt()));
+                    break;
+               case 3:
+                   System.out.println("enter key to delete");
+                   map.delete(map.get(sc.nextInt()));
+                    System.out.println("value deleted successfully");
                     break;
                case 4:// get collision
                     System.out.println("total collisions= "+map.getCollisions());
