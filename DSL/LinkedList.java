@@ -1,10 +1,10 @@
 
-class LinkNode
+class Node
 {
  int val; //Data to be stored
- LinkNode next; //Reference to next node
+ Node next; //Reference to next node
 
- public LinkNode(int val, LinkNode next)
+ public Node(int val, Node next)
  {
   this.val=val;
   this.next=next;
@@ -12,7 +12,7 @@ class LinkNode
 }
 public class LinkedList
 {
- LinkNode HEAD,TAIL; //References to first and last nodes
+ Node HEAD,TAIL; //References to first and last nodes
  int size;
 
  public int size()
@@ -21,7 +21,7 @@ public class LinkedList
  }
  public void add(int val)
  {
-  LinkNode newNode= new LinkNode(val,null);  //create new node
+  Node newNode= new Node(val,null);  //create new node
   
   if(this.HEAD==null)   
    this.HEAD=newNode;   //if no nodes are there, attach it to head, else
@@ -36,7 +36,7 @@ public class LinkedList
   if(index<0||index>=size)
    throw new IndexOutOfBoundsException("Invalid index");
    
-  LinkNode newNode= new LinkNode(val,null); //create new node
+  Node newNode= new Node(val,null); //create new node
 
   if(index==0)
   {
@@ -45,7 +45,7 @@ public class LinkedList
   }
   else
   {
-   LinkNode curr=HEAD;
+   Node curr=HEAD;
    for(int i=0;i<index-1;i++)
     curr=curr.next;     //find the predecessor
 
@@ -60,7 +60,7 @@ public class LinkedList
    throw new IndexOutOfBoundsException("Invalid index");
   
 
-  LinkNode curr=HEAD;       
+  Node curr=HEAD;       
   if(index==0)         //if first element is to be deleted, simple move forward HEAD
    HEAD=HEAD.next;
   else
@@ -86,7 +86,7 @@ public class LinkedList
   if(index<0||index>=size)
    throw new IndexOutOfBoundsException("Invalid index");
   
-  LinkNode curr=HEAD;
+  Node curr=HEAD;
   for(int i=0;i<index;i++)   //traverse index times
    curr=curr.next;
 
@@ -98,7 +98,7 @@ public class LinkedList
   if(index<0||index>=size)
    throw new IndexOutOfBoundsException("Invalid index");
   
-  LinkNode curr=HEAD;
+  Node curr=HEAD;
   for(int i=0;i<index;i++)   //traverse index times
    curr=curr.next;
 
@@ -109,7 +109,7 @@ public class LinkedList
  {
   int arr[]=new int[size];  //create a new array
 
-  LinkNode curr=HEAD;
+  Node curr=HEAD;
   for(int i=0;i<size;i++)   //traverse and dump all elements of linked lists on it
   {
    arr[i]=curr.val;
@@ -119,7 +119,7 @@ public class LinkedList
  }
  public int search(int val)
  {
-  LinkNode curr=HEAD;
+  Node curr=HEAD;
   for(int i=0;i<size;i++)  //perform linear search 
   {
    if(curr.val==val)
