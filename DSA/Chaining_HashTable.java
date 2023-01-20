@@ -44,6 +44,14 @@ public class Chaining_HashTable {
         arr[hashValue].add(new Pair(k,v));
         
     }
+    public void traverse(){
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==null)continue;
+            for(Pair p: arr[i])
+                System.out.print("["+p.key+","+p.val+"] ");
+        }
+        System.out.println();
+    }
     public void delete(Integer k){
         int hashValue=hash(k);
         if(arr[hashValue]==null) return ;
@@ -67,8 +75,7 @@ public class Chaining_HashTable {
         }
         return -1;
     }
-    public static void main(String args[]){
-        
+    public static void main(String args[]){        
         Scanner sc=new Scanner(System.in);
         boolean flag=true;
         System.out.println("Enter size of bucket");
@@ -77,8 +84,9 @@ public class Chaining_HashTable {
         System.out.println("\n1: put");
         System.out.println("2: get");
         System.out.println("3: delete");
-        System.out.println("4: get collisions");
-        System.out.println("5: terminate the program");
+        System.out.println("4: traverse");
+        System.out.println("5: get collisions");
+        System.out.println("6: terminate the program");
         while(flag){
             int x=sc.nextInt();
             switch(x){
@@ -90,21 +98,30 @@ public class Chaining_HashTable {
                     System.out.println("enter key");
                     System.out.println("value= "+map.get(sc.nextInt()));
                     break;
-               case 3:
+               case 3: //delete
                    System.out.println("enter key to delete");
                    map.delete(map.get(sc.nextInt()));
                     System.out.println("value deleted successfully");
                     break;
-               case 4:// get collision
+               case 4:// traverse
+                    System.out.println("traversal= ");
+                    map.traverse();
+                    break;
+               case 5:// get collision
                     System.out.println("total collisions= "+map.getCollisions());
                     break;
-               case 5:// terminate program
+               case 6:// terminate program
                     flag=false;
                     break;
                default:
                    System.out.println("invalid input");
             }
         }
+//          map.put(1,10);
+//          map.put(2,20);
+//          map.put(8,80);
+//          map.delete(8);
+//          map.traverse();
     }
 }
 
