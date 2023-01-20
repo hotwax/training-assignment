@@ -46,10 +46,12 @@ public class DoubleHashing {
 
   static int hash(int key){
      int hash1 = (key+"").hashCode() % maxSize;
-     int hash2 = justSmallerPrimeNum();
+     int hash2 = (prime-(key%prime));
 
      return (hash1+hash2)%maxSize;
   }
+ 
+  static int prime = justSmallerPrimeNum();
 
   static int justSmallerPrimeNum(){
      int x=0;
