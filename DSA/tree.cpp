@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Creating Node Class with data, left and right
+
 class Node
 {
 public:
@@ -64,6 +66,8 @@ void addVoidEle(Node *&root)
 
 // for deleting element
 
+// Getting mininmum element node from tree
+
 Node *getMin(Node *root)
 {
     Node *temp = root;
@@ -75,6 +79,8 @@ Node *getMin(Node *root)
 
     return temp;
 }
+
+// main function to delete node
 
 Node *deleteNode(Node *&root, int key)
 {
@@ -172,6 +178,8 @@ void isExist(Node *root)
     return;
 }
 
+// Preorder Traversal
+
 void preorder(Node *root)
 {
     if (!root)
@@ -182,6 +190,8 @@ void preorder(Node *root)
     preorder(root->left);
     preorder(root->right);
 }
+
+// PostOrder Traversal
 
 void postorder(Node *root)
 {
@@ -194,6 +204,8 @@ void postorder(Node *root)
     postorder(root->right);
     cout << root->data << " ";
 }
+
+// Inorder Traversal
 
 void inorder(Node *root)
 {
@@ -210,7 +222,11 @@ void inorder(Node *root)
 int main()
 {
 
+    // Iniatializing root node with NULL
+
     Node *root = NULL;
+
+    // While for Menu
 
     while (true)
     {

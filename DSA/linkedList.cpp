@@ -461,9 +461,11 @@ void sort(Node *&head, Node *&tail)
 
 int main()
 {
-
+    // Initializing linked list head and tail
     Node *head = NULL;
     Node *tail = NULL;
+
+    // While for menu
 
     while (true)
     {

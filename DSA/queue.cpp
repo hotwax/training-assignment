@@ -60,6 +60,8 @@ public:
         rear = newNode;
     }
 
+    // Function for dequeue Operation
+
     void dequeue()
     {
         if (front == NULL)
@@ -77,6 +79,8 @@ public:
 
         delete temp;
     }
+
+    // Update Function
 
     void updateWithKey()
     {
@@ -105,6 +109,8 @@ public:
             temp->data = data;
         }
     }
+
+    // Search Function
 
     void search()
     {
@@ -153,6 +159,7 @@ public:
 
 int main()
 {
+    // Creating queue Object
 
     Queue q;
 
