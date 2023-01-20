@@ -37,7 +37,8 @@ class LinkedListDemo
       default: defaultMessage(); break;
     }
    }
-   }catch(Exception e)
+   }
+   catch(Exception e)
    {
     System.out.print(e.getMessage());
    }
@@ -58,13 +59,13 @@ class LinkedListDemo
   ll.addAtIndex(index,val);
   System.out.println(val+" added successfully at index "+index);
  }
- public static void deleteIndex(){
+ public static void deleteIndex() throws Exception{
   System.out.println("Enter the index on which to be deleted:");
   int index=scanner.nextInt();
   ll.deleteIndex(index);
   System.out.println(index+" index deleted successfully.");
  }
- public static void updateIndex(){
+ public static void updateIndex() throws Exception {
   System.out.println("Enter the index which to be updated:");
   int index=scanner.nextInt();
   System.out.println("Enter the new value to added:");
@@ -72,7 +73,7 @@ class LinkedListDemo
   ll.updateIndex(index,val);
   System.out.println(index+" index updated successfully to "+val);
  }
- public static void getAtIndex(){
+ public static void getAtIndex() throws Exception {
   System.out.println("Enter the index which to be fetched:");
   int index=scanner.nextInt();
   int val=ll.get(index);
