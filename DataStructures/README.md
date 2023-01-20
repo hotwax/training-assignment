@@ -2,12 +2,13 @@
 
 ## To compile the files, run:
 
-```cd DataStructures
+```
+cd DataStructures
 
-javac Libraries/src/\*.java -d Libraries/classes -classpath Libraries/classes
+javac Libraries/src/*.java -d Libraries/classes -classpath Libraries/classes
 (to compile library classes)
 
-javac Demos/src/\*.java -d Demos/classes -classpath Libraries/classes;Demos/classes
+javac Demos/src/*.java -d Demos/classes -classpath Libraries/classes;Demos/classes
 (to compile Demo classes)
 ```
 
