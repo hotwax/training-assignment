@@ -1,9 +1,9 @@
 import java.util.*;
  class QueuE
 {
-	int CAPACITY=100;
-	int f=-1;
-	int r=-1;
+	int CAPACITY=100; // maxium capacity
+	int f=-1; // variable which points the front 
+	int r=-1; //variable to point the last inserted element
 	int queue[]=new int[CAPACITY];
 	
 	void showAll() //to display queue elements
@@ -20,7 +20,7 @@ import java.util.*;
  	System.out.println();
     }
 	
-	boolean search(int x)// to search elements
+	boolean search(int x)// to check if elements is present or not
 	{
 	for(int i=f;i<=r;i++)
 	{
@@ -65,8 +65,8 @@ import java.util.*;
 	{
 		if(isFull())
 		{
-						System.out.println("Queue is full");
-						return;
+		System.out.println("Queue is full");
+		return;
 		}
 		if(f==-1)f++;
 		queue[++r]=x;
@@ -88,7 +88,7 @@ import java.util.*;
 			return;
 		}
 	}
-			System.out.println("Data not fount");	
+	System.out.println("Data not fount");	
 	}
 }
 class Demo
@@ -151,7 +151,6 @@ class Demo
 		System.out.println("Invalid");
 		break;
 	}
-	
 	}
 
 	}
