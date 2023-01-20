@@ -1,18 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// hash Node Class
+// hash Node Class with next pointer so it can act as a linked list
 
 class HashNode
 {
 public:
     int value;
     int key;
+    HashNode *next;
 
     HashNode(int key, int value)
     {
         this->key = key;
         this->value = value;
+        this->next = NULL;
     }
 };
 
@@ -73,38 +75,50 @@ public:
 
     void insertNode(int key, int value)
     {
-        HashNode *temp = new HashNode(key, value);
-
+        HashNode *newNode = new HashNode(key, value);
+        // Generating HashIndex
         int hashIndex = hashCode(key);
 
         // finding the free space
-        // bool if collision detected
-        bool collisionExist = false;
 
-        // Using linear Probing
+        // Using Chaining collision resolution technique
 
-        while (arr[hashIndex] != NULL && arr[hashIndex]->key != key)
+        if (!arr[hashIndex])
         {
-            collisionExist = true;
-            // incrementing hashIndex and again making a hashcode for indexing
-            hashIndex++;
-            hashIndex %= capacity;
-        }
-
-        if (collisionExist)
-        {
-            this->collisions++;
-        }
-
-        if (arr[hashIndex] == NULL)
-        {
-            // increasing the size of HashMap
+            arr[hashIndex] = newNode;
             size++;
-            arr[hashIndex] = temp;
+            return;
+        }
+        else
+        {
+            collisions++;
+            HashNode *temp = arr[hashIndex];
+
+            // Traversing through the linkedlist
+
+            while (temp->next != NULL)
+            {
+                if (temp->key == key)
+                {
+                    temp->value = value;
+                    return;
+                }
+                temp = temp->next;
+            }
+
+            // checking if first node itself has the key
+
+            if (temp->key == key)
+            {
+                temp->value = value;
+                return;
+            }
+            size++;
+            temp->next = newNode;
         }
     }
 
-    // switch case function for insertion
+    // function for insertion for use in Menu
 
     void insertForMenu()
     {
@@ -126,30 +140,35 @@ public:
     {
         int hashIndex = hashCode(key);
 
-        // finding the node
+        HashNode *temp = arr[hashIndex];
+        HashNode *prev = NULL;
 
-        while (arr[hashIndex] != NULL)
+        // if it exists on the head
+
+        if (temp->key == key)
         {
-            if (arr[hashIndex]->key == key)
-            {
-                // removing the key value pair node
-                HashNode *temp = arr[hashIndex];
-
-                arr[hashIndex] = NULL;
-
-                // decrementing size
-                size--;
-
-                return temp->value;
-            }
-            else
-            {
-                // if not found
-
-                hashIndex++;
-                hashIndex %= capacity;
-            }
+            arr[hashIndex] = temp->next;
+            int value = temp->value;
+            delete temp;
+            return value;
         }
+
+        // if it does not exists on the head
+
+        while (temp != NULL)
+        {
+            if (temp->key == key)
+            {
+
+                int value = temp->value;
+                prev->next = temp->next;
+                delete temp;
+                return value;
+            }
+            prev = temp;
+            temp = temp->next;
+        }
+
         cout << "endl"
              << "Key Not Found.";
         return 0;
@@ -172,21 +191,20 @@ public:
     int getValueInMap(int key)
     {
         int hashIndex = hashCode(key);
-        // checking if loop does not exeed the size
-        int count = 0;
 
         // finding the key for value
 
-        while (arr[hashIndex] != NULL && count < capacity)
-        {
-            if (arr[hashIndex]->key == key)
-            {
-                return arr[hashIndex]->value;
-            }
+        HashNode *temp = arr[hashIndex];
 
-            hashIndex++;
-            hashIndex %= capacity;
+        while (temp != NULL)
+        {
+            if (temp->key == key)
+            {
+                return temp->value;
+            }
+            temp = temp->next;
         }
+
         cout << endl
              << "Key Not found.";
         return 0;
@@ -221,18 +239,30 @@ public:
         cout << sizeOfMap();
     }
 
+    // for displaying the map
+
     void display()
     {
-        //			cout<<endl<<"Your HashMap -- ";
         cout << endl;
         for (int i = 0; i < capacity; i++)
         {
-
+            cout << i << " -- ";
             if (arr[i] != NULL)
             {
-                cout << arr[i]->key << " -> " << arr[i]->value;
-                cout << endl;
+                HashNode *temp = arr[i];
+
+                while (temp)
+                {
+                    cout << "[" << temp->key << "," << temp->value << "]";
+                    temp = temp->next;
+
+                    if (temp)
+                    {
+                        cout << " -> ";
+                    }
+                }
             }
+            cout << endl;
         }
     }
 
@@ -255,6 +285,9 @@ void print(string message)
 int main()
 {
 
+    // Takin the capacity from the user for the hashMap and iniatilizing hasmap
+    // object from HashMap class
+
     int capacity;
     print("Enter the capacity for which the key will be moded to and array will crested on this - ");
     cin >> capacity;
@@ -274,13 +307,15 @@ int main()
         print("Enter 1 for Add Key Value operation");
         print("Enter 2 for Delete with key operation");
         print("Enter 3 for Size of Map operation");
-        print("Enter 4 for Get value From Map operation");
+        print("Enter 4 for Get Value From Map operation");
 
         print("Enter 5 to exit");
         cout << endl;
         int input;
         cin >> input;
         int data;
+
+        // on different input values
 
         switch (input)
         {
