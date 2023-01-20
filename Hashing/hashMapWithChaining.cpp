@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+using namespace std::chrono;
 
 // hash Node Class with next pointer so it can act as a linked list
 
@@ -98,6 +99,7 @@ public:
 
             while (temp->next != NULL)
             {
+                this->collisions++;
                 if (temp->key == key)
                 {
                     temp->value = value;
@@ -285,6 +287,12 @@ void print(string message)
 int main()
 {
 
+    // For Calculating Time
+
+    auto start = high_resolution_clock::now();
+
+    // -- end For Calculating Time
+
     // Takin the capacity from the user for the hashMap and iniatilizing hasmap
     // object from HashMap class
 
@@ -294,8 +302,8 @@ int main()
     HashMap map(capacity);
 
     // while for menu --
-
-    while (true)
+    bool menu = true;
+    while (menu)
     {
         print("Collisions - ");
         map.seeCollision();
@@ -333,7 +341,18 @@ int main()
             break;
 
         default:
-            return 0;
+            menu = false;
         }
     }
+
+    // For calculating Time
+
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
+
+    // end For Calculating Time
 }

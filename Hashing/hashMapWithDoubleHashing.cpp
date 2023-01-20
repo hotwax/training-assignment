@@ -1,8 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 using namespace std::chrono;
-// Linear Probing
-// hash Node Class 
+
+// Creating HashMap with quadratic Probing
+
+// Double hashing is a collision resolution technique used in hash
+//  tables. It works by using two hash functions to compute two
+//  different hash values for a given key. The first hash function
+//  is used to compute the initial hash value, and the second hash
+//  function is used to compute the step size for the probing sequence.
+
+/*
+Double hashing can be done using :
+(hash1(key) + i * hash2(key)) % TABLE_SIZE
+Here hash1() and hash2() are hash functions and TABLE_SIZE
+is size of hash table.
+(We repeat by increasing i when collision occurs)
+*/
+
+/*
+
+A popular second hash function is
+hash2(key) = PRIME – (key % PRIME)
+where PRIME is a prime smaller than the TABLE_SIZE.
+
+*/
+
+// hash Node Class
 
 class HashNode
 {
@@ -37,6 +61,14 @@ class HashMap
 
     int collisions;
 
+    // prime number less than the capacity
+
+    int prime;
+
+    // sieve of eratosthenes for marking all prime number less than the capcity
+
+    vector<bool> isPrime;
+
 public:
     // Constructor
     HashMap(int capacity)
@@ -53,6 +85,14 @@ public:
         {
             arr[i] = NULL;
         }
+
+        // seting prime value
+
+        this->setSieve();
+
+        prime = capacity - 1;
+        while (isPrime[prime] != 1)
+            prime--;
     }
 
     // print function
@@ -63,11 +103,33 @@ public:
              << message;
     }
 
-    // hash function to find index for a key
+    // making sieve for prime numbers
 
-    int hashCode(int key)
+    void setSieve()
+    {
+
+        vector<bool> temp(capacity, true);
+        this->isPrime = temp;
+
+        isPrime[0] = isPrime[1] = 1;
+        for (long long i = 2; i * i <= this->capacity; i++)
+            if (isPrime[i] == 1)
+                for (long long j = i * i; j <= capacity; j += i)
+                    isPrime[j] = 0;
+    }
+
+    // first hash function
+
+    int hash1(int key)
     {
         return key % capacity;
+    }
+
+    // second hash function
+
+    int hash2(int key)
+    {
+        return (prime - (key % prime));
     }
 
     // function for value insertion --
@@ -76,20 +138,26 @@ public:
     {
         HashNode *temp = new HashNode(key, value);
 
-        int hashIndex = hashCode(key);
+        int hashIndex = (hash1(key) + hash2(key)) % capacity;
 
         // finding the free space
+        // bool if collision detected
+        bool collisionExist = false;
 
-        // Using linear Probing
+        // Using Double hashing
 
         while (arr[hashIndex] != NULL && arr[hashIndex]->key != key)
         {
-            this->collisions++;
+            collisionExist = true;
             // incrementing hashIndex and again making a hashcode for indexing
             hashIndex++;
-            hashIndex %= capacity;
+            hashIndex = hashIndex % capacity;
         }
 
+        if (collisionExist)
+        {
+            this->collisions++;
+        }
 
         if (arr[hashIndex] == NULL)
         {
@@ -97,8 +165,6 @@ public:
             size++;
             arr[hashIndex] = temp;
         }
-
-        // if already exit update it
 
         // updating the value on particular key
 
@@ -128,7 +194,9 @@ public:
 
     int deleteNode(int key)
     {
-        int hashIndex = hashCode(key);
+        // (hash1(key) + i * hash2(key)) % TABLE_SIZE  --> HashIndex
+
+        int hashIndex = (hash1(key) + hash2(key)) % capacity;
 
         // finding the node
 
@@ -150,8 +218,10 @@ public:
             {
                 // if not found
 
+                // using quadratic probing
+
                 hashIndex++;
-                hashIndex %= capacity;
+                hashIndex = hashIndex % capacity;
             }
         }
         cout << "endl"
@@ -175,13 +245,11 @@ public:
 
     int getValueInMap(int key)
     {
-        int hashIndex = hashCode(key);
-        // checking if loop does not exeed the size
-        int count = 0;
 
+        int hashIndex = (hash1(key) + hash2(key)) % capacity;
         // finding the key for value
 
-        while (arr[hashIndex] != NULL && count < capacity)
+        while (arr[hashIndex] != NULL)
         {
             if (arr[hashIndex]->key == key)
             {
@@ -189,7 +257,7 @@ public:
             }
 
             hashIndex++;
-            hashIndex %= capacity;
+            hashIndex = hashIndex % capacity;
         }
         cout << endl
              << "Key Not found.";
@@ -231,12 +299,12 @@ public:
         cout << endl;
         for (int i = 0; i < capacity; i++)
         {
-
+            cout << i << " -- ";
             if (arr[i] != NULL)
             {
                 cout << arr[i]->key << " -> " << arr[i]->value;
-                cout << endl;
             }
+            cout << endl;
         }
     }
 
@@ -258,21 +326,19 @@ void print(string message)
 
 int main()
 {
-	
-	// For Calculating Time
+    // For Calculating Time
 
     auto start = high_resolution_clock::now();
 
     // -- end For Calculating Time
-
     int capacity;
     print("Enter the capacity for which the key will be moded to and array will crested on this - ");
     cin >> capacity;
     HashMap map(capacity);
 
     // while for menu --
-	bool menu = true;
-    while(menu)
+    bool menu = true;
+    while (menu)
     {
         print("Collisions - ");
         map.seeCollision();
@@ -311,7 +377,7 @@ int main()
             menu = false;
         }
     }
-    
+
     // For calculating Time
 
     auto stop = high_resolution_clock::now();
@@ -322,4 +388,6 @@ int main()
          << duration.count() << " microseconds" << endl;
 
     // end For Calculating Time
+
+    return 0;
 }
