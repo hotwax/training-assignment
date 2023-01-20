@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class CustomHashMap {
+public class Chaning {
 
   public static class HashMap<K, V> {
     public class HMNode {
