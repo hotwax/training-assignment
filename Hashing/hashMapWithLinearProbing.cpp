@@ -102,6 +102,15 @@ public:
             size++;
             arr[hashIndex] = temp;
         }
+
+        // if already exit update it
+
+        // updating the value on particular key
+
+        if (arr[hashIndex]->key == key)
+        {
+            arr[hashIndex]->value = value;
+        }
     }
 
     // switch case function for insertion
