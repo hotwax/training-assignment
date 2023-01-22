@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Double_Hashing {
-    int m,n;
+    int m,n,PM;
     Pair arr[];
     int collisions;
     boolean[] deleted;
@@ -19,13 +19,25 @@ public class Double_Hashing {
         collisions=0;
         arr=new Pair[m];
         deleted=new boolean[m];
+        PM=getPrime();
     }
     public int hash1(Integer k){
         return (k.hashCode()%m);
     }
     public int hash2(Integer k){
-        //here hash2 should never return 0, thsts why
-        return (m-1)-(k.hashCode()%(m-1));
+        //here hash2 should never return 0, thats why
+        return m-(k.hashCode()%(m));
+    }
+    public int getPrime(){
+        for (int i = m - 1; i >= 1; i--) { 
+            int cnt = 0;
+            for (int j = 2; j * j <= i; j++)
+                if (i % j == 0)
+                    cnt++;
+            if (cnt == 0)
+                return i;
+        }
+        return 3;
     }
     public void put(int k, int v){
         int probe=hash1(k);
@@ -112,13 +124,7 @@ public class Double_Hashing {
         Double_Hashing map=new Double_Hashing(n,m);
         int val=10,key=1;
         Set<Integer> s=new HashSet<>();
-        Random rand =new Random();
-        for(int i=0;i<100000;i++){
-            int r=rand.nextInt((1000000-1)+1)+1;
-            if(!s.contains(r))
-            map.put(r, val++);
-            s.add(r);
-        }
+
         System.out.println("\n1: put");
         System.out.println("2: get");
         System.out.println("3: delete");
