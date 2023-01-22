@@ -7,6 +7,7 @@ public class Compare_Hashing {
         Chaining_HashTable ch=new Chaining_HashTable(m);
         Linear_Probing lp=new Linear_Probing(n,m);
         Quadratic_Probing qp=new Quadratic_Probing(n,m);
+        Random_Probing rp=new Random_Probing(n,m);
         Double_Hashing db=new Double_Hashing(n,m);
         
         int val=10;
@@ -51,6 +52,17 @@ public class Compare_Hashing {
         System.out.println("time required= "+(endTime-startTime));
         System.out.println();
         
+        //calculating time and collisions for random probing
+        val=10;
+        startTime = System.currentTimeMillis();
+        for(int i=0;i<n;i++){
+            int r=rand.nextInt((1000000-1)+1)+1;
+                rp.put(r, val++);
+        }
+        endTime = System.currentTimeMillis();
+        System.out.println("Random probing= "+rp.collisions);
+        System.out.println("time required= "+(endTime-startTime));
+        System.out.println();
         
         //calculating time and collisions for double hashing
         val=10;
