@@ -9,6 +9,6 @@ class HashAlgorithm
   
   if(result<0) result*=(-1);
   
-  return result%capacity;
+  return result;
  }
 }
