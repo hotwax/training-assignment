@@ -126,6 +126,7 @@ class Demo
 	{
 	int a,b;
 	DoublePro c=new DoublePro(50);
+	long l1=System.currentTimeMillis();
 	while(true)
 	{
 	System.out.println("===========================");
@@ -174,7 +175,8 @@ class Demo
 		break;
 		
 		case 6:		
-		System.out.println("Time in mili seconds"+System.currentTimeMillis());
+		long l2=System.currentTimeMillis();
+		System.out.println("Time in mili seconds "+(l2-l1));
 		break;
 		
 		case 7:		
