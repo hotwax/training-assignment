@@ -1,4 +1,4 @@
-class LinearProbing
+class DoubleHashing
 {
  ProbingNode[] hashTable;
  int capacity;
@@ -15,9 +15,10 @@ class LinearProbing
   int i=1;
   while(true)
   {
-   if(hashTable[(hashKey+i)%capacity]==null)
+   int newKey=(hashKey+HashAlgorithm.calculateHash(i))%capacity;
+   if(hashTable[newKey]==null)
    {
-    hashTable[(hashKey+i)%capacity]=new ProbingNode(val);
+    hashTable[newKey]=new ProbingNode(val);
     break;
    }
    i++;
@@ -40,7 +41,7 @@ class LinearProbing
   long endTime=System.currentTimeMillis();
   return new HashingStat(collisions,endTime-startTime);
  }
- public LinearProbing(int capacity)
+ public DoubleHashing(int capacity)
  {
   this.hashTable=new ProbingNode[capacity];
   this.capacity=capacity;
