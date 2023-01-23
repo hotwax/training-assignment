@@ -136,6 +136,14 @@ public:
 
     void insertNode(int key, int value)
     {
+
+        // if hashmap is full
+        if (this->size >= capacity)
+        {
+            print("HashMap is Full");
+            return;
+        }
+
         HashNode *temp = new HashNode(key, value);
 
         int hashIndex = (hash1(key) + hash2(key)) % capacity;

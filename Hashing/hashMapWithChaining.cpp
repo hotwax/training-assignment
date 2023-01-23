@@ -76,6 +76,14 @@ public:
 
     void insertNode(int key, int value)
     {
+
+        // if hashmap is full
+        if (this->size >= capacity)
+        {
+            print("HashMap is Full");
+            return;
+        }
+
         HashNode *newNode = new HashNode(key, value);
         // Generating HashIndex
         int hashIndex = hashCode(key);

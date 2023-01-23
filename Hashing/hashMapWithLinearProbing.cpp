@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 // Linear Probing
-// hash Node Class 
+// hash Node Class
 
 class HashNode
 {
@@ -74,6 +74,14 @@ public:
 
     void insertNode(int key, int value)
     {
+
+        // if hashmap is full
+        if (this->size >= capacity)
+        {
+            print("HashMap is Full");
+            return;
+        }
+
         HashNode *temp = new HashNode(key, value);
 
         int hashIndex = hashCode(key);
@@ -89,7 +97,6 @@ public:
             hashIndex++;
             hashIndex %= capacity;
         }
-
 
         if (arr[hashIndex] == NULL)
         {
@@ -258,8 +265,8 @@ void print(string message)
 
 int main()
 {
-	
-	// For Calculating Time
+
+    // For Calculating Time
 
     auto start = high_resolution_clock::now();
 
@@ -271,8 +278,8 @@ int main()
     HashMap map(capacity);
 
     // while for menu --
-	bool menu = true;
-    while(menu)
+    bool menu = true;
+    while (menu)
     {
         print("Collisions - ");
         map.seeCollision();
@@ -311,7 +318,7 @@ int main()
             menu = false;
         }
     }
-    
+
     // For calculating Time
 
     auto stop = high_resolution_clock::now();
