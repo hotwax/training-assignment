@@ -1,4 +1,4 @@
-class QuadraticProbing
+class QuadraticProbing implements CollisionHandler
 {
  ProbingNode[] hashTable;
  int capacity;
@@ -27,17 +27,7 @@ class QuadraticProbing
   
   return 1;
  }
- public HashingStat test(int numOfOperations)
- {
-  long startTime=System.currentTimeMillis();
-  int collisions=0;
 
-  for(int i=0;i<numOfOperations;i++)
-   collisions+=add((int)(Math.random()*1000000));
-
-  long endTime=System.currentTimeMillis();
-  return new HashingStat(collisions,endTime-startTime);
- }
  public QuadraticProbing(int capacity)
  {
   this.hashTable=new ProbingNode[capacity];

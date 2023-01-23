@@ -1,4 +1,4 @@
-class LinearProbing
+class LinearProbing implements CollisionHandler
 {
  ProbingNode[] hashTable;
  int capacity;
@@ -25,21 +25,7 @@ class LinearProbing
   return 1;
  }
 
- public HashingStat test(int numOfOperations)
- {
-  int allValues[]=new int[numOfOperations];
-  for(int i=0;i<numOfOperations;i++)
-   allValues[i]=(int)(Math.random()*1000000);
-  
-  long startTime=System.currentTimeMillis();
-  int collisions=0;
 
-  for(int i=0;i<numOfOperations;i++)
-   collisions+=add(allValues[i]);
-
-  long endTime=System.currentTimeMillis();
-  return new HashingStat(collisions,endTime-startTime);
- }
  public LinearProbing(int capacity)
  {
   this.hashTable=new ProbingNode[capacity];

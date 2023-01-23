@@ -9,13 +9,14 @@ public class Main
   System.out.println("Enter number of Insertions:");
   int insertions= scanner.nextInt();
   System.out.println("Comuting for all collisions techniques:");
-  HashingStat hs1= new Chaining(capacity).test(insertions);
-  System.out.println("Chaining:          Collisions= "+hs1.numOfCollisions+"     Time taken="+hs1.timeTakenInMillis+" ms");
-  HashingStat hs2= new LinearProbing(capacity).test(insertions);
-  System.out.println("Linear Probing:    Collisions= "+hs2.numOfCollisions+"     Time taken="+hs2.timeTakenInMillis+" ms");
-  HashingStat hs3= new QuadraticProbing(capacity).test(insertions);
-  System.out.println("Quadratic Probing: Collisions= "+hs3.numOfCollisions+"     Time taken="+hs3.timeTakenInMillis+" ms");
-  HashingStat hs4= new DoubleHashing(capacity).test(insertions);
-  System.out.println("Double Hashing   : Collisions= "+hs4.numOfCollisions+"     Time taken="+hs4.timeTakenInMillis+" ms");
+  System.out.println("Technique           Collisions   Time taken(ns)");
+  HashingStat hs1= HashMapTester.test(new Chaining(capacity),insertions);  
+  System.out.println("Chaining:           "+hs1.numOfCollisions+"         "+hs1.timeTakenInMillis);
+  HashingStat hs2= HashMapTester.test(new LinearProbing(capacity),insertions);
+  System.out.println("Linear Probing:     "+hs2.numOfCollisions+"         "+hs2.timeTakenInMillis);
+  HashingStat hs3= HashMapTester.test(new QuadraticProbing(capacity),insertions);
+  System.out.println("Quadratic Probing:  "+hs3.numOfCollisions+"         "+hs3.timeTakenInMillis);
+  HashingStat hs4= HashMapTester.test(new DoubleHashing(capacity),insertions);
+  System.out.println("Double Hashing   :  "+hs4.numOfCollisions+"         "+hs4.timeTakenInMillis);
  }
 }

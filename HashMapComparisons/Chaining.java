@@ -8,7 +8,7 @@ class ChainNode
   this.next=null;
  }
 };
-public class Chaining
+public class Chaining implements CollisionHandler
 {
  ChainNode[] hashTable;
  int capacity;
@@ -39,17 +39,7 @@ public class Chaining
    }
    return 1;
  }
- public HashingStat test(int numOfOperations)
- {
-  long startTime=System.currentTimeMillis();
-  int collisions=0;
-
-  for(int i=0;i<numOfOperations;i++)
-   collisions+=add((int)(Math.random()*1000000));
-
-  long endTime=System.currentTimeMillis();
-  return new HashingStat(collisions,endTime-startTime);
- }
+ 
  public Chaining(int capacity)
  {
   this.hashTable=new ChainNode[capacity];

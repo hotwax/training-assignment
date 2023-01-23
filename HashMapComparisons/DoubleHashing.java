@@ -1,4 +1,4 @@
-class DoubleHashing
+class DoubleHashing implements CollisionHandler
 {
  ProbingNode[] hashTable;
  int capacity;
@@ -11,11 +11,11 @@ class DoubleHashing
    hashTable[hashKey]=new ProbingNode(val);
    return 0;
   }
-  int ex=HashAlgorithm.calculateHash(hashKey+2328);
+  int secondHash=HashAlgorithm.calculateSecondHash(val);
   int i=1;
   while(true)
   {
-   int newKey=(hashKey+(i*ex)%capacity)%capacity;
+   int newKey=Math.abs((hashKey+i*secondHash)%capacity)%capacity;
    if(hashTable[newKey]==null)
    {
     hashTable[newKey]=new ProbingNode(val);
@@ -26,21 +26,7 @@ class DoubleHashing
   return 1;
  }
 
- public HashingStat test(int numOfOperations)
- {
-  int allValues[]=new int[numOfOperations];
-  for(int i=0;i<numOfOperations;i++)
-   allValues[i]=(int)(Math.random()*1000000);
-  
-  long startTime=System.currentTimeMillis();
-  int collisions=0;
 
-  for(int i=0;i<numOfOperations;i++)
-   collisions+=add(allValues[i]);
-
-  long endTime=System.currentTimeMillis();
-  return new HashingStat(collisions,endTime-startTime);
- }
  public DoubleHashing(int capacity)
  {
   this.hashTable=new ProbingNode[capacity];
