@@ -1,102 +1,179 @@
-public class RandomProbing {
-    static class Pair {
-        int key;
-        int value;
-        Pair next;
+import java.util.*;
 
-        Pair(int key, int value) {
-            this.key = key;
-            this.value = value;
-            this.next = null;
+class Node {
+    int key;
+    int value;
+
+    Node(int key, int value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+
+class RandomProbing {
+    Node[] table;
+    int capacity = 0;
+    int collision;
+    boolean remove[];
+
+    RandomProbing(int capacity) {
+        this.capacity = capacity;
+        table = new Node[capacity];
+        remove = new boolean[capacity];
+    }
+
+    void display() {
+        for (int i = 0; i < capacity; i++) {
+            if (table[i] != null) {
+                System.out.println("Key: " + table[i].key + " Value: " + table[i].value);
+            }
         }
     }
 
-    static class hashMap {
-        int size;
-        Pair[] arr;
-
-        hashMap(int size) {
-            this.size = size;
-            arr = new Pair[size];
-            for (int i = 0; i < size; i++) {
-                arr[i] = null;
-            }
-        }
-
-        //  Function to insert a key value pair in the hash map
-        public int hashFunction(int key) {
-            return key % size;
-        }
-
-        //  Function to insert a key value pair in the hash map
-        public void insert(int key, int value) {
-            int index = hashFunction(key);
-            Pair newNode = new Pair(key, value);
-            if (arr[index] == null) {
-                arr[index] = newNode;
-            } else {
-                Pair temp = arr[index];
-                while (temp.next != null) {
-                    temp = temp.next;
-                }
-                temp.next = newNode;
-            }
-        }
-
-        //  Function to search a key in the hash map
-        public void delete(int key) {
-            int index = hashFunction(key);
-            Pair temp = arr[index];
-            if (temp.key == key) {
-                arr[index] = temp.next;
-            } else {
-                while (temp.next != null) {
-                    if (temp.next.key == key) {
-                        temp.next = temp.next.next;
-                        break;
-                    }
-                    temp = temp.next;
-                }
-            }
-        }
-
-        //  Function to search a key in the hash map
-        public int search(int key) {
-            int index = hashFunction(key);
-            Pair temp = arr[index];
-            while (temp != null) {
-                if (temp.key == key) {
-                    return temp.value;
-                }
-                temp = temp.next;
-            }
-            return -1;
-        }
-
-        //       Function to get collision in Linear Probing
-        public int getCollision() {
-            int count = 0;
-            for (int i = 0; i < size; i++) {
-                if (arr[i] != null) {
-                    Pair temp = arr[i];
-                    while (temp.next != null) {
-                        count++;
-                        temp = temp.next;
-                    }
-                }
-            }
-            return count;
-        }
+    int hash(int key) {
+        return key % capacity;
     }
 
+    void insert(int key, int value) {
+        if (key % capacity > capacity) {
+            System.out.println("Key is greater than capacity");
+        }
+        int index = hash(key);
+        int random = 1;
+        while ((table[index] != null && table[index].key != key)) {
+            random = (int) (Math.random() * (capacity)) + 1;
+            index = (index + random) % random;
+        }
+        if (index != hash(key) || (table[index] != null && table[index].key == key)) {
+            collision++;
+        }
+        table[index] = new Node(key, value);
+        remove[index] = true;
+    }
+
+    void delete(int key) {
+        int index = hash(key);
+        int offset = 0;
+        int start = index;
+        while (table[index]!=null|| table[index].key != key){
+            offset = (int) (Math.random() * (capacity)) + 1;
+            index = (index + offset) % capacity;
+            if (start == index) {
+                System.out.println("Key not found");
+                return;
+            }
+        }
+        if(table[index] == null){
+            System.out.println("Key not found");
+            return;
+        }
+        remove[index] = false;
+        for(int i=0;i<capacity;i++){
+            System.out.print(remove[i]+" ");
+        }
+        System.out.println();
+    }
+
+    int get(int key) {
+        int index = hash(key);
+        int offset = 1;
+        int start = index;
+        while (true) {
+            if (table[index] != null && table[index].key == key) {
+                break;
+            }
+            index = (index + offset) % capacity;
+            if (start == index) {
+                System.out.println("Key not found");
+                return -1;
+            }
+        }
+        return table[index].value;
+    }
+    public void traverse(){
+        for(int i=0;i<capacity;i++){
+            if(table[i]==null || !remove[i])continue;
+            System.out.println("Key: "+table[i].key+" Value: "+table[i].value);
+        }
+        System.out.println();
+    }
+
+    int getCollision() {
+        return collision;
+    }
+}
+
+class hashMap {
     public static void main(String[] args) {
-        hashMap map = new hashMap(10);
-        map.insert(1, 10);
-        map.insert(2, 20);
-        map.insert(3, 30);
-        map.insert(4, 40);
-        map.insert(5, 50);
-        map.insert(6, 60);
-        map.insert(7, 70);
+        RandomProbing map = null;
+        int choice;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("--------- MENU ---------");
+            System.out.println("Press 0 : Create a new Hashmap");
+            System.out.println("Press 1 : Insert  Value");
+            System.out.println("Press 2 : Delete Value");
+            System.out.println("Press 3 : Display the Hashmap");
+            System.out.println("Press 4 : Get All Collisions");
+            System.out.println("Press 5 : To get Value from key");
+            System.out.println("Press 6 : Exit");
+            System.out.println("Enter your choice : ");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 0:
+                    System.out.print("Please Enter the size of the HashMap: ");
+                    map = new RandomProbing(sc.nextInt());
+                    break;
+                case 1:
+                    if (map == null) {
+                        System.out.println("Please create a new HashMap");
+                        break;
+                    } else {
+                        System.out.print("Please Enter the key: ");
+                        int key = sc.nextInt();
+                        System.out.print("Please Enter the value: ");
+                        int value = sc.nextInt();
+                        map.insert(key, value);
+                    }
+                    break;
+                case 2:
+                    if (map == null) {
+                        System.out.println("Please create a new HashMap");
+                        break;
+                    } else {
+                        System.out.print("Please Enter the key: ");
+                        map.delete(sc.nextInt());
+                        System.out.println("Deleted");
+                    }
+                    break;
+
+                case 3:
+                    if (map == null) {
+                        System.out.println("Please create a new HashMap");
+                        break;
+                    } else {
+                        map.display();
+                    }
+                    break;
+                case 4:
+                    if (map != null) {
+                        System.out.println("Number of collisions: " + map.getCollision());
+                    }
+                    break;
+                case 5:
+                    if (map != null) {
+                        System.out.print("Please Enter the key: ");
+                        int key = sc.nextInt();
+                        System.out.println("Value: " + map.get(key));
+                    }
+                    break;
+                case 6:
+                    System.out.println("Program Terminated");
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+                    break;
+            }
+        } while (choice != 6);
     }
 }
