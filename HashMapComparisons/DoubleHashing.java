@@ -11,11 +11,11 @@ class DoubleHashing
    hashTable[hashKey]=new ProbingNode(val);
    return 0;
   }
-
+  int ex=HashAlgorithm.calculateHash(hashKey+2328);
   int i=1;
   while(true)
   {
-   int newKey=(hashKey+HashAlgorithm.calculateHash(i))%capacity;
+   int newKey=(hashKey+(i*ex)%capacity)%capacity;
    if(hashTable[newKey]==null)
    {
     hashTable[newKey]=new ProbingNode(val);

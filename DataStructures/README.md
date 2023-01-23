@@ -21,29 +21,35 @@ cd DataStructures
 ### - LinkedList Demo:
 
 ```
-java -classpath Demos/classes;Libraries/demo LinkedListDemo
+java -classpath Demos/classes;Libraries/classes LinkedListDemo
 ```
 
 ### - Stack Demo:
 
 ```
-java -classpath Demos/classes;Libraries/demo StackDemo
+java -classpath Demos/classes;Libraries/classes StackDemo
 ```
 
 ### - Queue Demo:
 
 ```
-java -classpath Demos/classes;Libraries/demo QueueDemo
+java -classpath Demos/classes;Libraries/classes QueueDemo
 ```
 
 ### - BinarySearchTree Demo:
 
 ```
-java -classpath Demos/classes;Libraries/demo BinarySearchTreeDemo
+java -classpath Demos/classes;Libraries/classes BinarySearchTreeDemo
 ```
 
 ### - HashMap Demo:
 
 ```
-java -classpath Demos/classes;Libraries/demo HashMapDemo
+java -classpath Demos/classes;Libraries/classes HashMapDemo
+```
+
+### - Graph Demo:
+
+```
+java -classpath Demos/classes;Libraries/classes GraphDemo
 ```
