@@ -210,7 +210,7 @@ public:
 
         while (arr[hashIndex] != NULL)
         {
-            if (arr[hashIndex]->key == key)
+            if (arr[hashIndex] && arr[hashIndex]->key == key)
             {
                 // removing the key value pair node
                 HashNode *temp = arr[hashIndex];
@@ -259,7 +259,7 @@ public:
 
         while (arr[hashIndex] != NULL)
         {
-            if (arr[hashIndex]->key == key)
+            if (arr[hashIndex] && arr[hashIndex]->key == key)
             {
                 return arr[hashIndex]->value;
             }
