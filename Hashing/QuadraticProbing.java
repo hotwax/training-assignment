@@ -71,9 +71,9 @@ public class QuadraticProbing {
 
         public static void main(String[] args) {
             hashMap map = new hashMap(10001);
-            int z = 234579;
+            int z = 2345;
             Random rand = new Random();
-            for (int i = 1; i < 10000; i++) {
+            for (int i = z; i < 10000; i++) {
                 int r = rand.nextInt((1000000 - 1) + 1) + 1;
                 map.insert(r, i * 10);
             }

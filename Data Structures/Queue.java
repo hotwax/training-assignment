@@ -4,30 +4,32 @@
  *  type of the data to a generic type.
  */
 
-
 //Importing Scanner class for user input
 import java.util.Scanner;
 
 public class Queue {
     static class Node {
-        //        Data of the node
+        // Data of the node
         int data;
         // Pointer to the next node
         Node next;
-        Node(int data){
+
+        Node(int data) {
             this.data = data;
             this.next = null;
         }
     }
-    //    Create a scanner to take input from the user
+
+    // Create a scanner to take input from the user
     static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         // Create a blank linked list
         Node head = null;
         // Variable to store the choice of the user
         int choice;
         do {
-            //  Printing the menu for the user
+            // Printing the menu for the user
             System.out.println(" --------- MENU --------- ");
             System.out.println("Press 0 : Create a New Queue");
             System.out.println("Press 1 : Enqueue an element");
@@ -37,7 +39,7 @@ public class Queue {
             System.out.println("Press 5 : Exit");
             System.out.println("Enter your choice : ");
             choice = sc.nextInt();
-            //  Taking the choice from the user and performing the corresponding operation
+            // Taking the choice from the user and performing the corresponding operation
             switch (choice) {
                 case 0:
                     System.out.print("Please Enter the first Node Value: ");
@@ -54,6 +56,7 @@ public class Queue {
                 case 2:
                     System.out.println("Please Enter the Node Value: ");
                     int dequeuedElement = dequeue(head);
+                    System.out.println("Dequeued Element: " + dequeuedElement);
                     break;
                 case 3:
                     System.out.print("Please Enter the Node Value: ");
@@ -72,7 +75,6 @@ public class Queue {
 
     }
 
-
     private static Node enqueue(Node head, int nextInt) {
         Node temp = head;
         while (temp.next != null) {
@@ -81,8 +83,9 @@ public class Queue {
         temp.next = new Node(nextInt);
         return head;
     }
+
     private static int dequeue(Node head) {
-        if(head == null){
+        if (head == null) {
             System.out.println("Queue is empty");
             return -1;
         }
@@ -90,6 +93,7 @@ public class Queue {
         head = head.next;
         return dequeuedElement;
     }
+
     private static void updateElement(Node head, int nextInt) {
         Node temp = head;
         while (temp != null) {
@@ -113,11 +117,10 @@ public class Queue {
     }
 
     private static Node dequeue(Node head, int nextInt) {
-        if(head ==null){
+        if (head == null) {
             System.out.println("Queue is empty");
             return null;
-        }
-        else{
+        } else {
             Node temp = head;
             head = head.next;
             System.out.println("The deleted element is: " + temp.data);
@@ -126,11 +129,8 @@ public class Queue {
     }
 
     private static Node createQueue(int nextInt) {
-      Node head = new Node(nextInt);
+        Node head = new Node(nextInt);
         return head;
     }
 
-
 }
-
-
