@@ -21,7 +21,9 @@ public class MyGraph {
     //Traversals
     public void dfs(){
         boolean visited[]=new boolean[V];
-        dfs_main(0,visited);
+        for(int i=0;i<V;i++)
+            if(!visited[i])
+                dfs_main(i,visited);
         System.out.println();
     }
     public void dfs_main(int s, boolean visited[]){
@@ -33,8 +35,15 @@ public class MyGraph {
     }
     
     public void bfs(){
+        boolean visited[]=new boolean[V];
+        for(int i=0;i<V;i++){
+            if(!visited[i])
+                bfs_main(i);
+        }
+    }
+    public void bfs_main(int s){
         Queue<Integer> q=new LinkedList<>();
-        q.add(0);
+        q.add(s);
         boolean visited[]=new boolean[V];
         visited[0]=true;
         while(!q.isEmpty()){
