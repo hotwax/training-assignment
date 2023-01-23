@@ -118,7 +118,21 @@ public class LinkedList
  }
  public void sort()
  {
-  
+  int arr[]=getAll();
+  for(int i=0;i<arr.length;i++)
+   for(int j=i+1;j<arr.length;j++)
+    if(arr[i]>arr[j])
+    {
+     int tmp=arr[j];
+     arr[j]=arr[i];
+     arr[i]=tmp;
+    }
+  LinkedList newList=new LinkedList();
+  for(int i:arr)
+   newList.add(i);
+  this.HEAD=newList.HEAD;
+  this.TAIL=newList.TAIL;
+  this.size=newList.size;
  }
 
  public LinkedList()
