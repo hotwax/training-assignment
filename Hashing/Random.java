@@ -35,7 +35,10 @@ class RandomPro //random probeing
 	}
 	 void add(int key, int value) // program to insert new key value pair 
 	{
-		
+		if(key%CAP > CAP)
+		{
+			System.out.print("Not accepted");
+		}
         int hashcode=hash(key);
         int random=1; // this variable will randomly findout a index
         
