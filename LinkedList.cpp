@@ -3,8 +3,9 @@
 using namespace std ;
 
 
-class Node()
+class Node
 {
+    public:
     int data ;
     Node * next ;
     Node(int val)
@@ -148,60 +149,67 @@ void print(Node * head)
 {
     while(head!=NULL)
     {
-        cout<<head->data<<endl;
+        cout<<head->data<<" ";
         head=head->next ;
     }
+    cout<<endl;
 }
 int main()
 {
-    while(1){
-    cout<<"Linked List"<<endl<<"Select Option"<<endl;
-    cout<<"1. Add Element"<<endl<<"2. Delete Element"<<endl<<"3. Update List "<<endl<<"4. Sort the List"<<endl<<"5. Print List"<<endl<<"6. Exit";
-    int choice = 0 ;
-    cin>>choice;
-    switch(choice)
+    Node * head = NULL ;
+    while(1)
     {
-        case 1:
-        cout<<"Enter the value to be inserted"<<endl;
-        int val ; cin>>val ;
-        insert(head,val);
-
-        case 2:
-        cout<<"Delete Element by"<<endl<<"1. position"<<endl<<"2. Value"<<endl;
-        int ch = 0 ;
-        cin>>ch;
-        if(ch==2){
-            cout<<"Enter the Value of the Element to be deleted"<<endl;
+        cout<<"Linked List"<<endl<<"Select Option"<<endl;
+        cout<<"1. Add Element"<<endl<<"2. Delete Element"<<endl<<"3. Update List "<<endl<<"4. Sort the List"<<endl<<"5. Print List"<<endl<<"6. Exit"<<endl;
+        int choice = 0 ;
+        cin>>choice;
+        switch(choice)
+        {
+            case 1:{
+            cout<<"Enter the value to be inserted"<<endl;
             int val ; cin>>val ;
-            deleteNodeByValue(head , val);
+            insert(head,val);
+            break;}
+
+            case 2:{
+            cout<<"Delete Element by"<<endl<<"1. position"<<endl<<"2. Value"<<endl;
+            int ch = 0 ;
+            cin>>ch;
+            if(ch==2){
+                cout<<"Enter the Value of the Element to be deleted"<<endl;
+                int val1 ; cin>>val1 ;
+                deleteNodeByValue(head , val1);
+            }
+            else if(ch==1){
+                cout<<"Enter the Positon of the Element to be deleted"<<endl;
+                int pos ; cin>>pos ;
+                deleteNodeByPosition(head , pos);
+            }
+            else{
+                cout<<"invalid Choice"<<endl;
+            }
+            break ;}
+
+            case 3:{
+            cout<<"Enter previous Value and New value to update the list ( Note : values should be separated by space ) "<<endl;
+            int p_val , n_val ;
+            cin>>p_val>>n_val;
+            update(head , p_val , n_val);
+            break ;}
+
+            case 4:{
+            cout<<"Sort the List"<<endl;
+            Node * f = merge_sort(head);
+            head=f ;
+            break ;}
+
+            case 5:{
+            print(head);
+            break ;}
+
+            case 6:
+            break ;
         }
-        else if(ch==1){
-            cout<<"Enter the Positon of the Element to be deleted"<<endl;
-            int pos ; cin>>pos ;
-            deleteNodeByPosition(head , pos);
-        }
-        else{
-            cout<<"invalid Choice"<<endl;
-        }
-
-        case 3:
-        cout<<"Enter previous Value and New value to update the list ( Note : values should be separated by space ) "<<endl;
-        int p_val , n_val ;
-        cin>>p_val>>n_val;
-        update(head , p_val , n_val);
-
-        case 4:
-        cout<<"Sort the List"<<endl;
-        Node * n = merge_sort(head);
-        head=n ;
-
-        case 5:
-        print(head);
-
-        case 6:
-        break ;
     }
-
-
-
+    return 0 ;
 }
