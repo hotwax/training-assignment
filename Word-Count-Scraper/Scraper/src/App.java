@@ -17,6 +17,7 @@ public class App {
         // split the string by spaces in a
         String a[] = str.split(" ");
         // search for pattern in a
+        kjhshksdjhkjhd
         int count = 0;
         for (int i = 0; i < a.length; i++) {
             // if match found increase count
@@ -28,10 +29,10 @@ public class App {
 
     public static Map<String, Integer> sortByValue(Map<String, Integer> hm) {
         // Create a list from elements of HashMap
-        List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(hm.entrySet());
+        List<Map.Entry<String, Integer>> lists = new LinkedList<Map.Entry<String, Integer>>(hm.entrySet());
 
-        // Sort the list
-        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+        // Sort the lists
+        Collections.sort(lists, new Comparator<Map.Entry<String, Integer>>() {
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
                 return (o2.getValue()).compareTo(o1.getValue());
             }
@@ -39,7 +40,7 @@ public class App {
 
         // put data from sorted list to hashmap
         Map<String, Integer> temp = new LinkedHashMap<String, Integer>();
-        for (Map.Entry<String, Integer> aa : list) {
+        for (Map.Entry<String, Integer> aa : lists) {
             temp.put(aa.getKey(), aa.getValue());
         }
         return temp;
