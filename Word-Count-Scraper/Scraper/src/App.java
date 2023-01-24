@@ -49,25 +49,41 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
+        // map to store the word count
         Map<String, Integer> wordCount = new TreeMap<String, Integer>();
+
+        // current working directory patt
         String dir = System.getProperty("user.dir");
-        System.out.println("The current working directory is " + dir);
-        File urls = new File(dir + "/Word-Count-Scraper/Scraper/src/urls.txt");
-        File words = new File(dir + "/Word-Count-Scraper/Scraper/src/words.txt");
+
+        // get url and words files
+        File urls = new File(dir + "/src/urls.txt");
+        File words = new File(dir + "/src/words.txt");
         String key;
+
+        // read words file and add to wordCount map
         BufferedReader brwords = new BufferedReader(new FileReader(words));
         while ((key = brwords.readLine()) != null) {
             wordCount.put(key, 0);
         }
+
+        // read urls file and scrape each url
         BufferedReader brurls = new BufferedReader(new FileReader(urls));
         String st;
         while ((st = brurls.readLine()) != null) {
+
+            // scrape url
             Document doc = Jsoup.connect(st).get();
+
+            // get text from body
             String text = doc.body().text();
+
+            // count occurrences of each word in text
             for (String word : wordCount.keySet()) {
                 wordCount.put(word, wordCount.get(word) + countOccurrences(text, word));
             }
         }
+
+        // sort map by value
         wordCount = sortByValue(wordCount);
         System.out.println(wordCount);
     }
