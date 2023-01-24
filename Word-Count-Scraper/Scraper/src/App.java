@@ -17,7 +17,6 @@ public class App {
         // split the string by spaces in a
         String a[] = str.split(" ");
         // search for pattern in a
-        kjhshksdjhkjhd
         int count = 0;
         for (int i = 0; i < a.length; i++) {
             // if match found increase count
@@ -57,8 +56,8 @@ public class App {
         String dir = System.getProperty("user.dir");
 
         // get url and words files
-        File urls = new File(dir + "/src/urls.txt");
-        File words = new File(dir + "/src/words.txt");
+        File urls = new File(dir + "/Word-Count-Scraper/Scraper/src/urls.txt");
+        File words = new File(dir + "/Word-Count-Scraper/Scraper/src/words.txt");
         String key;
 
         // read words file and add to wordCount map
