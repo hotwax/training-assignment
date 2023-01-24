@@ -1,0 +1,241 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std ;
+
+
+class Node
+{
+    public:
+    int data ;
+    Node * left ;
+    Node * right ;
+    // Node (int val)
+    // {
+    //     data = val ;
+    //     left = right = NULL ;
+    // }
+};
+Node* getNode(int val)
+{
+    Node * newNode = new Node();
+    newNode->data = val;
+    newNode->left = NULL ;
+    newNode->right = NULL ;
+    return newNode ;
+}
+
+Node* insertNode(Node* &root , int val)
+{
+    // cout<<"i m in"1
+    if(root == NULL)
+    {
+        root=getNode(val);
+        return root;
+    }
+    else if(val <= root->data)
+    {
+        root->left = insertNode(root->left , val) ;
+    }
+    else 
+    {
+        root->right = insertNode(root->right , val) ;
+    }
+    return root ;
+
+}
+// Node* insertNode(Node * &root, int val)
+// {
+//     if(root==NULL)
+//     {
+//         Node * newNode = new Node(val) ;
+//         root = newNode ;
+//         return root ;
+//     }
+//     else if(root->data<val)
+//     {
+//         root-> right = insertNode(root->right , val );
+//     }
+//     else
+//     {
+//         root->left = insertNode(root->left , val );
+//     }
+//     return root ;
+// }
+bool Search(Node* root , int val)
+{
+
+    if(root==NULL)
+    {
+        return false ;
+    }
+    else if (root->data == val) 
+    {
+        return true ;
+    }
+    else if(val < root->data )
+    {
+        return Search(root->left , val);
+    }
+    else
+    {
+        return Search(root->right , val );
+    }
+}
+// Preorder Traversal
+
+void preorder(Node *root)
+{
+    if (!root)
+    {
+        return;
+    }
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+// PostOrder Traversal
+
+void postorder(Node *root)
+{
+    if (!root)
+    {
+        return;
+    }
+
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+
+// Inorder Traversal
+
+void inorder(Node *root)
+{
+    if (!root)
+    {
+        return;
+    }
+
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+Node * findMin(Node* root)
+{
+    if(root==NULL)
+    {
+        cout<<"Tree is empty"<<endl;
+        return root ;
+    }
+    if(root->left == NULL)
+    {
+        return root->left ;
+    }
+    return findMin(root->left);
+}
+Node* deleteNode(Node * root , int val)
+{
+    if(root==NULL)
+    {
+        return root ;
+    }
+    else if(val > root->data)
+    {
+        root->right = deleteNode(root->right , val );
+    }
+    else if(val < root->data)
+    {
+        root->left = deleteNode(root->left , val );
+    }
+    else
+    {
+        if(root->left == NULL && root->right == NULL)
+        {
+            delete root ;
+            root = NULL ;
+        }
+        else if(root->left == NULL)
+        {
+            Node * temp = root->right ;
+            delete root ;
+            root = temp ; 
+        }
+        else if(root->right == NULL )
+        {
+            Node * temp = root->left ;
+            delete root ;
+            root = temp ;
+        }
+        else 
+        {
+            Node * temp = findMin(root->right);
+            root -> data = temp -> data  ;
+            root->right = deleteNode(root->right , temp ->data );
+        }
+    }
+    return root ;
+}
+int main()
+{
+    Node * root = NULL ;
+    int ch = 0 ;
+    while(ch != 5)
+    {
+        cout<<"1. Insert Node"<<endl;
+        cout<<"2. Delete Node"<<endl;
+        cout<<"3. Search Element"<<endl;
+        cout<<"4. Traverse the Tree"<<endl;
+        cout<<"5. Exit"<<endl;
+        cout<<"Enter Your Choice"<<endl;
+        cin>>ch ;
+
+        switch(ch)
+        {
+            case 1:
+            {
+                cout<<"Enter the value of Node"<<endl;
+                int val ;
+                cin>>val ;
+                root = insertNode(root , val);
+                break ;
+            }
+            case 2 :
+            {
+                cout<<"Enter the value of Node to delete"<<endl;
+                int val ;
+                cin>>val ;
+                deleteNode(root, val);
+                break ;
+            }
+            case 3 :
+            {
+                cout<<"Enter the value of Node to Search"<<endl;
+                int val ;
+                cin>>val ;
+                int temp = Search(root , val);
+                if(temp) cout<<"Element Found"<<endl;
+                else cout<<"Element Not Found"<<endl;
+
+            }
+            case 4 :
+            {
+                cout<<"Traversal Techniques :- "<<endl;
+                cout<<"1. PreOrder"<<endl;
+                cout<<"2. PostOrder"<<endl;
+                cout<<"3. Inorder"<<endl;
+                cout<<"Enter Your Choice"<<endl;
+                int b = 0 ;
+                cin>>b ;
+                if(b==1) preorder(root);
+                else if(b==2) postorder(root);
+                else if(b==3) inorder(root);
+                else cout<<"Invalid Choice"<<endl;
+                cout<<endl;
+            }
+            
+        }
+
+    }
+    return 0 ;
+}
