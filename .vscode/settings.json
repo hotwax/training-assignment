@@ -1,0 +1,7 @@
+{
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "c:\\Users\\056di\\Downloads\\jsoup-1.15.3.jar"
+  ]
+}
