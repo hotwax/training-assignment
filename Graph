@@ -1,0 +1,172 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std ;
+class Graph
+{
+    public:
+    int vertices ;
+    map<int,vector<int>> adj;
+    Graph(int val)
+    {
+        vertices = val ;
+    }
+
+    void addEdge()
+    {
+        int node1 , node2 ;
+        cout<<"Enter the Value of Vertex1"<<endl;
+        cin>>node1 ;
+        cout<<"Enter the Value of Vertex2"<<endl;
+        cin>>node2 ;
+
+        adj[node1].push_back(node2);
+        adj[node2].push_back(node1);   
+    }
+    void bfs()
+    {
+        cout<<"Enter the Source Node or first Node"<<endl;
+        int source; cin>>source ;
+        int visited[vertices+1]={0};
+        queue<int> q ;
+        q.push(source);
+        visited[source]=1 ;
+        while(!q.empty())
+        {
+            int vertex = q.front();
+            q.pop();
+            cout<<vertex<<" ";
+            for(auto child : adj[vertex])
+            {
+                if(!visited[child])
+                {
+                    q.push(child);
+                    visited[child]=1 ;
+                }
+            }
+        }
+        cout<<endl;
+    }
+    void solve(int source , int visited[])
+    {
+        visited[source]=1 ;
+        cout<<source<<" ";
+
+        for(auto child : adj[source])
+        {
+            if(!visited[child])
+            solve(child, visited);
+        }
+    }
+    void dfs()
+    {
+        cout<<"Enter the Source Node or first Node"<<endl;
+        int source; cin>>source ;
+        int visited[vertices+1]={0};
+        solve(source,visited);
+        cout<<endl;
+    }
+
+    void deleteEdge()
+    {
+        int node1 , node2 ;
+        cout<<"Enter Node1 and Node2 whose edge between them is to be deleted"<<endl;
+        cin>>node1>>node2 ;
+        // Traversing through the first vector list
+        // and removing the second element from it
+        for (int i = 0; i < adj[node1].size(); i++) {
+            if (adj[node1][i] == node2) {
+                adj[node1].erase(adj[node1].begin() + i);
+                break;
+            }
+        }
+    
+        // Traversing through the second vector list
+        // and removing the first element from it
+        for (int i = 0; i < adj[node2].size(); i++) {
+            if (adj[node2][i] == node1) {
+                adj[node2].erase(adj[node2].begin() + i);
+                break;
+            }
+        }
+
+    }
+    void display()
+    {
+        cout<<"Your List is "<<endl;
+        for (auto i : adj)
+        {
+            cout << i.first << "->";
+            for (auto j : i.second)
+            {
+                cout << j << ",";
+            }
+            cout << endl;
+        }
+    }
+};
+
+
+int main()
+{
+    int n;
+    cout<<"Enter Number of vertex"<<endl;
+    cin>>n;
+    Graph g(n);
+    int ch = 0 ;
+    while(ch != 5)
+    {
+        cout<<"1. Add a Edge"<<endl;
+        cout<<"2. Traverse the Graph"<<endl;
+        cout<<"3. Delete the Edge"<<endl;
+        cout<<"4. Display"<<endl;
+        cout<<"5. Exit"<<endl;
+        cout<<"Enter Your Choice"<<endl;
+        cin>>ch ;
+        switch(ch)
+        {
+            case 1:
+            {
+                g.addEdge();
+                break ;
+            }
+            case 2:
+            {
+                cout<<"Traversal Techniques"<<endl;
+                cout<<"1. DFS"<<endl;
+                cout<<"2. BFS"<<endl;
+                int temp ; cin>>temp ;
+                if(temp==1)
+                {
+                    g.dfs();
+                }
+                else if(temp==2)
+                {
+                    g.bfs();
+                }
+                else
+                {
+                    cout<<"Invalid Choice"<<endl;
+                }
+                break ;
+            }
+            case 3:
+            {
+                g.deleteEdge();
+                break ;
+            }
+            case 4:
+            {
+                g.display();
+                break ;
+            }
+            case 5:
+            {
+                cout<<"Exit"<<endl;
+                break ;
+            }
+            default:
+            return 0 ;
+        }
+    }
+    return 0 ;
+}
