@@ -1,0 +1,190 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Create Node 
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        next = NULL;
+    }
+};
+
+// Create Custom Stack DataStructure
+class Stack
+{
+public:
+    // Create top pointer which points to the first element of the stack
+    Node *top; 
+    Stack()
+    {
+        // Initially top is null when there is no element in the list
+        top = NULL;
+    }
+
+    // function to push the element in the stack 
+    void push(int data)
+    {
+        Node *newNode = new Node(data);
+        if (!newNode)
+        {
+            cout << "Stack Overflow." << endl;
+            return;
+        }
+        newNode->next = top;
+        top = newNode;
+    }
+
+    // return the first element of the stack 
+    void topp()
+    {
+        if (top == NULL)
+        {
+            cout << "Stack is empty." << endl;
+        }
+        else
+        {
+            cout << endl
+                 << "The element is : " << this->top->data << endl;
+        }
+    }
+
+    // Pop the element which is present at top 
+    void pop()
+    {
+        if (top == NULL)
+        {
+            cout << "Stack Underflow." << endl;
+        }
+        else
+        {
+            Node *temp = top;
+            top = top->next;
+            delete temp;
+        }
+    }
+
+    // Search the element in stack
+    void search(int data)
+    {
+        Node *temp = top;
+
+        while (temp != NULL)
+        {
+            if (temp->data == data)
+            {
+                cout << "Present" << endl;
+                return;
+            }
+            temp = temp->next;
+        }
+
+        cout << "Not Present" << endl;
+    }
+
+    // Update the value of the stack
+    void update()
+    {
+
+        int key;
+        cout << "Enter the Value is to be changed : " << endl;
+        cin >> key;
+        int data;
+        cout << "Enter the new Value  : " << endl;
+        cin >> data;
+
+        Node *temp = top;
+
+        while (temp != NULL && temp->data != key )
+        {
+            temp = temp->next;
+        }
+
+        if (!temp)
+        {
+            cout << "No such Element present" << endl;
+        }
+        else
+        {
+            temp->data = data;
+            cout << "Updation Successful." << endl;
+        }
+    }
+
+    // Print all the element of the stack
+    void display()
+    {
+        Node *temp = top;
+
+        if (!temp)
+        {
+            cout << "Stack is empty" << endl;
+        }
+        cout << endl;
+        while (temp != NULL)
+        {
+            cout << temp->data;
+            temp = temp->next;
+            if (temp)
+            {
+                cout << "->";
+            }
+        }
+    }
+};
+
+int main()
+{
+
+    Stack s;
+    int ch = 0;
+    while (ch != 6)
+    {
+        cout << "1. push" << endl;
+        cout << "2. pop" << endl;
+        cout << "3. peek" << endl;
+        cout << "4. search" << endl;
+        cout << "5. update" << endl;
+        cout << "6. Exit" << endl;
+        cout << endl;
+        cout << "Enter Your Choice" << endl;
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+        {
+            cout << "Enter Element to Insert" << endl;
+            int val = 0;
+            cin >> val;
+            s.push(val);
+            break;
+        }
+        case 2:
+            s.pop();
+            break;
+        case 3:
+            s.topp();
+            break;
+        case 4:
+        {
+            cout << "Enter Element to Search" << endl;
+            int val = 0;
+            cin >> val;
+            s.search(val);
+            break;
+        }
+        case 5:
+        {
+            s.update();
+            break;
+        }
+        default:
+            return 0;
+        }
+    }
+}
