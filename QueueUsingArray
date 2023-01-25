@@ -1,101 +1,121 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
-class Queue {
-    public:
+
+// Create a Custom Queue DataStructure
+class Queue
+{
+public:
     int front, rear, cap;
     int queue[1000];
+
+    // Constructor to initialize all the class variables
     Queue(int capi)
     {
         front = rear = 0;
         cap = capi;
     }
- 
+
+    // Method to push the element in the Queue
     void Enqueue()
     {
-        cout<<"Enter the element to be inserted"<<endl;
-        int data = 0 ;
-        cin>>data;
-        if (cap == rear) {
-            cout<<"Queue is full"<<endl;
+        cout << "Enter the element to be inserted" << endl;
+        int data = 0;
+        cin >> data;
+        if (cap == rear)
+        {
+            cout << "Queue is full" << endl;
             return;
         }
- 
-        else {
+
+        else
+        {
             queue[rear] = data;
             rear++;
         }
         return;
     }
+
+    // Method to pop the element from the Queue
     void Dequeue()
     {
-        if (front == rear) {
-            cout<<"Queue is  empty"<<endl;
+        if (front == rear)
+        {
+            cout << "Queue is  empty" << endl;
             return;
         }
-        else {
-            for (int i = 0; i < rear - 1; i++) {
+        else
+        {
+            for (int i = 0; i < rear - 1; i++)
+            {
                 queue[i] = queue[i + 1];
             }
             rear--;
         }
-        return;
+        cout<<"Operation Successful"<<endl;
     }
- 
+
+    // Method to print the Queue 
     void Display()
     {
-        int i;
-        if (front == rear) {
-            cout<<"Queue is Empty"<<endl;
+
+        if (front == rear)
+        {
+            cout << "Queue is Empty" << endl;
             return;
         }
 
-        for (i = front; i < rear; i++) {
-            cout<<queue[i]<<endl;
+        for (int i = front; i < rear; i++)
+        {
+            cout << queue[i] << endl;
         }
         return;
     }
- 
+
+    // Print Front of the queue
     void Front()
     {
-        if (front == rear) {
-            cout<<" Queue is Empty "<<endl;
+        if (front == rear)
+        {
+            cout << " Queue is Empty " << endl;
             return;
         }
-        cout<<queue[front]<<endl;
+        cout << queue[front] << endl;
         return;
     }
 };
 
-int main(void)
+int main()
 {
-    Queue q(4);
-    int ch=0;
+    int sz ;
+    cout<<"Enter the Size of the Queue"<<endl;
+    cin>>sz ;
+    Queue q(sz);
+    int ch = 0;
     while (ch != 5)
     {
-        cout<<"1. enqueue "<<endl;
-        cout<<"2. dequeue "<<endl;
-        cout<<"3. Front "<<endl;
-        cout<<"4. Display"<<endl ;
-        cout<<"5. exit"<<endl;
-        cout<<"Enter the Choice"<<endl;
+        cout << "1. enqueue " << endl;
+        cout << "2. dequeue " << endl;
+        cout << "3. Front " << endl;
+        cout << "4. Display" << endl;
+        cout << "5. exit" << endl;
+        cout << "Enter the Choice" << endl;
         cin >> ch;
 
         switch (ch)
         {
-            case 1:
-                q.Enqueue();
-                break;
-            case 2:
-                q.Dequeue();
-                break;
-            case 3:
-                q.Front();
-                break;
-            case 4:
-                q.Display();
-                break;
-         }
+        case 1:
+            q.Enqueue();
+            break;
+        case 2:
+            q.Dequeue();
+            break;
+        case 3:
+            q.Front();
+            break;
+        case 4:
+            q.Display();
+            break;
+        }
     }
     return 0;
 }
