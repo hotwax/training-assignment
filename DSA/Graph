@@ -1,6 +1,8 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std ;
+
+// Custom Graph DataStructure 
 class Graph
 {
     public:
@@ -10,7 +12,8 @@ class Graph
     {
         vertices = val ;
     }
-
+    
+    // function to add a edge in the graph 
     void addEdge()
     {
         int node1 , node2 ;
@@ -22,6 +25,8 @@ class Graph
         adj[node1].push_back(node2);
         adj[node2].push_back(node1);   
     }
+    
+    // Graph Traversal using BFS 
     void bfs()
     {
         cout<<"Enter the Source Node or first Node"<<endl;
@@ -57,6 +62,8 @@ class Graph
             solve(child, visited);
         }
     }
+    
+    // Graph Traversal using DFS 
     void dfs()
     {
         cout<<"Enter the Source Node or first Node"<<endl;
@@ -65,7 +72,8 @@ class Graph
         solve(source,visited);
         cout<<endl;
     }
-
+    
+    // function to delete a Edge from Graph
     void deleteEdge()
     {
         int node1 , node2 ;
@@ -90,6 +98,8 @@ class Graph
         }
 
     }
+    
+    // Function to Display all the nodes in the Graph
     void display()
     {
         cout<<"Your List is "<<endl;
@@ -111,8 +121,11 @@ int main()
     int n;
     cout<<"Enter Number of vertex"<<endl;
     cin>>n;
+    
+    // Create Instance of the Graph Class
     Graph g(n);
     int ch = 0 ;
+    
     while(ch != 5)
     {
         cout<<"1. Add a Edge"<<endl;
@@ -122,6 +135,8 @@ int main()
         cout<<"5. Exit"<<endl;
         cout<<"Enter Your Choice"<<endl;
         cin>>ch ;
+        
+        // Menu
         switch(ch)
         {
             case 1:
