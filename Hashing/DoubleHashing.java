@@ -115,7 +115,8 @@ class DoubleHashing {
             System.out.println("Press 2 : Delete Value");
             System.out.println("Press 3 : Display the Hashmap");
             System.out.println("Press 4 : Get All Collisions");
-            System.out.println("Press 5 : Exit");
+            System.out.println("Press 5 : Get Value from Key");
+            System.out.println("Press 6 : Exit");
             System.out.println("Enter your choice : ");
             choice = sc.nextInt();
             switch (choice) {
@@ -144,6 +145,13 @@ class DoubleHashing {
                     }
                     break;
                 case 5:
+                    if (hashmap != null) {
+                        System.out.println("Create a hashmap first");
+                    } else {
+                        System.out.println(hashmap.get(sc.nextInt()));
+                    }
+
+                case 6:
                     System.out.println("Program Terminated");
                     break;
                 default:
