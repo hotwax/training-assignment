@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 // Create a Node for the Linked List 
@@ -19,6 +19,7 @@ public:
 class Queue
 {
 public:
+    // Front and Rear Pointer Which points the Element of Queue
     Node *front;
     Node *rear;
 
@@ -55,7 +56,7 @@ public:
             return;
         }
 
-        Node *temp = front;
+        Node * To_delete_Node = front;
         front = front->next;
 
         if (front == NULL)
@@ -63,72 +64,30 @@ public:
             rear = NULL;
         }
 
-        delete temp;
+        delete To_delete_Node ;
         cout<<"Operation Successful"<<endl;
     }
-
-    // Update the Value of Queue
-    void update()
+    
+    // print the Front of the Queue
+    void Front()
     {
-        int key;
-        cout << "Enter the Value to be Changed: " << endl;
-        cin >> key;
-        int data;
-        cout << "Enter the New Value: " << endl;
-        cin >> data;
-
-        Node *temp = front;
-
-        while (temp != NULL && temp->data != key)
-        {
-            temp = temp->next;
-        }
-
-        if (temp == NULL)
-        {
-            cout << "No such key present." << endl;
-        }
-        else
-        {
-            temp->data = data;
-        }
+        cout<<front->data<<endl;
     }
-
-    // Search the element in Queue
-    void search()
-    {
-        int data;
-        cout << "Enter the data to search: " << endl;
-        cin >> data;
-        Node *temp = front;
-
-        while (temp != NULL)
-        {
-            if (temp->data == data)
-            {
-                cout << "Present" << endl;
-                return;
-            }
-            temp = temp->next;
-        }
-
-        cout << "Not Present" << endl;
-    }
-
+    
     // print the Queue
     void display()
     {
-        Node *temp = front;
+        Node *nodePtr = front;
 
-        if (!temp)
+        if (!nodePtr)
         {
             cout << "Queue empty" << endl;
         }
         cout << endl;
-        while (temp != NULL)
+        while (nodePtr != NULL)
         {
-            cout << temp->data << " ";
-            temp = temp->next;
+            cout << nodePtr->data << " ";
+            nodePtr = NodePtr->next;
         }
         cout << endl;
     }
@@ -138,19 +97,18 @@ public:
 int main()
 {
     Queue q;
-    int ch;
-    while (ch != 6)
+    int choice;
+    while (choice != 4)
     {
         cout << "1. enqueue " << endl;
         cout << "2. dequeue " << endl;
-        cout << "3. update " << endl;
-        cout << "4. search " << endl;
-        cout << "5. Display" << endl;
-        cout << "6. exit" << endl;
+        cout<<  "3. Front   " <<endl;
+        cout << "3. Display" << endl;
+        cout << "4. exit" << endl;
         cout << "Enter the Choice" << endl;
-        cin >> ch;
+        cin >> choice;
 
-        switch (ch)
+        switch (choice)
         {
         case 1:
             q.enqueue();
@@ -159,11 +117,8 @@ int main()
             q.dequeue();
             break;
         case 3:
-            q.update();
-            break;
-        case 4:
-            q.search();
-            break;
+            q.Front();
+            break ;
         case 5:
             q.display();
             break;
