@@ -5,14 +5,15 @@ using namespace std;
 class Queue
 {
 public:
-    int front, rear, cap;
+    // Front and rear are variables which points the elements of Queue
+    int front, rear, capacity;
     int queue[1000];
 
     // Constructor to initialize all the class variables
-    Queue(int capi)
+    Queue(int capacity)
     {
         front = rear = 0;
-        cap = capi;
+        this->capacity = capacity ;
     }
 
     // Method to push the element in the Queue
@@ -21,7 +22,7 @@ public:
         cout << "Enter the element to be inserted" << endl;
         int data = 0;
         cin >> data;
-        if (cap == rear)
+        if (capacity == rear)
         {
             cout << "Queue is full" << endl;
             return;
@@ -45,6 +46,7 @@ public:
         }
         else
         {
+        // i = index , to iterate
             for (int i = 0; i < rear - 1; i++)
             {
                 queue[i] = queue[i + 1];
@@ -63,7 +65,7 @@ public:
             cout << "Queue is Empty" << endl;
             return;
         }
-
+        // i = index , to iterate 
         for (int i = front; i < rear; i++)
         {
             cout << queue[i] << endl;
@@ -86,22 +88,23 @@ public:
 
 int main()
 {
-    int sz ;
+    int Size ; // Size of the Queue
     cout<<"Enter the Size of the Queue"<<endl;
-    cin>>sz ;
-    Queue q(sz);
-    int ch = 0;
-    while (ch != 5)
-    {
+    cin>>Size ;
+    Queue q(Size);
+    int choice = 0;
+    while (choice != 5)
+    {        
+                  // MENU
         cout << "1. enqueue " << endl;
         cout << "2. dequeue " << endl;
         cout << "3. Front " << endl;
         cout << "4. Display" << endl;
         cout << "5. exit" << endl;
         cout << "Enter the Choice" << endl;
-        cin >> ch;
+        cin >> choice;
 
-        switch (ch)
+        switch (choice)
         {
         case 1:
             q.Enqueue();
@@ -115,6 +118,9 @@ int main()
         case 4:
             q.Display();
             break;
+        default:
+            cout<<"EXIT<<endl;
+            return 0 ;
         }
     }
     return 0;
