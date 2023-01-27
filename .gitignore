@@ -1,0 +1,5 @@
+*.class
+*/*.class
+*.iml
+*.idea
+*/*.idea
