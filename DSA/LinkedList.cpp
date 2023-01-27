@@ -1,5 +1,4 @@
 #include <iostream>
-#include <bits/stdc++.h>
 using namespace std;
 
 // Create Node which has two fields data and next
@@ -10,9 +9,9 @@ class Node
 public:
     int data;
     Node *next;
-    Node(int val)
+    Node(int value)
     {
-        data = val;
+        data = value;
         next = NULL;
     }
 };
@@ -22,98 +21,104 @@ class LinkedList
 {
 public:
      // Insert Node in the List 
-    void insert(Node *&head, int val)
+    void insert(Node *&head, int value)
     {
         // Create new Node
-        Node *newNode = new Node(val);
+        Node *newNode = new Node(value);
         if (!head)
         {
             head = newNode;
             return;
         }
-        Node *temp = head;
+        Node *nodePtr = head;
         // go to the last Node
-        while (temp->next != NULL)
+        while (nodePtr->next != NULL)
         {
-            temp = temp->next;
+            nodePtr = nodePtr->next;
         }
-        temp->next = newNode;
+        nodePtr->next = newNode;
     }
 
     // Function to delete the Node By value
-    void deleteNodeByValue(Node *&head, int val)
+    void deleteNodeByValue(Node *&head, int value)
     {
-        Node *temp = head;
-        while (temp->next->data != val && temp != NULL)
+        Node *nodePtr= head;
+        while (nodePtr->next->data != value && nodePtr != NULL)
         {
-            if (temp == head)
+            // if first node has to be the node which we want to delete
+            if (nodePtr == head)
             {
-                head = temp->next;
-                delete (temp);
+                head = nodePtr->next;
+                delete (nodePtr);
                 return;
             }
-            temp = temp->next;
+            nodePtr = nodePtr->next;
         }
-        Node *n = temp->next;
-        temp->next = temp->next->next;
-        delete (n);
+        // delete the node
+        Node * to_delete_node = nodePtr->next;
+        nodePtr->next = nodePtr->next->next;
+        delete (to_delete_node);
     }
 
     // Function to delete the Node By position or index
-    void deleteNodeByPosition(Node *&head, int n)
+    void deleteNodeByPosition(Node *&head, int position)
     {
-        Node *temp = head;
-        if (n == 1)
+        Node *nodePtr = head;
+        if (position == 1)
         {
-            head = temp->next;
-            delete (temp);
+            head = nodePtr->next;
+            delete (nodePtr);
             return;
         }
+        // i = index , to Iterate
         for (int i = 1; i < n - 1; i++)
         {
-            temp = temp->next;
+            nodePtr = nodePtr->next;
         }
-        Node *temp2 = temp->next;
-        temp->next = temp2->next;
-        delete (temp2);
+        Node * to_delete_node = nodePtr->next;
+        nodePtr->next = nodePtr->next;
+        delete (to_delete_node);
     }
 
     // Function to Update the data of the Node
-    void update(Node *&head, int pval, int nval)
+    void update(Node *&head, int previous_val, int new_val)
     {
-        Node *temp = head;
-        while (temp->data != pval && temp != NULL)
+        Node * nodePtr = head;
+        while (nodePtr->data != previous_val && nodePtr != NULL)
         {
-            temp = temp->next;
+            nodePtr = nodePtr->next;
         }
-        temp->data = nval;
+        nodePtr->data = new_val;
     }
-    Node *merge(Node *a, Node *b)
+    
+    // Merge the Lists 
+    Node *merge(Node * firstHalf , Node *secondHalf)
     {
         // base case
-        if (a == NULL)
-            return b;
-        if (b == NULL)
-            return a;
+        if (firstHalf == NULL)
+            return secondHalf;
+        if (secondHalf == NULL)
+            return firstHalf ;
 
         // recursive case
         // take a head pointer
-        Node *c;
+        Node * mergedList;
 
-        if (a->data < b->data)
+        if (firstHalf->data < secondHalf ->data)
         {
-            c = a;
-            c->next = merge(a->next, b);
+            mergedList = firstHalf;
+            mergedList->next = merge(firstHalf->next, secondHalf);
         }
         else
         {
-            c = b;
-            c->next = merge(a, b->next);
+            mergedList = secondHalf;
+            mergedList->next = merge(firstHalf, secondHalf->next);
         }
 
-        return c;
+        return mergedList;
     }
-
+    
+    // find Mid Point
     Node *mid_point(Node *head)
     {
         if (head == NULL || head->next == NULL)
@@ -148,20 +153,20 @@ public:
         // Step 1: divide the linked list into
         // two equal linked lists
         Node *mid = mid_point(head);
-        Node *a = head;
-        Node *b = mid->next;
+        Node *firstHalf = head;
+        Node *secondHalf = mid->next;
 
         mid->next = NULL;
 
         // Step 2: recursively sort the smaller
         // linked lists
-        a = merge_sort(a);
-        b = merge_sort(b);
+        firstHalf = merge_sort(firstHalf);
+        secondHalf = merge_sort(secondHalf);
 
         // Step 3: merge the sorted linked lists
-        Node *c = merge(a, b);
+        Node *mergedList = merge(firstHalf, secondHalf);
 
-        return c;
+        return mergedList;
     }
 
     // Function to Print the list 
@@ -245,8 +250,8 @@ int main()
         case 4:
         {
             cout << "Sort the List" << endl;
-            Node *f = ll.merge_sort(head);
-            head = f;
+            Node *sortedList = ll.merge_sort(head);
+            head = sortedList;
             break;
         }
 
