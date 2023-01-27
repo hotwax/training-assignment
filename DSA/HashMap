@@ -1,64 +1,87 @@
-#include<iostream>
-// #include<bits/stdc++.h>
-using namespace std ;
+#include <iostream>
+using namespace std;
 
-// A node in map which has three part key,value and address of next node 
+// A node in Hashmap which has three part key,value and address of next node
 class Node
 {
-    public :
-    int key ;
-    int value ;
-    Node * next ;
-    Node(int key , int value )
+public:
+    int key;
+    int value;
+    Node *next;
+    Node(int key, int value)
     {
-        this->key = key ;
-        this->value = value ;
-        next = NULL ;
+        this->key = key;
+        this->value = value;
+        next = NULL;
     }
 };
 
-// HashMap Data Structure with User Given Capacity 
+// Create Custom Hashmap Datastructure
+// HashMap Data Structure with User Given Capacity
 class Hashmap
 {
-    Node **arr;
-    int CAPACITY ;
-    public: 
-    
-    // contructor which initialize the members 
+    Node **hashTable;
+    int CAPACITY;
+
+public:
+    // contructor which initialize the members
     Hashmap(int CAPACITY)
     {
-        this->CAPACITY = CAPACITY ;
-        arr=new Node *[CAPACITY];
-        for(int i=0 ; i<CAPACITY ; i++)
+        this->CAPACITY = CAPACITY;
+        hashTable = new Node *[CAPACITY];
+
+        // i = index , to iterate
+        for (int i = 0; i < CAPACITY; i++)
         {
-            arr[i]=NULL ;
+            hashTable[i] = NULL;
         }
     }
-    
-    // hash function which brings key in range 
+
+    // hash function which brings key in range
+    // more formally it convert a big value into small values whose range lies between 0 < i < Capacity of HashMap
     int HashFunction(int key)
     {
-        return key%CAPACITY ;
+        return key % CAPACITY;
     }
-    
+
     // Insert method to Put key value pair in HashMap.
-    // To handle Collisions I used Separate Chaining method 
-    void Insert(int key , int value)
+    // To handle Collisions I used Separate Chaining method
+    void Insert(int key, int value)
     {
+        // Hash Code of the Given Key
         int hash_position = HashFunction(key);
-        Node * newNode = new Node(key,value);
-        if(arr[hash_position] == NULL)
+        Node *newNode = new Node(key, value); // Create New Node
+
+        // if the slot at hash position is NULL
+        if (hashTable[hash_position] == NULL)
         {
-            arr[hash_position] = newNode ;
+            hashTable[hash_position] = newNode;
+        }
+        // first node key is equal to the key , so update its value
+        else if(hashTable[hash_position]->key == key)
+        {
+            hashTable[hash_position]->value = value ;
         }
         else
         {
-            Node * temp = arr[hash_position];
-            while(temp->next != NULL)
+            // Make a Pointer which initially points to the First node of the HashMap
+            // Used to Interate Over the HashMap
+            Node *pointer_to_node = hashTable[hash_position];
+
+            while (pointer_to_node->next != NULL && pointer_to_node -> next -> key != key )
             {
-                temp = temp->next ;
+                pointer_to_node = pointer_to_node->next;
             }
-            temp->next = newNode ;
+            // if key not exist 
+            if (pointer_to_node->next == NULL )
+            {
+                pointer_to_node->next = newNode;
+            }
+            // if key already exist then we update its value
+            else if(pointer_to_node -> next -> key == key)
+            {
+                pointer_to_node->next->value = value ;
+            }
         }
     }
     
@@ -66,167 +89,184 @@ class Hashmap
     void deleteKey(int Key)
     {
         int hash_position = HashFunction(Key);
-        if(arr[hash_position]!=NULL)
+
+        if (hashTable[hash_position] != NULL)
         {
-            Node* temp = arr[hash_position] ;
-            if(temp->key == Key)
+            Node *pointer_to_node = hashTable[hash_position];
+
+            // to Delete first node
+            if (pointer_to_node->key == Key)
             {
-                arr[hash_position]=temp->next ;
-                return ;
+                hashTable[hash_position] = pointer_to_node->next;
+                return;
             }
-            while(temp->next->key != Key && temp->next != NULL)
+            // Find the Node to delete
+            while (pointer_to_node->next->key != Key && pointer_to_node->next != NULL)
             {
-                temp = temp->next ;
+                pointer_to_node = pointer_to_node->next;
             }
-            if(temp->next != NULL)
+
+            // Node Found
+            if (pointer_to_node->next != NULL)
             {
-                temp->next = temp->next->next ;
-                cout<<"Operation Successful"<<endl; 
+                pointer_to_node->next = pointer_to_node->next->next;
+                cout << "Operation Successful" << endl;
             }
+
+            // Node not Present in the hashMap
             else
             {
-                cout<<"Key is Not Present in the HashMap"<<endl;
+                cout << "Key is Not Present in the HashMap" << endl;
             }
         }
         else
         {
-            cout<<"Key is Not Present in the HashMap"<<endl; 
+            cout << "Key is Not Present in the HashMap" << endl;
         }
     }
-    
-    // Function to Search the Key in Hashmap 
+
+    // Search the key in the
     void searchKey(int Key)
     {
         int hash_position = HashFunction(Key);
-        Node * temp = arr[hash_position];
-        while(temp->key!=Key && temp!=NULL)
+
+        Node *pointer_to_node = hashTable[hash_position];
+
+        while (pointer_to_node->key != Key && pointer_to_node != NULL)
         {
-            temp=temp->next ;
+            pointer_to_node = pointer_to_node->next;
         }
-        if(temp->key==Key)
+        if (pointer_to_node->key == Key)
         {
-            cout<<"Key-value pair "<<temp->key<<":"<<temp->value<<" is Found "<<endl;
+            cout << "Key-value pair " << pointer_to_node->key << ":" << pointer_to_node->value << " is Found " << endl;
         }
         else
         {
-            cout<<"Key Not Found"<<endl;
+            cout << "Key Not Found" << endl;
         }
     }
-    
-    // Show all the Keys value of HashMap 
-    void display() 
+
+    //  Function to Display the HashMap
+    void display()
     {
-        for (int i = 0; i < CAPACITY ; i++) 
+        // i = index , to iterate
+        for (int i = 0; i < CAPACITY; i++)
         {
-            Node* temp = arr[i];
-            cout<<"Position "<< i << " is connected to the keys are : ";
-            while (temp != NULL) 
+            // Make a Pointer which initially points to the First node of the HashMap
+            // Used to Interate Over the HashMap
+            Node *pointer_to_node = hashTable[i];
+
+            cout << "Position " << i << " is connected to the keys are : ";
+
+            // Print all the Nodes at i'th position
+            while (pointer_to_node != NULL)
             {
-                cout<<temp->key<<"->"<<temp->value<<"  ";
-                temp = temp->next;
+                cout << pointer_to_node->key << "->" << pointer_to_node->value << "  ";
+                pointer_to_node = pointer_to_node->next;
             }
-            cout<<endl;
+
+            cout << endl;
         }
     }
-     
-    // Get the Value of the Key
-    void getValue(int Key)
+
+    // Function to Print the Value Of the Key
+    void getKey(int Key)
     {
-          int hash_position = HashFunction(Key);
-          Node * temp = arr[hash_position];
-          if(temp==NULL)
-          {
-              cout<<"Key Not Found"<<endl;
-          }
-          else
-          {
-              while(temp!=NULL && temp->key!=Key)
-              {
-                  temp=temp->next ;
-              }
-              if(temp==NULL)
-              {
-                  cout<<"Key Not Found"<<endl;
-              }
-              if(temp->key==Key)
-              {
-                  cout<<"The Value of the Key "<<Key<<" is "<<temp->value<<endl;
-              }
-              else
-              {
-                  cout<<"Key Not Found"<<endl;
-              }
-          }  
-        
-     }   
-};
+        int hash_position = HashFunction(Key);
+        Node *pointer_to_node = hashTable[hash_position];
+        if (pointer_to_node == NULL)
+        {
+            cout << "Key Not Found" << endl;
+        }
+        else
+        {
+            while (pointer_to_node != NULL && pointer_to_node->key != Key)
+            {
+                pointer_to_node = pointer_to_node->next;
+            }
+            if (pointer_to_node == NULL)
+            {
+                cout << "Key Not Found" << endl;
+            }
+            if (pointer_to_node->key == Key)
+            {
+                cout << "The Value of the Key " << Key << " is " << pointer_to_node->value << endl;
+            }
+            else
+            {
+                cout << "Key Not Found" << endl;
+            }
+        }
+    }
+}; // End of class
 int main()
 {
-    int cap ;
-    cout<<"Enter the Capacity of the Hashmap "<<endl;
-    cin>>cap;
-    
-    // Create the Instance of the Class
-    Hashmap mp(cap)  ;
-    int ch = 0 ;
-    while(ch!=6)
+    // Capacity Of the HashMap
+    int capacity;
+    cout << "Enter the Capacity of the Hashmap " << endl;
+    cin >> capacity;
+
+    // Create a Object / Instance of Class hashmap
+    Hashmap mp(capacity);
+
+    int choice = 0;
+    while (choice != 6)
     {
-        // Menu
-        cout<<endl;
-        cout<<"1. Insert the Key Value Pair in Hashmap"<<endl;
-        cout<<"2. Delete the key from the hashmap"<<endl;
-        cout<<"3. Search the Key in the HashMap"<<endl;
-        cout<<"4. Preview the Hashmap"<<endl;
-        cout<<"5. Get the Value of the key in HashMap"<<endl;
-        cout<<"6. Exit"<<endl;
+        cout << endl;
+        cout << "1. Insert the Key Value Pair in Hashmap" << endl;
+        cout << "2. Delete the key from the hashmap" << endl;
+        cout << "3. Search the Key in the HashMap" << endl;
+        cout << "4. Preview the Hashmap" << endl;
+        cout << "5. Get the Value of the key in HashMap" << endl;
+        cout << "6. Exit" << endl;
 
-        cout<<"Enter Your Choice"<<endl;
-        cin>>ch;
-        switch(ch)
+        cout << "Enter Your Choice" << endl;
+        cin >> choice;
+        switch (choice)
         {
-            case 1:
-            {
-                int key , value ;
-                cout<<"Enter the Key and Value to insert in the map ( Note : Enter key and its value separated by space )"<<endl;
-                cin>>key>>value ;
-                mp.Insert(key, value);
-                break ;
-            }
-            case 2:
-            {
-                int key ;
-                cout<<"Enter the Key to be Deleted"<<endl;
-                cin>>key;
-                mp.deleteKey(key);
-                break ;
-
-            }
-            case 3:
-            {
-                int key ;
-                cout<<"Enter the Key to search"<<endl;
-                cin>>key;
-                mp.searchKey(key);
-                break ;
-            }
-            case 4:
-            {
-                mp.display();
-                break ;
-            }
-            case 5:
-            {
-                int key ;
-                cout<<"Enter the Key to get its Value"<<endl;
-                cin>>key;
-                mp.getValue(key);
-                break ;
-            }
-            case 6:
-            cout<<"Exit"<<endl;
-            default :
-            return 0 ;
+        case 1:
+        {
+            int key, value;
+            cout << "Enter the Key and Value to insert in the map ( Note : Enter key and its value separated by space )" << endl;
+            cin >> key >> value;
+            mp.Insert(key, value);
+            break;
+        }
+        case 2:
+        {
+            int key;
+            cout << "Enter the Key to be Deleted" << endl;
+            cin >> key;
+            mp.deleteKey(key);
+            break;
+        }
+        case 3:
+        {
+            int key;
+            cout << "Enter the Key to search" << endl;
+            cin >> key;
+            mp.searchKey(key);
+            break;
+        }
+        case 4:
+        {
+            mp.display();
+            break;
+        }
+        case 5:
+        {
+            int key;
+            cout << "Enter the Key to get its Value" << endl;
+            cin >> key;
+            mp.getKey(key);
+            break;
+        }
+        case 6:
+            cout << "Exit" << endl;
+            break;
+        default:
+            return 0;
         }
     }
-    return 0 ;
+    return 0;
 }
