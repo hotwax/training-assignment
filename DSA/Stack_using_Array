@@ -7,7 +7,8 @@ class Stack
 {
 
 public:
-    int cap = 1000;
+    // Capacity of Stack
+    int capacity = 1000;
 
     // Create stack Array 
     int stack[1000];
@@ -16,14 +17,14 @@ public:
     int top = -1;
 
     // function to push the element in the stack 
-    void push(int val)
+    void push(int value)
     {
-        if (top >= cap - 1)
+        if (top >= capacity - 1)
             cout << "Stack Overflow" << endl;
         else
         {
             top++;
-            stack[top] = val;
+            stack[top] = value;
         }
     }
     
@@ -45,6 +46,7 @@ public:
         if (top >= 0)
         {
             cout << "Stack elements are:";
+            // i = index  , to iterate
             for (int i = top; i >= 0; i--)
                 cout << stack[i] << " ";
             cout << endl;
@@ -68,7 +70,7 @@ public:
 
 int main()
 {
-    int ch, val;
+    int choice, value;
     // Create Instance of the Stack class
     Stack st;
     cout << "1) Push" << endl;
@@ -79,14 +81,14 @@ int main()
     do
     {
         cout << "Enter choice: " << endl;
-        cin >> ch;
-        switch (ch)
+        cin >> choice;
+        switch (choice)
         {
         case 1:
         {
             cout << "Enter value to be pushed:" << endl;
-            cin >> val;
-            st.push(val);
+            cin >> value;
+            st.push(value);
             break;
         }
         case 2:
@@ -114,6 +116,6 @@ int main()
             cout << "Invalid Choice" << endl;
         }
         }
-    } while (ch != 5);
+    } while (choice != 5);
     return 0;
 }
