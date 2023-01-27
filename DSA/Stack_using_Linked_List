@@ -63,74 +63,27 @@ public:
         }
         else
         {
-            Node *temp = top;
+            Node *to_delete_node = top;
             top = top->next;
-            delete temp;
+            delete to_delete_node;
         }
     }
-
-    // Search the element in stack
-    void search(int data)
-    {
-        Node *temp = top;
-
-        while (temp != NULL)
-        {
-            if (temp->data == data)
-            {
-                cout << "Present" << endl;
-                return;
-            }
-            temp = temp->next;
-        }
-
-        cout << "Not Present" << endl;
-    }
-
-    // Update the value of the stack
-    void update()
-    {
-
-        int key;
-        cout << "Enter the Value is to be changed : " << endl;
-        cin >> key;
-        int data;
-        cout << "Enter the new Value  : " << endl;
-        cin >> data;
-
-        Node *temp = top;
-
-        while (temp != NULL && temp->data != key )
-        {
-            temp = temp->next;
-        }
-
-        if (!temp)
-        {
-            cout << "No such Element present" << endl;
-        }
-        else
-        {
-            temp->data = data;
-            cout << "Updation Successful." << endl;
-        }
-    }
-
+    
     // Print all the element of the stack
     void display()
     {
-        Node *temp = top;
+        Node * nodePtr = top;
 
-        if (!temp)
+        if (!nodePtr)
         {
             cout << "Stack is empty" << endl;
         }
         cout << endl;
-        while (temp != NULL)
+        while (nodePtr != NULL)
         {
-            cout << temp->data;
-            temp = temp->next;
-            if (temp)
+            cout << nodePtr->data;
+            nodePtr = nodePtr->next;
+            if (nodePtr)
             {
                 cout << "->";
             }
@@ -142,25 +95,23 @@ int main()
 {
 
     Stack s;
-    int ch = 0;
-    while (ch != 6)
+    int choice = 0;
+    while (choice != 5)
     {
         cout << "1. push" << endl;
         cout << "2. pop" << endl;
-        cout << "3. peek" << endl;
-        cout << "4. search" << endl;
-        cout << "5. update" << endl;
-        cout << "6. Exit" << endl;
+        cout << "3. top" << endl;
+        cout << "4. Exit" << endl;
         cout << endl;
         cout << "Enter Your Choice" << endl;
-        cin >> ch;
-        switch (ch)
+        cin >> choice;
+        switch (choice)
         {
         case 1:
         {
             cout << "Enter Element to Insert" << endl;
-            int val = 0;
-            cin >> val;
+            int value = 0;
+            cin >> value;
             s.push(val);
             break;
         }
@@ -170,19 +121,6 @@ int main()
         case 3:
             s.topp();
             break;
-        case 4:
-        {
-            cout << "Enter Element to Search" << endl;
-            int val = 0;
-            cin >> val;
-            s.search(val);
-            break;
-        }
-        case 5:
-        {
-            s.update();
-            break;
-        }
         default:
             return 0;
         }
