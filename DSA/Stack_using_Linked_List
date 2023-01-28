@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 // Create Node 
@@ -37,10 +37,10 @@ public:
             return;
         }
         newNode->next = top;
-        top = newNode;
+        top = newNode;  // points top pointer to newNode
     }
 
-    // return the first element of the stack 
+    // return the top element of the stack 
     void topp()
     {
         if (top == NULL)
@@ -50,7 +50,7 @@ public:
         else
         {
             cout << endl
-                 << "The element is : " << this->top->data << endl;
+                 << "The element at top is  : " << this->top->data << endl;
         }
     }
 
@@ -66,6 +66,7 @@ public:
             Node *to_delete_node = top;
             top = top->next;
             delete to_delete_node;
+            cout<<"Operation SuccessFul"<<endl;
         }
     }
     
@@ -112,7 +113,7 @@ int main()
             cout << "Enter Element to Insert" << endl;
             int value = 0;
             cin >> value;
-            s.push(val);
+            s.push(value);
             break;
         }
         case 2:
