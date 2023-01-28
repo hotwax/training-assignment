@@ -1,16 +1,88 @@
 #include<iostream>
-#include<bits/stdc++.h>
 using namespace std ;
 
-// Custom Graph DataStructure 
+// Crate a Queue Data Structure which is Used in BFS Traversal
+class Queue
+{
+public:
+
+    int front, rear, cap;
+    int queue[1000];
+
+    // Constructor to initialize all the class variables
+    Queue(int capi)
+    {
+        front = rear = 0;
+        cap = capi;
+    }
+    // Method to push the element in the Queue
+    void Push(int data)
+    {
+        // if rear pointer equals to capacity of queue , then queue is full
+        if (cap == rear)
+        {
+            cout << "Queue is full" << endl;
+            return;
+        }
+
+        else
+        {
+            queue[rear] = data;
+            rear++;
+        }
+        return;
+    }
+    // Method to pop the element from the Queue
+    void Pop()
+    {
+        // Queue is empty
+        if (front == rear)
+        {
+            return;
+        }
+        else
+        {
+            for (int i = 0; i < rear - 1; i++)
+            {
+                queue[i] = queue[i + 1];
+            }
+            rear--;
+        }
+    }
+    // Print Front of the queue
+    int Front()
+    {
+        // Queue is empty
+        if (front == rear)
+        {
+            return -1;
+        }
+        return queue[front] ;
+    }
+    bool Empty()
+    {
+        return front==rear ;
+    }
+};
+// Create Custom Graph DataStructure 
 class Graph
 {
     public:
-    int vertices ;
-    map<int,vector<int>> adj;
+    int vertices ; // number of nodes/vertices in the Graph
+    // create a Adjacencey matrix
+    int **adjacencyMatrix ;
+
+    // Create a firstNode or source Node for DFS and BFS traversal
+    int firstNode ;
     Graph(int val)
     {
         vertices = val ;
+        adjacencyMatrix = new int*[val+1];
+        for (int i = 0; i <= val; i++) 
+        {
+            adjacencyMatrix[i] = new int[val];
+        }
+        firstNode = -1 ; // Store the first / Source Node 
     }
     
     // function to add a edge in the graph 
@@ -22,55 +94,71 @@ class Graph
         cout<<"Enter the Value of Vertex2"<<endl;
         cin>>node2 ;
 
-        adj[node1].push_back(node2);
-        adj[node2].push_back(node1);   
+        adjacencyMatrix[node1][node2]=1;
+        adjacencyMatrix[node2][node1]=1; 
+
+        if(firstNode==-1) // store source node
+        {
+            firstNode=node1 ;
+        }  
     }
     
     // Graph Traversal using BFS 
     void bfs()
-    {
-        cout<<"Enter the Source Node or first Node"<<endl;
-        int source; cin>>source ;
+    { 
+        // made a visited array to mark nodes visited
         int visited[vertices+1]={0};
-        queue<int> q ;
-        q.push(source);
-        visited[source]=1 ;
-        while(!q.empty())
+
+        // Create a Object of Queue Class
+        Queue q(100) ;
+        q.Push(firstNode);
+        // mark source node visited
+        visited[firstNode]=1 ;
+
+        while(!q.Empty())
         {
-            int vertex = q.front();
-            q.pop();
+            int vertex = q.Front();
             cout<<vertex<<" ";
-            for(auto child : adj[vertex])
+            q.Pop();
+            for (int i = 0; i <= vertices; i++) 
             {
-                if(!visited[child])
-                {
-                    q.push(child);
-                    visited[child]=1 ;
+                if (adjacencyMatrix[vertex][i] == 1 && !visited[i] ) {
+    
+                    // Push the adjacent node to the queue
+                    q.Push(i);
+    
+                    // Set
+                    visited[i] = 1 ;
                 }
             }
         }
         cout<<endl;
+    
     }
-    void solve(int source , int visited[])
+
+    void DfsTraversal(int source , int visited[])
     {
         visited[source]=1 ;
         cout<<source<<" ";
 
-        for(auto child : adj[source])
+        for(int child=0 ; child<=vertices ; child++)
         {
-            if(!visited[child])
-            solve(child, visited);
+            if(adjacencyMatrix[source][child]==1 && !visited[child])
+            {
+                DfsTraversal(child, visited);
+            }
         }
+        return ;
     }
     
     // Graph Traversal using DFS 
     void dfs()
     {
-        cout<<"Enter the Source Node or first Node"<<endl;
-        int source; cin>>source ;
+        // made a visited array to mark nodes visited
         int visited[vertices+1]={0};
-        solve(source,visited);
+        DfsTraversal(firstNode,visited);
         cout<<endl;
+        return ;
     }
     
     // function to delete a Edge from Graph
@@ -79,38 +167,33 @@ class Graph
         int node1 , node2 ;
         cout<<"Enter Node1 and Node2 whose edge between them is to be deleted"<<endl;
         cin>>node1>>node2 ;
-        // Traversing through the first vector list
-        // and removing the second element from it
-        for (int i = 0; i < adj[node1].size(); i++) {
-            if (adj[node1][i] == node2) {
-                adj[node1].erase(adj[node1].begin() + i);
-                break;
-            }
-        }
     
-        // Traversing through the second vector list
-        // and removing the first element from it
-        for (int i = 0; i < adj[node2].size(); i++) {
-            if (adj[node2][i] == node1) {
-                adj[node2].erase(adj[node2].begin() + i);
-                break;
-            }
+        if(node1>vertices || node2>vertices) 
+        {
+            cout<<"Invalid Node Values"<<endl;
+            return ;
         }
-
+        // delete node by mark them 0 in matrix
+        adjacencyMatrix[node1][node2]=0;
+        adjacencyMatrix[node2][node1]=0;
+        return ;
     }
     
     // Function to Display all the nodes in the Graph
     void display()
     {
         cout<<"Your List is "<<endl;
-        for (auto i : adj)
+        for(int i = 0 ; i<=vertices ; i++)
         {
-            cout << i.first << "->";
-            for (auto j : i.second)
+            cout<<i<<"->";
+            for(int j = 0 ; j<=vertices ; j++)
             {
-                cout << j << ",";
+                if(adjacencyMatrix[i][j]==1)
+                {
+                    cout<<j<<" ";
+                }
             }
-            cout << endl;
+            cout<<endl;
         }
     }
 };
@@ -118,12 +201,12 @@ class Graph
 
 int main()
 {
-    int n;
-    cout<<"Enter Number of vertex"<<endl;
-    cin>>n;
+    int vertices;
+    cout<<"Enter Number of vertices"<<endl;
+    cin>>vertices;
     
     // Create Instance of the Graph Class
-    Graph g(n);
+    Graph g(vertices);
     int ch = 0 ;
     
     while(ch != 5)
