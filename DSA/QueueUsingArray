@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 // Create a Custom Queue DataStructure
@@ -118,8 +118,11 @@ int main()
         case 4:
             q.Display();
             break;
+        case 5:
+            cout<<"EXIT"<<endl;
+            break ;
         default:
-            cout<<"EXIT<<endl;
+            cout<<"Invalid Choice"<<endl;
             return 0 ;
         }
     }
