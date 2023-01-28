@@ -42,27 +42,62 @@ public:
     // Function to delete the Node By value
     void deleteNodeByValue(Node *&head, int value)
     {
+        if(head==NULL)
+        {
+            cout<<"List is Empty"<<endl;
+            return ;
+        }
         Node *nodePtr= head;
-        while (nodePtr->next->data != value && nodePtr != NULL)
+        if (nodePtr->data == value)
+        {
+            head = nodePtr->next;
+            delete (nodePtr);
+            return;
+        }
+        while (nodePtr->next != NULL && nodePtr->next->data != value)
         {
             // if first node has to be the node which we want to delete
-            if (nodePtr == head)
-            {
-                head = nodePtr->next;
-                delete (nodePtr);
-                return;
-            }
+           
             nodePtr = nodePtr->next;
         }
         // delete the node
-        Node * to_delete_node = nodePtr->next;
-        nodePtr->next = nodePtr->next->next;
-        delete (to_delete_node);
+        if(nodePtr->next != NULL && nodePtr->next->data == value)
+        {
+            Node * to_delete_node = nodePtr->next;
+            nodePtr->next = nodePtr->next->next;
+            delete (to_delete_node);
+        }
+        else
+        {
+            cout<<"Node Not present "<<endl;
+        }
+        
+    }
+    int list_Length(Node * head)
+    {
+        int size = 0 ;
+        while(head!=NULL)
+        {
+            head=head->next ;
+            size ++ ;
+        }
+        return size ;
     }
 
     // Function to delete the Node By position or index
     void deleteNodeByPosition(Node *&head, int position)
     {
+        if(head==NULL)
+        {
+            cout<<"list is Empty"<<endl;
+            return ;
+        }
+        if(position>list_Length(head))
+        {
+            cout<<"Invalid Position"<<endl;
+            return ;
+        }
+
         Node *nodePtr = head;
         if (position == 1)
         {
@@ -71,24 +106,37 @@ public:
             return;
         }
         // i = index , to Iterate
-        for (int i = 1; i < n - 1; i++)
+        for (int i = 1; i < position - 1; i++)
         {
             nodePtr = nodePtr->next;
         }
         Node * to_delete_node = nodePtr->next;
         nodePtr->next = nodePtr->next;
         delete (to_delete_node);
+        cout<<"Operation Successful"<<endl;
     }
 
     // Function to Update the data of the Node
     void update(Node *&head, int previous_val, int new_val)
     {
+        if(head==NULL)
+        {
+            cout<<"List is Empty"<<endl;
+            return ;
+        }
         Node * nodePtr = head;
-        while (nodePtr->data != previous_val && nodePtr != NULL)
+        while (nodePtr != NULL && nodePtr->data != previous_val)
         {
             nodePtr = nodePtr->next;
         }
+        if(nodePtr == NULL)
+        cout<<"Node not Found"<<endl;
+        else if (nodePtr->data == previous_val)
         nodePtr->data = new_val;
+
+        return ;
+
+        
     }
     
     // Merge the Lists 
@@ -172,6 +220,11 @@ public:
     // Function to Print the list 
     void print(Node *head)
     {
+        if(head==NULL)
+        {
+            cout<<"List Empty"<<endl;
+            return ;
+        }
         while (head->next != NULL)
         {
             cout << head->data << "->";
