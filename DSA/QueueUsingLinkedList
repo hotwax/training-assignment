@@ -35,7 +35,7 @@ public:
         cout << "Enter the data: " << endl;
         cin >> data;
 
-        Node *newNode = new Node(data);
+        Node *newNode = new Node(data); // Create a NewNode
 
         if (rear == NULL)
         {
@@ -64,7 +64,7 @@ public:
             rear = NULL;
         }
 
-        delete To_delete_Node ;
+        delete To_delete_Node ; // delete the element
         cout<<"Operation Successful"<<endl;
     }
     
@@ -87,7 +87,7 @@ public:
         while (nodePtr != NULL)
         {
             cout << nodePtr->data << " ";
-            nodePtr = NodePtr->next;
+            nodePtr = nodePtr->next;
         }
         cout << endl;
     }
@@ -98,13 +98,13 @@ int main()
 {
     Queue q;
     int choice;
-    while (choice != 4)
+    while (choice != 5)
     {
         cout << "1. enqueue " << endl;
         cout << "2. dequeue " << endl;
         cout<<  "3. Front   " <<endl;
-        cout << "3. Display" << endl;
-        cout << "4. exit" << endl;
+        cout << "4. Display" << endl;
+        cout << "5. exit" << endl;
         cout << "Enter the Choice" << endl;
         cin >> choice;
 
@@ -119,7 +119,7 @@ int main()
         case 3:
             q.Front();
             break ;
-        case 5:
+        case 4:
             q.display();
             break;
         default:
