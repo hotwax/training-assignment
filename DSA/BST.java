@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 class BST {
   int data;
   BST left;
@@ -162,7 +163,7 @@ class Demo {
         }
 
       }
-	  catch (Exception e) {
+	  catch (InputMismatchException e) {
       System.out.println("Enter valid option");
     }
     } 
