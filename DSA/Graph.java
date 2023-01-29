@@ -1,18 +1,16 @@
-import java.util.*;
+import java.util.Scanner;
 class GrapH
 {
 	int vertex;
 	int edge;
 	int[][] graph;
-	ArrayList<ArrayList<Integer>> al;
 	Scanner sc=new Scanner(System.in);
+	
 	GrapH(int x,int y) //constructor to initialize vertex and edges
 	{
 		vertex=x;
 		edge=y;
 		graph=new int[vertex+1][vertex+1];
-		al=new ArrayList<ArrayList<Integer>>(vertex);
-		adjList();
 	}
 	
 	void insert(int v1,int v2,int w) // to create adjacency matrix 
@@ -32,53 +30,32 @@ class GrapH
 			System.out.println("==================");
 		}
 	}
-	void adjList() //to create adjacency list
-	{
-		for(int i=0;i<vertex;i++)
-			al.add(new ArrayList<>());
-	}
-	void addList(int v,int u)
-	{
-		al.get(v).add(u);
-		al.get(u).add(v);
-	}
-	void PList() // to print list
-	{
-		for(int i=0;i<al.size();i++)
-		{
-			System.out.print("Vertex "+i+"=>");
-			for(int j=0;j<al.get(i).size();j++)
-			{
-				System.out.print(al.get(i).get(j)+"  ");
-			}
-			System.out.println();
-		}
-	}
 	void Pmatrix() //to print adjacency matrix
 	{
 		for(int i=0;i<vertex;i++)
 		{
 			for(int j=0;j<vertex;j++)
 			System.out.print(graph[i][j]+"  ");
-		\
+		
 		System.out.println();
 		}
 	}
-	public void dfsearch() //depth first search
-	{
-        boolean v[]=new boolean[vertex];
-        df_search(0,v);
-        System.out.println();
-    }
-    public void df_search(int s, boolean v[]) //helping method
-	{
-        v[s]=true;
-        System.out.print(s+" ");
-        for(int a:al.get(s))
-		{
-            if(!v[a]) df_search(a,v);
+	void dfs(int start, boolean[] visited)
+    {
+        // Print the current node
+        System.out.print(start + " ");
+        // Set current node as visited
+        visited[start] = true;
+        // For every node of the graph
+        for (int i = 0; i < graph[start].length; i++) {
+            // If some node is adjacent to the current node
+            // and it has not already been visited
+            if (graph[start][i] == 1 && (!visited[i])) {
+                dfs(i, visited);
+            }
         }
     }
+	
 }
 class Demo
 {
@@ -91,18 +68,18 @@ class Demo
 		int edge=sc.nextInt(); 
 		GrapH g=new GrapH(vertex,edge);
 		int a,b;
+	
 	while(true)
 	{
 	System.out.println("===========================");
 	System.out.println("*****Enter your choice*****");
 	System.out.println("1. Create Adjancy matrix ");
-	System.out.println("2. Create Adjancy List");
-	System.out.println("3. Print Adjancy matrix");
-	System.out.println("4. Print Adjancy List");
-	System.out.println("5. Traversing DFS");
-	System.out.println("6. Exit");
+	System.out.println("2. Print Adjancy matrix");
+	System.out.println("3. Traversing DFS");
+	System.out.println("4. Exit");
 	System.out.println("===========================");
-	
+	try
+	{
 	int x=sc.nextInt();
 	switch(x)
 	{
@@ -112,28 +89,16 @@ class Demo
 		break;
 		
 		case 2:
-		System.out.println("Enter two connecting edges name ");
-		System.out.println("First vertex");
-		a=sc.nextInt();
-		System.out.println("second vertex");
-		b=sc.nextInt();
-		g.addList(a,b);
-		System.out.println("Done \n");
-		break;
-		
-		case 3:
 		g.Pmatrix();
 		break;
 		
-		case 4:
-		g.PList();
+		case 3:
+		boolean[] visited = new boolean[vertex];
+		g.dfs(0,visited);
+        System.out.println();
 		break;
 		
-		case 5:
-		g.dfsearch();
-		break;
-		
-		case 6:		
+		case 4:		
 		System.out.println("Thank you");
 		System.exit(0);
 		break;
@@ -142,7 +107,11 @@ class Demo
 		System.out.println("Invalid");
 		break;
 	}
-	
+	}
+	catch(Exception e)
+	{
+	System.out.println("Enter valid option");
+	}
 	}
 	}
 }
