@@ -71,49 +71,50 @@ public class My_Stack {
         System.out.println();
     }
     public void menu(){
-    Scanner sc=new Scanner(System.in);
-    boolean flag=true;
-    while(flag){
-        System.out.println("===========================");
-        System.out.println("1: push");
-        System.out.println("2: pop");
-        System.out.println("3: peek");
-        System.out.println("4: traverse");
-        System.out.println("5: update");
-        System.out.println("6: search");
-        System.out.println("7: terminate the program");
-        System.out.println();
-        int n=sc.nextInt();
-        try{
-            switch(n){
-            case 1:// push
-              System.out.println("enter no. to push");
-              push(sc.nextInt());
-              break;
-             case 2:// pop
-                 System.out.println("popped value= "+pop());
-                 break;
-             case 3:// peek
-                 System.out.println("peeked value= "+peek());
-                 break;
-             case 4:// traverse
-                 traverseAll();
-                 break;
-             case 5:// update
-                 System.out.println("enter no. to update and the value");
-                 update(sc.nextInt(),sc.nextInt());
-                 break;
-             case 6:// search
-                 System.out.println("enter value to search");
-                 System.out.println(search(sc.nextInt()));
-                 break;
-             case 7:// end
-                 flag=false;
-                 break;
-             default:
-                 System.out.println("invalid input");
-                 break;
-          }
+        boolean flag=true;
+        while(flag){            
+            System.out.println("===========================");
+            System.out.println("1: push");
+            System.out.println("2: pop");
+            System.out.println("3: peek");
+            System.out.println("4: traverse");
+            System.out.println("5: update");
+            System.out.println("6: search");
+            System.out.println("7: terminate the program");
+            System.out.println();
+            
+            try{
+                Scanner sc=new Scanner(System.in);
+                int n=sc.nextInt();
+                switch(n){
+                case 1:// push
+                  System.out.println("enter no. to push");
+                  push(sc.nextInt());
+                  break;
+                 case 2:// pop
+                     System.out.println("popped value= "+pop());
+                     break;
+                 case 3:// peek
+                     System.out.println("peeked value= "+peek());
+                     break;
+                 case 4:// traverse
+                     traverseAll();
+                     break;
+                 case 5:// update
+                     System.out.println("enter no. to update and the value");
+                     update(sc.nextInt(),sc.nextInt());
+                     break;
+                 case 6:// search
+                     System.out.println("enter value to search");
+                     System.out.println(search(sc.nextInt()));
+                     break;
+                 case 7:// end
+                     flag=false;
+                     break;
+                 default:
+                     System.out.println("invalid input");
+                     break;
+              }
         }
         catch(Exception e){
             //if user enter any other value than integer
