@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Stack {
-
     // Pointer to top of stack
     Node top;
 
@@ -46,23 +45,12 @@ public class Stack {
         return stack;
     }
 
-    // update a value in the stack
-    public static Stack update(Stack stack, int s_value, int n_value) {
-        // Store top node
+    public static void peek(Stack stack) {
         if (stack.top == null)
-            return stack;
-
-        // Store previous top and move top one node ahead
-        Node temp = stack.top;
-        while (temp != null) {
-            if (temp.data == s_value) {
-                temp.data = n_value;
-            }
-            temp = temp.next;
+            System.out.println("Stack is empty");
+        else {
+            System.out.println("Top element is " + stack.top.data);
         }
-
-        // Return the list by head
-        return stack;
     }
 
     // method to print the stack
@@ -88,7 +76,7 @@ public class Stack {
             System.out.println("Select an option from the menu below");
             System.out.println("1. Push a new element in the stack");
             System.out.println("2. Pop an element from the stack");
-            System.out.println("3. Update an element in stack");
+            System.out.println("3. Peek element from the stack");
             System.out.println("4. Exit");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
@@ -105,10 +93,7 @@ public class Stack {
                         stack = pop(stack);
                         break;
                     case 3:
-                        System.out.println("Enter the value to be updated and the new value");
-                        int s_value = input.nextInt();
-                        int n_value = input.nextInt();
-                        stack = update(stack, s_value, n_value);
+                        peek(stack);
                         break;
                     case 4:
                         flag = false;
