@@ -1,6 +1,6 @@
 package hashing.linear_probing;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Linear_Probing {
     int m,n;

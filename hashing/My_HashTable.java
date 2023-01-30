@@ -1,7 +1,8 @@
 package hashing;
 
-import java.util.*;
-
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class My_HashTable {
     Pair arr[];
@@ -48,18 +49,6 @@ public class My_HashTable {
             map.put(r, val++);
             s.add(r);
         }
-//        map.put(1,10);
-//        map.put(12,20);
-//        map.put(16,30);
-//        map.put(81,40);
-//        map.put(341,50);
-//        map.put(9871,60);
-//        System.out.println(map.get(1));
-//        System.out.println(map.get(12));
-//        System.out.println(map.get(16));
-//        System.out.println(map.get(81));
-//        System.out.println(map.get(341));
-//        System.out.println(map.get(9871));
         System.out.println(map.getCollisions());
     }
 }

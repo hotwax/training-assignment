@@ -1,6 +1,9 @@
 package hashing.chaining;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+
 public class Chaining_HashTable {
     LinkedList<Pair> arr[];
     int m,n;

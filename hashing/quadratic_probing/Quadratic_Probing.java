@@ -1,6 +1,7 @@
 package hashing.quadratic_probing;
 
-import java.util.*;
+import java.util.Scanner;
+
 public class Quadratic_Probing {
     int m,n;
   //  int c1=7,c2=3;

@@ -1,6 +1,6 @@
 package hashing.random_probing;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Random_Probing {
     int m,n;
@@ -111,7 +111,6 @@ public class Random_Probing {
         int n=sc1.nextInt();
         Random_Probing map=new Random_Probing(n,m);
         int val=10,key=1;
-        Set<Integer> s=new HashSet<>();
         System.out.println("\n1: put");
         System.out.println("2: get");
         System.out.println("3: delete");

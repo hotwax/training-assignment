@@ -1,6 +1,6 @@
 package hashing.double_hashing;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Double_Hashing {
     int m,n,PM;
@@ -125,8 +125,6 @@ public class Double_Hashing {
         int n=sc1.nextInt();
         Double_Hashing map=new Double_Hashing(n,m);
         int val=10,key=1;
-        Set<Integer> s=new HashSet<>();
-
         
         while(flag){
             System.out.println("==========================");
