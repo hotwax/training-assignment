@@ -1,67 +1,34 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Graph {
-    // adjacency list
-    ArrayList<ArrayList<Integer>> adj;
-    int V;
+    private boolean adjMatrix[][];
+    private int numVertices;
 
-    // constructor
-    public Graph(int V) {
-        this.V = V;
-        adj = new ArrayList<>();
-        for (int i = 0; i < V; i++) {
-            adj.add(new ArrayList<>());
-        }
+    // Initialize the matrix
+    public Graph(int numVertices) {
+        this.numVertices = numVertices;
+        adjMatrix = new boolean[numVertices][numVertices];
     }
 
-    // add edge by addding the vertex to the adjacency list
-    public void addEdge(int u, int v) {
-        adj.get(u).add(v);
-        adj.get(v).add(u);
+    // Add edges
+    public void addEdge(int i, int j) {
+        adjMatrix[i][j] = true;
+        adjMatrix[j][i] = true;
     }
 
-    // remove edge by removing the vertex from the adjacency list
-    public void deleteEdge(int u, int v) {
-        adj.get(u).remove((Integer) v);
-        adj.get(v).remove((Integer) u);
+    // Remove edges
+    public void removeEdge(int i, int j) {
+        adjMatrix[i][j] = false;
+        adjMatrix[j][i] = false;
     }
 
-    // breadth first search
-    public void bfs(int s) {
-        boolean[] visited = new boolean[V];
-        List<Integer> queue = new ArrayList<>();
-        visited[s] = true;
-        queue.add(s);
-        while (!queue.isEmpty()) {
-            s = queue.remove(0);
-            System.out.print(s + " ");
-            for (int i : adj.get(s)) {
-                if (!visited[i]) {
-                    visited[i] = true;
-                    queue.add(i);
-                }
+    public void displayGraph() {
+        for (int i = 0; i < numVertices; i++) {
+            System.out.print(i + ": ");
+            for (boolean j : adjMatrix[i]) {
+                System.out.print((j ? 1 : 0) + " ");
             }
-        }
-        System.out.println();
-    }
-
-    // depth first search
-    public void dfs(int s) {
-        boolean[] visited = new boolean[V];
-        dfsSolve(s, visited);
-        System.out.println();
-    }
-
-    // dfs helper function
-    void dfsSolve(int s, boolean[] visited) {
-        visited[s] = true;
-        System.out.print(s + " ");
-        for (int i : adj.get(s)) {
-            if (!visited[i]) {
-                dfsSolve(i, visited);
-            }
+            System.out.println();
         }
     }
 
@@ -90,12 +57,13 @@ public class Graph {
                         System.out.println("Enter the vertexes which edge to be deleted");
                         int v1 = input.nextInt();
                         int v2 = input.nextInt();
-                        graph.deleteEdge(v1, v2);
+                        graph.removeEdge(v1, v2);
                         break;
                     case 3:
                         flag = false;
                         break;
                 }
+                graph.displayGraph();
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
