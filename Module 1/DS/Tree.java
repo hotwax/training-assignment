@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Tree {
     Node head;
@@ -91,17 +92,22 @@ public class Tree {
     }
 
     public void DashBoard() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("1. Insert");
-        System.out.println("2. Delete");
-        System.out.println("3. Sorting");
-        System.out.println("4. Search");
-        System.out.println("5. EXIT");
+        
         boolean flag = true;
         while (flag) {
+            
+            System.out.println();
+            System.out.println("1. Insert");
+            System.out.println("2. Delete");
+            System.out.println("3. Sorting");
+            System.out.println("4. Search");
+            System.out.println("5. EXIT");
+            Scanner sc = new Scanner(System.in);
             int n = sc.nextInt();
-            switch (n) {
+            System.out.println();
+            try {
+                
+                switch (n) {
                 case 1:// Insert
                     System.out.println("Enter value to be inserted.");
                     insert(sc.nextInt());
@@ -116,7 +122,7 @@ public class Tree {
                     inorder();
                     break;
                 case 4:// search
-                    System.out.println("enter value to search");
+                    System.out.println("Enter value to be searched.");
                     System.out.println(search(sc.nextInt()));
                     break;
                 case 5:// end
@@ -125,6 +131,10 @@ public class Tree {
                 default:
                     System.out.println("Kindly choose the correct option.");
                     break;
+            }
+            }
+            catch(InputMismatchException ex) {
+                System.out.println(ex.getMessage());
             }
         }
     }
