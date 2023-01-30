@@ -1,7 +1,10 @@
 package Data_Structures.graph_using_array;
 
-import Data_Structures.graph_using_arraylist.MyGraph;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+
 
 //Primitive Array based implementation of graph
 public class Graph_Array {
@@ -71,7 +74,7 @@ public class Graph_Array {
         Scanner sc1=new Scanner(System.in);
         System.out.println("Enter number of vertices");
         int V=sc1.nextInt();
-        MyGraph g=new MyGraph(V);
+        Graph_Array g=new Graph_Array(V);
         boolean flag=true;
         while(flag){
             try{

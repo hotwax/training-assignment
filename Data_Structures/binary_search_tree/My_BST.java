@@ -1,6 +1,6 @@
 package Data_Structures.binary_search_tree;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class My_BST {
     Node head;

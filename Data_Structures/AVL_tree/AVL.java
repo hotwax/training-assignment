@@ -1,6 +1,7 @@
 package Data_Structures.AVL_tree;
 
-import java.util.*;
+import java.util.Scanner;
+
 
 public class AVL {
     Node head;
