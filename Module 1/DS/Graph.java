@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.Queue;
 
 public class Graph {
@@ -26,7 +28,7 @@ public class Graph {
     }
 
     // Traversal Method:
-    public void helperOne() {
+    public void traverseGraphDfs() {
         boolean visited[] = new boolean[V];
         for (int i = 0; i < V; i++)
             if (!visited[i])
@@ -43,7 +45,7 @@ public class Graph {
         }
     }
 
-    public void helperTwo() {
+    public void traverseGraphBfs() {
         boolean visited[] = new boolean[V];
         for (int i = 0; i < V; i++) {
             if (!visited[i])
@@ -90,11 +92,11 @@ public class Graph {
                     break;
                 case 3:// bfs
                     System.out.println("BFS Traversal: ");
-                    helperTwo();
+                    traverseGraphBfs();
                     break;
                 case 4:// dfs
                     System.out.println("DFS Traversal: ");
-                    helperOne();
+                    traverseGraphDfs();
                     break;
                 case 5: //Exit from the program.
                     flag = false;
@@ -105,6 +107,7 @@ public class Graph {
             }
         }
         // sc.close();
+
     }
 
     public static void main(String args[]) {

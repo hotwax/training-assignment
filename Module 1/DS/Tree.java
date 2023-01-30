@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Tree {
     Node head;
@@ -105,6 +105,7 @@ public class Tree {
                 case 1:// Insert
                     System.out.println("Enter value to be inserted.");
                     insert(sc.nextInt());
+                    System.out.println("The value is inserted. Continue.....");
                     break;
                 case 2:// delete
                     System.out.println("Enter the value to be deleted.");

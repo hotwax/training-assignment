@@ -1,5 +1,3 @@
-import java.io.*;
-import java.util.*;
 import java.util.Scanner;
 
 class LinearProbingHashTable {
@@ -132,7 +130,7 @@ public class LinearProbing {
         // maxSizeake object of LinearProbingHashTable
         LinearProbingHashTable lpht = new LinearProbingHashTable(sc.nextInt());
 
-        char ch;
+        char ch = 'Y';
 
         // Do-while loop
         // Do part for performing actions
@@ -141,16 +139,16 @@ public class LinearProbing {
         {
             // Menu
             System.out.println("\nHash Table Operations\n");
-            System.out.println("1. insert ");
-            System.out.println("2. remove");
-            System.out.println("3. get");
-            System.out.println("4. clear");
-            System.out.println("5. size");
+            System.out.println("1. Insert ");
+            System.out.println("2. Remove");
+            System.out.println("3. Get");
+            System.out.println("4. Clear");
+            System.out.println("5. Size");
 
-            int ch = sc.nextInt();
+            int choice = sc.nextInt();
 
             // Switch case
-            switch (ch) {
+            switch (choice) {
 
                 // Case 1
                 case 1:
@@ -213,7 +211,7 @@ public class LinearProbing {
             // Display message asking the user whether
             // he/she wants to continue
             System.out.println(
-                    "\nDo you want to continue (Type y or n) \n");
+                    "\nDo you want to continue (Type y) otherwise enter n \n");
 
             // Reading character using charAt() method to
             // fetch
