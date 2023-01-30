@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
+
 
 public class SinglyLinkedList {
 
@@ -99,22 +101,22 @@ public class SinglyLinkedList {
 
         return list;
     }
-
+    // Sort Method
     public static SinglyLinkedList sort(SinglyLinkedList list) {
-        Node cNode = list.head;
-        Node nNode = list.head.next;
+        Node currNode = list.head;
+        Node nextNode = list.head.next;
         int temp;
-        while (cNode != null) {
-            while (nNode != null) {
-                if (cNode.data > nNode.data) {
-                    temp = cNode.data;
-                    cNode.data = nNode.data;
-                    nNode.data = temp;
+        while (currNode != null) {
+            while (nextNode != null) {
+                if (currNode.data > nextNode.data) {
+                    temp = currNode.data;
+                    currNode.data = nextNode.data;
+                    nextNode.data = temp;
                 }
-                nNode = nNode.next;
+                nextNode = nextNode.next;
             }
-            cNode = cNode.next;
-            nNode = cNode.next;
+            currNode = currNode.next;
+            nextNode = currNode.next;
         }
         return list;
     }
@@ -150,40 +152,50 @@ public class SinglyLinkedList {
             System.out.println();
             Scanner sc = new Scanner(System.in);
             int ch = sc.nextInt();
-            if (ch < 1 || ch > 5) {
+            if (ch < 1 || ch > 5) 
+            {
                 System.out.println("Invalid choice");
-            } else {
-                switch (ch) {
-                    case 1:
-                        System.out.println("Enter the value to be inserted");
-                        int i_value = sc.nextInt();
-                        list = insert(list, i_value);
-                        break;
-                    case 2:
-                        System.out.println("Enter the value to be deleted");
-                        int d_value = sc.nextInt();
-                        list = delete(list, d_value);
-                        break;
-                    case 3:
-                        System.out.println("Enter the value of the node which is to be updated.");
-                        int s_value = sc.nextInt();
-                        int n_value = sc.nextInt();
-                        list = update(list, s_value, n_value);
-                        break;
-                    case 4:
-                        System.out.println("Sorting the list");
-                        list = sort(list);
-                        break;
-                    case 5:
-                        flag = false;
-                        break;
+            } 
+            else 
+            {
+                try 
+                {
+                    switch (ch) {
+                        case 1:
+                            System.out.println("Enter the value to be inserted");
+                            int i_value = sc.nextInt();
+                            list = insert(list, i_value);
+                            break;
+                        case 2:
+                            System.out.println("Enter the value to be deleted");
+                            int d_value = sc.nextInt();
+                            list = delete(list, d_value);
+                            break;
+                        case 3:
+                            System.out.println("Enter the value of the node which is to be updated.");
+                            int s_value = sc.nextInt();
+                            int n_value = sc.nextInt();
+                            list = update(list, s_value, n_value);
+                            break;
+                        case 4:
+                            System.out.println("Sorting the list");
+                            list = sort(list);
+                            break;
+                        case 5:
+                            flag = false;
+                            break;
+                    }
+                    print(list);
+                    if (flag == false) {
+                        System.out.println("Exiting the program.");
+                    }
                 }
-                print(list);
-                if (flag == false) {
-                    System.out.println("Exiting the program.");
-                }
+
+            catch(InputMismatchException ex) {
+                System.out.println(ex.getMessage());
             }
         }
 
     }
+}
 }

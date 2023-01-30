@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Stack {
 
@@ -102,7 +103,8 @@ public class Stack {
             if (ch < 1 || ch > 5) {
                 System.out.println("Kindly enter the right option.");
             } else {
-                switch (ch) {
+                try {
+                    switch (ch) {
                     case 1:
                         System.out.println("Enter the value to be inserted");
                         int i_value = sc.nextInt();
@@ -130,6 +132,10 @@ public class Stack {
                 System.out.println();
                 if (flag == false) {
                     System.out.println("Exiting the program");
+                }
+                }
+                catch(InputMismatchException ex) {
+                    System.out.println(ex.getMessage());
                 }
             }
         }
