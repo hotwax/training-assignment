@@ -26,8 +26,7 @@ import java.util.Scanner;
             // Create a blank stack
             Node head = null;
             // Variable to store the choice of the user
-            int choice;
-            try {
+            int choice = -1;
                 do {
                     //  Printing the menu for the user
                     System.out.println("--------- MENU ---------");
@@ -35,7 +34,8 @@ import java.util.Scanner;
                     System.out.println("Press 1 : Push an element");
                     System.out.println("Press 2 : Pop an Element");
                     System.out.println("Press 3 : Display/Traversal the Stack");
-                    System.out.println("Press 4 : Program Terminated");
+                    System.out.println("Press 4 : Peek Element");
+                    System.out.println("Press 5 : Program Terminated");
                     System.out.println("Enter your choice : ");
                     choice = sc.nextInt();
                     //  Taking the choice from the user and performing the corresponding operation
@@ -59,18 +59,24 @@ import java.util.Scanner;
                             displayStack(head);
                             break;
                         case 4:
+                            peek(head);
+                            break;
+                        case 5:
                             System.out.println("Program Terminated Successfully");
                             break;
                         default:
                             System.out.println("Invalid Input");
-                    }
-                } while (choice != 4);
-            } catch (InputMismatchException error) {
-                // handling the exception if the user enters a non-integer value
-                System.out.println(error.getMessage());
-            }
+                        }
+
+                } while (choice != 5);
+
         }
-//        Method to create a new Stack
+
+        private static void peek(Node head) {
+            System.out.println("The top element is: " + head.data);
+        }
+
+        //        Method to create a new Stack
         private static Node createStack(int nextInt) {
             Node head = new Node(nextInt);
             return head;
