@@ -1,9 +1,10 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-class QueuE {
+class QueueByArray {
+	
   int CAPACITY = 100; // maxium capacity
-  int f = -1; // variable which points the front 
-  int r = -1; //variable to point the last inserted element
+  int front = -1; // variable which points the front 
+  int rear = -1; //variable to point the last inserted element
   int queue[] = new int[CAPACITY];
 
   void showAll() //to display queue elements
@@ -12,16 +13,16 @@ class QueuE {
       System.out.println("queue is empty\n");
       return;
     }
-    for (int i = f; i <= r; i++) {
+    for (int i = front; i <= rear; i++) {
       System.out.print(queue[i] + "  ");
     }
     System.out.println();
   }
 
-  boolean search(int x) // to check if elements is present or not
+  boolean search(int data) // to check if elements is present or not
   {
-    for (int i = f; i <= r; i++) {
-      if (queue[i] == x) return true;
+    for (int index = front; index <= rear; index++) {
+      if (queue[index] == data) return true;
     }
     return false;
   }
@@ -32,7 +33,7 @@ class QueuE {
       System.out.println("queue is empty\n");
       return -1;
     }
-    return queue[f++];
+    return queue[front++];
   }
 
   int front() // to see first entered element
@@ -41,29 +42,29 @@ class QueuE {
       System.out.println("queue is empty\n");
       return -1;
     }
-    return queue[f];
+    return queue[front];
   }
 
   boolean isEmpty() //to check if queue is empty
   {
-    if (f == -1 || f > r) return true;
+    if (front == -1 || front > rear) return true;
     return false;
   }
 
   boolean isFull() // to check if queue is full
   {
-    if (r == CAPACITY - 1) return true;
+    if (rear == CAPACITY - 1) return true;
     return false;
   }
 
-  void enqueue(int x) // to insert element
+  void enqueue(int data) // to insert element
   {
     if (isFull()) {
       System.out.println("Queue is full");
       return;
     }
-    if (f == -1) f++;
-    queue[++r] = x;
+    if (front == -1) front++;
+    queue[++rear] = data;
   }
 
   void update(int pre, int nw) // to update value of an element
@@ -72,9 +73,9 @@ class QueuE {
       System.out.println("queue is empty\n");
       return;
     }
-    for (int i = f; i <= r; i++) {
-      if (queue[i] == pre) {
-        queue[i] = nw;
+    for (int index = front; index <= rear; index++) {
+      if (queue[index] == pre) {
+        queue[index] = nw;
         System.out.println("Done");
         return;
       }
@@ -82,10 +83,11 @@ class QueuE {
     System.out.println("Data not fount");
   }
 }
+
 class Demo {
   public static void main(String[] args) {
-    QueuE q = new QueuE();
-    int a, b;
+    QueueByArray queue = new QueueByArray();
+    int input1, input2;
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
@@ -99,35 +101,35 @@ class Demo {
 
       Scanner sc = new Scanner(System.in);
       try {
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          q.enqueue(a);
+          input1 = sc.nextInt();
+          queue.enqueue(input1);
           System.out.println("Done ");
           break;
 
         case 2:
-          System.out.println("Element " + q.dequeue());
+          System.out.println("Element " + queue.dequeue());
           break;
 
         case 3:
-          q.showAll();
+          queue.showAll();
           break;
 
         case 4:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          System.out.println("Element present : " + q.search(a));
+          input1 = sc.nextInt();
+          System.out.println("Element present : " + queue.search(input1));
           break;
 
         case 5:
           System.out.println("Enter no. to be replaced ");
-          a = sc.nextInt();
+          input1 = sc.nextInt();
           System.out.println("Enter a number");
-          b = sc.nextInt();
-          q.update(a, b);
+          input2 = sc.nextInt();
+          queue.update(input1, input2);
           break;
 
         case 6:

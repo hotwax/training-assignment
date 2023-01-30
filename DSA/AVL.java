@@ -14,53 +14,53 @@ class Node // a normal node class
 class AVL {
   Node root;
 
-  int height(Node N) // to find height of tree
+  int height(Node node) // to find height of tree
   {
-    if (N == null)
+    if (node == null)
       return 0;
-    return N.height;
+    return node.height;
   }
 
-  private Node rightRotate(Node temp) // Right rotation for balancing tree 
+  private Node rightRotate(Node tempNode) // Right rotation for balancing tree 
   {
-    Node first = temp.left;
+    Node first = tempNode.left;
     Node second = first.right;
     // Perform rotation
-    first.right = temp;
-    temp.left = second;
+    first.right = tempNode;
+    tempNode.left = second;
     //  Update heights
-    temp.height = Math.max(height(temp.left), height(temp.right)) + 1;
+    tempNode.height = Math.max(height(tempNode.left), height(tempNode.right)) + 1;
     first.height = Math.max(height(first.left), height(first.right)) + 1;
     // Return new root
     return first;
   }
 
-  private Node leftRotate(Node temp) // Left rotation for balancing tree
+  private Node leftRotate(Node tempNode) // Left rotation for balancing tree
   {
-    Node first = temp.right;
+    Node first = tempNode.right;
     Node second = first.left;
     // Perform rotation
-    first.left = temp;
-    temp.right = second;
+    first.left = tempNode;
+    tempNode.right = second;
     //  Update heights
-    temp.height = Math.max(height(temp.left), height(temp.right)) + 1;
+    tempNode.height = Math.max(height(tempNode.left), height(tempNode.right)) + 1;
     first.height = Math.max(height(first.left), height(first.right)) + 1;
     // Return new root
     return first;
   }
 
-  int heightDiff(Node N) // to check if tree is unbalance or not
+  int heightDiff(Node node) // to check if tree is unbalance or not
   {
-    if (N == null)
+    if (node == null)
       return 0;
-    return height(N.left) - height(N.right);
+    return height(node.left) - height(node.right);
   }
 
   Node min(Node node) //min node
   {
-    Node temp;
-    for (temp = node; temp.left != null; temp = temp.left);
-    return temp;
+    Node tempNode;
+    for (tempNode = node; tempNode.left != null; tempNode = tempNode.left);
+    return tempNode;
   }
 
   void inOrder(Node node) //sorted form of traversing
@@ -136,29 +136,29 @@ class AVL {
       // node with only one child or no child
       if ((root.left == null) || (root.right == null)) {
 
-        Node temp;
+        Node tempNode;
         if (root.left != null)
-          temp = root.left;
+          tempNode = root.left;
         else
-          temp = root.right;
+          tempNode = root.right;
 
         // No child case
-        if (temp == null) {
-          temp = root;
+        if (tempNode == null) {
+          tempNode = root;
           root = null;
         } else // One child case
-          root = temp; // Copy the contents of the non-empty child
+          root = tempNode; // Copy the contents of the non-empty child
 
-        temp = null;
+        tempNode = null;
       } else {
         //smallest in the right subtree
-        Node temp = min(root.right);
+        Node tempNode = min(root.right);
 
         // Copy the inorder successor's data to this node
-        root.data = temp.data;
+        root.data = tempNode.data;
 
         // Delete the inorder successor
-        root.right = delete(root.right, temp.data);
+        root.right = delete(root.right, tempNode.data);
       }
     }
 
@@ -221,25 +221,25 @@ class AVL {
     return root;
   }
 
-  Node search(Node temp, int x) //helping function to check if an element is present or not
+  Node search(Node tempNode, int x) //helping function to check if an element is present or not
   {
 
-    if (temp != null) {
-      if (temp.data == x)
-        return temp;
-      else if (temp.data > x)
-        return search(temp.left, x);
+    if (tempNode != null) {
+      if (tempNode.data == x)
+        return tempNode;
+      else if (tempNode.data > x)
+        return search(tempNode.left, x);
       else
-        return search(temp.right, x);
+        return search(tempNode.right, x);
     }
 
     return null;
   }
 
-  boolean searchNode(Node root, int x) //main function to search
+  boolean searchNode(Node root, int data) //main function to search
   {
-    Node temp = search(root, x);
-    if (temp != null) return true;
+    Node tempNode = search(root, data);
+    if (tempNode != null) return true;
     else return false;
   }
 
@@ -264,8 +264,8 @@ class Demo {
 
 		try {
         Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter a number ");
           input1 = sc.nextInt();

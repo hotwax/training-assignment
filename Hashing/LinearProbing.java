@@ -1,11 +1,12 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-class Linear {
+class LinearProbing {
   int size, max;
   Integer[] keys; //table to store values
   Integer[] vals;
   int collision = 0;
-  Linear(int capacity) //constructor to initize
+  
+  LinearProbing(int capacity) //constructor to initize
   {
     size = 0;
     max = capacity;
@@ -26,34 +27,34 @@ class Linear {
   void insert(Integer key, Integer val) // function to insert
   {
     int tmp = hash(key);
-    int i = tmp;
+    int index = tmp;
     do {
-      if (keys[i] != null) collision++;
-      if (keys[i] == null) {
-        keys[i] = key;
-        vals[i] = val;
+      if (keys[index] != null) collision++;
+      if (keys[index] == null) {
+        keys[index] = key;
+        vals[index] = val;
         size++;
         return;
       }
-      if (keys[i].equals(key)) {
-        vals[i] = val;
+      if (keys[index].equals(key)) {
+        vals[index] = val;
         return;
       }
-      i = (i + 1) % max;
-    } while (i != tmp);
+      index = (index + 1) % max;
+    } while (index != tmp);
 
   }
 
   Integer get(Integer key) // function to search for value
   {
     int tmp = hash(key);
-    int i = tmp;
+    int index = tmp;
     do {
-      if (keys[i] != null && keys[i].equals(key)) {
-        return vals[i];
+      if (keys[index] != null && keys[index].equals(key)) {
+        return vals[index];
       }
-      i = (i + 1) % max;
-    } while (i != tmp);
+      index = (index + 1) % max;
+    } while (index != tmp);
 
     return null;
   }
@@ -63,10 +64,10 @@ class Linear {
     if (!contains(key))
       return;
 
-    int i = hash(key);
-    while (!key.equals(keys[i]))
-      i = (i + 1) % max;
-    keys[i] = vals[i] = null;
+    int index = hash(key);
+    while (!key.equals(keys[index]))
+      index = (index + 1) % max;
+    keys[index] = vals[index] = null;
 
     // size--;        
   }
@@ -77,17 +78,17 @@ class Linear {
 
   /** Function to print HashTable **/
   void showAll() {
-    for (int i = 0; i < max; i++)
-      if (keys[i] != null)
-        System.out.println("Key = " + keys[i] + ", Value = " + vals[i]);
+    for (int index = 0; index < max; index++)
+      if (keys[index] != null)
+        System.out.println("Key = " + keys[index] + ", Value = " + vals[index]);
     System.out.println();
   }
 }
 class Demo {
   public static void main(String[] args) {
-    int a, b;
-    Linear c = new Linear(10);
-    long l1 = System.currentTimeMillis();
+    int value1, value2;
+    LinearProbing linear = new LinearProbing(10);
+    long time1 = System.currentTimeMillis();
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
@@ -99,43 +100,43 @@ class Demo {
       System.out.println("6.Time");
       System.out.println("7.Exit");
       System.out.println("===========================");
+      Scanner sc = new Scanner(System.in);
       try {
-        Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter key ");
-          a = sc.nextInt();
+          value1 = sc.nextInt();
           System.out.println("Enter value ");
-          b = sc.nextInt();
-          c.insert(a, b);
+          value2 = sc.nextInt();
+          linear.insert(value1, value2);
           System.out.println("Done ");
           break;
 
         case 2:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          c.remove(a);
+          value1 = sc.nextInt();
+          linear.remove(value1);
           System.out.println("Done ");
           break;
 
         case 3:
-          c.showAll();
+          linear.showAll();
           break;
 
         case 4:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          System.out.println("key=" + a + "     Value=" + c.get(a));
+          value1 = sc.nextInt();
+          System.out.println("key=" + value1 + "     Value=" + linear.get(value1));
           break;
 
         case 5:
-          System.out.println("No of collision : " + c.getCollision());
+          System.out.println("No of collision : " + linear.getCollision());
           break;
 
         case 6:
-          long l2 = System.currentTimeMillis();
-          System.out.println("Time in mili seconds " + (l2 - l1));
+          long time2 = System.currentTimeMillis();
+          System.out.println("Time in mili seconds " + (time2 - time1));
           break;
 
         case 7:

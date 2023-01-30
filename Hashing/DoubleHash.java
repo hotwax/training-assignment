@@ -18,23 +18,23 @@ class DoubleHash {
   private int primeSize;
 
   /* Constructor */
-  public DoubleHash(int ts) {
+  public DoubleHash(int tablesize) {
     size = 0;
-    table = new Node[ts];
-    for (int i = 0; i < table.length; i++)
-      table[i] = null;
+    table = new Node[tablesize];
+    for (int index = 0; index < table.length; index++)
+      table[index] = null;
     primeSize = getPrime();
   }
 
   /* Method to get prime number less than table size for myhash2 function */
   public int getPrime() {
-    for (int i = table.length - 1; i >= 1; i--) {
+    for (int index = table.length - 1; index >= 1; index--) {
       int fact = 0;
-      for (int j = 2; j <= (int) Math.sqrt(i); j++)
-        if (i % j == 0)
+      for (int j_index = 2; j_index <= (int) Math.sqrt(index); j_index++)
+        if (index % j_index == 0)
           fact++;
       if (fact == 0)
-        return i;
+        return index;
     }
     /* Return a prime number */
     return 3;
@@ -91,8 +91,8 @@ class DoubleHash {
   }
 
   /* Method myhash which gives a hash value for a given string */
-  private int myhash1(Integer x) {
-    int hashVal = x.hashCode();
+  private int myhash1(Integer key) {
+    int hashVal = key.hashCode();
     hashVal %= table.length;
     if (hashVal < 0)
       hashVal += table.length;
@@ -100,8 +100,8 @@ class DoubleHash {
   }
 
   /* Method myhash function for double hashing */
-  private int myhash2(Integer x) {
-    int hashVal = x.hashCode();
+  private int myhash2(Integer key) {
+    int hashVal = key.hashCode();
     hashVal %= table.length;
     if (hashVal < 0)
       hashVal += table.length;
@@ -110,9 +110,9 @@ class DoubleHash {
 
   /* Method to print hash table */
   public void showAll() {
-    for (int i = 0; i < table.length; i++)
-      if (table[i] != null)
-        System.out.println("Key = " + table[i].key + ", Value = " + table[i].value);
+    for (int index = 0; index < table.length; index++)
+      if (table[index] != null)
+        System.out.println("Key = " + table[index].key + ", Value = " + table[index].value);
   }
 
   int getCollisions() {
@@ -121,9 +121,9 @@ class DoubleHash {
 }
 class Demo {
   public static void main(String[] args) {
-    int a, b;
+    int value1, value2;
     DoubleHash c = new DoubleHash(5);
-    long l1 = System.currentTimeMillis();
+    long time1 = System.currentTimeMillis();
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
@@ -137,21 +137,21 @@ class Demo {
       System.out.println("===========================");
       Scanner sc = new Scanner(System.in);
       try {
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter key ");
-          a = sc.nextInt();
+          value1 = sc.nextInt();
           System.out.println("Enter value ");
-          b = sc.nextInt();
-          c.insert(a, b);
+          value2 = sc.nextInt();
+          c.insert(value1, value2);
           System.out.println("Done ");
           break;
 
         case 2:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          c.remove(a);
+          value1 = sc.nextInt();
+          c.remove(value1);
           System.out.println("Done ");
           break;
 
@@ -161,8 +161,8 @@ class Demo {
 
         case 4:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          System.out.println("key=" + a + "     Value=" + c.get(a));
+          value1 = sc.nextInt();
+          System.out.println("key=" + value1 + "     Value=" + c.get(value1));
           break;
 
         case 5:
@@ -170,8 +170,8 @@ class Demo {
           break;
 
         case 6:
-          long l2 = System.currentTimeMillis();
-          System.out.println("Time in mili seconds " + (l2 - l1));
+          long time2 = System.currentTimeMillis();
+          System.out.println("Time in mili seconds " + (time2 - time1));
           break;
 
         case 7:

@@ -27,32 +27,32 @@ class Quadratic {
   void insert(Integer key, Integer val) //insertion of an key value
   {
     int tmp = hash(key);
-    int i = tmp, h = 1;
+    int index = tmp, height = 1;
     do {
-      if (keys[i] != null) collision++; //if that index is already filled then c++
-      if (keys[i] == null) //if it is empty we will simply initialize it
+      if (keys[index] != null) collision++; //if that index is already filled then c++
+      if (keys[index] == null) //if it is empty we will simply initialize it
       {
-        keys[i] = key;
-        value[i] = val;
+        keys[index] = key;
+        value[index] = val;
         size++;
         return;
       }
-      if (keys[i].equals(key)) //to update if same key comes 
+      if (keys[index].equals(key)) //to update if same key comes 
       {
-        value[i] = val;
+        value[index] = val;
         return;
       }
-      i = (i + h * h++) % max;
-    } while (i != tmp);
+      index = (index + height * height++) % max;
+    } while (index != tmp);
   }
 
   Integer get(Integer key) //to get value from an index
   {
-    int i = hash(key), h = 1;
-    while (keys[i] != null) {
-      if (keys[i].equals(key))
-        return value[i]; //returns value corresponding to key
-      i = (i + h * h++) % max;
+    int index = hash(key), height = 1;
+    while (keys[index] != null) {
+      if (keys[index].equals(key))
+        return value[index]; //returns value corresponding to key
+      index = (index + height * height++) % max;
     }
     return null; //else return null
   }
@@ -62,19 +62,19 @@ class Quadratic {
     if (!contains(key))
       return;
 
-    int i = hash(key), h = 1;
-    while (!key.equals(keys[i]))
-      i = (i + h * h++) % max;
-    keys[i] = value[i] = null; //searchs the index and put null over there
+    int index = hash(key), height = 1;
+    while (!key.equals(keys[index]))
+      index = (index + height * height++) % max;
+    keys[index] = value[index] = null; //searchs the index and put null over there
 
     size--;
   }
 
   void showAll() //display all
   {
-    for (int i = 0; i < max; i++)
-      if (keys[i] != null)
-        System.out.println("Key = " + keys[i] + ", Value = " + value[i]);
+    for (int index = 0; index < max; index++)
+      if (keys[index] != null)
+        System.out.println("Key = " + keys[index] + ", Value = " + value[index]);
 
     System.out.println();
   }
@@ -87,9 +87,9 @@ class Quadratic {
 
 class Demo {
   public static void main(String[] args) {
-    int a, b;
-    Quadratic c = new Quadratic(10);
-    long l1 = System.currentTimeMillis();
+    int value1, value2;
+    Quadratic quad = new Quadratic(10);
+    long time1 = System.currentTimeMillis();
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
@@ -104,41 +104,41 @@ class Demo {
 
       Scanner sc = new Scanner(System.in);
       try {
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter key ");
-          a = sc.nextInt();
+          value1 = sc.nextInt();
           System.out.println("Enter value ");
-          b = sc.nextInt();
-          c.insert(a, b);
+          value2 = sc.nextInt();
+          quad.insert(value1, value2);
           System.out.println("Done ");
           break;
 
         case 2:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          c.remove(a);
+          value1 = sc.nextInt();
+          quad.remove(value1);
           System.out.println("Done ");
           break;
 
         case 3:
-          c.showAll();
+          quad.showAll();
           break;
 
         case 4:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          System.out.println("key=" + a + "     Value=" + c.get(a));
+          value1 = sc.nextInt();
+          System.out.println("key=" + value1 + "     Value=" + quad.get(value1));
           break;
 
         case 5:
-          System.out.println("No of collision : " + c.getCollision());
+          System.out.println("No of collision : " + quad.getCollision());
           break;
 
         case 6:
-          long l2 = System.currentTimeMillis();
-          System.out.println("Time in mili seconds " + (l2 - l1));
+          long time2 = System.currentTimeMillis();
+          System.out.println("Time in mili seconds " + (time2 - time1));
           break;
 
         case 7:

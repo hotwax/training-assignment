@@ -1,31 +1,32 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-class StacK {
+class StackByArray {
+	
   int CAPACITY = 1000;
   int stack[] = new int[CAPACITY];
-  static int top = -1;
+  int top = -1;
 
-  void push(int x) //to insert elements
+  void push(int data) //to insert elements
   {
     if (top == CAPACITY - 1) {
       System.out.println("Stack is full");
       return;
     }
-    stack[++top] = x;
+    stack[++top] = data;
   }
 
   void showAll() //to display all elements of stack
   {
-    for (int i = top; i >= 0; i--) {
-      System.out.print(stack[i] + "  ");
+    for (int index = top; index >= 0; index--) {
+      System.out.print(stack[index] + "  ");
     }
     System.out.println();
   }
 
-  boolean search(int x) // to check an element is present or not
+  boolean search(int data) // to check an element is present or not
   {
-    for (int i = top; i >= 0; i--) {
-      if (stack[i] == x) return true;
+    for (int index = top; index >= 0; index--) {
+      if (stack[index] == data) return true;
     }
     return false;
   }
@@ -59,8 +60,8 @@ class StacK {
 }
 class Demo {
   public static void main(String[] args) {
-    StacK top = new StacK();
-    int a, b;
+    StackByArray top = new StackByArray();
+    int input1, input2;
     
       while (true) {
         System.out.println("===========================");
@@ -75,12 +76,12 @@ class Demo {
         System.out.println("===========================");
 		try {
         Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          top.push(a);
+          input1 = sc.nextInt();
+          top.push(input1);
           System.out.println("Done ");
           break;
 
@@ -94,8 +95,8 @@ class Demo {
 
         case 4:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          System.out.println("Element present : " + top.search(a));
+          input1 = sc.nextInt();
+          System.out.println("Element present : " + top.search(input1));
           break;
 
         case 5:

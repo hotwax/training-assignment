@@ -6,36 +6,36 @@ class GrapH {
   int[][] graph;
   Scanner sc = new Scanner(System.in);
 
-  GrapH(int x, int y) //constructor to initialize vertex and edges
+  GrapH(int vertex, int edge) //constructor to initialize vertex and edges
   {
-    vertex = x;
-    edge = y;
-    graph = new int[vertex + 1][vertex + 1];
+    this.vertex = vertex;
+    this.edge = edge;
+    this.graph = new int[vertex + 1][vertex + 1];
   }
 
-  void insert(int v1, int v2, int w) // to create adjacency matrix 
+  void insert(int vertex1, int vertex2, int weight) // to create adjacency matrix 
   {
-    graph[v1][v2] = w;
-    graph[v2][v1] = w;
+    graph[vertex1][vertex2] = weight;
+    graph[vertex2][vertex1] = weight;
   }
 
   void adjMaxtrix() // to initialize adjacency matrix
   {
-    for (int i = 0; i < edge; i++) {
+    for (int index = 0; index < edge; index++) {
       System.out.println("enter starting vertex ");
-      int a = sc.nextInt();
+      int value1 = sc.nextInt();
       System.out.println("enter ending vertex ");
-      int b = sc.nextInt();
-      insert(a, b, 1);
+      int value2 = sc.nextInt();
+      insert(value1, value2, 1);
       System.out.println("==================");
     }
   }
 
-  void Pmatrix() //to print adjacency matrix
+  void printMatrix() //to print adjacency matrix
   {
-    for (int i = 0; i < vertex; i++) {
-      for (int j = 0; j < vertex; j++)
-        System.out.print(graph[i][j] + "  ");
+    for (int row = 0; row < vertex; row++) {
+      for (int column = 0; column < vertex; column++)
+        System.out.print(graph[row][column] + "  ");
 
       System.out.println();
     }
@@ -47,11 +47,11 @@ class GrapH {
     // Set current node as visited
     visited[start] = true;
     // For every node of the graph
-    for (int i = 0; i < graph[start].length; i++) {
+    for (int index = 0; index < graph[start].length; index++) {
       // If some node is adjacent to the current node
       // and it has not already been visited
-      if (graph[start][i] == 1 && (!visited[i])) {
-        dfs(i, visited);
+      if (graph[start][index] == 1 && (!visited[index])) {
+        dfs(index, visited);
       }
     }
   }
@@ -66,7 +66,6 @@ class Demo {
       System.out.println("Enter number of edges");
       int edge = sc.nextInt();
       GrapH g = new GrapH(vertex, edge);
-      int a, b;
 
       while (true) {
         System.out.println("===========================");
@@ -77,15 +76,15 @@ class Demo {
         System.out.println("4. Exit");
         System.out.println("===========================");
         try {
-          int x = sc.nextInt();
-          switch (x) {
+          int condition = sc.nextInt();
+          switch (condition) {
           case 1:
             g.adjMaxtrix();
             System.out.println("Done ");
             break;
 
           case 2:
-            g.Pmatrix();
+            g.printMatrix();
             break;
 
           case 3:

@@ -1,51 +1,54 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 class BST {
+	
   int data;
   BST left;
   BST right;
   BST root;
 
-  void insert(int x) //insert in BST
+  void insert(int data) //insert in BST
   {
-    root = insert(root, x);
+    root = insert(root, data);
   }
-  BST insert(BST temp, int x) //insert  node in BST
+  
+  BST insert(BST tempNode, int data) //insert  node in BST
   {
-    if (temp == null) {
-      temp = new BST();
-      temp.data = x;
-      temp.left = null;
-      temp.right = null;
-      return temp;
-    } else if (temp.data > x)
-      temp.left = insert(temp.left, x);
+    if (tempNode == null) {
+      tempNode = new BST();
+      tempNode.data = data;
+      tempNode.left = null;
+      tempNode.right = null;
+      return tempNode;
+    } else if (tempNode.data > data)
+      tempNode.left = insert(tempNode.left, data);
     else
-      temp.right = insert(temp.right, x);
+      tempNode.right = insert(tempNode.right, data);
 
-    return temp;
+    return tempNode;
   }
-  void inOrder(BST temp) // inorder to print it in sorted way
+  
+  void inOrder(BST tempNode) // inorder to print it in sorted way
   {
-    if (temp == null) return;
-    inOrder(temp.left);
-    System.out.print(temp.data + "  ");
-    inOrder(temp.right);
+    if (tempNode == null) return;
+    inOrder(tempNode.left);
+    System.out.print(tempNode.data + "  ");
+    inOrder(tempNode.right);
   }
 
-  void delete(int x) //deletion main function
+  void delete(int data) //deletion main function
   {
-    root = delete(root, x);
+    root = delete(root, data);
   }
 
-  BST delete(BST root, int x) //deletion in BST
+  BST delete(BST root, int data) //deletion in BST
   {
     if (root == null)
       return root;
-    if (x < root.data) // if x is less than root
-      root.left = delete(root.left, x);
-    else if (x > root.data)
-      root.right = delete(root.right, x);
+    if (data < root.data) // if data is less than root
+      root.left = delete(root.left, data);
+    else if (data > root.data)
+      root.right = delete(root.right, data);
     else //node with only one or none child
     {
       if (root.left == null)
@@ -60,33 +63,33 @@ class BST {
     return root;
   }
 
-  int subTree(BST temp) //to fetch a subTree
+  int subTree(BST tempNode) //to fetch a subTree
   {
-    int a = temp.data;
-    while (temp.left != null) {
-      a = temp.left.data;
-      temp = temp.left;
+    int a = tempNode.data;
+    while (tempNode.left != null) {
+      a = tempNode.left.data;
+      tempNode = tempNode.left;
     }
     return a;
   }
 
-  BST search(BST temp, int x) //helping function to check if an element is present or not
+  BST search(BST tempNode, int data) //helping function to check if an element is present or not
   {
-    if (temp != null) {
-      if (temp.data == x)
-        return temp;
-      else if (temp.data > x)
-        return search(temp.left, x);
+    if (tempNode != null) {
+      if (tempNode.data == data)
+        return tempNode;
+      else if (tempNode.data > data)
+        return search(tempNode.left, data);
       else
-        return search(temp.right, x);
+        return search(tempNode.right, data);
     }
     return null;
   }
 
-  boolean searchBST(int x) //main function to search
+  boolean searchBST(int data) //main function to search
   {
-    BST temp = search(root, x);
-    if (temp != null) return true;
+    BST tempNode = search(root, data);
+    if (tempNode != null) return true;
     else return false;
   }
 
@@ -104,8 +107,8 @@ class BST {
 }
 class Demo {
   public static void main(String[] args) {
-    BST n = new BST();
-    int a, b;
+    BST tree = new BST();
+    int input1, input2;
     
       while (true) {
         System.out.println("===========================");
@@ -117,39 +120,39 @@ class Demo {
         System.out.println("5.Update");
         System.out.println("6.Exit");
         System.out.println("===========================");
-		try {
         Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        switch (x) {
+		try {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          n.insert(a);
+          input1 = sc.nextInt();
+          tree.insert(input1);
           System.out.println("Done ");
           break;
 
         case 2:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          n.delete(a);
+          input1 = sc.nextInt();
+          tree.delete(input1);
           break;
 
         case 3:
-          n.showAll();
+          tree.showAll();
           break;
 
         case 4:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          System.out.println("Element present : " + n.searchBST(a));
+          input1 = sc.nextInt();
+          System.out.println("Element present : " + tree.searchBST(input1));
           break;
 
         case 5:
           System.out.println("Enter no. to be replaced ");
-          a = sc.nextInt();
+          input1 = sc.nextInt();
           System.out.println("Enter a number");
-          b = sc.nextInt();
-          n.update(a, b);
+          input2 = sc.nextInt();
+          tree.update(input1, input2);
           break;
 
         case 6:

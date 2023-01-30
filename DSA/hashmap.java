@@ -1,13 +1,13 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-class Entry < K, V > {
+class Node < K, V > {
   private K key;
   private V value;
-  private Entry <K,V> next;
+  private Node <K,V> next;
   
   //constructor
-  public Entry(K key, V value, Entry < K, V > next) {
+  public Node(K key, V value, Node < K, V > next) {
     this.key = key;
     this.value = value;
     this.next = next;
@@ -30,37 +30,37 @@ class Entry < K, V > {
     this.value = value;
   }
 //to get next entry
-  public Entry getNext() {
+  public Node getNext() {
     return next;
   }
 //to set next entry
-  public void setNext(Entry < K, V > next) {
+  public void setNext(Node < K, V > next) {
     this.next = next;
   }
 }
-class hashmap<K,V> {
+class CustomHashMap<K,V> {
 	
   private int capacity = 16; //initial capacity
 
-  private Entry < K, V > [] table; //table to store hashmap entries
+  private Node < K, V > [] table; //table to store CustomHashMap entries
 
-  public hashmap() { //constructor to initialize
-    table = new Entry[capacity];
+  public CustomHashMap() { //constructor to initialize
+    table = new Node[capacity];
   }
 
-  public hashmap(int capacity) { //constructor to initialize
+  public CustomHashMap(int capacity) { //constructor to initialize
     this.capacity = capacity;
-    table = new Entry[capacity];
+    table = new Node[capacity];
   }
   
-  public void put(K key, V value) { //method to add a pair into hashmap
+  public void put(K key, V value) { //method to add a pair into CustomHashMap
     int index = index(key); //getting index for key
-    Entry newEntry = new Entry(key, value, null);
+    Node newNode = new Node(key, value, null);
     if (table[index] == null) {
-      table[index] = newEntry; // if that index is empty we will store data there.
+      table[index] = newNode; // if that index is empty we will store data there.
     } else {
-      Entry < K, V > previousNode = null;  // if that index is having a value pair already we will have to override the data part
-      Entry < K, V > currentNode = table[index];
+      Node < K, V > previousNode = null;  // if that index is having a value pair already we will have to override the data part
+      Node < K, V > currentNode = table[index];
       while (currentNode != null) {
         if (currentNode.getKey().equals(key)) {
           currentNode.setValue(value);
@@ -70,7 +70,7 @@ class hashmap<K,V> {
         currentNode = currentNode.getNext();
       }
       if (previousNode != null)
-        previousNode.setNext(newEntry);
+        previousNode.setNext(newNode);
     }
   }
 
@@ -78,7 +78,7 @@ class hashmap<K,V> {
 	  
     V value = null;
     int index = index(key);
-    Entry < K, V > entry = table[index];
+    Node < K, V > entry = table[index];
     while (entry != null) {
       if (entry.getKey().equals(key)) { //if key found then loop will break
         value = entry.getValue();
@@ -91,8 +91,8 @@ class hashmap<K,V> {
   
   public void remove(K key) { //method to remove key value pair
     int index = index(key); //getting index for key
-    Entry previous = null;
-    Entry entry = table[index];
+    Node previous = null;
+    Node entry = table[index];
     while (entry != null) { // to delete first we will search by key
       if (entry.getKey().equals(key)) {
         if (previous == null) {
@@ -108,12 +108,12 @@ class hashmap<K,V> {
       entry = entry.getNext(); // when we find that we will store next entry at that place
     }
   }
-  public void showAll() { //printing the entire hashmap
-    for (int i = 0; i < capacity; i++) {
-      if (table[i] != null) {
-        Entry < K, V > currentNode = table[i];
+  public void showAll() { //printing the entire CustomHashMap
+    for (int index = 0; index < capacity; index++) {
+      if (table[index] != null) {
+        Node < K, V > currentNode = table[index];
         while (currentNode != null) {
-          System.out.println(String.format("Key = "+currentNode.getKey()+", Value = "+currentNode.getValue()));
+          System.out.println("Key = "+currentNode.getKey()+", Value = "+currentNode.getValue());
           currentNode = currentNode.getNext();
         }
       }
@@ -129,8 +129,8 @@ class hashmap<K,V> {
 
 class Demo {
   public static void main(String[] args) {
-    int a, b;
-    hashmap < Integer, Integer > map = new hashmap < > ();
+    int input1, input2;
+    CustomHashMap < Integer, Integer > map = new CustomHashMap < > ();
 
     while (true) {
       System.out.println("===========================");
@@ -143,21 +143,21 @@ class Demo {
       System.out.println("===========================");
       try {
         Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter key ");
-          a = sc.nextInt();
+          input1 = sc.nextInt();
           System.out.println("Enter value ");
-          b = sc.nextInt();
-          map.put(a, b);
+          input2 = sc.nextInt();
+          map.put(input1, input2);
           System.out.println("Done ");
           break;
 
         case 2:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          map.remove(a);
+          input1 = sc.nextInt();
+          map.remove(input1);
           System.out.println("Done ");
           break;
 
@@ -167,8 +167,8 @@ class Demo {
 
         case 4:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          System.out.println("key=" + a + "     Value=" + map.get(a));
+          input1 = sc.nextInt();
+          System.out.println("key=" + input1 + "     Value=" + map.get(input1));
           break;
 
 

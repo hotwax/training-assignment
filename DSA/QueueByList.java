@@ -1,15 +1,17 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-class queue {
+class QueueByList {
+	
   int data;
-  queue next;
-  queue f;
-  queue r;
+  QueueByList next;
+  QueueByList front;
+  QueueByList rear;
+  
   void showAll() // to see inserted elements 
   {
-    queue temp = f;
+    QueueByList temp = front;
     if (isEmpty()) {
-      System.out.println("queue is empty\n");
+      System.out.println("Queue is empty\n");
       return;
     }
     while (temp != null) {
@@ -19,66 +21,66 @@ class queue {
     System.out.println();
   }
 
-  boolean search(int x) // to search elements
+  boolean search(int data) // to search elements
   {
-    queue temp = f;
+    QueueByList temp = front;
     while (temp != null) {
-      if (temp.data == x) return true;
+      if (temp.data == data) return true;
       temp = temp.next;
     }
     return false;
   }
 
-  int dequeue() // to remove element form queue
+  int deQueue() // to remove element form QueueByList
   {
     if (isEmpty()) {
-      System.out.println("queue is empty\n");
+      System.out.println("Queue is empty\n");
       return -1;
     }
-    queue temp = f;
-    int x = temp.data;
-    f = f.next;
+    QueueByList temp = front;
+    int data = temp.data;
+    front = front.next;
     temp = null;
-    return x;
+    return data;
   }
 
   int front() // to see first inserted element
   {
     if (isEmpty()) {
-      System.out.println("queue is empty\n");
+      System.out.println("Queue is empty\n");
       return -1;
     }
-    return f.data;
+    return front.data;
   }
 
-  boolean isEmpty() // to check if queue is empty or not
+  boolean isEmpty() // to check if QueueByList is empty or not
   {
-    if (f == null) return true;
+    if (front == null) return true;
     return false;
   }
 
-  void enqueue(int x) // to insert an element
+  void enQueue(int data) // to insert an element
   {
-    queue temp = new queue();
+    QueueByList temp = new QueueByList();
     if (temp == null) {
       System.out.println("space not available");
       return;
     }
-    temp.data = x;
+    temp.data = data;
     temp.next = null;
-    if (r == null)
-      f = temp;
+    if (rear == null)
+      front = temp;
     else
-      r.next = temp;
+      rear.next = temp;
 
-    r = temp;
+    rear = temp;
   }
 
   void update(int pre, int nw) // to update value of an element
   {
-    queue temp = f;
+    QueueByList temp = front;
     if (isEmpty()) {
-      System.out.println("queue is empty\n");
+      System.out.println("QueueByList is empty\n");
       return;
     }
     while (temp != null && temp.data != pre) {
@@ -93,13 +95,15 @@ class queue {
 }
 class Demo {
   public static void main(String[] args) {
-    queue q = new queue();
-    int a, b;
+	  
+    QueueByList queue = new QueueByList();
+    int input1, input2;
+	
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
-      System.out.println("1.Enqueue");
-      System.out.println("2.Dequeue");
+      System.out.println("1.EnQueueByList");
+      System.out.println("2.DeQueueByList");
       System.out.println("3.showAll");
       System.out.println("4.Search");
       System.out.println("5.Update");
@@ -108,35 +112,35 @@ class Demo {
       Scanner sc = new Scanner(System.in);
 
       try {
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          q.enqueue(a);
+          input1 = sc.nextInt();
+          queue.enQueue(input1);
           System.out.println("Done ");
           break;
 
         case 2:
-          System.out.println("Element " + q.dequeue());
+          System.out.println("Element " + queue.deQueue());
           break;
 
         case 3:
-          q.showAll();
+          queue.showAll();
           break;
 
         case 4:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          System.out.println("Element present : " + q.search(a));
+          input1 = sc.nextInt();
+          System.out.println("Element present : " + queue.search(input1));
           break;
 
         case 5:
           System.out.println("Enter no. to be replaced ");
-          a = sc.nextInt();
+          input1 = sc.nextInt();
           System.out.println("Enter a number");
-          b = sc.nextInt();
-          q.update(a, b);
+          input2 = sc.nextInt();
+          queue.update(input1, input2);
           break;
 
         case 6:

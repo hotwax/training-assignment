@@ -1,79 +1,86 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-class Node //Node to store data
-{
-  Integer key;
-  int value;
-  Node(Integer key, int value) {
-    this.key = key;
-    this.value = value;
-  }
-}
-class RandomPro //random probeing
-{
-  Node a[];
-  int CAP;
-  int collision = 0;
-  boolean remove[];
+class RandomPro {
+  int size, max;
+  Integer[] keys;
+  Integer[] value; //arrays to store data
+  int collision;
+  final int random_var=(int)(Math.random()*(max)) + 1;
 
-  RandomPro(int CAP) //constructor
+  RandomPro(int capacity) //constructor to initialize
   {
-    this.CAP = CAP;
-    a = new Node[CAP];
-    remove = new boolean[CAP];
+    size = 0;
+    max = capacity;
+    keys = new Integer[max];
+    value = new Integer[max];
   }
 
-  void showAll() //method to print all the table
+  boolean contains(Integer key) // contains key or not
   {
-    for (int i = 0; i < a.length; i++) {
-      if (a[i] != null)
-        System.out.println("Key = " + a[i].key + ", Value = " + a[i].value);
-    }
-  }
-  
-  int hash(Integer k) // to find out hashcode
-  {
-    return (k.hashCode() % CAP);
+    return get(key) != null;
   }
 
-  void add(int key, int value) // program to insert new key value pair 
+  int hash(Integer key) //hash code generation method
   {
-    if (key % CAP > CAP) {
-      System.out.print("Not Valid ");
-    }
-    int hashcode = hash(key);
-    int random = 1; // this variable will randomly findout a index
-
-    while ((a[hashcode] != null && a[hashcode].key != key)) {
-      random = (int)(Math.random() * (CAP)) + 1;
-      hashcode = (hashcode + random) % random;
-    }
-
-    // if already that index was already filled then hashcode will be different than hash() returned value
-    if (hashcode != hash(key) || (a[hashcode] != null && a[hashcode].key != key)) collision++;
-    a[hashcode] = new Node(key, value);
+    return key.hashCode() % max;
   }
 
-  void remove(int key) // to remove the key we will have to linear search 
+  void insert(Integer key, Integer val) //insertion of an key value
   {
-    for (int i = 0; i < a.length; i++) {
-      if (a[i] != null && a[i].key == key) {
-        a[i] = null;
+    int tmp = hash(key);
+    int index = tmp;
+    do {
+      if (keys[index] != null) collision++; //if that index is already filled then c++
+      if (keys[index] == null) //if it is empty we will simply initialize it
+      {
+        keys[index] = key;
+        value[index] = val;
+        size++;
+        return;
       }
-    }
-  }
-
-  Integer get(int key) // to seach we will have to go linearly
-  {
-    for (int i = 0; i < a.length; i++) {
-      if (a[i] != null && a[i].key == key) {
-        return a[i].value;
+      if (keys[index].equals(key)) //to update if same key comes 
+      {
+        value[index] = val;
+        return;
       }
-    }
-    return null;
+      index = (index + random_var) % max;
+    } while (index != tmp);
   }
 
-  int getCollisions() // to count number of collision
+  Integer get(Integer key) //to get value from an index
+  {
+    int index = hash(key);
+    while (keys[index] != null) {
+      if (keys[index].equals(key))
+        return value[index]; //returns value corresponding to key
+      index = (index + random_var) % max;
+    }
+    return null; //else return null
+  }
+
+  void remove(Integer key) // to remove key value pair 
+  {
+    if (!contains(key))
+      return;
+
+    int index = hash(key);
+    while (!key.equals(keys[index]))
+      index = (index + random_var) % max;
+    keys[index] = value[index] = null; //searchs the index and put null over there
+
+    size--;
+  }
+
+  void showAll() //display all
+  {
+    for (int index = 0; index < max; index++)
+      if (keys[index] != null)
+        System.out.println("Key = " + keys[index] + ", Value = " + value[index]);
+
+    System.out.println();
+  }
+
+  int getCollisions() // find out all collision
   {
     return collision;
   }
@@ -81,9 +88,9 @@ class RandomPro //random probeing
 
 class Demo {
   public static void main(String[] args) {
-    int a, b;
-    RandomPro r = new RandomPro(10);
-    long l1 = System.currentTimeMillis();
+    int value1, value2;
+    RandomPro rand = new RandomPro(10);
+    long time1 = System.currentTimeMillis();
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
@@ -98,41 +105,41 @@ class Demo {
 
       Scanner sc = new Scanner(System.in);
       try {
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter key ");
-          a = sc.nextInt();
+          value1 = sc.nextInt();
           System.out.println("Enter value ");
-          b = sc.nextInt();
-          r.add(a, b);
+          value2 = sc.nextInt();
+          rand.insert(value1, value2);
           System.out.println("Done ");
           break;
 
         case 2:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          r.remove(a);
+          value1 = sc.nextInt();
+          rand.remove(value1);
           System.out.println("Done ");
           break;
 
         case 3:
-          r.showAll();
+          rand.showAll();
           break;
 
         case 4:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          System.out.println("key=" + a + "     Value=" + r.get(a));
+          value1 = sc.nextInt();
+          System.out.println("key=" + value1 + "     Value=" + rand.get(value1));
           break;
 
         case 5:
-          System.out.println("No of collision : " + r.getCollisions());
+          System.out.println("No of collision : " + rand.getCollisions());
           break;
 
         case 6:
-          long l2 = System.currentTimeMillis();
-          System.out.println("Time in mili seconds " + (l2 - l1));
+          long time2 = System.currentTimeMillis();
+          System.out.println("Time in mili seconds " + (time2 - time1));
           break;
 
         case 7:

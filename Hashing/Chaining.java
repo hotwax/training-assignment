@@ -7,10 +7,10 @@ class Node {
   int value;
 
   // Constructor 
-  public Node(int x, int y) {
-    key = x;
-    value = y;
-    next = null;
+  public Node(int key, int value) {
+    this.key = key;
+    this.value = value;
+    this.next = null;
   }
 }
 
@@ -75,9 +75,8 @@ class Chaining {
   }
 
   // Method hash to genrate hashcode 
-  private int hash(Integer x) {
-    // int hashVal = x%17;
-    int hashVal = x.hashCode();
+  private int hash(Integer key) {
+    int hashVal = key.hashCode();
     hashVal %= table.length;
     if (hashVal < 0)
       hashVal += table.length;
@@ -86,10 +85,10 @@ class Chaining {
 
   //method to print the key value pair
   public void showAll() {
-    for (int i = 0; i < table.length; i++) {
-      Node start = table[i];
+    for (int index = 0; index < table.length; index++) {
+      Node start = table[index];
       if (start != null) {
-        System.out.print("table " + i + "=> ");
+        System.out.print("table " + index + "=> ");
       }
       while (start != null) {
         System.out.print("{ Key = " + start.key + ", Value = " + start.value + "} ");
@@ -102,8 +101,8 @@ class Chaining {
   //method to get value for a key
   public void get(int key) {
     boolean flag = true;
-    for (int i = 0; i < table.length; i++) {
-      Node start = table[i];
+    for (int index = 0; index < table.length; index++) {
+      Node start = table[index];
       while (start != null) {
         if (start.key == key) {
           System.out.println("key = " + start.key + " Value = " + start.value);
@@ -126,9 +125,9 @@ class Chaining {
 
 class Demo {
   public static void main(String[] args) {
-    int a, b;
-    Chaining c = new Chaining(5);
-    long l1 = System.currentTimeMillis();
+    int value1, value2;
+    Chaining chain = new Chaining(5);
+    long time1 = System.currentTimeMillis();
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
@@ -143,41 +142,41 @@ class Demo {
 
       Scanner sc = new Scanner(System.in);
       try {
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter key ");
-          a = sc.nextInt();
+          value1 = sc.nextInt();
           System.out.println("Enter value ");
-          b = sc.nextInt();
-          c.put(a, b);
+          value2 = sc.nextInt();
+          chain.put(value1, value2);
           System.out.println("Done ");
           break;
 
         case 2:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          c.remove(a);
+          value1 = sc.nextInt();
+          chain.remove(value1);
           System.out.println("Done ");
           break;
 
         case 3:
-          c.showAll();
+          chain.showAll();
           break;
 
         case 4:
           System.out.println("Enter key ");
-          a = sc.nextInt();
-          c.get(a);
+          value1 = sc.nextInt();
+          chain.get(value1);
           break;
 
         case 5:
-          System.out.println("No of collision : " + c.getCollisions());
+          System.out.println("No of collision : " + chain.getCollisions());
           break;
 
         case 6:
-          long l2 = System.currentTimeMillis();
-          System.out.println("Time in mili seconds " + (l2 - l1));
+          long time2 = System.currentTimeMillis();
+          System.out.println("Time in mili seconds " + (time2 - time1));
           break;
 
         case 7:

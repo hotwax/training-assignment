@@ -1,68 +1,69 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-class linkedlist {
+class CustomLinkedList {
   int data;
-  linkedlist next;
+  CustomLinkedList next;
+   CustomLinkedList start = null;
 
-  static linkedlist start = null;
-
-  int countlinkedlist() //count nodes
+  int countCustomLinkedList() //count nodes
   {
     int c = 0;
-    linkedlist temp = start;
-    while (temp != null) {
+    CustomLinkedList tempNode = start;
+    while (tempNode != null) {
       c++;
-      temp = temp.next;
+      tempNode = tempNode.next;
     }
     return c;
   }
 
-  linkedlist msort(linkedlist a, linkedlist b) //merge sort to merge two sorted linkedlist
+  CustomLinkedList msort(CustomLinkedList first,CustomLinkedList second) //merge sort to merge two sorted LinkedList
   {
-    linkedlist result;
-    if (a == null)
-      return b;
-    if (b == null)
-      return a;
-    if (a.data <= b.data) {
-      result = a;
-      result.next = msort(a.next, b);
+    CustomLinkedList result;
+    if (first == null)
+      return second;
+    if (second == null)
+      return first;
+    if (first.data <= second.data) {
+      result = first;
+      result.next = msort(first.next, second);
     } else {
-      result = b;
-      result.next = msort(a, b.next);
+      result = second;
+      result.next = msort(first, second.next);
     }
     return result;
   }
+  
   void sort() // main method to sort
   {
     start = split(start);
     showAll();
   }
-  linkedlist split(linkedlist h) // to break a linkedlist into two parts
+  
+  CustomLinkedList split(CustomLinkedList tempNode) // to break a CustomLinkedList into two parts
   {
-    if (h == null || h.next == null) {
-      return h;
+    if (tempNode == null || tempNode.next == null) {
+      return tempNode;
     }
 
-    linkedlist a = getMiddle(h); // to find middle
-    linkedlist b = a.next;
+    CustomLinkedList first = getMiddle(tempNode); // to find middle
+    CustomLinkedList second = first.next;
 
-    a.next = null;
+    first.next = null;
 
-    linkedlist left = split(h);
-    linkedlist right = split(b);
+    CustomLinkedList left = split(tempNode);
+    CustomLinkedList right = split(second);
 
-    linkedlist sortedlist = msort(left, right);
+    CustomLinkedList sortedlist = msort(left, right);
     return sortedlist;
   }
 
-  public static linkedlist getMiddle(linkedlist head) //method to find middle
+  public static CustomLinkedList getMiddle(CustomLinkedList head) //method to find middle
   {
     if (head == null)
       return head;
 
-    linkedlist slow = head, fast = head;
+    CustomLinkedList slow = head, fast = head;
 
     while (fast.next != null && fast.next.next != null) {
       slow = slow.next;
@@ -71,24 +72,24 @@ class linkedlist {
     return slow;
   }
 
-  void update(int pre, int nw) // method to update a linkedlist
+  void update(int pre, int nw) // method to update a CustomLinkedList
   {
-    linkedlist temp = start;
-    while (temp != null && temp.data != pre) {
-      temp = temp.next;
+    CustomLinkedList tempNode = start;
+    while (tempNode != null && tempNode.data != pre) {
+      tempNode = tempNode.next;
     }
-    if (temp == null)
+    if (tempNode == null)
       System.out.println("Data not found");
     else
-      temp.data = nw;
+      tempNode.data = nw;
   }
 
   void showAll() //method to print 
   {
-    linkedlist temp = start;
-    while (temp != null) {
-      System.out.print(temp.data + "  ");
-      temp = temp.next;
+    CustomLinkedList tempNode = start;
+    while (tempNode != null) {
+      System.out.print(tempNode.data + "  ");
+      tempNode = tempNode.next;
     }
     System.out.println();
   }
@@ -99,9 +100,9 @@ class linkedlist {
       System.out.println("list is empty");
       return;
     }
-    linkedlist temp1 = start;
+    CustomLinkedList tempNode1 = start;
     start = start.next;
-    temp1 = null;
+    tempNode1 = null;
   }
 
   void deleteAtE() // deletion at ending
@@ -110,96 +111,96 @@ class linkedlist {
       deleteAtB();
       return;
     }
-    linkedlist temp1 = start;
-    linkedlist temp2 = start;
-    while (temp1.next != null) {
-      temp2 = temp1;
-      temp1 = temp1.next;
+    CustomLinkedList tempNode1 = start;
+    CustomLinkedList tempNode2 = start;
+    while (tempNode1.next != null) {
+      tempNode2 = tempNode1;
+      tempNode1 = tempNode1.next;
     }
-    temp2.next = null;
-    temp1 = null;
+    tempNode2.next = null;
+    tempNode1 = null;
   }
 
-  void deleteAtSP(int p) // deletion at specific point
+  void deleteAtSP(int position) // deletion at specific point
   {
-    if (p <= 1) {
+    if (position <= 1) {
       deleteAtB();
       return;
     }
-    if (p > countlinkedlist()) {
+    if (position > countCustomLinkedList()) {
       deleteAtE();
       return;
     }
-    linkedlist temp1 = start;
-    linkedlist t;
-    int i;
-    for (i = 1; i < p - 1; i++) {
-      temp1 = temp1.next;
+    CustomLinkedList tempNode1 = start;
+    CustomLinkedList t;
+    int index;
+    for (index = 1; index < position - 1; index++) {
+      tempNode1 = tempNode1.next;
     }
-    t = temp1.next;
-    temp1.next = t.next;
+    t = tempNode1.next;
+    tempNode1.next = t.next;
     t = null;
   }
 
-  void insertAtB(int x) // insertion at beginning
+  void insertAtB(int data) // insertion at beginning
   {
-    linkedlist temp = new linkedlist();
-    temp.data = x;
-    temp.next = start;
-    start = temp;
+    CustomLinkedList tempNode = new CustomLinkedList();
+    tempNode.data = data;
+    tempNode.next = start;
+    start = tempNode;
   }
 
-  void insertAtE(int x) // insertion at ending
+  void insertAtE(int data) // insertion at ending
   {
     if (start == null) {
-      insertAtB(x);
+      insertAtB(data);
       return;
     }
-    linkedlist temp = new linkedlist();
-    linkedlist temp1 = start;
-    temp.data = x;
-    temp.next = null;
-    while (temp1.next != null)
-      temp1 = temp1.next;
+    CustomLinkedList tempNode = new CustomLinkedList();
+    CustomLinkedList tempNode1 = start;
+    tempNode.data = data;
+    tempNode.next = null;
+    while (tempNode1.next != null)
+      tempNode1 = tempNode1.next;
 
-    temp1.next = temp;
+    tempNode1.next = tempNode;
   }
 
-  boolean search(int x) // searching an element 
+  boolean search(int data) // searching an element 
   {
-    linkedlist temp = start;
-    while (temp != null) {
-      if (temp.data == x) return true;
-      temp = temp.next;
+    CustomLinkedList tempNode = start;
+    while (tempNode != null) {
+      if (tempNode.data == data) return true;
+      tempNode = tempNode.next;
     }
     return false;
   }
 
-  void insertAtSP(int x, int p) // insertion at specific point
+  void insertAtSP(int data, int position) // insertion at specific point
   {
-    if (p <= 1) {
-      insertAtB(x);
+    if (position <= 1) {
+      insertAtB(data);
       return;
     }
-    if (p >= countlinkedlist()) {
-      insertAtE(x);
+    if (position >= countCustomLinkedList()) {
+      insertAtE(data);
       return;
     }
-    linkedlist temp = new linkedlist();
-    linkedlist temp1 = start;
-    temp.data = x;
-    for (int i = 1; i < p - 1; i++)
-      temp1 = temp1.next;
+    CustomLinkedList tempNode = new CustomLinkedList();
+    CustomLinkedList tempNode1 = start;
+    tempNode.data = data;
+    for (int index = 1; index < position - 1; index++)
+      tempNode1 = tempNode1.next;
 
-    temp.next = temp1.next;
-    temp1.next = temp;
+    tempNode.next = tempNode1.next;
+    tempNode1.next = tempNode;
   }
 
 }
 class Demo {
   public static void main(String[] args) {
-    linkedlist start = new linkedlist();
-    int a, b;
+    CustomLinkedList start = new CustomLinkedList();
+    int value1, value2;
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
@@ -217,28 +218,28 @@ class Demo {
       System.out.println("===========================");
       try {
         Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
         case 1:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          start.insertAtB(a);
+          value1 = sc.nextInt();
+          start.insertAtB(value1);
           System.out.println("Done ");
           break;
 
         case 2:
           System.out.println("Enter a number ");
-          b = sc.nextInt();
-          start.insertAtE(b);
+          value2 = sc.nextInt();
+          start.insertAtE(value2);
           System.out.println("Done ");
           break;
 
         case 3:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
+          value1 = sc.nextInt();
           System.out.println("Enter a position ");
-          b = sc.nextInt();
-          start.insertAtSP(a, b);
+          value2 = sc.nextInt();
+          start.insertAtSP(value1, value2);
           System.out.println("Done ");
           break;
 
@@ -254,24 +255,24 @@ class Demo {
 
         case 6:
           System.out.println("Enter a position ");
-          b = sc.nextInt();
-          start.deleteAtSP(b);
+          value2 = sc.nextInt();
+          start.deleteAtSP(value2);
           System.out.println("Done ");
           break;
 
         case 7:
           System.out.println("Enter no. to be replaced ");
-          a = sc.nextInt();
+          value1 = sc.nextInt();
           System.out.println("Enter new number ");
-          b = sc.nextInt();
-          start.update(a, b);
+          value2 = sc.nextInt();
+          start.update(value1, value2);
           System.out.println("Done ");
           break;
 
         case 8:
           System.out.println("Enter a number ");
-          b = sc.nextInt();
-          System.out.println(start.search(b));
+          value2 = sc.nextInt();
+          System.out.println(start.search(value2));
           break;
 
         case 9:

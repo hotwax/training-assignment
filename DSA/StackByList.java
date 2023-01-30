@@ -1,14 +1,15 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-class stack {
+class StackByList {
+	
   int data;
-  stack next;
+  StackByList next;
 
-  stack top = null;
+  StackByList top = null;
 
   void showAll() //to display all elements of stack
   {
-    stack temp = top;
+    StackByList temp = top;
     while (temp != null) {
       System.out.print(temp.data + "  ");
       temp = temp.next;
@@ -16,20 +17,20 @@ class stack {
     System.out.println();
   }
 
-  boolean search(int x) // To search an element
+  boolean search(int data) // To search an element
   {
-    stack temp = top;
+    StackByList temp = top;
     while (temp != null) {
-      if (temp.data == x) return true;
+      if (temp.data == data) return true;
       temp = temp.next;
     }
     return false;
   }
 
-  stack push(int x) // To insert an element
+  StackByList push(int data) // To insert an element
   {
-    stack temp = new stack();
-    temp.data = x;
+    StackByList temp = new StackByList();
+    temp.data = data;
     temp.next = top;
     top = temp;
     return temp;
@@ -41,11 +42,11 @@ class stack {
       System.out.println("stack is empty");
       return -1;
     }
-    int x = top.data;
-    stack temp = top;
+    int data = top.data;
+    StackByList temp = top;
     top = top.next;
     temp = null;
-    return x;
+    return data;
   }
 
   int peek() // To fetch top most element
@@ -65,10 +66,9 @@ class stack {
 }
 class Demo {
   public static void main(String[] args) {
-    stack top = new stack();
-    int a, b;
+    StackByList top = new StackByList();
+    int input1, input2;
 
-    
       while (true) {
         System.out.println("===========================");
         System.out.println("*****Enter your choice*****");
@@ -82,12 +82,13 @@ class Demo {
         System.out.println("===========================");
 		try{
         Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        switch (x) {
+        int condition = sc.nextInt();
+        switch (condition) {
+			
         case 1:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          top.push(a);
+          input1 = sc.nextInt();
+          top.push(input1);
           System.out.println("Done ");
           break;
 
@@ -101,8 +102,8 @@ class Demo {
 
         case 4:
           System.out.println("Enter a number ");
-          a = sc.nextInt();
-          System.out.println("Element present : " + top.search(a));
+          input1 = sc.nextInt();
+          System.out.println("Element present : " + top.search(input1));
           break;
 
         case 5:
