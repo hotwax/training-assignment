@@ -1,8 +1,6 @@
-import java.io.*;
-import java.util.*;
 import java.util.Scanner;
 
-class HashMap {
+
 
     // Pair class to store key value pairs
     static class Pair {
@@ -88,20 +86,17 @@ class HashMap {
             Pair temp = arr[i];
             while (temp != null) {
                 System.out.print(temp.key + "->" + temp.value + "  ");
-                temp = temp.next;
-            }
-            System.out.println();
+     
+
         }
 
-    }
+        
+            
 
-
-    public void search(int nextInt) {
-        int index = hashFunction(nextInt);
-        Pair temp = arr[index];
-        while (temp != null) {
-            if (temp.key == nextInt) {
-                System.out.println(temp.key + "->" + temp.value + " is present in the hash map");
+            
+        
+        if (temp.key == n
+     
 
                 return;
             }
