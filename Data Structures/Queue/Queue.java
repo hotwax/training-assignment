@@ -5,6 +5,7 @@
  */
 
 //Importing Scanner class for user input
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Queue {
@@ -20,14 +21,12 @@ public class Queue {
         }
     }
 
-    // Create a scanner to take input from the user
-    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         // Create a blank linked list
         Node head = null;
         // Variable to store the choice of the user
-        int choice;
+        int choice = 0;
         do {
             // Printing the menu for the user
             System.out.println(" --------- MENU --------- ");
@@ -38,39 +37,45 @@ public class Queue {
             System.out.println("Press 4 : Display/Traversal the Queue");
             System.out.println("Press 5 : Exit");
             System.out.println("Enter your choice : ");
-            choice = sc.nextInt();
-            // Taking the choice from the user and performing the corresponding operation
-            switch (choice) {
-                case 0:
-                    System.out.print("Please Enter the first Element: ");
-                    head = createQueue(sc.nextInt());
-                    break;
-                case 1:
-                    if (head != null) {
-                        System.out.print("Please Enter the Element: ");
-                        enqueue(head, sc.nextInt());
-                    } else {
-                        System.out.println("Please create a Queue first");
-                    }
-                    break;
-                case 2:
-                    if(head!=null) {
-                        head = dequeue(head);
-                    }
-                    break;
-                case 3:
-                    if(head!=null)
-                        front(head);
-                    break;
-                case 4:
-                    if(head!=null)
-                        display(head);
-                    break;
-                case 5:
-                    System.out.println("Program Terminated Successfully");
-                    break;
-                default:
-                    System.out.println("Invalid Input");
+            try {
+                // Create a scanner to take input from the user
+                Scanner sc = new Scanner(System.in);
+                choice = sc.nextInt();
+                // Taking the choice from the user and performing the corresponding operation
+                switch (choice) {
+                    case 0:
+                        System.out.print("Please Enter the first Element: ");
+                        head = createQueue(sc.nextInt());
+                        break;
+                    case 1:
+                        if (head != null) {
+                            System.out.print("Please Enter the Element: ");
+                            enqueue(head, sc.nextInt());
+                        } else {
+                            System.out.println("Please create a Queue first");
+                        }
+                        break;
+                    case 2:
+                        if (head != null) {
+                            head = dequeue(head);
+                        }
+                        break;
+                    case 3:
+                        if (head != null)
+                            front(head);
+                        break;
+                    case 4:
+                        if (head != null)
+                            display(head);
+                        break;
+                    case 5:
+                        System.out.println("Program Terminated Successfully");
+                        break;
+                    default:
+                        System.out.println("Invalid Input");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Enter Integer only");
             }
         } while (choice != 5);
 

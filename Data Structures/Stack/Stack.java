@@ -21,12 +21,15 @@ import java.util.Scanner;
             }
 
         }
-        static Scanner sc = new Scanner(System.in);
+        //  Scanner object to take input from the user
+        Scanner sc = new Scanner(System.in);
         public static void main(String[] args) {
             // Create a blank stack
             Node head = null;
+            //  Scanner object to take input from the user
+            Scanner sc = new Scanner(System.in);
             // Variable to store the choice of the user
-            int choice = -1;
+            int choice = 0;
                 do {
                     //  Printing the menu for the user
                     System.out.println("--------- MENU ---------");
@@ -37,37 +40,41 @@ import java.util.Scanner;
                     System.out.println("Press 4 : Peek Element");
                     System.out.println("Press 5 : Program Terminated");
                     System.out.println("Enter your choice : ");
+                    try{
                     choice = sc.nextInt();
                     //  Taking the choice from the user and performing the corresponding operation
-                    switch (choice) {
-                        case 0:
-                            System.out.print("Please Enter the first Element: ");
-                            head = createStack(sc.nextInt());
-                            break;
-                        case 1:
-                            if (head != null) {
-                                System.out.print("Please Enter the Element Value: ");
-                                head = push(head, sc.nextInt());
-                            } else {
-                                System.out.println("Please create a Stack first");
-                            }
-                            break;
-                        case 2:
-                            head = pop(head);
-                            break;
-                        case 3:
-                            displayStack(head);
-                            break;
-                        case 4:
-                            peek(head);
-                            break;
-                        case 5:
-                            System.out.println("Program Terminated Successfully");
-                            break;
-                        default:
-                            System.out.println("Invalid Input");
+                        switch (choice) {
+                            case 0:
+                                System.out.print("Please Enter the first Element: ");
+                                head = createStack(sc.nextInt());
+                                break;
+                            case 1:
+                                if (head != null) {
+                                    System.out.print("Please Enter the Element Value: ");
+                                    head = push(head, sc.nextInt());
+                                } else {
+                                    System.out.println("Please create a Stack first");
+                                }
+                                break;
+                            case 2:
+                                head = pop(head);
+                                break;
+                            case 3:
+                                displayStack(head);
+                                break;
+                            case 4:
+                                peek(head);
+                                break;
+                            case 5:
+                                System.out.println("Program Terminated Successfully");
+                                break;
+                            default:
+                                System.out.println("Invalid Input");
                         }
-
+                        } catch (InputMismatchException e){
+                        System.out.println("Enter Integer Only");
+                        sc.next();
+                        }
                 } while (choice != 5);
 
         }
@@ -76,7 +83,7 @@ import java.util.Scanner;
             System.out.println("The top element is: " + head.data);
         }
 
-        //        Method to create a new Stack
+        //  Method to create a new Stack
         private static Node createStack(int nextInt) {
             Node head = new Node(nextInt);
             return head;
@@ -99,7 +106,7 @@ import java.util.Scanner;
             }
             System.out.println();
         }
-        //        Method to pop an element from the Stack
+        // Method to pop an element from the Stack
         private static Node pop(Node head) {
            if(head == null){
                System.out.println("Stack is empty");
