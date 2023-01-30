@@ -60,6 +60,16 @@ public class Stack {
         return s;
     }
 
+    // Peek method returns the top element in the stack.
+    public static void peek(Stack s) {
+        if(s.top == null) {
+            System.out.println("Empty Stack.");
+        }
+        else {
+            System.out.println("Top element: " + s.top.data);
+        }
+    }
+
     // Print Method: To print stack after every operation. 
     public static void print(Stack s) {
         Node currNode = s.top;
@@ -80,15 +90,16 @@ public class Stack {
         Stack s = new Stack();
         Boolean flag = true;
         while (flag) {
-            System.out.println("Choose an option from the Dashboard given below:");
+            System.out.println("Choose an option from the Dashboard given below:\n");
             System.out.println("1. Push ");
             System.out.println("2. Pop ");
-            System.out.println("3. Update ");
-            System.out.println("4. Exit");
+            System.out.println("3. Update value in the stack. ");
+            System.out.println("4. Peek or top");
+            System.out.println("5. EXIT");
             System.out.println();
             Scanner sc = new Scanner(System.in);
             int ch = sc.nextInt();
-            if (ch < 1 || ch > 4) {
+            if (ch < 1 || ch > 5) {
                 System.out.println("Kindly enter the right option.");
             } else {
                 switch (ch) {
@@ -107,8 +118,12 @@ public class Stack {
                         s = update(s, s_value, n_value);
                         break;
                     case 4:
+                        peek(s);
+                        break;
+                    case 5:
                         flag = false;
                         break;
+                     
                 }
                 System.out.println();
                 print(s);
