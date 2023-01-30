@@ -69,9 +69,9 @@ class Student implements Serializable {
 
     String firstName;
     // Initial
-    String dateOfBirth;
+    // String dateOfBirth;
     // After Change
-    // Date dateOfBirth;
+    Date dateOfBirth;
     Address address;
 
     // Constructor
@@ -83,9 +83,9 @@ class Student implements Serializable {
 
     // making changes after serialization
 
-    // Student(Date dateOfBirth) {
-    // this.dateOfBirth = dateOfBirth;
-    // }
+    Student(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
 }
 
