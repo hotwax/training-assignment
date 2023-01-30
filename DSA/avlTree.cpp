@@ -78,7 +78,7 @@ public:
     {
         Node *y = z->left;
 
-        Node *t = y->left;
+        Node *t = y->right;
 
         z->left = t;
         y->right = z;

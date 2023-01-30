@@ -190,11 +190,11 @@ public:
     {
         cout << node << " ";
         visited[node] = 1;
-        for (auto i : adj[node])
+        for (auto listItem : adj[node])
         {
-            if (!visited[i])
+            if (!visited[listItem])
             {
-                recursiveFunctionForDfs(visited, i);
+                recursiveFunctionForDfs(visited, listItem);
             }
         }
     }

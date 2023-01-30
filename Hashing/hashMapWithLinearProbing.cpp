@@ -24,7 +24,7 @@ class HashMap
 
     // Hash elements array
 
-    HashNode **arr;
+    HashNode **hashNodeArray;
 
     // hash capacity
 
@@ -45,13 +45,13 @@ public:
         size = 0;
         collisions = 0;
         // creating hashNode array
-        arr = new HashNode *[capacity];
+        hashNodeArray = new HashNode *[capacity];
 
         // initializing all values with NULL
 
         for (int i = 0; i < capacity; i++)
         {
-            arr[i] = NULL;
+            hashNodeArray[i] = NULL;
         }
     }
 
@@ -90,7 +90,7 @@ public:
 
         // Using linear Probing
 
-        while (arr[hashIndex] != NULL && arr[hashIndex]->key != key)
+        while (hashNodeArray[hashIndex] != NULL && hashNodeArray[hashIndex]->key != key)
         {
             this->collisions++;
             // incrementing hashIndex and again making a hashcode for indexing
@@ -98,20 +98,20 @@ public:
             hashIndex %= capacity;
         }
 
-        if (arr[hashIndex] == NULL)
+        if (hashNodeArray[hashIndex] == NULL)
         {
             // increasing the size of HashMap
             size++;
-            arr[hashIndex] = temp;
+            hashNodeArray[hashIndex] = temp;
         }
 
         // if already exit update it
 
         // updating the value on particular key
 
-        if (arr[hashIndex]->key == key)
+        if (hashNodeArray[hashIndex]->key == key)
         {
-            arr[hashIndex]->value = value;
+            hashNodeArray[hashIndex]->value = value;
         }
     }
 
@@ -139,14 +139,14 @@ public:
 
         // finding the node
 
-        while (arr[hashIndex] != NULL)
+        while (hashNodeArray[hashIndex] != NULL)
         {
-            if (arr[hashIndex] && arr[hashIndex]->key == key)
+            if (hashNodeArray[hashIndex] && hashNodeArray[hashIndex]->key == key)
             {
                 // removing the key value pair node
-                HashNode *temp = arr[hashIndex];
+                HashNode *temp = hashNodeArray[hashIndex];
 
-                arr[hashIndex] = NULL;
+                hashNodeArray[hashIndex] = NULL;
 
                 // decrementing size
                 size--;
@@ -188,11 +188,11 @@ public:
 
         // finding the key for value
 
-        while (arr[hashIndex] != NULL && count < capacity)
+        while (hashNodeArray[hashIndex] != NULL && count < capacity)
         {
-            if (arr[hashIndex] && arr[hashIndex]->key == key)
+            if (hashNodeArray[hashIndex] && hashNodeArray[hashIndex]->key == key)
             {
-                return arr[hashIndex]->value;
+                return hashNodeArray[hashIndex]->value;
             }
 
             hashIndex++;
@@ -239,9 +239,9 @@ public:
         for (int i = 0; i < capacity; i++)
         {
 
-            if (arr[i] != NULL)
+            if (hashNodeArray[i] != NULL)
             {
-                cout << arr[i]->key << " -> " << arr[i]->value;
+                cout << hashNodeArray[i]->key << " -> " << hashNodeArray[i]->value;
                 cout << endl;
             }
         }

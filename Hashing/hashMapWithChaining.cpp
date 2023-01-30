@@ -26,7 +26,7 @@ class HashMap
 
     // Hash elements array
 
-    HashNode **arr;
+    HashNode **hashNodeArray;
 
     // hash capacity
 
@@ -47,13 +47,13 @@ public:
         size = 0;
         collisions = 0;
         // creating hashNode array
-        arr = new HashNode *[capacity];
+        hashNodeArray = new HashNode *[capacity];
 
         // initializing all values with NULL
 
         for (int i = 0; i < capacity; i++)
         {
-            arr[i] = NULL;
+            hashNodeArray[i] = NULL;
         }
     }
 
@@ -92,16 +92,16 @@ public:
 
         // Using Chaining collision resolution technique
 
-        if (!arr[hashIndex])
+        if (!hashNodeArray[hashIndex])
         {
-            arr[hashIndex] = newNode;
+            hashNodeArray[hashIndex] = newNode;
             size++;
             return;
         }
         else
         {
             collisions++;
-            HashNode *temp = arr[hashIndex];
+            HashNode *temp = hashNodeArray[hashIndex];
 
             // Traversing through the linkedlist
 
@@ -150,14 +150,14 @@ public:
     {
         int hashIndex = hashCode(key);
 
-        HashNode *temp = arr[hashIndex];
+        HashNode *temp = hashNodeArray[hashIndex];
         HashNode *prev = NULL;
 
         // if it exists on the head
 
         if (temp->key == key)
         {
-            arr[hashIndex] = temp->next;
+            hashNodeArray[hashIndex] = temp->next;
             int value = temp->value;
             delete temp;
             return value;
@@ -204,7 +204,7 @@ public:
 
         // finding the key for value
 
-        HashNode *temp = arr[hashIndex];
+        HashNode *temp = hashNodeArray[hashIndex];
 
         while (temp != NULL)
         {
@@ -257,9 +257,9 @@ public:
         for (int i = 0; i < capacity; i++)
         {
             cout << i << " -- ";
-            if (arr[i] != NULL)
+            if (hashNodeArray[i] != NULL)
             {
-                HashNode *temp = arr[i];
+                HashNode *temp = hashNodeArray[i];
 
                 while (temp)
                 {

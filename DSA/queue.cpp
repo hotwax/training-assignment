@@ -80,36 +80,6 @@ public:
         delete temp;
     }
 
-    // Update Function
-
-    void updateWithKey()
-    {
-        // Taking input from the user
-
-        int key;
-        print("Enter the key: ");
-        cin >> key;
-        int data;
-        print("Enter the data: ");
-        cin >> data;
-
-        Node *temp = front;
-
-        while (temp->data != key && temp != NULL)
-        {
-            temp = temp->next;
-        }
-
-        if (temp == NULL)
-        {
-            print("No such key present.");
-        }
-        else
-        {
-            temp->data = data;
-        }
-    }
-
     // Search Function
 
     void search()
@@ -174,10 +144,9 @@ int main()
 
         print("Enter 1 for enqueue operation");
         print("Enter 2 for dequeue operation");
-        print("Enter 3 for updateWithKey operation");
-        print("Enter 4 for search operation");
+        print("Enter 3 for search operation");
 
-        print("Enter 5 to exit");
+        print("Enter 4 to exit");
         cout << endl;
         int input;
         cin >> input;
@@ -191,10 +160,8 @@ int main()
         case 2:
             q.dequeue();
             break;
+
         case 3:
-            q.updateWithKey();
-            break;
-        case 4:
             q.search();
             break;
 

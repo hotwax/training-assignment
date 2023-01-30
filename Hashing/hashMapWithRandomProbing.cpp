@@ -24,7 +24,7 @@ class HashMap
 
     // Hash elements array
 
-    HashNode **arr;
+    HashNode **hashNodeArray;
 
     // hash capacity
 
@@ -37,6 +37,10 @@ class HashMap
 
     int collisions;
 
+    // Taking a random number
+
+    int randomNumber;
+
 public:
     // Constructor
     HashMap(int capacity)
@@ -45,14 +49,18 @@ public:
         size = 0;
         collisions = 0;
         // creating hashNode array
-        arr = new HashNode *[capacity];
+        hashNodeArray = new HashNode *[capacity];
 
         // initializing all values with NULL
 
         for (int i = 0; i < capacity; i++)
         {
-            arr[i] = NULL;
+            hashNodeArray[i] = NULL;
         }
+
+        // iniatializing
+
+        this->randomNumber = rand() % this->capacity;
     }
 
     // print function
@@ -75,6 +83,7 @@ public:
     void insertNode(int key, int value)
     {
 
+        // if hashmap is full
         if (this->size >= capacity)
         {
             print("HashMap is Full");
@@ -83,36 +92,34 @@ public:
 
         HashNode *temp = new HashNode(key, value);
 
-        // Generating HashIndex with a Random value
-
-        int hashIndex = hashCode(rand());
+        int hashIndex = hashCode(key);
 
         // finding the free space
 
-        // Using Random Probing
+        // Using linear Probing
 
-        while (arr[hashIndex] != NULL && arr[hashIndex]->key != key)
+        while (hashNodeArray[hashIndex] != NULL && hashNodeArray[hashIndex]->key != key)
         {
             this->collisions++;
             // incrementing hashIndex and again making a hashcode for indexing
-            hashIndex++;
+            hashIndex += this->randomNumber;
             hashIndex %= capacity;
         }
 
-        if (arr[hashIndex] == NULL)
+        if (hashNodeArray[hashIndex] == NULL)
         {
             // increasing the size of HashMap
             size++;
-            arr[hashIndex] = temp;
+            hashNodeArray[hashIndex] = temp;
         }
 
         // if already exit update it
 
         // updating the value on particular key
 
-        if (arr[hashIndex]->key == key)
+        if (hashNodeArray[hashIndex]->key == key)
         {
-            arr[hashIndex]->value = value;
+            hashNodeArray[hashIndex]->value = value;
         }
     }
 
@@ -136,18 +143,18 @@ public:
 
     int deleteNode(int key)
     {
-        int hashIndex = 0;
+        int hashIndex = hashCode(key);
 
         // finding the node
 
-        while (hashIndex < this->capacity)
+        while (hashNodeArray[hashIndex] != NULL)
         {
-            if (arr[hashIndex] && arr[hashIndex]->key == key)
+            if (hashNodeArray[hashIndex] && hashNodeArray[hashIndex]->key == key)
             {
                 // removing the key value pair node
-                HashNode *temp = arr[hashIndex];
+                HashNode *temp = hashNodeArray[hashIndex];
 
-                arr[hashIndex] = NULL;
+                hashNodeArray[hashIndex] = NULL;
 
                 // decrementing size
                 size--;
@@ -159,6 +166,7 @@ public:
                 // if not found
 
                 hashIndex++;
+                hashIndex %= capacity;
             }
         }
         cout << "endl"
@@ -182,6 +190,25 @@ public:
 
     int getValueInMap(int key)
     {
+        int hashIndex = hashCode(key);
+        // checking if loop does not exeed the size
+        int count = 0;
+
+        // finding the key for value
+
+        while (hashNodeArray[hashIndex] != NULL && count < capacity)
+        {
+            if (hashNodeArray[hashIndex] && hashNodeArray[hashIndex]->key == key)
+            {
+                return hashNodeArray[hashIndex]->value;
+            }
+
+            hashIndex += this->randomNumber;
+            hashIndex %= capacity;
+        }
+        cout << endl
+             << "Key Not found.";
+        return 0;
     }
 
     // void get value
@@ -193,20 +220,9 @@ public:
         int key;
         print("Enter the key to find the value: ");
         cin >> key;
+
         print("Value is : ");
-
-        // Traversing through all the array to find the value
-
-        for (int i = 0; i < capacity; i++)
-        {
-            if (arr[i] && arr[i]->key == key)
-            {
-                cout << arr[i]->value;
-                return;
-            }
-        }
-        cout << endl
-             << "Key Not found.";
+        cout << getValueInMap(key);
     }
 
     // Getting a size
@@ -231,9 +247,9 @@ public:
         for (int i = 0; i < capacity; i++)
         {
             cout << i << " -- ";
-            if (arr[i] != NULL)
+            if (hashNodeArray[i] != NULL)
             {
-                cout << arr[i]->key << " -> " << arr[i]->value;
+                cout << hashNodeArray[i]->key << " -> " << hashNodeArray[i]->value;
             }
             cout << endl;
         }

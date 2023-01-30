@@ -70,14 +70,14 @@ void addVoidEle(Node *&root)
 
 Node *getMin(Node *root)
 {
-    Node *temp = root;
+    Node *temporaryNodeRef = root;
 
-    while (temp->left != NULL)
+    while (temporaryNodeRef->left != NULL)
     {
-        temp = temp->left;
+        temporaryNodeRef = temporaryNodeRef->left;
     }
 
-    return temp;
+    return temporaryNodeRef;
 }
 
 // main function to delete node
@@ -98,15 +98,15 @@ Node *deleteNode(Node *&root, int key)
         }
         else if (root->left && !root->right)
         {
-            Node *temp = root->left;
+            Node *temporaryNodeRef = root->left;
             delete root;
-            return temp;
+            return temporaryNodeRef;
         }
         else if (!root->left && root->right)
         {
-            Node *temp = root->right;
+            Node *temporaryNodeRef = root->right;
             delete root;
-            return temp;
+            return temporaryNodeRef;
         }
         else
         {
@@ -154,23 +154,23 @@ void isExist(Node *root)
     print("Enter the data to search : ");
     cin >> data;
 
-    Node *temp = root;
+    Node *temporaryNodeRef = root;
 
-    while (temp)
+    while (temporaryNodeRef)
     {
 
-        if (temp->data == data)
+        if (temporaryNodeRef->data == data)
         {
             print("Data is Present.");
             return;
         }
-        else if (data < temp->data)
+        else if (data < temporaryNodeRef->data)
         {
-            temp = temp->left;
+            temporaryNodeRef = temporaryNodeRef->left;
         }
         else
         {
-            temp = temp->right;
+            temporaryNodeRef = temporaryNodeRef->right;
         }
     }
 

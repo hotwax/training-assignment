@@ -28,12 +28,12 @@ void print(string message)
 
 void printLinkedList(Node *head)
 {
-    Node *temp = head;
+    Node *temporaryNodeRef = head;
 
-    while (temp)
+    while (temporaryNodeRef)
     {
-        cout << temp->data << " ";
-        temp = temp->next;
+        cout << temporaryNodeRef->data << " ";
+        temporaryNodeRef = temporaryNodeRef->next;
     }
 }
 
@@ -124,24 +124,24 @@ void insertAtPos(Node *&head, Node *&tail)
 
     int count = 1;
 
-    Node *temp = head;
+    Node *temporaryNodeRef = head;
     Node *prev = NULL;
 
-    while (temp != NULL && count < pos)
+    while (temporaryNodeRef != NULL && count < pos)
     {
-        prev = temp;
-        temp = temp->next;
+        prev = temporaryNodeRef;
+        temporaryNodeRef = temporaryNodeRef->next;
         count++;
     }
 
-    if (temp == NULL)
+    if (temporaryNodeRef == NULL)
     {
         print("No such position exists.");
     }
     else
     {
         prev->next = newNode;
-        newNode->next = temp;
+        newNode->next = temporaryNodeRef;
     }
 }
 
@@ -154,29 +154,29 @@ void deleteByKey(Node *&head, Node *&tail)
     int toDelete;
     cin >> toDelete;
 
-    Node *temp = head;
+    Node *temporaryNodeRef = head;
     Node *prev = NULL;
 
-    while (temp != NULL && temp->data != toDelete)
+    while (temporaryNodeRef != NULL && temporaryNodeRef->data != toDelete)
     {
-        prev = temp;
-        temp = temp->next;
+        prev = temporaryNodeRef;
+        temporaryNodeRef = temporaryNodeRef->next;
     }
 
-    if (temp == head)
+    if (temporaryNodeRef == head)
     {
-        head = temp->next;
-        delete temp;
+        head = temporaryNodeRef->next;
+        delete temporaryNodeRef;
     }
-    else if (temp == tail)
+    else if (temporaryNodeRef == tail)
     {
         prev->next = NULL;
-        delete temp;
+        delete temporaryNodeRef;
     }
     else
     {
-        prev->next = temp->next;
-        delete temp;
+        prev->next = temporaryNodeRef->next;
+        delete temporaryNodeRef;
     }
 }
 
@@ -195,20 +195,20 @@ void deleteFromHead(Node *&head, Node *&tail)
 
     // if head is tail
 
-    Node *temp = head;
+    Node *temporaryNodeRef = head;
 
     if (head == tail)
     {
         head = NULL;
         tail = NULL;
-        delete temp;
+        delete temporaryNodeRef;
     }
     else
     {
         // just deleting the head
 
-        head = temp->next;
-        delete temp;
+        head = temporaryNodeRef->next;
+        delete temporaryNodeRef;
     }
 }
 
@@ -268,26 +268,26 @@ void deleteBypos(Node *&head, Node *&tail)
 
     int count = 1;
 
-    Node *temp = head;
+    Node *temporaryNodeRef = head;
     Node *prev = NULL;
 
-    while (temp != NULL && pos < count)
+    while (temporaryNodeRef != NULL && pos < count)
     {
-        prev = temp;
-        temp = temp->next;
+        prev = temporaryNodeRef;
+        temporaryNodeRef = temporaryNodeRef->next;
         count++;
     }
 
-    // if temp is tail
+    // if temporaryNodeRefis tail
 
-    if (temp == tail)
+    if (temporaryNodeRef == tail)
     {
         deleteFromTail(head, tail);
         return;
     }
 
-    prev->next = temp->next;
-    delete temp;
+    prev->next = temporaryNodeRef->next;
+    delete temporaryNodeRef;
 }
 
 // update by key
@@ -303,22 +303,22 @@ void updateByKey(Node *&head, Node *&tail)
     int updateWith;
     cin >> updateWith;
 
-    Node *temp = head;
+    Node *temporaryNodeRef = head;
     // finding the key
-    while (temp->data != key && temp != NULL)
+    while (temporaryNodeRef->data != key && temporaryNodeRef != NULL)
     {
-        temp = temp->next;
+        temporaryNodeRef = temporaryNodeRef->next;
     }
 
-    // if temp is NULL
+    // if temporaryNodeRefis NULL
 
-    if (!temp)
+    if (!temporaryNodeRef)
     {
         print("Key does not exist.");
     }
     else
     {
-        temp->data = updateWith;
+        temporaryNodeRef->data = updateWith;
     }
 }
 
@@ -337,21 +337,21 @@ void updateWithPos(Node *&head, Node *tail)
     cin >> updateWith;
 
     int count = 1;
-    Node *temp = head;
-    while (count < pos && temp != NULL)
+    Node *temporaryNodeRef = head;
+    while (count < pos && temporaryNodeRef != NULL)
     {
-        temp = temp->next;
+        temporaryNodeRef = temporaryNodeRef->next;
         count++;
     }
 
-    // if temp becomes null
-    if (!temp)
+    // if temporaryNodeRefbecomes null
+    if (!temporaryNodeRef)
     {
         print("Position does not exist.");
     }
     else
     {
-        temp->data = updateWith;
+        temporaryNodeRef->data = updateWith;
     }
 }
 
@@ -380,36 +380,36 @@ Node *merge(Node *left, Node *right)
         return left;
 
     Node *ans = new Node(-1);
-    Node *temp = ans;
+    Node *temporaryNodeRef = ans;
 
     // merge 2 sorted Linked List
     while (left != NULL && right != NULL)
     {
         if (left->data < right->data)
         {
-            temp->next = left;
-            temp = left;
+            temporaryNodeRef->next = left;
+            temporaryNodeRef = left;
             left = left->next;
         }
         else
         {
-            temp->next = right;
-            temp = right;
+            temporaryNodeRef->next = right;
+            temporaryNodeRef = right;
             right = right->next;
         }
     }
 
     while (left != NULL)
     {
-        temp->next = left;
-        temp = left;
+        temporaryNodeRef->next = left;
+        temporaryNodeRef = left;
         left = left->next;
     }
 
     while (right != NULL)
     {
-        temp->next = right;
-        temp = right;
+        temporaryNodeRef->next = right;
+        temporaryNodeRef = right;
         right = right->next;
     }
 
@@ -449,14 +449,14 @@ void sort(Node *&head, Node *&tail)
 
     head = mergeSort(head);
 
-    Node *temp = head;
+    Node *temporaryNodeRef = head;
 
-    while (temp->next != NULL)
+    while (temporaryNodeRef->next != NULL)
     {
-        temp = temp->next;
+        temporaryNodeRef = temporaryNodeRef->next;
     }
 
-    tail = temp;
+    tail = temporaryNodeRef;
 }
 
 int main()

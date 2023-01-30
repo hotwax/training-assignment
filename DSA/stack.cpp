@@ -112,38 +112,6 @@ public:
         print("Not Present");
     }
 
-    // to update
-
-    void updateWithKey()
-    {
-
-        // Taking input
-
-        int key;
-        print("Enter the key: ");
-        cin >> key;
-        int data;
-        print("Enter the data: ");
-        cin >> data;
-
-        Node *temp = top;
-
-        while (temp->data != key && temp != NULL)
-        {
-            temp = temp->next;
-        }
-
-        if (!temp)
-        {
-            print("No such key present");
-        }
-        else
-        {
-            temp->data = data;
-            print("Updation Successful.");
-        }
-    }
-
     // to display
 
     void display()
