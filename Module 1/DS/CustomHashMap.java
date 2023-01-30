@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class CustomHashMap {
     static class Pair {
@@ -114,6 +115,7 @@ public class CustomHashMap {
         int choice;
         do {
             // Printing the menu for the user
+            System.out.println();
             System.out.println("Select an option from the DashBoard given below: ");
             System.out.println("1 : Insert ");
             System.out.println("2 : Delete ");
@@ -124,7 +126,8 @@ public class CustomHashMap {
             System.out.println("Enter your choice : ");
             choice = sc.nextInt();
             // Taking the choice from the user and performing the corresponding operation
-            switch (choice) {
+            try {
+                switch (choice) {
                 case 1:
                     System.out.println("Please Enter the key and value: ");
                     hashmap.insert(sc.nextInt(), sc.nextInt());
@@ -145,7 +148,16 @@ public class CustomHashMap {
                     hashmap.search(sc.nextInt());
                     break;
                 default:
+                if(choice == 6) {
+                    System.out.println("Exiting the program.");
+                } else {
                     System.out.println("Invalid Input");
+                }
+                    
+            }
+            }
+            catch(InputMismatchException ex) {
+                System.out.println(ex.getMessage());
             }
         } while (choice != 6);
 
