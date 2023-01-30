@@ -122,10 +122,9 @@ class My_LinkedList{
     System.out.println();
   }
   public void menu(){
-    Scanner sc=new Scanner(System.in);
-    
+      
     boolean flag=true;
-    try{
+    
         while(flag){
             System.out.println("===========================");
             System.out.println("1: add");
@@ -134,37 +133,41 @@ class My_LinkedList{
             System.out.println("4: sort");
             System.out.println("5: traverse");
             System.out.println("6: terminate the program");
-            int n=sc.nextInt();
-            switch(n){
-              case 1:// add
-                System.out.println("enter no. to add");
-                add(sc.nextInt());
-                break;
-               case 2:// delete
-                   System.out.println("enter no. to delete");
-                   delete(sc.nextInt());
-                   break;
-               case 3:// upadte
-                   System.out.println("enter no. to update and the value");
-                   update(sc.nextInt(),sc.nextInt());
-                   break;
-               case 4:// sort
-                   sort();
-               case 5:// traverse
-                   traverseAll();
-                   break;
-               case 6:// end
-                   flag=false;
-                   break;
-               default:
-                   System.out.println("invalid input");
-                   break;
+            
+            try{
+                Scanner sc=new Scanner(System.in);
+                int n=sc.nextInt();
+                switch(n){
+                  case 1:// add
+                    System.out.println("enter no. to add");
+                    add(sc.nextInt());
+                    break;
+                   case 2:// delete
+                       System.out.println("enter no. to delete");
+                       delete(sc.nextInt());
+                       break;
+                   case 3:// upadte
+                       System.out.println("enter no. to update and the value");
+                       update(sc.nextInt(),sc.nextInt());
+                       break;
+                   case 4:// sort
+                       sort();
+                   case 5:// traverse
+                       traverseAll();
+                       break;
+                   case 6:// end
+                       flag=false;
+                       break;
+                   default:
+                       System.out.println("invalid input");
+                       break;
+                }
+              }
+              catch(Exception e){
+                System.out.println("Invalid input: please enter Integer");
             }
-          }
     }
-    catch(Exception e){
-        System.out.println("Invalid input: please enter Integer");
-    }
+    
     
   }
   public static void main(String args[]){
