@@ -21,7 +21,7 @@ public:
 // HashMap Data Structure with User Given Capacity
 class Hashmap
 {
-    Node **arr;
+    Node **hash_table;
     // capacity of the Hashmap
     int CAPACITY;
     // Size of hashMap
@@ -36,12 +36,12 @@ public:
         this->CAPACITY = CAPACITY;
         collisions = 0;
         size = 0;
-        arr = new Node *[CAPACITY];
+        hash_table = new Node *[CAPACITY];
 
         // Initialise all the value with NULL ;
-        for (int i = 0; i < CAPACITY; i++)
+        for (int index = 0; index < CAPACITY; index++)
         {
-            arr[i] = NULL;
+            hash_table[index] = NULL;
         }
     }
 
@@ -65,10 +65,10 @@ public:
 
         // create newnode
         Node *newNode = new Node(key, value);
-        if (arr[hash_position] == NULL)
+        if (hash_table[hash_position] == NULL)
         {
             size++;
-            arr[hash_position] = newNode;
+            hash_table[hash_position] = newNode;
         }
         else
         {
@@ -76,25 +76,26 @@ public:
             //  TO HANDLE COLLISION HERE I USE CHAINING METHOD
             collisions++;
 
-            Node *temp = arr[hash_position];
-            if (temp->key == key)
+             
+            Node *array_node = hash_table[hash_position];
+            if (array_node->key == key)
             {
-                temp->value = value;
+                array_node->value = value;
                 return;
             }
-            while (temp->next != NULL)
+            while (array_node->next != NULL)
             {
                 collisions++;
-                if(temp->next->key == key)
+                if (array_node->next->key == key)
                 {
-                    cout<<"hello"<<endl;
-                    temp->next->value = value ;
-                    return ;
+                    cout << "hello" << endl;
+                    array_node->next->value = value;
+                    return;
                 }
-                temp = temp->next;
+                array_node = array_node->next;
             }
             size++;
-            temp->next = newNode;
+            array_node->next = newNode;
         }
     }
 
@@ -102,30 +103,30 @@ public:
     void deleteKey(int Key)
     {
         int hash_position = HashFunction(Key);
-        if (arr[hash_position] != NULL)
+        if (hash_table[hash_position] != NULL)
         {
-            Node *temp = arr[hash_position];
+            Node *array_node = hash_table[hash_position];
 
             // check if the first element is the key
-            if (temp->key == Key)
+            if (array_node->key == Key)
             {
 
-                arr[hash_position] = temp->next;
-                delete temp;
+                hash_table[hash_position] = array_node->next;
+                delete array_node;
                 return;
             }
 
-            while (temp->next->key != Key && temp->next != NULL)
+            while (array_node->next->key != Key && array_node->next != NULL)
             {
-                temp = temp->next;
+                array_node = array_node->next;
             }
 
             // found the key and delete it
-            if (temp->next != NULL)
+            if (array_node->next != NULL)
             {
-                Node *to_del = temp->next;
-                temp->next = temp->next->next;
-                delete (to_del);
+                Node *to_delete_Node = array_node->next;
+                array_node->next = array_node->next->next;
+                delete (to_delete_Node);
                 cout << "Operation Successful" << endl;
             }
             else
@@ -143,32 +144,38 @@ public:
     void searchKey(int Key)
     {
         int hash_position = HashFunction(Key);
-        Node *temp = arr[hash_position];
-        while (temp->key != Key && temp != NULL)
+
+        // Find the node
+        Node * pointer_to_node = hash_table[hash_position] ;
+        while (pointer_to_node != NULL)
         {
-            temp = temp->next;
+            if (pointer_to_node!=NULL && pointer_to_node->key == Key)
+            {
+                cout << "Key Found and its Value is " << pointer_to_node->value << endl;
+                return;
+            }
+            else
+            {
+                // if not found
+
+                pointer_to_node=pointer_to_node->next ;
+            }
         }
-        if (temp->key == Key)
-        {
-            cout << "Key-value pair " << temp->key << ":" << temp->value << " is Found " << endl;
-        }
-        else
-        {
-            cout << "Key Not Found" << endl;
-        }
+        cout << "Key Not found" << endl;
     }
 
     // Show all the Keys value of HashMap
     void display()
     {
+        // i = index of array (hash_map)
         for (int i = 0; i < CAPACITY; i++)
         {
-            Node *temp = arr[i];
+            Node *array_node = hash_table[i];
             cout << "Position " << i << " is connected to the keys are : ";
-            while (temp != NULL)
+            while (array_node != NULL)
             {
-                cout << temp->key << "->" << temp->value << "  ";
-                temp = temp->next;
+                cout << array_node->key << "->" << array_node->value << "  ";
+                array_node = array_node->next;
             }
             cout << endl;
         }
@@ -178,24 +185,24 @@ public:
     void getValue(int Key)
     {
         int hash_position = HashFunction(Key);
-        Node *temp = arr[hash_position];
-        if (temp == NULL)
+        Node *array_node = hash_table[hash_position];
+        if (array_node == NULL)
         {
             cout << "Key Not Found" << endl;
         }
         else
         {
-            while (temp != NULL && temp->key != Key)
+            while (array_node != NULL && array_node->key != Key)
             {
-                temp = temp->next;
+                array_node = array_node->next;
             }
-            if (temp == NULL || temp->key != Key)
+            if (array_node == NULL || array_node->key != Key)
             {
                 cout << "Key Not Found" << endl;
             }
-            else if (temp->key == Key)
+            else if (array_node->key == Key)
             {
-                cout << "The Value of the Key " << Key << " is " << temp->value << endl;
+                cout << "The Value of the Key " << Key << " is " << array_node->value << endl;
             }
         }
     }
@@ -209,15 +216,15 @@ int main()
     // used to Calculating time
     auto starting_time = std::chrono::high_resolution_clock::now();
 
-    int cap;
+    int capicity;
     // take the capacity of th hashmap
     cout << "Enter the Capacity of the Hashmap " << endl;
-    cin >> cap;
+    cin >> capicity;
 
     // Create the Instance of the Class
-    Hashmap mp(cap);
-    int ch = 0;
-    while (ch != 7)
+    Hashmap mp(capicity);
+    int choice = 0;
+    while (choice != 7)
     {
         // Menu
         cout << endl;
@@ -230,8 +237,8 @@ int main()
         cout << "7. Exit" << endl;
 
         cout << "Enter Your Choice" << endl;
-        cin >> ch;
-        switch (ch)
+        cin >> choice;
+        switch (choice)
         {
         case 1:
         {
