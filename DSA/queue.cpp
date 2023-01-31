@@ -69,7 +69,7 @@ public:
             return;
         }
 
-        Node *temp = front;
+        Node *tempNodeRef = front;
         front = front->next;
 
         if (front == NULL)
@@ -77,7 +77,7 @@ public:
             rear = NULL;
         }
 
-        delete temp;
+        delete tempNodeRef;
     }
 
     // Search Function
@@ -88,17 +88,17 @@ public:
         int data;
         print("Enter the data to search: ");
         cin >> data;
-        Node *temp = front;
+        Node *tempNodeRef = front;
 
-        while (temp != NULL)
+        while (tempNodeRef != NULL)
         {
-            if (temp->data == data)
+            if (tempNodeRef->data == data)
             {
                 cout << endl
                      << "Present";
                 return;
             }
-            temp = temp->next;
+            tempNodeRef = tempNodeRef->next;
         }
 
         print("Not Present");
@@ -108,18 +108,18 @@ public:
 
     void display()
     {
-        Node *temp = front;
+        Node *tempNodeRef = front;
 
-        if (!temp)
+        if (!tempNodeRef)
         {
             print("Queue is empty");
         }
         cout << endl;
-        while (temp != NULL)
+        while (tempNodeRef != NULL)
         {
-            cout << temp->data;
-            temp = temp->next;
-            if (temp)
+            cout << tempNodeRef->data;
+            tempNodeRef = tempNodeRef->next;
+            if (tempNodeRef)
             {
                 cout << "->";
             }

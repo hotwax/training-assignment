@@ -83,9 +83,9 @@ public:
         }
         else
         {
-            Node *temp = top;
+            Node *tempNodeRef = top;
             top = top->next;
-            delete temp;
+            delete tempNodeRef;
         }
     }
 
@@ -97,16 +97,16 @@ public:
         int data;
         print("Enter the data to search: ");
         cin >> data;
-        Node *temp = top;
+        Node *tempNodeRef = top;
 
-        while (temp != NULL)
+        while (tempNodeRef != NULL)
         {
-            if (temp->data == data)
+            if (tempNodeRef->data == data)
             {
                 print("Present");
                 return;
             }
-            temp = temp->next;
+            tempNodeRef = tempNodeRef->next;
         }
 
         print("Not Present");
@@ -116,18 +116,18 @@ public:
 
     void display()
     {
-        Node *temp = top;
+        Node *tempNodeRef = top;
 
-        if (!temp)
+        if (!tempNodeRef)
         {
             print("Stack is empty");
         }
         cout << endl;
-        while (temp != NULL)
+        while (tempNodeRef != NULL)
         {
-            cout << temp->data;
-            temp = temp->next;
-            if (temp)
+            cout << tempNodeRef->data;
+            tempNodeRef = tempNodeRef->next;
+            if (tempNodeRef)
             {
                 cout << "->";
             }

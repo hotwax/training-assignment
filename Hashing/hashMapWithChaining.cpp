@@ -101,30 +101,30 @@ public:
         else
         {
             collisions++;
-            HashNode *temp = hashNodeArray[hashIndex];
+            HashNode *tempNodeRef = hashNodeArray[hashIndex];
 
             // Traversing through the linkedlist
 
-            while (temp->next != NULL)
+            while (tempNodeRef->next != NULL)
             {
                 this->collisions++;
-                if (temp->key == key)
+                if (tempNodeRef->key == key)
                 {
-                    temp->value = value;
+                    tempNodeRef->value = value;
                     return;
                 }
-                temp = temp->next;
+                tempNodeRef = tempNodeRef->next;
             }
 
             // checking if first node itself has the key
 
-            if (temp->key == key)
+            if (tempNodeRef->key == key)
             {
-                temp->value = value;
+                tempNodeRef->value = value;
                 return;
             }
             size++;
-            temp->next = newNode;
+            tempNodeRef->next = newNode;
         }
     }
 
@@ -150,33 +150,33 @@ public:
     {
         int hashIndex = hashCode(key);
 
-        HashNode *temp = hashNodeArray[hashIndex];
+        HashNode *tempNodeRef = hashNodeArray[hashIndex];
         HashNode *prev = NULL;
 
         // if it exists on the head
 
-        if (temp->key == key)
+        if (tempNodeRef->key == key)
         {
-            hashNodeArray[hashIndex] = temp->next;
-            int value = temp->value;
-            delete temp;
+            hashNodeArray[hashIndex] = tempNodeRef->next;
+            int value = tempNodeRef->value;
+            delete tempNodeRef;
             return value;
         }
 
         // if it does not exists on the head
 
-        while (temp != NULL)
+        while (tempNodeRef != NULL)
         {
-            if (temp->key == key)
+            if (tempNodeRef->key == key)
             {
 
-                int value = temp->value;
-                prev->next = temp->next;
-                delete temp;
+                int value = tempNodeRef->value;
+                prev->next = tempNodeRef->next;
+                delete tempNodeRef;
                 return value;
             }
-            prev = temp;
-            temp = temp->next;
+            prev = tempNodeRef;
+            tempNodeRef = tempNodeRef->next;
         }
 
         cout << "endl"
@@ -204,15 +204,15 @@ public:
 
         // finding the key for value
 
-        HashNode *temp = hashNodeArray[hashIndex];
+        HashNode *tempNodeRef = hashNodeArray[hashIndex];
 
-        while (temp != NULL)
+        while (tempNodeRef != NULL)
         {
-            if (temp->key == key)
+            if (tempNodeRef->key == key)
             {
-                return temp->value;
+                return tempNodeRef->value;
             }
-            temp = temp->next;
+            tempNodeRef = tempNodeRef->next;
         }
 
         cout << endl
@@ -259,14 +259,14 @@ public:
             cout << i << " -- ";
             if (hashNodeArray[i] != NULL)
             {
-                HashNode *temp = hashNodeArray[i];
+                HashNode *tempNodeRef = hashNodeArray[i];
 
-                while (temp)
+                while (tempNodeRef)
                 {
-                    cout << "[" << temp->key << "," << temp->value << "]";
-                    temp = temp->next;
+                    cout << "[" << tempNodeRef->key << "," << tempNodeRef->value << "]";
+                    tempNodeRef = tempNodeRef->next;
 
-                    if (temp)
+                    if (tempNodeRef)
                     {
                         cout << " -> ";
                     }

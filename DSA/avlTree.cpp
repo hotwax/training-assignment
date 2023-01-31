@@ -51,10 +51,10 @@ public:
             return 0;
         }
 
-        int lh = height(root->left);
-        int rh = height(root->right);
+        int heightOfLeftTree = height(root->left);
+        int heightOfRightTree = height(root->right);
 
-        return 1 + max(lh, rh);
+        return 1 + max(heightOfLeftTree, heightOfRightTree);
     }
 
     // To find Balance
@@ -66,51 +66,51 @@ public:
             return 0;
         }
 
-        int lh = height(root->left);
-        int rh = height(root->right);
+        int heightOfLeftTree = height(root->left);
+        int heightOfRightTree = height(root->right);
 
-        return lh - rh;
+        return heightOfLeftTree - heightOfRightTree;
     }
 
     // To Rotate Right
 
-    Node *rightRotate(Node *&z)
+    Node *rightRotate(Node *&root)
     {
-        Node *y = z->left;
+        Node *lowerNode = root->left;
 
-        Node *t = y->right;
+        Node *lowerNodeChild = lowerNode->right;
 
-        z->left = t;
-        y->right = z;
+        root->left = lowerNodeChild;
+        lowerNode->right = root;
 
-        z->height = height(z);
-        z->bal = balance(z);
+        root->height = height(root);
+        root->bal = balance(root);
 
-        y->height = height(y);
-        y->bal = balance(y);
+        lowerNode->height = height(lowerNode);
+        lowerNode->bal = balance(lowerNode);
 
-        return y;
+        return lowerNode;
     }
 
     // To Rotate left
 
-    Node *leftRotate(Node *&z)
+    Node *leftRotate(Node *&root)
     {
-        Node *y = z->right;
+        Node *lowerNode = root->right;
 
-        Node *t = z->left;
+        Node *lowerNodeChild = root->left;
 
-        z->right = t;
+        root->right = lowerNodeChild;
 
-        y->left = z;
+        lowerNode->left = root;
 
-        z->height = height(z);
-        z->bal = balance(z);
+        root->height = height(root);
+        root->bal = balance(root);
 
-        y->height = height(y);
-        y->bal = balance(y);
+        lowerNode->height = height(lowerNode);
+        lowerNode->bal = balance(lowerNode);
 
-        return y;
+        return lowerNode;
     }
 
     // To add Node to tree
@@ -119,8 +119,8 @@ public:
     {
         if (root == NULL)
         {
-            Node *temp = new Node(data);
-            return temp;
+            Node *tempNodeRef = new Node(data);
+            return tempNodeRef;
         }
 
         // Checking where node can be inserted
@@ -198,15 +198,15 @@ public:
         {
             if (!root->left && root->right)
             {
-                Node *temp = root->right;
+                Node *tempNodeRef = root->right;
                 delete root;
-                return temp;
+                return tempNodeRef;
             }
             else if (root->left && !root->right)
             {
-                Node *temp = root->right;
+                Node *tempNodeRef = root->right;
                 delete root;
-                return temp;
+                return tempNodeRef;
             }
             else if (!root->left && !root->right)
             {

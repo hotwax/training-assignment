@@ -84,7 +84,7 @@ public:
             print("HashMap is Full");
             return;
         }
-        HashNode *temp = new HashNode(key, value);
+        HashNode *tempNodeRef = new HashNode(key, value);
 
         int hashIndex = hashCode(key);
 
@@ -119,7 +119,7 @@ public:
         {
             // increasing the size of HashMap
             size++;
-            hashNodeArray[hashIndex] = temp;
+            hashNodeArray[hashIndex] = tempNodeRef;
         }
 
         // updating the value on particular key
@@ -167,14 +167,14 @@ public:
             if (hashNodeArray[hashIndex] && hashNodeArray[hashIndex]->key == key)
             {
                 // removing the key value pair node
-                HashNode *temp = hashNodeArray[hashIndex];
+                HashNode *tempNodeRef = hashNodeArray[hashIndex];
 
                 hashNodeArray[hashIndex] = NULL;
 
                 // decrementing size
                 size--;
 
-                return temp->value;
+                return tempNodeRef->value;
             }
             else
             {
