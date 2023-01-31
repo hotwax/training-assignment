@@ -106,12 +106,13 @@ public class Chaining {
         do {
             System.out.println();
             System.out.println("Kindly choose an option from the DashBoard given below:");
-            System.out.println("Press 1 : Insert  Value");
-            System.out.println("Press 2 : Delete Value");
-            System.out.println("Press 3 : Display the Hashmap");
-            System.out.println("Press 4 : Get All Collisions");
-            System.out.println("Press 5 : Get Value from Key");
-            System.out.println("Press 6 : Exit");
+            System.out.println("1 : Insert  Value");
+            System.out.println("2 : Delete Value");
+            System.out.println("3 : Display the Hashmap");
+            System.out.println("4 : Get All Collisions");
+            System.out.println("5 : Get Value from Key");
+            System.out.println("6 : Exit");
+            System.out.println("--------------------------------------");
             System.out.println("Enter your choice : ");
             choice = sc.nextInt();
             try {
