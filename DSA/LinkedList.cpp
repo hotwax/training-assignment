@@ -10,110 +10,162 @@ class Node
 public:
     int data;
     Node *next;
-    Node(int val)
+    Node(int value)
     {
-        data = val;
+        data = value;
         next = NULL;
     }
 };
 
 // Create custom DataStructure LinkedList
-class LinkedList
+class linkedList
 {
 public:
      // Insert Node in the List 
-    void insert(Node *&head, int val)
+    void insert(Node *&head, int value)
     {
         // Create new Node
-        Node *newNode = new Node(val);
+        Node *newNode = new Node(value);
         if (!head)
         {
             head = newNode;
             return;
         }
-        Node *temp = head;
+        Node *node_pointer = head;
         // go to the last Node
-        while (temp->next != NULL)
+        while (node_pointer->next != NULL)
         {
-            temp = temp->next;
+            node_pointer = node_pointer -> next;
         }
-        temp->next = newNode;
+        node_pointer->next = newNode;
     }
 
     // Function to delete the Node By value
-    void deleteNodeByValue(Node *&head, int val)
+    void deleteNodeByValue(Node *&head, int value)
     {
-        Node *temp = head;
-        while (temp->next->data != val && temp != NULL)
+        if(head==NULL)
         {
-            if (temp == head)
-            {
-                head = temp->next;
-                delete (temp);
-                return;
-            }
-            temp = temp->next;
+            cout<<"List is Empty"<<endl;
+            return ;
         }
-        Node *n = temp->next;
-        temp->next = temp->next->next;
-        delete (n);
-    }
+        Node * node_pointer = head;
 
-    // Function to delete the Node By position or index
-    void deleteNodeByPosition(Node *&head, int n)
-    {
-        Node *temp = head;
-        if (n == 1)
+        if (node_pointer->data == value)
         {
-            head = temp->next;
-            delete (temp);
+            head = node_pointer->next;
+            delete (node_pointer);
             return;
         }
-        for (int i = 1; i < n - 1; i++)
+        while (node_pointer->next != NULL && node_pointer->next->data != value)
         {
-            temp = temp->next;
+            node_pointer = node_pointer->next;
         }
-        Node *temp2 = temp->next;
-        temp->next = temp2->next;
-        delete (temp2);
-    }
-
-    // Function to Update the data of the Node
-    void update(Node *&head, int pval, int nval)
-    {
-        Node *temp = head;
-        while (temp->data != pval && temp != NULL)
+        if(node_pointer->next != NULL && node_pointer->next->data == value)
         {
-            temp = temp->next;
-        }
-        temp->data = nval;
-    }
-    Node *merge(Node *a, Node *b)
-    {
-        // base case
-        if (a == NULL)
-            return b;
-        if (b == NULL)
-            return a;
-
-        // recursive case
-        // take a head pointer
-        Node *c;
-
-        if (a->data < b->data)
-        {
-            c = a;
-            c->next = merge(a->next, b);
+            Node * to_delete_node = node_pointer->next;
+            node_pointer->next = node_pointer->next->next;
+            delete (to_delete_node);
         }
         else
         {
-            c = b;
-            c->next = merge(a, b->next);
+            cout<<"Node Not present "<<endl;
         }
 
-        return c;
+    }
+    int list_Length(Node * head)
+    {
+        int size = 0 ;
+        while(head!=NULL)
+        {
+            head=head->next ;
+            size ++ ;
+        }
+        return size ;
     }
 
+    // Function to delete the Node By position or index
+    void deleteNodeByPosition(Node *&head, int position)
+    {
+        // If there is no node in list
+        if(head==NULL)
+        {
+            cout<<"list is Empty"<<endl;
+            return ;
+        }
+        // if given position larger than list length 
+        if(position>list_Length(head))
+        {
+            cout<<"Invalid Position"<<endl;
+            return ;
+        }
+        Node *node_pointer = head;
+        if (position == 1)
+        {
+            head = node_pointer->next;
+            delete (node_pointer);
+            return;
+        }
+        // find position
+        for (int index = 1; index < position-1 ; index++)
+        {
+            node_pointer = node_pointer->next;
+        }
+        Node * to_delete_node = node_pointer->next;
+        node_pointer->next = node_pointer->next->next;
+        delete (to_delete_node);
+        cout<<"Operation Successful"<<endl;
+    }
+
+    // Function to Update the data of the Node
+    void update(Node *&head, int previous_value, int new_value )
+    {
+        if(head==NULL)
+        {
+            cout<<"List is Empty"<<endl;
+            return ;
+        }
+        Node * node_pointer = head ;
+        // Find Node
+        while (node_pointer != NULL && node_pointer->data != previous_value)
+        {
+            node_pointer = node_pointer->next;
+        }
+        if(node_pointer == NULL)
+        cout<<"Node not Found"<<endl;
+        else if (node_pointer->data == previous_value)
+        node_pointer->data = new_value;
+
+        return ;
+
+    }
+    // Merge the lists 
+    Node *merge(Node * first_half , Node *second_half)
+    {
+        // base case
+        if (first_half == NULL)
+            return second_half;
+        if (second_half == NULL)
+            return first_half;
+
+        // recursive case
+        // take a head pointer
+        Node *merged_list;
+
+        if (first_half->data < second_half->data)
+        {
+            merged_list = first_half;
+            merged_list->next = merge(first_half->next, second_half);
+        }
+        else
+        {
+            merged_list = second_half;
+            merged_list->next = merge(first_half, second_half->next);
+        }
+
+        return merged_list;
+    }
+
+    // find mid point of list
     Node *mid_point(Node *head)
     {
         if (head == NULL || head->next == NULL)
@@ -148,25 +200,30 @@ public:
         // Step 1: divide the linked list into
         // two equal linked lists
         Node *mid = mid_point(head);
-        Node *a = head;
-        Node *b = mid->next;
+        Node *first_half = head;
+        Node *second_half = mid->next;
 
         mid->next = NULL;
 
         // Step 2: recursively sort the smaller
         // linked lists
-        a = merge_sort(a);
-        b = merge_sort(b);
+        first_half = merge_sort(first_half);
+        second_half = merge_sort(second_half);
 
         // Step 3: merge the sorted linked lists
-        Node *c = merge(a, b);
+        Node *merged_list = merge(first_half, second_half);
 
-        return c;
+        return merged_list;
     }
 
     // Function to Print the list 
     void print(Node *head)
     {
+        if(head==NULL)
+        {
+            cout<<"List Empty"<<endl;
+            return ;
+        }
         while (head->next != NULL)
         {
             cout << head->data << "->";
@@ -179,7 +236,7 @@ public:
 int main()
 {
     Node *head = NULL;
-    LinkedList ll;
+    linkedList ll;
     int choice = 0;
     while (choice != 6)
     {
@@ -200,9 +257,9 @@ int main()
         case 1:
         {
             cout << "Enter the value to be inserted" << endl;
-            int val;
-            cin >> val;
-            ll.insert(head, val);
+            int value;
+            cin >> value;
+            ll.insert(head, value);
             break;
         }
 
@@ -211,21 +268,21 @@ int main()
             cout << "Delete Element by" << endl
                  << "1. position" << endl
                  << "2. Value" << endl;
-            int ch = 0;
-            cin >> ch;
-            if (ch == 2)
+            int choice1 = 0;
+            cin >> choice1;
+            if (choice1 == 2)
             {
                 cout << "Enter the Value of the Element to be deleted" << endl;
-                int val1;
-                cin >> val1;
-                ll.deleteNodeByValue(head, val1);
+                int value1;
+                cin >> value1;
+                ll.deleteNodeByValue(head, value1);
             }
-            else if (ch == 1)
+            else if (choice1 == 1)
             {
                 cout << "Enter the Positon of the Element to be deleted" << endl;
-                int pos;
-                cin >> pos;
-                ll.deleteNodeByPosition(head, pos);
+                int position;
+                cin >> position;
+                ll.deleteNodeByPosition(head, position);
             }
             else
             {
@@ -237,17 +294,17 @@ int main()
         case 3:
         {
             cout << "Enter previous Value and New value to update the list ( Note : values should be separated by space ) " << endl;
-            int p_val, n_val;
-            cin >> p_val >> n_val;
-            ll.update(head, p_val, n_val);
+            int previous_value, new_value;
+            cin >> previous_value >> new_value;
+            ll.update(head, previous_value, new_value);
             break;
         }
 
         case 4:
         {
             cout << "Sort the List" << endl;
-            Node *f = ll.merge_sort(head);
-            head = f;
+            Node * node_pointer = ll.merge_sort(head);
+            head  = node_pointer ;
             break;
         }
 
