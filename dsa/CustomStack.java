@@ -1,57 +1,64 @@
 import java.util.Scanner;
-import CustomLinkedList;
 
-class Node {
-  int data;
-  Node next;
-}
-
-public class CustomStack{
-
-  static Node head, tail;
-  static int size;
+public class CustomStack {
 
   public static void main(String[] args) {
-    
-    Scanner sc = new Scanner(System.in);
 
-    while (true) {
-      System.out.print("Your Stack: ");
-      display(head);
-      System.out.println();
+    try {
+      Scanner sc = new Scanner(System.in);
+      Stack stack = new Stack();
 
-      System.out.println("Enter 1 to push");
-      System.out.println("Enter 2 to pop");
-      System.out.println("Enter 3 to peek");
-      System.out.println("Enter 4 to search");
-      System.out.println("Enter 5 to end the program");
+      while (true) {
+        System.out.print("Your Stack: ");
+        stack.display(stack.head);
+        System.out.println();
 
-      int n = sc.nextInt();
+        System.out.println("Enter 1 to push");
+        System.out.println("Enter 2 to pop");
+        System.out.println("Enter 3 to peek");
+        System.out.println("Enter 4 to search");
 
-      if (n == 1) {
-        System.out.print("Enter the value: ");
-        int val = sc.nextInt();
-        addLast(val);
-        System.out.println("-------------------------------------");
-      } else if (n == 2) {
-        removeLast();
-        System.out.println("-------------------------------------");
-      } else if (n == 3) {
-        System.out.println(getLast());
-        System.out.println("-------------------------------------");
-      } else if (n == 4) {
-        int val = sc.nextInt();
-        System.out.println(search(val));
-        System.out.println("-------------------------------------");
-      } else {
-        System.out.println("-------------------------------------");
-        return;
+        int choice = sc.nextInt();
+
+        if (choice == 1) {
+          System.out.print("Enter the value: ");
+          int val = sc.nextInt();
+          stack.push(val);
+          System.out.println("-------------------------------------");
+        } else if (choice == 2) {
+          System.out.println("Popped out value: " + stack.pop());
+          System.out.println("-------------------------------------");
+        } else if (choice == 3) {
+          System.out.println("Peeked value: " + stack.peek());
+          System.out.println("-------------------------------------");
+        } else if (choice == 4) {
+          System.out.print("Enter the value to search: ");
+          int val = sc.nextInt();
+          if(stack.search(val)==-1) System.out.println(val+" Doesn't exists.");
+          else System.out.println("Searched value is present at index: " + stack.search(val));
+          System.out.println("-------------------------------------");
+        } else {
+          System.out.println("Program terminated successfully.");
+          System.out.println("-------------------------------------");
+          return;
+        }
+
       }
 
+    } catch (Exception e) {
+      System.out.println(e);
     }
+
   }
-  
-  static void addLast(int val) {
+
+}
+
+class Stack {
+
+  Node head, tail;
+  int size;
+
+  void push(int val) {
     Node node = new Node();
     node.data = val;
     node.next = null;
@@ -59,61 +66,63 @@ public class CustomStack{
     if (size == 0) {
       head = tail = node;
     } else {
-      tail.next = node;
-      tail = node;
+      node.next = head;
+      head = node;
     }
     size++;
   }
 
-  static void removeLast() {
+  int pop() {
     if (size == 0) {
       System.out.println("List is empty");
+      return -1;
     } else if (size == 1) {
+      int headData = head.data;
       head = tail = null;
       size = 0;
+      return headData;
     } else {
-      Node temp = head;
-      while (temp.next != tail) {
-        temp = temp.next;
-      }
-      temp.next = null;
-      tail = temp;
+      int headData = head.data;
+      head = head.next;
       size--;
+      return headData;
     }
   }
 
-
-  static int getLast() {
+  int peek() {
     if (size == 0) {
       System.out.println("List is empty");
       return -1;
     } else {
-      return tail.data;
+      return head.data;
     }
   }
 
+  int search(int val) {
+    Node temp = head; //a temporary node
 
-  static int search(int val){
-     Node temp=head;
+    int idx = 0;
+    while (temp != null) {
+      if (temp.data == val)
+        return idx;
+      temp = temp.next;
+      idx++;
+    }
 
-     int idx=0;
-     while (temp!=null) {
-       if(temp.data==val) return idx; 
-       temp=temp.next;
-       idx++;
-     }
-
-     return -1;
+    return -1;
   }
- 
-  static void display(Node node) {
-    if(node==null) return;
 
+  void display(Node node) {
+    if (node == null)
+      return;
+
+    System.out.print(node.data + " ");
     display(node.next);
-    System.out.print(node.data+ " ");
   }
 
+}
 
-
-
+class Node {
+  int data;
+  Node next;
 }

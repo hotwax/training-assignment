@@ -2,52 +2,60 @@ import java.util.Scanner;
 
 public class AVL {
 
-  public static class Node{
+  public static class Node {
     int data;
-    Node left; //left child
-    Node right; //right child
+    Node left; // left child
+    Node right; // right child
 
-    int ht=1; // height
-    int bal=0; // balance
+    int ht = 1; // height
+    int bal = 0; // balance
 
-    Node(int data){
-      this.data=data;
+    Node(int data) {
+      this.data = data;
     }
   }
 
   public static void main(String[] args) {
-     Node root=null;
 
-     Scanner sc=new Scanner(System.in);
+    try {
+      Scanner sc = new Scanner(System.in);
+      Node root = null;
 
-     while (true) {
-       System.out.println("Your tree: ");
-       display(root);
+      while (true) {
+        System.out.println("Your tree: ");
+        display(root);
 
-       System.out.println("Enter 1 to add a node");
-       System.out.println("Enter 2 to remove a node");
-       System.out.println("Enter 3 to end the program");
+        System.out.println("Enter 1 to add a node");
+        System.out.println("Enter 2 to remove a node");
 
-       int n=sc.nextInt();
+        int choice = sc.nextInt();
 
-       if (n==1) {
-        System.out.println("Enter the value of the node: ");
-        int val=sc.nextInt();
-        root=add(root, val);
-       } else if (n==2) {
-        System.out.println("Enter the value of the node: ");
-        int val=sc.nextInt();
-        root=remove(root, val);
-       } else{
-         return;
-       }
-     }
-      
+        if (choice == 1) {
+          System.out.println("Enter the value of the node: ");
+          int val = sc.nextInt();
+          root = add(root, val);
+          System.out.println("-------------------------------------");
+        } else if (choice == 2) {
+          System.out.println("Enter the value of the node: ");
+          int val = sc.nextInt();
+          root = remove(root, val);
+          System.out.println("-------------------------------------");
+        } else {
+          System.out.println("Program terminated successfully.");
+          System.out.println("-------------------------------------");
+          return;
+        }
+      }
+
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+
   }
 
   static int height(Node node) {
-    int lh = (node.left == null ? 0 : node.left.ht);
-    int rh = (node.right == null ? 0 : node.right.ht);
+    int lh = (node.left == null ? 0 : node.left.ht);  //left child height
+    int rh = (node.right == null ? 0 : node.right.ht); //right child height
     return Math.max(lh, rh) + 1;
   }
 
@@ -64,7 +72,8 @@ public class AVL {
 
     String lstr = (node.left == null ? "" : node.left.data + "");
     String rstr = (node.right == null ? "" : node.right.data + "");
-    String str = lstr + "  <---- " + node.data + "[ height = " + node.ht + ", balance = " + node.bal + "]" + " ----> " + rstr;
+    String str = lstr + "  <---- " + node.data + "[ height = " + node.ht + ", balance = " + node.bal + "]" + " ----> "
+        + rstr;
 
     System.out.println(str);
 

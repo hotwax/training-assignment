@@ -1,94 +1,104 @@
 import java.util.Scanner;
- 
-class Node {
-  int data;
-  Node next;
-}
 
 public class CustomLinkedList {
 
-  static Node head, tail;
-  static int size;
-
   public static void main(String[] args) {
 
-    Scanner sc = new Scanner(System.in);
-    
-    while (true) {
-      System.out.print("Your linked list: ");
-      display();
+    try {
+      Scanner sc = new Scanner(System.in);
+      LinkedList ll = new LinkedList(); //ll- linkedlist
 
-      System.out.println("Enter 1 to add at last");
-      System.out.println("Enter 2 to add at First");
-      System.out.println("Enter 3 to add at a position");
-      System.out.println("Enter 4 to remove from last");
-      System.out.println("Enter 5 to remove from First");
-      System.out.println("Enter 6 to remove at a position");
-      System.out.println("Enter 7 to get from last");
-      System.out.println("Enter 8 to get from First");
-      System.out.println("Enter 9 to get at a position");
-      System.out.println("Enter 10 to reverse the list");
-      System.out.println("Enter 11 to get the mid node");
-      System.out.println("Enter 12 to end the program");
+      while (true) {
+        System.out.print("Your linked list: ");
+        ll.display();
 
-      int n = sc.nextInt();
+        System.out.println("Enter 1 to add at last");
+        System.out.println("Enter 2 to add at First");
+        System.out.println("Enter 3 to add at a position");
+        System.out.println("Enter 4 to remove from last");
+        System.out.println("Enter 5 to remove from First");
+        System.out.println("Enter 6 to remove at a position");
+        System.out.println("Enter 7 to get from last");
+        System.out.println("Enter 8 to get from First");
+        System.out.println("Enter 9 to get at a position");
+        System.out.println("Enter 10 to reverse the list");
+        System.out.println("Enter 11 to get the mid node");
 
-      if (n == 1) {
-        System.out.print("Enter the value: ");
-        int val = sc.nextInt();
-        addLast(val);
-        System.out.println("-------------------------------------");
-      } else if (n == 2) {
-        System.out.print("Enter the value: ");
-        int val = sc.nextInt();
-        addFirst(val);
-        System.out.println("-------------------------------------");
-      } else if (n == 3) {
-        System.out.print("Enter the index: ");
-        int idx = sc.nextInt();
-        System.out.print("Enter the value: ");
-        int val = sc.nextInt();
-        addAt(idx, val);
-        System.out.println("-------------------------------------");
-      } else if (n == 4) {
-        removeLast();
-        System.out.println("-------------------------------------");
-      } else if (n == 5) {
-        removeFirst();
-        System.out.println("-------------------------------------");
-      } else if (n == 6) {
-        System.out.print("Enter the index: ");
-        int idx = sc.nextInt();
-        removeAt(idx);
-        System.out.println("-------------------------------------");
-      } else if (n == 7) {
-        System.out.println(getLast());
-        System.out.println("-------------------------------------");
-      } else if (n == 8) {
-        System.out.println(getFirst());
-        System.out.println("-------------------------------------");
-      } else if (n == 9) {
-        System.out.print("Enter the index: ");
-        int idx = sc.nextInt();
-        System.out.println(getAt(idx));
-        System.out.println("-------------------------------------");
-      } else if (n == 10) {
-        reverseLL();
-        display();
-        System.out.println("-------------------------------------");
-      } else if (n == 11) {
-        System.out.println(midNode());
-        System.out.println("-------------------------------------");
-      }  else {
-        System.out.println("-------------------------------------");
-        return;
+        int option = sc.nextInt();
+
+        if (option == 1) {
+          System.out.print("Enter the value: ");
+          int val = sc.nextInt(); //value
+          ll.addLast(val);
+          System.out.println("-------------------------------------");
+        } else if (option == 2) {
+          System.out.print("Enter the value: ");
+          int val = sc.nextInt();
+          ll.addFirst(val);
+          System.out.println("-------------------------------------");
+        } else if (option == 3) {
+          System.out.print("Enter the index: ");
+          int idx = sc.nextInt(); //index
+          System.out.print("Enter the value: ");
+          int val = sc.nextInt();
+          ll.addAt(idx, val);
+          System.out.println("-------------------------------------");
+        } else if (option == 4) {
+          ll.removeLast();
+          System.out.println("-------------------------------------");
+        } else if (option == 5) {
+          ll.removeFirst();
+          System.out.println("-------------------------------------");
+        } else if (option == 6) {
+          System.out.print("Enter the index: ");
+          int idx = sc.nextInt();
+          ll.removeAt(idx);
+          System.out.println("-------------------------------------");
+        } else if (option == 7) {
+          System.out.println(ll.getLast());
+          System.out.println("-------------------------------------");
+        } else if (option == 8) {
+          System.out.println(ll.getFirst());
+          System.out.println("-------------------------------------");
+        } else if (option == 9) {
+          System.out.print("Enter the index: ");
+          int idx = sc.nextInt();
+          System.out.println(ll.getAt(idx));
+          System.out.println("-------------------------------------");
+        } else if (option == 10) {
+          ll.reverseLL();
+          ll.display();
+          System.out.println("-------------------------------------");
+        } else if (option == 11) {
+          System.out.println(ll.midNode());
+          System.out.println("-------------------------------------");
+        } else {
+          System.out.println("Program terminated successfully.");
+          System.out.println("-------------------------------------");
+          return;
+        }
+
       }
-
+    } catch (Exception e) {
+      System.out.println(e);
     }
+
   }
 
-  static void display() {
-    Node temp = head;
+}
+
+class Node {
+  int data;
+  Node next; //pointer to the next node
+}
+
+class LinkedList {
+
+  Node head, tail;
+  int size;
+
+  void display() {
+    Node temp = head; //temporary node 
 
     while (temp != null) {
       System.out.print(temp.data + " ");
@@ -97,7 +107,7 @@ public class CustomLinkedList {
     System.out.println();
   }
 
-  static void addLast(int val) {
+  void addLast(int val) {
     Node node = new Node();
     node.data = val;
     node.next = null;
@@ -111,7 +121,7 @@ public class CustomLinkedList {
     size++;
   }
 
-  static void addFirst(int val) {
+  void addFirst(int val) {
     Node temp = new Node();
     temp.data = val;
 
@@ -125,7 +135,7 @@ public class CustomLinkedList {
     size++;
   }
 
-  static void addAt(int idx, int val) {
+  void addAt(int idx, int val) {
     if (idx < 0 || idx > size) {
       System.out.println("Invalid arguments");
       return;
@@ -151,7 +161,7 @@ public class CustomLinkedList {
     size++;
   }
 
-  static void removeLast() {
+  void removeLast() {
     if (size == 0) {
       System.out.println("List is empty");
     } else if (size == 1) {
@@ -168,7 +178,7 @@ public class CustomLinkedList {
     }
   }
 
-  static void removeFirst() {
+  void removeFirst() {
     if (size == 0) {
       System.out.println("List is empty");
     } else if (size == 1) {
@@ -180,7 +190,7 @@ public class CustomLinkedList {
     }
   }
 
-  static void removeAt(int idx) {
+  void removeAt(int idx) {
     if (idx < 0 || idx >= size) {
       System.out.println("Invalid arguments");
     } else if (idx == 0) {
@@ -193,13 +203,13 @@ public class CustomLinkedList {
       for (int i = 1; i < idx; i++) {
         temp = temp.next;
       }
-      Node nnode = temp.next.next;
-      temp.next = nnode;
+      Node nextnextnode = temp.next.next;
+      temp.next = nextnextnode;
       size--;
     }
   }
 
-  static int getFirst() {
+  int getFirst() {
     if (size == 0) {
       System.out.println("List is empty");
       return -1;
@@ -208,7 +218,7 @@ public class CustomLinkedList {
     }
   }
 
-  static int getLast() {
+  int getLast() {
     if (size == 0) {
       System.out.println("List is empty");
       return -1;
@@ -217,7 +227,7 @@ public class CustomLinkedList {
     }
   }
 
-  static int getAt(int idx) {
+  int getAt(int idx) {
     if (size == 0) {
       System.out.println("List is empty");
       return -1;
@@ -233,9 +243,9 @@ public class CustomLinkedList {
     return temp.data;
   }
 
-  static void reverseLL() {
-    Node prev = null;
-    Node curr = head;
+  void reverseLL() {
+    Node prev = null; //previous
+    Node curr = head; //current
 
     while (curr != null) {
       Node cnext = curr.next;
@@ -250,9 +260,9 @@ public class CustomLinkedList {
     tail = temp;
   }
 
-  static int midNode() {
-    Node slow = head;
-    Node fast = head;
+  int midNode() {
+    Node slow = head; //slow with reference to speed
+    Node fast = head; //fast with reference to speed
 
     while (fast != tail && fast.next != tail) {
       slow = slow.next;
