@@ -36,7 +36,7 @@ public class Random_Probing {
         //if probe location is already filled, then check for next location untill find an empty slot or same key to replace if existed
         while((arr[probe]!=null && arr[probe].key!=k) && deleted[probe]){
             offset=(int)(Math.random()*(m-1));
-            probe=(probe+offset)%m;
+            probe=(probe+offset+randomValue)%m;
         }
         //if probe is not equal to original hash of key then its a collision
         //if the same key is inseted again with different value then this is not a collision, its updation
