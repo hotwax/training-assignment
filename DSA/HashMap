@@ -125,25 +125,27 @@ public:
         }
     }
 
-    // Search the key in the
     void searchKey(int Key)
     {
         int hash_position = HashFunction(Key);
 
-        Node *pointer_to_node = hashTable[hash_position];
+        // Find the node
+        Node * pointer_to_node = hashTable[hash_position] ;
+        while (pointer_to_node != NULL)
+        {
+            if (pointer_to_node!=NULL && pointer_to_node->key == Key)
+            {
+                cout << "Key Found and its Value is " << pointer_to_node->value << endl;
+                return;
+            }
+            else
+            {
+                // if not found
 
-        while (pointer_to_node->key != Key && pointer_to_node != NULL)
-        {
-            pointer_to_node = pointer_to_node->next;
+                pointer_to_node=pointer_to_node->next ;
+            }
         }
-        if (pointer_to_node->key == Key)
-        {
-            cout << "Key-value pair " << pointer_to_node->key << ":" << pointer_to_node->value << " is Found " << endl;
-        }
-        else
-        {
-            cout << "Key Not Found" << endl;
-        }
+        cout << "Key Not found" << endl;
     }
 
     //  Function to Display the HashMap
