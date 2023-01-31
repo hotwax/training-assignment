@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 // Create Node which has two fields data and next
@@ -9,9 +10,9 @@ class Node
 public:
     int data;
     Node *next;
-    Node(int value)
+    Node(int val)
     {
-        data = value;
+        data = val;
         next = NULL;
     }
 };
@@ -21,152 +22,98 @@ class LinkedList
 {
 public:
      // Insert Node in the List 
-    void insert(Node *&head, int value)
+    void insert(Node *&head, int val)
     {
         // Create new Node
-        Node *newNode = new Node(value);
+        Node *newNode = new Node(val);
         if (!head)
         {
             head = newNode;
             return;
         }
-        Node *nodePtr = head;
+        Node *temp = head;
         // go to the last Node
-        while (nodePtr->next != NULL)
+        while (temp->next != NULL)
         {
-            nodePtr = nodePtr->next;
+            temp = temp->next;
         }
-        nodePtr->next = newNode;
+        temp->next = newNode;
     }
 
     // Function to delete the Node By value
-    void deleteNodeByValue(Node *&head, int value)
+    void deleteNodeByValue(Node *&head, int val)
     {
-        if(head==NULL)
+        Node *temp = head;
+        while (temp->next->data != val && temp != NULL)
         {
-            cout<<"List is Empty"<<endl;
-            return ;
+            if (temp == head)
+            {
+                head = temp->next;
+                delete (temp);
+                return;
+            }
+            temp = temp->next;
         }
-        Node *nodePtr= head;
-        if (nodePtr->data == value)
-        {
-            head = nodePtr->next;
-            delete (nodePtr);
-            return;
-        }
-        while (nodePtr->next != NULL && nodePtr->next->data != value)
-        {
-            // if first node has to be the node which we want to delete
-           
-            nodePtr = nodePtr->next;
-        }
-        // delete the node
-        if(nodePtr->next != NULL && nodePtr->next->data == value)
-        {
-            Node * to_delete_node = nodePtr->next;
-            nodePtr->next = nodePtr->next->next;
-            delete (to_delete_node);
-        }
-        else
-        {
-            cout<<"Node Not present "<<endl;
-        }
-        
-    }
-    int list_Length(Node * head)
-    {
-        int size = 0 ;
-        while(head!=NULL)
-        {
-            head=head->next ;
-            size ++ ;
-        }
-        return size ;
+        Node *n = temp->next;
+        temp->next = temp->next->next;
+        delete (n);
     }
 
     // Function to delete the Node By position or index
-    void deleteNodeByPosition(Node *&head, int position)
+    void deleteNodeByPosition(Node *&head, int n)
     {
-        if(head==NULL)
+        Node *temp = head;
+        if (n == 1)
         {
-            cout<<"list is Empty"<<endl;
-            return ;
-        }
-        if(position>list_Length(head))
-        {
-            cout<<"Invalid Position"<<endl;
-            return ;
-        }
-
-        Node *nodePtr = head;
-        if (position == 1)
-        {
-            head = nodePtr->next;
-            delete (nodePtr);
+            head = temp->next;
+            delete (temp);
             return;
         }
-        // i = index , to Iterate
-        for (int i = 1; i < position - 1; i++)
+        for (int i = 1; i < n - 1; i++)
         {
-            nodePtr = nodePtr->next;
+            temp = temp->next;
         }
-        Node * to_delete_node = nodePtr->next;
-        nodePtr->next = nodePtr->next;
-        delete (to_delete_node);
-        cout<<"Operation Successful"<<endl;
+        Node *temp2 = temp->next;
+        temp->next = temp2->next;
+        delete (temp2);
     }
 
     // Function to Update the data of the Node
-    void update(Node *&head, int previous_val, int new_val)
+    void update(Node *&head, int pval, int nval)
     {
-        if(head==NULL)
+        Node *temp = head;
+        while (temp->data != pval && temp != NULL)
         {
-            cout<<"List is Empty"<<endl;
-            return ;
+            temp = temp->next;
         }
-        Node * nodePtr = head;
-        while (nodePtr != NULL && nodePtr->data != previous_val)
-        {
-            nodePtr = nodePtr->next;
-        }
-        if(nodePtr == NULL)
-        cout<<"Node not Found"<<endl;
-        else if (nodePtr->data == previous_val)
-        nodePtr->data = new_val;
-
-        return ;
-
-        
+        temp->data = nval;
     }
-    
-    // Merge the Lists 
-    Node *merge(Node * firstHalf , Node *secondHalf)
+    Node *merge(Node *a, Node *b)
     {
         // base case
-        if (firstHalf == NULL)
-            return secondHalf;
-        if (secondHalf == NULL)
-            return firstHalf ;
+        if (a == NULL)
+            return b;
+        if (b == NULL)
+            return a;
 
         // recursive case
         // take a head pointer
-        Node * mergedList;
+        Node *c;
 
-        if (firstHalf->data < secondHalf ->data)
+        if (a->data < b->data)
         {
-            mergedList = firstHalf;
-            mergedList->next = merge(firstHalf->next, secondHalf);
+            c = a;
+            c->next = merge(a->next, b);
         }
         else
         {
-            mergedList = secondHalf;
-            mergedList->next = merge(firstHalf, secondHalf->next);
+            c = b;
+            c->next = merge(a, b->next);
         }
 
-        return mergedList;
+        return c;
     }
-    
-    // find Mid Point
+
     Node *mid_point(Node *head)
     {
         if (head == NULL || head->next == NULL)
@@ -201,30 +148,25 @@ public:
         // Step 1: divide the linked list into
         // two equal linked lists
         Node *mid = mid_point(head);
-        Node *firstHalf = head;
-        Node *secondHalf = mid->next;
+        Node *a = head;
+        Node *b = mid->next;
 
         mid->next = NULL;
 
         // Step 2: recursively sort the smaller
         // linked lists
-        firstHalf = merge_sort(firstHalf);
-        secondHalf = merge_sort(secondHalf);
+        a = merge_sort(a);
+        b = merge_sort(b);
 
         // Step 3: merge the sorted linked lists
-        Node *mergedList = merge(firstHalf, secondHalf);
+        Node *c = merge(a, b);
 
-        return mergedList;
+        return c;
     }
 
     // Function to Print the list 
     void print(Node *head)
     {
-        if(head==NULL)
-        {
-            cout<<"List Empty"<<endl;
-            return ;
-        }
         while (head->next != NULL)
         {
             cout << head->data << "->";
@@ -238,7 +180,8 @@ int main()
 {
     Node *head = NULL;
     LinkedList ll;
-    while (1)
+    int choice = 0;
+    while (choice != 6)
     {
         // Menu
         cout << "Linked List" << endl
@@ -249,7 +192,7 @@ int main()
              << "4. Sort the List" << endl
              << "5. Print List" << endl
              << "6. Exit" << endl;
-        int choice = 0;
+        
         cout<<"Enter Your Choice"<<endl;
         cin >> choice;
         switch (choice)
@@ -303,8 +246,8 @@ int main()
         case 4:
         {
             cout << "Sort the List" << endl;
-            Node *sortedList = ll.merge_sort(head);
-            head = sortedList;
+            Node *f = ll.merge_sort(head);
+            head = f;
             break;
         }
 
@@ -313,10 +256,11 @@ int main()
             ll.print(head);
             break;
         }
-
-        case 6:
-            break;
+        case 6 :
+            cout<<"EXIT"<<endl;
+            break ;
+        default:
+           return 0 ;
         }
     }
-    return 0;
 }
