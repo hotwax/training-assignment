@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 class LinearProbingHashTable {
     // Member variables of this class
@@ -124,8 +125,7 @@ public class LinearProbing {
         Scanner sc = new Scanner(System.in);
 
         // Display messages
-        System.out.println("Hash Table Test\n\n");
-        System.out.println("Enter size");
+        System.out.println("Enter size of the hash table.");
 
         // maxSizeake object of LinearProbingHashTable
         LinearProbingHashTable lpht = new LinearProbingHashTable(sc.nextInt());
@@ -147,7 +147,8 @@ public class LinearProbing {
 
             int choice = sc.nextInt();
 
-            // Switch case
+           try {
+             // Switch case
             switch (choice) {
 
                 // Case 1
@@ -216,6 +217,10 @@ public class LinearProbing {
             // Reading character using charAt() method to
             // fetch
             ch = sc.next().charAt(0);
+           }
+           catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+           }
         } while (ch == 'Y' || ch == 'y');
     }
 }
