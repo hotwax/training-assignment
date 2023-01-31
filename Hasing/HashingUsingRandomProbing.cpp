@@ -72,7 +72,7 @@ public:
         {
             collisions++;
             // incrementing hashIndex and again making a hashcode for indexing
-            hash_position=hash_position+random_number ;
+            hash_position=hash_position + (random_number*collisions) ;
             hash_position = hash_position % CAPACITY;
         }
         if (hash_table[hash_position] == NULL)
@@ -115,7 +115,7 @@ public:
             {
                 // if not found
 
-                hash_position++;
+                hash_position = hash_position + (random_number * collisions);
                 hash_position %= CAPACITY;
             }
         }
@@ -138,7 +138,7 @@ public:
             {
                 // if not found
 
-                hash_position=hash_position+random_number ;
+                hash_position=hash_position + (random_number * collisions) ;
                 hash_position %= CAPACITY;
             }
         }
@@ -176,7 +176,7 @@ public:
             {
                 // if not found
 
-                hash_position++;
+                hash_position = hash_position + (random_number * collisions);
                 hash_position %= CAPACITY;
             }
         }
