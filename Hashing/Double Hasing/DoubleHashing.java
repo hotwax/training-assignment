@@ -146,11 +146,12 @@ class DoubleHashing {
                     break;
                 case 5:
                     if (hashmap != null) {
-                        System.out.println("Create a hashmap first");
-                    } else {
+                        System.out.println("Please Enter the key: ");
                         System.out.println(hashmap.get(sc.nextInt()));
+                    } else {
+                        System.out.println("Create a hashmap first");
                     }
-
+                    break;
                 case 6:
                     System.out.println("Program Terminated");
                     break;
@@ -158,6 +159,6 @@ class DoubleHashing {
                     System.out.println("Invalid Choice");
                     break;
             }
-        } while (choice != 5);
+        } while (choice != 6);
     }
 }
