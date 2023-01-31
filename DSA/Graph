@@ -1,25 +1,23 @@
-#include<iostream>
-using namespace std ;
-
-// Crate a Queue Data Structure which is Used in BFS Traversal
+#include <iostream>
+using namespace std;
+// Create a Queue Data Structure which is Used in BFS Traversal
 class Queue
 {
 public:
-
-    int front, rear, cap;
+    int front, rear, capacity;
     int queue[1000];
 
     // Constructor to initialize all the class variables
-    Queue(int capi)
+    Queue(int capacity)
     {
         front = rear = 0;
-        cap = capi;
+        this->capacity = capacity ;
     }
     // Method to push the element in the Queue
     void Push(int data)
     {
         // if rear pointer equals to capacity of queue , then queue is full
-        if (cap == rear)
+        if (capacity == rear)
         {
             cout << "Queue is full" << endl;
             return;
@@ -42,6 +40,7 @@ public:
         }
         else
         {
+            // i = index
             for (int i = 0; i < rear - 1; i++)
             {
                 queue[i] = queue[i + 1];
@@ -57,214 +56,216 @@ public:
         {
             return -1;
         }
-        return queue[front] ;
+        return queue[front];
     }
     bool Empty()
     {
-        return front==rear ;
+        return front == rear;
     }
 };
-// Create Custom Graph DataStructure 
+// Create Custom Graph DataStructure
 class Graph
 {
-    public:
-    int vertices ; // number of nodes/vertices in the Graph
+public:
+    int vertices; // number of nodes/vertices in the Graph
     // create a Adjacencey matrix
-    int **adjacencyMatrix ;
+    int **adjacencyMatrix;
 
     // Create a firstNode or source Node for DFS and BFS traversal
-    int firstNode ;
-    Graph(int val)
+    int firstNode;
+    Graph(int value)
     {
-        vertices = val ;
-        adjacencyMatrix = new int*[val+1];
-        for (int i = 0; i <= val; i++) 
+        vertices = value;
+        adjacencyMatrix = new int *[value + 1];
+        // i = index
+        for (int i = 0; i <= value ; i++)
         {
-            adjacencyMatrix[i] = new int[val];
+            adjacencyMatrix[i] = new int[value];
         }
-        firstNode = -1 ; // Store the first / Source Node 
+        firstNode = -1; // Store the first / Source Node
     }
-    
-    // function to add a edge in the graph 
+
+    // function to add a edge in the graph
     void addEdge()
     {
-        int node1 , node2 ;
-        cout<<"Enter the Value of Vertex1"<<endl;
-        cin>>node1 ;
-        cout<<"Enter the Value of Vertex2"<<endl;
-        cin>>node2 ;
+        int node1, node2;
+        cout << "Enter the Value of Vertex1" << endl;
+        cin >> node1;
+        cout << "Enter the Value of Vertex2" << endl;
+        cin >> node2;
 
-        adjacencyMatrix[node1][node2]=1;
-        adjacencyMatrix[node2][node1]=1; 
+        adjacencyMatrix[node1][node2] = 1;
+        adjacencyMatrix[node2][node1] = 1;
 
-        if(firstNode==-1) // store source node
+        if (firstNode == -1) // store source node
         {
-            firstNode=node1 ;
-        }  
+            firstNode = node1;
+        }
     }
-    
-    // Graph Traversal using BFS 
+
+    // Graph Traversal using BFS
     void bfs()
-    { 
+    {
         // made a visited array to mark nodes visited
-        int visited[vertices+1]={0};
+        int visited[vertices + 1] = {0};
 
         // Create a Object of Queue Class
-        Queue q(100) ;
+        Queue q(100);
         q.Push(firstNode);
         // mark source node visited
-        visited[firstNode]=1 ;
+        visited[firstNode] = 1;
 
-        while(!q.Empty())
+        while (!q.Empty())
         {
             int vertex = q.Front();
-            cout<<vertex<<" ";
+            cout << vertex << " ";
             q.Pop();
-            for (int i = 0; i <= vertices; i++) 
+            // i = index
+            for (int i = 0; i <= vertices; i++)
             {
-                if (adjacencyMatrix[vertex][i] == 1 && !visited[i] ) {
-    
+                if (adjacencyMatrix[vertex][i] == 1 && !visited[i])
+                {
+
                     // Push the adjacent node to the queue
                     q.Push(i);
-    
+
                     // Set
-                    visited[i] = 1 ;
+                    visited[i] = 1;
                 }
             }
         }
-        cout<<endl;
-    
+        cout << endl;
     }
 
-    void DfsTraversal(int source , int visited[])
+    void DfsTraversal(int source, int visited[])
     {
-        visited[source]=1 ;
-        cout<<source<<" ";
+        visited[source] = 1;
+        cout << source << " ";
 
-        for(int child=0 ; child<=vertices ; child++)
+        for (int child = 0; child <= vertices; child++)
         {
-            if(adjacencyMatrix[source][child]==1 && !visited[child])
+            if (adjacencyMatrix[source][child] == 1 && !visited[child])
             {
                 DfsTraversal(child, visited);
             }
         }
-        return ;
+        return;
     }
-    
-    // Graph Traversal using DFS 
+
+    // Graph Traversal using DFS
     void dfs()
     {
         // made a visited array to mark nodes visited
-        int visited[vertices+1]={0};
-        DfsTraversal(firstNode,visited);
-        cout<<endl;
-        return ;
+        int visited[vertices + 1] = {0};
+        DfsTraversal(firstNode, visited);
+        cout << endl;
+        return;
     }
-    
+
     // function to delete a Edge from Graph
     void deleteEdge()
     {
-        int node1 , node2 ;
-        cout<<"Enter Node1 and Node2 whose edge between them is to be deleted"<<endl;
-        cin>>node1>>node2 ;
-    
-        if(node1>vertices || node2>vertices) 
+        int node1, node2;
+        cout << "Enter Node1 and Node2 whose edge between them is to be deleted" << endl;
+        cin >> node1 >> node2;
+
+        if (node1 > vertices || node2 > vertices)
         {
-            cout<<"Invalid Node Values"<<endl;
-            return ;
+            cout << "Invalid Node Values" << endl;
+            return;
         }
         // delete node by mark them 0 in matrix
-        adjacencyMatrix[node1][node2]=0;
-        adjacencyMatrix[node2][node1]=0;
-        return ;
+        adjacencyMatrix[node1][node2] = 0;
+        adjacencyMatrix[node2][node1] = 0;
+        return;
     }
-    
+
     // Function to Display all the nodes in the Graph
     void display()
     {
-        cout<<"Your List is "<<endl;
-        for(int i = 0 ; i<=vertices ; i++)
+        cout << "Your List is " << endl;
+        for (int row = 0; row <= vertices; row++)
         {
-            cout<<i<<"->";
-            for(int j = 0 ; j<=vertices ; j++)
+            cout << row << "->";
+            for (int column = 0; column <= vertices; column++)
             {
-                if(adjacencyMatrix[i][j]==1)
+                if (adjacencyMatrix[row][column] == 1)
                 {
-                    cout<<j<<" ";
+                    cout << column << " ";
                 }
             }
-            cout<<endl;
+            cout << endl;
         }
     }
 };
 
-
 int main()
 {
     int vertices;
-    cout<<"Enter Number of vertices"<<endl;
-    cin>>vertices;
-    
+    cout << "Enter Number of vertices" << endl;
+    cin >> vertices;
+
     // Create Instance of the Graph Class
     Graph g(vertices);
-    int ch = 0 ;
-    
-    while(ch != 5)
+    int choice = 0;
+
+    while (choice != 5)
     {
-        cout<<"1. Add a Edge"<<endl;
-        cout<<"2. Traverse the Graph"<<endl;
-        cout<<"3. Delete the Edge"<<endl;
-        cout<<"4. Display"<<endl;
-        cout<<"5. Exit"<<endl;
-        cout<<"Enter Your Choice"<<endl;
-        cin>>ch ;
-        
+        cout << "1. Add a Edge" << endl;
+        cout << "2. Traverse the Graph" << endl;
+        cout << "3. Delete the Edge" << endl;
+        cout << "4. Display" << endl;
+        cout << "5. Exit" << endl;
+        cout << "Enter Your Choice" << endl;
+        cin >> choice;
+
         // Menu
-        switch(ch)
+        switch (choice)
         {
-            case 1:
+        case 1:
+        {
+            g.addEdge();
+            break;
+        }
+        case 2:
+        {
+            cout << "Traversal Techniques" << endl;
+            cout << "1. DFS" << endl;
+            cout << "2. BFS" << endl;
+            int choice1;
+            cin >> choice1;
+            if (choice1 == 1)
             {
-                g.addEdge();
-                break ;
+                g.dfs();
             }
-            case 2:
+            else if (choice1 == 2)
             {
-                cout<<"Traversal Techniques"<<endl;
-                cout<<"1. DFS"<<endl;
-                cout<<"2. BFS"<<endl;
-                int temp ; cin>>temp ;
-                if(temp==1)
-                {
-                    g.dfs();
-                }
-                else if(temp==2)
-                {
-                    g.bfs();
-                }
-                else
-                {
-                    cout<<"Invalid Choice"<<endl;
-                }
-                break ;
+                g.bfs();
             }
-            case 3:
+            else
             {
-                g.deleteEdge();
-                break ;
+                cout << "Invalid Choice" << endl;
             }
-            case 4:
-            {
-                g.display();
-                break ;
-            }
-            case 5:
-            {
-                cout<<"Exit"<<endl;
-                break ;
-            }
-            default:
-            return 0 ;
+            break;
+        }
+        case 3:
+        {
+            g.deleteEdge();
+            break;
+        }
+        case 4:
+        {
+            g.display();
+            break;
+        }
+        case 5:
+        {
+            cout << "Exit" << endl;
+            break;
+        }
+        default:
+            return 0;
         }
     }
-    return 0 ;
+    return 0;
 }
