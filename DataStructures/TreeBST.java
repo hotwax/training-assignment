@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Tree {
+public class TreeBST {
 
     Node root;
 
@@ -15,7 +15,7 @@ public class Tree {
     }
 
     // Method to insert a new element in the tree
-    public static Tree insert(Tree tree, int value) {
+    public static TreeBST insert(TreeBST tree, int value) {
         Node temp = new Node(value);
         if (tree.root == null) {
             tree.root = temp;
@@ -81,7 +81,7 @@ public class Tree {
     }
 
     public static void main(String[] args) {
-        Tree tree = new Tree();
+        TreeBST tree = new TreeBST();
         Boolean flag = true;
         Scanner sc = new Scanner(System.in);
         while (flag) {

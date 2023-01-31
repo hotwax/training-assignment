@@ -39,7 +39,6 @@ public class Queue {
             return queue;
 
         // Store previous front and move front one node ahead
-        Node temp = queue.front;
         queue.front = queue.front.next;
 
         // If front becomes NULL, then change rear also as NULL

@@ -125,6 +125,24 @@ public class LinkedList {
 		return list;
 	}
 
+	public static LinkedList insertAtIndex(LinkedList list, int index, int data) {
+		Node currNode = list.head;
+		Node prev = null;
+		Node newNode = new Node(data);
+		int count = 0;
+		while (currNode != null) {
+			if (count == index) {
+				prev.next = newNode;
+				newNode.next = currNode;
+				break;
+			}
+			prev = currNode;
+			currNode = currNode.next;
+			count++;
+		}
+		return list;
+	}
+
 	// Method to print the LinkedList.
 	public static void printList(LinkedList list) {
 		Node currNode = list.head;
@@ -152,7 +170,8 @@ public class LinkedList {
 			System.out.println("2. Delete a node from the list");
 			System.out.println("3. Update a node in the list");
 			System.out.println("4. Sort the list");
-			System.out.println("5. Exit");
+			System.out.println("5. Insert new element on index");
+			System.out.println("6. Exit");
 			Scanner input = new Scanner(System.in);
 			int choice = input.nextInt();
 			if (choice < 1 || choice > 5) {
@@ -180,6 +199,12 @@ public class LinkedList {
 						list = sort(list);
 						break;
 					case 5:
+						System.out.println("Enter the index and the value to be inserted");
+						int index = input.nextInt();
+						int value = input.nextInt();
+						list = insertAtIndex(list, index, value);
+						break;
+					case 6:
 						flag = false;
 						break;
 				}

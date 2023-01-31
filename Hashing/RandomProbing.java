@@ -1,14 +1,17 @@
 import java.util.Scanner;
+
 import java.util.Random;
 
 class RandomProbing {
     public int collisions = 0;
     private int size, elementCount;
     private int[] table;
+    private int random = new Random().nextInt(10);
     public Scanner sc = new Scanner(System.in);
 
     // Initialize hash Table
     RandomProbing() {
+        System.out.print(this.random);
         System.out.print("Enter the size of the Table : ");
         this.size = sc.nextInt();
 
@@ -38,10 +41,9 @@ class RandomProbing {
     void randomProbing(int element, int position, boolean isStored) {
         System.out.println("Collision has occured for element " + element + " at position " + position
                 + " finding new Position.");
-        Random random = new Random();
         while (this.table[position] != 0) {
             this.collisions += 1;
-            position += random.nextInt(size);
+            position += this.random;
             if (position >= this.size) {
                 position = 0;
             }
@@ -59,11 +61,8 @@ class RandomProbing {
             System.out.println("Hash Table Full");
             return;
         }
-
         boolean isStored = false;
-
         position = this.hashFunction(element);
-
         // checking if the position is empty
         if (this.table[position] == 0) {
             this.table[position] = element;
@@ -71,7 +70,6 @@ class RandomProbing {
             isStored = true;
             this.elementCount += 1;
         }
-
         // collision occured hence we do linear probing
         else {
             this.randomProbing(element, position, isStored);

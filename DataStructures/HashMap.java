@@ -1,16 +1,14 @@
 import java.util.Scanner;
 
 class HashMap {
-    // Pair class to store key value pairs
+    // Pair class to store key value pairs 
     static class Pair {
         int key;
         int value;
         Pair next;
-
         Pair(int key, int value) {
             this.key = key;
             this.value = value;
-            this.next = null;
         }
     }
 
@@ -33,18 +31,15 @@ class HashMap {
         return key % size;
     }
 
-    // Function to insert a key value pair in the hash map
+    //function to insert a key value pair in the hash map
     public void insert(int key, int value) {
         int index = hashFunction(key);
-        Pair newNode = new Pair(key, value);
-        if (arr[index] == null) {
-            arr[index] = newNode;
+        Pair temp = arr[index];
+        if (temp == null) {
+            arr[index] = new Pair(key, value);
         } else {
-            Pair temp = arr[index];
-            while (temp.next != null) {
-                temp = temp.next;
-            }
-            temp.next = newNode;
+            System.out.println("key already exists, updating the value");
+            arr[index] = new Pair(key, value);
         }
     }
 
@@ -65,7 +60,7 @@ class HashMap {
             }
         }
     }
-
+    
     // Function to search a key in the hash map
     public int get(int key) {
         int index = hashFunction(key);
@@ -117,11 +112,11 @@ class HashMap {
                         int d_key = input.nextInt();
                         map.delete(d_key);
                         break;
-                    case 3:
-                        System.out.println("Enter the key to be searched");
-                        int s_key = input.nextInt();
-                        map.search(s_key);
-                        break;
+                    // case 3:
+                    //     System.out.println("Enter the key to be searched");
+                    //     int s_key = input.nextInt();
+                    //     map.search(s_key);
+                    //     break;
                     case 4:
                         flag = false;
                         break;
