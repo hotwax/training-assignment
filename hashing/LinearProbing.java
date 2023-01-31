@@ -1,121 +1,180 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class LinearProbing {
 
   static int[] keys;
   static int[] vals;
-  static int currentSize=0, maxSize=0; 
-  static int noOfCollisions=0;
-  
-  LinearProbing(int size){
-      maxSize=size;
-      keys=new int[size];
-      vals=new int[size];
+  static int currentSize = 0, maxSize = 0;
+  static int noOfCollisions = 0;
 
-      Arrays.fill(keys, -1);
-      Arrays.fill(vals, -1);
+  static void initialize(int size) {
+    maxSize = size;
+    keys = new int[size];
+    vals = new int[size];
+
+    Arrays.fill(keys, Integer.MAX_VALUE);  //Integer.MAX_VALUE is set, because its default value is 0 which can't be used because user can enter 0 as the key also.
+    Arrays.fill(vals, Integer.MAX_VALUE);
   }
 
-  static void display(){
+  static void display() {
     for (int i = 0; i < keys.length; i++) {
-      if(keys[i]!=-1) System.out.print(keys[i]+" "+vals[i]+", ");
+      if (keys[i] != Integer.MAX_VALUE)
+        System.out.print(keys[i] + " " + vals[i] + ", ");
     }
   }
 
-  static void add(int key, int value){
-    int i = hash(key);
-    int temp=i;
+  static void add(int key, int value) {
 
-    do{
-       if (keys[i]==-1) {
-         keys[i]= key;
-         vals[i]= value;
-         currentSize++;
-         return;
-       } else if(keys[i]==key){
-         vals[i]= value;
-         return;
-       } else{
-         i = (i+1)%maxSize;
-         noOfCollisions++;
-       }
-       
-       
-    } while(i!=temp);
-  }
-
-  static int hash(int key){
-    return (key+"").hashCode() % maxSize;
-  }
-
-  static void remove(int key){
-    if(get(key)==-1) return;
-
-    int i = hash(key);
-    while (keys[i]!=key) {
-      i=(i+1)%maxSize;
+    if (currentSize == maxSize) {
+      System.out.println("array size is full");
+      return;
     }
-    keys[i]=vals[i]=null;
-    
-  }
 
-  static int get(int key){
-    int i=hash(key);
-    while (keys[i]!=-1) {
-      if (keys[i]==key) {
-        return vals[i];
+    int pointer = hash(key);
+    int initialHashValue = pointer;
+
+    do {
+      if (keys[pointer] == Integer.MAX_VALUE) {
+        keys[pointer] = key;
+        vals[pointer] = value;
+        currentSize++;
+        return;
+      } else if (keys[pointer] == key) {
+        vals[pointer] = value;
+        return;
+      } else {
+        pointer = (pointer + 1) % maxSize;
+        noOfCollisions++;
       }
-      i=(i+1)%maxSize;
-    }
-    return -1;
+
+    } while (pointer != initialHashValue);
   }
 
+  static int hash(int key) {
+    if (key < 0)
+      key += maxSize;
+    return key % maxSize;
+  }
+
+  static void remove(int key) {
+    if (get(key) == Integer.MAX_VALUE) {
+      System.out.println(key + " doesn't exists.");
+      return;
+    }
+
+    // remove
+    int pointer = hash(key);
+    while (keys[pointer] != key) {
+      pointer = (pointer + 1) % maxSize;
+    }
+    keys[pointer] = vals[pointer] = Integer.MAX_VALUE;
+    currentSize--;
+
+    // rehash
+    pointer= (pointer + 1) % maxSize;
+    do {
+      if (keys[pointer] != Integer.MAX_VALUE) {
+        int temp1 = keys[pointer], temp2 = vals[pointer];
+        keys[pointer] = vals[pointer] = Integer.MAX_VALUE;
+        currentSize--;
+        add(temp1, temp2);
+      }
+      pointer = (pointer + 1) % maxSize;
+
+    } while (keys[pointer] != Integer.MAX_VALUE);
+  }
+
+  static int get(int key) {
+    int pointer = hash(key);
+    while (keys[pointer] != Integer.MAX_VALUE) {
+      if (keys[pointer] == key) {
+        return vals[pointer];
+      }
+      pointer = (pointer + 1) % maxSize;
+    }
+    return Integer.MAX_VALUE;
+  }
+
+  static String comparison(int[] arr) {
+    initialize(50000);
+    long startTime = System.currentTimeMillis();
+    for (int i = 0; i < arr.length; i++) {
+      add(arr[i], arr[i]);
+    }
+    long endTime = System.currentTimeMillis();
+    long timeTaken = endTime - startTime;
+    return "No of collisions: " + noOfCollisions + " Time taken: " + timeTaken;
+  }
 
   public static void main(String[] args) {
 
-    int startingTime = System.currentTimeMillis();
-    
-    Scanner sc=new Scanner(System.in);
-    int capacity = sc.nextInt();
-    LinearProbing(capacity);
+    long startingTime = System.currentTimeMillis();
 
-     while (true) {
-       System.out.println("Your hash table: ");
-       display();
+    try {
+      System.out.println("Initialize capacity of array: ");
+      Scanner sc = new Scanner(System.in);
+      int capacity = sc.nextInt();
+      initialize(capacity);
 
-       System.out.println("Enter 1 to add an element");
-       System.out.println("Enter 2 to remove an element");
-       System.out.println("Enter 3 to search an element");
-       System.out.println("Enter 4 to check whether an element is present");
-       System.out.println("Enter 5 to find number of collisions");
-       System.out.println("Enter 6 to end the program");
+      while (true) {
+        System.out.print("Your hash table: ");
+        display();
+        System.out.println();
 
-       int n=sc.nextInt();
+        System.out.println("Enter 1 to add an element");
+        System.out.println("Enter 2 to remove an element");
+        System.out.println("Enter 3 to search an element");
+        System.out.println("Enter 4 to check whether an element is present");
+        System.out.println("Enter 5 to find number of collisions");
 
-       if (n==1) {
-        System.out.println("Enter the key: ");
-        int key=sc.nextInt(); 
-        System.out.println("Enter the value: ");
-        int value=sc.nextInt();
-        add(key, value);
-        int endingTime = System.currentTimeMillis();
-        System.out.println("Time taken: "+ (endingTime-startingTime));
-       } else if (n==2) {
-        System.out.println("Enter the key: ");
-        int key=sc.nextInt();
-        root=remove(key);
-       } else if (n==3) {
-        System.out.println("Enter the key: ");
-        int key=sc.nextInt();
-        System.out.println(get(key));
-       } else if (n==4) {
-        System.out.println("Enter the key: ");
-        int key=sc.nextInt();
-        if(get(key)==-1) System.out.println("Doesn't exists");
-        else System.out.println("Exists");
-       } else if (n==5) {
-        System.out.println(noOfCollisions);
-       } else{
-         return;
-       }
-     }
+        System.out.println("Note- The data type of key and value is int.");
+
+        int choice = sc.nextInt();
+
+        if (choice == 1) {
+          System.out.println("Enter the key: ");
+          int key = sc.nextInt();
+          System.out.println("Enter the value: ");
+          int value = sc.nextInt();
+          add(key, value);
+          long endingTime = System.currentTimeMillis();
+          System.out.println("Time taken: " + (endingTime - startingTime) + " ms");
+          System.out.println("-----------------------------------");
+        } else if (choice == 2) {
+          System.out.println("Enter the key: ");
+          int key = sc.nextInt();
+          remove(key);
+          System.out.println("-----------------------------------");
+        } else if (choice == 3) {
+          System.out.println("Enter the key: ");
+          int key = sc.nextInt();
+          if (get(key) == Integer.MAX_VALUE)
+            System.out.println(key+ "doesn't exists");
+          else
+            System.out.println(get(key));
+          System.out.println("-----------------------------------");
+        } else if (choice == 4) {
+          System.out.println("Enter the key: ");
+          int key = sc.nextInt();
+          if (get(key) == Integer.MAX_VALUE)
+            System.out.println("Doesn't exists");
+          else
+            System.out.println("Exists");
+          System.out.println("-----------------------------------");
+        } else if (choice == 5) {
+          System.out.println(noOfCollisions);
+          System.out.println("-----------------------------------");
+        } else {
+          System.out.println("Program terminated successfully.");
+          System.out.println("-----------------------------------");
+          return;
+        }
+      }
+
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+
   }
 }
