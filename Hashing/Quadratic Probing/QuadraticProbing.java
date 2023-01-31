@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class QuadraticProbing {
@@ -110,8 +111,8 @@ public class QuadraticProbing {
     static class Quadratic {
         public static void main(String[] args) {
             hashMap hashmap = null;
-            int choice;
-            Scanner sc = new Scanner(System.in);
+            int choice = 0 ;
+
             do {
                 System.out.println("--------- MENU ---------");
                 System.out.println("Press 0 : Create a new Hashmap");
@@ -122,61 +123,66 @@ public class QuadraticProbing {
                 System.out.println("Press 5 : To get Value from key");
                 System.out.println("Press 6 : Exit");
                 System.out.println("Enter your choice : ");
-                choice = sc.nextInt();
-                switch (choice) {
-                    case 0:
-                        System.out.print("Please Enter the size of the HashMap: ");
-                        hashmap = new hashMap(sc.nextInt());
-                        break;
-                    case 1:
-                        if (hashmap == null) {
-                            System.out.println("Please create a new HashMap");
+                try {
+                    Scanner sc = new Scanner(System.in);
+                    choice = sc.nextInt();
+                    switch (choice) {
+                        case 0:
+                            System.out.print("Please Enter the size of the HashMap: ");
+                            hashmap = new hashMap(sc.nextInt());
                             break;
-                        } else {
-                            System.out.print("Please Enter the key: ");
-                            int key = sc.nextInt();
-                            System.out.print("Please Enter the value: ");
-                            int value = sc.nextInt();
-                            hashmap.insert(key, value);
-                        }
-                        break;
-                    case 2:
-                        if (hashmap == null) {
-                            System.out.println("Please create a new HashMap");
+                        case 1:
+                            if (hashmap == null) {
+                                System.out.println("Please create a new HashMap");
+                                break;
+                            } else {
+                                System.out.print("Please Enter the key: ");
+                                int key = sc.nextInt();
+                                System.out.print("Please Enter the value: ");
+                                int value = sc.nextInt();
+                                hashmap.insert(key, value);
+                            }
                             break;
-                        } else {
-                            System.out.print("Please Enter the key: ");
-                            hashmap.delete(sc.nextInt());
-                            System.out.println("Deleted");
-                        }
-                        break;
+                        case 2:
+                            if (hashmap == null) {
+                                System.out.println("Please create a new HashMap");
+                                break;
+                            } else {
+                                System.out.print("Please Enter the key: ");
+                                hashmap.delete(sc.nextInt());
+                                System.out.println("Deleted");
+                            }
+                            break;
 
-                    case 3:
-                        if (hashmap == null) {
-                            System.out.println("Please create a new HashMap");
+                        case 3:
+                            if (hashmap == null) {
+                                System.out.println("Please create a new HashMap");
+                                break;
+                            } else {
+                                hashmap.display();
+                            }
                             break;
-                        } else {
-                            hashmap.display();
-                        }
-                        break;
-                    case 4:
-                        if (hashmap != null) {
-                            System.out.println("Number of collisions: " + hashmap.getCollision());
-                        }
-                        break;
-                    case 5:
-                        if (hashmap != null) {
-                            System.out.print("Please Enter the key: ");
-                            int key = sc.nextInt();
-                            System.out.println("Value: " + hashmap.get(key));
-                        }
-                        break;
-                    case 6:
-                        System.out.println("Program Terminated");
-                        break;
-                    default:
-                        System.out.println("Invalid Choice");
-                        break;
+                        case 4:
+                            if (hashmap != null) {
+                                System.out.println("Number of collisions: " + hashmap.getCollision());
+                            }
+                            break;
+                        case 5:
+                            if (hashmap != null) {
+                                System.out.print("Please Enter the key: ");
+                                int key = sc.nextInt();
+                                System.out.println("Value: " + hashmap.get(key));
+                            }
+                            break;
+                        case 6:
+                            System.out.println("Program Terminated");
+                            break;
+                        default:
+                            System.out.println("Invalid Choice");
+                            break;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Enter Integer Only");
                 }
             } while (choice != 6);
         }

@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Chaining {
@@ -99,8 +100,8 @@ public class Chaining {
 
     public static void main(String[] args) {
         hashMap map = null;
-        Scanner sc = new Scanner(System.in);
-        int choice;
+
+        int choice = 0;
         do {
             System.out.println("--------- MENU ---------");
             System.out.println("Press 0 : Create a new Hashmap");
@@ -111,50 +112,55 @@ public class Chaining {
             System.out.println("Press 5 : Get Value from Key");
             System.out.println("Press 6 : Exit");
             System.out.println("Enter your choice : ");
-            choice = sc.nextInt();
-            switch (choice) {
-                case 0:
-                    System.out.print("Please Enter the size of the HashMap: ");
-                    map = new hashMap(sc.nextInt());
-                    break;
-                case 1:
-                    if (map != null) {
-                        System.out.print("Please Enter the key: ");
-                        int key = sc.nextInt();
-                        System.out.print("Please Enter the value: ");
-                        int value = sc.nextInt();
-                        map.insert(key, value);
-                    }
-                    break;
-                case 2:
-                    if (map != null) {
-                        System.out.print("Please Enter the key: ");
-                        map.delete(sc.nextInt());
-                        System.out.println("Deleted");
-                    }
-                    break;
-                case 3:
-                    if (map != null)
-                        map.display();
-                    break;
-                case 4:
-                    if (map != null) {
-                        System.out.println("Number of collisions: " + map.getCollision());
-                    }
-                    break;
-                case 5:
-                    if (map != null) {
-                        System.out.print("Please Enter the key: ");
-                        int key1 = sc.nextInt();
-                        System.out.println("Value: " + map.get(key1));
-                    }
-                    break;
-                case 6:
-                    System.out.println("Program Terminated");
-                    break;
-                default:
-                    System.out.println("Invalid Choice");
-                    break;
+            try {
+                Scanner sc = new Scanner(System.in);
+                choice = sc.nextInt();
+                switch (choice) {
+                    case 0:
+                        System.out.print("Please Enter the size of the HashMap: ");
+                        map = new hashMap(sc.nextInt());
+                        break;
+                    case 1:
+                        if (map != null) {
+                            System.out.print("Please Enter the key: ");
+                            int key = sc.nextInt();
+                            System.out.print("Please Enter the value: ");
+                            int value = sc.nextInt();
+                            map.insert(key, value);
+                        }
+                        break;
+                    case 2:
+                        if (map != null) {
+                            System.out.print("Please Enter the key: ");
+                            map.delete(sc.nextInt());
+                            System.out.println("Deleted");
+                        }
+                        break;
+                    case 3:
+                        if (map != null)
+                            map.display();
+                        break;
+                    case 4:
+                        if (map != null) {
+                            System.out.println("Number of collisions: " + map.getCollision());
+                        }
+                        break;
+                    case 5:
+                        if (map != null) {
+                            System.out.print("Please Enter the key: ");
+                            int key1 = sc.nextInt();
+                            System.out.println("Value: " + map.get(key1));
+                        }
+                        break;
+                    case 6:
+                        System.out.println("Program Terminated");
+                        break;
+                    default:
+                        System.out.println("Invalid Choice");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Enter Integer Value Only");
             }
         } while (choice != 6);
     }
