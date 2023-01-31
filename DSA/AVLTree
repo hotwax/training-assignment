@@ -322,18 +322,18 @@ int main()
     // create instance of the tree class
     AVLTree t;
     Node *root = NULL; // root node , initially when there is no node in the tree root is NULL
-    int ch = 0;
-    while (ch != 5)
+    int choice = 0;
+    while (choice != 5)
     {
         cout << "1. Insert Node" << endl;
         cout << "2. Traversal" << endl;
         cout << "3. Search" << endl;
-        cout << "4. Delete" <<endl;
+        cout << "4. Delete" << endl;
         cout << "5. Exit" << endl;
         cout << "Enter Your Choice" << endl;
-        cin >> ch;
+        cin >> choice;
 
-        switch (ch)
+        switch (choice)
         {
         case 1:
         {
@@ -350,13 +350,13 @@ int main()
             cout << "2. PostOrder" << endl;
             cout << "3. Inorder" << endl;
             cout << "Enter Your Choice" << endl;
-            int b = 0;
-            cin >> b;
-            if (b == 1)
+            int choice1 = 0;
+            cin >> choice1;
+            if (choice1 == 1)
                 t.preorder(root);
-            else if (b == 2)
+            else if (choice1 == 2)
                 t.postorder(root);
-            else if (b == 3)
+            else if (choice1 == 3)
                 t.inorder(root);
             else
                 cout << "Invalid Choice" << endl;
@@ -375,20 +375,20 @@ int main()
                 cout << "Element Not Found" << endl;
             break;
         }
-        case 4 :
+        case 4:
         {
-            cout<<"Enter the value of Node to delete"<<endl;
-            int val ;
-            cin>>val ;
-            if(t.deleteNode(root, val)) 
+            cout << "Enter the value of Node to delete" << endl;
+            int value;
+            cin >> value;
+            if (t.deleteNode(root, value))
             {
-                cout<<"Operation Successful"<<endl;
+                cout << "Operation Successful" << endl;
             }
             else
             {
-                cout<<"Element Not present"<<endl;
+                cout << "Element Not present" << endl;
             }
-            break ;
+            break;
         }
         case 5:
             cout << "EXIT" << endl;
