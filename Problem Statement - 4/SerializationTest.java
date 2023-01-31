@@ -1,7 +1,10 @@
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,34 +73,49 @@ class Student implements Serializable {
     String firstName;
     // Initial
     // String dateOfBirth;
+
     // After Change
     Date dateOfBirth;
+
     Address address;
+
+    // iniatilizing simple date object for formatting
+    SimpleDateFormat simpleDate = new SimpleDateFormat("dd/mm/yyyy"); // for date formatting
 
     // Constructor
 
-    Student(String firstName, Address address) {
-        this.firstName = firstName;
-        this.address = address;
+    Student(String firstName, String dateOfBirth, Address address) {
+        try {
+
+            this.firstName = firstName;
+            this.address = address;
+            // After Change
+            this.dateOfBirth = simpleDate.parse(dateOfBirth);
+
+            // Initial
+            // this.dateOfBirth = dateOfBirth;
+        } catch (Exception exp) {
+            System.out.println(exp);
+        }
     }
 
-    // making changes after serialization
+    // for printing purpose
 
-    Student(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public String toString() {
+        return "First Name : " + this.firstName + ", Address : " + this.address.city + ", DOB : " + this.dateOfBirth;
     }
 
 }
 
 // class for creating 4 objects and has serialization method
 
-class Test {
+class TestForSerailization {
     Student stu1;
     Student stu2;
     Student stu3;
     Student stu4;
 
-    Test() {
+    TestForSerailization() {
         this.setStu1();
         this.setStu2();
         this.setStu3();
@@ -110,40 +128,40 @@ class Test {
 
         Address newAddress = new Address("Bamhori", "Madhya Pradesh", "India", 464672);
 
-        this.stu1 = new Student("Sanskar", newAddress);
+        this.stu1 = new Student("Sanskar", "19/03/2002", newAddress);
     }
 
     public void setStu2() {
 
         Address newAddress = new Address("Bhopal", "Madhya Pradesh", "India", 464600);
 
-        this.stu2 = new Student("Shubham", newAddress);
+        this.stu2 = new Student("Shubham", "22/03/2002", newAddress);
     }
 
     public void setStu3() {
 
         Address newAddress = new Address("Shamgarh", "Madhya Pradesh", "India", 460072);
 
-        this.stu3 = new Student("Pratham", newAddress);
+        this.stu3 = new Student("Pratham", "29/08/2002", newAddress);
     }
 
     public void setStu4() {
 
         Address newAddress = new Address("Indore", "Madhya Pradesh", "India", 452010);
 
-        this.stu4 = new Student("Sumit", newAddress);
+        this.stu4 = new Student("Sumit", "28/03/2002", newAddress);
     }
 
     public void runTest(String fileName) {
 
         // Creating a list and adding objects into it
 
-        List<Student> list = new ArrayList<Student>();
+        List<Student> studentList = new ArrayList<Student>();
 
-        list.add(this.stu1);
-        list.add(this.stu2);
-        list.add(this.stu3);
-        list.add(this.stu4);
+        studentList.add(this.stu1);
+        studentList.add(this.stu2);
+        studentList.add(this.stu3);
+        studentList.add(this.stu4);
 
         // Serialization
         try {
@@ -152,16 +170,16 @@ class Test {
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             // Method for serialization of object
-            out.writeObject(list);
+            out.writeObject(studentList);
 
             out.close();
             file.close();
 
             System.out.println("Object has been serialized");
 
-        }
-
-        catch (Exception ex) {
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
             System.out.println(ex);
         }
 
@@ -170,7 +188,8 @@ class Test {
 
 public class SerializationTest {
     public static void main(String args[]) {
-        Test test = new Test();
+
+        TestForSerailization test = new TestForSerailization();
 
         Scanner input = new Scanner(System.in); // Create a Scanner object
         System.out.println("Enter The Filename : ");
