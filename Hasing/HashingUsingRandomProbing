@@ -72,7 +72,7 @@ public:
         {
             collisions++;
             // incrementing hashIndex and again making a hashcode for indexing
-            hash_position++;
+            hash_position=hash_position+random_number ;
             hash_position = hash_position % CAPACITY;
         }
         if (hash_table[hash_position] == NULL)
@@ -138,7 +138,7 @@ public:
             {
                 // if not found
 
-                hash_position++;
+                hash_position=hash_position+random_number ;
                 hash_position %= CAPACITY;
             }
         }
@@ -199,8 +199,8 @@ int main()
 
     // Create the Instance of the Class
     Hashmap mp(capacity);
-    int ch = 0;
-    while (ch != 7)
+    int choice = 0;
+    while (choice != 7)
     {
         // Menu
         cout << endl;
@@ -213,8 +213,8 @@ int main()
         cout << "7. Exit" << endl;
 
         cout << "Enter Your Choice" << endl;
-        cin >> ch;
-        switch (ch)
+        cin >> choice;
+        switch (choice)
         {
         case 1:
         {
