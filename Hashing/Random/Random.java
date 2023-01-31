@@ -5,10 +5,11 @@ class RandomPro {
   Integer[] keys;
   Integer[] value; //arrays to store data
   int collision;
-  final int random_var=(int)(Math.random()*(max)) + 1;
+  final int random_var;
 
   RandomPro(int capacity) //constructor to initialize
   {
+	random_var=(int)(Math.random()*(max)) + 1;
     size = 0;
     max = capacity;
     keys = new Integer[max];
@@ -43,7 +44,7 @@ class RandomPro {
         value[index] = val;
         return;
       }
-      index = (index + random_var) % max;
+      index = (index + (random_var * collision)) % max;
     } while (index != tmp);
   }
 
@@ -53,7 +54,7 @@ class RandomPro {
     while (keys[index] != null) {
       if (keys[index].equals(key))
         return value[index]; //returns value corresponding to key
-      index = (index + random_var) % max;
+      index = (index + (random_var * collision)) % max;
     }
     return null; //else return null
   }
@@ -65,7 +66,7 @@ class RandomPro {
 
     int index = hash(key);
     while (!key.equals(keys[index]))
-      index = (index + random_var) % max;
+      index = (index + (random_var * collision)) % max;
     keys[index] = value[index] = null; //searchs the index and put null over there
 
     size--;
