@@ -82,10 +82,10 @@ public class Chaining {
         // Function to display the hash map
         public void display() {
             for (int i = 0; i < size; i++) {
-                Pair temp = arr[i];
-                while (temp != null) {
-                    System.out.print(temp.key + " -> " + temp.value);
-                    temp = temp.next;
+                Pair head = arr[i];
+                while (head != null) {
+                    System.out.print(head.key + " -> " + head.value);
+                    head = head.next;
                 }
                 System.out.println();
             }
