@@ -1,4 +1,5 @@
 #include <iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 // To handle Collision here I use Double Hashing
@@ -20,7 +21,7 @@ public:
 // HashMap Data Structure with User Given Capacity
 class Hashmap
 {
-    Node **arr;
+    Node **hash_table;
     // capacity of the Hashmap
     int CAPACITY;
     // Size of hashMap
@@ -37,14 +38,14 @@ public:
         this->CAPACITY = CAPACITY;
         collisions = 0;
         size = 0;
-        arr = new Node *[CAPACITY];
+        hash_table = new Node *[CAPACITY];
         isPrime = new int[CAPACITY];
         // Initialise all the value with NULL ;
 
         // i = index
         for (int index = 0; index < CAPACITY; index++)
         {
-            arr[index] = NULL;
+            hash_table[index] = NULL;
         }
         for(int index = 0 ; index < CAPACITY ; index++)
         {
@@ -98,24 +99,27 @@ public:
         Node *newNode = new Node(key, value);
         //  if there is already a element present at the hashed index then this is collision
         //  TO HANDLE COLLISION HERE I USE Double Hashing
-        while (arr[hash_position] != NULL && arr[hash_position]->key != key)
+        bool Collide = false ;
+        while (hash_table[hash_position] != NULL && hash_table[hash_position]->key != key)
         {
-            collisions++;
+            Collide=true ;
             // incrementing hashIndex and again making a hashcode for indexing
             hash_position++;
             hash_position = hash_position % CAPACITY;
         }
-        if (arr[hash_position] == NULL)
+        if(Collide==true)
+        collisions++ ;
+        if (hash_table[hash_position] == NULL)
         {
             // Increasing the size of the map
             size++;
-            arr[hash_position] = newNode;
+            hash_table[hash_position] = newNode;
             return;
         }
         // if already exist the key Update its Value
-        if (arr[hash_position]->key == key)
+        if (hash_table[hash_position]->key == key)
         {
-            arr[hash_position]->value = value;
+            hash_table[hash_position]->value = value;
             return;
         }
     }
@@ -126,14 +130,14 @@ public:
         int hash_position = (HashFunction1(Key) + HashFunction2(Key)) % CAPACITY;
 
         // Find the node
-        while (arr[hash_position] != NULL)
+        while (hash_table[hash_position] != NULL)
         {
-            if (arr[hash_position] && arr[hash_position]->key == Key)
+            if (hash_table[hash_position] && hash_table[hash_position]->key == Key)
             {
                 // removing the key value pair node
-                Node *to_delete_node = arr[hash_position];
+                Node *to_delete_node = hash_table[hash_position];
 
-                arr[hash_position] = NULL;
+                hash_table[hash_position] = NULL;
 
                 delete to_delete_node;
                 // decrementing size
@@ -156,11 +160,11 @@ public:
         int hash_position = (HashFunction1(Key) + HashFunction2(Key)) % CAPACITY;
 
         // Find the node
-        while (arr[hash_position] != NULL)
+        while (hash_table[hash_position] != NULL)
         {
-            if (arr[hash_position] && arr[hash_position]->key == Key)
+            if (hash_table[hash_position] && hash_table[hash_position]->key == Key)
             {
-                cout << "Key Found and its Value is " << arr[hash_position]->value << endl;
+                cout << "Key Found and its Value is " << hash_table[hash_position]->value << endl;
                 return;
             }
             else
@@ -180,9 +184,9 @@ public:
         // i = index of array (hashmap)
         for (int i = 0; i < CAPACITY; i++)
         {
-            if (arr[i] != NULL)
+            if (hash_table[i] != NULL)
             {
-                cout << arr[i]->key << " -> " << arr[i]->value;
+                cout << hash_table[i]->key << " -> " << hash_table[i]->value;
                 cout << endl;
             }
         }
@@ -193,11 +197,11 @@ public:
     {
         int hash_position = (HashFunction1(Key) + HashFunction2(Key)) % CAPACITY;
 
-        while (arr[hash_position] != NULL)
+        while (hash_table[hash_position] != NULL)
         {
-            if (arr[hash_position] && arr[hash_position]->key == Key)
+            if (hash_table[hash_position] && hash_table[hash_position]->key == Key)
             {
-                cout << "The value of the Key " << Key << " is " << arr[hash_position]->value << endl;
+                cout << "The value of the Key " << Key << " is " << hash_table[hash_position]->value << endl;
                 return;
             }
             else
@@ -227,8 +231,8 @@ int main()
 
     // Create the Instance of the Class
     Hashmap mp(capacity);
-    int ch = 0;
-    while (ch != 7)
+    int choice = 0;
+    while (choice != 7)
     {
         // Menu
         cout << endl;
@@ -241,8 +245,8 @@ int main()
         cout << "7. Exit" << endl;
 
         cout << "Enter Your Choice" << endl;
-        cin >> ch;
-        switch (ch)
+        cin >> choice;
+        switch (choice)
         {
         case 1:
         {
