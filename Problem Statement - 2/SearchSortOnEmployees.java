@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +23,8 @@ class Employee {
     private String email;
     private int age;
     private Date dob;
+
+    
 
     // Constructor --
 
@@ -82,12 +83,12 @@ class Employee {
     public String toString() {
         return "Id : " + this.id + ", Name : " + this.name + ", email : " + this.email + ", age : " + this.age
                 + ", DOB : "
-                + Main.simpleDate.format(this.dob);
+                + SearchSortOnEmployees.simpleDate.format(this.dob);
     }
 
 }
 
-public class Main {
+public class SearchSortOnEmployees {
 
     public static List<Employee> employeeList = new ArrayList<>(); // Employee list
     public static int idCounter = 1; // for keeping track of employee id
