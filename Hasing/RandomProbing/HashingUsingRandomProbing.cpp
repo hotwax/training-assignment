@@ -2,6 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 // A node in map which has three part key,value
 // To handle collisions here i use Random probing
 // in Random probing generate hash_position with random key
@@ -62,7 +63,7 @@ public:
             cout << "HashMap is Full" << endl;
             return;
         }
-        int hash_position = HashFunction(random_number);
+        int hash_position = HashFunction(key);
 
         // create newnode
         Node *newNode = new Node(key, value);

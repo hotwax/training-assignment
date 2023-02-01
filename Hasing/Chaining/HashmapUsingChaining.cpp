@@ -94,7 +94,6 @@ public:
                 }
                 array_node = array_node->next;
             }
-            size++;
             array_node->next = newNode;
         }
     }
