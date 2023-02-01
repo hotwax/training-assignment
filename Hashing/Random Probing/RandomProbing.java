@@ -1,15 +1,16 @@
+package Hashing.RandomProbing;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
 
-class RandomProbing {
+public class RandomProbing {
     int[] keys;
     int[] values;
     int capacity;
     int collision;
     int randomNum;
     int size;
-    RandomProbing(int capacity) {
+    public RandomProbing(int capacity) {
         this.capacity = capacity;
         this.keys = new int[capacity];
         this.values = new int[capacity];
@@ -23,12 +24,12 @@ class RandomProbing {
         randomNum = random.nextInt(capacity);
     }
     boolean isEmpty() {
-        return size!=capacity;
+        return size != capacity;
     }
     int getCapacity() {
         return capacity;
     }
-    int getCollision() {
+    public int getCollision() {
         return collision;
     }
 
@@ -44,7 +45,7 @@ class RandomProbing {
         return key % capacity;
     }
 
-    void insert(int key, int value) {
+    public void insert(int key, int value) {
         if(size == capacity){
             System.out.println("Hashmap is full");
             return;
@@ -58,10 +59,10 @@ class RandomProbing {
                 size++;
                 break;
             }
-            index = (index + randomNum + 1) % capacity;
+            index = (index + randomNum * collision) % capacity;
             collision++;
             if(start == index){
-                System.out.println("Hashmap is full");
+//                System.out.println("Hashmap is full");
                 return;
             }
         }
@@ -77,7 +78,7 @@ class RandomProbing {
                 size--;
                 break;
             }
-            index = (index + randomNum + 1) % capacity;
+            index = (index + randomNum * collision) % capacity;
             if(start == index){
                 System.out.println("Key not found");
                 return;
@@ -92,7 +93,7 @@ class RandomProbing {
             if(keys[index] == key){
                 return values[index];
             }
-            index = (index + randomNum + 1) % capacity;
+            index = (index + randomNum * collision) % capacity;
             if(start == index){
                 System.out.println("Key not found");
                 return Integer.MAX_VALUE;
@@ -108,7 +109,7 @@ class RandomProbing {
                 System.out.println("Key: "+keys[index]+" Value: "+values[index]+" is present in the hash map");
                 return;
             }
-            index = (index + randomNum + 1) % capacity;
+            index = (index + randomNum * collision) % capacity;
             if(start == index){
                 System.out.println("Key not found");
                 return;

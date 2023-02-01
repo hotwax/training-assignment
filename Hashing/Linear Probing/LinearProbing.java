@@ -1,3 +1,4 @@
+package Hashing.LinearProbing;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class LinearProbing {
         }
     }
 
-    static class hashMap {
+    public static class hashMap {
         // size of the hash map
         int size;
         // array of pairs
@@ -22,7 +23,7 @@ public class LinearProbing {
         int collision;
 
         // constructor
-        hashMap(int size) {
+        public hashMap(int size) {
             this.size = size;
             arr = new Pair[size];
             for (int i = 0; i < size; i++) {
@@ -99,7 +100,7 @@ public class LinearProbing {
                 }
             }
         }
-
+        // function to get the number of collisions
         public int getCollision() {
             return collision;
         }

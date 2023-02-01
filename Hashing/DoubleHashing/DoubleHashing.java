@@ -1,19 +1,18 @@
+package Hashing.DoubleHashing;
 import java.util.InputMismatchException;
-import java.util.Random;
 import java.util.Scanner;
-
-class HashMapArray {
+public class DoubleHashing {
+public static class HashMapArray {
     // size of the hashmap
     int size;
     // capacity of the hashmap
-    int capacity;
+     int capacity;
     // number of collision in the hashmap
     int collision;
     // hashmap array
     Node[] table;
     // prime number for hash function 2
-    int prime = 37;
-
+    
     // Node class
     static class Node {
         int key;
@@ -26,16 +25,32 @@ class HashMapArray {
     }
 
     // Constructor
-    HashMapArray(int x) {
+    public HashMapArray(int capacity) {
         int size = 0;
-        this.capacity = x;
+        this.capacity = capacity;
         table = new Node[capacity];
         for (int i = 0; i < capacity; i++) {
             table[i] = null;
         }
         collision = 0;
     }
+     int justSmallerPrimeNum() {
+        for (int num = capacity - 1; num >= 1; num--) {
+            if (isPrime(num))
+                return num;
+        }
 
+        return 1;
+    }
+
+    public  boolean isPrime(int n) { // ts - sqrt(n)
+        for (int div = 2; div * div <= n; div++) { // div <= root(n)
+            if (n % div == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
     // Function to create hash function 1
     int hashFunction(int key) {
         return key % capacity;
@@ -43,7 +58,10 @@ class HashMapArray {
 
     // Function to create hash function 2
     int hashFunction1(int key) {
-        return prime - (key % prime);
+      if (key < 0)
+            key += capacity;
+      key = key % capacity;
+        return justSmallerPrimeNum() - (key % justSmallerPrimeNum());
     }
 
     // Function to get value from hash map
@@ -52,13 +70,13 @@ class HashMapArray {
         int index1 = hashFunction1(key);
         while (table[index] != null && (!(table[index].key == key))) {
             index += index1;
-            index1 %= capacity;
+            index %= capacity;
         }
         return table[index].value;
     }
 
     // Function to insert a key value pair in the hash map
-    void insert(int key, int val) {
+    public void insert(int key, int val) {
         if (size == capacity) {
             System.out.println("Hash map is full");
             return;
@@ -67,9 +85,14 @@ class HashMapArray {
         int index1 = hashFunction1(key);
 
         while (table[index] != null) {
+            if(table[index].key == key) {
+                     table[index].value = val;
+                        return;
+            }
+
             collision++;
-            index += index1;
-            index1 %= capacity;
+            index = (index+index1)%capacity ;
+
         }
         Node newNode = new Node(key, val);
         table[index] = newNode;
@@ -82,7 +105,7 @@ class HashMapArray {
         int index1 = hashFunction1(key);
         while (table[index] != null && (!(table[index].key == key))) {
             index += index1;
-            index1 %= capacity;
+            index %= capacity;
         }
         table[index] = null;
         size--;
@@ -104,7 +127,7 @@ class HashMapArray {
 
 }
 
-class DoubleHashing {
+
     public static void main(String[] args) {
         HashMapArray hashmap = null;
         int choice = 0 ;

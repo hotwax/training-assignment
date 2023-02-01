@@ -1,3 +1,4 @@
+package  Hashing.Chaining;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -15,12 +16,12 @@ public class Chaining {
         }
     }
 
-    static class hashMap {
+    public static class hashMap {
         int size;
         Pair[] arr;
         int collision;
 
-        hashMap(int size) {
+        public hashMap(int size) {
             this.size = size;
             arr = new Pair[size];
             for (int i = 0; i < size; i++) {
