@@ -7,7 +7,7 @@ public class AVL {
     Node left; // left child
     Node right; // right child
 
-    int ht = 1; // height
+    int height = 1; // height
     int bal = 0; // balance
 
     Node(int data) {
@@ -29,7 +29,7 @@ public class AVL {
         System.out.println("Enter 2 to remove a node");
 
         int choice = sc.nextInt();
-        int val;
+        int val; 
 
         switch (choice) {
           case 1:
@@ -62,15 +62,15 @@ public class AVL {
   }
 
   static int height(Node node) {
-    int lh = (node.left == null ? 0 : node.left.ht); // left child height
-    int rh = (node.right == null ? 0 : node.right.ht); // right child height
-    return Math.max(lh, rh) + 1;
+    int leftChildHeight = (node.left == null ? 0 : node.left.height); // left child height
+    int rightChildHeight = (node.right == null ? 0 : node.right.height); // right child height
+    return Math.max(leftChildHeight, rightChildHeight) + 1;
   }
 
   static int balance(Node node) {
-    int lh = (node.left == null ? 0 : node.left.ht);
-    int rh = (node.right == null ? 0 : node.right.ht);
-    return lh - rh;
+    int leftChildHeight = (node.left == null ? 0 : node.left.height);
+    int rightChildHeight = (node.right == null ? 0 : node.right.height);
+    return leftChildHeight - rightChildHeight;
   }
 
   static void display(Node node) {
@@ -80,7 +80,7 @@ public class AVL {
 
     String lstr = (node.left == null ? "" : node.left.data + "");
     String rstr = (node.right == null ? "" : node.right.data + "");
-    String str = lstr + "  <---- " + node.data + "[ height = " + node.ht + ", balance = " + node.bal + "]" + " ----> "
+    String str = lstr + "  <---- " + node.data + "[ height = " + node.height + ", balance = " + node.bal + "]" + " ----> "
         + rstr;
 
     System.out.println(str);
@@ -99,7 +99,7 @@ public class AVL {
       node.right = add(node.right, val);
     }
 
-    node.ht = height(node);
+    node.height = height(node);
     node.bal = balance(node);
 
     if (node.bal > 1) { // ll or lr
@@ -133,10 +133,10 @@ public class AVL {
     z.left = t3;
     y.right = z;
 
-    z.ht = height(z);
+    z.height = height(z);
     z.bal = balance(z);
 
-    y.ht = height(y);
+    y.height = height(y);
     y.bal = balance(y);
 
     return y;
@@ -152,10 +152,10 @@ public class AVL {
     z.right = t2;
     y.left = z;
 
-    z.ht = height(z);
+    z.height = height(z);
     z.bal = balance(z);
 
-    y.ht = height(y);
+    y.height = height(y);
     y.bal = balance(y);
 
     return y;
@@ -184,7 +184,7 @@ public class AVL {
       node.right = remove(node.right, val);
     }
 
-    node.ht = height(node);
+    node.height = height(node);
     node.bal = balance(node);
 
     // bal = lh - rh
