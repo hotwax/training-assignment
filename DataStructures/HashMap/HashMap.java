@@ -1,96 +1,113 @@
 import java.util.Scanner;
 
 class HashMap {
-    // Pair class to store key value pairs 
+    public static Pair[] map;
+    public static int size;
+
+    // Constructor to initialize the size of the hash map
+    HashMap(int size) {
+        map = new Pair[size];
+        this.size = size;
+        for (int i = 0; i < size; i++) {
+            map[i] = null;
+        }
+    }
+
+    // Class to store the key and value
     static class Pair {
         int key;
         int value;
         Pair next;
-        Pair(int key, int value) {
+
+        public Pair(int key, int value) {
             this.key = key;
             this.value = value;
+            this.next = null;
         }
     }
 
-    int size;
-
-    // Array of pairs to store the key value pairs
-    Pair[] arr;
-
-    // Constructor to initialize the hash map
-    HashMap(int size) {
-        this.size = size;
-        arr = new Pair[size];
-        for (int i = 0; i < size; i++) {
-            arr[i] = null;
-        }
-    }
-
-    // hash function to get the index of the key
-    public int hashFunction(int key) {
+    public static int hash(int key, int size) {
         return key % size;
     }
 
-    //function to insert a key value pair in the hash map
-    public void insert(int key, int value) {
-        int index = hashFunction(key);
-        Pair temp = arr[index];
-        if (temp == null) {
-            arr[index] = new Pair(key, value);
+    public static void insert(int key, int value) {
+        int index = hash(key, size);
+        Pair pair = new Pair(key, value);
+        if (map[index] == null) {
+            map[index] = pair;
         } else {
-            System.out.println("key already exists, updating the value");
-            arr[index] = new Pair(key, value);
-        }
-    }
-
-    // Function to search a key in the hash map
-    public void delete(int key) {
-        int index = hashFunction(key);
-        Pair temp = arr[index];
-        if (temp.key == key) {
-            arr[index] = temp.next;
-        } else {
-            // if collision occurs linear probing is used to find the key
+            Pair temp = map[index];
             while (temp.next != null) {
-                if (temp.next.key == key) {
-                    temp.next = temp.next.next;
-                    break;
-                }
                 temp = temp.next;
             }
+            temp.next = pair;
         }
-    }
-    
-    // Function to search a key in the hash map
-    public int get(int key) {
-        int index = hashFunction(key);
-        Pair temp = arr[index];
-        while (temp != null) {
-            if (temp.key == key) {
-                return temp.value;
-            }
-            temp = temp.next;
-        }
-        return -1;
     }
 
-    // Function to display the hash map
-    public void display() {
-        for (int i = 0; i < size; i++) {
-            Pair temp = arr[i];
-            while (temp != null) {
-                System.out.print(temp.key + "->" + temp.value + "  ");
+    // Method to delete an element from the hash map
+    public static void delete(int key) {
+        int index = hash(key, size);
+        if (map[index] == null) {
+            System.out.println("Key not found");
+        } else {
+            Pair temp = map[index];
+            Pair prev = null;
+            while (temp.key != key && temp.next != null) {
+                prev = temp;
+                temp = temp.next;
             }
+            if (temp.key == key) {
+                if (prev == null) {
+                    map[index] = null;
+                } else {
+                    prev.next = temp.next;
+                }
+            } else {
+                System.out.println("Key not found");
+            }
+        }
+    }
+
+    // Method to search an element in the hash map
+    public static void search(int key) {
+        int index = hash(key, size);
+        if (map[index] == null) {
+            System.out.println("Key not found");
+        } else {
+            Pair temp = map[index];
+            while (temp.key != key && temp.next != null) {
+                temp = temp.next;
+            }
+            if (temp.key == key) {
+                System.out.println("Key found");
+                System.out.println("Value: " + temp.value);
+            } else {
+                System.out.println("Key not found");
+            }
+        }
+    }
+
+    // Method to print the hash map
+    public static void display() {
+        for (int i = 0; i < size; i++) {
+            Pair temp = map[i];
+            System.out.print(i + ": ");
+            while (temp != null) {
+                System.out.print("[" + temp.key + "," + temp.value + "]");
+                temp = temp.next;
+            }
+            System.out.println();
         }
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("Enter the size of the hash map");
-        Scanner input = new Scanner(System.in);
-        int size = input.nextInt();
-        HashMap map = new HashMap(size);
+        int size = sc.nextInt();
+        HashMap hmap = new HashMap(size);
         Boolean flag = true;
         while (flag) {
+            Scanner input = new Scanner(System.in);
             System.out.println("Select an option from the menu below");
             System.out.println("1. Insert a new element in the Hash Table");
             System.out.println("2. Delete an element from the Hash Table");
@@ -105,23 +122,23 @@ class HashMap {
                         System.out.println("Enter the key and value to be inserted");
                         int key = input.nextInt();
                         int value = input.nextInt();
-                        map.insert(key, value);
+                        insert(key, value);
                         break;
                     case 2:
                         System.out.println("Enter the key to be deleted");
                         int d_key = input.nextInt();
-                        map.delete(d_key);
+                        delete(d_key);
                         break;
-                    // case 3:
-                    //     System.out.println("Enter the key to be searched");
-                    //     int s_key = input.nextInt();
-                    //     map.search(s_key);
-                    //     break;
+                    case 3:
+                        System.out.println("Enter the key to be searched");
+                        int s_key = input.nextInt();
+                        search(s_key);
+                        break;
                     case 4:
                         flag = false;
                         break;
                 }
-                map.display();
+                display();
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }

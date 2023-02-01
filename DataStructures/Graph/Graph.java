@@ -12,15 +12,15 @@ public class Graph {
     }
 
     // Add edges
-    public void addEdge(int i, int j) {
-        adjMatrix[i][j] = true;
-        adjMatrix[j][i] = true;
+    public void addEdge(int row, int col) {
+        adjMatrix[row][col] = true;
+        adjMatrix[col][row] = true;
     }
 
     // Remove edges
-    public void removeEdge(int i, int j) {
-        adjMatrix[i][j] = false;
-        adjMatrix[j][i] = false;
+    public void removeEdge(int row, int col) {
+        adjMatrix[row][col] = false;
+        adjMatrix[col][row] = false;
     }
 
 
@@ -28,9 +28,9 @@ public class Graph {
     public void dfs(int vertex, boolean[] visited) {
         visited[vertex] = true;
         System.out.print(vertex + " ");
-        for (int i = 0; i < numVertices; i++) {
-            if (adjMatrix[vertex][i] && !visited[i]) {
-                dfs(i, visited);
+        for (int index = 0; index < numVertices; index++) {
+            if (adjMatrix[vertex][index] && !visited[index]) {
+                dfs(index, visited);
             }
         }
     }
@@ -44,20 +44,20 @@ public class Graph {
         while (!queue.isEmpty()) {
             vertex = queue.poll();
             System.out.println(vertex + " ");
-            for (int i = 0; i < numVertices; i++) {
-                if (adjMatrix[vertex][i] && !visited[i]) {
-                    visited[i] = true;
-                    queue.add(i);
+            for (int index = 0; index < numVertices; index++) {
+                if (adjMatrix[vertex][index] && !visited[index]) {
+                    visited[index] = true;
+                    queue.add(index);
                 }
             }
         }
     }
 
     public void displayGraph() {
-        for (int i = 0; i < numVertices; i++) {
-            System.out.print(i + ": ");
-            for (boolean j : adjMatrix[i]) {
-                System.out.print((j ? 1 : 0) + " ");
+        for (int index = 0; index < numVertices; index++) {
+            System.out.print(index + ": ");
+            for (boolean val : adjMatrix[index]) {
+                System.out.print((val ? 1 : 0) + " ");
             }
             System.out.println();
         }
@@ -70,14 +70,13 @@ public class Graph {
         Boolean flag = true;
         boolean visited[] = new boolean[graph.numVertices];
         while (flag) {
-            System.out.println("Select an option from the menu below");
-            System.out.println("1. Insert an edge in the Graph");
-            System.out.println("2. Delete an edge from the Graph");
-            System.out.println("3. Run DFS Traversal");
-            System.out.println("4. Run BFS Traversal");
-            System.out.println("5. Exit");
-
             try {
+                System.out.println("Select an option from the menu below");
+                System.out.println("1. Insert an edge in the Graph");
+                System.out.println("2. Delete an edge from the Graph");
+                System.out.println("3. Run DFS Traversal");
+                System.out.println("4. Run BFS Traversal");
+                System.out.println("5. Exit");
                 Scanner input = new Scanner(System.in);
                 int choice = input.nextInt();
                 switch (choice) {
@@ -108,16 +107,15 @@ public class Graph {
                         break;
                     default:
                         System.out.println("Please Choose a number from the menu");
+                
+                }
                 graph.displayGraph();
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
+            } catch (Exception e) {
+                System.out.println("Please enter a valid input");
             }
-            }
-            catch (Exception e) {
-                System.out.println("Please Choose a number from the menu");
-            }
-        }
     }
-
+    }
 }
