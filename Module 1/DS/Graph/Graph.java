@@ -1,4 +1,3 @@
-
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.InputMismatchException;
@@ -23,14 +22,14 @@ public class Graph {
     }
 
     public void deleteEdge(int from, int to) {
-        // remove the edge between Node a nad b. (undirected)
+        // remove the edge between Node a and b. (undirected)
         adj[from][to] = 0;
         adj[to][from] = 0;
     }
 
     // Traversals
     public void dfsTraverse() {
-        // boolean array to keep track of visited Nodes
+        // Bolean array is created to keep track of the nodes visited. 
         boolean visited[] = new boolean[no_Of_Vertices];
         for (int node = 0; node < no_Of_Vertices; node++) {
             if (!visited[node])
@@ -42,7 +41,6 @@ public class Graph {
     public void dfs_main(int start, boolean visited[]) {
         visited[start] = true;
         System.out.print(start + " ");
-        // call every node of graph whether it is connected or disconnnected.
         for (int neighbor : adj[start]) {
             if (neighbor == 1 && !visited[neighbor])
                 dfs_main(neighbor, visited);
@@ -51,7 +49,6 @@ public class Graph {
 
     public void bfsTraverse() {
         boolean visited[] = new boolean[no_Of_Vertices];
-        // call every node of graph wheather it is connected or disconnnected.
         for (int node = 0; node < no_Of_Vertices; node++) {
             if (!visited[node])
                 bfs_main(node);
@@ -84,7 +81,7 @@ public class Graph {
         boolean flag = true;
         while (flag) {
             try {
-                System.out.println("Select an option from the Menu given below:");
+                System.out.println("\nSelect an option from the Menu given below:");
                 System.out.println("1: Insert Edge");
                 System.out.println("2: Delete Edge");
                 System.out.println("3: BFS Traversal");
@@ -95,12 +92,14 @@ public class Graph {
                 int n = sc.nextInt();
                 switch (n) {
                     case 1:// addEdge
-                        System.out.println("enter node 1 and node 2 of the edge you want to add");
+                        System.out.println("Enter the nodes you want to insert.");
                         g.addEdge(sc.nextInt(), sc.nextInt());
+                        System.out.println("The Nodes are added.");
                         break;
                     case 2:// removeEdge
-                        System.out.println("enter node1 and node 2 of the edge you want to delete");
+                        System.out.println("Enter the nodes which you want to delete");
                         g.deleteEdge(sc.nextInt(), sc.nextInt());
+                        System.out.println("The Nodes are deleted.");
                         break;
                     case 3:// bfs
                         System.out.println("BFS Traversal");

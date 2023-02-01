@@ -19,11 +19,11 @@ public class Tree {
     }
 
     public Node insert(Node root, int x) {
-        if (root == null)
+        if (root == null) //If root is null.
             return new Node(x);
-        if (root.val > x) {
+        if (root.val > x) { //Leftf subtree
             root.left = insert(root.left, x);
-        } else if (root.val < x) {
+        } else if (root.val < x) { //Right Subtree.
             root.right = insert(root.right, x);
         }
         return root;
@@ -90,18 +90,28 @@ public class Tree {
         }
         return false;
     }
+    
+    public static void printTree(Node temp) {
+        
+        if (temp == null)
+            return;
+        printTree(temp.left);
+        System.out.print(temp.val + "  ");
+        printTree(temp.right);
+    }
 
     public void DashBoard() {
         
         boolean flag = true;
         while (flag) {
             
-            System.out.println();
+            System.out.println("\n\nKindly Select an option from the Dashboard given below:");
             System.out.println("1. Insert");
             System.out.println("2. Delete");
             System.out.println("3. Sorting");
             System.out.println("4. Search");
             System.out.println("5. EXIT");
+            System.out.println("Enter your option:");
             Scanner sc = new Scanner(System.in);
             int n = sc.nextInt();
             System.out.println();
@@ -132,6 +142,8 @@ public class Tree {
                     System.out.println("Kindly choose the correct option.");
                     break;
             }
+            System.out.print("Tree:    ");
+            printTree(head);
             }
             catch(InputMismatchException ex) {
                 System.out.println(ex.getMessage());

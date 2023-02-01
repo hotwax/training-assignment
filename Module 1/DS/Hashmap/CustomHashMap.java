@@ -113,7 +113,8 @@ public class CustomHashMap {
         // Variable to store the choice of the user
         hashMap hashmap = new hashMap(size);
         int choice;
-        do {
+        boolean flag = true;
+        while(flag) {
             // Printing the menu for the user
             System.out.println();
             System.out.println("Select an option from the DashBoard given below: ");
@@ -128,38 +129,40 @@ public class CustomHashMap {
             // Taking the choice from the user and performing the corresponding operation
             try {
                 switch (choice) {
-                case 1:
-                    System.out.println("Please Enter the key and value: ");
-                    hashmap.insert(sc.nextInt(), sc.nextInt());
-                    break;
-                case 2:
-                    System.out.println("Please Enter the Node Value: ");
-                    hashmap.delete(sc.nextInt());
-                    break;
-                case 3:
-                    System.out.print("Please Enter the key whose value you want: ");
-                    System.out.println(hashmap.get(sc.nextInt()));
-                    break;
-                case 4:
-                    hashmap.display();
-                    break;
-                case 5:
-                    System.out.println("Enter the key to search: ");
-                    hashmap.search(sc.nextInt());
-                    break;
-                default:
-                if(choice == 6) {
-                    System.out.println("Exiting the program.");
-                } else {
-                    System.out.println("Invalid Input");
+                    case 1:
+                        System.out.println("Please Enter the key and value: ");
+                        hashmap.insert(sc.nextInt(), sc.nextInt());
+                        System.out.println("The key and value is inserted");
+                        break;
+                    case 2:
+                        System.out.println("Please Enter the Node Value: ");
+                        hashmap.delete(sc.nextInt());
+                        System.out.println("The node is deleted.");
+                        break;
+                    case 3:
+                        System.out.print("Please Enter the key whose value you want: ");
+                        System.out.println(hashmap.get(sc.nextInt()));
+                        break;
+                    case 4:
+                        hashmap.display();
+                        break;
+                    case 5:
+                        System.out.println("Enter the key to search: ");
+                        hashmap.search(sc.nextInt());
+                        break;
+                    case 6:
+                        System.out.println("Exiting the program.");
+                        flag = false;
+                        break;
+                    default:
+                        System.out.println("Invalid Input.");
+                        break;
+
                 }
-                    
-            }
-            }
-            catch(InputMismatchException ex) {
+            } catch (InputMismatchException ex) {
                 System.out.println(ex.getMessage());
             }
-        } while (choice != 6);
+        }
 
     }
 
