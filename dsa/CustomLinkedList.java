@@ -6,7 +6,7 @@ public class CustomLinkedList {
 
     try {
       Scanner sc = new Scanner(System.in);
-      LinkedList ll = new LinkedList(); //ll- linkedlist
+      LinkedList ll = new LinkedList(); // ll- linkedlist
 
       while (true) {
         System.out.print("Your linked list: ");
@@ -25,58 +25,84 @@ public class CustomLinkedList {
         System.out.println("Enter 11 to get the mid node");
 
         int option = sc.nextInt();
+        int val, idx;
 
-        if (option == 1) {
-          System.out.print("Enter the value: ");
-          int val = sc.nextInt(); //value
-          ll.addLast(val);
-          System.out.println("-------------------------------------");
-        } else if (option == 2) {
-          System.out.print("Enter the value: ");
-          int val = sc.nextInt();
-          ll.addFirst(val);
-          System.out.println("-------------------------------------");
-        } else if (option == 3) {
-          System.out.print("Enter the index: ");
-          int idx = sc.nextInt(); //index
-          System.out.print("Enter the value: ");
-          int val = sc.nextInt();
-          ll.addAt(idx, val);
-          System.out.println("-------------------------------------");
-        } else if (option == 4) {
-          ll.removeLast();
-          System.out.println("-------------------------------------");
-        } else if (option == 5) {
-          ll.removeFirst();
-          System.out.println("-------------------------------------");
-        } else if (option == 6) {
-          System.out.print("Enter the index: ");
-          int idx = sc.nextInt();
-          ll.removeAt(idx);
-          System.out.println("-------------------------------------");
-        } else if (option == 7) {
-          System.out.println(ll.getLast());
-          System.out.println("-------------------------------------");
-        } else if (option == 8) {
-          System.out.println(ll.getFirst());
-          System.out.println("-------------------------------------");
-        } else if (option == 9) {
-          System.out.print("Enter the index: ");
-          int idx = sc.nextInt();
-          System.out.println(ll.getAt(idx));
-          System.out.println("-------------------------------------");
-        } else if (option == 10) {
-          ll.reverseLL();
-          ll.display();
-          System.out.println("-------------------------------------");
-        } else if (option == 11) {
-          System.out.println(ll.midNode());
-          System.out.println("-------------------------------------");
-        } else {
-          System.out.println("Program terminated successfully.");
-          System.out.println("-------------------------------------");
-          return;
+        switch (choice) {
+          case 1:
+            System.out.print("Enter the value: ");
+            val = sc.nextInt(); // value
+            ll.addLast(val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 2:
+            System.out.print("Enter the value: ");
+            val = sc.nextInt();
+            ll.addFirst(val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 3:
+            System.out.print("Enter the index: ");
+            idx = sc.nextInt(); // index
+            System.out.print("Enter the value: ");
+            val = sc.nextInt();
+            ll.addAt(idx, val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 4:
+            ll.removeLast();
+            System.out.println("-------------------------------------");
+            break;
+
+          case 5:
+            ll.removeFirst();
+            System.out.println("-------------------------------------");
+            break;
+
+          case 6:
+            System.out.print("Enter the index: ");
+            idx = sc.nextInt();
+            ll.removeAt(idx);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 7:
+            System.out.println(ll.getLast());
+            System.out.println("-------------------------------------");
+            break;
+
+          case 8:
+            System.out.println(ll.getFirst());
+            System.out.println("-------------------------------------");
+            break;
+
+          case 9:
+            System.out.print("Enter the index: ");
+            idx = sc.nextInt();
+            System.out.println(ll.getAt(idx));
+            System.out.println("-------------------------------------");
+            break;
+
+          case 10:
+            ll.reverseLL();
+            ll.display();
+            System.out.println("-------------------------------------");
+            break;
+
+          case 11:
+            System.out.println(ll.midNode());
+            System.out.println("-------------------------------------");
+            break;
+
+          default:
+            System.out.println("Program terminated successfully.");
+            System.out.println("-------------------------------------");
+            return;
         }
+
+        
 
       }
     } catch (Exception e) {
@@ -89,7 +115,7 @@ public class CustomLinkedList {
 
 class Node {
   int data;
-  Node next; //pointer to the next node
+  Node next; // pointer to the next node
 }
 
 class LinkedList {
@@ -98,7 +124,7 @@ class LinkedList {
   int size;
 
   void display() {
-    Node temp = head; //temporary node 
+    Node temp = head; // temporary node
 
     while (temp != null) {
       System.out.print(temp.data + " ");
@@ -244,8 +270,8 @@ class LinkedList {
   }
 
   void reverseLL() {
-    Node prev = null; //previous
-    Node curr = head; //current
+    Node prev = null; // previous
+    Node curr = head; // current
 
     while (curr != null) {
       Node cnext = curr.next;
@@ -261,8 +287,8 @@ class LinkedList {
   }
 
   int midNode() {
-    Node slow = head; //slow with reference to speed
-    Node fast = head; //fast with reference to speed
+    Node slow = head; // slow with reference to speed
+    Node fast = head; // fast with reference to speed
 
     while (fast != tail && fast.next != tail) {
       slow = slow.next;

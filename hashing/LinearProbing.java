@@ -131,45 +131,62 @@ public class LinearProbing {
         System.out.println("Note- The data type of key and value is int.");
 
         int choice = sc.nextInt();
+        int key;
+        String val;
 
-        if (choice == 1) {
-          System.out.println("Enter the key: ");
-          int key = sc.nextInt();
-          System.out.println("Enter the value: ");
-          int value = sc.nextInt();
-          add(key, value);
-          long endingTime = System.currentTimeMillis();
-          System.out.println("Time taken: " + (endingTime - startingTime) + " ms");
-          System.out.println("-----------------------------------");
-        } else if (choice == 2) {
-          System.out.println("Enter the key: ");
-          int key = sc.nextInt();
-          remove(key);
-          System.out.println("-----------------------------------");
-        } else if (choice == 3) {
-          System.out.println("Enter the key: ");
-          int key = sc.nextInt();
-          if (get(key) == Integer.MAX_VALUE)
-            System.out.println(key+ "doesn't exists");
-          else
-            System.out.println(get(key));
-          System.out.println("-----------------------------------");
-        } else if (choice == 4) {
-          System.out.println("Enter the key: ");
-          int key = sc.nextInt();
-          if (get(key) == Integer.MAX_VALUE)
-            System.out.println("Doesn't exists");
-          else
-            System.out.println("Exists");
-          System.out.println("-----------------------------------");
-        } else if (choice == 5) {
-          System.out.println(noOfCollisions);
-          System.out.println("-----------------------------------");
-        } else {
-          System.out.println("Program terminated successfully.");
-          System.out.println("-----------------------------------");
-          return;
+        switch (choice) {
+          case 1:
+            System.out.println("Enter the key: ");
+            key = sc.nextInt();
+            System.out.println("Enter the value: ");
+            int value = sc.nextInt();
+            add(key, value);
+            long endingTime = System.currentTimeMillis();
+            System.out.println("Time taken: " + (endingTime - startingTime) + " ms");
+            System.out.println("-----------------------------------");
+            break;
+
+          case 2:
+            System.out.println("Enter the key: ");
+            key = sc.nextInt();
+            remove(key);
+            System.out.println("-----------------------------------");
+            break;
+
+          case 3:
+            System.out.println("Enter the key: ");
+            key = sc.nextInt();
+            if (get(key) == Integer.MAX_VALUE)
+              System.out.println("Doesn't exists");
+            else
+              System.out.println(get(key));
+            System.out.println("-----------------------------------");
+            break;
+
+          case 4:
+            System.out.println("Enter the key: ");
+            key = sc.nextInt();
+            if (get(key) == Integer.MAX_VALUE)
+              System.out.println("Doesn't exists");
+            else
+              System.out.println("Exists");
+            System.out.println("-----------------------------------");
+            break;
+
+          case 5:
+            System.out.println(noOfCollisions);
+            System.out.println("-------------------------------------");
+
+            break;
+
+          default:
+            System.out.println("Program terminated successfully.");
+            System.out.println("-------------------------------------");
+            return;
         }
+
+
+        
       }
 
     } catch (Exception e) {

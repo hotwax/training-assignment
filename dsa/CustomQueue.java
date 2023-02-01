@@ -20,29 +20,43 @@ public class CustomQueue {
         System.out.println("Enter 4 to search");
 
         int choice = sc.nextInt();
+        int val;
 
-        if (choice == 1) {
-          System.out.print("Enter the value: ");
-          int val = sc.nextInt();
-          queue.add(val);
-          System.out.println("-------------------------------------");
-        } else if (choice == 2) {
-          System.out.println("Removed value: " + queue.remove());
-          System.out.println("-------------------------------------");
-        } else if (choice == 3) {
-          System.out.println("Peeked value: " + queue.peek());
-          System.out.println("-------------------------------------");
-        } else if (choice == 4) {
-          System.out.print("Enter the value to search: ");
-          int val = sc.nextInt();
-          if(queue.search(val)==-1) System.out.println(val+" Doesn't exists.");
-          else System.out.println("Searched value is present at index: " + queue.search(val));
-          System.out.println("-------------------------------------");
-        } else {
-          System.out.println("Program terminated successfully.");
-          System.out.println("-------------------------------------");
-          return;
+        switch (choice) {
+          case 1:
+            System.out.print("Enter the value: ");
+            val = sc.nextInt();
+            queue.add(val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 2:
+            System.out.println("Removed value: " + queue.remove());
+            System.out.println("-------------------------------------");
+            break;
+
+          case 3:
+            System.out.println("Peeked value: " + queue.peek());
+            System.out.println("-------------------------------------");
+            break;
+
+          case 4:
+            System.out.print("Enter the value to search: ");
+            val = sc.nextInt();
+            if (queue.search(val) == -1)
+              System.out.println(val + " Doesn't exists.");
+            else
+              System.out.println("Searched value is present at index: " + queue.search(val));
+            System.out.println("-------------------------------------");
+            break;
+
+          default:
+            System.out.println("Program terminated successfully.");
+            System.out.println("-------------------------------------");
+            return;
         }
+
+        
 
       }
 
@@ -64,7 +78,7 @@ class Queue {
   int size;
 
   void add(int val) {
-    Node temp = new Node(); //a temporary node
+    Node temp = new Node(); // a temporary node
     temp.data = val;
 
     if (size == 0) {
@@ -106,7 +120,7 @@ class Queue {
   int search(int val) {
     Node temp = head;
 
-    int idx = 0;  //index
+    int idx = 0; // index
     while (temp != null) {
       if (temp.data == val)
         return idx;

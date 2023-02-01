@@ -24,35 +24,47 @@ public class CustomHashMap {
         System.out.println("Note- key is of 'int' data type and value is of 'String' data type.");
 
         int choice = sc.nextInt();
+        int key;
+        String val;
 
-        if (choice == 1) {
-          System.out.print("Enter the Key: ");
-          int key = sc.nextInt();
-          System.out.print("Enter the value: ");
-          String val = sc.next(); //value
-          map.put(key, val);
-          System.out.println("-------------------------------------");
-        } else if (choice == 2) {
-          System.out.print("Enter the Key: ");
-          int key = sc.nextInt();
-          map.remove(key);
-          System.out.println("-------------------------------------");
-        } else if (choice == 3) {
-          System.out.print("Enter the Key: ");
-          int key = sc.nextInt();
-          HashMap.HMNode node=map.get(key);
-          if(node==null) System.out.println("Doesn't exists");
-          else System.out.println(node.value);
-          System.out.println("-------------------------------------");
-        } else if (choice == 4) {
-          System.out.print("Enter the Key: ");
-          int key = sc.nextInt();
-          System.out.println(map.containsKey(key));
-          System.out.println("-------------------------------------");
-        } else {
-          System.out.println("Program terminated successfully.");
-          System.out.println("-------------------------------------");
-          return;
+        switch (choice) {
+          case 1:
+            System.out.print("Enter the Key: ");
+            key = sc.nextInt();
+            System.out.print("Enter the value: ");
+            val = sc.next(); // value
+            map.put(key, val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 2:
+            System.out.print("Enter the Key: ");
+            key = sc.nextInt();
+            map.remove(key);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 3:
+            System.out.print("Enter the Key: ");
+            key = sc.nextInt();
+            HashMap.HMNode node = map.get(key);
+            if (node == null)
+              System.out.println("Doesn't exists");
+            else
+              System.out.println(node.value);
+            break;
+
+          case 4:
+            System.out.print("Enter the Key: ");
+            key = sc.nextInt();
+            System.out.println(map.containsKey(key));
+            System.out.println("-------------------------------------");
+            break;
+
+          default:
+            System.out.println("Program terminated successfully.");
+            System.out.println("-------------------------------------");
+            return;
         }
 
       }
@@ -67,7 +79,7 @@ public class CustomHashMap {
 
 class HashMap {
 
-  class HMNode { //Hashmap node, a key value pair node
+  class HMNode { // Hashmap node, a key value pair node
     int key;
     String value;
     HMNode next;
@@ -191,7 +203,8 @@ class HashMap {
   }
 
   public int hash(int key) {
-    if(key<0) key+=buckets.length;
+    if (key < 0)
+      key += buckets.length;
     return key % buckets.length;
   }
 
@@ -231,7 +244,7 @@ class HashMap {
     int bi = hash(key);
     int di = getIndexWithinBucket(key, bi);
     if (di == -1) {
-      System.out.println(key+" doesn't exists");
+      System.out.println(key + " doesn't exists");
       return;
     } else {
       buckets[bi].remove(di);

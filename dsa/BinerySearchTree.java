@@ -80,7 +80,7 @@ public class BinerySearchTree {
       return true;
   }
 
-  public static Node leftMax(Node node) {  //max value of left child tree
+  public static Node leftMax(Node node) { // max value of left child tree
 
     while (node.right != null) {
       node = node.right;
@@ -107,27 +107,38 @@ public class BinerySearchTree {
 
         int choice = sc.nextInt();
 
-        if (choice == 1) {
-          System.out.println("Enter the value of the node: ");
-          int val = sc.nextInt();
-          root = add(root, val);
-          System.out.println("-----------------------------");
-        } else if (choice == 2) {
-          System.out.println("Enter the value of the node: ");
-          int val = sc.nextInt();
-          root = remove(root, val);
-          System.out.println("-----------------------------");
-        } else if (choice == 3) {
-          System.out.println("Enter the value of the node: ");
-          int val = sc.nextInt();
-          String result = whetherExists(root, val) ? (val + " exists") : (val + " doesn't exists");
-          System.out.println(result);
-          System.out.println("-----------------------------");
-        } else {
-          System.out.println("Program terminated successfully.");
-          System.out.println("-----------------------------");
-          return;
+        int val;
+
+        switch (choice) {
+          case 1:
+            System.out.println("Enter the value of the node: ");
+            val = sc.nextInt();
+            root = add(root, val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 2:
+            System.out.println("Enter the value of the node: ");
+            val = sc.nextInt();
+            root = add(root, val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 3:
+            System.out.println("Enter the value of the node: ");
+            val = sc.nextInt();
+            String result = whetherExists(root, val) ? (val + " exists") : (val + " doesn't exists");
+            System.out.println(result);
+            System.out.println("-----------------------------");
+            break;
+
+          default:
+            System.out.println("Program terminated successfully.");
+            System.out.println("-------------------------------------");
+            return;
         }
+
+        
       }
 
     } catch (Exception e) {

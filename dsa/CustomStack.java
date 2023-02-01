@@ -19,29 +19,43 @@ public class CustomStack {
         System.out.println("Enter 4 to search");
 
         int choice = sc.nextInt();
+        int val;
 
-        if (choice == 1) {
-          System.out.print("Enter the value: ");
-          int val = sc.nextInt();
-          stack.push(val);
-          System.out.println("-------------------------------------");
-        } else if (choice == 2) {
-          System.out.println("Popped out value: " + stack.pop());
-          System.out.println("-------------------------------------");
-        } else if (choice == 3) {
-          System.out.println("Peeked value: " + stack.peek());
-          System.out.println("-------------------------------------");
-        } else if (choice == 4) {
-          System.out.print("Enter the value to search: ");
-          int val = sc.nextInt();
-          if(stack.search(val)==-1) System.out.println(val+" Doesn't exists.");
-          else System.out.println("Searched value is present at index: " + stack.search(val));
-          System.out.println("-------------------------------------");
-        } else {
-          System.out.println("Program terminated successfully.");
-          System.out.println("-------------------------------------");
-          return;
+        switch (choice) {
+          case 1:
+            System.out.print("Enter the value: ");
+            val = sc.nextInt();
+            stack.push(val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 2:
+            System.out.println("Popped out value: " + stack.pop());
+            System.out.println("-------------------------------------");
+            break;
+
+          case 3:
+            System.out.println("Peeked value: " + stack.peek());
+            System.out.println("-------------------------------------");
+            break;
+
+          case 4:
+            System.out.print("Enter the value to search: ");
+            val = sc.nextInt();
+            if (stack.search(val) == -1)
+              System.out.println(val + " Doesn't exists.");
+            else
+              System.out.println("Searched value is present at index: " + stack.search(val));
+            System.out.println("-------------------------------------");
+            break;
+
+          default:
+            System.out.println("Program terminated successfully.");
+            System.out.println("-------------------------------------");
+            return;
         }
+
+        
 
       }
 
@@ -99,7 +113,7 @@ class Stack {
   }
 
   int search(int val) {
-    Node temp = head; //a temporary node
+    Node temp = head; // a temporary node
 
     int idx = 0;
     while (temp != null) {

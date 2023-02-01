@@ -29,22 +29,30 @@ public class AVL {
         System.out.println("Enter 2 to remove a node");
 
         int choice = sc.nextInt();
+        int val;
 
-        if (choice == 1) {
-          System.out.println("Enter the value of the node: ");
-          int val = sc.nextInt();
-          root = add(root, val);
-          System.out.println("-------------------------------------");
-        } else if (choice == 2) {
-          System.out.println("Enter the value of the node: ");
-          int val = sc.nextInt();
-          root = remove(root, val);
-          System.out.println("-------------------------------------");
-        } else {
-          System.out.println("Program terminated successfully.");
-          System.out.println("-------------------------------------");
-          return;
+        switch (choice) {
+          case 1:
+            System.out.println("Enter the value of the node: ");
+            val = sc.nextInt();
+            root = add(root, val);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 2:
+            System.out.println("Enter the value of the node: ");
+            val = sc.nextInt();
+            root = add(root, val);
+            System.out.println("-------------------------------------");
+            break;
+
+          default:
+            System.out.println("Program terminated successfully.");
+            System.out.println("-------------------------------------");
+            return;
         }
+
+        
       }
 
     } catch (Exception e) {
@@ -54,8 +62,8 @@ public class AVL {
   }
 
   static int height(Node node) {
-    int lh = (node.left == null ? 0 : node.left.ht);  //left child height
-    int rh = (node.right == null ? 0 : node.right.ht); //right child height
+    int lh = (node.left == null ? 0 : node.left.ht); // left child height
+    int rh = (node.right == null ? 0 : node.right.ht); // right child height
     return Math.max(lh, rh) + 1;
   }
 

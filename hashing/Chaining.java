@@ -7,7 +7,7 @@ public class Chaining {
     HashMap map = new HashMap(50000);
     long startTime = System.currentTimeMillis();
     for (int i = 0; i < arr.length; i++) {
-      map.put(arr[i], arr[i] + "");   
+      map.put(arr[i], arr[i] + "");
     }
     long endTime = System.currentTimeMillis();
     long timeTaken = endTime - startTime;
@@ -235,39 +235,52 @@ public class Chaining {
         System.out.println("Note- key is of 'int' data type and value is of 'String' data type.");
 
         int choice = sc.nextInt();
+        int key;
+        String val;
 
-        if (choice == 1) {
-          System.out.print("Enter the Key: ");
-          int key = sc.nextInt();
-          System.out.print("Enter the value: ");
-          String val = sc.next();
-          map.put(key, val);
-          long endingTime = System.currentTimeMillis();
-          System.out.println("Time taken: " + (endingTime - startingTime) + " ms");
-          System.out.println("-------------------------------------");
-        } else if (choice == 2) {
-          System.out.print("Enter the Key: ");
-          int key = sc.nextInt();
-          map.remove(key);
-          System.out.println("-------------------------------------");
-        } else if (choice == 3) {
-          System.out.print("Enter the Key: ");
-          int key = sc.nextInt();
-          System.out.println(map.get(key));
-          System.out.println("-------------------------------------");
-        } else if (choice == 4) {
-          System.out.print("Enter the Key: ");
-          int key = sc.nextInt();
-          System.out.println(map.containsKey(key));
-          System.out.println("-------------------------------------");
-        } else if (choice == 5) {
-          System.out.println(map.getNoOfCollisions());
-          System.out.println("-------------------------------------");
+        switch (choice) {
+          case 1:
+            System.out.print("Enter the Key: ");
+            key = sc.nextInt();
+            System.out.print("Enter the value: ");
+            val = sc.next();
+            map.put(key, val);
+            long endingTime = System.currentTimeMillis();
+            System.out.println("Time taken: " + (endingTime - startingTime) + " ms");
+            System.out.println("-------------------------------------");
+            break;
 
-        } else {
-          System.out.println("Program terminated successfully.");
-          System.out.println("-------------------------------------");
-          return;
+          case 2:
+            System.out.print("Enter the Key: ");
+            key = sc.nextInt();
+            map.remove(key);
+            System.out.println("-------------------------------------");
+            break;
+
+          case 3:
+            System.out.print("Enter the Key: ");
+            key = sc.nextInt();
+            System.out.println(map.get(key));
+            System.out.println("-------------------------------------");
+            break;
+
+          case 4:
+            System.out.print("Enter the Key: ");
+            key = sc.nextInt();
+            System.out.println(map.containsKey(key));
+            System.out.println("-------------------------------------");
+            break;
+
+          case 5:
+            System.out.println(map.getNoOfCollisions());
+            System.out.println("-------------------------------------");
+
+            break;
+
+          default:
+            System.out.println("Program terminated successfully.");
+            System.out.println("-------------------------------------");
+            return;
         }
 
       }
