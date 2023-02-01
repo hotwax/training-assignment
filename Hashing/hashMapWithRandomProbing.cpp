@@ -94,6 +94,10 @@ public:
 
         int hashIndex = hashCode(key);
 
+        // for counting collisions
+
+        int counter = 0;
+
         // finding the free space
 
         // Using linear Probing
@@ -101,8 +105,9 @@ public:
         while (hashNodeArray[hashIndex] != NULL && hashNodeArray[hashIndex]->key != key)
         {
             this->collisions++;
+            counter++;
             // incrementing hashIndex and again making a hashcode for indexing
-            hashIndex += this->randomNumber;
+            hashIndex = hashIndex + (counter * this->randomNumber);
             hashIndex %= capacity;
         }
 
@@ -191,17 +196,20 @@ public:
     int getValueInMap(int key)
     {
         int hashIndex = hashCode(key);
-        // checking if loop does not exeed the size
-        int count = 0;
+        // for counting collisions
+        int counter = 0;
 
         // finding the key for value
 
-        while (hashNodeArray[hashIndex] != NULL && count < capacity)
+        while (hashNodeArray[hashIndex] != NULL)
         {
+
             if (hashNodeArray[hashIndex] && hashNodeArray[hashIndex]->key == key)
             {
                 return hashNodeArray[hashIndex]->value;
             }
+
+            counter++;
 
             hashIndex += this->randomNumber;
             hashIndex %= capacity;

@@ -149,22 +149,15 @@ public:
         int hashIndex = (hash1(key) + hash2(key)) % capacity;
 
         // finding the free space
-        // bool if collision detected
-        bool collisionExist = false;
 
         // Using Double hashing
 
         while (hashNodeArray[hashIndex] != NULL && hashNodeArray[hashIndex]->key != key)
         {
-            collisionExist = true;
+            this->collisions++;
             // incrementing hashIndex and again making a hashcode for indexing
             hashIndex++;
             hashIndex = hashIndex % capacity;
-        }
-
-        if (collisionExist)
-        {
-            this->collisions++;
         }
 
         if (hashNodeArray[hashIndex] == NULL)
