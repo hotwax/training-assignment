@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 // Linked List class
 public class LinkedList {
@@ -7,10 +8,8 @@ public class LinkedList {
 
 	// Node class for creating nodes of linked list.
 	static class Node {
-
 		int data;
 		Node next;
-
 		// Constructor
 		Node(int d) {
 			data = d;
@@ -165,6 +164,7 @@ public class LinkedList {
 		LinkedList list = new LinkedList();
 		Boolean flag = true;
 		while (flag) {
+			try{
 			System.out.println("Select an option from the menu below");
 			System.out.println("1. Insert a new node in the list");
 			System.out.println("2. Delete a node from the list");
@@ -174,9 +174,6 @@ public class LinkedList {
 			System.out.println("6. Exit");
 			Scanner input = new Scanner(System.in);
 			int choice = input.nextInt();
-			if (choice < 1 || choice > 5) {
-				System.out.println("Invalid choice");
-			} else {
 				switch (choice) {
 					case 1:
 						System.out.println("Enter the value to be inserted");
@@ -207,12 +204,16 @@ public class LinkedList {
 					case 6:
 						flag = false;
 						break;
+					default:
+						System.out.println("Please enter a valid choice from the menu");
 				}
 				printList(list);
 				if (flag == false) {
 					System.out.println("Exiting the program");
 				}
-			}
+			}catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
+            }
 		}
 
 	}

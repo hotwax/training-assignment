@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class TreeBST {
 
@@ -83,8 +84,9 @@ public class TreeBST {
     public static void main(String[] args) {
         TreeBST tree = new TreeBST();
         Boolean flag = true;
-        Scanner sc = new Scanner(System.in);
         while (flag) {
+            try {
+            Scanner sc = new Scanner(System.in);
             System.out.println("1. Insert");
             System.out.println("2. Delete");
             System.out.println("3. Exit");
@@ -104,10 +106,15 @@ public class TreeBST {
                 case 3:
                     flag = false;
                     break;
+                default:
+                    System.out.println("Please choose a valid option from the menu");
             }
             printTree(tree.root);
             if (flag == false) {
                 System.out.println("Exiting the program");
+            }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
             }
         }
     }

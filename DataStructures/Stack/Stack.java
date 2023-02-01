@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Stack {
     // Pointer to top of stack
@@ -73,6 +74,7 @@ public class Stack {
         Stack stack = new Stack();
         Boolean flag = true;
         while (flag) {
+            try {
             System.out.println("Select an option from the menu below");
             System.out.println("1. Push a new element in the stack");
             System.out.println("2. Pop an element from the stack");
@@ -80,9 +82,7 @@ public class Stack {
             System.out.println("4. Exit");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
-            if (choice < 1 || choice > 4) {
-                System.out.println("Invalid choice");
-            } else {
+            
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the value to be inserted");
@@ -98,11 +98,15 @@ public class Stack {
                     case 4:
                         flag = false;
                         break;
+                    default:
+                        System.out.println("Please enter a valid input from the menu");
                 }
                 printStack(stack);
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
             }
         }
 

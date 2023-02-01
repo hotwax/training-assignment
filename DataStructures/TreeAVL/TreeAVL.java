@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class TreeAVL {
     // Node class for the AVL tree
@@ -223,8 +224,12 @@ public class TreeAVL {
                     default:
                         System.out.println("Please choose a valid option from the menu");
                 }
-                sc.close();
-            } catch (Exception mismatch) {
+                inorder(root);
+                System.out.println();
+                if (flag == false) {
+                    System.out.println("Exiting the program");
+                }
+            } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid input");
             }
         }

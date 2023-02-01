@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.util.InputMismatchException;
 
 public class Graph {
     private boolean adjMatrix[][];
@@ -13,12 +14,20 @@ public class Graph {
 
     // Add edges
     public void addEdge(int row, int col) {
+        if (adjMatrix[row][col] == true) {
+            System.out.println("Edge already exists between " + row + " and " + col);
+            return;
+        }
         adjMatrix[row][col] = true;
         adjMatrix[col][row] = true;
     }
 
     // Remove edges
     public void removeEdge(int row, int col) {
+        if (adjMatrix[row][col] == false) {
+            System.out.println("No edge between " + row + " and " + col);
+            return;
+        }
         adjMatrix[row][col] = false;
         adjMatrix[col][row] = false;
     }
@@ -33,17 +42,17 @@ public class Graph {
                 dfs(index, visited);
             }
         }
+        System.out.println();
     }
 
     // bfs traversal
-    public void bfs(int vertex) {
-        boolean visited[] = new boolean[numVertices];
+    public void bfs(int vertex, boolean[] visited) {
         LinkedList<Integer> queue = new LinkedList<Integer>();
         visited[vertex] = true;
         queue.add(vertex);
         while (!queue.isEmpty()) {
             vertex = queue.poll();
-            System.out.println(vertex + " ");
+            System.out.print(vertex + " ");
             for (int index = 0; index < numVertices; index++) {
                 if (adjMatrix[vertex][index] && !visited[index]) {
                     visited[index] = true;
@@ -51,6 +60,7 @@ public class Graph {
                 }
             }
         }
+        System.out.println();
     }
 
     public void displayGraph() {
@@ -100,7 +110,7 @@ public class Graph {
                     case 4:
                         System.out.println("Enter the starting vertex");
                         int start_v = input.nextInt();
-                        graph.bfs(start_v);
+                        graph.bfs(start_v, visited);
                         break;
                     case 5:
                         flag = false;
@@ -113,7 +123,7 @@ public class Graph {
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid input");
             }
     }

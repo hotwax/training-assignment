@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Queue {
 
@@ -91,6 +92,7 @@ public class Queue {
         Queue queue = new Queue();
         Boolean flag = true;
         while (flag) {
+            try {
             System.out.println("Select an option from the menu below");
             System.out.println("1. Enqueue a new element in the queue");
             System.out.println("2. Dequeue an element from the queue");
@@ -98,9 +100,6 @@ public class Queue {
             System.out.println("4. Exit");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
-            if (choice < 1 || choice > 4) {
-                System.out.println("Invalid choice");
-            } else {
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the value to be inserted");
@@ -119,11 +118,15 @@ public class Queue {
                     case 4:
                         flag = false;
                         break;
+                    default:
+                        System.out.println("Please enter a valid input from the menu");
                 }
                 printQueue(queue);
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
             }
         }
 

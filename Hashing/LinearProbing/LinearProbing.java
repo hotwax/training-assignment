@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 class LinearProbing {
     public int collisions = 0;
+    long time = 0;
     private int size, elementCount;
     private int[] table;
     public Scanner sc = new Scanner(System.in);
@@ -35,20 +37,16 @@ class LinearProbing {
 
     // Linear Probing
     void linearProbing(int element, int position, boolean isStored) {
-        System.out.println("Collision has occured for element " + element + " at position " + position
-                + " finding new Position.");
-        int i = 1;
-        while (this.table[position] != 0) {
+        long startTime = System.nanoTime();
+        do{
             this.collisions += 1;
-            position += i;
-            if (position >= this.size) {
-                position = 0;
-            }
-            i += 1;
-        }
+            position = (position + 1)%size;
+        }while (this.table[position] != 0);
         this.table[position] = element;
         isStored = true;
         this.elementCount += 1;
+        long endTime = System.nanoTime();
+        time += (endTime - startTime);
     }
 
     // method that inserts element inside the hash table
@@ -149,15 +147,15 @@ class LinearProbing {
         LinearProbing ht = new LinearProbing();
         Boolean flag = true;
         while (flag) {
+            try {
             System.out.println("Select an option from the menu below");
             System.out.println("1. Insert a new element in the Hash Table");
             System.out.println("2. Delete an element from the Hash Table");
-            System.out.println("3. Exit");
+            System.out.println("3. Time taken for collision handling");
+            System.out.println("4. Total number of collisions");
+            System.out.println("5. Exit");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
-            if (choice < 1 || choice > 3) {
-                System.out.println("Invalid choice");
-            } else {
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the value to be inserted");
@@ -170,15 +168,26 @@ class LinearProbing {
                         ht.remove(d_key);
                         break;
                     case 3:
+                        System.out.println("Time taken for collision handling is " + ht.time + " nanoseconds");
+                        break;
+                    case 4:
+                        System.out.println("Total number of collisions are " + ht.collisions);
+                        break;
+                    case 5:
                         flag = false;
+                        break;
+                    default:
+                        System.out.println("Please enter a valid choice from the menu");
                         break;
                 }
                 ht.display();
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
             }
-        }
     }
 
-};
+}
+}

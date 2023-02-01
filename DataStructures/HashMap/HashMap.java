@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 class HashMap {
     public static Pair[] map;
@@ -107,6 +108,7 @@ class HashMap {
         HashMap hmap = new HashMap(size);
         Boolean flag = true;
         while (flag) {
+            try{
             Scanner input = new Scanner(System.in);
             System.out.println("Select an option from the menu below");
             System.out.println("1. Insert a new element in the Hash Table");
@@ -114,9 +116,6 @@ class HashMap {
             System.out.println("3. Search an element in the Hash Table by key");
             System.out.println("4. Exit");
             int choice = input.nextInt();
-            if (choice < 1 || choice > 4) {
-                System.out.println("Invalid choice");
-            } else {
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the key and value to be inserted");
@@ -137,11 +136,15 @@ class HashMap {
                     case 4:
                         flag = false;
                         break;
+                    default:
+                        System.out.println("Please enter a valid input from the menu");
                 }
                 display();
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
             }
         }
     }

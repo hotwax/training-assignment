@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 // Class to implement Hash Table
 class Chaining {
+    long time = 0;
     public int collisions = 0;
     Node[] table;
     int size;
@@ -11,6 +13,7 @@ class Chaining {
     static class Node {
         int data;
         Node next;
+
         // Constructor
         Node(int data) {
             this.data = data;
@@ -30,6 +33,8 @@ class Chaining {
         return element % this.size;
     }
 
+    // method to calculate the time taken to insert an element in the hash table
+
     // Method to insert an element in the hash table
     void insert(int element) {
         int position = this.hashFunction(element);
@@ -37,12 +42,15 @@ class Chaining {
             this.table[position] = new Node(element);
             // If we found a collision, we will use chaining to store the element
         } else {
+            long startTime = System.nanoTime();
             this.collisions += 1;
             Node temp = this.table[position];
             while (temp.next != null) {
                 temp = temp.next;
             }
             temp.next = new Node(element);
+            long endTime = System.nanoTime();
+            time += (endTime - startTime);
         }
         this.elementCount += 1;
         return;
@@ -57,7 +65,6 @@ class Chaining {
                 System.out.print(temp.data + "->");
                 temp = temp.next;
             }
-            System.out.println("Number of collisions: " + this.collisions);
             System.out.println();
         }
         return;
@@ -109,14 +116,14 @@ class Chaining {
         Chaining table = new Chaining(input);
         Boolean flag = true;
         while (flag) {
-            System.out.println("Select an option from the menu below");
-            System.out.println("1. Insert a new element in the Hash Table");
-            System.out.println("2. Delete an element from the Hash Table");
-            System.out.println("3. Exit");
-            int choice = sc.nextInt();
-            if (choice < 1 || choice > 3) {
-                System.out.println("Invalid choice");
-            } else {
+            try {
+                System.out.println("Select an option from the menu below");
+                System.out.println("1. Insert a new element in the Hash Table");
+                System.out.println("2. Delete an element from the Hash Table");
+                System.out.println("3. Time taken for collision handling");
+                System.out.println("4. Total number of collisions");
+                System.out.println("5. Exit");
+                int choice = sc.nextInt();
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the value to be inserted");
@@ -129,13 +136,23 @@ class Chaining {
                         table.remove(d_key);
                         break;
                     case 3:
+                        System.out.println("Time taken for collision: " + table.time + "ns");
+                        break;
+                    case 4:
+                        System.out.println("Total number of collisions: " + table.collisions);
+                        break;
+                    case 5:
                         flag = false;
                         break;
+                    default:
+                        System.out.println("Please enter a valid input from the menu");
                 }
                 table.display();
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
             }
         }
     }

@@ -1,6 +1,9 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
+
 
 class DoubleHashing {
+    long time = 0;
     public int collisions = 0;
     private int size, elementCount;
     private int[] table;
@@ -43,18 +46,19 @@ class DoubleHashing {
                 + " finding new Position.");
         int i = 1;
 
+        long startTime = System.nanoTime();
         // using one more hash function to find new position
         while (this.table[position] != 0) {
             this.collisions += 1;
-            position += (i * hashFunction2(element));
-            if (position >= this.size) {
-                position = 0;
-            }
+            position = (position + (i * hashFunction2(element)))%size;
             i += 1;
         }
         this.table[position] = element;
         isStored = true;
         this.elementCount += 1;
+        long endTime = System.nanoTime();
+        time += (endTime - startTime);
+
     }
 
     void insert(int element) {
@@ -154,15 +158,15 @@ class DoubleHashing {
         DoubleHashing ht = new DoubleHashing();
         Boolean flag = true;
         while (flag) {
+            try {
             System.out.println("Select an option from the menu below");
             System.out.println("1. Insert a new element in the Hash Table");
             System.out.println("2. Delete an element from the Hash Table");
-            System.out.println("3. Exit");
+            System.out.println("3. Time taken for collision handling");
+            System.out.println("4. Total number of collisions");
+            System.out.println("5. Exit");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
-            if (choice < 1 || choice > 3) {
-                System.out.println("Invalid choice");
-            } else {
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the value to be inserted");
@@ -175,15 +179,25 @@ class DoubleHashing {
                         ht.remove(d_key);
                         break;
                     case 3:
+                        System.out.println("The time taken for collision handling is : " + ht.time);
+                        break;
+                    case 4:
+                        System.out.println("The number of collisions are : " + ht.collisions);
+                        break;
+                    case 5:
                         flag = false;
+                        break;
+                    default:
+                        System.out.println("Please enter a valid input from the menu");
                         break;
                 }
                 ht.display();
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
             }
-        }
     }
 
-};
+}

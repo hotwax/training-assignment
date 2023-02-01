@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 class QuadraticProbing {
+    long time = 0;
     public int collisions = 0;
     private int size, elementCount;
     private int[] table;
@@ -34,18 +36,18 @@ class QuadraticProbing {
     }
 
     void quadraticProbing(int element, int position, boolean isStored) {
+        long startTime = System.nanoTime();
         int i = 1;
         while (this.table[position] != 0) {
             this.collisions += 1;
-            position += (i * i);
-            if (position >= this.size) {
-                position = 0;
-            }
+            position = (position + (i * i))%size;
             i += 1;
         }
         this.table[position] = element;
         isStored = true;
         this.elementCount += 1;
+        long endTime = System.nanoTime();
+        time += (endTime - startTime);
     }
 
     // method that inserts element inside the hash table
@@ -146,15 +148,15 @@ class QuadraticProbing {
         QuadraticProbing ht = new QuadraticProbing();
         Boolean flag = true;
         while (flag) {
+            try {
             System.out.println("Select an option from the menu below");
             System.out.println("1. Insert a new element in the Hash Table");
             System.out.println("2. Delete an element from the Hash Table");
-            System.out.println("3. Exit");
+            System.out.println("3. Time taken for collision handling");
+            System.out.println("4. Total number of collisions");
+            System.out.println("5. Exit");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
-            if (choice < 1 || choice > 3) {
-                System.out.println("Invalid choice");
-            } else {
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the value to be inserted");
@@ -167,13 +169,24 @@ class QuadraticProbing {
                         ht.remove(d_key);
                         break;
                     case 3:
+                        System.out.println("Time taken for collision handling is " + ht.time + " nanoseconds");
+                        break;
+                    case 4:
+                        System.out.println("Total number of collisions are " + ht.collisions);
+                        break;
+                    case 5:
                         flag = false;
+                        break;
+                    default:
+                        System.out.println("Please enter a valid input from the menu");
                         break;
                 }
                 ht.display();
                 if (flag == false) {
                     System.out.println("Exiting the program");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid input");
             }
         }
     }

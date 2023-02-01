@@ -1,8 +1,9 @@
 import java.util.Scanner;
-
 import java.util.Random;
+import java.util.InputMismatchException;
 
 class RandomProbing {
+    long time = 0;
     public int collisions = 0;
     private int size, elementCount;
     private int[] table;
@@ -11,7 +12,6 @@ class RandomProbing {
 
     // Initialize hash Table
     RandomProbing() {
-        System.out.print(this.random);
         System.out.print("Enter the size of the Table : ");
         this.size = sc.nextInt();
 
@@ -41,16 +41,17 @@ class RandomProbing {
     void randomProbing(int element, int position, boolean isStored) {
         System.out.println("Collision has occured for element " + element + " at position " + position
                 + " finding new Position.");
+
+        long startTime = System.nanoTime();
         while (this.table[position] != 0) {
             this.collisions += 1;
-            position += this.random;
-            if (position >= this.size) {
-                position = 0;
-            }
+            position = (position + this.random) % size;
         }
         this.table[position] = element;
         isStored = true;
         this.elementCount += 1;
+        long endTime = System.nanoTime();
+        time += (endTime - startTime);
     }
 
     // method that inserts element inside the hash table
@@ -147,35 +148,45 @@ class RandomProbing {
         RandomProbing ht = new RandomProbing();
         Boolean flag = true;
         while (flag) {
+            try {
             System.out.println("Select an option from the menu below");
             System.out.println("1. Insert a new element in the Hash Table");
             System.out.println("2. Delete an element from the Hash Table");
-            System.out.println("3. Exit");
+            System.out.println("3. Time taken for collision handling");
+            System.out.println("4. Total number of collisions");
+            System.out.println("5. Exit");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
-            if (choice < 1 || choice > 3) {
-                System.out.println("Invalid choice");
-            } else {
-                switch (choice) {
-                    case 1:
-                        System.out.println("Enter the value to be inserted");
-                        int value = input.nextInt();
-                        ht.insert(value);
-                        break;
-                    case 2:
-                        System.out.println("Enter the key to be deleted");
-                        int d_key = input.nextInt();
-                        ht.remove(d_key);
-                        break;
-                    case 3:
-                        flag = false;
-                        break;
-                }
-                ht.display();
-                if (flag == false) {
-                    System.out.println("Exiting the program");
-                }
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter the value to be inserted");
+                    int value = input.nextInt();
+                    ht.insert(value);
+                    break;
+                case 2:
+                    System.out.println("Enter the key to be deleted");
+                    int d_key = input.nextInt();
+                    ht.remove(d_key);
+                    break;
+                case 3:
+                    System.out.println("The time taken for collision handling is " + ht.time + " nanoseconds");
+                    break;
+                case 4:
+                    System.out.println("The number of collisions are " + ht.collisions);
+                    break;
+                case 5:
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Please enter a valid choice from the menu");
+                    break;
             }
+            ht.display();
+            if (flag == false) {
+                System.out.println("Exiting the program");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a valid input");
         }
     }
 
