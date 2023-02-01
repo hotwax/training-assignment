@@ -1,161 +1,180 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/** Class QuadraticProbingHashTable **/  
-class QuadraticProbingHashTable {
-    private int currentSize, maxSize;
-    private String[] keys;
-    private String[] vals;
-
-    /** Constructor **/
-    public QuadraticProbingHashTable(int capacity) {
-        currentSize = 0;
-        maxSize = capacity;
-        keys = new String[maxSize];
-        vals = new String[maxSize];
-    }
-
-    /** Function to clear hash table **/
-    public void makeEmpty() {
-        currentSize = 0;
-        keys = new String[maxSize];
-        vals = new String[maxSize];
-    }
-
-    /** Function to get size of hash table **/
-    public int getSize() {
-        return currentSize;
-    }
-
-    /** Function to check if hash table is full **/
-    public boolean isFull() {
-        return currentSize == maxSize;
-    }
-
-    /** Function to check if hash table is empty **/
-    public boolean isEmpty() {
-        return getSize() == 0;
-    }
-
-    /** Fucntion to check if hash table contains a key **/
-    public boolean contains(String key) {
-        return get(key) != null;
-    }
-
-    /** Functiont to get hash code of a given key **/
-    private int hash(String key) {
-        return key.hashCode() % maxSize;
-    }
-
-    /** Function to insert key-value pair **/
-    public void insert(String key, String val) {
-        int tmp = hash(key);
-        int i = tmp, h = 1;
-        do {
-            if (keys[i] == null) {
-                keys[i] = key;
-                vals[i] = val;
-                currentSize++;
-                return;
-            }
-            if (keys[i].equals(key)) {
-                vals[i] = val;
-                return;
-            }
-            i = (i + h * h++) % maxSize;
-        } while (i != tmp);
-    }
-
-    /** Function to get value for a given key **/
-    public String get(String key) {
-        int i = hash(key), h = 1;
-        while (keys[i] != null) {
-            if (keys[i].equals(key))
-                return vals[i];
-            i = (i + h * h++) % maxSize;
-            System.out.println("i " + i);
-        }
-        return null;
-    }
-
-    /** Function to remove key and its value **/
-    public void remove(String key) {
-        if (!contains(key))
-            return;
-
-        /** find position key and delete **/
-        int i = hash(key), h = 1;
-        while (!key.equals(keys[i]))
-            i = (i + h * h++) % maxSize;
-        keys[i] = vals[i] = null;
-
-        /** rehash all keys **/
-        for (i = (i + h * h++) % maxSize; keys[i] != null; i = (i + h * h++) % maxSize) {
-            String tmp1 = keys[i], tmp2 = vals[i];
-            keys[i] = vals[i] = null;
-            currentSize--;
-            insert(tmp1, tmp2);
-        }
-        currentSize--;
-    }
-
-    /** Function to print HashTable **/
-    public void printHashTable() {
-        System.out.println("\nHash Table: ");
-        for (int i = 0; i < maxSize; i++)
-            if (keys[i] != null)
-                System.out.println(keys[i] + " " + vals[i]);
-        System.out.println();
-    }
-}
-
-/** Class QuadraticProbingHashTableTest **/
 public class QuadraticProbing {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter size");
-        /** maxSizeake object of QuadraticProbingHashTable **/
-        QuadraticProbingHashTable qpht = new QuadraticProbingHashTable(sc.nextInt());
+    static class Pair {
+        // key and value of the pair
+        int key;
+        int value;
 
-        char ch;
-        /** Perform QuadraticProbingHashTable operations **/
-        do {
-            System.out.println("\nHash Table Operations DashBoard\n");
-            System.out.println("1. Insert ");
-            System.out.println("2. Remove");
-            System.out.println("3. Get");
-            System.out.println("4. Clear");
-            System.out.println("5. Size");
+        Pair(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
 
-            int choice = sc.nextInt();
-            switch (choice) {
-                case 1:
-                    System.out.println("Enter key and value");
-                    qpht.insert(sc.next(), sc.next());
-                    break;
-                case 2:
-                    System.out.println("Enter key");
-                    qpht.remove(sc.next());
-                    break;
-                case 3:
-                    System.out.println("Enter key");
-                    System.out.println("Value = " + qpht.get(sc.next()));
-                    break;
-                case 4:
-                    qpht.makeEmpty();
-                    System.out.println("Hash Table Cleared\n");
-                    break;
-                case 5:
-                    System.out.println("Size = " + qpht.getSize());
-                    break;
-                default:
-                    System.out.println("Wrong Entry \n ");
-                    break;
+    static class hashMap {
+        // size of the hash map
+        int size;
+        // array of pairs
+        Pair[] arr;
+        // number of collisions
+        int collision;
+
+        // constructor
+        hashMap(int size) {
+            this.size = size;
+            arr = new Pair[size];
+            for (int i = 0; i < size; i++) {
+                arr[i] = null;
             }
-            /** Display hash table **/
-            qpht.printHashTable();
+            collision = 0;
+        }
 
-            System.out.println("\nDo you want to continue (Type y or n) \n");
-            ch = sc.next().charAt(0);
-        } while (ch == 'Y' || ch == 'y');
+        // Function to insert a key value pair in the hash map
+        public int hashFunction(int key) {
+            return key % size;
+        }
+
+        // Function to insert a key value pair in the hash map
+        public void insert(int key, int value) {
+            int index = hashFunction(key);
+            Pair newNode = new Pair(key, value);
+            if (arr[index] == null) {
+                arr[index] = newNode;
+            } else {
+                int i = index;
+                int j = 1;
+                while (arr[i] != null) {
+                    i = (i + j * j) % size;
+                    j++;
+                }
+                if ((i != hashFunction(key)) && (arr[i] == null || arr[i].key != key)) {
+                    collision++;
+                    arr[i] = newNode;
+                }
+            }
+        }
+
+        // Function to search a key in the hash map
+        public void delete(int key) {
+            int index = hashFunction(key);
+            if (arr[index].key == key) {
+                arr[index] = null;
+            } else {
+                int i = index;
+                int j = 1;
+                while (arr[i] != null) {
+                    if (arr[i].key == key) {
+                        arr[i] = null;
+                        break;
+                    }
+                    i = (i + j * j) % size;
+                    j++;
+                }
+            }
+        }
+
+        // Function to get the value of a key in the hash map
+        public int getValueOfKey(int key) {
+            int index = hashFunction(key);
+            if (arr[index].key == key) {
+                return arr[index].value;
+            } else {
+                int i = index;
+                int j = 1;
+                while (arr[i] != null) {
+                    if (arr[i].key == key) {
+                        return arr[i].value;
+                    }
+                    i = (i + j * j++) % size;
+                }
+            }
+            return -1;
+        }
+
+        // Function to print the hash map
+        public void display() {
+            for (int i = 0; i < size; i++) {
+                if (arr[i] != null) {
+                    System.out.println(arr[i].key + "->" + arr[i].value);
+                }
+            }
+        }
+
+        public int noOfCollisions() {
+            return collision;
+        }
+    }
+
+    // Driver code
+    public static void main(String[] args) {
+        hashMap hashmap = null;
+        int ch = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Please Enter the size of the HashMap: ");
+        hashmap = new hashMap(sc.nextInt());
+        long t1 = System.currentTimeMillis();
+        do {
+            System.out.println("\nSelect an option from the menu given below.");
+            System.out.println("1 : Insert  ");
+            System.out.println("2 : Delete ");
+            System.out.println("3 : Display the Hashmap");
+            System.out.println("4 : Number of Collisions");
+            System.out.println("5 : Get Value of Key");
+            System.out.println("6 : Calculate Time ");
+            System.out.println("7 : Exit");
+
+            try {
+                System.out.println("Enter your choice : ");
+                ch = sc.nextInt();
+                switch (ch) {
+                    case 1:
+                        if (hashmap != null) {
+                            System.out.print("Please Enter the key: ");
+                            int key = sc.nextInt();
+                            System.out.print("Please Enter the value: ");
+                            int value = sc.nextInt();
+                            hashmap.insert(key, value);
+                        }
+                        break;
+                    case 2:
+                        if (hashmap != null) {
+                            System.out.print("Please Enter the key: ");
+                            hashmap.delete(sc.nextInt());
+                            System.out.println("The key is deleted.");
+                        }
+                        break;
+                    case 3:
+                        if (hashmap != null)
+                            hashmap.display();
+                        break;
+                    case 4:
+                        if (hashmap != null) {
+                            System.out.println("Number of collisions: " + hashmap.noOfCollisions());
+                        }
+                        break;
+                    case 5:
+                        if (hashmap != null) {
+                            System.out.print("Please Enter the key: ");
+                            int key1 = sc.nextInt();
+                            System.out.println("Value: " + hashmap.getValueOfKey(key1));
+                        }
+                        break;
+                    case 6:
+                        long t2 = System.currentTimeMillis();
+                        System.out.println("Time in milli seconds is: " + (t2 - t1));
+                        break;
+                    case 7:
+                        System.out.println("Exiting the program.");
+                        break;
+                    default:
+                        System.out.println("Invalid Choice");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (ch != 7);
     }
 }
