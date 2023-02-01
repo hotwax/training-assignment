@@ -1,226 +1,178 @@
-import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
-class LinearProbingHashTable {
-    // Member variables of this class
-    private int currentSize, maxSize;
-    private String[] keys;
-    private String[] vals;
-
-    // Constructor of this class
-    public LinearProbingHashTable(int capacity) {
-        currentSize = 0;
-        maxSize = capacity;
-        keys = new String[maxSize];
-        vals = new String[maxSize];
-    }
-
-    // Function to clear hash table
-    public void makeEmpty() {
-        currentSize = 0;
-        keys = new String[maxSize];
-        vals = new String[maxSize];
-    }
-
-    // Function to get size of hash table
-    public int getSize() {
-        return currentSize;
-    }
-
-    // Function to check if hash table is full
-    public boolean isFull() {
-        return currentSize == maxSize;
-    }
-
-    // Function to check if hash table is empty
-    public boolean isEmpty() {
-        return getSize() == 0;
-    }
-
-    // Function to check if hash table contains a key
-    public boolean contains(String key) {
-        return get(key) != null;
-    }
-
-    // Function to get hash code of a given key
-    private int hash(String key) {
-        return key.hashCode() % maxSize;
-    }
-
-    // Function to insert key-value pair
-    public void insert(String key, String val) {
-        int tmp = hash(key);
-        int i = tmp;
-        // Do part for performing actions
-        do {
-            if (keys[i] == null) {
-                keys[i] = key;
-                vals[i] = val;
-                currentSize++;
-                return;
-            }
-
-            if (keys[i].equals(key)) {
-                vals[i] = val;
-                return;
-            }
-
-            i = (i + 1) % maxSize;
-
-        }
-
-        // while part for condition check
-        while (i != tmp);
-    }
-
-    // Function to get value for a given key
-    public String get(String key) {
-        int i = hash(key);
-        while (keys[i] != null) {
-            if (keys[i].equals(key))
-                return vals[i];
-            i = (i + 1) % maxSize;
-        }
-        return null;
-    }
-
-    // Function to remove key and its value
-    public void remove(String key) {
-        if (!contains(key))
-            return;
-
-        // Find position key and delete
-        int i = hash(key);
-        while (!key.equals(keys[i]))
-            i = (i + 1) % maxSize;
-        keys[i] = vals[i] = null;
-
-        // rehash all keys
-        for (i = (i + 1) % maxSize; keys[i] != null; i = (i + 1) % maxSize) {
-            String tmp1 = keys[i], tmp2 = vals[i];
-            keys[i] = vals[i] = null;
-            currentSize--;
-            insert(tmp1, tmp2);
-        }
-        currentSize--;
-    }
-
-    // Function to print HashTable
-    public void printHashTable() {
-        System.out.println("\nHash Table: ");
-        for (int i = 0; i < maxSize; i++)
-            if (keys[i] != null)
-                System.out.println(keys[i] + " " + vals[i]);
-        System.out.println();
-    }
-}
-
-// Main testing class
-// Main Class for LinearProbingHashTableTest
 public class LinearProbing {
-    // Main driver method
-    public static void main(String[] args) {
-        // Creating a scanner object
-        // to take input from user
-        Scanner sc = new Scanner(System.in);
+    static class Pair {
+        // key and value of the pair
+        int key;
+        int value;
 
-        // Display messages
-        System.out.println("Enter size of the hash table.");
+        Pair(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
 
-        // maxSizeake object of LinearProbingHashTable
-        LinearProbingHashTable lpht = new LinearProbingHashTable(sc.nextInt());
+    static class hashMap {
+        // size of the hash map
+        int size;
+        // array of pairs
+        Pair[] arr;
+        // number of collisions
+        int collision;
 
-        char ch = 'Y';
-
-        // Do-while loop
-        // Do part for performing actions
-        do
-
-        {
-            // Menu
-            System.out.println("\nHash Table Operations\n");
-            System.out.println("1. Insert ");
-            System.out.println("2. Remove");
-            System.out.println("3. Get");
-            System.out.println("4. Clear");
-            System.out.println("5. Size");
-
-            int choice = sc.nextInt();
-
-           try {
-             // Switch case
-            switch (choice) {
-
-                // Case 1
-                case 1:
-
-                    // Display message
-                    System.out.println("Enter key and value");
-                    lpht.insert(sc.next(), sc.next());
-                    // Break statement to terminate a case
-                    break;
-
-                // Case 2
-                case 2:
-
-                    // Display message
-                    System.out.println("Enter key");
-                    lpht.remove(sc.next());
-                    // Break statement to terminate a case
-                    break;
-
-                // Case 3
-                case 3:
-
-                    // Print statements
-                    System.out.println("Enter key");
-                    System.out.println("Value = "
-                            + lpht.get(sc.next()));
-                    // Break statement to terminate a case
-                    break;
-
-                // Case 4
-                case 4:
-
-                    lpht.makeEmpty();
-                    // Print statement
-                    System.out.println("Hash Table Cleared\n");
-                    // Break statement to terminate a case
-                    break;
-
-                // Case 5
-                case 5:
-
-                    // Print statement
-                    System.out.println("Size = "
-                            + lpht.getSize());
-                    break;
-
-                // Default case
-                // Executed when mentioned switch cases are not
-                // matched
-                default:
-                    // Print statement
-                    System.out.println("Wrong Entry \n ");
-                    // Break statement
-                    break;
+        // constructor
+        hashMap(int size) {
+            this.size = size;
+            arr = new Pair[size];
+            for (int i = 0; i < size; i++) {
+                arr[i] = null;
             }
+            collision = 0;
+        }
 
-            // Display hash table
-            lpht.printHashTable();
+        // Function to insert a key value pair in the hash map
+        public int magicFunction(int key) {
+            return key % size;
+        }
 
-            // Display message asking the user whether
-            // he/she wants to continue
-            System.out.println(
-                    "\nDo you want to continue (Type y) otherwise enter n \n");
+        // Function to insert a key value pair in the hash map
+        public void insert(int key, int value) {
+            int index = magicFunction(key);
+            Pair newNode = new Pair(key, value);
+            if (arr[index] == null) {
+                arr[index] = newNode;
+            } else if (arr[index].key == key) {
+                arr[index].value = value;
+            } else {
+                int i = index; // i is the index of the next empty slot
 
-            // Reading character using charAt() method to
-            // fetch
-            ch = sc.next().charAt(0);
-           }
-           catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
-           }
-        } while (ch == 'Y' || ch == 'y');
+                while (arr[i] != null) {
+                    i = (i + 1) % size;
+                }
+                if ((i != magicFunction(key)) && (arr[i] == null || arr[i].key != key)) {
+                    collision++;
+                    arr[i] = newNode;
+                }
+            }
+        }
+
+        // Function to search a key in the hash map
+        public void delete(int key) {
+            int index = magicFunction(key);
+            if (arr[index].key == key) {
+                arr[index] = null;
+            } else {
+                int i = index;
+                while (arr[i] != null) {
+                    if (arr[i].key == key) {
+                        arr[i] = null;
+                        break;
+                    }
+                    i = (i + 1) % size;
+                }
+            }
+        }
+
+        // Function to get a value from the hash map
+        public int getValueOfKey(int key) {
+            int index = magicFunction(key);
+            if (arr[index].key == key) {
+                return arr[index].value;
+            } else {
+                int i = index;
+                while (arr[i] != null) {
+                    if (arr[i].key == key) {
+                        return arr[i].value;
+                    }
+                    i = (i + 1) % size;
+                }
+            }
+            return -1;
+        }
+
+        // Function to print the hash map
+        public void display() {
+            for (int i = 0; i < size; i++) {
+                if (arr[i] != null) {
+                    System.out.println(arr[i].key + "->" + arr[i].value);
+                }
+            }
+        }
+
+        public int noOfCollisions() {
+            return collision;
+        }
+    }
+
+    // Driver code
+    public static void main(String[] args) {
+        hashMap hashmap = null;
+        int ch = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Please Enter the size of the HashMap: ");
+        hashmap = new hashMap(sc.nextInt());
+        long t1 = System.currentTimeMillis();
+        do {
+            System.out.println("\nSelect an option from the menu given below.");
+            System.out.println("1 : Insert  ");
+            System.out.println("2 : Delete ");
+            System.out.println("3 : Display the Hashmap");
+            System.out.println("4 : Number of Collisions");
+            System.out.println("5 : Get Value of Key");
+            System.out.println("6 : Calculate Time ");
+            System.out.println("7 : Exit");
+            
+            try {
+                System.out.println("Enter your choice : ");
+                ch = sc.nextInt();
+                switch (ch) {
+                    case 1:
+                        if (hashmap != null) {
+                            System.out.print("Please Enter the key: ");
+                            int key = sc.nextInt();
+                            System.out.print("Please Enter the value: ");
+                            int value = sc.nextInt();
+                            hashmap.insert(key, value);
+                        }
+                        break;
+                    case 2:
+                        if (hashmap != null) {
+                            System.out.print("Please Enter the key: ");
+                            hashmap.delete(sc.nextInt());
+                            System.out.println("The key is deleted.");
+                        }
+                        break;
+                    case 3:
+                        if (hashmap != null)
+                            hashmap.display();
+                        break;
+                    case 4:
+                        if (hashmap != null) {
+                            System.out.println("Number of collisions: " + hashmap.noOfCollisions());
+                        }
+                        break;
+                    case 5:
+                        if (hashmap != null) {
+                            System.out.print("Please Enter the key: ");
+                            int key1 = sc.nextInt();
+                            System.out.println("Value: " + hashmap.getValueOfKey(key1));
+                        }
+                        break;
+                    case 6:
+                        long t2 = System.currentTimeMillis();
+                        System.out.println("Time in milli seconds is: " + (t2-t1));
+                        break;
+                    case 7:
+                        System.out.println("Exiting the program.");
+                        break;
+                    default:
+                        System.out.println("Invalid Choice");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (ch != 7);
     }
 }

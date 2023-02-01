@@ -46,7 +46,9 @@ public class Chaining {
                 }
                 collision++;
                 temp.next = newNode;
+                System.out.print("  ");
             }
+            
         }
 
         // Function to search a key in the hash map
@@ -84,7 +86,7 @@ public class Chaining {
             for (int i = 0; i < size; i++) {
                 Pair temp = arr[i];
                 while (temp != null) {
-                    System.out.print(temp.key + " -> " + temp.value);
+                    System.out.print("   " + temp.key + " -> " + temp.value);
                     temp = temp.next;
                 }
                 System.out.println();
@@ -102,16 +104,18 @@ public class Chaining {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the size of the hashmap");
         map = new hashMap(sc.nextInt());
+        long t1 = System.currentTimeMillis(); //Variable To calculate the time taken at the start. 
         int choice;
         do {
             System.out.println();
             System.out.println("Kindly choose an option from the DashBoard given below:");
-            System.out.println("1 : Insert  Value");
-            System.out.println("2 : Delete Value");
+            System.out.println("1 : Insert  ");
+            System.out.println("2 : Delete ");
             System.out.println("3 : Display the Hashmap");
-            System.out.println("4 : Get All Collisions");
-            System.out.println("5 : Get Value from Key");
-            System.out.println("6 : Exit");
+            System.out.println("4 : Total Collisions");
+            System.out.println("5 : Get Value of Key");
+            System.out.println("6 : Time ");
+            System.out.println("7 : EXIT");
             System.out.println("--------------------------------------");
             System.out.println("Enter your choice : ");
             choice = sc.nextInt();
@@ -123,6 +127,7 @@ public class Chaining {
                         int key = sc.nextInt();
                         System.out.print("Please Enter the value: ");
                         int value = sc.nextInt();
+                        System.out.print("  ");
                         map.insert(key, value);
                     }
                     break;
@@ -150,6 +155,10 @@ public class Chaining {
                     }
                     break;
                 case 6:
+                    long t2 = System.currentTimeMillis();
+                    System.out.println("Time in milli seconds is " + (t2 - t1));
+                    break;
+                case 7:
                     System.out.println("Program Terminated");
                     break;
                 default:
@@ -160,6 +169,6 @@ public class Chaining {
             catch(InputMismatchException ex) {
                 System.out.println(ex.getMessage());
             }
-        } while (choice != 6);
+        } while (choice != 7);
     }
 }
