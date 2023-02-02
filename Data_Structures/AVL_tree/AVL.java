@@ -136,10 +136,14 @@ public class AVL {
         // If this node becomes unbalanced, then there are 4 cases
         // Left Left Case
         if (balance > 1 && getBalanceFactor(root.left) >= 0)
+        {
+            System.out.println("right rotation");
             return rightRotate(root);
+        }
  
         // Left Right Case
         if (balance > 1 && getBalanceFactor(root.left) < 0){
+            System.out.println("left rotation");
             root.left = leftRotate(root.left);
             return rightRotate(root);
         }
@@ -254,8 +258,8 @@ public class AVL {
     }
     public void menu(){
     
-    boolean flag=true;
-    while(flag){
+    boolean terminationFlag=true;
+    while(terminationFlag){
       try{
           Scanner sc=new Scanner(System.in);
           System.out.println("==========================");
@@ -294,7 +298,7 @@ public class AVL {
                  System.out.println(search(sc.nextInt()));
                  break;
              case 7:// end
-                 flag=false;
+                 terminationFlag=false;
                  break;
              default:
                  System.out.println("invalid input");

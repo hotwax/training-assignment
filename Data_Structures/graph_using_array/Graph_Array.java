@@ -74,9 +74,9 @@ public class Graph_Array {
         Scanner sc1=new Scanner(System.in);
         System.out.println("Enter number of vertices");
         int V=sc1.nextInt();
-        Graph_Array g=new Graph_Array(V);
-        boolean flag=true;
-        while(flag){
+        Graph_Array graph=new Graph_Array(V);
+        boolean terminationFlag=true;
+        while(terminationFlag){
             try{
                 System.out.println("=========================");
                 System.out.println("1: add Edge");
@@ -90,23 +90,23 @@ public class Graph_Array {
                 switch(n){
                   case 1:// addEdge
                     System.out.println("enter node 1 and node 2 of the edge you want to add");
-                    g.addEdge(sc.nextInt(),sc.nextInt());
+                    graph.addEdge(sc.nextInt(),sc.nextInt());
                     break;
                   case 2:// removeEdge
                       System.out.println("enter node1 and node 2 of the edge you want to delete");
-                      g.deleteEdge(sc.nextInt(),sc.nextInt());
+                      graph.deleteEdge(sc.nextInt(),sc.nextInt());
                       break;
                   case 3:// bfs
                       System.out.println("bfs traversal");
-                      g.bfs();
+                      graph.bfs();
                       break;
                   case 4:// dfs
                       System.out.println("dfs traversal");
-                      g.dfs();
+                      graph.dfs();
                       break;
                   case 5:// dfs
                       System.out.println("program terminated");
-                      flag=false;
+                      terminationFlag=false;
                       break;
                   default:
                       System.out.println("invalid input");

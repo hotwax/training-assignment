@@ -114,8 +114,8 @@ public class My_BST {
         return false;
     }
     public void menu(){
-        boolean flag=true;
-        while(flag){
+        boolean terminationFlag=true;
+        while(terminationFlag){
             System.out.println("=========================");
             System.out.println("1: add Node");
             System.out.println("2: remove Node");
@@ -154,7 +154,7 @@ public class My_BST {
                        System.out.println(search(sc.nextInt()));
                        break;
                    case 7:// end
-                       flag=false;
+                       terminationFlag=false;
                        break;
                    default:
                        System.out.println("invalid input");
@@ -169,7 +169,7 @@ public class My_BST {
     }
 
     public static void main(String args[]){
-        My_BST t=new My_BST();
-        t.menu();
+        My_BST bst=new My_BST();
+        bst.menu();
     }
 }

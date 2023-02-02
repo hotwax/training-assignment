@@ -73,8 +73,8 @@ public class My_Queue {
         }
     }
     public void menu(){
-        boolean flag=true;
-        while(flag){
+        boolean terminationFlag=true;
+        while(terminationFlag){
             System.out.println("===========================");
             System.out.println("1: add");
             System.out.println("2: poll");
@@ -111,7 +111,7 @@ public class My_Queue {
                    System.out.println(search(sc.nextInt()));
                    break;
                case 7:// end
-                   flag=false;
+                   terminationFlag=false;
                    break;
                default:
                    System.out.println("invalid input");
@@ -125,7 +125,7 @@ public class My_Queue {
           }
     }
     public static void main(String args[]){
-        My_Queue q=new My_Queue();
-        q.menu();
+        My_Queue queue=new My_Queue();
+        queue.menu();
     }
 }

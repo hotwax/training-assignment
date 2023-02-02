@@ -77,12 +77,12 @@ public class MyGraph {
  
     
     public static void main(String args[]){
-        boolean flag=true;
+        boolean terminationFlag=true;
         System.out.println("Enter number of vertices");
         Scanner sc1=new Scanner(System.in);
-        MyGraph g=new MyGraph(sc1.nextInt());
+        MyGraph graph=new MyGraph(sc1.nextInt());
         
-        while(flag){
+        while(terminationFlag){
             System.out.println("===========================");
             System.out.println("1: add Edge");
             System.out.println("2: remove Edge");
@@ -97,23 +97,23 @@ public class MyGraph {
                 switch(n){
                 case 1:// addEdge
                   System.out.println("enter node 1 and node 2 of the edge you want to add");
-                  g.addEdge(sc.nextInt(),sc.nextInt());
+                  graph.addEdge(sc.nextInt(),sc.nextInt());
                   break;
                case 2:// removeEdge
                    System.out.println("enter node1 and node 2 of the edge you want to delete");
-                   g.deleteEdge(sc.nextInt(),sc.nextInt());
+                   graph.deleteEdge(sc.nextInt(),sc.nextInt());
                    break;
                case 3:// bfs
                    System.out.println("bfs traversal");
-                   g.bfs();
+                   graph.bfs();
                    break;
                case 4:// dfs
                    System.out.println("dfs traversal");
-                   g.dfs();
+                   graph.dfs();
                    break;
                 case 5:// dfs
                     System.out.println("program terminated successfully");
-                    flag=false;
+                    terminationFlag=false;
                     break;
                default:
                    System.out.println("invalid input");

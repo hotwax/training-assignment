@@ -123,9 +123,9 @@ class My_LinkedList{
   }
   public void menu(){
       
-    boolean flag=true;
+    boolean terminationFlag=true;
     
-        while(flag){
+        while(terminationFlag){
             System.out.println("===========================");
             System.out.println("1: add");
             System.out.println("2: delete");
@@ -156,7 +156,7 @@ class My_LinkedList{
                        traverseAll();
                        break;
                    case 6:// end
-                       flag=false;
+                       terminationFlag=false;
                        break;
                    default:
                        System.out.println("invalid input");
@@ -167,12 +167,10 @@ class My_LinkedList{
                 System.out.println("Invalid input: please enter Integer");
             }
     }
-    
-    
   }
   public static void main(String args[]){
-    My_LinkedList ll=new My_LinkedList();
-    ll.menu();
+    My_LinkedList linkedList=new My_LinkedList();
+    linkedList.menu();
   }
 }
 

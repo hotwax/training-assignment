@@ -71,8 +71,8 @@ public class My_Stack {
         System.out.println();
     }
     public void menu(){
-        boolean flag=true;
-        while(flag){            
+        boolean terminationFlag=true;
+        while(terminationFlag){            
             System.out.println("===========================");
             System.out.println("1: push");
             System.out.println("2: pop");
@@ -109,7 +109,7 @@ public class My_Stack {
                      System.out.println(search(sc.nextInt()));
                      break;
                  case 7:// end
-                     flag=false;
+                     terminationFlag=false;
                      break;
                  default:
                      System.out.println("invalid input");
@@ -123,7 +123,7 @@ public class My_Stack {
       }
     }
     public static void main(String args[]){
-        My_Stack st=new My_Stack();
-        st.menu();
+        My_Stack stack=new My_Stack();
+        stack.menu();
     }
 }
