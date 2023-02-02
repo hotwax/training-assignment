@@ -17,6 +17,13 @@ import java.util.Map;
 import java.util.regex.*;
 import org.jsoup.nodes.Document;
 
+/*
+Jsoup :-
+Jsoup is a Java library for working with real-world HTML.
+It provides a very convenient API for fetching URLs and extracting and manipulating data,
+using the best of HTML5 DOM methods and CSS selectors.
+
+*/
 public class CountWords {
     public static void main(String args[]) throws Exception{
         //list to store given urls
