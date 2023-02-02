@@ -1,8 +1,6 @@
 package hashing.chaining;
-
 import java.util.LinkedList;
 import java.util.Scanner;
-
 
 public class Chaining_HashTable {
     LinkedList<Pair> arr[];
@@ -26,7 +24,7 @@ public class Chaining_HashTable {
     public int getCollisions(){
         int bucketElements=0;
         // total no. of collision is equal to the 
-        //sibmisiion of size of all linkedList(chains) excluding first element
+        //summation of size of all linkedList(chains) excluding first element
         for(int i=0;i<arr.length;i++){
               if(arr[i]!=null && arr[i].size()>1){
                   bucketElements++;
