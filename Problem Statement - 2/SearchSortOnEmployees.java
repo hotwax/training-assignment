@@ -11,9 +11,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 // Creating an employee class
 
@@ -23,8 +25,6 @@ class Employee {
     private String email;
     private int age;
     private Date dob;
-
-    
 
     // Constructor --
 
@@ -95,7 +95,7 @@ public class SearchSortOnEmployees {
     public static Scanner input = new Scanner(System.in); // Create a Scanner object
     public static SimpleDateFormat simpleDate = new SimpleDateFormat("dd/mm/yyyy"); // for date formatting
 
-    public static void main(String args[]) throws Exception {
+    public static void main(String args[]) {
 
         // Creating file
 
@@ -131,7 +131,19 @@ public class SearchSortOnEmployees {
             System.out.println("Enter 3 For Searching from From the file");
             System.out.println("Enter any other number to Exit");
             // Taking input from user
-            int menuInput = input.nextInt();
+
+            int menuInput = 1;
+
+            try {
+                menuInput = input.nextInt();
+
+            } catch (InputMismatchException e) {
+                // TODO: handle exception
+
+                System.out.println("Enter a Valid Input");
+
+                System.exit(-1);
+            }
 
             switch (menuInput) {
                 case 1:
@@ -202,9 +214,23 @@ public class SearchSortOnEmployees {
 
             String name = bufferReader.readLine();
 
+            // For checking if the data entered by the user is valid or not
+
+            if (!isValidName(name)) {
+                System.out.println("Enter a Valid Name \n");
+                System.exit(0);
+            }
+
             System.out.println("Enter the Email : ");
 
             String email = bufferReader.readLine();
+
+            // For checking if the data entered by the user is valid or not
+
+            if (!isValidEmail(email)) {
+                System.out.println("Enter a Valid Email \n");
+                System.exit(0);
+            }
 
             System.out.println("Enter the Age : ");
 
@@ -231,8 +257,16 @@ public class SearchSortOnEmployees {
             rewriteTheFile();
 
         } catch (IOException exception) {
-            System.out.println("Enter a Valid Number " + exception);
+            System.out.println("Enter a Valid Input \n" + exception);
+        } catch (InputMismatchException exception) {
+            System.out.println("Enter a Valid Input \n" + exception);
+        } catch (ParseException exception) {
+            System.out.println("Enter a Valid Input \n" + exception);
         }
+
+        // Giving output that employee is created and added to the file
+
+        System.out.println("\n Employee added successfully \n");
 
     }
 
@@ -343,6 +377,14 @@ public class SearchSortOnEmployees {
 
         System.out.println("Your Result - ");
 
+        // if no results exists
+
+        if (searchResult.size() <= 0) {
+            System.out.println("No Results Found");
+        }
+
+        // if results exists
+
         for (Employee emp : searchResult) {
             System.out.println(emp);
         }
@@ -415,5 +457,30 @@ public class SearchSortOnEmployees {
         // returning the sorted list
 
         return listToSort;
+    }
+
+    // For checking if string is a valid email or not
+
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
+
+    // for checking if string contains only letters alphabets
+
+    public static boolean isValidName(String name) {
+        String nameRegex = "[a-zA-Z]+";
+
+        Pattern pat = Pattern.compile(nameRegex);
+        if (name == null)
+            return false;
+        return pat.matcher(name).matches();
     }
 }

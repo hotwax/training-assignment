@@ -21,9 +21,11 @@ import org.jsoup.nodes.Document;
 
 /* Using jsoup Library */
 
-/*Jsoup is an open source Java library used mainly for extracting data from HTML. It also allows you to manipulate and output HTML. It has a steady development line, great documentation, and a fluent and flexible API. Jsoup can also be used to parse and build XML.
-
-In this tutorial, we'll use the Spring Blog to illustrate a scraping exercise that demonstrates several features of jsoup:
+/*Jsoup is an open source Java library used mainly for extracting data from HTML. 
+It also allows you to manipulate and output HTML. It has a steady development line, 
+great documentation, and a fluent and flexible API. Jsoup can also be used to parse 
+and build XML.
+features of jsoup:
 
 Loading: fetching and parsing the HTML into a Document
 Filtering: selecting the desired data into Elements and traversing it
@@ -105,7 +107,7 @@ public class CountWordInWebPage {
             HashMap<String, Integer> wordOccurrence = new HashMap<String, Integer>(); // Creating HashMap for
                                                                                       // wordOccurrence
 
-            // finding words in text
+            // finding words in text and calculating their occurence
 
             for (String word : listOfWords) {
                 for (String str : wordArray) {
@@ -114,7 +116,6 @@ public class CountWordInWebPage {
                         totalWordOccurrence.put(word, totalWordOccurrence.getOrDefault(word, 0) + 1);
                     }
                 }
-
             }
 
             // sorting the entrries by creating list
@@ -160,7 +161,7 @@ public class CountWordInWebPage {
 
     }
 
-    // function to sort hashmap by keys
+    // function to sort hashmap by making a list and returning it 
 
     public static List<HashMap.Entry<String, Integer>> sortByValueAndReturnList(HashMap<String, Integer> hashMap) {
         // Create a list from elements of HashMap
@@ -172,7 +173,7 @@ public class CountWordInWebPage {
                 HashMap.Entry::getValue,
                 Comparator.reverseOrder());
 
-        // Sort the list using lambda expression
+        // Sort the list using collections sort
         Collections.sort(
                 list,
                 mapValueComparator);

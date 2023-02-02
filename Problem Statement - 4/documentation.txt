@@ -15,7 +15,11 @@ implementation accordingly. Don’t change the signature of the constructor. Jus
 single parameter constructor of the Date class to assign the passed String Date to
 “dateOfBirth”.
 
-Getting Error in both the files while deserializing.
+Getting Exception in both the files while deserializing.
+
+java.io.InvalidClassException: Student; local class incompatible:
+stream classdesc serialVersionUID = -475765159253012278, local class
+serialVersionUID = 2267678840185043506
 
 Solution For this – 
 
@@ -37,3 +41,11 @@ When I am Deserializing it getting this exception –
 
 java.lang.ClassCastException: cannot assign instance of java.lang.String to field
 Student.dateOfBirth of type java.util.Date in instance of Student
+
+About Exception -- 
+
+As its name implies, ClassCastException is an exception that happens when the JVM tries
+to cast an object to a class (or in some instances, an interface) and fails. This
+relates to explicit type casting [3] and the reason the cast fails can be traced to
+an attempt at downcasting an object to a class of which it is not an instance, or to
+an interface which it does not implement.

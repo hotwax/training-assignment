@@ -4,7 +4,7 @@ import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.Scanner;
 
-// ffor deserialization -- 
+// for deserialization -- 
 
 public class DeserializationTest {
     public static void main(String args[]) {
@@ -23,27 +23,23 @@ public class DeserializationTest {
             ObjectInputStream in = new ObjectInputStream(file);
 
             // Method for deserialization of object
-            
 
             studentList = (List<Student>) in.readObject();
 
             in.close();
             file.close();
 
+            // printing the objects --
 
-            // printing the objects -- 
-
-            for(Student stu: studentList){
+            for (Student stu : studentList) {
                 System.out.println(stu);
             }
         }
 
         catch (Exception ex) {
+            // Exception handling
             System.out.println(ex);
         }
-
-
-        
 
     }
 }
