@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Comparator;
 import java.util.InputMismatchException;
+import java.io.IOException;
 
 class Employee {
   static int count = 1; //varible to generate unique id
@@ -17,7 +18,7 @@ class Employee {
   private String DOB;
   private Integer age;
 
-  Employee(String name, String email, String DOB, Integer age) //constructor
+  Employee(String name, String email, String DOB, Integer age) //constructor to initialize
   {
     this.name = name;
     this.email = email;
@@ -142,25 +143,26 @@ class StoreEmployee // A class which file related operations
   }
 
   // to search by name,id,email,DOB or age
-  ArrayList < Employee > search(String input, String find) {
+  ArrayList < Employee > search(String input, String find) 
+  {
     ArrayList < Employee > store_emp = new ArrayList < > ();
 
-    if ("ID".equalsIgnoreCase(input)) //by id
+    if ("ID".equalsIgnoreCase(input)) //searching by id
     {
       for (Employee employee: alist)
         if (employee.getID().equals(Integer.parseInt(find)))
           store_emp.add(employee);
-    } else if ("name".equalsIgnoreCase(input)) //by name
+    } else if ("name".equalsIgnoreCase(input)) //searching by name
     {
       for (Employee employee: alist)
         if (employee.getName().equalsIgnoreCase(find))
           store_emp.add(employee);
-    } else if ("email".equalsIgnoreCase(input)) //by email
+    } else if ("email".equalsIgnoreCase(input)) //searching by email
     {
       for (Employee employee: alist)
         if (employee.getEmail().equalsIgnoreCase(find))
           store_emp.add(employee);
-    } else if ("DOB".equalsIgnoreCase(input)) //by DOB
+    } else if ("DOB".equalsIgnoreCase(input)) //searching by DOB
     {
       for (Employee employee: alist)
         if (employee.getDOB().equalsIgnoreCase(find))
@@ -175,22 +177,22 @@ class StoreEmployee // A class which file related operations
     return store_emp;
   }
 
-  ArrayList < Employee > sort(ArrayList < Employee > emp, String order) //to sort by name,id,email,DOB or age
+  ArrayList < Employee > sort(ArrayList < Employee > emp, String order) //to sort by name, id, email, DOB or age
   {
 
-    if ("ID".equalsIgnoreCase(order)) {
+    if ("ID".equalsIgnoreCase(order)) { //if we have to order by id
       Collections.sort(emp, new Employee.OrderByID());
       return emp;
-    } else if ("name".equalsIgnoreCase(order)) {
+    } else if ("name".equalsIgnoreCase(order)) { //if we have to order by name
       Collections.sort(emp, new Employee.OrderByName());
       return emp;
-    } else if ("email".equalsIgnoreCase(order)) {
+    } else if ("email".equalsIgnoreCase(order)) { //if we have to order by email
       Collections.sort(emp, new Employee.OrderByEmail());
       return emp;
-    } else if ("DOB".equalsIgnoreCase(order)) {
+    } else if ("DOB".equalsIgnoreCase(order)) { //if we have to order by DOB
       Collections.sort(emp, new Employee.OrderByDOB());
       return emp;
-    } else if ("age".equalsIgnoreCase(order)) {
+    } else if ("age".equalsIgnoreCase(order)) { //if we have to order by age
       Collections.sort(emp, new Employee.OrderByAge());
       return emp;
     }
@@ -198,32 +200,37 @@ class StoreEmployee // A class which file related operations
     return emp;
   }
 
-  ArrayList < Employee > delete(int data) throws Exception //method to delete some record by id only
+  ArrayList < Employee > delete(int data)  //method to delete some record by id only
   {
-
-    for (int index = 0; index < alist.size(); index++) {
+	for (int index = 0; index < alist.size(); index++) {
       if (alist.get(index).getID().equals(data))
-        alist.remove(index);
+      alist.remove(index);
       insert();
     }
-
     return alist;
   }
 
-  ArrayList < Employee > get() throws Exception //method to get data from file
+  ArrayList < Employee > get() //method to get data from file
   {
     alist = new ArrayList < > ();
 
-    BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+    try
+	{
+	BufferedReader br = new BufferedReader(new FileReader("input.txt"));
     String line = br.readLine();
     while (line != null) {
-      String str[] = line.split(",");
-      Employee emp = new Employee(Integer.parseInt(str[0]), str[1], str[2], str[3], Integer.parseInt(str[4]));
-      alist.add(emp);
-      line = br.readLine();
+    String str[] = line.split(",");
+    Employee emp = new Employee(Integer.parseInt(str[0]), str[1], str[2], str[3], Integer.parseInt(str[4]));
+    alist.add(emp);
+    line = br.readLine();
     }
     br.close();
 
+	}
+	catch(IOException e)
+	{
+		System.out.println(e);
+	}
     return alist;
   }
 
@@ -237,7 +244,9 @@ class StoreEmployee // A class which file related operations
         br.newLine();
       }
       br.close();
-    } catch (Exception e) {}
+    } catch (Exception e) {
+		System.out.println(e);
+	}
 
     return alist;
   }
@@ -248,6 +257,7 @@ class Demo {
   public static void main(String[] args) throws Exception {
     String name, email, DOB;
     Integer age, id;
+	
     StoreEmployee file = new StoreEmployee();
     ArrayList < Employee > list = file.get();
     while (true) {
@@ -270,10 +280,29 @@ class Demo {
 
           System.out.println("Enter name ");
           name = br.readLine();
+		  
+          while(true) //while accurate format is not given
+		  {
           System.out.println("Enter email");
-          email = sc.next();
-          System.out.println("Enter DOB");
+		  email = sc.next();
+		  String regex = "^[a-zA-Z0-9+_.-]+@gmail.com$";
+		  boolean res = email.matches(regex);
+		  if(!res)
+		  System.out.println("\nEnter valid email");
+		  if(res)break;
+		  }
+		  
+		  while(true) //while accurate format is not given 
+		  {
+          System.out.println("Enter DOB (Format : DD/MM/YYYY)");
           DOB = sc.next();
+		  String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
+		  boolean res = DOB.matches(regex);
+		  if(!res)
+		  System.out.println("Enter valid email");
+		  if(res)break;
+		  }
+          
           System.out.println("Enter age");
           age = sc.nextInt();
 
