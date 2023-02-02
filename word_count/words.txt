@@ -1,4 +1,3 @@
-hotwax
 HotWax
 is
 dog
