@@ -13,7 +13,7 @@ class AccountOverdrawSafeDemo {
             public void run() {
                 double totalWithdraw = 0;
                 //making transaction of 1 rs 1000 times
-                for (int i = 0; i < 1000; i++) {
+                for (int transaction = 0; transaction < 1000; transaction++) {
                     //I have added Synchronized block to the places where withdraw method is called.
                     //this will protect thread1 to access balance variable of class Account when thread2 is using that variable.
                     synchronized (account) {
@@ -32,7 +32,7 @@ class AccountOverdrawSafeDemo {
             public void run() {
                 double totalWithdraw = 0;
                 //making transaction of 1 rs 1000 times
-                for (int i = 0; i < 1000; i++) {
+                for (int transaction = 0; transaction < 1000; transaction++) {
                     //I have added Synchronized block to the places where withdraw method is called.
                     //this will protect thread2 to access balance variable of class Account when thread1 is using that variable.
                     synchronized (account) {

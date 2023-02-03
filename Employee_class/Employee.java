@@ -1,26 +1,28 @@
 package Employee_class;
+
 import java.io.BufferedReader;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Employee{
-    private static int globalID=0;
+public class Employee {
+
+    private static int globalID = 0;
     private String name;
     private String emailAddress;
     private int age;
     private Date dateOfBirth;
     private int id;
-    private static SimpleDateFormat sdf=new SimpleDateFormat("dd/mm/yyyy");
-    
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+
     public Employee(String name, String email, int age, Date dob) {
-        this.id=globalID++;
+        this.id = globalID++;
         this.name = name;
         this.emailAddress = email;
         this.age = age;
         this.dateOfBirth = dob;
     }
-    
+
     //return the name
     public String getName() {
         return name;
@@ -30,7 +32,7 @@ public class Employee{
     public void setName(String name) {
         this.name = name;
     }
-   
+
     //return the emailAddress
     public String getEmailAddress() {
         return emailAddress;
@@ -55,22 +57,24 @@ public class Employee{
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
-public int getId(){
-    return id;
-}
+
+    public int getId() {
+        return id;
+    }
+
     //param dateOfBirth the dateOfBirth to set
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     //Overriding toString() method
-    
+
     @Override
     public String toString() {
-        
-        return getId()+", "+getName()+", "+getEmailAddress()+", "+getAge()+", "
-                +sdf.format(dateOfBirth);
+
+        return getId() + ", " + getName() + ", " + getEmailAddress() + ", " + getAge() + ", "
+                + sdf.format(dateOfBirth);
     }
-    
+
     @Override
     public boolean equals(Object o) {
         // If the object is compared with itself then return true 
@@ -82,20 +86,17 @@ public int getId(){
         if (!(o instanceof Employee)) {
             return false;
         }
-         
+
         // typecast o to Complex so that we can compare data members
         Employee c = (Employee) o;
-         
+
         // Compare the data members and return accordingly
-        //System.out.println("-=--=-=-=-=-=-=-"+c.emailAddress+this.emailAddress);
         return this.emailAddress.equals(c.emailAddress);
     }
-    
+
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return emailAddress.hashCode();
     }
-    
-    
-}
 
+}

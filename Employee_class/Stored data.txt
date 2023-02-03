@@ -5,5 +5,6 @@
 4, Naveen Patel, naveen.patel@gmail.com, 40, 03/03/1981
 5, Dhruv Singh, ds@gmail.com, 20, 12/01/2002
 6, Dhruv Singh, singhdhruv861@gmail.com, 20, 12/01/2002
-7, Dhruv Singh, ds@861, 24, 12/01/2000
-8, Akshat Jaiswal, ak@123.com, 21, 12/03/2002
+7, Akshat Jaiswal, ak@123.com, 21, 12/03/2002
+8, Rishika Jain, rishikajain@gmail.com, 20, 21/11/2002
+10, Dhruv Singh, singhdhruv@gmail.com, 17, 18/03/2005
