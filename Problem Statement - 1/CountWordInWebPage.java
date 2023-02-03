@@ -38,7 +38,7 @@ public class CountWordInWebPage {
     public static List<String> listOfUrls = new ArrayList<String>();
     public static List<String> lsitOfUrlData = new ArrayList<String>();
     public static HashMap<String, Integer> totalWordOccurrence = new HashMap<String, Integer>(); // Creating HashMap for
-    // wordOccurrence of all urls
+    // wordOccurrence of all urls  
 
     public static void main(String args[]) throws Exception {
 

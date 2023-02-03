@@ -139,9 +139,7 @@ public class SearchSortOnEmployees {
 
             } catch (InputMismatchException e) {
                 // TODO: handle exception
-
                 System.out.println("Enter a Valid Input");
-
                 System.exit(-1);
             }
 
@@ -216,9 +214,11 @@ public class SearchSortOnEmployees {
 
             // For checking if the data entered by the user is valid or not
 
-            if (!isValidName(name)) {
-                System.out.println("Enter a Valid Name \n");
-                System.exit(0);
+            String nameRegex = "[a-zA-Z ]+";
+
+            while (!name.matches(nameRegex)) {
+                System.out.println("\nEnter a valid name!! \n");
+                name = bufferReader.readLine();
             }
 
             System.out.println("Enter the Email : ");
@@ -227,9 +227,14 @@ public class SearchSortOnEmployees {
 
             // For checking if the data entered by the user is valid or not
 
-            if (!isValidEmail(email)) {
-                System.out.println("Enter a Valid Email \n");
-                System.exit(0);
+            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                    "[a-zA-Z0-9_+&*-]+)*@" +
+                    "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                    "A-Z]{2,7}$";
+
+            while (!email.matches(emailRegex)) {
+                System.out.println("\nEnter a valid Email!! \n");
+                email = bufferReader.readLine();
             }
 
             System.out.println("Enter the Age : ");
@@ -457,30 +462,5 @@ public class SearchSortOnEmployees {
         // returning the sorted list
 
         return listToSort;
-    }
-
-    // For checking if string is a valid email or not
-
-    public static boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
-
-        Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
-            return false;
-        return pat.matcher(email).matches();
-    }
-
-    // for checking if string contains only letters alphabets
-
-    public static boolean isValidName(String name) {
-        String nameRegex = "[a-zA-Z]+";
-
-        Pattern pat = Pattern.compile(nameRegex);
-        if (name == null)
-            return false;
-        return pat.matcher(name).matches();
     }
 }
