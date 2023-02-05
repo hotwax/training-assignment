@@ -14,7 +14,7 @@ import java.util.Date;
 class Student implements Serializable {
   String name;
   // String DOB; //old format of student class
-  Date DOB;//new format of student class
+  Object DOB;//new format of student class
   Address a;
 
   // serialVersionUID, which is used during deserialization to verify that the sender and receiver of a serialized object have loaded class
