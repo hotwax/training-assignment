@@ -10,7 +10,7 @@ public class Student implements Serializable {
 
     private static final long serialVersionUID = 2L;
     private String firstName;
-    private Date dateOfBirth;
+    private Object dateOfBirth;
     private Address address;
     private transient int version = 3;
 

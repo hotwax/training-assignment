@@ -7,6 +7,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/*
+The serialization at runtime associates with each serializable class a version number called a serialVersionUID,
+which is used during deserialization to verify that the sender and receiver of a serialized object have loaded classes
+for that object that are compatible with respect to serialization.
+It is because SerialVersionUID is used to ensure that during deserialization the same class (that was used during 
+serialize process) is loaded.
+
+JVM will match the serialVersionUID of current .class file and the serialized file if they both don't match
+then JVM will throw an InvalidClassException
+*/
+
 public class SerializationTest {
 
     public static void main(String args[]) {
