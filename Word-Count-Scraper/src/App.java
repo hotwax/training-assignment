@@ -56,8 +56,8 @@ public class App {
         String dir = System.getProperty("user.dir");
 
         // get url and words files
-        File urls = new File(dir + "/Word-Count-Scraper/Scraper/src/urls.txt");
-        File words = new File(dir + "/Word-Count-Scraper/Scraper/src/words.txt");
+        File urls = new File(dir + "/Word-Count-Scraper/src/urls.txt");
+        File words = new File(dir + "/Word-Count-Scraper/src/words.txt");
         String key;
 
         // read words file and add to wordCount map
