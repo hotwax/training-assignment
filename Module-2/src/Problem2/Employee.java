@@ -134,6 +134,7 @@ class RunEmployee{
             System.out.println("Type Add    : To Insert Entry");
             System.out.println("Type Delete : To Delete Entry");
             System.out.println("Type Search : To Search Entry");
+            System.out.println("Type display : To Display Entries");
             System.out.println("Enter your choice : ");
             try {
                 Scanner sc = new Scanner(System.in);
