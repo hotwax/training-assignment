@@ -1,5 +1,3 @@
-import java.util.Random;
-
 class Account {
   String name;
   static int balance = 1000;
@@ -11,7 +9,7 @@ class Account {
   public boolean withdraw(int withdrawalAmount, String person) {
  
     try {
-      Thread.sleep(50);
+      Thread.sleep(100);
     } catch (InterruptedException e) {
       System.out.println(e);
     }
@@ -34,52 +32,47 @@ class Account {
 }
 
 class AccountOverdrawDemo extends Thread {
-  Account acc;
+  Account account;
   String person;
 
-  AccountOverdrawDemo(Account acc, String person) {
-    this.acc = acc;
+  AccountOverdrawDemo(Account account, String person) {
+    this.account = account;
     this.person = person;
   }
-
-  Random rm = new Random();
 
   public void run() {
     int totalWithdrawalAmount=0;
 
-    for (int transaction = 1; transaction <= 22; transaction++) {
+    for (int transaction = 1; transaction <= 20; transaction++) {  //20 because 1000/50=20
       
-      // int withdrawalAmount = rm.nextInt(500);
       int withdrawalAmount = 50;
-      if(acc.withdraw(withdrawalAmount, person)) totalWithdrawalAmount+=withdrawalAmount;
+      if(account.withdraw(withdrawalAmount, person)) totalWithdrawalAmount+=withdrawalAmount;
     }
 
     System.out.println("Total withdrawal amount: "+ totalWithdrawalAmount);
+    
   }
 
 }
 
 class AccountOverdrawSafeDemo extends Thread{
   String person;
-  Account acc;
+  Account account;
 
-  AccountOverdrawSafeDemo(Account acc, String name){
+  AccountOverdrawSafeDemo(Account account, String name){
     this.person=name;
-    this.acc=acc;
+    this.account=account;
   }
-
-  Random rm = new Random();
 
   public void run(){
 
     int totalWithdrawalAmount=0;
 
-    for (int transaction = 1; transaction <= 22; transaction++) {
+    for (int transaction = 1; transaction <= 20; transaction++) {
       
-      // int withdrawalAmount = rm.nextInt(500);
       int withdrawalAmount = 50;
-      synchronized(acc){
-        if(acc.withdraw(withdrawalAmount, person)) totalWithdrawalAmount+=withdrawalAmount;
+      synchronized(account){
+        if(account.withdraw(withdrawalAmount, person)) totalWithdrawalAmount+=withdrawalAmount;
       }
     }
 
@@ -98,6 +91,11 @@ public class Problem3 {
 
     AccountOverdrawSafeDemo thread1 = new AccountOverdrawSafeDemo(account1, "person1");
     AccountOverdrawSafeDemo thread2 = new AccountOverdrawSafeDemo(account1, "person2");
+
+    // in using AccountOverdrawDemo, the sum of totalWithdrawalAmount of thread1 and thread2 will be > 1000 
+    // which is the scenario we need to handle.
+    // in using AccountOverdrawSafeDemo, the sum of totalWithdrawalAmount of thread1 and thread2 will always be = 1000
+    // by using synchronized block.
 
     thread1.start();
     thread2.start();
