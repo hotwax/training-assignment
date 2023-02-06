@@ -21,48 +21,54 @@ public class Problem2 {
 
   static void add() {
 
-    System.out.println("Enter name of the employee: ");
-    String name = sc.next();
-    System.out.println("Enter age of the employee: ");
-    int age = sc.nextInt();
-    System.out.println("Enter email of the employee: ");
-    String email = sc.next();
-    System.out.println("Enter date of birth of the employee: (format- yyyy-mm-dd)");
-    String dateOfBirth = sc.next();
+    try {
+      System.out.println("Enter name of the employee: ");
+      String name = sc.next();
+      System.out.println("Enter age of the employee: ");
+      int age = sc.nextInt();
+      System.out.println("Enter email of the employee: ");
+      String email = sc.next();
+      System.out.println("Enter date of birth of the employee: (format- yyyy-mm-dd)");
+      String dateOfBirth = sc.next();
 
-    Employee emp = new Employee();
-    emp.setName(name);
-    emp.setAge(age);
-    emp.setEmail(email);
-    emp.setDate(dateOfBirth);
+      Employee employeeObject = new Employee();
+      employeeObject.setName(name);
+      employeeObject.setAge(age);
+      employeeObject.setEmail(email);
+      employeeObject.setDate(dateOfBirth);
 
-    set.add(emp);
+      set.add(employeeObject);
 
-    addToFile(emp);
+      addToFile(employeeObject);
 
-    System.out.println("Data is inserted successfully.");
-    System.out.println("-------------------------------\n");
+      System.out.println("Data is inserted successfully.");
+      System.out.println("-------------------------------\n");
+    } catch (Exception e) {
+      System.out.println(e);
+    }
 
   }
 
-  static void addToFile(Employee emp) {
+  static void addToFile(Employee employeeObject) {
     try {
-      File file = new File("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
-      file.createNewFile();
-      FileWriter fw = new FileWriter("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt",
-          true);
-      BufferedWriter bw = new BufferedWriter(fw);
-      bw.newLine();
-      bw.write("Name: " + emp.getName() + ", Age: " + emp.getAge() + ", Email: " + emp.getEmail() + ", Date of birth: "
-          + emp.getDateOfBirth());
+      String employeefilePath = "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt";
+      File employeefile = new File(employeefilePath);
+      employeefile.createNewFile();
+      FileWriter fileWriter = new FileWriter(employeefilePath, true); // true- appends to file
+      BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+      bufferedWriter.write("Name: " + employeeObject.getName() + ", Age: " + employeeObject.getAge() + ", Email: "
+          + employeeObject.getEmail() + ", Date of birth: "
+          + employeeObject.getDateOfBirth());
 
-      bw.close();
+      bufferedWriter.newLine();
+
+      bufferedWriter.close();
+      fileWriter.close();
 
       if (Desktop.isDesktopSupported()) {
         Desktop desktop = Desktop.getDesktop();
-        desktop.open(file);
+        desktop.open(employeefile);
       }
-      fw.close();
 
     } catch (Exception e) {
       System.out.println(e);
@@ -71,38 +77,42 @@ public class Problem2 {
   }
 
   static void delete() {
-    System.out.println("Enter the email id of the employee: ");
-    String emailId = sc.next();
-
-    Iterator<Employee> itr = set.iterator();
-    while (itr.hasNext()) {
-      Employee employee = itr.next();
-      if (employee.getEmail().equals(emailId)) {
-        set.remove(employee);
-        break;
-      }
-    }
-
     try {
-      File file = new File("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
-      FileWriter fw = new FileWriter("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
+      System.out.println("Enter the email id of the employee: ");
+      String emailId = sc.next();
 
-      BufferedWriter bw = new BufferedWriter(fw);
+      Iterator<Employee> iterator = set.iterator();
+      while (iterator.hasNext()) { // we have used iterator in place of for loop because java throws an exception
+                                   // if we apply loop on a class and remove from the same class in it.
+        Employee employee = iterator.next();
+        if (employee.getEmail().equals(emailId)) {
+          set.remove(employee);
+          break;
+        }
+      }
 
-      for (Employee emp : set) {
-        bw.newLine();
-        bw.write("Name: " + emp.getName() + ", Age: " + emp.getAge() + ", Email: " + emp.getEmail()
-            + ", Date of birth: " + emp.getDateOfBirth());
+      String employeeFilePath = "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt";
+      File employeeFile = new File(employeeFilePath);
+      FileWriter fileWriter = new FileWriter(employeeFilePath);
+      BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+      for (Employee employeeObject : set) {
+        bufferedWriter.write("Name: " + employeeObject.getName() + ", Age: " + employeeObject.getAge() + ", Email: "
+            + employeeObject.getEmail()
+            + ", Date of birth: " + employeeObject.getDateOfBirth());
+        bufferedWriter.newLine();
 
       }
 
-      bw.close();
+      bufferedWriter.close();
+      fileWriter.close();
 
       System.out.println("Employee " + emailId + " is removed successfully.");
       System.out.println("-------------------------------\n");
-      Desktop desktop = Desktop.getDesktop();
-      desktop.open(file);
-      fw.close();
+      if (Desktop.isDesktopSupported()) {
+        Desktop desktop = Desktop.getDesktop();
+        desktop.open(employeeFile);
+      }
 
     } catch (Exception e) {
       System.out.println(e);
@@ -112,32 +122,27 @@ public class Problem2 {
 
   static void fetch() {
     try {
-      File file = new File("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
-      if (file.createNewFile() == false) {
-        FileReader fr = new FileReader("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
-        BufferedReader br = new BufferedReader(fr);
-        String s = "";
-        int i = 0;
-        while ((s = br.readLine()) != null) {
-          if (i == 0) {
+      File employeeFile = new File("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
+      if (employeeFile.createNewFile() == false) { // employee.txt already exists
+        FileReader fileReader = new FileReader(
+            "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String employee = "";
+        while ((employee = bufferedReader.readLine()) != null) {
 
-          } else {
-            String[] ss = s.split(", ");
+          String[] employeeData = employee.split(", ");
 
-            Employee emp = new Employee();
-            emp.setName(ss[0].split(" ")[1]);
-            emp.setAge(Integer.parseInt(ss[1].split(" ")[1]));
-            emp.setEmail(ss[2].split(" ")[1]);
-            emp.setDate(ss[3].split(" ")[3]);
+          Employee employeeObject = new Employee();
+          employeeObject.setName(employeeData[0].split(" ")[1]);
+          employeeObject.setAge(Integer.parseInt(employeeData[1].split(" ")[1]));
+          employeeObject.setEmail(employeeData[2].split(" ")[1]);
+          employeeObject.setDate(employeeData[3].split(" ")[3]);
 
-            set.add(emp);
-
-          }
-
-          i++;
+          set.add(employeeObject);
 
         }
 
+        bufferedReader.close();
       }
 
     } catch (Exception e) {
@@ -147,81 +152,99 @@ public class Problem2 {
   }
 
   static void searchAndSort() {
-    System.out.println("Enter which field to search: (name, age, date of birth)");
-    String field = sc.next(); // name, age, dateOfBirth
+    try {
+      System.out.println("Enter which field to search: (name, age, date of birth)");
+      String field = sc.next(); // name, age, dateOfBirth
 
-    System.out.println("Enter the field value to search: ");
-    String fieldName = sc.next(); // if field is name- eg: Nidhi, if field is age- eg: 20
+      System.out.println("Enter the field value to search: ");
+      String fieldName = sc.next(); // if field is name- eg: Nidhi, if field is age- eg: 20
 
-    System.out.println("Enter which field to sort by: (name, age, date of birth)");
-    String sortBY = sc.next(); // any field
+      System.out.println("Enter which field to sort by: (name, age, date of birth)");
+      String sortBY = sc.next(); // any field
 
-    System.out.println("Enter the direction to sort (ascending or descending): ");
-    String direction = sc.next(); // ascending or descending
+      System.out.println("Enter the direction to sort (ascending or descending): ");
+      String direction = sc.next(); // ascending or descending
 
-    ArrayList<Employee> al = new ArrayList<>();
+      ArrayList<Employee> resultOfSearchAndSort = new ArrayList<>();
 
-    if (field.equals("name")) {
-      for (Employee employee : set) {
-        if (employee.getName().equals(fieldName))
-          al.add(employee);
+      if (field.equals("name")) {
+        for (Employee employee : set) {
+          if (employee.getName().equals(fieldName))
+            resultOfSearchAndSort.add(employee);
+        }
+      } else if (field.equals("age")) {
+        for (Employee employee : set) {
+          if (employee.getAge() == Integer.parseInt(fieldName))
+            resultOfSearchAndSort.add(employee);
+        }
+      } else if (field.equals("dateOfBirth")) {
+        for (Employee employee : set) {
+          if (employee.getDateOfBirth().toString().equals(fieldName))
+            resultOfSearchAndSort.add(employee);
+        }
       }
-    } else if (field.equals("age")) {
-      for (Employee employee : set) {
-        if (employee.getAge() == Integer.parseInt(fieldName))
-          al.add(employee);
-      }
-    } else if (field.equals("dateOfBirth")) {
-      for (Employee employee : set) {
-        if (employee.getDateOfBirth().toString().equals(fieldName))
-          al.add(employee);
-      }
-    }
 
-    if (sortBY.equals("name")) {
-      al.sort(Comparator.comparing(Employee::getName,
-          direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
-    } else if (sortBY.equals("age")) {
-      al.sort(Comparator.comparing(Employee::getAge,
-          direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
-    } else if (sortBY.equals("dateOfBirth")) {
-      al.sort(Comparator.comparing(Employee::getDateOfBirth,
-          direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
-    }
+      if (sortBY.equals("name")) {
+        resultOfSearchAndSort.sort(Comparator.comparing(Employee::getName,
+            direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
+      } else if (sortBY.equals("age")) {
+        resultOfSearchAndSort.sort(Comparator.comparing(Employee::getAge,
+            direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
+      } else if (sortBY.equals("dateOfBirth")) {
+        resultOfSearchAndSort.sort(Comparator.comparing(Employee::getDateOfBirth,
+            direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
+      }
 
-    for (Employee emp : al) {
-      System.out.println(
-          "Name: " + emp.getName() + ", Age: " + emp.getAge() + ", Email: " + emp.getEmail() + ", Date of birth: "
-              + emp.getDateOfBirth());
+      for (Employee employeeObj : resultOfSearchAndSort) {
+        System.out.println(
+            "Name: " + employeeObj.getName() + ", Age: " + employeeObj.getAge() + ", Email: " + employeeObj.getEmail()
+                + ", Date of birth: "
+                + employeeObj.getDateOfBirth());
+      }
+      System.out.println("-------------------------------\n");
+
+    } catch (Exception e) {
+      System.out.println(e);
     }
-    System.out.println("-------------------------------\n");
 
   }
 
   public static void main(String[] args) {
 
-    fetch();
+    try {
+      fetch(); // if employee.txt already exists then fetch its data
 
-    Scanner sc = new Scanner(System.in);
+      while (true) {
+        System.out.println("Enter 1 to add data");
+        System.out.println("Enter 2 to delete data");
+        System.out.println("Enter 3 to search and sort data");
+        System.out.println();
 
-    while (true) {
-      System.out.println("Enter 1 to add data");
-      System.out.println("Enter 2 to delete data");
-      System.out.println("Enter 3 to search and sort data");
-      System.out.println();
-      
-      int n = sc.nextInt();
-      if (n == 1) { // add
-        add();
-      } else if (n == 2) { // delete
-        delete();
-      } else if (n == 3) { // search and sort
-        searchAndSort();
-      } else {
-        System.out.println("-------------------------------\n");
-        System.out.println("Program is terminated successfully");
-        return;
+        int choice = sc.nextInt();
+
+        switch (choice) {
+          case 1:
+            add();
+            break;
+
+          case 2:
+            delete();
+            break;
+
+          case 3:
+            searchAndSort();
+            break;
+
+          default:
+            System.out.println("-------------------------------\n");
+            System.out.println("Program is terminated successfully");
+            return;
+        }
+
       }
+
+    } catch (Exception e) {
+      System.out.println(e);
     }
 
   }
