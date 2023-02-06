@@ -15,7 +15,7 @@ class Student implements Serializable {
   String name;
   // String DOB; //old format of student class
   Object DOB;//new format of student class
-  Address a;
+  Address account;
 
   // serialVersionUID, which is used during deserialization to verify that the sender and receiver of a serialized object have loaded class
 
@@ -26,12 +26,12 @@ class Student implements Serializable {
     this.name = name;
     // this.DOB = dateOfBirth; //old format of student class
     this.DOB=new Date(""+dateOfBirth);//new format of student class
-    this.a = a;
+    this.account = account;
   }
 
   public String toString() // to print a meaningful output
   {
-    return "[ Name = " + name + "\n DOB = " + DOB + "\n Address = " + a + "\n]";
+    return "[ Name = " + name + "\n DOB = " + DOB + "\n Address = " + account + "\n]";
   }
 }
 
@@ -61,9 +61,9 @@ class SerializationTest // A class to serialize
 {
   String filename; //the file which need to serialize 
 
-  SerializationTest(String s) //constructor to initialize
+  SerializationTest(String str) //constructor to initialize
   {
-    this.filename = s;
+    this.filename = str;
   }
 
   void serialize() throws Exception //function to serialize object 
@@ -87,8 +87,8 @@ class SerializationTest // A class to serialize
       FileOutputStream fi = new FileOutputStream(filename);
       ObjectOutputStream os = new ObjectOutputStream(fi);
       os.writeObject(li); //writting objects in file
-    } catch (IOException e) {
-      System.out.println(e);
+    } catch (IOException exception) {
+      System.out.println(exception);
     }
     System.out.println("Data inserted\n");
 
@@ -100,9 +100,9 @@ class DeserializationTest // class to deserialize objects
 {
   String filename; //the file which need to serialize 
 
-  DeserializationTest(String s) //constructor to initialize
+  DeserializationTest(String str) //constructor to initialize
   {
-    filename = s;
+    filename = str;
   }
 
   void deserialize() //function to deserialize
@@ -113,10 +113,10 @@ class DeserializationTest // class to deserialize objects
       FileInputStream fi = new FileInputStream(filename);
       ObjectInputStream os = new ObjectInputStream(fi);
       ArrayList li = (ArrayList) os.readObject(); //reading object from file and storing in a list
-      for (int i = 0; i < li.size(); i++)
-        System.out.println(li.get(i));
-    } catch (IOException | ClassNotFoundException e) {
-      System.out.println(e);
+      for (int index = 0; index < li.size(); index++)
+        System.out.println(li.get(index));
+    } catch (IOException | ClassNotFoundException exception) {
+      System.out.println(exception);
     }
 
   }
@@ -157,7 +157,7 @@ class Demo {
           System.out.println("Invalid");
           break;
         }
-      } catch (InputMismatchException e) {
+      } catch (InputMismatchException exception) {
         System.out.println("Enter valid option");
       }
     }

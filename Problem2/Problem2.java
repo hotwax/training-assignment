@@ -228,9 +228,9 @@ class StoreEmployee // A class which file related operations
     br.close();
 
 	}
-	catch(IOException e)
+	catch(IOException exception)
 	{
-		System.out.println(e);
+		System.out.println(exception);
 	}
     return alist;
   }
@@ -245,8 +245,8 @@ class StoreEmployee // A class which file related operations
         br.newLine();
       }
       br.close();
-    } catch (Exception e) {
-		System.out.println(e);
+    } catch (Exception exception) {
+		System.out.println(exception);
 	}
 
     return alist;
@@ -308,8 +308,7 @@ class Demo {
           age = sc.nextInt();
 
           Employee emp = new Employee(name, email, DOB, age);
-		  System.out.print(emp);
-          list.add(emp);
+		  list.add(emp);
           file.insert(list);
           System.out.println("Done ");
           break;
@@ -360,7 +359,7 @@ class Demo {
           System.out.println("Invalid");
           break;
         }
-      } catch (InputMismatchException e) {
+      } catch (InputMismatchException exception) {
         System.out.println("Enter valid option");
       }
     }

@@ -63,25 +63,25 @@ class webScrap // a class to get web page and count certain words
 }
 class Demo {
   public static void main(String ar[]) throws Exception {
-    HashSet < CountFre > ts = new HashSet < > ();
+    HashSet < CountFre > set = new HashSet < > ();
     webScrap ws = new webScrap();
 
     //storing all urls into a ArrayList
     BufferedReader br = new BufferedReader(new FileReader("url.txt"));
-    String stru = br.readLine();
+    String stringURL = br.readLine();
     ArrayList < String > url = new ArrayList < > ();
-    while (stru != null) {
-      url.add(stru);
-      stru = br.readLine();
+    while (stringURL != null) {
+      url.add(stringURL);
+      stringURL = br.readLine();
     }
 
     //storing all words to an arraylist
     BufferedReader br1 = new BufferedReader(new FileReader("word.txt"));
-    String strw = br1.readLine();
+    String stringWORD = br1.readLine();
     ArrayList < String > words = new ArrayList < > ();
-    while (strw != null) {
-      words.add(strw);
-      strw = br1.readLine();
+    while (stringWORD != null) {
+      words.add(stringWORD);
+      stringWORD = br1.readLine();
     }
 
     int url_num = 1; //variable to give url number
@@ -94,21 +94,21 @@ class Demo {
       for (String str1: words) {
         int count1 = ws.count(str1, ws.load(str));
         alist.add(new CountFre(str1, count1)); //adding to arraylist
-        ts.add(new CountFre(str1, count1)); // adding to hashSet
+        set.add(new CountFre(str1, count1)); // adding to hashSet
       }
 
-      alist.sort((o1, o2) -> o2.freq - o1.freq); //sorting the arraylist
+      alist.sort((object1, object2) -> object2.freq - object1.freq); //sorting the arraylist
 
-      for (int i = 0; i < 3; i++) //printing the first 3 
-        System.out.print(alist.get(i));
+      for (int index = 0; index < 3; index++) //printing the first 3 
+        System.out.print(alist.get(index));
     }
 
     //storing the hashSet to TreeSet to sort it descending
     System.out.println("\nComplete .......");
 
-    TreeSet < CountFre > treeSet = new TreeSet < CountFre > ((a, b) -> b.freq - a.freq);
-    for (CountFre cf: ts)
-      treeSet.add(cf);
+    TreeSet <CountFre> treeSet = new TreeSet <CountFre>((object1, object2) -> object2.freq - object1.freq);
+    for (CountFre countfreq: set)
+      treeSet.add(countfreq);
 
     System.out.println(treeSet);
   }

@@ -15,12 +15,12 @@ class Account {
       System.out.println(name + " has withdraw : " + with_draw + "\nYour balance : " + balance + "\n");
       try {
         Thread.sleep(50);
-      } catch (Exception e) {}
+      } catch (Exception exception) {}
     } else {
       System.out.println(name + ", You don't have " + with_draw + "\nYour balance : " + balance + "\n");
       try {
         Thread.sleep(50);
-      } catch (Exception e) {}
+      } catch (Exception exception) {}
     }
   }
 
@@ -28,31 +28,31 @@ class Account {
 
 class AccountOverdrawSafeDemo extends Thread //a class to call withdraw method 
 {
-  Account a;
+  Account account;
   String name; //name of varible which is withdrawing the amount
 
-  AccountOverdrawSafeDemo(Account a, String name) //constructor to initialize
+  AccountOverdrawSafeDemo(Account account, String name) //constructor to initialize
   {
-    this.a = a;
+    this.account = account;
     this.name = name;
   }
 
   public void run() //overridding run method of thread class
   {
-    int i = 0;
-    while (i <= 5) {
-      a.withdraw(name, (int)(Math.random() * 1000) + 1); // randomly deducting amount
-      i++;
+    int index = 0;
+    while (index <= 5) {
+      account.withdraw(name, (int)(Math.random() * 1000) + 1); // randomly deducting amount
+      index++;
     }
   }
 
 }
 class Demo {
   public static void main(String[] args) {
-    Account ob = new Account("Ram & Sita", 1000);
-    AccountOverdrawSafeDemo t1 = new AccountOverdrawSafeDemo(ob, "Ram");
-    AccountOverdrawSafeDemo t2 = new AccountOverdrawSafeDemo(ob, "Sita");
-    t1.start();
-    t2.start();
+    Account account = new Account("Ram & Sita", 1000);
+    AccountOverdrawSafeDemo thread1 = new AccountOverdrawSafeDemo(account, "Ram");
+    AccountOverdrawSafeDemo thread2 = new AccountOverdrawSafeDemo(account, "Sita");
+    thread1.start();
+    thread2.start();
   }
 }
