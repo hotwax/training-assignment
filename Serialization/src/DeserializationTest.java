@@ -6,24 +6,25 @@ import java.util.ArrayList;
 public class DeserializationTest{
     public static void main(String[] args){
         try{
-            FileInputStream fileIn = new FileInputStream("Serialization/src/output2.ser");
+            FileInputStream fileIn = new FileInputStream("Serialization/src/output1.ser");
             ObjectInputStream object = new ObjectInputStream(fileIn);
             ArrayList<Student> students = (ArrayList<Student>) object.readObject();
+            // ArrayList students = (ArrayList) object.readObject();
             object.close();
             fileIn.close();
             for(Student student: students){
+                System.out.println("Name: " + student.name);
+                System.out.println("Date of Birth: " + student.dob);
+                System.out.println("City: " + student.address.city);
+                System.out.println("State: " + student.address.state);
+                System.out.println("Pincode: " + student.address.picode);
+                System.out.println("Country: " + student.address.country);
                 System.out.println();
-                System.out.println(student.name);
-                System.out.println(student.dob);
-                System.out.println(student.address.city);
-                System.out.println(student.address.state);
-                System.out.println(student.address.picode);
-                System.out.println(student.address.country);
             }
             System.out.println();
         }
         catch(Exception e){
-            System.out.println(e);
+            System.out.println("Cannot deserialize the object. The class is not found.");
         }
     }
 }

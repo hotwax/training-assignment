@@ -120,6 +120,20 @@ public class Employee {
             System.out.println("Date of birth: " + employee.dob);
         }
         System.out.println();
+    } 
+
+    public void searchEmployeeData(int id) {
+        for (Employee employee : employeeData) {
+            if (employee.id == id) {
+                System.out.println();
+                System.out.println("Id: " + employee.id);
+                System.out.println("Name: " + employee.name);
+                System.out.println("Age: " + employee.age);
+                System.out.println("Email: " + employee.email);
+                System.out.println("Date of birth: " + employee.dob);
+                System.out.println();
+            }
+        }
     }
 }
 
@@ -179,10 +193,8 @@ class ManageEmployee{
                         System.out.println();
                         System.out.println("Enter the id of the employee: ");
                         id = sc.nextInt();
-                        System.out.println("Enter the name of the employee: ");
-                        name = sc.next();
                         System.out.println();
-                        employee.searchEmployee(id, name);
+                        employee.searchEmployeeData(id);
                         System.out.println();
                         break;
                     case 4:

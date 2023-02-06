@@ -22,12 +22,12 @@ public class SerializationTest {
         students.add(student3);
         students.add(student4);
         try {
-            FileOutputStream fileOut = new FileOutputStream("Serialization/src/output2.ser");
+            FileOutputStream fileOut = new FileOutputStream("Serialization/src/output1.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(students);
             out.close();
             fileOut.close();
-            System.out.println("Serialized data is saved in output.ser");
+            System.out.println("Serialized data is saved in .ser file in the folder.");
         } 
         catch (Exception e) {
             System.out.println(e);
