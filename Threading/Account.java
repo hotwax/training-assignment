@@ -16,7 +16,7 @@ public class Account {
         //which ultimately cass more overdraw of bank account, which demonstrate the necessacity of Synchronized transaction.
         try {
             Thread.sleep(1);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException exception) {
             System.out.println("Interrupted");
         }
 

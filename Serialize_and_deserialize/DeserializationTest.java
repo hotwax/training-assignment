@@ -25,7 +25,6 @@ public class DeserializationTest {
     public static void main(String args[]) {
         // Object deserialization
         try {
-            Student object2;
             //FileInputStream to read file from output2.txt
             System.out.println("Deserializing Output2.txt data");
             FileInputStream fileInputStream = new FileInputStream("E:\\Work\\java work\\Module2\\src\\Serialize_and_deserialize\\" + args[0]);

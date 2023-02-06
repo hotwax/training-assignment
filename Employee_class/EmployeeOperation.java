@@ -59,7 +59,7 @@ public class EmployeeOperation {
                         System.out.println("Invalid choice. Try again.");
                         break;
                 }
-            } catch (Exception e) {
+            } catch (Exception exception) {
                 //used to catch the invalid input entered by user
                 System.out.println("Invalid Input: Enter Integer");
             }
@@ -96,47 +96,47 @@ public class EmployeeOperation {
             }
             //new global id is created which is 1 greated than the id of last employee
             GlobalID = ++lastId;
-        } catch (Exception e) {
+        } catch (Exception exception) {
             //used to handle exceptions in this method
-            System.out.println("Error loading employees from file: " + e.getMessage());
+            System.out.println("Error loading employees from file: " + exception.getMessage());
         }
     }
 
     // this method is used to add employee from data provided by user
     public static void addEmployee() throws ParseException {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("enter Name : ");
-        String name = sc.nextLine();
+        String name = scanner.nextLine();
         //check for valid name
         //loop untill user did not enter a valid name
         while (!isValidName(name)) {
             System.out.println("Not a Valid Name: ENTER AGAIN !!!");
-            name = sc.nextLine();
+            name = scanner.nextLine();
         }
 
         System.out.println("enter email : ");
-        String email = sc.nextLine();
+        String email = scanner.nextLine();
         //check for valid email
         //loop untill user did not enter a valid email
         while (!isValidEmail(email)) {
             System.out.println("Not a Valid Email: ENTER AGAIN !!!");
-            email = sc.nextLine();
+            email = scanner.nextLine();
         }
         System.out.println("enter age : ");
-        String age = sc.nextLine();
+        String age = scanner.nextLine();
         //check for valid age
         //loop untill user did not enter a valid age
         while (!isValidAge(age)) {
             System.out.println("Not a Valid Age: ENTER AGAIN !!!");
-            age = sc.nextLine();
+            age = scanner.nextLine();
         }
         System.out.println("enter date of birth (dd/MM/yyyy): ");
-        String dobString = sc.nextLine();
+        String dobString = scanner.nextLine();
         //check for valid date of birth
         //loop untill user did not enter a valid date of birth
         while (!isValidDate(dobString)) {
             System.out.println("Not a Valid Date: ENTER AGAIN !!!");
-            dobString = sc.nextLine();
+            dobString = scanner.nextLine();
         }
         //formate the date in our provided formate using dateFormater
         Date dob = dateFormater.parse(dobString);
