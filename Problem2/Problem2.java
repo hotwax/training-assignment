@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.util.Collections;
+import java.time.LocalDate;  
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Comparator;
@@ -15,14 +16,14 @@ class Employee {
   private Integer id;
   private String name;
   private String email;
-  private String DOB;
+  private LocalDate DOB;
   private Integer age;
 
   Employee(String name, String email, String DOB, Integer age) //constructor to initialize
   {
     this.name = name;
     this.email = email;
-    this.DOB = DOB;
+    this.DOB = LocalDate.parse(DOB);
     this.age = age;
     this.id = count++;
   }
@@ -32,7 +33,7 @@ class Employee {
     count = Math.max(count, id + 1); //to get maxium id till now
     this.name = name;
     this.email = email;
-    this.DOB = DOB;
+    this.DOB = LocalDate.parse(DOB);
     this.age = age;
     this.id = id;
   }
@@ -53,7 +54,7 @@ class Employee {
 
   String getDOB() //getting DOB
   {
-    return DOB;
+    return ""+DOB;
   }
 
   Integer getAge() //getting age
@@ -73,7 +74,7 @@ class Employee {
 
   void setDOB(String DOB) //setting DOB
   {
-    this.DOB = DOB;
+    this.DOB = LocalDate.parse(DOB);
   }
 
   void setAge(Integer age) //setting age
@@ -205,7 +206,7 @@ class StoreEmployee // A class which file related operations
 	for (int index = 0; index < alist.size(); index++) {
       if (alist.get(index).getID().equals(data))
       alist.remove(index);
-      insert();
+      insert(alist);
     }
     return alist;
   }
@@ -234,12 +235,12 @@ class StoreEmployee // A class which file related operations
     return alist;
   }
 
-  ArrayList < Employee > insert() //method to insert data into file
+  ArrayList < Employee > insert(ArrayList<Employee> list) //method to insert data into file
   {
-
+	  
     try {
       BufferedWriter br = new BufferedWriter(new FileWriter("input.txt"));
-      for (Employee emp: alist) {
+      for (Employee emp: list) {
         br.write("" + emp.getID() + "," + emp.getName() + "," + emp.getEmail() + "," + emp.getDOB() + "," + emp.getAge());
         br.newLine();
       }
@@ -294,12 +295,12 @@ class Demo {
 		  
 		  while(true) //while accurate format is not given 
 		  {
-          System.out.println("Enter DOB (Format : DD/MM/YYYY)");
+          System.out.println("Enter DOB (Format : YYYY-MM-DD)");
           DOB = sc.next();
-		  String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$";
+		  String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
 		  boolean res = DOB.matches(regex);
 		  if(!res)
-		  System.out.println("Enter valid email");
+		  System.out.println("Enter valid DOB");
 		  if(res)break;
 		  }
           
@@ -307,9 +308,9 @@ class Demo {
           age = sc.nextInt();
 
           Employee emp = new Employee(name, email, DOB, age);
+		  System.out.print(emp);
           list.add(emp);
-
-          file.insert();
+          file.insert(list);
           System.out.println("Done ");
           break;
 
