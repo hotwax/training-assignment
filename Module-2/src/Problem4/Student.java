@@ -9,7 +9,7 @@ public class Student implements Serializable {
     // first name
     public String firstName;
 //    public String dateOfBirth;
-    public Date dateOfBirth;
+    public Object dateOfBirth;
     // address
     Address address;
     // constructor
