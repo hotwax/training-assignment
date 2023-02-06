@@ -1,16 +1,24 @@
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.io.IOException;
 
 
 public class DeserializationTest{
     public static void main(String[] args){
         try{
+
+            // FileInputStream provides the functionality to read the data from a file.
             FileInputStream fileIn = new FileInputStream("Serialization/src/output1.ser");
-            ObjectInputStream object = new ObjectInputStream(fileIn);
-            ArrayList<Student> students = (ArrayList<Student>) object.readObject();
+
+            // ObjectInputStream is used to read the object from the file.
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+
+            ArrayList<Student> students = (ArrayList<Student>) in.readObject();
+
+
             // ArrayList students = (ArrayList) object.readObject();
-            object.close();
+            in.close();
             fileIn.close();
             for(Student student: students){
                 System.out.println("Name: " + student.name);
@@ -23,8 +31,8 @@ public class DeserializationTest{
             }
             System.out.println();
         }
-        catch(Exception e){
-            System.out.println("Cannot deserialize the object. The class is not found.");
+        catch(IOException exc){
+            System.out.println("Not able to read the file.");
         }
     }
 }

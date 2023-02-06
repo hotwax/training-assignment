@@ -1,9 +1,13 @@
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.IOException;
 
 public class SerializationTest {
 
+
+    // This method creates a student object and returns it.
     public static Student createStudentObject(String name, String dob, String city, String state, String pincode, String country){
         Address address = new Address(city, state, pincode, country);
         Student student = new Student(name, dob, address);
@@ -21,18 +25,24 @@ public class SerializationTest {
         students.add(student2);
         students.add(student3);
         students.add(student4);
-        try {
+        try{
+            // FileOutputStream provide the file output stream to write the object to the file.
             FileOutputStream fileOut = new FileOutputStream("Serialization/src/output1.ser");
+
+            // ObjectOutputStream is used to write the object to the file.
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+            // Write the object to the file.
             out.writeObject(students);
             out.close();
             fileOut.close();
+            System.out.println();
             System.out.println("Serialized data is saved in .ser file in the folder.");
-        } 
-        catch (Exception e) {
-            System.out.println(e);
+            System.out.println();
+
+        }catch(IOException exc){
+            System.out.println("Not able to write in the file.");
         }
-        
 
     }
     

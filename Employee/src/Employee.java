@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.util.InputMismatchException;
+import java.io.IOException;
 
+
+// Employee class for storing employee data
 public class Employee {
     public int id;
     public String name;
@@ -14,9 +18,11 @@ public class Employee {
     public String dob;
     ArrayList<Employee> employeeData = new ArrayList<Employee>();
 
+    // Empty Constructor
     public Employee() {
     }
 
+    // Constructor
     public Employee (int id, String name, int age, String email, String dob){
         this.id = id;
         this.name = name;
@@ -47,19 +53,25 @@ public class Employee {
         this.dob = dob;
     }
 
+
+    // Method to write the data in the file which is stored in the ArrayList
     public void writeInFile() {
         try {
+
+            // BufferedWriter is used to write the data in the file.
             BufferedWriter writer = new BufferedWriter(new FileWriter("Employee/src/Employee.txt"));
             for (Employee employee : employeeData) {
                 writer.write(employee.id + ", " + employee.name + ", " + employee.age + ", " + employee.email + ", " + employee.dob);
                 writer.newLine();
             }
             writer.close();
-        } catch (Exception exc) {
+        } catch (IOException exc) {
             System.out.println("Not able to write in the file.");
         }
     }
 
+
+    // Method to add the employee data in the ArrayList
     public void addEmployee(int id, String name, int age, String email, String dob) {
         if (checkIdInData(id) == true) {
             System.out.println("Employee data already exists.");
@@ -76,6 +88,7 @@ public class Employee {
         }
     }
 
+    // Method to check the id is already present in the ArrayList or not
     public boolean checkIdInData(int id) {
         for (Employee employee : employeeData) {
             if (employee.id == id) {
@@ -85,6 +98,8 @@ public class Employee {
         return false;
     }
 
+
+    //Method to delete the employee data from the ArrayList
     public void deleteEmployee(int id) {
         if (checkIdInData(id) == false) {
             System.out.println("Employee data does not exists.");
@@ -101,15 +116,7 @@ public class Employee {
         }
     }
 
-    public void searchEmployee(int id, String name) {
-        for (Employee employee : employeeData) {
-            if (employee.id == id && employee.name == name) {
-                employeeData.remove(employee);
-                System.out.println("Employee data deleted successfully.");
-            }
-        }
-    }
-
+    // Method to show all the employee data from the ArrayList
     public void showAllEmployee() {
         for (Employee employee : employeeData) {
             System.out.println();
@@ -122,6 +129,7 @@ public class Employee {
         System.out.println();
     } 
 
+    // Method to search the employee data from the ArrayList
     public void searchEmployeeData(int id) {
         for (Employee employee : employeeData) {
             if (employee.id == id) {
@@ -137,22 +145,29 @@ public class Employee {
     }
 }
 
+
+// Main class
 class ManageEmployee{
     
     public static void main(String[] args) throws Exception {
+
         Employee employee = new Employee();
-        BufferedReader reader = new BufferedReader(new FileReader("Employee/src/Employee.txt"));
-        String line;
         boolean flag = true;
+        
         try{
+            // BufferedReader is used to read the data from the file.
+            BufferedReader reader = new BufferedReader(new FileReader("Employee/src/Employee.txt"));
+            String line;
+            
             while ((line = reader.readLine()) != null){
                 String str[] = line.split(", ");
                 Employee emp = new Employee(Integer.parseInt(str[0]), str[1], Integer.parseInt(str[2]), str[3], str[4]);
                 employee.employeeData.add(emp);
             }
-        }catch (Exception exc){  
-            System.out.println("Not able to read the file.");
+        }catch (NumberFormatException | FileNotFoundException exc){  
+            System.out.println("Not able to read the file. Exceptiion occured: " + exc);
         }
+
         while (flag) {
             try{
                 System.out.println("Choose an option: ");

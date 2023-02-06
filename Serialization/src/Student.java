@@ -15,6 +15,8 @@ class Address implements Serializable{
     }
 }
 
+
+//Student class is serializable we will be able to write it to a file
 public class Student implements Serializable{
     public String name;
     // public String dob;
