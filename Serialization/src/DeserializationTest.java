@@ -13,9 +13,7 @@ public class DeserializationTest{
 
             // ObjectInputStream is used to read the object from the file.
             ObjectInputStream in = new ObjectInputStream(fileIn);
-
             ArrayList<Student> students = (ArrayList<Student>) in.readObject();
-
 
             // ArrayList students = (ArrayList) object.readObject();
             in.close();
@@ -31,7 +29,7 @@ public class DeserializationTest{
             }
             System.out.println();
         }
-        catch(IOException exc){
+        catch(IOException | ClassNotFoundException exc){
             System.out.println("Not able to read the file.");
         }
     }
