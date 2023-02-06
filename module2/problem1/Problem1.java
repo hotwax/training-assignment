@@ -1,106 +1,110 @@
-import java.io.*;
-import java.net.*;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+
+import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;  
+import org.jsoup.nodes.Document;
 
-public class Problem1{
-    public static void main(String[] args) {
-      try {
-        FileReader fr = new FileReader("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem1\\urls.txt");
-        BufferedReader br = new BufferedReader(fr);
+//before compilation- set classpath=%classpath%;D:\Nidhi pal\hotwax\training-assignment\module2\problem1\jsoup-1.15.3.jar;
 
-        HashMap<String, Integer> map1 = new HashMap<>(); //for output 2
+public class Problem1 {
 
-        System.out.println("Output #1 \n======== \n");
+  public static void main(String[] args) {
+    try {
+      FileReader fileReaderForUrls = new FileReader(
+          "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem1\\urls.txt");
+      BufferedReader bufferedReaderForUrls = new BufferedReader(fileReaderForUrls);
 
-        String surl="";
-        while ((surl=br.readLine())!=null) {
-           URL url = new URL(surl);
-           InputStreamReader ir = new InputStreamReader(url.openStream());
-           BufferedReader brr = new BufferedReader(ir);
+      HashMap<String, Integer> mapForOutput2 = new HashMap<>(); // for output 2
 
-           String siteHtml="";
-           String unfilteredData = "";
+      System.out.println("Output #1 \n======== \n");
 
-           while ((siteHtml=brr.readLine())!=null) {
-               unfilteredData+=siteHtml;
-           }
+      String urlString = "";
+      while ((urlString = bufferedReaderForUrls.readLine()) != null) {
+        URL urlObject = new URL(urlString);
+        InputStreamReader inputStreamReaderForUrlData = new InputStreamReader(urlObject.openStream());
+        BufferedReader bufferedReaderForUrlData = new BufferedReader(inputStreamReaderForUrlData);
 
-          //  System.out.println(unfilteredData);
+        String siteHtml = "";
+        String unfilteredData = ""; // full content of site including tags eg- <html>, <script>
 
-           String filteredData = Jsoup.parse(unfilteredData).text();
-
-          //  System.out.println(filteredData);
-
-           HashMap<String, Integer> map = new HashMap<>();  //for output 1
-           
-           FileReader fr1 = new FileReader("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem1\\words.txt");
-           BufferedReader br1 = new BufferedReader(fr1);
-
-           String sword="";
-           while ((sword=br1.readLine())!=null) {
-              String regex= sword;
-              Pattern pattern = Pattern.compile(regex);
-              Matcher matcher = pattern.matcher(filteredData);
-
-              int count=0;
-              while (matcher.find()) {
-                count++;
-              }
-
-              map.put(sword, count);  //for output 1
-
-              if (map1.containsKey(sword)) {   // for output 2
-                map1.put(sword, map1.get(sword)+count);
-              }
-              else{
-                map1.put(sword, count);
-              }
-           }
-
-           ArrayList<Map.Entry<String, Integer>> al = new ArrayList<>(map.entrySet()) ;
-           Collections.sort(al, new MyComparator());
-
-           System.out.println(surl);
-           for (int i = 0; i < 3; i++) {
-             System.out.println(al.get(i));
-           }
-           System.out.println();
-
-
+        while ((siteHtml = bufferedReaderForUrlData.readLine()) != null) {
+          unfilteredData += siteHtml;
         }
 
-        System.out.println("============================== \nOutput #2 \n======== \n");
-        ArrayList<Map.Entry<String, Integer>> al1 = new ArrayList<>(map1.entrySet());
-        Collections.sort(al1, new MyComparator());
-        for (int i = 0; i < al1.size(); i++) {
-          System.out.println(al1.get(i));
+        String filteredData = Jsoup.parse(unfilteredData).text(); // only text content of site
+
+        HashMap<String, Integer> mapForOutput1 = new HashMap<>(); // for output 1
+
+        FileReader fileReaderForWords = new FileReader(
+            "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem1\\words.txt");
+        BufferedReader bufferedReaderForWords = new BufferedReader(fileReaderForWords);
+
+        String wordString = "";
+        while ((wordString = bufferedReaderForWords.readLine()) != null) {
+          String regex = wordString;
+          Pattern pattern = Pattern.compile(regex);
+          Matcher matcher = pattern.matcher(filteredData);
+
+          int count = 0;
+          while (matcher.find()) {
+            count++;
+          }
+
+          mapForOutput1.put(wordString, count); // for output 1
+
+          if (mapForOutput2.containsKey(wordString)) { // for output 2
+            mapForOutput2.put(wordString, mapForOutput2.get(wordString) + count);
+          } else {
+            mapForOutput2.put(wordString, count);
+          }
         }
 
-        
-        br.close();
-          
+        ArrayList<Map.Entry<String, Integer>> output1 = new ArrayList<>(mapForOutput1.entrySet());
+        Collections.sort(output1, new MyComparator());
 
-      } catch (Exception e) {
-        System.out.println(e);
+        System.out.println(urlString);
+        for (int i = 0; i < 3; i++) {
+          System.out.println(output1.get(i));
+        }
+        System.out.println();
+
+        bufferedReaderForWords.close();
+        bufferedReaderForUrlData.close();
+
       }
 
-    }
-
-    public static class MyComparator implements Comparator<Map.Entry<String, Integer>>{
-
-      public int compare(Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2){
-          return e2.getValue()-e1.getValue();
+      System.out.println("============================== \nOutput #2 \n======== \n");
+      ArrayList<Map.Entry<String, Integer>> output2 = new ArrayList<>(mapForOutput2.entrySet());
+      Collections.sort(output2, new MyComparator());
+      for (int i = 0; i < output2.size(); i++) {
+        System.out.println(output2.get(i));
       }
+
+      bufferedReaderForUrls.close();
+
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+
+  }
+
+  static class MyComparator implements Comparator<Map.Entry<String, Integer>> {
+
+    public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+      return entry2.getValue() - entry1.getValue();
+    }
+  }
 }
