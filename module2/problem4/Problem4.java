@@ -8,27 +8,28 @@ import java.util.Scanner;
 import java.util.Date;
 
 class Student implements Serializable {
-  private static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 100;
+
   String firstName;
   Date dateOfBirth;
   // String dateOfBirth;
   Address address;
-  
 
-  Student(String firstName, String dateOfBirth, Address address) {
+  Student(String firstName, String dateOfBirth, Address address) { //before changing the data type of date of birth
     this.firstName = firstName;
     this.dateOfBirth = new Date(dateOfBirth);
     this.address = address;
   }
 
-  // Student(String firstName, String dateOfBirth, Address address) {
-  //   this.firstName = firstName;
-  //   this.dateOfBirth = dateOfBirth;
-  //   this.address = address;
+  // Student(String firstName, String dateOfBirth, Address address) { //after changing the data type of date of birth
+  // this.firstName = firstName;
+  // this.dateOfBirth = dateOfBirth;
+  // this.address = address;
   // }
 
-  public String toString(){
-    return this.firstName+" "+this.dateOfBirth+" "+this.address.city+" "+this.address.country+" "+this.address.pinCode+" "+this.address.state; 
+  public String toString() {
+    return this.firstName + " " + this.dateOfBirth + " " + this.address.city + " " + this.address.country + " "
+        + this.address.pinCode + " " + this.address.state;
   }
 
 }
@@ -62,14 +63,15 @@ class SerializationTest {
     students.add(student4);
 
     try {
-      FileOutputStream fOutputStream = new FileOutputStream(
+      FileOutputStream fileOutputStream = new FileOutputStream(
           "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem4\\" + fileName);
-      ObjectOutputStream objoutputStream = new ObjectOutputStream(fOutputStream);
+      ObjectOutputStream objoutputStream = new ObjectOutputStream(fileOutputStream);
 
       objoutputStream.writeObject(students);
       objoutputStream.close();
+      fileOutputStream.close();
 
-      System.out.println("Serialized");
+      System.out.println("Serialized\n");
     } catch (Exception e) {
       System.out.println(e);
     }
@@ -77,52 +79,62 @@ class SerializationTest {
 
 }
 
-class DeserializationTest{
-  void deserialize(String fileName){
-     try {
-       FileInputStream fileInputStream = new FileInputStream("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem4\\" + fileName);
-       ObjectInputStream objInputStream = new ObjectInputStream(fileInputStream);
-       ArrayList<Student> students = (ArrayList<Student>)objInputStream.readObject();
-       objInputStream.close();
-       for (Student student : students) {
-         System.out.println(student.toString());
-       }
+class DeserializationTest {
+  void deserialize(String fileName) {
+    try {
+      FileInputStream fileInputStream = new FileInputStream(
+          "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem4\\" + fileName);
+      ObjectInputStream objInputStream = new ObjectInputStream(fileInputStream);
+      ArrayList<Student> students = (ArrayList<Student>) objInputStream.readObject();
+      objInputStream.close();
+      fileInputStream.close();
 
-       System.out.println("Deserialized");
-     } catch (Exception e) {
-       System.out.println(e);
-     }
-  }
-}
-
-public class Problem4{
-  public static void main(String[] args) {
-    while (true) {
-      System.out.println("Enter 1 to serialize");
-      System.out.println("Enter 2 to deserialize");
-
-      Scanner sc = new Scanner(System.in);
-      int choice = sc.nextInt();
-
-      switch (choice) {
-        case 1:
-          System.out.println("Enter file name: ");
-          String fileName = sc.next();
-          new SerializationTest().serialize(fileName);
-          System.out.println("---------------------------\n");
-          break;
-        
-        case 2:
-          System.out.println("Enter file name: ");
-          fileName = sc.next();
-          new DeserializationTest().deserialize(fileName);
-          System.out.println("---------------------------\n");
-          break;
-
-        default:
-          break;
+      for (Student student : students) {
+        System.out.println(student.toString());
       }
+
+      System.out.println("Deserialized");
+    } catch (Exception e) {
+      System.out.println(e);
     }
   }
 }
 
+public class Problem4 {
+  public static void main(String[] args) {
+    try {
+      Scanner sc = new Scanner(System.in);
+
+      while (true) {
+        System.out.println("Enter 1 to serialize");
+        System.out.println("Enter 2 to deserialize");
+
+        int choice = sc.nextInt();
+
+        switch (choice) {
+          case 1:
+            System.out.println("Enter the file name: ");
+            String fileName = sc.next();
+            new SerializationTest().serialize(fileName);
+            System.out.println("---------------------------\n");
+            break;
+
+          case 2:
+            System.out.println("Enter the file name: ");
+            fileName = sc.next();
+            new DeserializationTest().deserialize(fileName);
+            System.out.println("---------------------------\n");
+            break;
+
+          default:
+            System.out.println("---------------------------\n");
+            System.out.println("Program terminated successfully.");
+        }
+      }
+
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+
+  }
+}
