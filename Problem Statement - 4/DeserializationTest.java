@@ -11,9 +11,7 @@ public class DeserializationTest {
 
         Scanner input = new Scanner(System.in); // Create a Scanner object
         System.out.println("Enter The Filename : ");
-
         String fileName = input.nextLine(); // Read user input
-
         List<Student> studentList = null; // For storing
 
         // Deserialization
@@ -23,14 +21,11 @@ public class DeserializationTest {
             ObjectInputStream in = new ObjectInputStream(file);
 
             // Method for deserialization of object
-
             studentList = (List<Student>) in.readObject();
-
             in.close();
             file.close();
 
             // printing the objects --
-
             for (Student stu : studentList) {
                 System.out.println(stu);
             }
@@ -40,6 +35,5 @@ public class DeserializationTest {
             // Exception handling
             System.out.println(ex);
         }
-
     }
 }

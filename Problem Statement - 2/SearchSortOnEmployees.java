@@ -15,10 +15,8 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 // Creating an employee class
-
 class Employee {
     private int id;
     private String name;
@@ -27,7 +25,6 @@ class Employee {
     private Date dob;
 
     // Constructor --
-
     Employee(int id, String name, String email, int age, Date dob) {
         this.id = id;
         this.name = name;
@@ -37,7 +34,6 @@ class Employee {
     }
 
     // Getters and Setters
-
     public int getId() {
         return id;
     }
@@ -79,7 +75,6 @@ class Employee {
     }
 
     // for printing purpose
-
     public String toString() {
         return "Id : " + this.id + ", Name : " + this.name + ", email : " + this.email + ", age : " + this.age
                 + ", DOB : "
@@ -98,13 +93,10 @@ public class SearchSortOnEmployees {
     public static void main(String args[]) {
 
         // Creating file
-
         try {
-
             File Obj = new File("employees.txt");
 
             // Reading from the file and adding all the content to the list
-
             Scanner Reader = new Scanner(Obj);
             while (Reader.hasNextLine()) {
                 String data = Reader.nextLine();
@@ -121,7 +113,6 @@ public class SearchSortOnEmployees {
         }
 
         // Creating Menu --
-
         Boolean onMenu = true;
 
         while (onMenu) {
@@ -130,10 +121,9 @@ public class SearchSortOnEmployees {
             System.out.println("Enter 2 For Delete Employee From the file");
             System.out.println("Enter 3 For Searching from From the file");
             System.out.println("Enter any other number to Exit");
+
             // Taking input from user
-
             int menuInput = 1;
-
             try {
                 menuInput = input.nextInt();
 
@@ -175,58 +165,43 @@ public class SearchSortOnEmployees {
     }
 
     // function to create object by giving a informatic string
-
     public static Employee createObject(String str) throws Exception {
 
         List<String> list = Arrays.asList(str.split("\\s*,\\s*"));
 
         // System.out.println(list);
-
         int id = Integer.parseInt(list.get(0).trim());
-
         String name = list.get(1).trim();
         String email = list.get(2).trim();
         int age = Integer.parseInt(list.get(3).trim());
         Date date = simpleDate.parse(list.get(4).trim());
 
         // Creating Object by calling constructor
-
         Employee emp = new Employee(id, name, email, age, date);
-
         return emp;
-
     }
 
     // function to add employee in file
-
     public static void addEmployee() throws IOException, ParseException {
 
         try {
-
             // Taking all the inputs
-
             InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader bufferReader = new BufferedReader(isr);
-
             System.out.println("Enter the Name : ");
-
             String name = bufferReader.readLine();
 
             // For checking if the data entered by the user is valid or not
-
             String nameRegex = "[a-zA-Z ]+";
-
             while (!name.matches(nameRegex)) {
                 System.out.println("\nEnter a valid name!! \n");
                 name = bufferReader.readLine();
             }
 
             System.out.println("Enter the Email : ");
-
             String email = bufferReader.readLine();
 
             // For checking if the data entered by the user is valid or not
-
             String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                     "[a-zA-Z0-9_+&*-]+)*@" +
                     "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
@@ -236,29 +211,21 @@ public class SearchSortOnEmployees {
                 System.out.println("\nEnter a valid Email!! \n");
                 email = bufferReader.readLine();
             }
-
             System.out.println("Enter the Age : ");
-
             Integer age = input.nextInt();
 
             System.out.println("Enter the Date Of Birth : ");
-
             String dobInString = bufferReader.readLine();
-
             Date dob = simpleDate.parse(dobInString);
-
             Employee emp = new Employee(idCounter, name, email, age, dob);
 
             // Adding employee to the list
-
             employeeList.add(emp);
 
             // increasing id
-
             idCounter++;
 
             // ReWriting in a file --
-
             rewriteTheFile();
 
         } catch (IOException exception) {
@@ -270,16 +237,13 @@ public class SearchSortOnEmployees {
         }
 
         // Giving output that employee is created and added to the file
-
         System.out.println("\n Employee added successfully \n");
 
     }
 
     // for employee deletion
-
     public static void deleteEmployee() {
         System.out.println("Enter the id to delete : ");
-
         int toDeleteId = input.nextInt();
 
         // looping through the list for finding the element
@@ -295,28 +259,22 @@ public class SearchSortOnEmployees {
     }
 
     // rewriting the file
-
     public static void rewriteTheFile() {
         // Writing in a file --
-
         try {
-
             // Open given file in append mode by creating an
             // object of BufferedWriter class
             BufferedWriter out = new BufferedWriter(
                     new FileWriter("employees.txt"));
 
             // Writing on output stream
-
             // looping through the list and writing the objects
-
             for (Employee emp : employeeList) {
                 out.write(emp.getId() + ", " + emp.getName() + ", " + emp.getEmail() + ", " + emp.getAge() + ", "
                         + simpleDate.format(emp.getDob()) + "\n");
             }
 
             // Closing the connection
-
             out.close();
         }
 
@@ -334,17 +292,14 @@ public class SearchSortOnEmployees {
 
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader bufferReader = new BufferedReader(isr);
-
         System.out.println("Enter the text to search : ");
 
         // Making it lowercase so that it will not be case sensitive
-
         String textToSearch = bufferReader.readLine().toLowerCase();
 
         List<Employee> searchResult = new ArrayList<Employee>();
 
         // Looping through employee for finding the matching text objects
-
         for (Employee emp : employeeList) {
 
             // creating an employee string so that we can search for text in it
@@ -357,7 +312,6 @@ public class SearchSortOnEmployees {
         }
 
         // Asking how user wants to sort content
-
         System.out.println("How do you want to sort the content -- ?? ");
         System.out.println("Enter 1 to sort by ID");
         System.out.println("Enter 2 to sort by Name");
@@ -368,28 +322,23 @@ public class SearchSortOnEmployees {
         int inputForSortingOpeartion = input.nextInt();
 
         // Asking user for the direction of sorting ascending or descending
-
         System.out.println("Direction for sorting - ");
         System.out.println("Enter 1 for Ascending and 2 for Descending ");
 
         int inputForSortingDirection = input.nextInt();
 
         // soryting the list by calling the sortlist method
-
         searchResult = sortList(searchResult, inputForSortingOpeartion, inputForSortingDirection == 1 ? true : false);
 
         // Printing Users search result --
-
         System.out.println("Your Result - ");
 
         // if no results exists
-
         if (searchResult.size() <= 0) {
             System.out.println("No Results Found");
         }
 
         // if results exists
-
         for (Employee emp : searchResult) {
             System.out.println(emp);
         }
@@ -397,48 +346,40 @@ public class SearchSortOnEmployees {
     }
 
     // for converting an object into a string
-
     public static String objectToString(Employee emp) {
         return emp.getId() + emp.getName() + emp.getEmail() + emp.getAge() + simpleDate.format(emp.getDob());
     }
 
     // for applying order sort on list
-
     public static List<Employee> sortList(List<Employee> listToSort, int sortBy, Boolean isAscending) {
 
         // Creating different Comparartors --
-
         // By Id comparator --
         Comparator<Employee> sortByIDComparator = Comparator.comparing(
                 Employee::getId,
                 isAscending ? Comparator.naturalOrder() : Comparator.reverseOrder());
 
         // By Name comparator
-
         Comparator<Employee> sortByNameComparator = Comparator.comparing(
                 Employee::getName,
                 isAscending ? Comparator.naturalOrder() : Comparator.reverseOrder());
 
         // By Email comparator
-
         Comparator<Employee> sortByEmailComparator = Comparator.comparing(
                 Employee::getEmail,
                 isAscending ? Comparator.naturalOrder() : Comparator.reverseOrder());
 
         // By Age comparator
-
         Comparator<Employee> sortByAgeComparator = Comparator.comparing(
                 Employee::getAge,
                 isAscending ? Comparator.naturalOrder() : Comparator.reverseOrder());
 
         // By DOB comparator
-
         Comparator<Employee> sortByDOBComparator = Comparator.comparing(
                 Employee::getDob,
                 isAscending ? Comparator.naturalOrder() : Comparator.reverseOrder());
 
         // Switch case for based on different sorting sitiuation like name ... id etc
-
         switch (sortBy) {
             case 1:
                 Collections.sort(listToSort, sortByIDComparator);
@@ -460,7 +401,6 @@ public class SearchSortOnEmployees {
         }
 
         // returning the sorted list
-
         return listToSort;
     }
 }

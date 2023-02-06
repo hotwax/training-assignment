@@ -37,7 +37,7 @@ After that I recreated the  output1.ser with SerializationTest  having date stri
 
 Now made changes to the Student Class and made date to Date Type of java.util.
 
-When I am Deserializing it getting this exception – 
+When I am Deserializing it, getting this exception – 
 
 java.lang.ClassCastException: cannot assign instance of java.lang.String to field
 Student.dateOfBirth of type java.util.Date in instance of Student
@@ -49,3 +49,6 @@ to cast an object to a class (or in some instances, an interface) and fails. Thi
 relates to explicit type casting [3] and the reason the cast fails can be traced to
 an attempt at downcasting an object to a class of which it is not an instance, or to
 an interface which it does not implement.
+
+ --- We can also solve this issue by creating dateOfBirth Instance member as Object type. 
+After this there is no issue in deserialization means getting no exception.

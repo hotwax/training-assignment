@@ -14,15 +14,14 @@ import java.util.Scanner;
 
 class Address implements Serializable {
 
+    // explicitly declare and initialize serialVersionUID
     private static final long serialVersionUID = 652;
-
     private String city;
     private String state;
     private String country;
     private int pinCode;
 
     // Getters and Setters
-
     public String getCity() {
         return city;
     }
@@ -56,14 +55,12 @@ class Address implements Serializable {
     }
 
     // Constructor
-
     Address(String city, String state, String country, int pinCode) {
         this.city = city;
         this.country = country;
         this.state = state;
         this.pinCode = pinCode;
     }
-
 }
 
 // A Student class --
@@ -85,30 +82,25 @@ class Student implements Serializable {
      */
 
     // private static final long serialVersionUID = 652;
-
     String firstName;
 
     // Initial
-    // String dateOfBirth;
+    // Object dateOfBirth;
 
     // After Change
-    Date dateOfBirth;
-
+    Object dateOfBirth;
     Address address;
 
     // iniatilizing simple date object for formatting
     SimpleDateFormat simpleDate = new SimpleDateFormat("dd/mm/yyyy"); // for date formatting
 
     // Constructor
-
     Student(String firstName, String dateOfBirth, Address address) {
         try {
-
             this.firstName = firstName;
             this.address = address;
             // After Change
             this.dateOfBirth = simpleDate.parse(dateOfBirth);
-
             // Initial
             // this.dateOfBirth = dateOfBirth;
         } catch (Exception exp) {
@@ -117,7 +109,6 @@ class Student implements Serializable {
     }
 
     // for printing purpose
-
     public String toString() {
         return "First Name : " + this.firstName + ", Address : " + this.address.getCity() + ", DOB : "
                 + this.dateOfBirth;
@@ -141,41 +132,30 @@ class TestForSerailization {
     }
 
     // Functions for initializing Data Members
-
     public void setStu1() {
-
         Address newAddress = new Address("Bamhori", "Madhya Pradesh", "India", 464672);
-
         this.stu1 = new Student("Sanskar", "19/03/2002", newAddress);
     }
 
     public void setStu2() {
-
         Address newAddress = new Address("Bhopal", "Madhya Pradesh", "India", 464600);
-
         this.stu2 = new Student("Shubham", "22/03/2002", newAddress);
     }
 
     public void setStu3() {
-
         Address newAddress = new Address("Shamgarh", "Madhya Pradesh", "India", 460072);
-
         this.stu3 = new Student("Pratham", "29/08/2002", newAddress);
     }
 
     public void setStu4() {
-
         Address newAddress = new Address("Indore", "Madhya Pradesh", "India", 452010);
-
         this.stu4 = new Student("Sumit", "28/03/2002", newAddress);
     }
 
     public void runTest(String fileName) {
 
         // Creating a list and adding objects into it
-
         List<Student> studentList = new ArrayList<Student>();
-
         studentList.add(this.stu1);
         studentList.add(this.stu2);
         studentList.add(this.stu3);
@@ -189,10 +169,8 @@ class TestForSerailization {
 
             // Method for serialization of object
             out.writeObject(studentList);
-
             out.close();
             file.close();
-
             System.out.println("Object has been serialized");
 
         } catch (FileNotFoundException ex) {
@@ -208,14 +186,11 @@ public class SerializationTest {
     public static void main(String args[]) {
 
         TestForSerailization test = new TestForSerailization();
-
         Scanner input = new Scanner(System.in); // Create a Scanner object
         System.out.println("Enter The Filename : ");
-
         String fileName = input.nextLine(); // Read user input
 
         // calling the test method of test class which serializes the objects
-
         test.runTest(fileName);
 
     }
