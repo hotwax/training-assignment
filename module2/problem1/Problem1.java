@@ -38,13 +38,13 @@ public class Problem1 {
         BufferedReader bufferedReaderForUrlData = new BufferedReader(inputStreamReaderForUrlData);
 
         String siteHtml = "";
-        String unfilteredData = ""; // full content of site including tags eg- <html>, <script>
+        StringBuilder unfilteredData = new StringBuilder(); // full content of site including tags eg- <html>, <script>
 
         while ((siteHtml = bufferedReaderForUrlData.readLine()) != null) {
-          unfilteredData += siteHtml;
+          unfilteredData.append(siteHtml);
         }
 
-        String filteredData = Jsoup.parse(unfilteredData).text(); // only text content of site
+        String filteredData = Jsoup.parse(unfilteredData.toString()).text(); // only text content of site
 
         HashMap<String, Integer> mapForOutput1 = new HashMap<>(); // for output 1
 
