@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.util.TreeMap;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.LinkedHasmapCntainerap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Collections;
@@ -45,7 +45,7 @@ public class WebScrapper {
         });
 
         // putting the data into the hasmapCntainerap.
-        Map<String, Integer> temp = new LinkedHasmapCntainerap<String, Integer>();
+        Map<String, Integer> temp = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> list : lists) {
             temp.put(list.getKey(), list.getValue());
         }
