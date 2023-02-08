@@ -78,3 +78,166 @@ Ans- select sp.snum, sp.sname, o.onum, o.odate, o.amt
 | 1007 | Rfkin   | 3006 | 1990-10-03 | 1098.16 |
 +------+---------+------+------------+---------+
 
+6) List names of all customers matched with the salespeople serving them. 
+Ans- select c.cnum, c.cname, s.sname
+		from salespeople s, customers c
+		where s.snum=c.snum;
++------+----------+---------+
+| cnum | cname    | sname   |
++------+----------+---------+
+| 2001 | Hoffman  | Peel    |
+| 2002 | Giovanni | AxelRod |
+| 2003 | liu      | Serres  |
+| 2004 | Grass    | Serres  |
+| 2006 | Cisneros | Rfkin   |
+| 2006 | Cisneros | Peel    |
+| 2007 | Pereira  | Motika  |
++------+----------+---------+
+
+7) Find the names and numbers of all salespeople who have more than one customer. 
+Ans- select s.sname, s.snum, count(c.snum) as no_orders
+		from salespeople s, customers c
+		where s.snum=c.snum
+		group by s.snum,s.sname
+		having count(c.snum)>1;
++--------+------+-----------+
+| sname  | snum | no_orders |
++--------+------+-----------+
+| Peel   | 1001 |         2 |
+| Serres | 1002 |         2 |
++--------+------+-----------+
+
+8) Count the orders of each of the salespeople and output the results in descending order. 
+Ans- select s.sname, s.snum, count(c.snum) as no_orders
+     from salespeople s, customers c
+     where s.snum=c.snum
+     group by s.snum,s.sname
+     order by count(c.snum) desc;
++---------+------+-----------+
+| sname   | snum | no_orders |
++---------+------+-----------+
+| Peel    | 1001 |         2 |
+| Serres  | 1002 |         2 |
+| AxelRod | 1003 |         1 |
+| Rfkin   | 1007 |         1 |
+| Motika  | 1004 |         1 |
++---------+------+-----------+
+
+9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
+Ans- select * from customers
+		where (select count(city) from customers where city='SanJose')>=1;
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2001 | Hoffman  | London  | 100    | 1001 |
+| 2002 | Giovanni | Rome    | 200    | 1003 |
+| 2003 | liu      | SanJose | 200    | 1002 |
+| 2004 | Grass    | Berlin  | 300    | 1002 |
+| 2006 | Cisneros | SanJose | 300    | 1007 |
+| 2006 | Cisneros | London  | 100    | 1001 |
+| 2007 | Pereira  | Rome    | 100    | 1004 |
++------+----------+---------+--------+------+
+
+10) Match salespeople to customers according to what city they live in. 
+Ans- select s.snum, s.sname, c.cnum, c.cname
+		from salespeople s, customers c
+		where c.city=s.city
+		order by s.snum;
++------+--------+------+----------+
+| snum | sname  | cnum | cname    |
++------+--------+------+----------+
+| 1001 | Peel   | 2001 | Hoffman  |
+| 1001 | Peel   | 2006 | Cisneros |
+| 1002 | Serres | 2003 | liu      |
+| 1002 | Serres | 2006 | Cisneros |
+| 1004 | Motika | 2001 | Hoffman  |
+| 1004 | Motika | 2006 | Cisneros |
+| 1008 | Fran   | 2001 | Hoffman  |
+| 1008 | Fran   | 2006 | Cisneros |
++------+--------+------+----------+
+
+11) Find all the customers in SanJose who have a rating above 200. 
+Ans- select * from customers
+		where city='SanJose' AND rating>200;
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2006 | Cisneros | SanJose | 300    | 1007 |
++------+----------+---------+--------+------+
+
+12) List the names and commissions of all salespeople in London. 
+Ans- select sname, comm
+		from salespeople
+		where city='London';
++--------+------+
+| sname  | comm |
++--------+------+
+| Peel   |   12 |
+| Motika |   11 |
+| Fran   |   25 |
++--------+------+
+
+13) List all the orders of Salesperson Motika from the orders table.
+Ans- select o.onum, o.amt, o.odate, o.cnum, s.snum, s.sname
+		from orders o, salespeople s
+		where o.snum=s.snum AND s.sname='Motika';
++------+--------+------------+------+------+--------+
+| onum | amt    | odate      | cnum | snum | sname  |
++------+--------+------------+------+------+--------+
+| 3002 | 1900.1 | 1990-10-03 | 2007 | 1004 | Motika |
++------+--------+------------+------+------+--------+
+
+14) Find all customers who booked orders on October 3. 
+Ans- select c.cnum, c.cname, c.city, c.rating, o.onum, o.amt, o.odate
+		from customers c, orders o
+		where c.cnum=o.cnum AND o.odate='1990-10-3';
++------+---------+---------+--------+------+---------+------------+
+| cnum | cname   | city    | rating | onum | amt     | odate      |
++------+---------+---------+--------+------+---------+------------+
+| 2001 | Hoffman | London  | 100    | 3003 |  767.19 | 1990-10-03 |
+| 2003 | liu     | SanJose | 200    | 3005 | 5160.45 | 1990-10-03 |
+| 2007 | Pereira | Rome    | 100    | 3002 |  1900.1 | 1990-10-03 |
++------+---------+---------+--------+------+---------+------------+
+
+15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
+Ans- SELECT odate, sum(amt) as total_amt
+		FROM orders a
+		GROUP BY odate
+		HAVING total_amt >(SELECT 2000 + max(amt) FROM orders );
+Empty set 
+
+16) Select all orders that had amounts that were greater than at least one of the orders from October 6. 
+Ans- select * from orders
+		where amt>(select min(amt) from orders where odate='1990-10-06');
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+17) Write a query that uses the EXISTS operator to extract all salespeople who have customers with a rating of 300.
+Ans- select * from salespeople s
+	    where exists (select snum from customers c where s.snum=c.snum and rating=300);
++------+--------+-----------+------+
+| snum | sname  | city      | comm |
++------+--------+-----------+------+
+| 1002 | Serres | SanJose   |   13 |
+| 1007 | Rfkin  | Barcelona |   15 |
++------+--------+-----------+------+
+
+ 18) Find all customers whose cnum is 1000 above the snum of Serres. 
+Ans- select * from customers
+		where cnum>(select snum+1000 from salespeople where sname='Serres');
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2003 | liu      | SanJose | 200    | 1002 |
+| 2004 | Grass    | Berlin  | 300    | 1002 |
+| 2006 | Cisneros | SanJose | 300    | 1007 |
+| 2006 | Cisneros | London  | 100    | 1001 |
+| 2007 | Pereira  | Rome    | 100    | 1004 |
++------+----------+---------+--------+------+
