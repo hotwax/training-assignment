@@ -20,4 +20,22 @@ Ans- select * from customers where rating=200;
 | 2003 | liu      | SanJose | 200    | 1002 |
 +------+----------+---------+--------+------+
 
-
+3) Find the largest order taken by each salesperson on each date. 
+Ans- select s.snum,s.sname,max(o.amt),o.odate from salespeople s , orders o 
+		where s.snum = o.snum
+		GROUP BY S.SNUM,s.sname,o.odate
+		order by s.snum
++------+---------+------------+------------+
+| snum | sname   | max(o.amt) | odate      |
++------+---------+------------+------------+
+| 1001 | Peel    |     767.19 | 1990-10-03 |
+| 1001 | Peel    |       4723 | 1990-10-05 |
+| 1001 | Peel    |    9891.88 | 1990-10-06 |
+| 1002 | Serres  |    5160.45 | 1990-10-03 |
+| 1002 | Serres  |      75.75 | 1990-10-04 |
+| 1002 | Serres  |    1309.95 | 1990-10-06 |
+| 1003 | AxelRod |    1713.23 | 1990-10-04 |
+| 1004 | Motika  |     1900.1 | 1990-10-03 |
+| 1007 | Rfkin   |    1098.16 | 1990-10-03 |
++------+---------+------------+------------+
+	
