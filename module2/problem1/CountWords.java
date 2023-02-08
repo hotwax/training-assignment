@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.random;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,11 +23,10 @@ public class CountWords {
 
   public static void main(String[] args) {
     try {
-      FileReader fileReaderForUrls = new FileReader(
-          "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem1\\urls.txt");
+      FileReader fileReaderForUrls = new FileReader("urls.txt");
       BufferedReader bufferedReaderForUrls = new BufferedReader(fileReaderForUrls);
 
-      HashMap<String, Integer> mapForOutput2 = new HashMap<>(); // for output 2
+      HashMap<String, Integer> totalNumberOfOccurrences = new HashMap<>(); // total number of occurences of a word across all urls
 
       System.out.println("Output #1 \n======== \n");
 
@@ -46,16 +45,17 @@ public class CountWords {
 
         String filteredData = Jsoup.parse(unfilteredData.toString()).text(); // only text content of site
 
-        HashMap<String, Integer> mapForOutput1 = new HashMap<>(); // for output 1
+        // System.out.println(filteredData);
 
-        FileReader fileReaderForWords = new FileReader(
-            "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem1\\words.txt");
+        HashMap<String, Integer> numberOfOccurrences = new HashMap<>(); // number of occurences of a word in the present url 
+
+        FileReader fileReaderForWords = new FileReader("words.txt");
         BufferedReader bufferedReaderForWords = new BufferedReader(fileReaderForWords);
 
         String wordString = "";
         while ((wordString = bufferedReaderForWords.readLine()) != null) {
           String regex = wordString;
-          Pattern pattern = Pattern.compile(regex);
+          Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
           Matcher matcher = pattern.matcher(filteredData);
 
           int count = 0;
@@ -63,21 +63,21 @@ public class CountWords {
             count++;
           }
 
-          mapForOutput1.put(wordString, count); // for output 1
+          numberOfOccurrences.put(wordString, count); // occurences of the word in the present url
 
-          if (mapForOutput2.containsKey(wordString)) { // for output 2
-            mapForOutput2.put(wordString, mapForOutput2.get(wordString) + count);
+          if (totalNumberOfOccurrences.containsKey(wordString)) { // total number of occurences of the word across all urls
+            totalNumberOfOccurrences.put(wordString, totalNumberOfOccurrences.get(wordString) + count);
           } else {
-            mapForOutput2.put(wordString, count);
+            totalNumberOfOccurrences.put(wordString, count);
           }
         }
 
-        ArrayList<Map.Entry<String, Integer>> output1 = new ArrayList<>(mapForOutput1.entrySet());
-        Collections.sort(output1, new MyComparator());
+        ArrayList<Map.Entry<String, Integer>> arrayListForNumberOfOccurrences = new ArrayList<>(numberOfOccurrences.entrySet());
+        Collections.sort(arrayListForNumberOfOccurrences, new MyComparator());
 
         System.out.println(urlString);
         for (int i = 0; i < 3; i++) {
-          System.out.println(output1.get(i));
+          System.out.println(arrayListForNumberOfOccurrences.get(i));
         }
         System.out.println();
 
@@ -87,10 +87,10 @@ public class CountWords {
       }
 
       System.out.println("============================== \nOutput #2 \n======== \n");
-      ArrayList<Map.Entry<String, Integer>> output2 = new ArrayList<>(mapForOutput2.entrySet());
-      Collections.sort(output2, new MyComparator());
-      for (int i = 0; i < output2.size(); i++) {
-        System.out.println(output2.get(i));
+      ArrayList<Map.Entry<String, Integer>> arrayListForTotalNumberOfOccurrences = new ArrayList<>(totalNumberOfOccurrences.entrySet());
+      Collections.sort(arrayListForTotalNumberOfOccurrences, new MyComparator());
+      for (int i = 0; i < arrayListForTotalNumberOfOccurrences.size(); i++) {
+        System.out.println(arrayListForTotalNumberOfOccurrences.get(i));
       }
 
       bufferedReaderForUrls.close();
