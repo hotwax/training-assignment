@@ -61,8 +61,8 @@ public class WebScrapper {
         String dir = System.getProperty("user.dir");
 
         // get url and words files
-        File urls = new File(dir + "/Program1/src/urls.txt");
-        File words = new File(dir + "/Program1/src/words.txt");
+        File urls = new File(dir + "/src/Program1/src/urls.txt");
+        File words = new File(dir + "/src/Program1/src/words.txt");
         String key;
 
         // read words file and add to wordCount map

@@ -8,3 +8,9 @@
 7, Akshat Jaiswal, ak@123.com, 21, 12/03/2002
 8, Rishika Jain, rishikajain@gmail.com, 20, 20/11/2002
 9, Dhruv Singh, singhdhruv@gmail.com, 17, 18/03/2005
+10,Sarah Kaur,sarahkaur@email.com,22,12/08/2001
+11,Tom Malhotra,tommalhotra@email.com,30,25/10/1993
+12,Linda Patel,lindapatel@email.com,24,15/06/1999
+13,Mark Sharma,marksharma@email.com,26,04/08/1998
+14,Emily Chaudhary,emilychaudhary@email.com,29,12/05/1994
+15,James Singh,jamessingh@email.com,23,15/02/2000

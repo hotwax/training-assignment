@@ -21,10 +21,10 @@ class Account {
         }
         if(balance >= amount){
             balance -= amount;
-            System.out.println("Account Holder: "+name +"\nWithdrawal Amount: " + amount + " | Current Balance: " + balance);
+            System.out.println("Account Holder: "+person +"\nWithdrawal Amount: " + amount + " | Current Balance: " + balance);
             return  true;
         } else {
-            System.out.println("Account Holder: "+name+" \n Sorry!!! Insufficient Balance");
+            System.out.println("Account Holder: "+person+" \n Sorry!!! Insufficient Balance");
         }
         return false;
     }
@@ -53,7 +53,6 @@ class AccountOverdrawDemo extends Thread{
         // Creating two threads
         AccountOverdrawDemo Aman = new AccountOverdrawDemo(acc1,"Aman");
         AccountOverdrawDemo Gaurav = new AccountOverdrawDemo(acc1,"Gaurav");
-        //
         Aman.start();
         Gaurav.start();
     }

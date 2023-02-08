@@ -17,10 +17,10 @@ class AccountSafe {
         }
         if(balance >= amount){
             balance -= amount;
-            System.out.println("Account Holder: "+name +"\nWithdrawal Amount: " + amount + " | Current Balance: " + balance);
+            System.out.println("Account Holder: "+ name +"\n Withdrawal Amount: " + amount + " | Current Balance: " + balance);
             return  true;
         } else {
-            System.out.println("Account Holder: "+name+" Sorry!!! Insufficient Balance");
+            System.out.println("Account Holder: "+ name +" Sorry!!! Insufficient Balance");
         }
         return false;
     }
