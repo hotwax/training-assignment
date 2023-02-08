@@ -10,3 +10,14 @@ Ans- select * from salespeople;
 | 1003 | AxelRod | New York  |   10 |
 | 1008 | Fran    | London    |   25 |
 +------+---------+-----------+------+
+
+2) List all customers with a rating of 100. 
+Ans- select * from customers where rating=200;
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2002 | Giovanni | Rome    | 200    | 1003 |
+| 2003 | liu      | SanJose | 200    | 1002 |
++------+----------+---------+--------+------+
+
+
