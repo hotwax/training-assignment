@@ -13,7 +13,7 @@ import java.io.FileWriter;
 
 import java.awt.Desktop;
 
-public class Problem2 {
+public class SearchAndSortOnEmployee {
 
   static Scanner sc = new Scanner(System.in);
 

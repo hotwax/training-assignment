@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
+import java.util.random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +19,7 @@ import org.jsoup.nodes.Document;
 
 //before compilation- set classpath=%classpath%;D:\Nidhi pal\hotwax\training-assignment\module2\problem1\jsoup-1.15.3.jar;
 
-public class Problem1 {
+public class CountWords {
 
   public static void main(String[] args) {
     try {

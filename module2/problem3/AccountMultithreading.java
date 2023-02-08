@@ -80,7 +80,7 @@ class AccountOverdrawSafeDemo extends Thread{
   }
 }
 
-public class Problem3 {
+public class AccountMultithreading {
 
   public static void main(String[] args) {
     Account account1 = new Account("account1");

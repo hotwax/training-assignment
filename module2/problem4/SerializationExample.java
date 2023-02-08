@@ -100,7 +100,7 @@ class DeserializationTest {
   }
 }
 
-public class Problem4 {
+public class SerializationExample {
   public static void main(String[] args) {
     try {
       Scanner sc = new Scanner(System.in);
