@@ -17,9 +17,11 @@ public class SearchAndSortOnEmployee {
 
   static Scanner sc = new Scanner(System.in);
 
-  static HashSet<Employee> set = new HashSet<>();
+  static HashSet<Employee> set = new HashSet<>(); 
+  // to store employees objects, hashset because it doesn't allow duplicate entries
 
-  static void add() {
+  static void add() {  
+    // here we will take employee's details from user, create an employee object, add object to set and call addToFile method
 
     try {
       System.out.println("Enter name of the employee: ");
@@ -39,7 +41,7 @@ public class SearchAndSortOnEmployee {
 
       set.add(employeeObject);
 
-      addToFile(employeeObject);
+      addToFile(employeeObject); // file handling
 
       System.out.println("Data is inserted successfully.");
       System.out.println("-------------------------------\n");
@@ -49,7 +51,9 @@ public class SearchAndSortOnEmployee {
 
   }
 
-  static void addToFile(Employee employeeObject) {
+  static void addToFile(Employee employeeObject) { 
+    // here we will perform file handling and add the employee object to employee.txt 
+
     try {
       String employeefilePath = "employees.txt";
       File employeefile = new File(employeefilePath);
@@ -65,7 +69,7 @@ public class SearchAndSortOnEmployee {
       bufferedWriter.close();
       fileWriter.close();
 
-      if (Desktop.isDesktopSupported()) {
+      if (Desktop.isDesktopSupported()) { // Desktop class is used to open employee.txt file after adding data to the file
         Desktop desktop = Desktop.getDesktop();
         desktop.open(employeefile);
       }
@@ -77,6 +81,7 @@ public class SearchAndSortOnEmployee {
   }
 
   static void delete() {
+    // here we will first remove the specified employee from set and rewrite the set data to employee.txt file
     try {
       System.out.println("Enter the email id of the employee: ");
       String emailId = sc.next();
@@ -109,7 +114,7 @@ public class SearchAndSortOnEmployee {
 
       System.out.println("Employee " + emailId + " is removed successfully.");
       System.out.println("-------------------------------\n");
-      if (Desktop.isDesktopSupported()) {
+      if (Desktop.isDesktopSupported()) { // Desktop class is used to open employee.txt file after adding data to the file
         Desktop desktop = Desktop.getDesktop();
         desktop.open(employeeFile);
       }
@@ -120,7 +125,8 @@ public class SearchAndSortOnEmployee {
 
   }
 
-  static void fetch() {
+  static void fetch() { 
+    // if employee.txt file is already present then we will fetch its data and add it to set.
     try {
       File employeeFile = new File("employees.txt");
       if (employeeFile.createNewFile() == false) { // employee.txt already exists
@@ -129,7 +135,7 @@ public class SearchAndSortOnEmployee {
         String employee = "";
         while ((employee = bufferedReader.readLine()) != null) {
 
-          String[] employeeData = employee.split(", ");
+          String[] employeeData = employee.split(", "); // all employee's data
 
           Employee employeeObject = new Employee();
           employeeObject.setName(employeeData[0].split(" ")[1]);
@@ -164,7 +170,9 @@ public class SearchAndSortOnEmployee {
       System.out.println("Enter the direction to sort (ascending or descending): ");
       String direction = sc.next(); // ascending or descending
 
-      ArrayList<Employee> resultOfSearchAndSort = new ArrayList<>();
+      ArrayList<Employee> resultOfSearchAndSort = new ArrayList<>(); 
+      // if user has chosen field as "name" and fieldName as "Ram" then all employees with "Ram" name
+      // will get added to this arraylist
 
       if (field.equals("name")) {
         for (Employee employee : set) {
@@ -183,6 +191,7 @@ public class SearchAndSortOnEmployee {
         }
       }
 
+      // to sort the resultOfSearchAndSort arraylist data in ascending or descending order.
       if (sortBY.equals("name")) {
         resultOfSearchAndSort.sort(Comparator.comparing(Employee::getName,
             direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
@@ -194,6 +203,7 @@ public class SearchAndSortOnEmployee {
             direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
       }
 
+      //display the result obtained of resultOfSearchAndSort
       for (Employee employeeObj : resultOfSearchAndSort) {
         System.out.println(
             "Name: " + employeeObj.getName() + ", Age: " + employeeObj.getAge() + ", Email: " + employeeObj.getEmail()
@@ -223,15 +233,15 @@ public class SearchAndSortOnEmployee {
 
         switch (choice) {
           case 1:
-            add();
+            add(); // add an employee
             break;
 
           case 2:
-            delete();
+            delete(); // delete an employee
             break;
 
           case 3:
-            searchAndSort();
+            searchAndSort(); // search and sort the employees objects
             break;
 
           default:
