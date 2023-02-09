@@ -15,21 +15,24 @@ class Student implements Serializable {
   // with respect to serialization. 
 
   String firstName;
-  Date dateOfBirth;
+  // Date dateOfBirth;
   // String dateOfBirth;
+  Object dateOfBirth;
   Address address;
 
-  Student(String firstName, String dateOfBirth, Address address) { //before changing the data type of date of birth
+  // Student(String firstName, String dateOfBirth, Address address) { //before changing the data type of date of birth from string to date
+  // this.firstName = firstName;
+  // this.dateOfBirth = dateOfBirth;
+  // this.address = address;
+  // }
+
+  Student(String firstName, String dateOfBirth, Address address) { //after changing the data type of date of birth from string to date
     this.firstName = firstName;
     this.dateOfBirth = new Date(dateOfBirth);
     this.address = address;
   }
 
-  // Student(String firstName, String dateOfBirth, Address address) { //after changing the data type of date of birth
-  // this.firstName = firstName;
-  // this.dateOfBirth = dateOfBirth;
-  // this.address = address;
-  // }
+  
 
   public String toString() {
     return this.firstName + " " + this.dateOfBirth + " " + this.address.city + " " + this.address.country + " "
@@ -131,6 +134,7 @@ public class SerializationExample {
           default:
             System.out.println("---------------------------\n");
             System.out.println("Program terminated successfully.");
+            return;
         }
       }
 
