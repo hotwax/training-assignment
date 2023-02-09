@@ -23,7 +23,12 @@ public class CountWords {
 
   public static void main(String[] args) {
     try {
-      FileReader fileReaderForUrls = new FileReader("urls.txt");
+      FileReader fileReaderForUrls = new FileReader("urls.txt");  
+       
+      //or we can use 
+      // String currentDirPath = System.getProperty("user.dir");
+      // FileReader fileReaderForUrls = new FileReader(currentDirPath+"\\urls.txt");
+
       BufferedReader bufferedReaderForUrls = new BufferedReader(fileReaderForUrls);
 
       HashMap<String, Integer> totalNumberOfOccurrences = new HashMap<>(); // total number of occurences of a word across all urls

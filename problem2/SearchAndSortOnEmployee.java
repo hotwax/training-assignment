@@ -51,7 +51,7 @@ public class SearchAndSortOnEmployee {
 
   static void addToFile(Employee employeeObject) {
     try {
-      String employeefilePath = "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt";
+      String employeefilePath = "employees.txt";
       File employeefile = new File(employeefilePath);
       employeefile.createNewFile();
       FileWriter fileWriter = new FileWriter(employeefilePath, true); // true- appends to file
@@ -91,7 +91,7 @@ public class SearchAndSortOnEmployee {
         }
       }
 
-      String employeeFilePath = "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt";
+      String employeeFilePath = "employees.txt";
       File employeeFile = new File(employeeFilePath);
       FileWriter fileWriter = new FileWriter(employeeFilePath);
       BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -122,10 +122,9 @@ public class SearchAndSortOnEmployee {
 
   static void fetch() {
     try {
-      File employeeFile = new File("D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
+      File employeeFile = new File("employees.txt");
       if (employeeFile.createNewFile() == false) { // employee.txt already exists
-        FileReader fileReader = new FileReader(
-            "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem2\\employees.txt");
+        FileReader fileReader = new FileReader("employees.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String employee = "";
         while ((employee = bufferedReader.readLine()) != null) {

@@ -63,8 +63,7 @@ class SerializationTest {
     students.add(student4);
 
     try {
-      FileOutputStream fileOutputStream = new FileOutputStream(
-          "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem4\\" + fileName);
+      FileOutputStream fileOutputStream = new FileOutputStream(fileName);
       ObjectOutputStream objoutputStream = new ObjectOutputStream(fileOutputStream);
 
       objoutputStream.writeObject(students);
@@ -82,8 +81,7 @@ class SerializationTest {
 class DeserializationTest {
   void deserialize(String fileName) {
     try {
-      FileInputStream fileInputStream = new FileInputStream(
-          "D:\\Nidhi pal\\hotwax\\training-assignment\\module2\\problem4\\" + fileName);
+      FileInputStream fileInputStream = new FileInputStream(fileName);
       ObjectInputStream objInputStream = new ObjectInputStream(fileInputStream);
       ArrayList<Student> students = (ArrayList<Student>) objInputStream.readObject();
       objInputStream.close();
