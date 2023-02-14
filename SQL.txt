@@ -972,7 +972,7 @@ WHERE city!=ANY (SELECT city FROM customers);
 Ans-
 SELECT c.cname, c.city,s.sname, s.city
 FROM customers c, salespeople s
-WHERE EXISTS (SELECT * FROM salespeople, orders
+WHERE EXISTS (SELECT * FROM salespeople
 WHERE s.snum!=c.snum
 AND s.city=c.city);
 
@@ -1065,28 +1065,32 @@ HAVING COUNT>1;
 
 72) Write a query that extracts from the customer’s table every customer assigned to a salesperson, who is currently having at least one another customer(besides the customer being selected) with orders in the Orders Table. 
 Ans-
-SELECT c.cnum, c.cname, s.snum, s.sname, COUNT(s.snum) AS count
-FROM salespeople s, orders o,customers c
-WHERE s.snum=o.snum AND c.snum=s.snum
-GROUP  BY o.snum
-HAVING count>1;
-
-+------+----------+------+--------+-------+
-| cnum | cname    | snum | sname  | count |
-+------+----------+------+--------+-------+
-| 2001 | Hoffman  | 1001 | Peel   |     6 |
-| 2003 | liu      | 1002 | Serres |     6 |
-| 2008 | Cisneros | 1007 | Rifkin |     2 |
-+------+----------+------+--------+-------+
+SELECT c.*, o.onum, tab1.sname
+FROM customers c, orders o
+WHERE c.cnum=o.cnum AND c.snum IN(SELECT snum
+FROM customers
+GROUP BY snum
+HAVING COUNT(c.snum)>1) as tab1;
+	
++------+----------+---------+--------+------+------+
+| cnum | cname    | city    | rating | snum | onum |
++------+----------+---------+--------+------+------+
+| 2001 | Hoffman  | London  |    100 | 1001 | 3003 |
+| 2003 | liu      | SanJose |    200 | 1002 | 3005 |
+| 2004 | Grass    | Berlin  |    300 | 1002 | 3007 |
+| 2006 | Cisneros | London  |    100 | 1001 | 3008 |
+| 2004 | Grass    | Berlin  |    300 | 1002 | 3010 |
+| 2006 | Cisneros | London  |    100 | 1001 | 3011 |
++------+----------+---------+--------+------+------+
 
 73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
 Ans-
-SELECT city, MAX(rating) as max_rating
+SELECT city, MAX(rating) as rating
 FROM customers
 GROUP  BY city;
 
 +---------+------------+
-| city    | max_rating |
+| city    | rating |
 +---------+------------+
 | London  |        100 |
 | Rome    |        200 |
@@ -1098,7 +1102,7 @@ GROUP  BY city;
 Ans-
 SELECT s.snum, s.sname, o.onum, o.amt
 FROM salespeople s, orders o
-WHERE s.snum=o.snum AND amt>1000;
+WHERE s.snum=o.snum AND amt>1000
 
 +------+---------+------+---------+
 | snum | sname   | onum | amt     |
