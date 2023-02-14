@@ -5,8 +5,6 @@ Orders
 Systems
 Apache
 Service
-that
 OFBiz
 technology
-to
 ERP
