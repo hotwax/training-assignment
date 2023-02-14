@@ -17,13 +17,13 @@ mysql> SHOW DATABASES;
 
 
 
-mysql> CREATE TABLE Salespeople(snum int, sname varchar(30), city varchar(30), comm int);
+mysql> CREATE TABLE Salespeople(snum INT, sname VARCHAR(30), city VARCHAR(30), comm INT);
 Query OK, 0 rows affected (0.12 sec)
 
-mysql> CREATE TABLE Customers(cnum int, cname varchar(30), city varchar(30), rating int, snum int);
+mysql> CREATE TABLE Customers(cnum INT, cname VARCHAR(30), city VARCHAR(30), rating INT, snum INT);
 Query OK, 0 rows affected (0.04 sec)
 
-mysql> CREATE TABLE Orders(onum int, amt DOUBLE(10, 5), odate DATE, cnum int, snum int);
+mysql> CREATE TABLE Orders(onum INT, amt DOUBLE(10, 5), odate DATE, cnum INT, snum INT);
 Query OK, 0 rows affected, 1 warning (0.05 sec)
 
 
