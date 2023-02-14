@@ -260,3 +260,190 @@ SELECT max(o.amt), s.sname, o.snum FROM salespeople AS s, orders AS o WHERE (s.s
 |    1098.16 | Rifkin | 1007 |
 |    5160.45 | Serres | 1002 |
 +------------+--------+------+
+
+
+31) Sort the salespeople table in the following order: snum, sname, commission, city. 
+
+SELECT * FROM Salespeople ORDER BY snum, sname, comm, city;
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1003 | AxelRod | New York  |   10 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+
+
+32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
+
+SELECT * FROM Customers WHERE cname LIKE '[A-G]%';
+
+
+33) Select all the possible combinations of customers you can assign. 
+
+
+34) Select all orders that are greater than the average for October 4. 
+
+SELECT * FROM Orders where AMT > (SELECT AVG(amt) FROM Orders where odate='1990-10-04');
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+
+35) Write a select command using a correlated subquery that selects the names and numbers of all customers with ratings equal to the maximum for their city. 
+ 
+SELECT cnum, cname FROM Customers as c WHERE rating = (SELECT MAX(rating) FROM Customers where city=c.city);
++------+----------+
+| cnum | cname    |
++------+----------+
+| 2001 | Hoffman  |
+| 2002 | Giovanni |
+| 2004 | Grass    |
+| 2006 | Clemens  |
+| 2006 | Cisneros |
++------+----------+
+
+
+36) Write a query that totals the orders for each day and places the results in descending order. 
+
+SELECT SUM(amt), odate FROM Orders GROUP BY odate ORDER BY SUM(amt) DESC;
++----------+------------+
+| SUM(amt) | odate      |
++----------+------------+
+| 11201.83 | 1990-10-06 |
+|  8944.59 | 1990-10-03 |
+|  4723.00 | 1990-10-05 |
+|  1788.98 | 1990-10-04 |
++----------+------------+
+
+
+37) Write a select command that produces the rating followed by each customer's name in SanJose. 
+
+SELECT rating, cname FROM Customers WHERE city='SanJose';
++--------+----------+
+| rating | cname    |
++--------+----------+
+|    200 | Liu      |
+|    300 | Cisneros |
++--------+----------+
+
+
+38) Find all orders with amounts smaller than any amount for a customer in SanJose. 
+
+SELECT * FROM Orders WHERE amt < ANY (SELECT amt FROM Orders WHERE cnum IN (SELECT cnum FROM Customers WHERE city='SanJose'));
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
++------+---------+------------+------+------+
+
+
+39) Find all orders with above-average amounts for their customers. 
+
+
+
+40) Write a query that selects the highest rating in each city. 
+
+SELECT MAX(rating), city FROM Customers GROUP BY city;
++-------------+---------+
+| MAX(rating) | city    |
++-------------+---------+
+|         100 | London  |
+|         200 | Rome    |
+|         300 | SanJose |
+|         300 | Berlin  |
++-------------+---------+
+
+
+41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00. 
+
+42) Count the customers with ratings above SanJose’s average. 
+
+SELECT COUNT(*) AS count FROM Customers WHERE rating  > (SELECT AVG(rating) FROM Customers WHERE city='SanJose');
++-------+
+| count |
++-------+
+|     2 |
++-------+
+
+43) Find all salespeople that are located in either Barcelona or London. 
+
+SELECT * FROM Salespeople WHERE city='Barcelona' OR city='London';
++------+--------+-----------+------+
+| snum | sname  | city      | comm |
++------+--------+-----------+------+
+| 1001 | Peel   | London    |   12 |
+| 1004 | Motika | London    |   11 |
+| 1007 | Rifkin | Barcelona |   15 |
+| 1008 | Fran   | London    |   25 |
++------+--------+-----------+------+
+
+
+44) Find all salespeople with only one customer. 
+
+SELECT * FROM Salespeople WHERE snum IN (SELECT snum FROM Customers GROUP BY snum HAVING COUNT(cnum)=1);
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1003 | AxelRod | New York  |   10 |
++------+---------+-----------+------+
+
+
+45) Write a query that joins the Customer table to itself to find all pairs or customers served by a single salesperson.
+
+
+46) Write a query that will give you all orders for more than $1000.00. 
+
+
+47) Write a query that lists each order number followed by the name of the customer who made that order. 
+
+
+48) Write a query that selects all the customers whose ratings are equal to or greater than ANY(in the SQL sense) of ‘Serres’. 
+
+
+49) Write two queries that will produce all orders taken on October 3 or October 4. 
+
+SELECT * FROM Orders WHERE odate='1990-10-03' UNION SELECT * FROM Orders WHERE odate='1990-10-04';
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
++------+---------+------------+------+------+
+
+
+50) Find only those customers whose ratings are higher than every customer in Rome. 
+
+SELECT * FROM Customers WHERE rating > ALL (SELECT rating FROM Customers WHERE city='Rome');
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2006 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
