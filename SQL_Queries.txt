@@ -1,0 +1,100 @@
+      Module 3 SQL 
+			
+// Define the Tables 
+
+## First Create a Database 
+query : CREATE DATABASE sql_training_hotwax ;
+Query OK, 1 row affected (0.48 sec)
+
+## Check if database is created or not 
+query : SHOW DATABASES ; 
+output :
++---------------------------------+
+|          Database               |
++---------------------------------+
+| sql_training_hotwax             |
+| sys                             |
+| world                           |
++---------------------------------+
+
+## Use this Databases
+query : USE sql_training_hotwax ;
+Database changed
+
+## Create a table Salespeople ;
+query:
+CREATE TABLE Salespeople (
+    SNUM int NOT NULL ,
+    SNAME varchar(255) ,
+    CITY varchar(255) ,
+    COMM int,
+    PRIMARY KEY (SNUM)
+    ) ;
+Query OK, 0 rows affected (4.43 sec)
+
+
+## Insert the Data into SalesPeople Table
+query ;
+INSERT INTO Salespeople VALUES
+    (1001,'peel','London',12),
+    (1002,'Serres,'SanJose'13);
+    (1004,'Motika','London',11),
+    (1007,'RifKin','Barcelona',15),
+    (1003,'AxelRod','New York',10),
+    (1008,'Fran','London',25) ;
+Query OK, 6 rows affected (0.16 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+
+## Create a table Customers and Orders ;
+
+// Customer Table 
+CREATE TABLE Customers (
+    CNUM int NOT NULL ,
+    CNAME varchar(255) ,
+    CITY varchar(255) ,
+    RATING int,
+    SNUM int ,
+    PRIMARY KEY (CNUM),
+    FOREIGN KEY (SNUM) REFERENCES Salespeople(SNUM)
+) ;
+
+// Orders Table 
+CREATE TABLE Orders (
+    ONUM int NOT NULL ,
+    AMT Decimal(18 , 2) ,
+    ODATE varchar(10)  ,
+    CNUM int,
+    SNUM int ,
+    PRIMARY KEY(ONUM) ,
+    FOREIGN KEY (CNUM) REFERENCES Customers(CNUM) ,
+    FOREIGN KEY (SNUM) REFERENCES Salespeople(SNUM)
+    ) ;
+		
+## Insert Data into Customers and Orders table 
+
+// Insert data into Customers Table 
+INSERT INTO Customers VALUES
+    (2001,'Hoffman','London',100,1001),
+    (2002,'Giovanni','Rome',200,1003),
+    (2003,'Liu','Sanjose',200,1002),
+    (2004,'Grass','Berlin',300,1002),
+    (2006,'Clemens','London',100,1001),
+    (2008,'Cisneros','Sanjose',300,1007),
+    (2007,'Pereira','Rome',100,1004) ;
+		
+// Insert data into Orders Table 
+INSERT INTO Orders VALUES
+    (3001,18.69,'10/03/90',2008,1007),
+    (3003,767.19,'10/03/90',2001,1001),
+    (3002,1900.10,'10/03/90',2007,1004),
+    (3005,5160.45,'10/03/90',2003,1002),
+    (3006,1098.16,'10/03/90',2008,1007),
+    (3009,1713.23,'10/04/90',2002,1003),
+    (3007,75.75,'10/04/90',2004,1002),
+    (3008,4723.00,'10/05/90',2006,1001),
+    (3010,1309.95,'10/06/90',2004,1002),
+    (3011,9891.88,'10/06/90',2006,1001) ;
+		
+		
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
