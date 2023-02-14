@@ -1,7 +1,9 @@
-CREATE DATABASE Module_3;
+mysql> CREATE DATABASE Module_3;
 Query OK, 1 row affected (0.02 sec)
 
-SHOW DATABASES;
+
+
+mysql> SHOW DATABASES;
 +--------------------+
 | Database           |
 +--------------------+
@@ -15,13 +17,13 @@ SHOW DATABASES;
 
 
 
-CREATE TABLE Salespeople(SNUM int, SNAME varchar(30), CITY varchar(30), COMM int);
+mysql> CREATE TABLE Salespeople(SNUM int, SNAME varchar(30), CITY varchar(30), COMM int);
 Query OK, 0 rows affected (0.12 sec)
 
-CREATE TABLE Customers(CNUM int, CNAME varchar(30), CITY varchar(30), RATING int, SNUM int);
+mysql> CREATE TABLE Customers(CNUM int, CNAME varchar(30), CITY varchar(30), RATING int, SNUM int);
 Query OK, 0 rows affected (0.04 sec)
 
-CREATE TABLE Orders(ONUM int, AMT DOUBLE(10, 5), ODATE DATE, CNUM int, SNUM int);
+mysql> CREATE TABLE Orders(ONUM int, AMT DOUBLE(10, 5), ODATE DATE, CNUM int, SNUM int);
 Query OK, 0 rows affected, 1 warning (0.05 sec)
 
 
@@ -61,7 +63,6 @@ mysql> SELECT * from Salespeople;
 
 
 
-
 mysql> INSERT INTO Customers VALUES('2001', 'Hoffman', 'London', '100', '1001');
 Query OK, 1 row affected (0.01 sec)
 
@@ -84,6 +85,7 @@ mysql> INSERT INTO Customers VALUES('2007', 'Pereira', 'Rome', '100', '1004');
 Query OK, 1 row affected (0.00 sec)
 
 
+
 mysql> SELECT * FROM Customers;
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
@@ -97,8 +99,6 @@ mysql> SELECT * FROM Customers;
 | 2007 | Pereira  | Rome    |    100 | 1004 |
 +------+----------+---------+--------+------+
 7 rows in set (0.00 sec)
-
-
 
 
 
@@ -133,7 +133,9 @@ mysql> INSERT INTO Orders VALUES('3011', '9891.88', '1990-06-10', '2006', '1001'
 Query OK, 1 row affected (0.01 sec)
 
 
-ALTER TABLE Orders MODIFY COLUMN AMT DOUBLE(10, 2);
+
+mysql> ALTER TABLE Orders MODIFY COLUMN AMT DOUBLE(10, 2);
+
 
 
 mysql> SELECT * FROM Orders;
