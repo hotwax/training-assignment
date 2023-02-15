@@ -610,3 +610,169 @@ WHERE oc.rating > 100;
 | Cisneros |    300 | 3006 | 1098.16 |                 15 |         164.72 |
 +----------+--------+------+---------+--------------------+----------------+
 
+42) Count the customers with ratings above SanJose’s average.
+
+SELECT *
+FROM customers
+WHERE rating > (SELECT AVG(rating) FROM customers WHERE city = "SanJose");
+
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+
+43) Find all salespeople that are located in either Barcelona or London.
+
+SELECT *
+FROM salespeople
+WHERE city IN ("Barcelona", "London");
+
++------+--------+-----------+------+
+| SNUM | SNAME  | CITY      | COMM |
++------+--------+-----------+------+
+| 1001 | Peel   | London    |   12 |
+| 1004 | Motika | London    |   11 |
+| 1007 | Rifkin | Barcelona |   15 |
+| 1008 | Fran   | London    |   25 |
++------+--------+-----------+------+
+
+44) Find all salespeople with only one customer.
+
+SELECT *
+FROM salespeople
+WHERE 1 IN (SELECT COUNT(snum) FROM customers WHERE customers.snum = salespeople.snum GROUP BY salespeople.snum);
+
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1003 | AxelRod | New York  |   10 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
++------+---------+-----------+------+
+
+45) Write a query that joins the Customer table to itself to find all pairs or customers served by a single salesperson.
+
+SELECT c1.snum,
+       c1.cnum,
+       c1.cname,
+       c1.rating,
+       c1.city
+FROM customers c1
+         JOIN
+     customers c2 ON
+                 c1.snum = c2.snum AND
+                 c1.cname != c2.cname;
+
++------+------+---------+--------+---------+
+| snum | cnum | cname   | rating | city    |
++------+------+---------+--------+---------+
+| 1001 | 2001 | Hoffman |    100 | London  |
+| 1002 | 2003 | Liu     |    200 | SanJose |
+| 1002 | 2004 | Grass   |    300 | Berlin  |
+| 1001 | 2006 | Clemens |    100 | London  |
++------+------+---------+--------+---------+      
+46) Write a query that will give you all orders for more than $1000.00.
+
+SELECT *
+FROM orders
+WHERE amt > 1000;
+
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3002 | 1900.10 | 1990-03-10 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-03-10 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-03-10 | 2008 | 1007 |
+| 3008 | 4723.00 | 1990-05-10 | 2006 | 1001 |
+| 3009 | 1713.23 | 1990-04-10 | 2002 | 1003 |
+| 3010 | 1309.95 | 1990-06-10 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-06-10 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+47) Write a query that lists each order number followed by the name of the customer who made that order.
+
+SELECT o.onum, c.cname
+FROM customers AS c
+         JOIN orders o on c.CNUM = o.CNUM;
+
++------+----------+
+| onum | cname    |
++------+----------+
+| 3003 | Hoffman  |
+| 3009 | Giovanni |
+| 3005 | Liu      |
+| 3007 | Grass    |
+| 3010 | Grass    |
+| 3008 | Clemens  |
+| 3011 | Clemens  |
+| 3002 | Pereira  |
+| 3001 | Cisneros |
+| 3006 | Cisneros |
++------+----------+
+
+48) Write a query that selects all the customers whose ratings are equal to or greater than ANY(in the SQL sense) of ‘Serres’.
+
+SELECT *
+FROM customers
+WHERE rating >= ANY (SELECT c.rating
+                     FROM customers c
+                              JOIN
+                          salespeople s ON
+                                      c.SNUM = s.SNUM
+                                  AND s.sname = "Serres");
+
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+49) Write two queries that will produce all orders taken on October 3 or October 4.
+
+SELECT * FROM orders WHERE odate IN (SELECT odate FROM orders WHERE odate IN ("1990-03-10","1990-04-10"));
+
+SELECT *
+FROM orders
+WHERE odate = "1990-03-10";
+
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-03-10 | 2008 | 1007 |
+| 3002 | 1900.10 | 1990-03-10 | 2007 | 1004 |
+| 3003 |  767.69 | 1990-03-10 | 2001 | 1001 |
+| 3005 | 5160.45 | 1990-03-10 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-03-10 | 2008 | 1007 |
++------+---------+------------+------+------+
+
+SELECT *
+FROM orders
+WHERE odate = "1990-04-10";
+
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3007 |   75.75 | 1990-04-10 | 2004 | 1002 |
+| 3009 | 1713.23 | 1990-04-10 | 2002 | 1003 |
++------+---------+------------+------+------+
+
+50) Find only those customers whose ratings are higher than every customer in Rome.
+
+SELECT *
+FROM customers
+WHERE rating >
+          ALL (SELECT rating
+               FROM customers
+               WHERE city = "Rome");
+
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+
