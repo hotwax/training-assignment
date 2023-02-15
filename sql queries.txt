@@ -161,3 +161,196 @@ mysql> SELECT SNAME, SALESPEOPLE.SNUM, COUNT(SALESPEOPLE.SNUM) AS number_of_orde
 3 rows in set (0.00 sec)
 
 
+
+
+9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
+
+mysql> SELECT * FROM CUSTOMERS WHERE (SELECT COUNT(CNAME) FROM CUSTOMERS WHERE CITY="SanJose")>=1;
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+10) Match salespeople to customers according to what city they live in.
+
+mysql> SELECT SALESPEOPLE.SNAME, CUSTOMERS.CNAME,SALESPEOPLE.CITY FROM SALESPEOPLE,CUSTOMERS WHERE SALESPEOPLE.CITY=CUSTOMERS.CITY;
++--------+----------+---------+
+| SNAME  | CNAME    | CITY    |
++--------+----------+---------+
+| Peel   | Hoffman  | London  |
+| Motika | Hoffman  | London  |
+| Fran   | Hoffman  | London  |
+| Serres | Liu      | SanJose |
+| Peel   | Clemens  | London  |
+| Motika | Clemens  | London  |
+| Fran   | Clemens  | London  |
+| Serres | Cisneros | SanJose |
++--------+----------+---------+
+8 rows in set (0.00 sec)
+
+
+
+
+
+11) Find all the customers in SanJose who have a rating above 200. 
+
+mysql> SELECT CNAME FROM CUSTOMERS WHERE CITY="SanJose" AND RATING>200;
++----------+
+| CNAME    |
++----------+
+| Cisneros |
++----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+12) List the names and commissions of all salespeople in London. 
+
+mysql> SELECT SNAME, COMM FROM SALESPEOPLE WHERE CITY="London";
++--------+------+
+| SNAME  | COMM |
++--------+------+
+| Peel   |   12 |
+| Motika |   11 |
+| Fran   |   25 |
++--------+------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+13) List all the orders of Salesperson Motika from the orders table.
+
+mysql> SELECT ORDERS.* FROM ORDERS JOIN SALESPEOPLE ON SALESPEOPLE.SNUM=ORDERS.SNUM WHERE SNAME="Motika";
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
++------+---------+------------+------+------+
+1 row in set (0.06 sec)
+
+
+
+
+
+14) Find all customers who booked orders on October 3. 
+
+mysql> SELECT CUSTOMERS.* FROM CUSTOMERS JOIN ORDERS ON CUSTOMERS.CNUM=ORDERS.CNUM WHERE ODATE="1990-10-03" GROUP BY ORDERS.CNUM;
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount.
+
+mysql> SELECT SUM(AMT) FROM ORDERS GROUP BY ODATE HAVING SUM(AMT)>(SELECT MAX(AMT)+2000 FROM ORDERS);
+Empty set (0.00 sec)
+
+
+
+
+
+16) Select all orders that had amounts that were greater than at least one of the orders from October 6. 
+
+mysql> SELECT AMT FROM ORDERS WHERE AMT > ANY(SELECT AMT FROM ORDERS WHERE ODATE="1990-10-06");
++---------+
+| AMT     |
++---------+
+| 1900.10 |
+| 5160.45 |
+| 1713.23 |
+| 4723.00 |
+| 9891.88 |
++---------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+17) Write a query that uses the EXISTS operator to extract all salespeople who have customers with a rating of 300.
+
+mysql> SELECT * FROM SALESPEOPLE WHERE EXISTS (SELECT * FROM CUSTOMERS WHERE RATING=300 AND SALESPEOPLE.SNUM=CUSTOMERS.SNUM);
++------+--------+-----------+------+
+| SNUM | SNAME  | CITY      | COMM |
++------+--------+-----------+------+
+| 1002 | Serres | SanJose   |   13 |
+| 1007 | Rifkin | Barcelona |   15 |
++------+--------+-----------+------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+18) Find all customers whose cnum is 1000 above the snum of Serres. 
+
+mysql> SELECT * FROM CUSTOMERS WHERE CNUM>(SELECT SNUM+1000 FROM SALESPEOPLE WHERE SNAME="Serres");
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+5 rows in set (0.09 sec)
+
+
+
+
+
+19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
+
+mysql> SELECT SNAME, SALESPEOPLE.SNUM, COMM*100/SUM(AMT) AS COMMISSION_IN_PERCENTAGE FROM SALESPEOPLE, ORDERS WHERE SALESPEOPLE.SNUM=ORDERS.SNUM GROUP BY SNUM;
++---------+------+--------------------------+
+| SNAME   | SNUM | COMMISSION_IN_PERCENTAGE |
++---------+------+--------------------------+
+| Peel    | 1001 |                 0.078013 |
+| Serres  | 1002 |                 0.198590 |
+| AxelRod | 1003 |                 0.583693 |
+| Motika  | 1004 |                 0.578917 |
+| Rifkin  | 1007 |                 1.343063 |
++---------+------+--------------------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000.
+
+mysql> SELECT MAX(AMT), SNAME, SALESPEOPLE.SNUM, ODATE FROM SALESPEOPLE, ORDERS WHERE SALESPEOPLE.SNUM=ORDERS.SNUM GROUP BY ORDERS.SNUM,ODATE HAVING MAX(AMT)>3000;
++----------+--------+------+------------+
+| MAX(AMT) | SNAME  | SNUM | ODATE      |
++----------+--------+------+------------+
+|  4723.00 | Peel   | 1001 | 1990-10-05 |
+|  9891.88 | Peel   | 1001 | 1990-10-06 |
+|  5160.45 | Serres | 1002 | 1990-10-03 |
++----------+--------+------+------------+
+3 rows in set (0.00 sec)
