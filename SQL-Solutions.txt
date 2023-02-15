@@ -21,7 +21,12 @@ Output -
 
 Query - 
 
-SELECT * FROM customers WHERE rating = 100;
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    rating = 100;
 
 Output - 
 
@@ -37,10 +42,18 @@ Output -
 
 Query - 
 
-SELECT o.onum, o.odate, max(o.amt) as largest_order_in_amt, o.snum, s.sname FROM orders as o
-INNER JOIN 
-salespeople as s ON o.snum = s.snum
-GROUP BY s.snum, o.odate ORDER BY o.snum;
+SELECT 
+    o.odate,
+    o.onum,
+    MAX(o.amt) AS largest_order_in_amt,
+    o.snum,
+    s.sname
+FROM
+    orders AS o
+        INNER JOIN
+    salespeople AS s ON o.snum = s.snum
+GROUP BY s.snum , o.odate
+ORDER BY o.snum;
 
 Output - 
 
@@ -62,7 +75,11 @@ Output -
 
 Query - 
 
-SELECT * FROM orders ORDER BY cnum DESC;
+SELECT 
+    *
+FROM
+    orders
+ORDER BY cnum DESC;
 
 Output - 
 
@@ -85,7 +102,15 @@ Output -
 
 Query - 
 
-SELECT * FROM salespeople WHERE snum IN (SELECT snum FROM orders);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    snum IN (SELECT 
+            snum
+        FROM
+            orders);
 
 Output - 
 
@@ -103,7 +128,13 @@ Output -
 
 Query -
 
-SELECT c.cname AS CUSTOMER_NAME, s.sname AS SERVING_BY FROM customers AS c, salespeople as s WHERE s.snum = c.snum;
+SELECT 
+    c.cname AS CUSTOMER_NAME, s.sname AS SERVING_BY
+FROM
+    customers AS c,
+    salespeople AS s
+WHERE
+    s.snum = c.snum;
 
 Output -
 
@@ -123,9 +154,15 @@ Output -
 
 Query - 
 
-SELECT s.sname, s.snum FROM salespeople AS s, customers as c 
-WHERE s.snum = c.snum
-GROUP BY c.snum HAVING count(c.snum) > 1;
+SELECT 
+    s.sname, s.snum
+FROM
+    salespeople AS s,
+    customers AS c
+WHERE
+    s.snum = c.snum
+GROUP BY c.snum
+HAVING COUNT(c.snum) > 1;
 
 Output -
 
@@ -141,9 +178,15 @@ Output -
 
 Query -
 
-SELECT s.sname, s.snum, count(o.snum) AS order_count FROM salespeople as s, orders as o 
-WHERE s.snum = o.snum
-GROUP BY o.snum ORDER BY order_count DESC;
+SELECT 
+    s.sname, s.snum, COUNT(o.snum) AS order_count
+FROM
+    salespeople AS s,
+    orders AS o
+WHERE
+    s.snum = o.snum
+GROUP BY o.snum
+ORDER BY order_count DESC;
 
 Output - 
 
@@ -161,8 +204,17 @@ Output -
 
 Query - 
 
-SELECT * FROM customers WHERE 
-(SELECT count(city) FROM customers WHERE city = 'SanJose') >= 1;
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    (SELECT 
+            COUNT(city)
+        FROM
+            customers
+        WHERE
+            city = 'SanJose') >= 1;
 
 Output -
 
@@ -182,8 +234,14 @@ Output -
 
 Query - 
 
-SELECT s.sname, c.cname, s.city FROM salespeople AS s, customers AS c WHERE s.city = c.city;
-
+SELECT 
+    s.sname, c.cname, s.city
+FROM
+    salespeople AS s,
+    customers AS c
+WHERE
+    s.city = c.city;
+    
 Output - 
 
 +--------+----------+---------+
@@ -203,7 +261,12 @@ Output -
 
 Query -
 
-SELECT * FROM customers WHERE rating > 200 AND city = 'SanJose';
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    rating > 200 AND city = 'SanJose';
 
 Output - 
 
@@ -217,7 +280,12 @@ Output -
 
 Query -
 
-SELECT sname, comm FROM salespeople WHERE city = 'London';
+SELECT 
+    sname, comm
+FROM
+    salespeople
+WHERE
+    city = 'London';
 
 Output - 
 
@@ -233,7 +301,17 @@ Output -
 
 Query - 
 
-SELECT * FROM orders WHERE snum = (SELECT snum FROM salespeople WHERE sname = 'Motika');
+SELECT 
+    *
+FROM
+    orders
+WHERE
+    snum = (SELECT 
+            snum
+        FROM
+            salespeople
+        WHERE
+            sname = 'Motika');
 
 Output -
 
@@ -247,8 +325,17 @@ Output -
 
 Query -
 
-SELECT * FROM customers 
-WHERE cnum IN (SELECT cnum FROM orders WHERE month(odate) = 10 AND day(odate) = 3); 
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    cnum IN (SELECT 
+            cnum
+        FROM
+            orders
+        WHERE
+            MONTH(odate) = 10 AND DAY(odate) = 3); 
 
 Output -
 
@@ -266,9 +353,16 @@ Output -
 
 Query -
 
-SELECT odate AS DATE, sum(amt) AS TOTAL_AMOUNT FROM orders GROUP BY odate
- HAVING TOTAL_AMOUNT > (SELECT max(amt) + 2000 FROM orders);
- 
+SELECT 
+    odate AS DATE, SUM(amt) AS TOTAL_AMOUNT
+FROM
+    orders
+GROUP BY odate
+HAVING TOTAL_AMOUNT > (SELECT 
+        MAX(amt) + 2000
+    FROM
+        orders);
+
 Output - 
 
 Empty set (0.00 sec)
@@ -278,8 +372,17 @@ Empty set (0.00 sec)
 
 Query -
  
-SELECT * FROM orders
-WHERE amt > ANY (SELECT amt FROM orders WHERE month(odate) = 10 AND day(odate) = 6 );
+ SELECT 
+    *
+FROM
+    orders
+WHERE
+    amt > ANY (SELECT 
+            amt
+        FROM
+            orders
+        WHERE
+            MONTH(odate) = 10 AND DAY(odate) = 6);
 
 Output - 
 
@@ -298,8 +401,18 @@ Output -
 
 Query - 
 
-SELECT snum, sname FROM salespeople 
-WHERE EXISTS (SELECT cname FROM customers WHERE customers.snum = salespeople.snum AND rating = 300);
+SELECT 
+    snum, sname
+FROM
+    salespeople
+WHERE
+    EXISTS( SELECT 
+            cname
+        FROM
+            customers
+        WHERE
+            customers.snum = salespeople.snum
+                AND rating = 300);
 
 Output - 
 
@@ -314,8 +427,17 @@ Output -
 
 Query -
 
-SELECT * FROM customers
-WHERE cnum > (SELECT snum + 1000 FROM salespeople WHERE sname = 'Serres');
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    cnum > (SELECT 
+            snum + 1000
+        FROM
+            salespeople
+        WHERE
+            sname = 'Serres');
 
 Output - 
 
@@ -333,11 +455,19 @@ Output -
 
 Query -
 
-SELECT snum, sname, city, 
-round(
-(comm/(SELECT sum(amt) FROM orders GROUP BY orders.snum HAVING orders.snum = salespeople.snum))*100 
-, 2)
-AS commission FROM salespeople;
+SELECT 
+    snum,
+    sname,
+    city,
+    ROUND((comm / (SELECT 
+                    SUM(amt)
+                FROM
+                    orders
+                GROUP BY orders.snum
+                HAVING orders.snum = salespeople.snum)) * 100,
+            2) AS commission
+FROM
+    salespeople;
 
 Output - 
 
@@ -620,7 +750,11 @@ Output -
 
 Query - 
 
-SELECT * FROM salespeople ORDER BY snum, sname, comm, city;
+SELECT 
+    *
+FROM
+    salespeople
+ORDER BY snum , sname , comm , city;
 
 Output -
 
@@ -1086,7 +1220,19 @@ Ouput -
 
 Query 1 -
 
-SELECT * FROM orders WHERE month(odate) = 10 AND day(odate) = 3;
+SELECT 
+    *
+FROM
+    orders
+WHERE
+    MONTH(odate) = 10 AND DAY(odate) = 3;
+
+SELECT 
+    *
+FROM
+    orders
+WHERE
+    MONTH(odate) = 10 AND DAY(odate) = 4;
 
 Output -
 
@@ -1102,7 +1248,9 @@ Output -
 
 Query 2 -
 
-SELECT * FROM orders WHERE month(odate) = 10 AND day(odate) = 4;
+SELECT * 
+FROM orders 
+WHERE month(odate) = 10 AND day(odate) = 4;
 
 Output - 
 
@@ -1117,8 +1265,17 @@ Output -
 
 Query -
 
-SELECT * FROM customers 
-WHERE rating > ALL (SELECT rating FROM customers WHERE city = 'Rome');
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    rating > ALL (SELECT 
+            rating
+        FROM
+            customers
+        WHERE
+            city = 'Rome');
 
 Output -
 
@@ -1210,7 +1367,12 @@ Output -
 
 Query - 
 
-SELECT * FROM orders WHERE amt = 0 OR amt = NULL;
+SELECT 
+    *
+FROM
+    orders
+WHERE
+    amt = 0 OR amt = NULL;
 
 Output -
 
@@ -1322,10 +1484,17 @@ Output -
 
 Query -
 
-SELECT customers.cname, customers.rating
-FROM orders, customers
-WHERE customers.cnum = orders.cnum 
-AND orders.amt >= (SELECT avg(amt) FROM orders)
+SELECT 
+    customers.cname, customers.rating
+FROM
+    orders,
+    customers
+WHERE
+    customers.cnum = orders.cnum
+        AND orders.amt >= (SELECT 
+            AVG(amt)
+        FROM
+            orders)
 GROUP BY orders.cnum;
 
 Output - 
@@ -1406,9 +1575,15 @@ Output -
 
 Query -
 
-SELECT orders.onum, salespeople.sname, customers.cname 
-FROM orders, salespeople, customers
-WHERE orders.cnum = customers.cnum AND orders.snum = salespeople.snum
+SELECT 
+    orders.onum, salespeople.sname, customers.cname
+FROM
+    orders,
+    salespeople,
+    customers
+WHERE
+    orders.cnum = customers.cnum
+        AND orders.snum = salespeople.snum
 ORDER BY orders.onum;
 
 Output -
@@ -1463,9 +1638,17 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople 
-WHERE salespeople.city != ALL 
-(SELECT customers.city FROM customers WHERE customers.snum = salespeople.snum);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    salespeople.city != ALL (SELECT 
+            customers.city
+        FROM
+            customers
+        WHERE
+            customers.snum = salespeople.snum);
 
 Output -
 
@@ -1483,9 +1666,18 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople
-WHERE EXISTS (SELECT snum FROM customers WHERE
-customers.city = salespeople.city AND customers.snum != salespeople.snum);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    EXISTS( SELECT 
+            snum
+        FROM
+            customers
+        WHERE
+            customers.city = salespeople.city
+                AND customers.snum != salespeople.snum);
 
 Output -
 
@@ -1502,8 +1694,17 @@ Output -
 
 Query - 
 
-SELECT * FROM customers 
-WHERE snum IN (SELECT snum FROM salespeople WHERE sname IN ('Peel', 'Motika'));
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    snum IN (SELECT 
+            snum
+        FROM
+            salespeople
+        WHERE
+            sname IN ('Peel' , 'Motika'));
 
 Output -
 
@@ -1521,8 +1722,11 @@ Output -
 
 Query -
 
-SELECT odate, count(DISTINCT snum) AS no_of_salesperson
-FROM orders GROUP BY odate;
+SELECT 
+    odate, COUNT(DISTINCT snum) AS no_of_salesperson
+FROM
+    orders
+GROUP BY odate;
 
 Output -
 
@@ -1539,8 +1743,17 @@ Output -
 
 Query - 
 
-SELECT * FROM orders WHERE snum IN 
-(SELECT snum FROM salespeople WHERE city = 'London');
+SELECT 
+    *
+FROM
+    orders
+WHERE
+    snum IN (SELECT 
+            snum
+        FROM
+            salespeople
+        WHERE
+            city = 'London');
 
 Output - 
 
@@ -1557,10 +1770,16 @@ Output -
 
 Query -
 
-SELECT orders.* FROM 
-orders, customers, salespeople
-WHERE orders.cnum = customers.cnum AND orders.snum = salespeople.snum
-AND customers.city != salespeople.city; 
+SELECT 
+    orders.*
+FROM
+    orders,
+    customers,
+    salespeople
+WHERE
+    orders.cnum = customers.cnum
+        AND orders.snum = salespeople.snum
+        AND customers.city != salespeople.city; 
 
 Output -
 
@@ -1579,9 +1798,17 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople 
-WHERE snum IN 
-(SELECT snum FROM orders GROUP BY cnum HAVING count(*) > 1);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    snum IN (SELECT 
+            snum
+        FROM
+            orders
+        GROUP BY cnum
+        HAVING COUNT(*) > 1);
 
 Output -
 
@@ -1599,8 +1826,17 @@ Output -
 
 Query -
 
-SELECT * FROM customers
-WHERE snum IN (SELECT snum FROM customers GROUP BY snum HAVING count(*) > 1);
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    snum IN (SELECT 
+            snum
+        FROM
+            customers
+        GROUP BY snum
+        HAVING COUNT(*) > 1);
 
 Output -
 
@@ -1619,8 +1855,11 @@ Output -
 
 Query -
 
-SELECT city, max(rating) AS rating 
-FROM customers GROUP BY city;
+SELECT 
+    city, MAX(rating) AS rating
+FROM
+    customers
+GROUP BY city;
 
 Output -
 
@@ -1638,7 +1877,13 @@ Output -
 
 Query -
 
-SELECT snum FROM orders WHERE amt > 1000 GROUP BY snum;
+SELECT 
+    snum
+FROM
+    orders
+WHERE
+    amt > 1000
+GROUP BY snum;
 
 Output -
 
@@ -1657,8 +1902,10 @@ Output -
 
 Query -
 
-SELECT rating, cname, cnum 
-FROM customers
+SELECT 
+    rating, cname, cnum
+FROM
+    customers
 ORDER BY rating DESC;
 
 Output -
@@ -1679,8 +1926,12 @@ Output -
 
 Query -
 
-SELECT avg(comm) AS average_commision 
-FROM salespeople GROUP BY city HAVING city = 'London';
+SELECT 
+    AVG(comm) AS average_commision
+FROM
+    salespeople
+GROUP BY city
+HAVING city = 'London';
 
 Output - 
 
@@ -1694,8 +1945,17 @@ Output -
 
 Query -
 
-SELECT * FROM orders 
-WHERE snum = (SELECT snum FROM customers WHERE cnum = 2001);
+SELECT 
+    *
+FROM
+    orders
+WHERE
+    snum = (SELECT 
+            snum
+        FROM
+            customers
+        WHERE
+            cnum = 2001);
 
 Output -
 
@@ -1711,7 +1971,12 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople WHERE comm BETWEEN 0.10 AND 0.12;
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    comm BETWEEN 0.10 AND 0.12;
 
 Output - 
 
@@ -1722,8 +1987,12 @@ Empty set (0.00 sec)
 
 Query -
 
-SELECT sname, city FROM salespeople
-WHERE city = 'London' AND comm > 0.10;
+SELECT 
+    sname, city
+FROM
+    salespeople
+WHERE
+    city = 'London' AND comm > 0.10;
 
 Output - 
 
@@ -1739,9 +2008,13 @@ Output -
 
 Query -
 
-SELECT customers.cname, min(orders.amt) AS smallest_order 
-FROM customers, orders
-WHERE customers.cnum = orders.cnum
+SELECT 
+    customers.cname, MIN(orders.amt) AS smallest_order
+FROM
+    customers,
+    orders
+WHERE
+    customers.cnum = orders.cnum
 GROUP BY orders.cnum;
 
 Output - 
@@ -1763,8 +2036,14 @@ Output -
 
 Query - 
 
-SELECT * FROM customers
-WHERE cname LIKE 'G%' ORDER BY cname LIMIT 1;
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    cname LIKE 'G%'
+ORDER BY cname
+LIMIT 1;
 
 Output -
 
@@ -1779,8 +2058,10 @@ Output -
 
 Query -
 
-SELECT count(DISTINCT city) AS number_of_non_null_city 
-FROM customers;
+SELECT 
+    COUNT(DISTINCT city) AS number_of_non_null_city
+FROM
+    customers;
 
 Output - 
 
@@ -1794,8 +2075,10 @@ Output -
 
 Query - 
 
-SELECT AVG(amt) AS average_amt 
-FROM orders;
+SELECT 
+    AVG(amt) AS average_amt
+FROM
+    orders;
 
 Output -
 
@@ -1809,7 +2092,12 @@ Output -
 
 Query - 
 
-SELECT * FROM customers WHERE city != 'SanJose' AND rating > 200;
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    city != 'SanJose' AND rating > 200;
 
 Output -
 
@@ -1824,7 +2112,19 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople WHERE (comm > 0.12 OR comm < 0.14);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    comm BETWEEN 0.12 AND 0.14;
+
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    (comm > 0.12 OR comm < 0.14);
 
 Output -
 
@@ -1844,8 +2144,14 @@ Output -
 
 Query -
 
-SELECT salespeople.* FROM salespeople, customers
-WHERE salespeople.snum = customers.snum AND customers.city != salespeople.city
+SELECT 
+    salespeople.*
+FROM
+    salespeople,
+    customers
+WHERE
+    salespeople.snum = customers.snum
+        AND customers.city != salespeople.city
 GROUP BY snum;
 
 Output -
@@ -1864,10 +2170,15 @@ Output -
 
 Query -
 
-SELECT salespeople.*
-FROM salespeople, customers
-WHERE salespeople.snum = customers.snum
-AND salespeople.comm > 0.11 AND customers.rating < 250
+SELECT 
+    salespeople.*
+FROM
+    salespeople,
+    customers
+WHERE
+    salespeople.snum = customers.snum
+        AND salespeople.comm > 0.11
+        AND customers.rating < 250
 GROUP BY salespeople.snum;
 
 Output - 
@@ -1886,9 +2197,18 @@ Output -
 
 Query -
 
-SELECT s1.* FROM salespeople s1 
-WHERE s1.city IN 
-(SELECT s2.city FROM salespeople s2 WHERE s1.snum != s2.snum AND s1.comm != s2.comm);
+SELECT 
+    s1.*
+FROM
+    salespeople s1
+WHERE
+    s1.city IN (SELECT 
+            s2.city
+        FROM
+            salespeople s2
+        WHERE
+            s1.snum != s2.snum
+                AND s1.comm != s2.comm);
 
 Output -
 
@@ -1904,8 +2224,15 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople WHERE comm = 
-(SELECT max(comm) FROM salespeople);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    comm = (SELECT 
+            MAX(comm)
+        FROM
+            salespeople);
 
 Output - 
 
@@ -1920,18 +2247,25 @@ Output -
 
 Query -
 
-SELECT customers.cnum, customers.cname, customers.rating , count(*) AS no_of_orders 
-FROM orders, customers WHERE orders.cnum = customers.cnum
-GROUP BY orders.cnum 
-HAVING no_of_orders = 
-(
-SELECT max(no_of_orders) FROM
-(
-SELECT *, count(*) AS no_of_orders 
-FROM orders
-GROUP BY orders.cnum 
-) AS customers_with_orders
-);
+SELECT 
+    customers.cnum,
+    customers.cname,
+    customers.rating,
+    COUNT(*) AS no_of_orders
+FROM
+    orders,
+    customers
+WHERE
+    orders.cnum = customers.cnum
+GROUP BY orders.cnum
+HAVING no_of_orders = (SELECT 
+        MAX(no_of_orders)
+    FROM
+        (SELECT 
+            *, COUNT(*) AS no_of_orders
+        FROM
+            orders
+        GROUP BY orders.cnum) AS customers_with_orders);
 
 Output -
 
@@ -1949,7 +2283,11 @@ Output -
 
 Query -
 
-SELECT * FROM customers ORDER BY rating DESC;
+SELECT 
+    *
+FROM
+    customers
+ORDER BY rating DESC;
 
 Output -
 
@@ -1969,8 +2307,17 @@ Output -
 
 Query -
 
-SELECT DISTINCT odate FROM orders
-WHERE cnum = ( SELECT cnum FROM customers WHERE cname = 'Hoffman');
+SELECT DISTINCT
+    odate
+FROM
+    orders
+WHERE
+    cnum = (SELECT 
+            cnum
+        FROM
+            customers
+        WHERE
+            cname = 'Hoffman');
 
 Output - 
 
@@ -1984,10 +2331,17 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople
-WHERE 
-snum NOT IN 
-(SELECT snum FROM orders WHERE odate BETWEEN '1990-10-03' AND '1990-10-05');
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    snum NOT IN (SELECT 
+            snum
+        FROM
+            orders
+        WHERE
+            odate BETWEEN '1990-10-03' AND '1990-10-05');
 
 Output - 
 
@@ -2001,8 +2355,15 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople
-WHERE snum IN (SELECT snum FROM orders);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    snum IN (SELECT 
+            snum
+        FROM
+            orders);
 
 Output - 
 
@@ -2020,8 +2381,15 @@ Output -
 
 Query -
 
-SELECT * FROM customers
-WHERE cnum IN (SELECT cnum FROM orders);
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    cnum IN (SELECT 
+            cnum
+        FROM
+            orders);
 
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
@@ -2039,9 +2407,19 @@ WHERE cnum IN (SELECT cnum FROM orders);
 
 Query -
 
-SELECT s.sname, o1.snum, o1.odate, o1.amt  FROM orders o1 
-INNER JOIN salespeople s ON s.snum = o1.snum
-WHERE o1.amt = (SELECT max(amt) FROM orders o2 WHERE o1.snum = o2.snum);
+SELECT 
+    s.sname, o1.snum, o1.odate, o1.amt
+FROM
+    orders o1
+        INNER JOIN
+    salespeople s ON s.snum = o1.snum
+WHERE
+    o1.amt = (SELECT 
+            MAX(amt)
+        FROM
+            orders o2
+        WHERE
+            o1.snum = o2.snum);
 
 Output -
 
@@ -2059,10 +2437,18 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople 
-WHERE snum = 
-(SELECT snum FROM orders
-GROUP BY snum ORDER BY count(*) DESC, sum(amt) DESC LIMIT 1);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    snum = (SELECT 
+            snum
+        FROM
+            orders
+        GROUP BY snum
+        ORDER BY COUNT(*) DESC , SUM(amt) DESC
+        LIMIT 1);
 
 Output - 
 
@@ -2076,9 +2462,16 @@ Output -
 
 Query -
 
-SELECT c1.cname, c2.cname, c1.rating FROM customers c1, customers c2
-WHERE c1.cnum != c2.cnum AND c1.rating = c2.rating
-GROUP BY c1.cname, c2.cname ORDER BY rating DESC;
+SELECT 
+    c1.cname, c2.cname, c1.rating
+FROM
+    customers c1,
+    customers c2
+WHERE
+    c1.cnum != c2.cnum
+        AND c1.rating = c2.rating
+GROUP BY c1.cname , c2.cname
+ORDER BY rating DESC;
 
 Output -
 
@@ -2101,8 +2494,17 @@ Output -
 
 Query -
 
-SELECT * FROM orders
-WHERE amt > (SELECT avg(amt) FROM orders WHERE month(odate) = 10 AND day(odate) = 4);
+SELECT 
+    *
+FROM
+    orders
+WHERE
+    amt > (SELECT 
+            AVG(amt)
+        FROM
+            orders
+        WHERE
+            MONTH(odate) = 10 AND DAY(odate) = 4);
 
 Output -
 
@@ -2122,8 +2524,17 @@ Output -
 
 Query -
 
-SELECT * FROM customers
-WHERE rating > (SELECT avg(rating) FROM customers WHERE cname = 'Grass');
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    rating > (SELECT 
+            AVG(rating)
+        FROM
+            customers
+        WHERE
+            cname = 'Grass');
 
 Output -
 
@@ -2133,8 +2544,20 @@ Empty set (0.00 sec)
 
 Query -
 
-SELECT * FROM customers WHERE cnum IN
-(SELECT cnum FROM orders WHERE amt > (SELECT avg(amt) FROM orders));
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    cnum IN (SELECT 
+            cnum
+        FROM
+            orders
+        WHERE
+            amt > (SELECT 
+                    AVG(amt)
+                FROM
+                    orders));
 
 Output -
 
@@ -2150,9 +2573,17 @@ Output -
 
 Query -
 
-SELECT salespeople.sname, orders.snum, sum(orders.amt) AS total_amt FROM orders
-INNER JOIN salespeople ON salespeople.snum = orders.snum
-GROUP BY orders.snum HAVING sum(orders.amt) > (SELECT max(amt) FROM orders);
+SELECT 
+    salespeople.sname, orders.snum, SUM(orders.amt) AS total_amt
+FROM
+    orders
+        INNER JOIN
+    salespeople ON salespeople.snum = orders.snum
+GROUP BY orders.snum
+HAVING SUM(orders.amt) > (SELECT 
+        MAX(amt)
+    FROM
+        orders);
 
 Output -
 
@@ -2166,8 +2597,17 @@ Output -
 
 Query -
 
-SELECT snum, sname FROM salespeople WHERE snum IN
-(SELECT snum FROM customers GROUP BY snum HAVING count(*) > 1);
+SELECT 
+    snum, sname
+FROM
+    salespeople
+WHERE
+    snum IN (SELECT 
+            snum
+        FROM
+            customers
+        GROUP BY snum
+        HAVING COUNT(*) > 1);
 
 Output -
 
@@ -2183,9 +2623,18 @@ Output -
 
 Query -
 
-SELECT sname, snum FROM salespeople
-WHERE EXISTS (SELECT * FROM customers
-WHERE salespeople.city = customers.city AND salespeople.snum != customers.snum);
+SELECT 
+    sname, snum
+FROM
+    salespeople
+WHERE
+    EXISTS( SELECT 
+            *
+        FROM
+            customers
+        WHERE
+            salespeople.city = customers.city
+                AND salespeople.snum != customers.snum);
 
 Output -
 
@@ -2202,23 +2651,26 @@ Output -
 
 Query -
 
-SELECT
-
-(
-SELECT sum(orders.amt)
-FROM orders, customers
-WHERE customers.cnum = orders.cnum AND customers.city IN ('Rome', 'London') 
-) AS total_amt_in_orders_by_customers_in_rome_london
-
-,
-
-(
-SELECT sum(total_comm) * 5 AS five_x_comm FROM
-(SELECT (sum(orders.amt)/100) * salespeople.comm AS total_comm
-FROM orders, salespeople
-WHERE orders.snum = salespeople.snum AND salespeople.city IN ('London', 'New York')
-GROUP BY orders.snum) comm_of_salespersons_in_london_newyork
-) AS five_x_comm ;
+SELECT 
+    (SELECT 
+            SUM(orders.amt)
+        FROM
+            orders,
+            customers
+        WHERE
+            customers.cnum = orders.cnum
+                AND customers.city IN ('Rome' , 'London')) AS total_amt_in_orders_by_customers_in_rome_london,
+    (SELECT 
+            SUM(total_comm) * 5 AS five_x_comm
+        FROM
+            (SELECT 
+                (SUM(orders.amt) / 100) * salespeople.comm AS total_comm
+            FROM
+                orders, salespeople
+            WHERE
+                orders.snum = salespeople.snum
+                    AND salespeople.city IN ('London' , 'New York')
+            GROUP BY orders.snum) comm_of_salespersons_in_london_newyork) AS five_x_comm;
 
 Output - 
 
@@ -2236,19 +2688,22 @@ Output -
 Query -
 
 SELECT 
-	salespeople.sname,
+    salespeople.sname,
     salespeople.snum,
-	orders.odate,
+    orders.odate,
     orders.onum,
     orders.amt,
     salespeople.city
-    
-FROM orders, salespeople
-WHERE orders.snum = salespeople.snum 
-AND
-concat(orders.snum, orders.amt) IN 
-(SELECT concat(snum, max(amt)) FROM orders
-GROUP BY snum);
+FROM
+    orders,
+    salespeople
+WHERE
+    orders.snum = salespeople.snum
+        AND CONCAT(orders.snum, orders.amt) IN (SELECT 
+            CONCAT(snum, MAX(amt))
+        FROM
+            orders
+        GROUP BY snum);
 
 Output - 
 
@@ -2266,8 +2721,16 @@ Output -
 
 Query -
 
-SELECT * FROM salespeople
-WHERE comm = (SELECT min(comm) FROM salespeople);
+SELECT 
+    *
+FROM
+    salespeople
+WHERE
+    comm = (SELECT 
+            MIN(comm)
+        FROM
+            salespeople);
+
 
 Output - 
 
