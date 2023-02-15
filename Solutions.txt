@@ -313,7 +313,7 @@ SELECT count(distinct snum) AS 'number of salespeople' FROM orders;
 
 25) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
 
-SELECT c.cname, commision_table.sname, commision_table.commision FROM (SELECT ((comm/(SELECT SUM(comm) FROM salespeople))*100) AS commision, sname, snum, comm FROM salespeople) AS commision_table, customers as c WHERE c.snum=commision_table.snum AND commision_table.commision >12 ;
+SELECT c.cname, commission_table.sname, commission_table.commission FROM (SELECT ((comm/(SELECT SUM(comm) FROM salespeople))*100) AS commission, sname, snum, comm FROM salespeople) AS commission_table, customers as c WHERE c.snum=commission_table.snum AND commission_table.commission >12 ;
 +----------+--------+-----------+
 | cname    | sname  | commision |
 +----------+--------+-----------+
@@ -680,3 +680,7 @@ SELECT * FROM Customers WHERE rating > ALL (SELECT rating FROM Customers WHERE c
 | 2004 | Grass    | Berlin  |    300 | 1002 |
 | 2006 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
+
+
+
+
