@@ -1447,3 +1447,351 @@ mysql> SELECT * FROM CUSTOMERS WHERE CITY!="SanJose" AND RATING>200;
 | 2004 | Grass | Berlin |    300 | 1002 |
 +------+-------+--------+--------+------+
 1 row in set (0.02 sec)
+
+
+
+
+
+85) Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm &lt; 0.14);
+
+mysql> SELECT * FROM salespeople WHERE (comm > + 0.12 OR comm < 0.14);
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1003 | AxelRod | New York  |   10 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+86) Which salespersons attend to customers not in the city they have been assigned to? 
+
+mysql> SELECT SALESPEOPLE.* FROM SALESPEOPLE, CUSTOMERS WHERE SALESPEOPLE.SNUM=CUSTOMERS.SNUM AND SALESPEOPLE.CITY!=CUSTOMERS.CITY;
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1003 | AxelRod | New York  |   10 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1004 | Motika  | London    |   11 |
++------+---------+-----------+------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+87) Which salespeople get commission greater than 0.11 are serving customers rated less than 250? 
+
+mysql> SELECT SALESPEOPLE.*,RATING FROM SALESPEOPLE,CUSTOMERS WHERE SALESPEOPLE.SNUM=CUSTOMERS.SNUM AND COMM/100 > 0.10 AND RATING > 250;
++------+--------+-----------+------+--------+
+| SNUM | SNAME  | CITY      | COMM | RATING |
++------+--------+-----------+------+--------+
+| 1002 | Serres | SanJose   |   13 |    300 |
+| 1007 | Rifkin | Barcelona |   15 |    300 |
++------+--------+-----------+------+--------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+88) Which salespeople have been assigned to the same city but get different commission percentages? 
+
+mysql> SELECT S1.* FROM SALESPEOPLE S1, SALESPEOPLE S2 WHERE S1.CITY=S2.CITY AND S1.SNUM!=S2.SNUM AND S1.COMM!=S2.COMM GROUP BY SNUM;
++------+--------+--------+------+
+| SNUM | SNAME  | CITY   | COMM |
++------+--------+--------+------+
+| 1001 | Peel   | London |   12 |
+| 1004 | Motika | London |   11 |
+| 1008 | Fran   | London |   25 |
++------+--------+--------+------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+89) Which salesperson has earned the maximum commission?
+
+mysql> SELECT * FROM SALESPEOPLE WHERE COMM IN(SELECT MAX(COMM) FROM SALESPEOPLE);
++------+-------+--------+------+
+| SNUM | SNAME | CITY   | COMM |
++------+-------+--------+------+
+| 1008 | Fran  | London |   25 |
++------+-------+--------+------+
+1 row in set (0.07 sec)
+
+
+
+
+
+90) Does the customer who has placed the maximum number of orders have the maximum rating? 
+
+
+
+
+91) List all customers in descending order of customer rating. 
+
+mysql> SELECT * FROM CUSTOMERS ORDER BY RATING DESC;
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+92) On which days has Hoffman placed orders? 
+
+mysql> SELECT CNAME,ODATE FROM CUSTOMERS,ORDERS WHERE CUSTOMERS.CNUM=ORDERS.CNUM AND CNAME="Hoffman" GROUP BY ODATE;
++---------+------------+
+| CNAME   | ODATE      |
++---------+------------+
+| Hoffman | 1990-10-03 |
++---------+------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+93) Which salesmen have no orders between 10/03/1990 and 10/05/1990? 
+
+mysql> SELECT SALESPEOPLE.* FROM SALESPEOPLE,ORDERS WHERE SALESPEOPLE.SNUM=ORDERS.SNUM AND ODATE NOT BETWEEN "1990-10-03" AND "1990-10-05";
++------+--------+---------+------+
+| SNUM | SNAME  | CITY    | COMM |
++------+--------+---------+------+
+| 1002 | Serres | SanJose |   13 |
+| 1001 | Peel   | London  |   12 |
++------+--------+---------+------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+94) How many salespersons have succeeded in getting orders? 
+
+mysql> SELECT COUNT(*) AS NO_OF_SALESPEOPELE_HAVING_ORDERS FROM SALESPEOPLE WHERE SNUM IN (SELECT SNUM FROM ORDERS);
++----------------------------------+
+| NO_OF_SALESPEOPELE_HAVING_ORDERS |
++----------------------------------+
+|                                5 |
++----------------------------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+95) How many customers have placed orders? 
+
+mysql> SELECT COUNT(*) AS NO_OF_CUSTOMERS_HAVING_ORDERS FROM CUSTOMERS WHERE CNUM IN (SELECT CNUM FROM ORDERS)
++-------------------------------+
+| NO_OF_CUSTOMERS_HAVING_ORDERS |
++-------------------------------+
+|                             7 |
++-------------------------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+96) On which date has each salesman booked an order of maximum value? 
+
+mysql> SELECT SNAME, ODATE,MAX(AMT) FROM SALESPEOPLE, ORDERS WHERE SALESPEOPLE.SNUM=ORDERS.SNUM GROUP BY ORDERS.SNUM;
++---------+------------+----------+
+| SNAME   | ODATE      | MAX(AMT) |
++---------+------------+----------+
+| Peel    | 1990-10-03 |  9891.88 |
+| Serres  | 1990-10-03 |  5160.45 |
+| AxelRod | 1990-10-04 |  1713.23 |
+| Motika  | 1990-10-03 |  1900.10 |
+| Rifkin  | 1990-10-03 |  1098.16 |
++---------+------------+----------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+97) Who is the most successful salesperson? 
+
+mysql> select SALESPEOPLE.SNUM, SNAME, max(total) from SALESPEOPLE, (SELECT *,COUNT(*) as total FROM ORDERS GROUP BY SNUM) as results;
++------+-------+------------+
+| SNUM | SNAME | max(total) |
++------+-------+------------+
+| 1001 | Peel  |          3 |
++------+-------+------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+98) Which customers have the same rating? 
+
+mysql> SELECT C1.CNUM, C1.CNAME, C2.CNUM, C2.CNAME FROM CUSTOMERS C1,CUSTOMERS C2 WHERE C1.CNUM!=C2.CNUM AND C1.RATING=C2.RATING;
++------+----------+------+----------+
+| CNUM | CNAME    | CNUM | CNAME    |
++------+----------+------+----------+
+| 2006 | Clemens  | 2001 | Hoffman  |
+| 2007 | Pereira  | 2001 | Hoffman  |
+| 2003 | Liu      | 2002 | Giovanni |
+| 2002 | Giovanni | 2003 | Liu      |
+| 2008 | Cisneros | 2004 | Grass    |
+| 2001 | Hoffman  | 2006 | Clemens  |
+| 2007 | Pereira  | 2006 | Clemens  |
+| 2004 | Grass    | 2008 | Cisneros |
+| 2001 | Hoffman  | 2007 | Pereira  |
+| 2006 | Clemens  | 2007 | Pereira  |
++------+----------+------+----------+
+10 rows in set (0.00 sec)
+
+
+
+
+
+99) Find all orders greater than the average for October 4th. 
+
+mysql> SELECT * FROM ORDERS WHERE AMT>(SELECT AVG(AMT) FROM ORDERS WHERE ODATE="1990-10-04");
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+7 rows in set (0.00 sec)
+
+
+
+
+100) List all customers with ratings above Grass’s average. 
+
+mysql> SELECT * FROM CUSTOMERS WHERE RATING>(SELECT AVG(RATING) FROM CUSTOMERS WHERE CNAME="Grass");
+Empty set (0.00 sec)
+
+
+
+
+
+101) Which customers have above average orders? 
+
+mysql> SELECT * FROM ORDERS WHERE AMT>(SELECT AVG(AMT) FROM ORDERS);
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+102) Select the total amount in orders for each salesperson for which the total is greater than the amount of the largest order in the table.
+
+
+
+
+
+
+
+103) Give names and numbers of all salespersons that have more than one customer? 
+
+mysql> SELECT SNAME, SNUM FROM SALESPEOPLE WHERE SNUM IN (SELECT SNUM FROM CUSTOMERS GROUP BY SNUM HAVING COUNT(SNUM)>1);
++--------+------+
+| SNAME  | SNUM |
++--------+------+
+| Peel   | 1001 |
+| Serres | 1002 |
++--------+------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+104) Select all salespeople by name and number who have customers in their city whom they don’t service. 
+
+mysql> SELECT SNAME,SALESPEOPLE.SNUM FROM SALESPEOPLE,CUSTOMERS WHERE SALESPEOPLE.SNUM=CUSTOMERS.SNUM AND SALESPEOPLE.CITY!=CUSTOMERS.CITY;
++---------+------+
+| SNAME   | SNUM |
++---------+------+
+| AxelRod | 1003 |
+| Serres  | 1002 |
+| Rifkin  | 1007 |
+| Motika  | 1004 |
++---------+------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
+
+mysql> SELECT RES1,RES2,(RES1>RES2) AS "IS_IT_GREATER_?" FROM(SELECT SUM(COMM*AMT/100)*5 AS RES2 FROM SALESPEOPLE,ORDERS WHERE SALESPEOPLE.SNUM=ORDERS.SNUM AND (CITY="London" OR CITY="New York")) AS A,(SELECT SUM(AMT) AS RES1 FROM CUSTOMERS,ORDERS WHERE CUSTOMERS.CNUM=ORDERS.CNUM AND (CITY="London" OR CITY="Rome")) AS B;
++----------+--------------+-----------------+
+| RES1     | RES2         | IS_IT_GREATER_? |
++----------+--------------+-----------------+
+| 18995.40 | 11130.912000 |               1 |
++----------+--------------+-----------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+106) Which are the date, order number, amt and city for each salesperson (by name) for the maximum order he has obtained?
+
+mysql> SELECT ODATE, ONUM, AMT, CITY, SNAME FROM SALESPEOPLE, ORDERS WHERE SALESPEOPLE.SNUM = ORDERS.SNUM AND AMT IN(SELECT MAX(AMT) FROM SALESPEOPLE,ORDERS WHERE SALESPEOPLE.SNUM=ORDERS.SNUM GROUP BY ORDERS.SNUM);
++------------+------+---------+-----------+---------+
+| ODATE      | ONUM | AMT     | CITY      | SNAME   |
++------------+------+---------+-----------+---------+
+| 1990-10-03 | 3002 | 1900.10 | London    | Motika  |
+| 1990-10-03 | 3005 | 5160.45 | SanJose   | Serres  |
+| 1990-10-03 | 3006 | 1098.16 | Barcelona | Rifkin  |
+| 1990-10-04 | 3009 | 1713.23 | New York  | AxelRod |
+| 1990-10-06 | 3011 | 9891.88 | London    | Peel    |
++------------+------+---------+-----------+---------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+107) Which salesperson is having lowest commission? 
+
+mysql> SELECT * FROM SALESPEOPLE WHERE COMM=(SELECT MIN(COMM) FROM SALESPEOPLE);
++------+---------+----------+------+
+| SNUM | SNAME   | CITY     | COMM |
++------+---------+----------+------+
+| 1003 | AxelRod | New York |   10 |
++------+---------+----------+------+
+1 row in set (0.00 sec)
