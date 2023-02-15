@@ -1,0 +1,164 @@
+1) List all the columns of the Salespeople table. 
+
+mysql> show columns from salespeople;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| SNUM  | int(11)     | NO   | PRI | NULL    |       |
+| SNAME | varchar(30) | YES  |     | NULL    |       |
+| CITY  | varchar(20) | YES  |     | NULL    |       |
+| COMM  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+
+
+
+
+2) List all customers with a rating of 100. 
+
+mysql> select * from customers where RATING=100;
++------+---------+--------+--------+------+
+| CNUM | CNAME   | CITY   | RATING | SNUM |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
+| 2007 | Pereira | Rome   |    100 | 1004 |
++------+---------+--------+--------+------+
+3 rows in set (0.07 sec)
+
+
+
+
+
+3) Find the largest order taken by each salesperson on each date. 
+
+using nested queries->
+mysql> select SNAME, ODATE, AMT, salespeople.SNUM from salespeople, orders
+    -> where salespeople.SNUM=orders.SNUM and
+    -> AMT in (select max(AMT) from orders group by SNUM,ODATE);
++---------+------------+---------+------+
+| SNAME   | ODATE      | AMT     | SNUM |
++---------+------------+---------+------+
+| Peel    | 1990-10-03 |  767.19 | 1001 |
+| Motika  | 1990-10-03 | 1900.10 | 1004 |
+| Serres  | 1990-10-03 | 5160.45 | 1002 |
+| Rifkin  | 1990-10-03 | 1098.16 | 1007 |
+| AxelRod | 1990-10-04 | 1713.23 | 1003 |
+| Serres  | 1990-10-04 |   75.75 | 1002 |
+| Peel    | 1990-10-05 | 4723.00 | 1001 |
+| Serres  | 1990-10-06 | 1309.95 | 1002 |
+| Peel    | 1990-10-06 | 9891.88 | 1001 |
++---------+------------+---------+------+
+9 rows in set (0.00 sec)
+
+using join->
+mysql> SELECT salespeople.SNAME, orders.ODATE, MAX(orders.AMT) AS largest_order
+    -> FROM salespeople
+    -> JOIN orders ON salespeople.SNUM = orders.SNUM
+    -> GROUP BY salespeople.SNAME, orders.ODATE;
++---------+------------+---------------+
+| SNAME   | ODATE      | largest_order |
++---------+------------+---------------+
+| AxelRod | 1990-10-04 |       1713.23 |
+| Motika  | 1990-10-03 |       1900.10 |
+| Peel    | 1990-10-03 |        767.19 |
+| Peel    | 1990-10-05 |       4723.00 |
+| Peel    | 1990-10-06 |       9891.88 |
+| Rifkin  | 1990-10-03 |       1098.16 |
+| Serres  | 1990-10-03 |       5160.45 |
+| Serres  | 1990-10-04 |         75.75 |
+| Serres  | 1990-10-06 |       1309.95 |
++---------+------------+---------------+
+9 rows in set (0.02 sec)
+
+
+
+
+
+4) Arrange the Order table by descending customer number. 
+
+mysql> select * from customers order by CNUM desc;
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2001 | Hoffman  | London  |    100 | 1001 |
++------+----------+---------+--------+------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+5) Find which salespeople currently have orders in the order table. 
+
+mysql> select salespeople.SNAME, salespeople.SNUM from salespeople,orders where salespeople.SNUM=orders.SNUM group by SNAME;
++---------+------+
+| SNAME   | SNUM |
++---------+------+
+| AxelRod | 1003 |
+| Motika  | 1004 |
+| Peel    | 1001 |
+| Rifkin  | 1007 |
+| Serres  | 1002 |
++---------+------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+6) List names of all customers matched with the salespeople serving them. 
+
+mysql> select  customers.CNAME, salespeople.SNAME as salespeople_serving from salespeople JOIN customers on salespeople.SNUM=customers.SNUM;
++----------+---------------------+
+| CNAME    | salespeople_serving |
++----------+---------------------+
+| Hoffman  | Peel                |
+| Giovanni | AxelRod             |
+| Liu      | Serres              |
+| Grass    | Serres              |
+| Clemens  | Peel                |
+| Cisneros | Rifkin              |
+| Pereira  | Motika              |
++----------+---------------------+
+
+
+
+
+
+7) Find the names and numbers of all salespeople who have more than one customer. 
+
+mysql> select salespeople.SNAME, salespeople.SNUM from salespeople join customers on salespeople.SNUM=customers.SNUM group by SNUM having count(salespeople.SNUM)>1;
++--------+------+
+| SNAME  | SNUM |
++--------+------+
+| Peel   | 1001 |
+| Serres | 1002 |
++--------+------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+8) Count the orders of each of the salespeople and output the results in descending order. 
+
+mysql> select SNAME, salespeople.SNUM ,count(salespeople.SNUM) as number_of_orders from salespeople join orders on salespeople.SNUM=orders.SNUM group by orders.SNUM havin
+g count(orders.SNUM)>1;
++--------+------+------------------+
+| SNAME  | SNUM | number_of_orders |
++--------+------+------------------+
+| Peel   | 1001 |                3 |
+| Serres | 1002 |                3 |
+| Rifkin | 1007 |                2 |
++--------+------+------------------+
+3 rows in set (0.00 sec)
+
+
