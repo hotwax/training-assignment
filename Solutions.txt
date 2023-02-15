@@ -201,16 +201,13 @@ SELECT o.* FROM customers AS c, orders AS o WHERE o.cnum=c.cnum AND o.odate="199
 
 18) Find all customers whose cnum is 1000 above the snum of Serres. 
 
-SELECT * FROM customers WHERE cnum > (1000+(SELECT snum FROM salespeople WHERE sname='Serres'));
-+------+----------+---------+--------+------+
-| cnum | cname    | city    | rating | snum |
-+------+----------+---------+--------+------+
-| 2003 | Liu      | SanJose |    200 | 1002 |
-| 2004 | Grass    | Berlin  |    300 | 1002 |
-| 2006 | Clemens  | London  |    100 | 1001 |
-| 2006 | Cisneros | SanJose |    300 | 1007 |
-| 2007 | Pereira  | Rome    |    100 | 1004 |
-+------+----------+---------+--------+------+
+SELECT c.* FROM customers as c, salespeople as s WHERE c.snum=s.snum AND s.sname='Serres';
++------+-------+---------+--------+------+
+| cnum | cname | city    | rating | snum |
++------+-------+---------+--------+------+
+| 2003 | Liu   | SanJose |    200 | 1002 |
+| 2004 | Grass | Berlin  |    300 | 1002 |
++------+-------+---------+--------+------+
 
 
 19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
