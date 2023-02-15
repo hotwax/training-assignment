@@ -616,6 +616,25 @@ Output -
 | Serres      |           5160.45 |
 +-------------+-------------------+
 
+-- 31) Sort the salespeople table in the following order: snum, sname, commission, city.
+
+Query - 
+
+SELECT * FROM salespeople ORDER BY snum, sname, comm, city;
+
+Output -
+
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1003 | AxelRod | New York  |   10 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+
 -- 32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
 
 Query -
@@ -1515,6 +1534,24 @@ Output -
 | 1990-10-05 |                 1 |
 | 1990-10-06 |                 2 |
 +------------+-------------------+
+
+-- 69) Find all orders attributed to salespeople who live in London. 
+
+Query - 
+
+SELECT * FROM orders WHERE snum IN 
+(SELECT snum FROM salespeople WHERE city = 'London');
+
+Output - 
+
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
++------+---------+------------+------+------+
 
 -- 70) Find all orders by customers not located in the same cities as their salespeople. 
 
