@@ -517,7 +517,7 @@ WHERE amt>(SELECT AVG(amt) FROM orders WHERE month(odate)=10 AND day(odate)=4 );
 | 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
 +------+---------+------------+------+------+
 
-35) 35) Write a select command using correlated subquery that selects the names and numbers of all customers with ratings equal to the maximum for their city. 
+35) Write a select command using correlated subquery that selects the names and numbers of all customers with ratings equal to the maximum for their city. 
 Ans-
 SELECT c1.cname, c1.cnum FROM customers c1 
 WHERE c1.rating=(Select MAX(c2.rating) FROM customers c2 WHERE c1.city=c2.city);
