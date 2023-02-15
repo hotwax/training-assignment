@@ -1,6 +1,6 @@
 1) List all the columns of the Salespeople table. 
 
-mysql> show columns from salespeople;
+mysql> SHOW COLUMNS FROM SALESPEOPLE;
 +-------+-------------+------+-----+---------+-------+
 | Field | Type        | Null | Key | Default | Extra |
 +-------+-------------+------+-----+---------+-------+
@@ -17,7 +17,7 @@ mysql> show columns from salespeople;
 
 2) List all customers with a rating of 100. 
 
-mysql> select * from customers where RATING=100;
+mysql> SELECT * FROM CUSTOMERS WHERE RATING=100;
 +------+---------+--------+--------+------+
 | CNUM | CNAME   | CITY   | RATING | SNUM |
 +------+---------+--------+--------+------+
@@ -34,9 +34,9 @@ mysql> select * from customers where RATING=100;
 3) Find the largest order taken by each salesperson on each date. 
 
 using nested queries->
-mysql> select SNAME, ODATE, AMT, salespeople.SNUM from salespeople, orders
-    -> where salespeople.SNUM=orders.SNUM and
-    -> AMT in (select max(AMT) from orders group by SNUM,ODATE);
+mysql> SELECT SNAME, ODATE, AMT, SALESPEOPLE.SNUM from SALESPEOPLE, ORDERS
+    -> WHERE SALESPEOPLE.SNUM=ORDERS.SNUM AND
+    -> AMT IN (SELECT MAX(AMT) FROM ORDERS GROUP BY SNUM, ODATE);
 +---------+------------+---------+------+
 | SNAME   | ODATE      | AMT     | SNUM |
 +---------+------------+---------+------+
@@ -53,10 +53,10 @@ mysql> select SNAME, ODATE, AMT, salespeople.SNUM from salespeople, orders
 9 rows in set (0.00 sec)
 
 using join->
-mysql> SELECT salespeople.SNAME, orders.ODATE, MAX(orders.AMT) AS largest_order
-    -> FROM salespeople
-    -> JOIN orders ON salespeople.SNUM = orders.SNUM
-    -> GROUP BY salespeople.SNAME, orders.ODATE;
+mysql> SELECT SALESPEOPLE.SNAME, ORDERS.ODATE, MAX(orders.AMT) AS largest_order
+    -> FROM SALESPEOPLE
+    -> JOIN ORDERS ON SALESPEOPLE.SNUM = ORDERS.SNUM
+    -> GROUP BY SALESPEOPLE.SNAME, ORDERS.ODATE;
 +---------+------------+---------------+
 | SNAME   | ODATE      | largest_order |
 +---------+------------+---------------+
@@ -78,7 +78,7 @@ mysql> SELECT salespeople.SNAME, orders.ODATE, MAX(orders.AMT) AS largest_order
 
 4) Arrange the Order table by descending customer number. 
 
-mysql> select * from customers order by CNUM desc;
+mysql> SELECT * FROM CUSTOMERS ORDER BY CNUM DESC;
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -98,7 +98,7 @@ mysql> select * from customers order by CNUM desc;
 
 5) Find which salespeople currently have orders in the order table. 
 
-mysql> select salespeople.SNAME, salespeople.SNUM from salespeople,orders where salespeople.SNUM=orders.SNUM group by SNAME;
+mysql> SELECT SALESPEOPLE.SNAME, SALESPEOPLE.SNUM FROM SALESPEOPLE,ORDERS where SALESPEOPLE.SNUM=ORDERS.SNUM GROUP BY SNAME;
 +---------+------+
 | SNAME   | SNUM |
 +---------+------+
@@ -116,7 +116,7 @@ mysql> select salespeople.SNAME, salespeople.SNUM from salespeople,orders where 
 
 6) List names of all customers matched with the salespeople serving them. 
 
-mysql> select  customers.CNAME, salespeople.SNAME as salespeople_serving from salespeople JOIN customers on salespeople.SNUM=customers.SNUM;
+mysql> SELECT CUSTOMERS.CNAME, SALESPEOPLE.SNAME AS salespeople_serving FROM SALESPEOPLE JOIN CUSTOMERS ON SALESPEOPLE.SNUM=CUSTOMERS.SNUM;
 +----------+---------------------+
 | CNAME    | salespeople_serving |
 +----------+---------------------+
@@ -135,7 +135,7 @@ mysql> select  customers.CNAME, salespeople.SNAME as salespeople_serving from sa
 
 7) Find the names and numbers of all salespeople who have more than one customer. 
 
-mysql> select salespeople.SNAME, salespeople.SNUM from salespeople join customers on salespeople.SNUM=customers.SNUM group by SNUM having count(salespeople.SNUM)>1;
+mysql> SELECT SALESPEOPLE.SNAME, SALESPEOPLE.SNUM FROM SALESPEOPLE JOIN CUSTOMERS ON SALESPEOPLE.SNUM=CUSTOMERS.SNUM GROUP BY SNUM HAVING COUNT(SALESPEOPLE.SNUM)>1;
 +--------+------+
 | SNAME  | SNUM |
 +--------+------+
@@ -150,8 +150,7 @@ mysql> select salespeople.SNAME, salespeople.SNUM from salespeople join customer
 
 8) Count the orders of each of the salespeople and output the results in descending order. 
 
-mysql> select SNAME, salespeople.SNUM ,count(salespeople.SNUM) as number_of_orders from salespeople join orders on salespeople.SNUM=orders.SNUM group by orders.SNUM havin
-g count(orders.SNUM)>1;
+mysql> SELECT SNAME, SALESPEOPLE.SNUM, COUNT(SALESPEOPLE.SNUM) AS number_of_orders FROM SALESPEOPLE JOIN ORDERS ON SALESPEOPLE.SNUM=ORDERS.SNUM GROUP BY ORDERS.SNUM HAVING COUNT(ORDERS.SNUM)>1;
 +--------+------+------------------+
 | SNAME  | SNUM | number_of_orders |
 +--------+------+------------------+
