@@ -250,7 +250,7 @@ SELECT *, ((comm/(SELECT SUM(comm) FROM salespeople))*100) AS 'commission in %' 
 | 1004 | Motika  | London    |   11 |         12.7907 |
 | 1007 | Rifkin  | Barcelona |   15 |         17.4419 |
 | 1003 | AxelRod | New York  |   10 |         11.6279 |
-| 1008 | Fran    | London    |   25 |         29.0698 |
+| 1008 | Fran    | London    |   25 |         w
 +------+---------+-----------+------+-----------------+
 
 
@@ -313,6 +313,17 @@ SELECT count(distinct snum) AS 'number of salespeople' FROM orders;
 
 25) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
 
+SELECT c.cname, commision_table.sname, commision_table.commision FROM (SELECT ((comm/(SELECT SUM(comm) FROM salespeople))*100) AS commision, sname, snum, comm FROM salespeople) AS commision_table, customers as c WHERE c.snum=commision_table.snum AND commision_table.commision >12 ;
++----------+--------+-----------+
+| cname    | sname  | commision |
++----------+--------+-----------+
+| Hoffman  | Peel   |   13.9535 |
+| Liu      | Serres |   15.1163 |
+| Grass    | Serres |   15.1163 |
+| Clemens  | Peel   |   13.9535 |
+| Cisneros | Rifkin |   17.4419 |
+| Pereira  | Motika |   12.7907 |
++----------+--------+-----------+
 
 
 26) Find salespeople who have multiple customers. 
