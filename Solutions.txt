@@ -854,10 +854,41 @@ SELECT o.*, s.city AS 'salesperson's city',c.city AS 'customer's city' FROM orde
 74) Write a query that will produce the snum values of all salespeople with orders, having amt greater than 1000 in the Orders Table(without repeats). 
 
 
-75) Write a query that lists customers in a descending order of rating. Output the rating field first, followed by the customer’s names and numbers. 76) Find the average commission for salespeople in London. 
+75) Write a query that lists customers in a descending order of rating. Output the rating field first, followed by the customer’s names and numbers. 
 
+SELECT rating, cname, cnum FROM customers ORDER BY rating DESC;
++--------+----------+------+
+| rating | cname    | cnum |
++--------+----------+------+
+|    300 | Grass    | 2004 |
+|    300 | Cisneros | 2006 |
+|    200 | Giovanni | 2002 |
+|    200 | Liu      | 2003 |
+|    100 | Hoffman  | 2001 |
+|    100 | Clemens  | 2006 |
+|    100 | Pereira  | 2007 |
++--------+----------+------+
+
+
+76) Find the average commission for salespeople in London. 
+
+SELECT AVG(comm) FROM salespeople WHERE city='London';
++-----------+
+| AVG(comm) |
++-----------+
+|   16.0000 |
++-----------+
 
 77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
+
+SELECT o.* FROM orders AS o, customers AS c WHERE o.snum=c.snum AND c.cname='Hoffman';
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
 
 
 78) Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive). 
