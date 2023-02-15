@@ -776,3 +776,147 @@ WHERE rating >
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
+
+51) Write a query on the Customers table whose output will exclude all customers with a rating &lt;= 100.00, unless they are located in Rome.
+
+SELECT *
+FROM customers
+WHERE rating != 100
+   OR city = "Rome";
+
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+
+52) Find all rows from the customer’s table for which the salesperson number is 1001.
+
+SELECT *
+FROM customers
+WHERE snum = 1001;
+
++------+---------+--------+--------+------+
+| CNUM | CNAME   | CITY   | RATING | SNUM |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
++------+---------+--------+--------+------+
+
+53) Find the total amount in orders for each salesperson where their total of amounts are greater than
+the amount of the largest order in the table.
+
+SELECT onum,
+       sname,
+       odate,
+       SUM(amt) AS amount
+FROM orders o
+         JOIN
+     salespeople s ON
+         o.SNUM = s.SNUM
+GROUP BY o.snum
+HAVING amount > (SELECT MAX(amt) FROM orders);
+
++------+-------+------------+----------+
+| onum | sname | odate      | amount   |
++------+-------+------------+----------+
+| 3003 | Peel  | 1990-03-10 | 15382.57 |
++------+-------+------------+----------+
+
+54) Write a query that selects all orders save those with zeroes or NULL in the amount file.
+SELECT *
+FROM orders
+WHERE amt = 0
+   OR amt = NULL;
+
+OR
+
+SELECT *
+FROM orders
+INTO OUTFILE 'C:\ProgramData\MySQL\MySQL Server \Uploads\8.0\amount.txt';
+
+Empty set (0.00 sec)
+
+55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200.
+
+SELECT s.sname, c.cname, c.rating
+FROM salespeople s
+         JOIN customers c on s.SNUM = c.SNUM
+WHERE s.sname < c.cname
+  AND c.rating < 200;
+  
++--------+---------+--------+
+| sname  | cname   | rating |
++--------+---------+--------+
+| Motika | Pereira |    100 |
++--------+---------+--------+
+
+56) Find all salespeople name and commission.
+
+SELECT sname, comm
+FROM salespeople;
++---------+------+
+| sname   | comm |
++---------+------+
+| Peel    |   12 |
+| Serres  |   13 |
+| AxelRod |   10 |
+| Motika  |   11 |
+| Rifkin  |   15 |
+| Fran    |   25 |
++---------+------+
+
+57) Write a query that produces the names and cities of all customers with the same rating as Hoffman. Write the query using Hoffman’s cnum rather than his rating, so that it would still be usable if his rating is changed.
+
+SELECT cnum
+FROM customers
+WHERE cname = "Hoffman";
+SELECT cname, city
+FROM customers
+WHERE rating = (SELECT rating
+              FROM customers
+              WHERE cnum = 2001);
+
++---------+--------+
+| cname   | city   |
++---------+--------+
+| Hoffman | London |
+| Clemens | London |
+| Pereira | Rome   |
++---------+--------+
+
+58) Find all salespeople for whom there are customers that follow them in alphabetical order.
+
+SELECT *
+FROM salespeople
+WHERE snum IN (SELECT snum
+               FROM customers
+               WHERE salespeople.sname < customers.cname);
+
+
++------+---------+----------+------+
+| SNUM | SNAME   | CITY     | COMM |
++------+---------+----------+------+
+| 1003 | AxelRod | New York |   10 |
+| 1004 | Motika  | London   |   11 |
++------+---------+----------+------+
+
+59) Write a query that produces the names and ratings of all customers who have average orders.
+
+SELECT c.cname, c.rating
+FROM customers c
+         JOIN orders o ON c.cnum = o.cnum
+WHERE o.amt > (SELECT AVG(amt)
+               FROM orders)
+               GROUP BY o.cnum;
+
++---------+--------+
+| cname   | rating |
++---------+--------+
+| Liu     |    200 |
+| Clemens |    100 |
++---------+--------+
