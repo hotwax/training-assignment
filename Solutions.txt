@@ -47,20 +47,20 @@ SELECT * FROM customers WHERE rating=100;
 
 3) Find the largest order taken by each salesperson on each date. 
 
-SELECT MAX(amt), snum, odate FROM orders GROUP BY odate, snum;
-+----------+------+------------+
-| MAX(amt) | snum | odate      |
-+----------+------+------------+
-|  1098.16 | 1007 | 1990-10-03 |
-|   767.19 | 1001 | 1990-10-03 |
-|  1900.10 | 1004 | 1990-10-03 |
-|  5160.45 | 1002 | 1990-10-03 |
-|  1713.23 | 1003 | 1990-10-04 |
-|    75.75 | 1002 | 1990-10-04 |
-|  4723.00 | 1001 | 1990-10-05 |
-|  1309.95 | 1002 | 1990-10-06 |
-|  9891.88 | 1001 | 1990-10-06 |
-+----------+------+------------+
+SELECT MAX(amt) max_amount, snum, odate FROM orders GROUP BY odate, snum;
++------------+------+------------+
+| max_amount | snum | odate      |
++------------+------+------------+
+|    1098.16 | 1007 | 1990-10-03 |
+|     767.19 | 1001 | 1990-10-03 |
+|    1900.10 | 1004 | 1990-10-03 |
+|    5160.45 | 1002 | 1990-10-03 |
+|    1713.23 | 1003 | 1990-10-04 |
+|      75.75 | 1002 | 1990-10-04 |
+|    4723.00 | 1001 | 1990-10-05 |
+|    1309.95 | 1002 | 1990-10-06 |
+|    9891.88 | 1001 | 1990-10-06 |
++------------+------+------------+
 
 4) Arrange the Order table by descending customer number. 
 
@@ -83,7 +83,7 @@ SELECT * FROM orders ORDER BY cnum DESC;
 
 5) Find which salespeople currently have orders in the order table. 
 
-SELECT distinct s.* FROM orders as o, salespeople as s where o.snum=s.snum;
+SELECT DISTINCT s.* FROM orders o, salespeople s where o.snum=s.snum;
 +------+---------+-----------+------+
 | snum | sname   | city      | comm |
 +------+---------+-----------+------+
@@ -97,7 +97,7 @@ SELECT distinct s.* FROM orders as o, salespeople as s where o.snum=s.snum;
 
 6) List names of all customers matched with the salespeople serving them. 
 
-SELECT c.cname, s.sname FROM customers AS c, salespeople AS s WHERE s.snum=c.snum;
+SELECT c.cname, s.sname FROM customers c, salespeople s WHERE s.snum=c.snum;
 +----------+---------+
 | cname    | sname   |
 +----------+---------+
@@ -113,7 +113,7 @@ SELECT c.cname, s.sname FROM customers AS c, salespeople AS s WHERE s.snum=c.snu
 
 7) Find the names and numbers of all salespeople who have more than one customer. 
 
-SELECT c.snum, s.sname, count(cnum) AS 'number of customers' FROM customers AS c, salespeople AS s WHERE s.snum=c.snum Group By s.snum Having COUNT(cnum)>1;
+SELECT c.snum, s.sname, count(cnum) 'number of customers' FROM customers c, salespeople s WHERE s.snum=c.snum Group By s.snum Having COUNT(cnum)>1;
 +------+--------+---------------------+
 | snum | sname  | number of customers |
 +------+--------+---------------------+
@@ -138,7 +138,7 @@ SELECT COUNT(o.onum) AS 'number of orders', s.snum, s.sname FROM orders AS o, sa
 
 9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
 
-SELECT * FROM customers WHERE EXISTS (SELECT * FROM customers WHERE city='SanJose');
+SELECT * FROM customers WHERE (SELECT COUNT(*) FROM customers WHERE city = 'SanJose')>1;
 +------+----------+---------+--------+------+
 | cnum | cname    | city    | rating | snum |
 +------+----------+---------+--------+------+
@@ -147,7 +147,7 @@ SELECT * FROM customers WHERE EXISTS (SELECT * FROM customers WHERE city='SanJos
 | 2003 | Liu      | SanJose |    200 | 1002 |
 | 2004 | Grass    | Berlin  |    300 | 1002 |
 | 2006 | Clemens  | London  |    100 | 1001 |
-| 2006 | Cisneros | SanJose |    300 | 1007 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
 | 2007 | Pereira  | Rome    |    100 | 1004 |
 +------+----------+---------+--------+------+
 
@@ -254,17 +254,17 @@ SELECT * FROM customers WHERE cnum = (1000+ (SELECT snum FROM salespeople WHERE 
 
 19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
 
-SELECT *, ((comm/(SELECT SUM(comm) FROM salespeople))*100) AS 'commission in %' FROM salespeople ;
-+------+---------+-----------+------+-----------------+
-| snum | sname   | city      | comm | commission in % |
-+------+---------+-----------+------+-----------------+
-| 1001 | Peel    | London    |   12 |         13.9535 |
-| 1002 | Serres  | SanJose   |   13 |         15.1163 |
-| 1004 | Motika  | London    |   11 |         12.7907 |
-| 1007 | Rifkin  | Barcelona |   15 |         17.4419 |
-| 1003 | AxelRod | New York  |   10 |         11.6279 |
-| 1008 | Fran    | London    |   25 |         w
-+------+---------+-----------+------+-----------------+
+SELECT snum, sname, CONCAT(comm, ' %') AS commission FROM salespeople ;
++------+---------+------------+
+| snum | sname   | commission |
++------+---------+------------+
+| 1001 | Peel    | 12 %       |
+| 1002 | Serres  | 13 %       |
+| 1004 | Motika  | 11 %       |
+| 1007 | Rifkin  | 15 %       |
+| 1003 | AxelRod | 10 %       |
+| 1008 | Fran    | 25 %       |
++------+---------+------------+
 
 
 20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000. 
@@ -326,17 +326,14 @@ SELECT count(distinct snum) AS 'number of salespeople' FROM orders;
 
 25) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
 
-SELECT c.cname, commission_table.sname, commission_table.commission FROM (SELECT ((comm/(SELECT SUM(comm) FROM salespeople))*100) AS commission, sname, snum, comm FROM salespeople) AS commission_table, customers as c WHERE c.snum=commission_table.snum AND commission_table.commission >12 ;
-+----------+--------+-----------+
-| cname    | sname  | commision |
-+----------+--------+-----------+
-| Hoffman  | Peel   |   13.9535 |
-| Liu      | Serres |   15.1163 |
-| Grass    | Serres |   15.1163 |
-| Clemens  | Peel   |   13.9535 |
-| Cisneros | Rifkin |   17.4419 |
-| Pereira  | Motika |   12.7907 |
-+----------+--------+-----------+
+SELECT c.cname, s.sname, s.comm FROM salespeople s, customers c WHERE s.snum=c.snum AND s.comm>12;
++----------+--------+------+
+| cname    | sname  | comm |
++----------+--------+------+
+| Liu      | Serres |   13 |
+| Grass    | Serres |   13 |
+| Cisneros | Rifkin |   15 |
++----------+--------+------+
 
 
 26) Find salespeople who have multiple customers. 
