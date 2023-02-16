@@ -213,8 +213,10 @@ SELECT o.* FROM customers AS c, orders AS o WHERE o.cnum=c.cnum AND o.odate="199
 
 
 15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
-SELECT SUM(amt), odate FROM orders GROUP BY odate HAVING SUM(amt) > (2000+MAX(amt));
-//half done
+
+SELECT SUM(amt), odate FROM orders GROUP BY odate HAVING SUM(amt) > (2000+ (SELECT MAX(amt) FROM orders));
+Empty set (0.01 sec)
+
 
 16) Select all orders that had amounts that were greater than at least one of the orders from October 6. 
 
