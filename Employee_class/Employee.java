@@ -76,19 +76,19 @@ public class Employee {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object object) {
         // If the object is compared with itself then return true 
-        if (o == this) {
+        if (object == this) {
             return true;
         }
         /* Check if o is an instance of Complex or not
           "null instanceof [type]" also returns false */
-        if (!(o instanceof Employee)) {
+        if (!(object instanceof Employee)) {
             return false;
         }
 
         // typecast o to Complex so that we can compare data members
-        Employee c = (Employee) o;
+        Employee c = (Employee) object;
 
         // Compare the data members and return accordingly
         return this.emailAddress.equals(c.emailAddress);
