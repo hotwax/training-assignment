@@ -261,42 +261,42 @@ SELECT * FROM customers WHERE cnum >= (1000+ (SELECT snum FROM salespeople WHERE
 
 19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
 
-SELECT snum, sname, CONCAT(comm, ' %') AS commission FROM salespeople ;
-+------+---------+------------+
-| snum | sname   | commission |
-+------+---------+------------+
-| 1001 | Peel    | 12 %       |
-| 1002 | Serres  | 13 %       |
-| 1004 | Motika  | 11 %       |
-| 1007 | Rifkin  | 15 %       |
-| 1003 | AxelRod | 10 %       |
-| 1008 | Fran    | 25 %       |
-+------+---------+------------+
+SELECT snum, sname, CONCAT(comm, ' %') 'commission_in_%' FROM salespeople ;
++------+---------+-----------------+
+| snum | sname   | commission_in_% |
++------+---------+-----------------+
+| 1001 | Peel    | 12 %            |
+| 1002 | Serres  | 13 %            |
+| 1004 | Motika  | 11 %            |
+| 1007 | Rifkin  | 15 %            |
+| 1003 | AxelRod | 10 %            |
+| 1008 | Fran    | 25 %            |
++------+---------+-----------------+
 
 
 20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000. 
 
-SELECT MAX(amt), snum, odate FROM orders GROUP BY odate, snum HAVING MAX(amt)>=3000;
-+----------+------+------------+
-| MAX(amt) | snum | odate      |
-+----------+------+------------+
-|  5160.45 | 1002 | 1990-10-03 |
-|  4723.00 | 1001 | 1990-10-05 |
-|  9891.88 | 1001 | 1990-10-06 |
-+----------+------+------------+
+SELECT MAX(amt) max_amount, snum, odate FROM orders GROUP BY odate, snum HAVING MAX(amt)>=3000;
++------------+------+------------+
+| max_amount | snum | odate      |
++------------+------+------------+
+|    5160.45 | 1002 | 1990-10-03 |
+|    4723.00 | 1001 | 1990-10-05 |
+|    9891.88 | 1001 | 1990-10-06 |
++------------+------+------------+
 
 
 21) List all the largest orders for October 3, for each salesperson. 
 
-SELECT MAX(amt),snum,odate FROM orders WHERE odate='1990-10-03' GROUP BY snum;
-+----------+------+------------+
-| MAX(amt) | snum | odate      |
-+----------+------+------------+
-|  1098.16 | 1007 | 1990-10-03 |
-|   767.19 | 1001 | 1990-10-03 |
-|  1900.10 | 1004 | 1990-10-03 |
-|  5160.45 | 1002 | 1990-10-03 |
-+----------+------+------------+
+SELECT MAX(amt) max_amount,snum,odate FROM orders WHERE odate='1990-10-03' GROUP BY snum;
++------------+------+------------+
+| max_amount | snum | odate      |
++------------+------+------------+
+|    1098.16 | 1007 | 1990-10-03 |
+|     767.19 | 1001 | 1990-10-03 |
+|    1900.10 | 1004 | 1990-10-03 |
+|    5160.45 | 1002 | 1990-10-03 |
++------------+------+------------+
  
 22) Find all customers located in cities where Serres has customers. 
 
@@ -384,9 +384,9 @@ SELECT * FROM orders WHERE cnum = (SELECT cnum FROM customers WHERE cname='Cisne
 
 30) Find the largest orders for Serres and Rifkin. 
 
-SELECT max(o.amt), s.sname, o.snum, o.onum FROM salespeople s, orders o WHERE (s.snum=o.snum AND (s.sname='Serres' OR s.sname='Rifkin')) Group By o.snum ;
+SELECT max(o.amt) max_amount, s.sname, o.snum, o.onum FROM salespeople s, orders o WHERE (s.snum=o.snum AND (s.sname='Serres' OR s.sname='Rifkin')) Group By o.snum ;
 +------------+--------+------+------+
-| max(o.amt) | sname  | snum | onum |
+| max_amount | sname  | snum | onum |
 +------------+--------+------+------+
 |    1098.16 | Rifkin | 1007 | 3001 |
 |    5160.45 | Serres | 1002 | 3005 |
@@ -421,15 +421,15 @@ SELECT * FROM Customers WHERE cname BETWEEN 'A' AND 'G';
 
 33) Select all the possible combinations of customers you can assign. 
 
-SELECT c1.cname, c2.cname FROM customers c1, customers c2 WHERE NOT c1.cnum=c2.cnum AND c1.snum=c2.snum;
-+---------+---------+
-| cname   | cname   |
-+---------+---------+
-| Clemens | Hoffman |
-| Grass   | Liu     |
-| Liu     | Grass   |
-| Hoffman | Clemens |
-+---------+---------+
+SELECT c1.cname 'customer_1', c2.cname 'customer_2' FROM customers c1, customers c2 WHERE NOT c1.cnum=c2.cnum AND c1.snum=c2.snum;
++------------+------------+
+| customer_1 | customer_2 |
++------------+------------+
+| Clemens    | Hoffman    |
+| Grass      | Liu        |
+| Liu        | Grass      |
+| Hoffman    | Clemens    |
++------------+------------+
 
 34) Select all orders that are greater than the average for October 4. 
 
@@ -463,15 +463,15 @@ SELECT cnum, cname FROM Customers c WHERE rating = (SELECT MAX(rating) FROM Cust
 
 36) Write a query that totals the orders for each day and places the results in descending order. 
 
-SELECT SUM(amt), odate FROM Orders GROUP BY odate ORDER BY SUM(amt) DESC;
-+----------+------------+
-| SUM(amt) | odate      |
-+----------+------------+
-| 11201.83 | 1990-10-06 |
-|  8944.59 | 1990-10-03 |
-|  4723.00 | 1990-10-05 |
-|  1788.98 | 1990-10-04 |
-+----------+------------+
+SELECT SUM(amt) 'sum_of_amount', odate FROM Orders GROUP BY odate ORDER BY SUM(amt) DESC;
++---------------+------------+
+| sum_of_amount | odate      |
++---------------+------------+
+|      11201.83 | 1990-10-06 |
+|       8944.59 | 1990-10-03 |
+|       4723.00 | 1990-10-05 |
+|       1788.98 | 1990-10-04 |
++---------------+------------+
 
 
 37) Write a select command that produces the rating followed by each customer's name in SanJose. 
@@ -515,15 +515,15 @@ SELECT * FROM orders o1 WHERE amt > (SELECT AVG(o2.amt) FROM orders o2 WHERE o1.
 
 40) Write a query that selects the highest rating in each city. 
 
-SELECT MAX(rating), city FROM Customers GROUP BY city;
-+-------------+---------+
-| MAX(rating) | city    |
-+-------------+---------+
-|         100 | London  |
-|         200 | Rome    |
-|         300 | SanJose |
-|         300 | Berlin  |
-+-------------+---------+
+SELECT MAX(rating) 'max_city_rating', city FROM Customers GROUP BY city;
++-----------------+---------+
+| max_city_rating | city    |
++-----------------+---------+
+|             100 | London  |
+|             200 | Rome    |
+|             300 | SanJose |
+|             300 | Berlin  |
++-----------------+---------+
 
 
 41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00. 
@@ -972,15 +972,15 @@ SELECT DISTINCT c.* FROM customers c, orders o WHERE c.snum IN (SELECT snum FROM
 
 73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
 
-SELECT city, MAX(rating) rating FROM customers GROUP BY city;
-+---------+-------------+
-| city    |      rating |
-+---------+-------------+
-| London  |         100 |
-| Rome    |         200 |
-| SanJose |         300 |
-| Berlin  |         300 |
-+---------+-------------+
+SELECT city, MAX(rating) 'max city rating' FROM customers GROUP BY city;
++---------+-----------------+
+| city    | max city rating |
++---------+-----------------+
+| London  |             100 |
+| Rome    |             200 |
+| SanJose |             300 |
+| Berlin  |             300 |
++---------+-----------------+
 
 
 74) Write a query that will produce the snum values of all salespeople with orders, having amt greater than 1000 in the Orders Table(without repeats). 
@@ -1015,12 +1015,12 @@ SELECT rating, cname, cnum FROM customers ORDER BY rating DESC;
 
 76) Find the average commission for salespeople in London. 
 
-SELECT AVG(comm) FROM salespeople WHERE city='London';
-+-----------+
-| AVG(comm) |
-+-----------+
-|   16.0000 |
-+-----------+
+SELECT AVG(comm) 'avg_commission' FROM salespeople WHERE city='London';
++----------------+
+| avg_commission |
++----------------+
+|        16.0000 |
++----------------+
 
 77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
 
@@ -1086,22 +1086,22 @@ SELECT cname FROM customers WHERE cname LIKE 'G%' ORDER BY cname LIMIT 1;
 
 82) Write a query that counts the number of different non NULL city values in the customers table. 
 
-SELECT COUNT(DISTINCT city) FROM customers WHERE city IS NOT NULL;
-+----------------------+
-| COUNT(DISTINCT city) |
-+----------------------+
-|                    4 |
-+----------------------+
+SELECT COUNT(DISTINCT city) 'no of cities' FROM customers WHERE city IS NOT NULL;
++--------------+
+| no of cities |
++--------------+
+|            4 |
++--------------+
 
 
 83) Find the average amount from the Orders Table. 
 
-SELECT AVG(amt) FROM orders;
-+-------------+
-| AVG(amt)    |
-+-------------+
-| 2665.840000 |
-+-------------+
+SELECT AVG(amt) 'average_amount' FROM orders;
++----------------+
+| average_amount |
++----------------+
+|    2665.840000 |
++----------------+
 
 
 84) Find all customers who are not located in SanJose and whose rating is above 200. 
