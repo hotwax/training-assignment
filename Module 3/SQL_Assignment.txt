@@ -27,7 +27,24 @@ mysql> SELECT cname FROM customers WHERE rating = 100;
 
 3) Find the largest order taken by each salesperson on each date. 
 
-
+mysql> SELECT s.snum, s.sname, o.odate
+    -> FROM salespeople AS s
+    -> JOIN orders AS o ON o.snum = s.snum
+    -> GROUP BY o.snum, o.odate;
++------+---------+----------+
+| snum | sname   | odate    |
++------+---------+----------+
+| 1007 | Rifkin  | 10/03/90 |
+| 1004 | Motika  | 10/03/90 |
+| 1001 | Peel    | 10/03/90 |
+| 1002 | Serres  | 10/03/90 |
+| 1002 | Serres  | 10/04/90 |
+| 1001 | Peel    | 10/05/90 |
+| 1003 | AxelRod | 10/04/90 |
+| 1002 | Serres  | 10/06/90 |
+| 1001 | Peel    | 10/06/90 |
++------+---------+----------+
+9 rows in set (0.04 sec)
 
 
 4) Arrange the Orders table by descending customer number. 
@@ -92,9 +109,19 @@ mysql> SELECT cname
 
 7) Find the names and numbers of all salespeople who have more than one customer. 
 
-
-
-
+mysql> SELECT sname, snum
+    ->     FROM salespeople
+    ->     WHERE snum IN ( SELECT snum
+    ->                     FROM customers
+    ->			   GROUP BY snum
+    ->                     HAVING COUNT(snum) > 1);
++--------+------+
+| sname  | snum |
++--------+------+
+| Peel   | 1001 |
+| Serres | 1002 |
++--------+------+
+2 rows in set (0.00 sec)
 
 
 8) Count the orders of each of the salespeople and output the results in descending order. 
@@ -216,7 +243,20 @@ mysql> SELECT customers.cname
 
 15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
 
-
+mysql> SELECT odate, SUM(amt) AS total_for_date
+    -> FROM orders
+    -> GROUP BY odate
+    -> HAVING total_for_date - 2000 < ( SELECT MAX(amt)
+    ->                                  FROM orders);
++----------+----------------+
+| odate    | total_for_date |
++----------+----------------+
+| 10/03/90 |        8942.59 |
+| 10/04/90 |        1788.98 |
+| 10/05/90 |           4723 |
+| 10/06/90 |       11201.83 |
++----------+----------------+
+4 rows in set (0.00 sec)
 
 
 
