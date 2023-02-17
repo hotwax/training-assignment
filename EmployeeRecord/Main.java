@@ -163,6 +163,7 @@ class FileOperations {
     // if Exist
     if (isExist == 1) {
       insertIntoFile(list);
+      System.out.println("Operation Done");
     } else {
       System.out.println("Id not Found");
     }
@@ -288,7 +289,8 @@ public class Main {
 
             // Enter your Date of Birth
             System.out.println("Enter your Date of Birth in (dd/mm/yyyy) format ");
-            date_of_birth = Reader.next();
+            Reader.nextLine();
+            date_of_birth = Reader.nextLine();
             String dob_validation = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-2][0-9])?[0-9][0-9]$"; // Put
                                                                                                        // validations on
                                                                                                        // DOB
@@ -320,6 +322,11 @@ public class Main {
             // Filters in Searching like Search by , Sort By .
             System.out.println("Search By : \n1. Employee Id \n2. Name \n3. Email\n4. Date of Birth\n5. Age");
             int response = Reader.nextInt(); // choice
+            if(response<1 || response>5) 
+            {
+              System.out.println("Choose from option 1 to 5");
+              break;
+            }
             System.out.println("Enter Value to be Searched");
             String key = Reader.next(); // Which value to be searched
             ArrayList<Employee> foundRecords = fileOperations_object.searchRecord(list, response, key);
