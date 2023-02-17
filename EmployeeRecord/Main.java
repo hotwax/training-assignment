@@ -324,7 +324,7 @@ public class Main {
             int response = Reader.nextInt(); // choice
             if(response<1 || response>5) 
             {
-              System.out.println("Choose from option 1 to 5");
+              System.out.println("Choose option from 1 to 5");
               break;
             }
             System.out.println("Enter Value to be Searched");
