@@ -13,7 +13,7 @@ class Account
         balance = 1000 ;
         this.name = name ;
     }
-    public synchronized void withdraw(int amount , String person) {  // Make the method sychronized to make sure only one thread can access 
+    public synchronized int withdraw(int amount , String person) {  // Make the method sychronized to make sure only one thread can access 
                                                                      // method at a time 
         if (balance - amount >= 0) // to avoid negative transcations 
         {  
@@ -36,8 +36,12 @@ class Account
             
             System.out.println(person + " has withdrawn " + amount + " from " + name + " account");
             System.out.println("Balance Left in Account is " + balance);
-        } else {
-            System.out.println(name + " account does not have sufficient balance");
+            return 0 ;
+        } 
+        else 
+        {
+            System.out.println("Hey "+person+ " Your " + name + " does not have sufficient balance");
+            return 1 ;
         }
     }
     
@@ -55,7 +59,11 @@ class AccountOverdrawSafeDemo {
             {
                 for(int i=0 ; i<10 ; i++)  
                 {
-                    account.withdraw(100, "person1"); // Withdraw 100 rupees by person 1
+                    int isAccountNull = account.withdraw(100, "person1"); // Withdraw 100 rupees by person 1
+                    if(isAccountNull==1)
+                    {
+                        return ;
+                    }
                 }
             }
         };
@@ -66,7 +74,11 @@ class AccountOverdrawSafeDemo {
             {
                 for(int i=0 ; i<10 ; i++)
                 {
-                    account.withdraw(100, "Person2");  // Withdraw 100 rupees by person 2
+                    int isAccountNull = account.withdraw(100, "person2"); // Withdraw 100 rupees by person 1
+                    if(isAccountNull==1)
+                    {
+                        return ;
+                    }
                 }
             }
         };

@@ -14,7 +14,7 @@ class Account
         balance = 1000 ;
         this.name = name ;
     }
-    public void withdraw(int amount , String person) { 
+    public int withdraw(int amount , String person) { 
 
         if (balance - amount >= 0) // to avoid negative transcations 
         {  
@@ -23,7 +23,10 @@ class Account
             } catch (InterruptedException e) {
                 System.out.println(e);
             }
-            if(balance==0) balance = 0 ;
+            if(balance==0) 
+            {
+                balance = 0 ;
+            }
             else balance -= amount; // deduct balance by amount(100)
 
             // to calculate the total withdrawl of both persons
@@ -38,8 +41,13 @@ class Account
             
             System.out.println(person + " has withdrawn " + amount + " from " + name + " account");
             System.out.println("Balance Left in Account is " + balance);
-        } else {
-            System.out.println(name + " account does not have sufficient balance");
+
+            return 0 ;
+        } 
+        else 
+        {
+            System.out.println("Hey "+person+ " Your " + name + " does not have sufficient balance");
+            return 1;
         }
     }
     
@@ -57,7 +65,11 @@ class AccountOverdrawDemo {
             {
                 for(int i=0 ; i<10 ; i++)  
                 {
-                    account.withdraw(100, "person1"); // Withdraw 100 rupees by person 1
+                    int isAccountNull = account.withdraw(100, "person1"); // Withdraw 100 rupees by person 1
+                    if(isAccountNull==1)
+                    {
+                        return ;
+                    }
                 }
             }
         };
@@ -68,7 +80,11 @@ class AccountOverdrawDemo {
             {
                 for(int i=0 ; i<10 ; i++)
                 {
-                    account.withdraw(100, "Person2");  // Withdraw 100 rupees by person 2
+                    int isAccountNull = account.withdraw(100, "person2"); // Withdraw 100 rupees by person 1
+                    if(isAccountNull==1)
+                    {
+                        return ;
+                    }
                 }
             }
         };
@@ -96,7 +112,5 @@ class AccountOverdrawDemo {
         System.out.println("Total Amount Withdrawl by Person 1 "+ account.person1_Total_Withdrawl);
         System.out.println("Total Amount Withdrawl by Person 2 "+ account.person2_Total_Withdrawl);
         System.out.println("Total Amount Withdraw is "+ total_Withdrawl  );
-
-        
     }
 }

@@ -17,7 +17,7 @@ public class Deserialization
             System.out.println("Enter file name") ;
             String fileName = reader.next();
             // deserialization
-            FileInputStream fileInputObject = outnew FileInputStream(fileName) ; 
+            FileInputStream fileInputObject = new FileInputStream(fileName) ; 
             ObjectInputStream objectInputObject = new ObjectInputStream(fileInputObject) ; 
 
             ArrayList list = (ArrayList) objectInputObject.readObject() ; // reading object from file and storing in a list
