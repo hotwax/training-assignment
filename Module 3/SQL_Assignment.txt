@@ -695,7 +695,23 @@ mysql> SELECT city, MAX(rating) AS HIGHEST_RATING
 
 41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00. 
 
-
+mysql> SELECT o.odate, o.onum, o.amt, c.city, s.sname, (o.amt * s.comm / 100.0) AS commission
+    -> FROM orders o
+    -> JOIN customers c ON o.cnum = c.cnum AND c.rating > 100.0
+    -> JOIN salespeople s ON o.snum = s.snum
+    -> WHERE o.amt = (
+    ->   SELECT MAX(amt)
+    ->   FROM orders
+    ->   WHERE snum = s.snum
+    -> );
++----------+------+---------+---------+---------+--------------------+
+| odate    | onum | amt     | city    | sname   | commission         |
++----------+------+---------+---------+---------+--------------------+
+| 10/03/90 | 3002 |  1900.1 | SanJose | Motika  |            209.011 |
+| 10/03/90 | 3005 | 5160.45 | SanJose | Serres  |  670.8584999999999 |
+| 10/04/90 | 3009 | 1713.23 | Rome    | AxelRod | 171.32299999999998 |
++----------+------+---------+---------+---------+--------------------+
+3 rows in set (0.00 sec)
 
 42) Count the customers with ratings above SanJose’s average. 
 
@@ -1340,7 +1356,19 @@ mysql> SELECT AVG(comm) AS average_commission
 
 77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
 
-
+mysql> SELECT *
+    -> FROM orders
+    -> WHERE snum IN ( SELECT snum
+    ->                  FROM customers
+    ->                  WHERE cname = 'Hoffman');
++------+---------+----------+------+------+
+| onum | amt     | odate    | cnum | snum |
++------+---------+----------+------+------+
+| 3003 |  767.19 | 10/03/90 | 2001 | 1001 |
+| 3008 |    4723 | 10/05/90 | 2005 | 1001 |
+| 3011 | 9891.88 | 10/06/90 | 2006 | 1001 |
++------+---------+----------+------+------+
+3 rows in set (0.01 sec)
 
 
 78) Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive). 
@@ -1374,7 +1402,23 @@ mysql> SELECT sname, city
 
 80) Write a query that selects each customer’s smallest order. 
 
-
+mysql> SELECT cnum, MIN(amt)
+    -> FROM orders
+    -> GROUP BY cnum
+    -> ORDER BY cnum;
++------+----------+
+| cnum | MIN(amt) |
++------+----------+
+| 2001 |   767.19 |
+| 2002 |  1713.23 |
+| 2003 |  5160.45 |
+| 2004 |    75.75 |
+| 2005 |     4723 |
+| 2006 |  9891.88 |
+| 2007 |   1900.1 |
+| 2008 |    18.69 |
++------+----------+
+8 rows in set (0.00 sec)
 
 
 81) Write a query that selects the first customer in alphabetical order whose name begins with ‘G’. 
@@ -1430,9 +1474,18 @@ mysql> SELECT *
 1 row in set (0.00 sec)
 
 
-85) Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm &lt; 0.14); 
+85) Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm < 0.14); 
 
-
+mysql> SELECT *
+    -> FROM salespeople
+    -> WHERE comm BETWEEN 12 AND 14;
++------+--------+---------+------+
+| snum | sname  | city    | comm |
++------+--------+---------+------+
+| 1001 | Peel   | London  |   12 |
+| 1002 | Serres | SanJose |   13 |
++------+--------+---------+------+
+2 rows in set (0.00 sec)
 
 
 86) Which salespersons attend to customers not in the city they have been assigned to? 
@@ -1593,8 +1646,26 @@ mysql> SELECT COUNT(DISTINCT cnum) AS number_of_customers
 
 96) On which date has each salesman booked an order of maximum value? 
 
-
-
+mysql> SELECT s.snum, s.sname, o.odate, o.amt
+    -> FROM salespeople s
+    -> JOIN (
+    ->     SELECT snum, MAX(amt) AS max_amt
+    ->     FROM orders
+    ->     GROUP BY snum
+    -> ) m
+    -> ON s.snum = m.snum
+    -> JOIN orders o
+    -> ON m.snum = o.snum AND m.max_amt = o.amt;
++------+---------+----------+---------+
+| snum | sname   | odate    | amt     |
++------+---------+----------+---------+
+| 1004 | Motika  | 10/03/90 |  1900.1 |
+| 1002 | Serres  | 10/03/90 | 5160.45 |
+| 1007 | Rifkin  | 10/03/90 | 1096.16 |
+| 1003 | AxelRod | 10/04/90 | 1713.23 |
+| 1001 | Peel    | 10/06/90 | 9891.88 |
++------+---------+----------+---------+
+5 rows in set (0.00 sec)
 
 97) Who is the most successful salesperson? 
 
@@ -1693,7 +1764,17 @@ mysql> SELECT *
 
 102) Select the total amount in orders for each salesperson for which the total is greater than the amount of the largest order in the table. 
 
-
+mysql> SELECT snum, SUM(amt) AS max_total
+    -> FROM orders
+    -> GROUP BY snum
+    -> HAVING max_total > ( SELECT MAX(amt)
+    ->                          FROM orders);
++------+-----------+
+| snum | max_total |
++------+-----------+
+| 1001 |  15382.07 |
++------+-----------+
+1 row in set (0.00 sec)
 
 
 103) Give names and numbers of all salespersons that have more than one customer? 
@@ -1731,12 +1812,58 @@ mysql> SELECT DISTINCT(sname), s.snum
 
 105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
 
-
+mysql> SELECT
+    ->   (
+    ->     SELECT
+    ->       sum(o.amt) AS total_amt
+    ->     FROM
+    ->       customers c,
+    ->       orders o
+    ->     WHERE
+    ->       c.cnum = o.cnum
+    ->       AND c.city IN('Rome', 'London')
+    ->   ) AS max_order,
+    ->   (
+    ->     SELECT
+    ->       sum(
+    ->         (o.amt / 100)* s.comm
+    ->       )* 5 AS total_comm
+    ->     FROM
+    ->       salespeople s,
+    ->       orders o
+    ->     WHERE
+    ->       s.snum = o.snum
+    ->       AND s.city IN('New York', 'London')
+    ->   ) AS max_comm;
++-----------+--------------------+
+| max_order | max_comm           |
++-----------+--------------------+
+|  13487.15 | 11130.911999999998 |
++-----------+--------------------+
+1 row in set (0.00 sec)
 
 
 106) Which are the date, order number, amt and city for each salesperson (by name) for themaximum order he has obtained? 
 
-
+mysql> SELECT s.sname, o.odate, o.onum, o.amt, c.city
+    -> FROM salespeople s
+    -> JOIN orders o ON s.snum = o.snum
+    -> JOIN customers c ON o.cnum = c.cnum
+    -> WHERE (o.snum, o.amt) IN (
+    ->     SELECT snum, MAX(amt)
+    ->     FROM orders
+    ->     GROUP BY snum
+    -> );
++---------+----------+------+---------+---------+
+| sname   | odate    | onum | amt     | city    |
++---------+----------+------+---------+---------+
+| Motika  | 10/03/90 | 3002 |  1900.1 | SanJose |
+| Serres  | 10/03/90 | 3005 | 5160.45 | SanJose |
+| Rifkin  | 10/03/90 | 3006 | 1096.16 | Rome    |
+| AxelRod | 10/04/90 | 3009 | 1713.23 | Rome    |
+| Peel    | 10/06/90 | 3011 | 9891.88 | London  |
++---------+----------+------+---------+---------+
+5 rows in set (0.01 sec)
 
 
 107) Which salesperson is having lowest commission? 
