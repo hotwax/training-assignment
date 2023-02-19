@@ -1337,3 +1337,372 @@ output:
 | Cisneros | 2008 |         18.69 |
 +----------+------+---------------+
 7 rows in set (0.00 sec)
+
+81) Write a query that selects the first customer in alphabetical order whose name begins with ‘G’. 
+
+SELECT * FROM customers WHERE cname LIKE 'G%' ORDER BY cname LIMIT 1 ;
+output:
++------+----------+------+--------+------+
+| CNUM | CNAME    | CITY | RATING | SNUM |
++------+----------+------+--------+------+
+| 2002 | Giovanni | Rome |    200 | 1003 |
++------+----------+------+--------+------+
+
+
+82) Write a query that counts the number of different non NULL city values in the customers table. 
+
+SELECT COUNT(DISTINCT(city)) FROM customers ;
+
+output:
++-----------------------+
+| COUNT(DISTINCT(city)) |
++-----------------------+
+|                     4 |
++-----------------------+
+
+83) Find the average amount from the Orders Table.
+
+SELECT AVG(amt) FROM orders;
++-------------+
+| AVG(amt)    |
++-------------+
+| 2665.840000 |
++-------------+
+
+
+84) Find all customers who are not located in SanJose and whose rating is above 200. 
+
+SELECT * FROM customers WHERE city != "sanjose" AND rating>200 ;
+output:
++------+-------+--------+--------+------+
+| CNUM | CNAME | CITY   | RATING | SNUM |
++------+-------+--------+--------+------+
+| 2004 | Grass | Berlin |    300 | 1002 |
++------+-------+--------+--------+------+
+
+85) Give a simpler way to write this query. SELECT snum, sname, city, comm FROM salespeople WHERE (comm > = 0.12 OR comm < 0.14); 
+
+SELECT * FROM salespeople;
+output:
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | Sanjose   |   13 |
+| 1003 | AxelRod | New York  |   10 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | RifKin  | Barcelona |   15 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+86) Which salespersons attend to customers not in the city they have been assigned to? 
+
+SELECT s.sname , s.city , c.cname , c.city FROM salespeople s
+INNER JOIN
+Customers c WHERE c.snum = s.snum AND s.city != c.city ;
+output:
++---------+-----------+----------+---------+
+| sname   | city      | cname    | city    |
++---------+-----------+----------+---------+
+| AxelRod | New York  | Giovanni | Rome    |
+| Serres  | Sanjose   | Grass    | Berlin  |
+| Motika  | London    | Pereira  | Rome    |
+| RifKin  | Barcelona | Cisneros | Sanjose |
++---------+-----------+----------+---------+
+
+87) Which salespeople get commission greater than 0.11 are serving customers rated less than 250? 
+
+SELECT s.* , c.cname as Serving FROM salespeople s
+INNER JOIN
+Customers c WHERE c.snum = s.snum AND s.comm>11 AND c.rating < 250 ;
+
+output:
++------+--------+---------+------+---------+
+| SNUM | SNAME  | CITY    | COMM | Serving |
++------+--------+---------+------+---------+
+| 1001 | Peel   | London  |   12 | Hoffman |
+| 1001 | Peel   | London  |   12 | Clemens |
+| 1002 | Serres | Sanjose |   13 | Liu     |
++------+--------+---------+------+---------+
+
+88) Which salespeople have been assigned to the same city but get different commission percentages?
+
+SELECT snum , sname FROM salespeople
+WHERE snum IN (SELECT c1.snum FROM customers c1
+               INNER JOIN
+               customers c2 WHERE c1.city = c2.city AND c1.snum != c2.snum);
+
+output:
++------+---------+
+| snum | sname   |
++------+---------+
+| 1002 | Serres  |
+| 1003 | AxelRod |
+| 1004 | Motika  |
+| 1007 | RifKin  |
++------+---------+
+
+89) Which salesperson has earned the maximum commission? 
+
+SELECT s.sname  , SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s , orders o WHERE s.snum = o.snum GROUP BY snum ORDER BY Commission DESC LIMIT 1;
+output:
+
++-------+-------------+------+
+| sname | Commission  | snum |
++-------+-------------+------+
+| Peel  | 1845.848400 | 1001 |
++-------+-------------+------+
+
+90) Does the customer who has placed the maximum number of orders have the maximum rating?
+
+SELECT cname , rating , No_of_orders FROM customers c1 , (SELECT cnum , count(cnum) as No_of_orders from orders group by cnum having count(cnum) > 1) AS c2 WHERE c1.cnum = c2.cnum;
+output:
++----------+--------+--------------+
+| cname    | rating | No_of_orders |
++----------+--------+--------------+
+| Grass    |    300 |            2 |
+| Clemens  |    100 |            2 |
+| Cisneros |    300 |            2 |
++----------+--------+--------------+
+
+// Grass , clemens and cisneros has maximum order but only grass and cisneros got the highest rating.
+
+91) List all customers in descending order of customer rating.
+
+SELECT * FROM customers  ORDER BY rating DESC ;
+output:
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | Sanjose |    300 | 1007 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | Sanjose |    200 | 1002 |
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+
+
+92) On which days has Hoffman placed orders? 
+
+SELECT odate FROM orders WHERE cnum in ( SELECT cnum FROM customers WHERE cname = "hoffman") ;
+output: 
++----------+
+| odate    |
++----------+
+| 10/03/90 |
++----------+
+
+93) Which salesmen have no orders between 10/03/1990 and 10/05/1990? 
+
+SELECT sname FROM salespeople WHERE snum NOT IN (SELECT snum FROM orders WHERE odate BETWEEN "10/03/90" AND "10/05/90" ) ;
+output:
++-------+
+| sname |
++-------+
+| Fran  |
++-------+
+
+94) How many salespersons have succeeded in getting orders? 
+
+SELECT COUNT(distinct(snum)) FROM orders ;
++-----------------------+
+| COUNT(distinct(snum)) |
++-----------------------+
+|                     5 |
++-----------------------+
+
+95) How many customers have placed orders? 
+
+SELECT COUNT(DISTINCT(cnum)) FROM Orders ;
+output:
++-----------------------+
+| COUNT(DISTINCT(cnum)) |
++-----------------------+
+|                     7 |
++-----------------------+
+
+96) On which date has each salesman booked an order of maximum value?
+
+SELECT s.snum , s.sname , o.odate , max(o.amt) FROM orders o
+INNER JOIN
+Salespeople s WHERE s.snum = o.snum GROUP BY s.snum ;
+
+output:
++------+---------+----------+------------+
+| snum | sname   | odate    | max(o.amt) |
++------+---------+----------+------------+
+| 1007 | RifKin  | 10/03/90 |    1098.16 |
+| 1004 | Motika  | 10/03/90 |    1900.10 |
+| 1001 | Peel    | 10/03/90 |    9891.88 |
+| 1002 | Serres  | 10/03/90 |    5160.45 |
+| 1003 | AxelRod | 10/04/90 |    1713.23 |
++------+---------+----------+------------+
+
+97) Who is the most successful salesperson?
+
+SELECT s.sname  , SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s , orders o WHERE s.snum = o.snum GROUP BY snum ORDER BY Commission DESC LIMIT 1;
+output:
+// Peel Got Maximum Commission Among all the Salespeople 
++-------+-------------+------+
+| sname | Commission  | snum |
++-------+-------------+------+
+| Peel  | 1845.848400 | 1001 |
++-------+-------------+------+
+
+
+SELECT snum,  count(snum) as No_of_orders from orders group by snum order By No_of_orders desc LIMIT 1;
+output:
+//Peel got Maximum Number of Orders 
++------+--------------+
+| snum | No_of_orders |
++------+--------------+
+| 1001 |            3 |
++------+--------------+
+
+// So peel is the Most Successful Salespeople among all the salespeople
+
+
+98) Which customers have the same rating? 
+
+SELECT c1.cname , c2.cname FROM customers c1 , customers c2 WHERE c1.rating = c2.rating AND c1.cnum!= c2.cnum;
+output:
++----------+----------+
+| cname    | cname    |
++----------+----------+
+| Clemens  | Hoffman  |
+| Pereira  | Hoffman  |
+| Liu      | Giovanni |
+| Giovanni | Liu      |
+| Cisneros | Grass    |
+| Hoffman  | Clemens  |
+| Pereira  | Clemens  |
+| Hoffman  | Pereira  |
+| Clemens  | Pereira  |
+| Grass    | Cisneros |
++----------+----------+
+
+
+99) Find all orders greater than the average for October 4th.
+
+SELECT * FROM orders WHERE amt > (SELECT AVG(amt) FROM orders WHERE odate = "10/04/90") ;
+output:
++------+---------+----------+------+------+
+| ONUM | AMT     | ODATE    | CNUM | SNUM |
++------+---------+----------+------+------+
+| 3002 | 1900.10 | 10/03/90 | 2007 | 1004 |
+| 3005 | 5160.45 | 10/03/90 | 2003 | 1002 |
+| 3006 | 1098.16 | 10/03/90 | 2008 | 1007 |
+| 3008 | 4723.00 | 10/05/90 | 2006 | 1001 |
+| 3009 | 1713.23 | 10/04/90 | 2002 | 1003 |
+| 3010 | 1309.95 | 10/06/90 | 2004 | 1002 |
+| 3011 | 9891.88 | 10/06/90 | 2006 | 1001 |
++------+---------+----------+------+------+
+
+100) List all customers with ratings above Grass’s average. 
+
+SELECT * FROM customers WHERE rating > (SELECT AVG(rating) FROM customers WHERE cname = "grass") ;
+output:
+Empty set (0.00 sec)
+
+101) Which customers have above average orders? 
+
+SELECT cnum , cname FROM customers WHERE cnum IN (SELECT cnum FROM orders WHERE amt > (SELECT AVG(amt) FROM orders)) ;
+output: 
++------+---------+
+| cnum | cname   |
++------+---------+
+| 2003 | Liu     |
+| 2006 | Clemens |
++------+---------+
+
+102) Select the total amount in orders for each salesperson for which the total is greater than the amount of the largest order in the table.
+
+SELECT snum , total FROM (SELECT snum , SUM(amt) as total FROM orders GROUP BY snum) as Table1 WHERE total > (SELECT MAX(amt) FROM orders) ;
++------+----------+
+| snum | total    |
++------+----------+
+| 1001 | 15382.07 |
++------+----------+
+1 row in set (0.00 sec)
+
+103) Give names and numbers of all salespersons that have more than one customer? 
+
+SELECT s.snum , s.sname FROM salespeople s, ( SELECT snum , COUNT(snum) AS Count FROM customers GROUP BY snum) AS t WHERE t.snum = s.snum AND t.count>1 ;
+output:
++------+--------+
+| snum | sname  |
++------+--------+
+| 1001 | Peel   |
+| 1002 | Serres |
++------+--------+
+
+104) Select all salespeople by name and number who have customers in their city whom they don’t service.
+
+SELECT s.snum , s.sname , c.cname , s.city FROM salespeople s
+INNER JOIN
+customers c WHERE s.city = c.city AND s.snum != c.snum ;
+output:
++------+--------+----------+---------+
+| snum | sname  | cname    | city    |
++------+--------+----------+---------+
+| 1004 | Motika | Hoffman  | London  |
+| 1008 | Fran   | Hoffman  | London  |
+| 1004 | Motika | Clemens  | London  |
+| 1008 | Fran   | Clemens  | London  |
+| 1002 | Serres | Cisneros | Sanjose |
++------+--------+----------+---------+
+
+105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
+
+// total amount in orders by customer in Rome and London is 18995.40
+SELECT SUM(amt) AS total from orders WHERE cnum in (SELECT cnum FROM customers WHERE city IN("rome","london")) ;
++----------+
+| total    |
++----------+
+| 18995.40 |
++----------+
+// Commission paid to salesperson in London, and New York
+SELECT SUM(o.amt)*s.comm/100 AS commission FROM salespeople s , orders o WHERE s.snum = o.snum AND s.city IN ("London" , "newyork") ;
++-------------+
+| commission  |
++-------------+
+| 2073.860400 |
++-------------+
+
+// According to Ques
+// Does the total Amount exceed the commission by more than 5 times 
+// total > 5 * commission
+// 18995.40 > 5 * 2073.860
+// 18995.40 > 10369.3 
+// So yeah , it does exceed more than 5 times
+
+106) Which are the date, order number, amt and city for each salesperson (by name) for the maximum order he has obtained? 
+
+SELECT s.sname ,s.city, o.onum , MAX(o.amt) , o.odate FROM salespeople s
+INNER JOIN
+orders o WHERE s.snum = o.snum GROUP BY s.sname;
+output:
++---------+-----------+------+------------+----------+
+| sname   | city      | onum | MAX(o.amt) | odate    |
++---------+-----------+------+------------+----------+
+| RifKin  | Barcelona | 3001 |    1098.16 | 10/03/90 |
+| Motika  | London    | 3002 |    1900.10 | 10/03/90 |
+| Peel    | London    | 3003 |    9891.88 | 10/03/90 |
+| Serres  | Sanjose   | 3005 |    5160.45 | 10/03/90 |
+| AxelRod | New York  | 3009 |    1713.23 | 10/04/90 |
++---------+-----------+------+------------+----------+
+
+107) Which salesperson is having lowest commission?
+
+SELECT s.sname,SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s ,orders o WHERE s.snum = o.snum GROUP BY snum ORDER BY Commission LIMIT 1;
+output:
++--------+------------+------+
+| sname  | Commission | snum |
++--------+------------+------+
+| RifKin | 167.527500 | 1007 |
++--------+------------+------+
+
+
