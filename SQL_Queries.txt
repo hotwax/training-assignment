@@ -1196,3 +1196,144 @@ output:
 | 3006 | 1098.16 | 10/03/90 |
 +------+---------+----------+
 
+71) Find all salespeople who have customers with more than one current order.
+
+SELECT sname FROM salespeople WHERE snum IN ( SELECT snum FROM customers WHERE cnum IN (SELECT cnum FROM orders GROUP BY cnum HAVING COUNT(onum) > 1) ) ;
+
+output:
++--------+
+| sname  |
++--------+
+| Peel   |
+| Serres |
+| RifKin |
++--------+
+
+72) Write a query that extracts from the customer’s table every customer assigned to a salesperson, who is currently having at least one another customer(besides the customer being selected) with orders in the Orders Table.
+
+SELECT cnum , cname FROM 
+(SELECT cnum ,cname , snum FROM customers WHERE snum IN (SELECT snum FROM customers GROUP BY snum HAVING COUNT(snum) > 1 ) ) AS myTable  
+WHERE cnum IN (SELECT cnum FROM orders);
+output: 
+
++------+---------+
+| cnum | cname   |
++------+---------+
+| 2001 | Hoffman |
+| 2003 | Liu     |
+| 2004 | Grass   |
+| 2006 | Clemens |
++------+---------+
+
+
+73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
+
+SELECT city , MAX(rating) AS Rating FROM customers GROUP BY city ;
+output:
++---------+--------+
+| city    | Rating |
++---------+--------+
+| London  |    100 |
+| Rome    |    200 |
+| Sanjose |    300 |
+| Berlin  |    300 |
++---------+--------+
+
+74) Write a query that will produce the snum values of all salespeople with orders, having amt greater than 1000 in the Orders Table(without repeats).
+
+SELECT DISTINCT(snum) FROM orders WHERE amt > 1000 ;
+output:
+
++------+
+| snum |
++------+
+| 1001 |
+| 1002 |
+| 1003 |
+| 1004 |
+| 1007 |
++------+
+
+
+75) Write a query that lists customers in a descending order of rating. Output the rating field first, followed by the customer’s names and numbers. 
+
+SELECT Rating , cname AS Name , cnum AS Number FROM customers ORDER BY rating DESC ;
+output:
++--------+----------+--------+
+| Rating | Name     | Number |
++--------+----------+--------+
+|    300 | Grass    |   2004 |
+|    300 | Cisneros |   2008 |
+|    200 | Giovanni |   2002 |
+|    200 | Liu      |   2003 |
+|    100 | Hoffman  |   2001 |
+|    100 | Clemens  |   2006 |
+|    100 | Pereira  |   2007 |
++--------+----------+--------+
+
+76) Find the average commission for salespeople in London. 
+
+SELECT AVG(comm) AS AverageCommision FROM salespeople WHERE city = "London" ;
+output:
++------------------+
+| AverageCommision |
++------------------+
+|          16.0000 |
++------------------+
+
+77) Find all orders credited to the same salesperson who serves Hoffman.(cnum 2001). 
+
+SELECT * FROM orders WHERE snum IN (SELECT snum FROM customers WHERE cname = "hoffman") ; 
+output:
++------+---------+----------+------+------+
+| ONUM | AMT     | ODATE    | CNUM | SNUM |
++------+---------+----------+------+------+
+| 3003 |  767.19 | 10/03/90 | 2001 | 1001 |
+| 3008 | 4723.00 | 10/05/90 | 2006 | 1001 |
+| 3011 | 9891.88 | 10/06/90 | 2006 | 1001 |
++------+---------+----------+------+------+
+3 rows in set (0.00 sec)
+
+78) Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive). 
+
+SELECT * FROM salespeople WHERE comm/100 = 0.10 OR comm/100 = 0.12 OR comm/100 BETWEEN 0.10 AND 0.12 ;
+output:
++------+---------+----------+------+
+| SNUM | SNAME   | CITY     | COMM |
++------+---------+----------+------+
+| 1001 | Peel    | London   |   12 |
+| 1003 | AxelRod | New York |   10 |
+| 1004 | Motika  | London   |   11 |
++------+---------+----------+------+
+3 rows in set (0.00 sec)
+
+
+79) Write a query that will give you the names and cities of all salespeople in London with a commission above 0.10.
+
+SELECT sname , city FROM salespeople WHERE city = "london" AND comm/100 > 0.10 ;
+output:
++--------+--------+
+| sname  | city   |
++--------+--------+
+| Peel   | London |
+| Motika | London |
+| Fran   | London |
++--------+--------+
+
+80) Write a query that selects each customer’s smallest order
+
+SELECT c.cname , o.cnum , MIN(o.amt) AS SmallestOrder FROM orders o , customers c WHERE c.cnum = o.cnum GROUP BY o.cnum ;
+
+output:
++----------+------+---------------+
+| cname    | cnum | SmallestOrder |
++----------+------+---------------+
+| Hoffman  | 2001 |        767.19 |
+| Giovanni | 2002 |       1713.23 |
+| Liu      | 2003 |       5160.45 |
+| Grass    | 2004 |         75.75 |
+| Clemens  | 2006 |       4723.00 |
+| Pereira  | 2007 |       1900.10 |
+| Cisneros | 2008 |         18.69 |
++----------+------+---------------+
+7 rows in set (0.00 sec)
