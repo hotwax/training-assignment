@@ -215,7 +215,7 @@ public class SearchAndSortOnEmployee {
     }
 
     if (resultOfSearchAndSort.size() == 0) {
-      System.out.println("\n"+fieldValue+" "+fieldName+" doesn't exists.");
+      System.out.println("\nEmployee with "+fieldValue+" "+fieldName+" doesn't exists.");
       System.out.println("-------------------------------\n");
       return;
     }
@@ -223,8 +223,8 @@ public class SearchAndSortOnEmployee {
     System.out.println("Enter which field to sort by: (name, age, date Of Birth)");
     String sortBY = sc.nextLine();
 
-    if (!sortBY.equals("name") && !sortBY.equals("age") && !sortBY.equals("email") && !sortBY.equalsIgnoreCase("date Of Birth")) {
-      throw new InputMismatchException("Please enter 'name', 'age' or 'date Of Birth'");
+    if (!sortBY.equals("name") && !sortBY.equals("age") && !sortBY.equalsIgnoreCase("date Of Birth")) {
+      throw new InputMismatchException("Please enter 'name', 'age' or 'date of birth'");
     }
 
     if (fieldName.equalsIgnoreCase(sortBY)) {
