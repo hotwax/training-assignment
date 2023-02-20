@@ -27,9 +27,13 @@ public class SearchAndSortOnEmployee {
     // add object to set and call addToFile method
 
     System.out.println("Enter name of the employee: ");
-    String name = sc.next();
+    sc.nextLine();
+    String name = sc.nextLine();
     System.out.println("Enter age of the employee: ");
-    int age = sc.nextInt();
+    String age = "";
+
+    age = checkAgeForAddPurpose(age);
+
     System.out.println("Enter email of the employee: ");
     String email = "";
 
@@ -42,7 +46,7 @@ public class SearchAndSortOnEmployee {
 
     Employee employeeObject = new Employee();
     employeeObject.setName(name);
-    employeeObject.setAge(age);
+    employeeObject.setAge(Integer.parseInt(age));
     employeeObject.setEmail(email);
     employeeObject.setDate(dateOfBirth);
 
@@ -140,7 +144,8 @@ public class SearchAndSortOnEmployee {
         String[] employeeData = employee.split(", "); // all employee's data
 
         Employee employeeObject = new Employee();
-        employeeObject.setName(employeeData[0].split(" ")[1]);
+
+        employeeObject.setName(employeeData[0].split(" ", 2)[1]);
         employeeObject.setAge(Integer.parseInt(employeeData[1].split(" ")[1]));
         employeeObject.setEmail(employeeData[2].split(" ")[1]);
         employeeObject.setDate(employeeData[3].split(" ")[3]);
@@ -156,28 +161,36 @@ public class SearchAndSortOnEmployee {
 
   static void searchAndSort() throws InputMismatchException {
 
-    System.out.println("Enter which field to search: (name, age, dateOfBirth)");
-    String fieldName = sc.next(); // name, age, date Of Birth
+    System.out.println("Enter which field to search: (name, age, date Of Birth)");
+    sc.nextLine();
+    String fieldName = sc.nextLine(); // name, age, date Of Birth
 
-    if (!fieldName.equals("name") && !fieldName.equals("age") && !fieldName.equalsIgnoreCase("dateOfBirth")) {
+
+    if (!fieldName.equals("name") && !fieldName.equals("age") && !fieldName.equalsIgnoreCase("date Of Birth")) {
       throw new InputMismatchException();
     }
 
     System.out.println("Enter the field value to search: ");
-    String fieldValue = sc.next(); // if field is name- eg: Nidhi, if field is age- eg: 20
+    // sc.nextLine();
+    String fieldValue = sc.nextLine(); // if field is name- eg: Nidhi, if field is age- eg: 20
 
     if (fieldName.equals("age")) {
       if (!checkAgeForSearchPurpose(fieldValue)) {
         throw new InputMismatchException();
       }
-    } else if (fieldName.equalsIgnoreCase("dateOfBirth")) {
+    } else if (fieldName.equalsIgnoreCase("date Of Birth")) {
       if (!checkDateOfBirthForSearchPurpose(fieldValue)) {
         throw new InputMismatchException();
       }
     }
 
-    System.out.println("Enter which field to sort by: (name, age, dateOfBirth)");
-    String sortBY = sc.next(); // any field
+    System.out.println("Enter which field to sort by: (name, age, date Of Birth)");
+    // sc.nextLine();
+    String sortBY = sc.nextLine(); // any field
+
+    if (!fieldName.equals("name") && !fieldName.equals("age") && !fieldName.equalsIgnoreCase("date Of Birth")) {
+      throw new InputMismatchException();
+    }
 
     System.out.println("Enter the direction to sort (ascending or descending): ");
     String direction = sc.next(); // ascending or descending
@@ -193,6 +206,8 @@ public class SearchAndSortOnEmployee {
     // with "Ram" name
     // will get added to this arraylist
 
+
+
     if (fieldName.equals("name")) {
       for (Employee employee : set) {
         if (employee.getName().equals(fieldValue))
@@ -203,7 +218,7 @@ public class SearchAndSortOnEmployee {
         if (employee.getAge() == Integer.parseInt(fieldValue))
           resultOfSearchAndSort.add(employee);
       }
-    } else if (fieldName.equalsIgnoreCase("dateOfBirth")) {
+    } else if (fieldName.equalsIgnoreCase("date Of Birth")) {
       for (Employee employee : set) {
         if (employee.getDateOfBirth().toString().equals(fieldValue))
           resultOfSearchAndSort.add(employee);
@@ -211,7 +226,8 @@ public class SearchAndSortOnEmployee {
     }
 
     if (resultOfSearchAndSort.size() == 0) {
-      System.out.println("Entered value doesn't exists.\n");
+      System.out.println("\nEntered value doesn't exists.");
+      System.out.println("-------------------------------\n");
       return;
     }
 
@@ -223,12 +239,13 @@ public class SearchAndSortOnEmployee {
     } else if (sortBY.equals("age")) {
       resultOfSearchAndSort.sort(Comparator.comparing(Employee::getAge,
           direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
-    } else if (sortBY.equals("dateOfBirth")) {
+    } else if (sortBY.equalsIgnoreCase("date Of Birth")) {
       resultOfSearchAndSort.sort(Comparator.comparing(Employee::getDateOfBirth,
           direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
     }
 
     // display the result obtained of resultOfSearchAndSort
+    System.out.println();
     for (Employee employeeObj : resultOfSearchAndSort) {
       System.out.println(
           "Name: " + employeeObj.getName() + ", Age: " + employeeObj.getAge() + ", Email: " + employeeObj.getEmail()
@@ -273,7 +290,7 @@ public class SearchAndSortOnEmployee {
 
           default:
             System.out.println("-------------------------------\n");
-            System.out.println("Please enter a valid number");
+            System.out.println("Please enter a valid number\n");
 
         }
 
@@ -293,9 +310,9 @@ public class SearchAndSortOnEmployee {
 
 
   static String checkEmailForAddOrDeletePurpose(String email) {
+    String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
     while (true) {
       email = sc.next();
-      String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
       boolean match = email.matches(regex);
       if (!match) {
         System.out.println("Enter a valid email");
@@ -308,9 +325,9 @@ public class SearchAndSortOnEmployee {
   }
 
   static String checkDateOfBirthForAddPurpose(String dateOfBirth) {
+    String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
     while (true) {
       dateOfBirth = sc.next();
-      String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
       boolean match = dateOfBirth.matches(regex);
       if (!match) {
         System.out.println("Enter a valid date");
@@ -320,6 +337,21 @@ public class SearchAndSortOnEmployee {
     }
 
     return dateOfBirth;
+  }
+
+  static String checkAgeForAddPurpose(String age){
+    String regex = "[0-9]+";
+    while (true) {
+      age=sc.next();
+      boolean match = age.matches(regex);
+      if(!match){
+        System.out.println("Enter a valid age");
+      } else{
+        break;
+      }
+    }
+
+    return age;
   }
 
   static boolean checkAgeForSearchPurpose(String age) {
