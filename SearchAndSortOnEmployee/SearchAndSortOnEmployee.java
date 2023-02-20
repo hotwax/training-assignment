@@ -215,7 +215,7 @@ public class SearchAndSortOnEmployee {
     }
 
     if (resultOfSearchAndSort.size() == 0) {
-      System.out.println("\nEntered "+fieldName+" doesn't exists.");
+      System.out.println("\n"+fieldValue+" "+fieldName+" doesn't exists.");
       System.out.println("-------------------------------\n");
       return;
     }
