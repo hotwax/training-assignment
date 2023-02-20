@@ -8,6 +8,8 @@ public class SerializationExample {
       while (true) {
         System.out.println("Enter 1 to serialize");
         System.out.println("Enter 2 to deserialize");
+        System.out.println("Enter 3 to exit the program");
+        System.out.println();
 
         int choice = sc.nextInt();
 
@@ -26,10 +28,14 @@ public class SerializationExample {
             System.out.println("---------------------------\n");
             break;
 
-          default:
+          case 3:
             System.out.println("---------------------------\n");
             System.out.println("Program terminated successfully.");
             return;
+
+          default:
+            System.out.println("---------------------------\n");
+            System.out.println("Please enter a valid number");
         }
       }
 
