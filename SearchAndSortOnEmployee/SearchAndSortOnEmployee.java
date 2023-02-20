@@ -29,20 +29,21 @@ public class SearchAndSortOnEmployee {
     System.out.println("Enter name of the employee: ");
     sc.nextLine();
     String name = sc.nextLine();
-    System.out.println("Enter age of the employee: ");
-    String age = "";
 
-    age = checkAgeForAddPurpose(age);
+    System.out.println("Enter age of the employee: ");
+    String age = sc.next();
+    if (!checkAge(age))
+      throw new InputMismatchException("Please enter a valid age");
 
     System.out.println("Enter email of the employee: ");
-    String email = "";
-
-    email = checkEmailForAddOrDeletePurpose(email); // check validation for email
+    String email = sc.next();
+    if (!checkEmail(email))
+      throw new InputMismatchException("Please enter a valid email");
 
     System.out.println("Enter date of birth of the employee: (format- yyyy-mm-dd)");
-    String dateOfBirth = "";
-
-    dateOfBirth = checkDateOfBirthForAddPurpose(dateOfBirth); // check validation for date of birth
+    String dateOfBirth = sc.next();
+    if (!checkDateOfBirth(dateOfBirth))
+      throw new InputMismatchException("Please enter a valid date");
 
     Employee employeeObject = new Employee();
     employeeObject.setName(name);
@@ -92,7 +93,7 @@ public class SearchAndSortOnEmployee {
     System.out.println("Enter the email id of the employee: ");
     String emailId = sc.next();
 
-    checkEmailForAddOrDeletePurpose(emailId);
+    if(!checkEmail(emailId)) throw new InputMismatchException("Please enter a valid");
 
     Iterator<Employee> iterator = set.iterator();
     while (iterator.hasNext()) { // we have used iterator in place of for loop because java throws an exception
@@ -145,7 +146,8 @@ public class SearchAndSortOnEmployee {
 
         Employee employeeObject = new Employee();
 
-        employeeObject.setName(employeeData[0].split(" ", 2)[1]);
+        employeeObject.setName(employeeData[0].split(" ", 2)[1]); // here we have used limit: 2 in case user has entered
+                                                                  // full name(first name + last name)
         employeeObject.setAge(Integer.parseInt(employeeData[1].split(" ")[1]));
         employeeObject.setEmail(employeeData[2].split(" ")[1]);
         employeeObject.setDate(employeeData[3].split(" ")[3]);
@@ -161,58 +163,34 @@ public class SearchAndSortOnEmployee {
 
   static void searchAndSort() throws InputMismatchException {
 
-    System.out.println("Enter which field to search: (name, age, date Of Birth)");
+    System.out.println("Enter the field name to search: (name, age, email, date of birth)");
     sc.nextLine();
-    String fieldName = sc.nextLine(); // name, age, date Of Birth
+    String fieldName = sc.nextLine();
 
-
-    if (!fieldName.equals("name") && !fieldName.equals("age") && !fieldName.equalsIgnoreCase("date Of Birth")) {
-      throw new InputMismatchException();
+    if (!fieldName.equals("name") && !fieldName.equals("age") && !fieldName.equals("email")
+        && !fieldName.equalsIgnoreCase("date of birth")) {
+      throw new InputMismatchException("Please enter 'name', 'age', 'email' or 'date Of Birth' as fieldname");
     }
 
     System.out.println("Enter the field value to search: ");
-    // sc.nextLine();
-    String fieldValue = sc.nextLine(); // if field is name- eg: Nidhi, if field is age- eg: 20
+    String fieldValue = sc.nextLine();
 
-    if (fieldName.equals("age")) {
-      if (!checkAgeForSearchPurpose(fieldValue)) {
-        throw new InputMismatchException();
-      }
-    } else if (fieldName.equalsIgnoreCase("date Of Birth")) {
-      if (!checkDateOfBirthForSearchPurpose(fieldValue)) {
-        throw new InputMismatchException();
-      }
+    if (fieldName.equals("age") && !checkAge(fieldValue)) {
+      throw new InputMismatchException("Please enter a valid age");
+    } else if (fieldName.equalsIgnoreCase("date Of Birth") && !checkDateOfBirth(fieldValue)) {
+      throw new InputMismatchException("Please enter a valid date of birth");
+    } else if (fieldName.equalsIgnoreCase("email") && !checkEmail(fieldValue)) {
+      throw new InputMismatchException("Please enter a valid email");
     }
 
-    System.out.println("Enter which field to sort by: (name, age, date Of Birth)");
-    // sc.nextLine();
-    String sortBY = sc.nextLine(); // any field
 
-    if (!fieldName.equals("name") && !fieldName.equals("age") && !fieldName.equalsIgnoreCase("date Of Birth")) {
-      throw new InputMismatchException();
-    }
 
-    if(fieldName.equalsIgnoreCase(sortBY)){
-      System.out.println("Please enter different fieldname and sort bY input values");
-      System.out.println("-------------------------------\n");
-      return;
-    } 
-
-    System.out.println("Enter the direction to sort (ascending or descending): ");
-    String direction = sc.next(); // ascending or descending
-
-    if (!direction.equals("ascending") && !direction.equals("descending")) {
-      System.out.println("Either enter ascending or descending");
-      throw new InputMismatchException();
-    }
 
     ArrayList<Employee> resultOfSearchAndSort = new ArrayList<>();
     // if user has chosen fieldName as "name" and fieldValue as "Ram" then all
     // employees
     // with "Ram" name
     // will get added to this arraylist
-
-
 
     if (fieldName.equals("name")) {
       for (Employee employee : set) {
@@ -224,6 +202,11 @@ public class SearchAndSortOnEmployee {
         if (employee.getAge() == Integer.parseInt(fieldValue))
           resultOfSearchAndSort.add(employee);
       }
+    } else if (fieldName.equals("email")) {
+      for (Employee employee : set) {
+        if (employee.getEmail().equals(fieldValue))
+          resultOfSearchAndSort.add(employee);
+      }
     } else if (fieldName.equalsIgnoreCase("date Of Birth")) {
       for (Employee employee : set) {
         if (employee.getDateOfBirth().toString().equals(fieldValue))
@@ -232,10 +215,31 @@ public class SearchAndSortOnEmployee {
     }
 
     if (resultOfSearchAndSort.size() == 0) {
-      System.out.println("\nEntered value doesn't exists.");
+      System.out.println("\nEntered "+fieldName+" doesn't exists.");
       System.out.println("-------------------------------\n");
       return;
     }
+
+    System.out.println("Enter which field to sort by: (name, age, date Of Birth)");
+    String sortBY = sc.nextLine();
+
+    if (!sortBY.equals("name") && !sortBY.equals("age") && !sortBY.equals("email") && !sortBY.equalsIgnoreCase("date Of Birth")) {
+      throw new InputMismatchException("Please enter 'name', 'age' or 'date Of Birth'");
+    }
+
+    if (fieldName.equalsIgnoreCase(sortBY)) {
+      System.out.println("Please enter different fieldname and sort bY input values");
+      System.out.println("-------------------------------\n");
+      return;
+    }
+
+    System.out.println("Enter the direction to sort (ascending or descending): ");
+    String direction = sc.next(); // ascending or descending
+
+    if (!direction.equals("ascending") && !direction.equals("descending")) {
+      throw new InputMismatchException("Either enter ascending or descending");
+    }
+
 
     // to sort the resultOfSearchAndSort arraylist data in ascending or descending
     // order.
@@ -260,6 +264,24 @@ public class SearchAndSortOnEmployee {
     }
     System.out.println("-------------------------------\n");
 
+  }
+
+  static boolean checkAge(String age) {
+    String regex = "[0-9]+";
+    boolean match = age.matches(regex);
+    return match;
+  }
+
+  static boolean checkDateOfBirth(String dateOfBirth) {
+    String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
+    boolean match = dateOfBirth.matches(regex);
+    return match;
+  }
+
+  static boolean checkEmail(String email) {
+    String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    boolean match = email.matches(regex);
+    return match;
   }
 
   public static void main(String[] args) {
@@ -303,7 +325,6 @@ public class SearchAndSortOnEmployee {
       }
 
     } catch (InputMismatchException e) {
-      System.out.println("Please enter a valid input");
       System.out.println(e);
     } catch (IOException e) {
       System.out.println(e);
@@ -311,75 +332,6 @@ public class SearchAndSortOnEmployee {
       System.out.println(e);
     }
 
-  }
-
-
-
-  static String checkEmailForAddOrDeletePurpose(String email) {
-    String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-    while (true) {
-      email = sc.next();
-      boolean match = email.matches(regex);
-      if (!match) {
-        System.out.println("Enter a valid email");
-      } else {
-        break;
-      }
-    }
-
-    return email;
-  }
-
-  static String checkDateOfBirthForAddPurpose(String dateOfBirth) {
-    String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
-    while (true) {
-      dateOfBirth = sc.next();
-      boolean match = dateOfBirth.matches(regex);
-      if (!match) {
-        System.out.println("Enter a valid date");
-      } else {
-        break;
-      }
-    }
-
-    return dateOfBirth;
-  }
-
-  static String checkAgeForAddPurpose(String age){
-    String regex = "[0-9]+";
-    while (true) {
-      age=sc.next();
-      boolean match = age.matches(regex);
-      if(!match){
-        System.out.println("Enter a valid age");
-      } else{
-        break;
-      }
-    }
-
-    return age;
-  }
-
-  static boolean checkAgeForSearchPurpose(String age) {
-    String regex = "[0-9]+";
-    boolean match = age.matches(regex);
-    if (match) {
-      return true;
-    } else {
-      System.out.println("Age is invalid");
-      return false;
-    }
-  }
-
-  static boolean checkDateOfBirthForSearchPurpose(String dateOfBirth) {
-    String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
-    boolean match = dateOfBirth.matches(regex);
-    if (match) {
-      return true;
-    } else {
-      System.out.println("Enter a valid date");
-      return false;
-    }
   }
 
   
