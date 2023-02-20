@@ -1,4 +1,6 @@
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -15,8 +17,15 @@ class DeserializationTest {
         System.out.println(student.toString());
       }
 
-      System.out.println("Deserialized");
-    } catch (Exception e) {
+      System.out.println("\nDeserialized\n");
+
+    } catch (FileNotFoundException e) {
+      System.out.println(e);
+    } catch (IOException e){
+      System.out.println(e);
+    } catch (ClassCastException e){
+      System.out.println(e);
+    } catch (Exception e){
       System.out.println(e);
     }
   }

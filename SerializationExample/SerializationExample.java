@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SerializationExample {
@@ -16,14 +17,16 @@ public class SerializationExample {
         switch (choice) {
           case 1:
             System.out.println("Enter the file name: ");
-            String fileName = sc.next();
+            sc.nextLine();
+            String fileName = sc.nextLine();
             new SerializationTest().serialize(fileName);
             System.out.println("---------------------------\n");
             break;
 
           case 2:
             System.out.println("Enter the file name: ");
-            fileName = sc.next();
+            sc.nextLine();
+            fileName = sc.nextLine();
             new DeserializationTest().deserialize(fileName);
             System.out.println("---------------------------\n");
             break;
@@ -39,7 +42,10 @@ public class SerializationExample {
         }
       }
 
-    } catch (Exception e) {
+    } catch (InputMismatchException e) {
+      System.out.println(e);
+      System.out.println("Please enter a valid input");
+    } catch (Exception e){
       System.out.println(e);
     }
 
