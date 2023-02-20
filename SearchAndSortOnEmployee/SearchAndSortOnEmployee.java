@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -10,7 +11,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-
+import java.io.IOException;
 import java.awt.Desktop;
 
 public class SearchAndSortOnEmployee {
@@ -21,11 +22,11 @@ public class SearchAndSortOnEmployee {
   // to store employees objects, hashset because it doesn't allow duplicate
   // entries
 
-  static void add() {
+  static void add() throws InputMismatchException, IOException{
     // here we will take employee's details from user, create an employee object,
     // add object to set and call addToFile method
 
-    try {
+    
       System.out.println("Enter name of the employee: ");
       String name = sc.next();
       System.out.println("Enter age of the employee: ");
@@ -39,8 +40,7 @@ public class SearchAndSortOnEmployee {
         boolean match = email.matches(regex);
         if (!match) {
           System.out.println("Enter a valid email");
-        }
-        else{
+        } else {
           break;
         }
       }
@@ -54,8 +54,7 @@ public class SearchAndSortOnEmployee {
         boolean match = dateOfBirth.matches(regex);
         if (!match) {
           System.out.println("Enter a valid date");
-        }
-        else{
+        } else {
           break;
         }
       }
@@ -72,17 +71,15 @@ public class SearchAndSortOnEmployee {
 
       System.out.println("Data is inserted successfully.");
       System.out.println("-------------------------------\n");
-    } catch (Exception e) {
-      System.out.println(e);
-    }
+    
 
   }
 
-  static void addToFile(Employee employeeObject) {
+  static void addToFile(Employee employeeObject) throws IOException{
     // here we will perform file handling and add the employee object to
     // employee.txt
 
-    try {
+    
       String employeefilePath = "employees.txt";
       File employeefile = new File(employeefilePath);
       employeefile.createNewFile();
@@ -103,16 +100,12 @@ public class SearchAndSortOnEmployee {
         desktop.open(employeefile);
       }
 
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-
   }
 
-  static void delete() {
+  static void delete() throws InputMismatchException, IOException{
     // here we will first remove the specified employee from set and rewrite the set
     // data to employee.txt file
-    try {
+    
       System.out.println("Enter the email id of the employee: ");
       String emailId = sc.next();
 
@@ -150,16 +143,12 @@ public class SearchAndSortOnEmployee {
         desktop.open(employeeFile);
       }
 
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-
   }
 
-  static void fetch() {
+  static void fetch() throws IOException{
     // if employee.txt file is already present then we will fetch its data and add
     // it to set.
-    try {
+   
       File employeeFile = new File("employees.txt");
       if (employeeFile.createNewFile() == false) { // employee.txt already exists
         FileReader fileReader = new FileReader("employees.txt");
@@ -182,14 +171,11 @@ public class SearchAndSortOnEmployee {
         bufferedReader.close();
       }
 
-    } catch (Exception e) {
-      System.out.println(e);
-    }
 
   }
 
-  static void searchAndSort() {
-    try {
+  static void searchAndSort() throws InputMismatchException{
+    
 
       System.out.println("Enter which field to search: (name, age, date of birth)");
       String field = sc.next(); // name, age, dateOfBirth
@@ -248,9 +234,6 @@ public class SearchAndSortOnEmployee {
       }
       System.out.println("-------------------------------\n");
 
-    } catch (Exception e) {
-      System.out.println(e);
-    }
 
   }
 
@@ -263,6 +246,7 @@ public class SearchAndSortOnEmployee {
         System.out.println("Enter 1 to add data");
         System.out.println("Enter 2 to delete data");
         System.out.println("Enter 3 to search and sort data");
+        System.out.println("Enter 4 to exit the program");
         System.out.println();
 
         int choice = sc.nextInt();
@@ -280,14 +264,24 @@ public class SearchAndSortOnEmployee {
             searchAndSort(); // search and sort the employees objects
             break;
 
-          default:
+          case 4:
             System.out.println("-------------------------------\n");
             System.out.println("Program is terminated successfully");
             return;
+
+          default:
+            System.out.println("-------------------------------\n");
+            System.out.println("Please enter a valid number");
+
         }
 
       }
 
+    } catch (InputMismatchException e){
+      System.out.println("Please enter a valid input");
+      System.out.println(e);
+    } catch (IOException e){
+      System.out.println(e);
     } catch (Exception e) {
       System.out.println(e);
     }
