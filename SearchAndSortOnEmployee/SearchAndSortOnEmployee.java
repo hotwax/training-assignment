@@ -169,7 +169,7 @@ public class SearchAndSortOnEmployee {
 
     if (!fieldName.equals("name") && !fieldName.equals("age") && !fieldName.equals("email")
         && !fieldName.equalsIgnoreCase("date of birth")) {
-      throw new InputMismatchException("Please enter 'name', 'age', 'email' or 'date Of Birth' as fieldname");
+      throw new InputMismatchException("Please enter 'name', 'age', 'email' or 'date Of Birth' as fieldname input value");
     }
 
     System.out.println("Enter the field value to search: ");
@@ -224,7 +224,7 @@ public class SearchAndSortOnEmployee {
     String sortBY = sc.nextLine();
 
     if (!sortBY.equals("name") && !sortBY.equals("age") && !sortBY.equalsIgnoreCase("date Of Birth")) {
-      throw new InputMismatchException("Please enter 'name', 'age' or 'date of birth'");
+      throw new InputMismatchException("Please enter 'name', 'age' or 'date of birth' as sort by input value");
     }
 
     if (fieldName.equalsIgnoreCase(sortBY)) {
@@ -237,7 +237,7 @@ public class SearchAndSortOnEmployee {
     String direction = sc.next(); // ascending or descending
 
     if (!direction.equals("ascending") && !direction.equals("descending")) {
-      throw new InputMismatchException("Either enter ascending or descending");
+      throw new InputMismatchException("Either enter ascending or descending as direction input value");
     }
 
 
