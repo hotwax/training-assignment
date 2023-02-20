@@ -102,18 +102,16 @@ INSERT INTO Orders VALUES
 SOLVE THE FOLLOWING QUERIES 
 
 1) List all the columns of the Salespeople table.
-SELECT * FROM Salespeople ;
+DESC salespeople ;
 output:
-+------+---------+-----------+------+
-| SNUM | SNAME   | CITY      | COMM |
-+------+---------+-----------+------+
-| 1001 | Peel    | London    |   12 |
-| 1002 | Serres  | Sanjose   |   13 |
-| 1003 | AxelRod | New York  |   10 |
-| 1004 | Motika  | London    |   11 |
-| 1007 | RifKin  | Barcelona |   15 |
-| 1008 | Fran    | London    |   25 |
-+------+---------+-----------+------+
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| SNUM  | int          | NO   | PRI | NULL    |       |
+| SNAME | varchar(255) | YES  |     | NULL    |       |
+| CITY  | varchar(255) | YES  |     | NULL    |       |
+| COMM  | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
 6 rows in set (0.00 sec)
 
 2) List all customers with a rating of 100. 
