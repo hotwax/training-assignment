@@ -192,6 +192,12 @@ public class SearchAndSortOnEmployee {
       throw new InputMismatchException();
     }
 
+    if(fieldName.equalsIgnoreCase(sortBY)){
+      System.out.println("Please enter different fieldname and sort bY input values");
+      System.out.println("-------------------------------\n");
+      return;
+    } 
+
     System.out.println("Enter the direction to sort (ascending or descending): ");
     String direction = sc.next(); // ascending or descending
 
