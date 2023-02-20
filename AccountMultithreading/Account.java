@@ -6,6 +6,10 @@ class Account {
     this.name = name;
   }
 
+  void setInitialBalance(){
+    balance=1000;
+  }
+
   public boolean withdraw(int withdrawalAmount, String person) {
  
     // making the thread sleep for 100 milliseconds so that other thread can access the resource
@@ -18,7 +22,7 @@ class Account {
 
     if (balance >= withdrawalAmount) {
       balance -= withdrawalAmount; // decrease the balance by withdrawalAmount
-      System.out.println(person+ " Withdrawal amount: "+withdrawalAmount+ " Current balance: " + balance);
+      System.out.println(person+ " Withdrawal amount: "+withdrawalAmount+" -----"+ " Current balance: " + balance);
       return true;
     } else {
       System.out.println(person + ", you don't have sufficient balance.");

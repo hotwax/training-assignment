@@ -11,14 +11,17 @@ class AccountOverdrawSafeDemo extends Thread{
 
     int totalWithdrawalAmount=0;
 
-    for (int transaction = 1; transaction <= 20; transaction++) {
+    for (int transaction = 1; transaction <= 10; transaction++) {
       
-      int withdrawalAmount = 50;
+      int withdrawalAmount = 100;
       synchronized(account){
         if(account.withdraw(withdrawalAmount, person)) totalWithdrawalAmount+=withdrawalAmount;
+        else{
+          break;
+        }
       }
     }
 
-    System.out.println("Total withdrawal amount: "+ totalWithdrawalAmount);
+    System.out.println(person+ " total withdrawal amount: "+ totalWithdrawalAmount);
   }
 }

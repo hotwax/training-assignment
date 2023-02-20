@@ -10,13 +10,16 @@ class AccountOverdrawDemo extends Thread {
   public void run() {
     int totalWithdrawalAmount=0;
 
-    for (int transaction = 1; transaction <= 20; transaction++) {  //20 because 1000/50=20
+    for (int transaction = 1; transaction <= 10; transaction++) {  //10 because 1000/100=10
       
-      int withdrawalAmount = 50;
+      int withdrawalAmount = 100;
       if(account.withdraw(withdrawalAmount, person)) totalWithdrawalAmount+=withdrawalAmount;
+      else{
+        break;
+      }
     }
 
-    System.out.println("Total withdrawal amount: "+ totalWithdrawalAmount);
+    System.out.println(person+ " total withdrawal amount: "+ totalWithdrawalAmount);
     
   }
 
