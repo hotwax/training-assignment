@@ -113,8 +113,9 @@ class FileOperations {
     try {
       Scanner Reader = new Scanner(new File("Employee.txt"));
       while (Reader.hasNext()) {
-        String records = Reader.next();
+        String records = Reader.nextLine();
         String record_array[] = records.split(",");
+        // System.out.println(record_array) ;
         Employee employee_object = new Employee(Integer.parseInt(record_array[0]), record_array[1], record_array[2],
             Integer.parseInt(record_array[3]), record_array[4]);
         temporary_List.add(employee_object);
@@ -172,43 +173,51 @@ class FileOperations {
   // Method to Search the record in the List
   ArrayList<Employee> searchRecord(ArrayList<Employee> list, int response, String key) {
     ArrayList<Employee> foundRecords = new ArrayList<Employee>(); // Store all the Records Corresponding to the key
-    switch (response) // Switch Case
+    try
     {
-      case 1: // Search by Id
-        for (Employee employee : list) {
-          if (employee.getId().equals(Integer.parseInt(key)))
-            foundRecords.add(employee);
-        }
-        break;
-      case 2: // Search By Name
-        for (Employee employee : list) {
-          if (employee.getName().equalsIgnoreCase(key))
-            foundRecords.add(employee);
-        }
-        break;
+      switch (response) // Switch Case
+      {
+        case 1: // Search by Id
+          for (Employee employee : list) {
+              if (employee.getId().equals(Integer.parseInt(key)))
+              foundRecords.add(employee);
+          
+  
+          }
+          break;
+        case 2: // Search By Name
+          for (Employee employee : list) {
+            if (employee.getName().equalsIgnoreCase(key))
+              foundRecords.add(employee);
+          }
+          break;
 
-      case 3: // Search By Email
-        for (Employee employee : list) {
-          if (employee.getEmail().equalsIgnoreCase(key))
-            foundRecords.add(employee);
-        }
-        break;
-      case 4: // Search By date of Birth
-        for (Employee employee : list) {
-          if (employee.getDOB().equalsIgnoreCase(key))
-            foundRecords.add(employee);
-        }
-        break;
+        case 3: // Search By Email
+          for (Employee employee : list) {
+            if (employee.getEmail().equalsIgnoreCase(key))
+              foundRecords.add(employee);
+          }
+          break;
+        case 4: // Search By date of Birth
+          for (Employee employee : list) {
+            if (employee.getDOB().equalsIgnoreCase(key))
+              foundRecords.add(employee);
+          }
+          break;
 
-      case 5: // Search by Age
-        for (Employee employee : list) {
-          if (employee.getAge().equals(Integer.parseInt(key)))
-            foundRecords.add(employee);
-        }
-        break;
+        case 5: // Search by Age
+          for (Employee employee : list) {
+            if (employee.getAge().equals(Integer.parseInt(key)))
+              foundRecords.add(employee);
+          }
+          break;
 
+      }
     }
-    return foundRecords; // Return the list Which Contain all the Records Corresponding to the Key
+    catch (NumberFormatException e) {
+      System.out.println("Value should be numeric");
+    }
+    return foundRecords;  // Return the list Which Contain all the Records Corresponding to the Key
   }
 
   ArrayList<Employee> sortRecords(ArrayList<Employee> list, int response) {
@@ -328,7 +337,8 @@ public class Main {
               break;
             }
             System.out.println("Enter Value to be Searched");
-            String key = Reader.next(); // Which value to be searched
+            Reader.nextLine();
+            String key = Reader.nextLine(); // Which value to be searched
             ArrayList<Employee> foundRecords = fileOperations_object.searchRecord(list, response, key);
 
             // Records Found corresponding to the Search Value
