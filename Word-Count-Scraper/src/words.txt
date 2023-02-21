@@ -1,6 +1,0 @@
-Java
-Python
-C++
-C#
-Ruby
-HotWax
