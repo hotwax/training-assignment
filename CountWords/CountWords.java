@@ -1,9 +1,10 @@
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-
+import java.io.FileNotFoundException;
 import java.net.URL;
-
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -108,8 +109,15 @@ public class CountWords {
 
       bufferedReaderForUrls.close();
 
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (FileNotFoundException e) {
+      System.out.println(e);
+    } catch (IOException e) {
+      System.out.println(e);
+    } catch (UnknownHostException e){  
+      System.out.println("Please add a valid url");
+      System.out.println(e);
+    } catch (Exception e){
+      System.out.println(e);
     }
 
 
