@@ -719,9 +719,23 @@ SELECT SUM(o.amt),o.snum,s.sname FROM orders o, salespeople s WHERE o.snum=s.snu
 |     15382.07 | 1001 | Peel  |
 +--------------+------+-------+
 
-54) Write a query that selects all orders save those with zeroes or NULL in the amount file. 
+54) Write a query that selects all orders except those with zero or null in the Amt field from table.
 
-SELECT * FROM orders INTO OUTFILE 'C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\amount.txt'; WHERE amt=0 OR amt IS NULL;
+SELECT * FROM orders WHERE NOT amt=0 AND amt IS NOT NULsL;
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
 
 
 55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
