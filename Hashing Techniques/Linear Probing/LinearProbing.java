@@ -200,6 +200,7 @@ public class LinearProbing {
                         case 7:
                             long t2 = System.currentTimeMillis();
                             System.out.println("Time in milli seconds is " + (t2 - t1));
+                            break;
 
                         case 8:
                             flag = false;
