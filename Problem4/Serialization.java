@@ -14,7 +14,7 @@ import java.util.Date;
 class Student implements Serializable {
   String name;
   // String DOB; //old format of student class
-  Object DOB;//new format of student class
+  Object DOB; //new format of student class
   Address account;
 
   // serialVersionUID, which is used during deserialization to verify that the sender and receiver of a serialized object have loaded class
@@ -25,7 +25,7 @@ class Student implements Serializable {
   {
     this.name = name;
     // this.DOB = dateOfBirth; //old format of student class
-    this.DOB=new Date(""+dateOfBirth);//new format of student class
+    this.DOB = new Date("" + dateOfBirth); //new format of student class
     this.account = account;
   }
 
@@ -122,7 +122,7 @@ class DeserializationTest // class to deserialize objects
   }
 
 }
-class Demo {
+class Main {
   public static void main(String[] args) throws Exception {
     while (true) {
       System.out.println("===========================");

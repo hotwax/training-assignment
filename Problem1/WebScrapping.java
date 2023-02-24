@@ -7,13 +7,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 //we will have to set class path 
 // set classpath=%classpath%;D:\Programs\jsoup-1.15.3.jar;
-class CountFre // a class to store count of words and words
+class CountFrequency // a class to store count of words and words
 {
 
   String word;
   int freq;
 
-  CountFre(String word, int freq) // constructor to initialize 
+  CountFrequency(String word, int freq) // constructor to initialize 
   {
     this.word = word;
     this.freq = freq;
@@ -28,7 +28,7 @@ class CountFre // a class to store count of words and words
 
   public boolean equals(Object o) //overriding equals method
   {
-    CountFre count = (CountFre) o;
+    CountFrequency count = (CountFrequency) o;
     count.freq = freq + count.freq; //if word was same then we will update older and newer frequency
     return true;
   }
@@ -39,7 +39,7 @@ class CountFre // a class to store count of words and words
   }
 
 }
-class webScrap // a class to get web page and count certain words
+class WebScrapping // a class to get web page and count certain words
 {
 
   String load(String url) throws Exception // method to load data from web file
@@ -61,10 +61,10 @@ class webScrap // a class to get web page and count certain words
   }
 
 }
-class Demo {
+class Main {
   public static void main(String ar[]) throws Exception {
-    HashSet < CountFre > set = new HashSet < > ();
-    webScrap ws = new webScrap();
+    HashSet < CountFrequency > set = new HashSet < > ();
+    WebScrapping ws = new WebScrapping();
 
     //storing all urls into a ArrayList
     BufferedReader br = new BufferedReader(new FileReader("url.txt"));
@@ -87,14 +87,14 @@ class Demo {
     int url_num = 1; //variable to give url number
 
     for (String str: url) {
-      ArrayList < CountFre > alist = new ArrayList < > ();
+      ArrayList < CountFrequency > alist = new ArrayList < > ();
       System.out.println("\nURL : " + url_num);
       url_num++;
 
       for (String str1: words) {
         int count1 = ws.count(str1, ws.load(str));
-        alist.add(new CountFre(str1, count1)); //adding to arraylist
-        set.add(new CountFre(str1, count1)); // adding to hashSet
+        alist.add(new CountFrequency(str1, count1)); //adding to arraylist
+        set.add(new CountFrequency(str1, count1)); // adding to hashSet
       }
 
       alist.sort((object1, object2) -> object2.freq - object1.freq); //sorting the arraylist
@@ -106,9 +106,9 @@ class Demo {
     //storing the hashSet to TreeSet to sort it descending
     System.out.println("\nComplete .......");
 
-    TreeSet <CountFre> treeSet = new TreeSet <CountFre>((object1, object2) -> object2.freq - object1.freq);
-    for (CountFre countfreq: set)
-      treeSet.add(countfreq);
+    TreeSet < CountFrequency > treeSet = new TreeSet < CountFrequency > ((object1, object2) -> object2.freq - object1.freq);
+    for (CountFrequency countfrequency: set)
+      treeSet.add(countfrequency);
 
     System.out.println(treeSet);
   }

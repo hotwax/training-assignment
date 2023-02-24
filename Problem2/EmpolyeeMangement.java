@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.util.Collections;
-import java.time.LocalDate;  
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Comparator;
@@ -54,7 +54,7 @@ class Employee {
 
   String getDOB() //getting DOB
   {
-    return ""+DOB;
+    return "" + DOB;
   }
 
   Integer getAge() //getting age
@@ -144,8 +144,7 @@ class StoreEmployee // A class which file related operations
   }
 
   // to search by name,id,email,DOB or age
-  ArrayList < Employee > search(String input, String find) 
-  {
+  ArrayList < Employee > search(String input, String find) {
     ArrayList < Employee > store_emp = new ArrayList < > ();
 
     if ("ID".equalsIgnoreCase(input)) //searching by id
@@ -201,11 +200,11 @@ class StoreEmployee // A class which file related operations
     return emp;
   }
 
-  ArrayList < Employee > delete(int data)  //method to delete some record by id only
+  ArrayList < Employee > delete(int data) //method to delete some record by id only
   {
-	for (int index = 0; index < alist.size(); index++) {
+    for (int index = 0; index < alist.size(); index++) {
       if (alist.get(index).getID().equals(data))
-      alist.remove(index);
+        alist.remove(index);
       insert(alist);
     }
     return alist;
@@ -215,50 +214,47 @@ class StoreEmployee // A class which file related operations
   {
     alist = new ArrayList < > ();
 
-    try
-	{
-	BufferedReader br = new BufferedReader(new FileReader("input.txt"));
-    String line = br.readLine();
-    while (line != null) {
-    String str[] = line.split(",");
-    Employee emp = new Employee(Integer.parseInt(str[0]), str[1], str[2], str[3], Integer.parseInt(str[4]));
-    alist.add(emp);
-    line = br.readLine();
-    }
-    br.close();
+    try {
+      BufferedReader br = new BufferedReader(new FileReader("employee.txt"));
+      String line = br.readLine();
+      while (line != null) {
+        String str[] = line.split(",");
+        Employee emp = new Employee(Integer.parseInt(str[0]), str[1], str[2], str[3], Integer.parseInt(str[4]));
+        alist.add(emp);
+        line = br.readLine();
+      }
+      br.close();
 
-	}
-	catch(IOException exception)
-	{
-		System.out.println(exception);
-	}
+    } catch (IOException exception) {
+      System.out.println(exception);
+    }
     return alist;
   }
 
-  ArrayList < Employee > insert(ArrayList<Employee> list) //method to insert data into file
+  ArrayList < Employee > insert(ArrayList < Employee > list) //method to insert data into file
   {
-	  
+
     try {
-      BufferedWriter br = new BufferedWriter(new FileWriter("input.txt"));
+      BufferedWriter br = new BufferedWriter(new FileWriter("employee.txt"));
       for (Employee emp: list) {
         br.write("" + emp.getID() + "," + emp.getName() + "," + emp.getEmail() + "," + emp.getDOB() + "," + emp.getAge());
         br.newLine();
       }
       br.close();
     } catch (Exception exception) {
-		System.out.println(exception);
-	}
+      System.out.println(exception);
+    }
 
     return alist;
   }
 
 }
 
-class Demo {
+class Main {
   public static void main(String[] args) throws Exception {
     String name, email, DOB;
     Integer age, id;
-	
+
     StoreEmployee file = new StoreEmployee();
     ArrayList < Employee > list = file.get();
     while (true) {
@@ -281,34 +277,34 @@ class Demo {
 
           System.out.println("Enter name ");
           name = br.readLine();
-		  
-          while(true) //while accurate format is not given
-		  {
-          System.out.println("Enter email");
-		  email = sc.next();
-		  String regex = "^[a-zA-Z0-9+_.-]+@gmail.com$";
-		  boolean res = email.matches(regex);
-		  if(!res)
-		  System.out.println("\nEnter valid email");
-		  if(res)break;
-		  }
-		  
-		  while(true) //while accurate format is not given 
-		  {
-          System.out.println("Enter DOB (Format : YYYY-MM-DD)");
-          DOB = sc.next();
-		  String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
-		  boolean res = DOB.matches(regex);
-		  if(!res)
-		  System.out.println("Enter valid DOB");
-		  if(res)break;
-		  }
-          
+
+          while (true) //while accurate format is not given
+          {
+            System.out.println("Enter email");
+            email = sc.next();
+            String regex = "^[a-zA-Z0-9+_.-]+@gmail.com$";
+            boolean res = email.matches(regex);
+            if (!res)
+              System.out.println("\nEnter valid email");
+            if (res) break;
+          }
+
+          while (true) //while accurate format is not given 
+          {
+            System.out.println("Enter DOB (Format : YYYY-MM-DD)");
+            DOB = sc.next();
+            String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
+            boolean res = DOB.matches(regex);
+            if (!res)
+              System.out.println("Enter valid DOB");
+            if (res) break;
+          }
+
           System.out.println("Enter age");
           age = sc.nextInt();
 
           Employee emp = new Employee(name, email, DOB, age);
-		  list.add(emp);
+          list.add(emp);
           file.insert(list);
           System.out.println("Done ");
           break;

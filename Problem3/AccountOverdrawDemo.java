@@ -41,7 +41,7 @@ class AccountOverdrawDemo extends Thread //a class to call withdraw method
 
   public void run() //overridding run method of thread class
   {
-    int index	= 0;
+    int index = 0;
     while (index <= 5) {
       account.withdraw(name, (int)(Math.random() * 1000) + 1); // randomly deducting amount
       index++;
@@ -49,7 +49,7 @@ class AccountOverdrawDemo extends Thread //a class to call withdraw method
   }
 
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
     Account account = new Account("Ram & Sita", 1000);
     AccountOverdrawDemo thread1 = new AccountOverdrawDemo(account, "Ram");

@@ -47,7 +47,7 @@ class AccountOverdrawSafeDemo extends Thread //a class to call withdraw method
   }
 
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
     Account account = new Account("Ram & Sita", 1000);
     AccountOverdrawSafeDemo thread1 = new AccountOverdrawSafeDemo(account, "Ram");
