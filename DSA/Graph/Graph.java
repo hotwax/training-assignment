@@ -9,19 +9,24 @@ import java.util.Scanner;
 
 public class Graph {
 
+    // to store number of node or vertices in a graph
     int vertices;
+    // to store edge in a 2d matrix
     int matrix[][];
 
+    // constructor
     Graph(int vertices) {
         this.vertices = vertices;
         matrix = new int[vertices + 1][vertices + 1];
     }
 
+    // method to add edge in a graph
     void addedge(int source, int destination) {
         matrix[source][destination] = 1;
         matrix[destination][source] = 1;
     }
 
+    // method to print graph matrix
     void printgraphmaxtrix() {
         for (int i = 0; i < vertices; i++) {
             for (int j = 0; j < vertices; j++) {
@@ -31,6 +36,7 @@ public class Graph {
         }
     }
 
+    // method to traverse a graph in breadth first search manner
     void bfs(int start) {
         boolean visit[] = new boolean[vertices];
         Arrays.fill(visit, false);
@@ -53,6 +59,7 @@ public class Graph {
 
     }
 
+    // method to traverse a graph in depth first search manner
     void dfs(int start) {
         boolean visit[] = new boolean[vertices];
         Arrays.fill(visit, false);
@@ -60,6 +67,7 @@ public class Graph {
 
     }
 
+    // method to recursively visit to each node and mark it as visit
     void dfs_helper(int start, boolean visit[]) {
         System.out.print(start + " ");
         visit[start] = true;
@@ -70,19 +78,21 @@ public class Graph {
         }
     }
 
+    // to delete the edge in a graph
     void delete_edge(int position_1, int position_2) {
         matrix[position_1][position_2] = 0;
         matrix[position_2][position_1] = 0;
     }
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
+        // taking input from user
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the number of vertices");
         int v = sc.nextInt();
 
         int u;
 
+        // Creating Graph class object "gp"
         Graph gp = new Graph(v);
 
         boolean flag = true;
