@@ -4,9 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HashMapCustom<K, V> {
-    private Entry<K, V>[] table; // Array of Entry.
+    private Entry<K, V>[] table; // Array of Entry .
     private int capacity = 4; // Initial capacity of HashMap
 
+    // defining the Entry class
     static class Entry<K, V> {
         K key;
         V value;
@@ -19,10 +20,12 @@ public class HashMapCustom<K, V> {
         }
     }
 
+    // constructor
     public HashMapCustom() {
         table = new Entry[capacity];
     }
 
+    // method to insert the value in a hashmap
     public void put(K newKey, V data) {
         if (newKey == null)
             return; // does not allow to store null.
@@ -51,6 +54,7 @@ public class HashMapCustom<K, V> {
         }
     }
 
+    // method to get value from the key
     public V get(K key) {
         int hash = hash(key);
         if (table[hash] == null) {
@@ -66,6 +70,7 @@ public class HashMapCustom<K, V> {
         }
     }
 
+    // method to remove the key & value in the hashmap
     public boolean remove(K deleteKey) {
 
         int hash = hash(deleteKey);
@@ -94,13 +99,7 @@ public class HashMapCustom<K, V> {
 
     }
 
-    /**
-     * Method displays all key-value pairs present in HashMapCustom.,
-     * insertion order is not guaranteed, for maintaining insertion order
-     * refer LinkedHashMapCustom.
-     * 
-     * @param key
-     */
+    // method to display the data
     public void display() {
         System.out.println("Hashmap :");
         for (int i = 0; i < capacity; i++) {
@@ -115,6 +114,7 @@ public class HashMapCustom<K, V> {
 
     }
 
+    // method to search the key by it's value
     public void search(V value) {
         boolean isfound = false;
         for (int i = 0; i < capacity; i++) {
@@ -132,6 +132,7 @@ public class HashMapCustom<K, V> {
 
     }
 
+    // method to calculate the hash of the key
     private int hash(K key) {
         return Math.abs(key.hashCode()) % capacity;
     }
