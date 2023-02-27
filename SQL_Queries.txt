@@ -102,16 +102,17 @@ INSERT INTO Orders VALUES
 SOLVE THE FOLLOWING QUERIES 
 
 1) List all the columns of the Salespeople table.
-DESC salespeople ;
-output:
-+-------+--------------+------+-----+---------+-------+
-| Field | Type         | Null | Key | Default | Extra |
-+-------+--------------+------+-----+---------+-------+
-| SNUM  | int          | NO   | PRI | NULL    |       |
-| SNAME | varchar(255) | YES  |     | NULL    |       |
-| CITY  | varchar(255) | YES  |     | NULL    |       |
-| COMM  | int          | YES  |     | NULL    |       |
-+-------+--------------+------+-----+---------+-------+
+
+ SELECT column_name FROM information_schema.columns WHERE table_name = 'salespeople';
+ output:
++-------------+
+| COLUMN_NAME |
++-------------+
+| CITY        |
+| COMM        |
+| SNAME       |
+| SNUM        |
++-------------+
 6 rows in set (0.00 sec)
 
 2) List all customers with a rating of 100. 
@@ -127,21 +128,25 @@ output:
 
 3) Find the largest order taken by each salesperson on each date. 
  
- SELECT s.SNAME , o.ONUM , o.ODATE , o.AMT FROM Salespeople AS s
- INNER JOIN
- orders AS o
- WHERE o.snum = s.snum AND
- o.amt IN (SELECT MAX(amt) FROM orders GROUP BY odate) ;
- 
- output:
-+---------+------+----------+---------+
-| SNAME   | ONUM | ODATE    | AMT     |
-+---------+------+----------+---------+
-| Serres  | 3005 | 10/03/90 | 5160.45 |
-| Peel    | 3008 | 10/05/90 | 4723.00 |
-| AxelRod | 3009 | 10/04/90 | 1713.23 |
-| Peel    | 3011 | 10/06/90 | 9891.88 |
-+---------+------+----------+---------+
+SELECT s.snum , s.sname , o.onum , o.odate , MAX(o.amt) FROM salespeople s
+INNER JOIN
+orders o
+WHERE o.snum = s.snum GROUP BY o.snum , o.odate ;
+output:
++------+---------+------+----------+------------+
+| snum | sname   | onum | odate    | MAX(o.amt) |
++------+---------+------+----------+------------+
+| 1007 | RifKin  | 3001 | 10/03/90 |    1098.16 |
+| 1004 | Motika  | 3002 | 10/03/90 |    1900.10 |
+| 1001 | Peel    | 3003 | 10/03/90 |     767.19 |
+| 1002 | Serres  | 3005 | 10/03/90 |    5160.45 |
+| 1002 | Serres  | 3007 | 10/04/90 |      75.75 |
+| 1001 | Peel    | 3008 | 10/05/90 |    4723.00 |
+| 1003 | AxelRod | 3009 | 10/04/90 |    1713.23 |
+| 1002 | Serres  | 3010 | 10/06/90 |    1309.95 |
+| 1001 | Peel    | 3011 | 10/06/90 |    9891.88 |
++------+---------+------+----------+------------+
+
 
 4) Arrange the Order table by descending customer number.
 
@@ -198,16 +203,18 @@ output:
 
 6) List names of all customers matched with the salespeople serving them.
 
-select c.cname as Customer , s.sname as ServingBy from customers as c
-inner join
-Salespeople as s where c.snum = s.snum group by c.snum ;
-output:
+ SELECT c.cname AS customer , s.sname AS ServingBy from customers c
+ INNER JOIN
+ Salespeople s where c.snum = s.snum;
+ output:
 +----------+-----------+
-| Customer | ServingBy |
+| customer | ServingBy |
 +----------+-----------+
 | Hoffman  | Peel      |
-| Liu      | Serres    |
 | Giovanni | AxelRod   |
+| Liu      | Serres    |
+| Grass    | Serres    |
+| Clemens  | Peel      |
 | Pereira  | Motika    |
 | Cisneros | RifKin    |
 +----------+-----------+
@@ -325,31 +332,21 @@ output:
 
 14) Find all customers who booked orders on October 3.
 
-select c.cnum ,c.cname , c.city , o.odate from customers as c
-inner join
-orders as o where o.cnum = c.cnum and o.odate = "10/03/90" order by c.cnum;
+SELECT * FROM customers WHERE cnum in (SELECT distinct(cnum) FROM orders WHERE odate = "10/03/90" );
 output:
-+------+----------+---------+----------+
-| cnum | cname    | city    | odate    |
-+------+----------+---------+----------+
-| 2001 | Hoffman  | London  | 10/03/90 |
-| 2003 | Liu      | Sanjose | 10/03/90 |
-| 2007 | Pereira  | Rome    | 10/03/90 |
-| 2008 | Cisneros | Sanjose | 10/03/90 |
-| 2008 | Cisneros | Sanjose | 10/03/90 |
-+------+----------+---------+----------+
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2008 | Cisneros | Sanjose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2003 | Liu      | Sanjose |    200 | 1002 |
++------+----------+---------+--------+------+
 
 15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
-select onum,sum(amt) as totalAmount ,odate from orders group by odate having totalAmount >= 2000;
+SELECT onum, SUM(amt) AS totalAmount ,odate FROM orders GROUP BY odate HAVING totalAmount - 2000 >= ( SELECT MAX(amt) From orders );
 output:
-+------+-------------+----------+
-| onum | totalAmount | odate    |
-+------+-------------+----------+
-| 3001 |     8944.59 | 10/03/90 |
-| 3008 |     4723.00 | 10/05/90 |
-| 3010 |    11201.83 | 10/06/90 |
-+------+-------------+----------+
-3 rows in set (0.03 sec)
+Empty set (0.00 sec)
 
 16) Select all orders that had amounts that were greater than at least one of the orders from October 6.\
 
