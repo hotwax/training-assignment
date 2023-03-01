@@ -262,8 +262,36 @@ mysql> SELECT C.CNAME,C.CNUM,S.SNAME,S.SNUM FROM CUSTOMERS C
 | 1008 | Fran    | 29.0697674 |
 +------+---------+------------+
 
-20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000. 21) List all the largest orders for October 3, for each salesperson. 
+20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000.
 
+SELECT MAX(amt) max_amount, snum, odate
+FROM orders
+GROUP BY odate, snum
+HAVING MAX(amt) >= 3000;
+
++------------+------+------------+
+| max_amount | snum | odate      |
++------------+------+------------+
+|    5160.45 | 1002 | 1990-03-10 |
+|    4723.00 | 1001 | 1990-05-10 |
+|    9891.88 | 1001 | 1990-06-10 |
++------------+------+------------+
+
+21) List all the largest orders for October 3, for each salesperson.
+
+SELECT snum, MAX(amt),odate
+FROM  orders
+GROUP BY snum HAVING
+odate = '1990-03-10';
+
++------+----------+------------+
+| snum | MAX(amt) | odate      |
++------+----------+------------+
+| 1001 |  9891.88 | 1990-03-10 |
+| 1002 |  5160.45 | 1990-03-10 |
+| 1004 |  1900.10 | 1990-03-10 |
+| 1007 |  1098.16 | 1990-03-10 |
++------+----------+------------+
 
 22) Find all customers located in cities where Serres has customers. 
 mysql> SELECT cnum,cname,city
