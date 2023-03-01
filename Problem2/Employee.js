@@ -105,16 +105,16 @@ function deleteEmployeefile() {
 function searchEmployee() {
     read.question('\nEnter the text to search: ', (query) => {
         read.question('Order by (name, email, age, dob): ', (sortBy) => {
-            read.question('Sort direction (asc, desc): ', (sortDir) => {
+            read.question('Sort direction (asc, desc): ', (sortDirection) => {
                 const employees = readEmployeesFromFile();
                 //filtering those employees which have the query 
                 const results = employees.filter((employees) => {
                     return Object.keys(employees).some((val) => employees[val] === query);
-                }).sort((a, b) => {
-                    let sortOrder = sortDir === 'asc' ? 1 : -1;
-                    if (a[sortBy] < b[sortBy]) {  //sorting them accordingly 
+                }).sort((first, second) => {
+                    let sortOrder = sortDirection === 'asc' ? 1 : -1;
+                    if (first[sortBy] < second[sortBy]) {  //sorting them accordingly 
                         return -1 * sortOrder;
-                    } else if (a[sortBy] > b[sortBy]) {
+                    } else if (first[sortBy] > first[sortBy]) {
                         return 1 * sortOrder;
                     } else {
                         return 0;
@@ -158,4 +158,5 @@ async function askOption() {
         }
     });
 }
+
 askOption();
