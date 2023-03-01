@@ -42,18 +42,18 @@ urlsArray.forEach((url) => { //loop through urls
       }
     ).slice(0, 3))
 
-    console.log("Top 3 frequency words for url- " + url);
+    console.log("Top 3 frequency words for url- " + url+"\n");
 
     for (let [key, value] of wordsCountForOneUrl) {
       console.log(key);
       console.log(value);
     }
-    console.log("-----------------------")
+    console.log("-----------------------\n")
 
   });
 });
 
-console.log("Frequency of all words across all urls");
+console.log("Frequency of all words across all urls\n");
 
 wordsCountForAllUrls.forEach((value, key) => {
   console.log(key)
