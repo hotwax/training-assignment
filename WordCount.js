@@ -1,6 +1,6 @@
-const fileHandler = require("fs")
-const axios = require("axios");
-const { htmlToText } = require("html-to-text");
+const fileHandler = require("fs") // to read data from files 
+const axios = require("axios"); // to fetch data from a site
+const { htmlToText } = require("html-to-text"); // to convert html of the site to text
 
 const urlsArray = fileHandler.readFileSync("urls.txt", "utf-8").split("\n"); //get urls from urls.txt file
 const wordsArray = fileHandler.readFileSync("words.txt", "utf-8").split("\n"); //get words from words.txt file
@@ -14,7 +14,7 @@ urlsArray.forEach((url) => { //loop through urls
     
     let wordsCountForOneUrl = new Map(); //map to count words frequencies on one site
 
-    wordsArray.forEach(async (wordFromFile) => { //loop through words
+    wordsArray.forEach( (wordFromFile) => { //loop through words
       const regExp = new RegExp(`${wordFromFile}`, 'gi'); //regex for a global case-insensitive search
       const matchedWords = wordsFromUrl.match(regExp) //returns an array of matched words from the site
 
