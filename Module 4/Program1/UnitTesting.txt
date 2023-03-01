@@ -1,0 +1,67 @@
+
+CASE 1: 
+Input:
+URL: "https://www.vedantu.com/stories/hungry-fox-and-the-grapes"
+Words: ["grapes", "hungry", "fox"]
+
+Expected Output:
+https://www.vedantu.com/stories/hungry-fox-and-the-grapes
+fox - 27
+grapes - 25
+hungry - 7
+
+Total Counts
+fox - 27
+grapes - 25
+hungry - 7
+
+CASE 2:
+Input:
+URLs: ["https://www.vedantu.com/stories/hungry-fox-and-the-grapes", "https://google.com"]
+Words: ["grapes", "hungry", "fox"]
+
+Expected Output:
+https://www.vedantu.com/stories/hungry-fox-and-the-grapes
+fox - 27
+grapes - 25
+hungry - 7
+
+https://google.com
+fox - 0
+grapes - 0
+hungry - 0
+
+Total Counts
+fox - 27
+grapes - 25
+hungry - 7
+
+CASE 3:
+Input:
+URLs: ["https://www.vedantu.com/stories/hungry-fox-and-the-grapes"]
+Words: ["unicorn", "rainbow"]
+
+Expected Output:
+https://www.vedantu.com/stories/hungry-fox-and-the-grapes
+unicorn - 0
+rainbow - 0
+
+Total Counts
+unicorn - 0
+rainbow - 0
+
+
+CASE 4:
+Input:
+URLs: []
+Words: ["grapes", "hungry", "fox"]
+
+Expected Output: No URLs provided.
+
+
+CASE 5:
+Input:
+URLs: ["https://www.vedantu.com/stories/hungry-fox-and-the-grapes"]
+Words: []
+
+Expected Output: No words provided.
