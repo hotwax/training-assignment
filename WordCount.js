@@ -3,7 +3,7 @@ const axios = require("axios"); // to fetch data from a site
 const { htmlToText } = require("html-to-text"); // to convert html of the site to text
 
 const urlsArray = fileHandler.readFileSync("urls.txt", "utf-8").split("\n"); //get urls from urls.txt file
-const wordsArray = fileHandler.readFileSync("words.txt", "utf-8").split("\n"); //get words from words.txt file
+const wordsArray = fileHandler.readFileSync("words.txt", "utf-8").split(","); //get words from words.txt file
 
 let wordsCountForAllUrls = new Map(); //map to count words frequencies across all urls
 
