@@ -2,9 +2,8 @@ const fileHandler = require("fs") // to read data from files
 const axios = require("axios"); // to fetch data from a site
 const cheerio = require("cheerio"); // to convert html of the site to text
 
-var wordsArray = [];
-var urlsArray = [];
-
+let wordsArray = [];
+let urlsArray = [];
 
 let wordsCountForOneUrl = new Map(); //map to count words frequencies on one site
 let wordsCountForAllUrls = new Map(); //map to count words frequencies across all urls
