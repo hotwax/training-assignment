@@ -20,18 +20,18 @@ const updatefrequencyForAUrl = (wordFromFile) => {
     })
 
     if (matchedWords == null) {
-      wordsCountForOneUrl.set(wordFromFile, 0)
+      wordsCountForOneUrl=new Map([...wordsCountForOneUrl, [wordFromFile,0]])
     } else {
       const wordCount = matchedWords.length //total count of the word in the site
-      wordsCountForOneUrl.set(wordFromFile, wordCount)
+      wordsCountForOneUrl=new Map([...wordsCountForOneUrl, [wordFromFile,wordCount]])
 
       //updating count of the word in the map which stores word total count
       if (wordsCountForAllUrls.has(wordFromFile)) {
         const oldCount = wordsCountForAllUrls.get(wordFromFile)
-        wordsCountForAllUrls.set(wordFromFile, oldCount + wordCount);
+        wordsCountForAllUrls=new Map([...wordsCountForAllUrls, [wordFromFile,oldCount+wordCount]])
       }
       else {
-        wordsCountForAllUrls.set(wordFromFile, wordCount)
+        wordsCountForAllUrls=new Map([...wordsCountForAllUrls, [wordFromFile, wordCount]])
       }
     }
   }
