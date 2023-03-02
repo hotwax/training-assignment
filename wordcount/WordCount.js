@@ -15,16 +15,16 @@ function sortMapAndReturnTopThreeWords(wordsCountForOneUrl) {
 
 function updatefrequencyForAUrl(wordFromFile) {
 
-  return function innerFunction1(wordsFromUrl) {
+  return function getWordCount(wordsFromUrl) {
 
     let wordCount = wordsFromUrl.filter(word =>
       word.toLowerCase() === wordFromFile.toLowerCase()
     ).length //total count of the word in the site
 
-    return function innerFunction2(wordsCountForOneUrl) {
+    return function updateCountInMap(wordsCountForOneUrl) {
       wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, wordCount]]);
 
-      return function innerFunction3(wordsCountForAllUrls) {
+      return function UpdateCountInAllUrlsMap(wordsCountForAllUrls) {
         //updating count of the word in the map which stores word total count
         if (wordsCountForAllUrls.has(wordFromFile)) {
           const oldCount = wordsCountForAllUrls.get(wordFromFile);
@@ -91,7 +91,8 @@ function checkValidationForWordsAndUrls() {
   let wordsArray = [];
   let urlsArray = [];
   try {
-    urlsArray = fileHandler.readFileSync("urls.txt", "utf-8");
+    urlsArray = fileHandler.readFileSync("urls.txt", "utf-8"); 
+    //we can also use 'process.cwd()' or '__dirname' methods to get current directory path here
     urlsArray = urlsArray?.length == 0 ? null : urlsArray.split(", "); //get urls from urls.txt file and using optional chaining by ?
     if (urlsArray == null) {
       console.log("No urls found in urls.txt file.");
