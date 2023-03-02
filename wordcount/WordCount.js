@@ -5,7 +5,7 @@ const cheerio = require("cheerio"); // to convert html of the site to text
 let wordsCountForOneUrl = new Map(); //map to count words frequencies on one site
 let wordsCountForAllUrls = new Map(); //map to count words frequencies across all urls
 
-const sortMapAndReturnTopThreeWords = () => {
+function sortMapAndReturnTopThreeWords () {
   //sorting in descending order of words frequencies and then taking top 3 frequencies words
   wordsCountForOneUrl = new Map([...wordsCountForOneUrl.entries()].sort(
     function (a, b) {
@@ -14,7 +14,7 @@ const sortMapAndReturnTopThreeWords = () => {
   ).slice(0, 3))
 }
 
-const updatefrequencyForAUrl = (wordFromFile) => {
+function updatefrequencyForAUrl (wordFromFile) {
 
   return function innerFunction(wordsFromUrl) {
 
@@ -36,7 +36,7 @@ const updatefrequencyForAUrl = (wordFromFile) => {
 
 }
 
-const wordCount = async (urlsArray, wordsArray) => {
+async function wordCount  (urlsArray, wordsArray) {
   for (let index = 0; index < urlsArray.length; index++) {
     let url = urlsArray[index];
     let wordsFromUrl = "";
@@ -45,8 +45,8 @@ const wordCount = async (urlsArray, wordsArray) => {
     await axios.get(url).then((response) => { //using axios to fetch url data 
       let html = response.data; //html content of the site
 
-      const $ = cheerio.load(html);
-      wordsFromUrl = $("body").text().toLowerCase().split(/\W+/); //html to text
+      const loadedDocument = cheerio.load(html);
+      wordsFromUrl = loadedDocument("body").text().toLowerCase().split(/\W+/); //html to text
 
 
     }).catch(function (err) {
@@ -78,7 +78,7 @@ const wordCount = async (urlsArray, wordsArray) => {
   })
 }
 
-const checkValidationForWordsAndUrls = () => {
+function checkValidationForWordsAndUrls () {
   let wordsArray = [];
   let urlsArray = [];
   try {
