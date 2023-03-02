@@ -19,11 +19,9 @@ const updatefrequencyForAUrl = (wordFromFile) => {
   return function innerFunction(wordsFromUrl) {
 
     let wordCount = wordsFromUrl.split(wordFromFile.toLowerCase()).length //total count of the word in the site
+    wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, wordCount]])
 
-    if (wordCount == 0) {
-      wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, 0]])
-    } else {
-      wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, wordCount]])
+    if (wordCount != 0) {
 
       //updating count of the word in the map which stores word total count
       if (wordsCountForAllUrls.has(wordFromFile)) {
@@ -41,41 +39,38 @@ const updatefrequencyForAUrl = (wordFromFile) => {
 const wordCount = async (urlsArray, wordsArray) => {
   for (let index = 0; index < urlsArray.length; index++) {
     let url = urlsArray[index]
+    let wordsFromUrl = ""
 
     await axios.get(url).then((response) => { //using axios to fetch url data 
       let html = response.data; //html content of the site
 
       const $ = cheerio.load(html);
-      let wordsFromUrl = $("body").text().toLowerCase() //html to text
+      wordsFromUrl = $("body").text().toLowerCase() //html to text
 
-      wordsCountForOneUrl = new Map();
-
-      for (let index = 0; index < wordsArray.length; index++) {
-        let wordFromFile = wordsArray[index]
-        updatefrequencyForAUrl(wordFromFile)(wordsFromUrl)
-      }
-
-      sortMapAndReturnTopThreeWords()
-
-      console.log("Top 3 frequency words for url- " + url + "\n");
-
-
-      wordsCountForOneUrl.forEach((value, key) => {
-        console.log(key);
-        console.log(value);
-      })
-      console.log("-----------------------\n")
 
     }).catch(function (err) {
       console.log("Invalid url");
       process.exit(1)
     });
 
+    wordsCountForOneUrl = new Map();
+
+    for (let index = 0; index < wordsArray.length; index++) {
+      let wordFromFile = wordsArray[index]
+      updatefrequencyForAUrl(wordFromFile)(wordsFromUrl)
+    }
+
+    sortMapAndReturnTopThreeWords()
+
+    console.log("Top 3 frequency words for url- " + url + "\n");
+    wordsCountForOneUrl.forEach((value, key) => {
+      console.log(key);
+      console.log(value);
+    })
+    console.log("-----------------------\n")
   }
 
-
   console.log("Frequency of all words across all urls\n");
-
   wordsCountForAllUrls.forEach((value, key) => {
     console.log(key)
     console.log(value)
