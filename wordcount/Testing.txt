@@ -1,0 +1,45 @@
+Case 1: One url given
+Input- 
+urls.txt- https://www.hotwaxsystems.com/
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+Case 2: More than one url given
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+Case 3: No word found
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- 
+output-
+
+Case 4: No words
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- 
+output-
+
+Case 5: No urls
+Input- 
+urls.txt-
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+Case 6: No urls.txt file
+Input- 
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+Case 7: No words.txt file
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+output-
+
+Case 8: Given invalid url 
+Input- 
+urls.txt- https://www.abc.com/, https://www.hotwax.co/ 
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
