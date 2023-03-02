@@ -1,0 +1,58 @@
+CASE #1 :
+    Inputs:
+        URL : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
+                "https://www.github.com/"]
+        Words : [retailers, github, open, source, shopify, order]
+    Output:
+        -----------OUTPUT#1-------------
+        https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system
+         'order' => 81, 'shopify' => 59, 'retailers' => 24 
+        https://www.github.com/
+        'github' => 48, 'source' => 8, 'open' => 7 
+        -----------OUTPUT#2-------------       
+        'retailers' => 24,
+        'github' => 48,
+        'open' => 8,
+        'source' => 15,
+        'shopify' => 59,
+        'order' => 81
+
+CASE #2 :
+    Inputs:
+        URL : [] (NO URL Provided)
+        Words : [retailers, github, open, source, shopify, order]
+    Output:
+        No URLs Provided
+
+CASE #3 :
+    Inputs:
+        URLS : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
+                "https://www.github.com/"]
+        Words : [] (no words provided)
+    Output :
+        No Words Provided
+
+CASE #3 :
+    Inputs:
+        URLS : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
+                "https://www.github.com/"]
+        Words : [] (no words provided)
+    Output :
+        No Words Provided
+
+CASE #4 :
+    Inputs:
+        URLS : ["www.goolge"]
+        Words : [retailers, github, open, source, shopify, order]
+    Output :
+        Invalid URL
+
+CASE #5 : (No Internet)
+    Inputs:
+        URLS : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
+                "https://www.github.com/"]
+        Words : [retailers, github, open, source, shopify, order]
+    Output :
+        No Internet Connection
+
+
