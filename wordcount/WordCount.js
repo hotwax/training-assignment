@@ -18,19 +18,19 @@ const updatefrequencyForAUrl = (wordFromFile) => {
 
   return function innerFunction(wordsFromUrl) {
 
-    let wordCount = wordsFromUrl.split(wordFromFile.toLowerCase()).length //total count of the word in the site
+    let wordCount = wordsFromUrl.filter(word => 
+      word.toLowerCase() === wordFromFile.toLowerCase()
+    ).length //total count of the word in the site
+
     wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, wordCount]])
 
-    if (wordCount != 0) {
-
-      //updating count of the word in the map which stores word total count
-      if (wordsCountForAllUrls.has(wordFromFile)) {
-        const oldCount = wordsCountForAllUrls.get(wordFromFile)
-        wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, oldCount + wordCount]])
-      }
-      else {
-        wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, wordCount]])
-      }
+    //updating count of the word in the map which stores word total count
+    if (wordsCountForAllUrls.has(wordFromFile)) {
+      const oldCount = wordsCountForAllUrls.get(wordFromFile)
+      wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, oldCount + wordCount]])
+    }
+    else {
+      wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, wordCount]])
     }
   }
 
@@ -45,7 +45,7 @@ const wordCount = async (urlsArray, wordsArray) => {
       let html = response.data; //html content of the site
 
       const $ = cheerio.load(html);
-      wordsFromUrl = $("body").text().toLowerCase() //html to text
+      wordsFromUrl = $("body").text().toLowerCase().split(/\W+/) //html to text
 
 
     }).catch(function (err) {
