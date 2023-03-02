@@ -174,7 +174,7 @@ Omnichannel 14
 Order 12
 Store 21
 
-Case 9: Repetitive urls in urls.txt file
+Case 10: Repetitive urls in urls.txt file
 Input- 
 urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/, https://www.hotwax.co/
 words.txt- Systems, HotWax, OfBiz, Apache, Commerce, Omnichannel, Order, Store
