@@ -1,0 +1,3 @@
+https://www.geeksforgeeks.org/javascript/
+https://www.tutorialspoint.com/javascript/index.htm
+https://en.wikipedia.org/wiki/Computer_programming
