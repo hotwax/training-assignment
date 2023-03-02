@@ -1,1 +1,1 @@
-Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+Systems, HotWax, OfBiz, Apache, Commerce, Omnichannel, Order, Store
