@@ -67,26 +67,34 @@ function menu() {
 function addEmployee(employees) {
     //taking the name of employee from user
     let name = prompt('Enter employee name: ');
+    //regex to match if user has entered wrong name
     const nameRegex=/^[A-Za-z]+(?:\s+[A-Za-z]+)*$/;
+    //loop until user don't enter right name in provided format
     while(!nameRegex.test(name)) {
         name = prompt('Invalid name. ENTER AGAIN: ');
       }
+
     //taking the email of employee from user
     let email = prompt('Enter employee email: ');
+    //regex to match if user has entered wrong email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //loop until user don't enter right email in provided format
     while(!emailRegex.test(email)) {
         email = prompt('Invalid email. ENTER AGAIN: ');
     }
 
     //taking the age of employee from user
     let age = parseInt(prompt('Enter age:'));
+    //loop until user don't enter right age in range 0 to 120
     while(isNaN(age) || age < 0 || age > 120) {
         age = parseInt(prompt('Invalid age. ENTER AGAIN: '));
     }
     
     //taking the dob of employee from user
     let dob = prompt('Enter employee date of birth (DD/MM/YYYY): ');
+    //regex to match if user has entered wrong name
     const dobRegex = /^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}$/;
+    //loop until user don't right date of birth in provided format
     while(!dobRegex.test(dob)) {
         dob = prompt('Invalid date of birth. ENTER AGAIN: ');
     }
