@@ -88,8 +88,8 @@ const checkValidationForWordsAndUrls = () => {
       console.log("No urls found in urls.txt file.");
       return;
     }
-    urlsArray = removeRepetitiveUrls(urlsArray);
-    
+    urlsArray = Array.from(new Set(urlsArray)); //remove repetitive urls
+
   }
   catch (err) {
     console.log("urls.txt file doesn't exists");
@@ -102,7 +102,7 @@ const checkValidationForWordsAndUrls = () => {
       console.log("No words found in words.txt file.");
       return;
     }
-    wordsArray = removeRepetitiveWords(wordsArray);
+    wordsArray = Array.from(new Set(wordsArray)); //remove repetitive words
   }
   catch (err) {
     console.log("words.txt file doesn't exists");
@@ -110,14 +110,6 @@ const checkValidationForWordsAndUrls = () => {
   }
 
   wordCount(urlsArray, wordsArray);
-}
-
-const removeRepetitiveWords = (wordsArray) => {
-  return Array.from(new Set(wordsArray)); 
-}
-
-const removeRepetitiveUrls = (urlsArray) => {
-  return Array.from(new Set(urlsArray));
 }
 
 checkValidationForWordsAndUrls();
