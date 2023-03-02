@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio';
 import fs from 'fs';
 // for current path
 import path from 'path';
+import { exit } from 'process';
 import { fileURLToPath } from 'url'; 
 
 // The __dirname and __filename global variables are defined in CommonJS 
@@ -23,15 +24,42 @@ let words;
 
 // reading from file urls.txt and words.txt
 try{
-    urls = fs.readFileSync(path.join(__dirname, 'urls.txt'), 'utf-8').split('\r\n');
-    words = fs.readFileSync(path.join(__dirname, 'words.txt'), 'utf-8').toLowerCase().trim().split('\r\n');
+    urls = fs.readFileSync(path.join(__dirname, 'urls.txt'), 'utf-8').trim().split('\r\n').filter(Boolean);
+    words = fs.readFileSync(path.join(__dirname, 'words.txt'), 'utf-8').trim().toLowerCase().split('\r\n').filter(Boolean);
+
+    // Handling case if any of the file is empty
+    if(!urls.length){
+        console.log("urls file is empty!");
+        exit();
+    }
+    if(!words.length){
+        console.log("Words file is empty!");
+        exit();
+    }
 }
 catch(error){
-    console.log('Error occurred while reading file', error);
+    //hadling case if file does not exist
+    if(error.code === "ENOENT"){
+        console.log('Error occurred while reading file: file does not exist: ', error.path);
+    }else{
+        console.log('Error occurred while reading file', error);
+    }
+    exit();
 }
+
+// remove if there is duplicate urls
+urls = urls.filter((item, index) => urls.indexOf(item) === index);
+
+// remove if there is duplicate words
+words = words.filter((item, index) => words.indexOf(item) === index);
 
 // declaring a map for counting the word frequencies from all urls
 let overallWordFreq = new Map();
+
+//initializing map with words
+words.forEach(word => {
+    overallWordFreq.set(word, 0);
+})
 
 // creating a function to fetch data from urls and count word frequencies
 const fetchDataAndCountWordFreq = async () => {
@@ -41,8 +69,28 @@ const fetchDataAndCountWordFreq = async () => {
     console.log("Output #1 - the top 3 words on the given list of urls");
     console.log("\n===========");
     for (let i = 0; i < urls.length; i++) {
+
+        let response;
+
         // getting data using axios
-        const response = await axios.get(urls[i]);
+        try {       
+            response = await axios.get(urls[i]);
+        } catch (error) {
+            // if there is no internet
+            if(error.code === 'ENOTFOUND')
+            {
+                console.log("No internet Connection!");
+                exit();
+            }
+            //if url does not exist 
+            else if(error.response.status == 404){
+                console.log("\n-- Url does not exist : " + urls[i] + "\n");
+                continue;
+            } 
+            else{
+                console.log(error);
+            } 
+        }
 
         // using cheerio to parse the html data
         const $ = cheerio.load(response.data);
@@ -73,6 +121,11 @@ const fetchDataAndCountWordFreq = async () => {
         // printing th top 3 value
         for(const [key, value] of wordFrequecyForUrl) {
             console.log("\n" + await key + " - " + await value);
+        }
+
+        //if no words where matched
+        if(!wordFrequecyForUrl.size){
+            console.log("No words where found from given words !");
         }
     };
 
