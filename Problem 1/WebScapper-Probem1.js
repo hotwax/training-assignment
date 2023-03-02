@@ -27,7 +27,7 @@ const fetchURL = async (urls) => {
         // setting the word frequencies for all the urls
         wordFreq.set(
           word,
-          (wordFreq.get(word) || 0) + url.split(word).length - 1
+          (wordFreq.get(word) || 0) + urlData.split(word).length - 1
         );
       });
       // printing the url
