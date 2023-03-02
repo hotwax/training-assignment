@@ -1,16 +1,27 @@
 1) List all the columns of the Salespeople table.
 
-mysql> SELECT * FROM Salespeople;
-    +------+---------+-----------+------+
-    | SNUM | SNAME   | CITY      | COMM |
-    +------+---------+-----------+------+
-    | 1001 | Peel    | London    |   1 |
-    | 1002 | Serres  | SanJose   |   13 |
-    | 1003 | AxelRod | New York  |   10 |
-    | 1004 | Motika  | London    |   11 |
-    | 1007 | Rifkin  | Barcelona |   15 |
-    | 1008 | Fran    | London    |   25 |
-    +------+---------+-----------+------+
+ SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'salespeople';
++-------------+
+| COLUMN_NAME |
++-------------+
+| SNUM        |
+| SNAME       |
+| CITY        |
+| COMM        |
++-------------+
+
+OR 
+
+DESC salespeople;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| SNUM  | int         | NO   | PRI | NULL    |       |
+| SNAME | varchar(40) | YES  |     | NULL    |       |
+| CITY  | varchar(40) | YES  |     | NULL    |       |
+| COMM  | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
 
 2) List all customers with a rating of 100.
 
