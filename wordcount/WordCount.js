@@ -2,41 +2,50 @@ const fileHandler = require("fs") // to read data from files
 const axios = require("axios"); // to fetch data from a site
 const cheerio = require("cheerio"); // to convert html of the site to text
 
-let wordsCountForOneUrl = new Map(); //map to count words frequencies on one site
-let wordsCountForAllUrls = new Map(); //map to count words frequencies across all urls
-
-function sortMapAndReturnTopThreeWords () {
+function sortMapAndReturnTopThreeWords(wordsCountForOneUrl) {
   //sorting in descending order of words frequencies and then taking top 3 frequencies words
   wordsCountForOneUrl = new Map([...wordsCountForOneUrl.entries()].sort(
     function (a, b) {
       return b[1] - a[1];
     }
   ).slice(0, 3))
+
+  return [wordsCountForOneUrl]
 }
 
-function updatefrequencyForAUrl (wordFromFile) {
+function updatefrequencyForAUrl(wordFromFile) {
 
-  return function innerFunction(wordsFromUrl) {
+  return function innerFunction1(wordsFromUrl) {
 
-    let wordCount = wordsFromUrl.filter(word => 
+    let wordCount = wordsFromUrl.filter(word =>
       word.toLowerCase() === wordFromFile.toLowerCase()
     ).length //total count of the word in the site
 
-    wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, wordCount]]);
+    return function innerFunction2(wordsCountForOneUrl) {
+      wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, wordCount]]);
 
-    //updating count of the word in the map which stores word total count
-    if (wordsCountForAllUrls.has(wordFromFile)) {
-      const oldCount = wordsCountForAllUrls.get(wordFromFile);
-      wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, oldCount + wordCount]]);
+      return function innerFunction3(wordsCountForAllUrls) {
+        //updating count of the word in the map which stores word total count
+        if (wordsCountForAllUrls.has(wordFromFile)) {
+          const oldCount = wordsCountForAllUrls.get(wordFromFile);
+          wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, oldCount + wordCount]]);
+        }
+        else {
+          wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, wordCount]]);
+        }
+
+        return [wordsCountForOneUrl, wordsCountForAllUrls]
+      }
     }
-    else {
-      wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, wordCount]]);
-    }
+
   }
 
 }
 
-async function wordCount  (urlsArray, wordsArray) {
+async function wordCount(urlsArray, wordsArray) {
+  let wordsCountForOneUrl = new Map(); //map to count words frequencies on one site
+  let wordsCountForAllUrls = new Map(); //map to count words frequencies across all urls
+
   for (let index = 0; index < urlsArray.length; index++) {
     let url = urlsArray[index];
     let wordsFromUrl = "";
@@ -50,24 +59,24 @@ async function wordCount  (urlsArray, wordsArray) {
 
 
     }).catch(function (err) {
-      console.log("Invalid url- ", url+"\n");
-      invalidUrl=true;
+      console.log("Invalid url- ", url + "\n");
+      invalidUrl = true;
     });
 
-    if(invalidUrl) continue;
+    if (invalidUrl) continue;
 
     wordsCountForOneUrl = new Map();
 
     for (let index = 0; index < wordsArray.length; index++) {
       let wordFromFile = wordsArray[index];
-      updatefrequencyForAUrl(wordFromFile)(wordsFromUrl);
+      [wordsCountForOneUrl, wordsCountForAllUrls] = updatefrequencyForAUrl(wordFromFile)(wordsFromUrl)(wordsCountForOneUrl)(wordsCountForAllUrls);
     }
 
-    sortMapAndReturnTopThreeWords()
+    [wordsCountForOneUrl] = sortMapAndReturnTopThreeWords(wordsCountForOneUrl)
 
     console.log("Top 3 frequency words for url- " + url + "\n");
     wordsCountForOneUrl.forEach((value, key) => {
-      console.log(key,value);
+      console.log(key, value);
     })
     console.log("-----------------------\n")
   }
@@ -78,7 +87,7 @@ async function wordCount  (urlsArray, wordsArray) {
   })
 }
 
-function checkValidationForWordsAndUrls () {
+function checkValidationForWordsAndUrls() {
   let wordsArray = [];
   let urlsArray = [];
   try {
