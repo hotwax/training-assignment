@@ -1,0 +1,257 @@
+1) Test Case: User chooses option 1 and enters valid employee information.
+Input:
+1
+userName
+user.Name@gmail.com
+30
+1992-05-15
+
+Expected Output:
+userName added to employees.txt
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+Actual Output:
+userName added to employees.txt
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+
+2) Test Case: User chooses option 1 and enters invalid employee name.
+Input:
+1
+(nothing over here)
+user.Name@example.com
+30
+1992-05-15
+
+Expected Output:
+Invalid input. Please enter a name.
+Enter the employee name:
+
+Actual Output:
+Invalid input. Please enter a name.
+Enter the employee name:
+
+3) Test Case: User chooses option 1 and enters invalid email address.
+Input:
+1
+userName
+invalid-email-address
+30
+1992-05-15
+
+Expected Output:
+Invalid input. Please enter a valid email address.
+Enter the email address:
+
+Actual Output:
+Invalid input. Please enter a valid email address.
+Enter the email address:
+
+4) Test Case: User chooses option 1 and enters invalid age.
+Input:
+1
+userName
+user.Name@example.com
+invalid-age
+1992-05-15
+
+Expected Output:
+Invalid input. Please enter a valid age.
+Enter the employee age:
+
+Actual Output:
+Invalid input. Please enter a valid age.
+Enter the employee age:
+
+5) Test Case: User chooses option 1 and enters invalid date of birth.
+Input:
+1
+userName
+user.Name@example.com
+30
+invalid-date-of-birth
+
+Expected Output:
+Invalid input. Please enter a valid date of birth (YYYY-MM-DD).
+Enter the date of birth (YYYY-MM-DD):
+
+Actual Output:
+Invalid input. Please enter a valid date of birth (YYYY-MM-DD).
+Enter the date of birth (YYYY-MM-DD):
+
+6) Test Case: User chooses an invalid option.
+Input:
+6
+
+Expected Output:
+Invalid choice.
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+Actual Output:
+Invalid choice.
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+
+7) Test Case: User chooses option 2 to delete an employee that exists in the employees.txt file.
+Input:
+2
+userName
+
+Expected Output:
+userName deleted from employees.txt
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+Actual Output:
+userName deleted from employees.txt
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+8) Test Case: User chooses option 2 to delete an employee that does not exist in the employees.txt file.
+Input:
+2
+Non-Existing Employee
+
+Expected Output:
+Employee not found
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+Actual Output:
+Employee not found
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+9) Test Case: User chooses option 3 to search for an employee that exists in the employees.txt file.
+Input:
+3
+Enter the text to search: Sadhana
+Order by (name, email, age, dob): age
+Sort direction (asc, desc): desc
+
+Expected Output:
+data in text form then menu
+
+Actual Output:
+┌─────────┬───────────┬───────────────────────┬─────┬─────────────┐
+│ (index) │   name    │         email         │ age │     dob     │
+├─────────┼───────────┼───────────────────────┼─────┼─────────────┤
+│    0    │ 'Sadhana' │  'Sadhana@gmail.com'  │ 21  │ '6/20/2002' │
+│    1    │ 'Sadhana' │ 'Sadhana21@gmail.com' │ 17  │ '3/23/2002' │
+└─────────┴───────────┴───────────────────────┴─────┴─────────────┘
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+10) Test Case: User chooses option 3 to search for an employee that does not exist in the employees.txt file.
+Input:
+3
+Enter the text to search: user2
+Order by (name, email, age, dob): dob
+Sort direction (asc, desc): asc
+
+Expected Output:
+blank 
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+Actual Output:
+┌─────────┐
+│ (index) │
+├─────────┤
+└─────────┘
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+11) Test Case: User chooses option 4 to display all employees in the employees.txt file.
+Input:
+4
+
+Expected Output:
+data in text form then menu
+
+Actual Output:
+┌─────────┬───────────┬───────────────────────┬─────┬─────────────┐
+│ (index) │   name    │         email         │ age │     dob     │
+├─────────┼───────────┼───────────────────────┼─────┼─────────────┤
+│    0    │ 'Sadhana' │  'Sadhana@gmail.com'  │ 21  │ '6/20/2002' │
+│    1    │ 'Dhruv '  │   'Dhruv@gmail.com'   │ 20  │ '2/23/2001' │
+│    2    │ 'Ritisha' │  'Ritisha@gmail.com'  │ 22  │ '9/29/2000' │
+│    3    │ 'Sourabh' │  'Sourabh@gmail.com'  │ 26  │ '1/1/1996'  │
+│    4    │ 'Sadhana' │ 'Sadhana21@gmail.com' │ 17  │ '3/23/2002' │
+│    5    │  'renu'   │   'renu@gmail.com'    │ 21  │ '4/21/2002' │
+│    6    │ 'sadhana' │  'sadhana@gmail.com'  │ 21  │ '2/23/2002' │
+│    7    │  'user1'  │ 'user.name@gmail.com' │ 13  │ '2/12/2002' │
+└─────────┴───────────┴───────────────────────┴─────┴─────────────┘
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+
+12) Test Case: User chooses option 5 to exit the program.
+Input:
+5
+Expected Output:
+Thank you(and terminates)
+
+
+

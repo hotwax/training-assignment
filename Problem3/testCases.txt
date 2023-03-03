@@ -1,0 +1,62 @@
+1) Test case : When we run AccountOverdrawDemo.js file 
+Expected Output -
+Running AccountOverdrawDemo...
+
+Ishaan is withdrawing 355
+New balance: 645
+Akar is withdrawing 574
+New balance: 71
+Ishaan you do not have 210
+Final balance: 71
+
+Actual Output-
+Running AccountOverdrawDemo...
+
+Ishaan is withdrawing 355
+Akar is withdrawing 574
+New balance: 645
+Ishaan is withdrawing 194
+New balance: 71
+Akar you do not have 322
+New balance: -123
+Ishaan you do not have 210
+Final balance: -123
+
+Here since thread are working concurrently the ones Output will disrupts others.
+And there are possibilities that before new balance was displayed new withdraw has been made.
+To overcome this we have AccountOverdrawSafeDemo
+
+2) Test case : When we run AccountOverdrawSafeDemo.js file 
+Expected Output -
+Running AccountOverdrawSafeDemo...
+
+Ishaan is withdrawing 171
+New balance: 829
+Akar is withdrawing 225
+New balance: 604
+Ishaan is withdrawing 396
+New balance: 208
+Akar you do not have 392
+Ishaan is withdrawing 197
+New balance: 11
+Ishaan you do not have 193
+Final balance: 11
+
+Actual Output-
+Running AccountOverdrawSafeDemo...
+
+Ishaan is withdrawing 171
+New balance: 829
+Akar is withdrawing 225
+New balance: 604
+Ishaan is withdrawing 396
+New balance: 208
+Akar you do not have 392
+Ishaan is withdrawing 197
+New balance: 11
+Ishaan you do not have 193
+Final balance: 11
+
+Here we have fixed intervals for each thread of task
+Only when one is done then only other will able to withdraw.
+And here sequence of printing will be maintained.

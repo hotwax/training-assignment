@@ -1,0 +1,94 @@
+1) Test serialization:
+
+Input:
+User chooses option 1 (serialize file)
+User enters a file name "test.ser"
+
+Expected Output:
+"Serialization done successfully .."
+The program displays the menu again
+
+Actual Output:
+"Serialization done successfully .."
+The program displays the menu again
+
+2) Test serialization:
+
+Input:
+User chooses option 1 (serialize file)
+User enters a file name "new.ser"(which does not exist)
+
+Expected Output::
+"Serialization done successfully .."
+The program displays the menu again
+
+Actual Output:
+"Serialization done successfully .."
+The program displays the menu again
+
+
+3) Test deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "test.ser" which contains valid serialized data
+
+Expected & Actual Output:
+"Deserialization done successfully .."
+The program displays the deserialized Student objects on the console
+The program displays the menu again
+
+4) Test deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "new.ser" which does not contains any data
+
+Expected & Actual Output::
+The program displays an error message "SyntaxError: Unexpected token < in JSON at position 0"(catch block code)
+The program displays the menu again
+
+5) Test deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "new.ser" which contains serialized data according to old class now class is updated
+
+Expected & Actual Output:
+it will deserialize the older version of class according to newer version
+The program displays the menu again
+
+6) Test invalid file name:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "invalid.ser" which does not exist
+
+Expected & Actual Output:
+The program displays an message "File not found"
+The program displays the menu again
+
+7) Test invalid JSON format:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "invalid.json" which contains invalid JSON data
+
+Expected & Actual Output:
+The program displays an error message "SyntaxError: Unexpected token < in JSON at position 0"
+terminates the program
+
+8) Test invalid menu choice:
+Input:
+User enters an invalid menu choice "4"
+
+Expected & Actual Output:
+The program displays an error message "Invalid choice"
+The program displays the menu again
+
+9) Test exit:
+Input:
+User chooses option 3 (exit)
+
+Expected & Actual Output:
+The program closes the read interface and terminates.

@@ -1,0 +1,137 @@
+1) Test case : File containing url is not present 
+
+Expected output 
+Somthing wrong happened with url(terminates)
+
+Actual output
+Somthing wrong happened with url(terminates)
+
+2) Test case : File containing words is not present (missed test case)
+
+Expected output 
+Somthing wrong happened with words file(terminates)
+
+Actual output
+Somthing wrong happened with words file
+Somthing wrong happened with words file
+Somthing wrong happened with words 
+
+4) Test case : If url file and word file have data accurate  
+
+Expected output 
+values with frequency for 3 urls and then final output
+
+Actual output
+URL : 1
+javascript => 14
+date => 4
+array => 4
+
+Total result map :
+javascript => 14
+date => 4
+array => 4
+tutorial => 3
+teach => 1
+introduction => 0
+solution => 0
+hello => 0
+=====================
+URL : 2
+explore => 2
+array => 1
+javascript => 0
+
+Total result map :
+javascript => 14
+array => 5
+date => 4
+tutorial => 3
+explore => 2
+teach => 1
+introduction => 0
+solution => 0
+=====================
+URL : 3
+date => 23
+array => 4
+javascript => 1
+
+Total result map :
+date => 27
+javascript => 15
+array => 9
+tutorial => 3
+explore => 2
+teach => 1
+solution => 1
+introduction => 0
+=====================
+
+5) Test cases : if url does not have any url 
+
+Expected output
+error
+
+Actual output
+Error processing URL : connect ECONNREFUSED ::1:80(catch block code)
+
+6) Test cases : if words does not have anything 
+
+Expected output
+error
+
+Actual output
+URL : 1
+ => 0
+
+Total result map :
+ => 0
+=====================
+URL : 2
+ => 0
+
+Total result map :
+ => 0
+=====================
+URL : 3
+ => 0
+
+Total result map :
+ => 0
+=====================
+
+7) Test case : if we have wrong url at second line of url.txt
+
+Expected output & Actual output
+URL : 1
+javascript => 14
+date => 4
+array => 4
+
+Total result map :
+javascript => 14
+date => 4
+array => 4
+tutorial => 3
+teach => 1
+introduction => 0
+solution => 0
+hello => 0
+=====================
+Error processing URL https://www.geeksforgeeks.org/asdff: Request failed with status code 404(catch block code)
+URL : 3
+date => 23
+array => 4
+javascript => 1
+
+Total result map :
+date => 27
+javascript => 15
+array => 8
+tutorial => 3
+teach => 1
+solution => 1
+introduction => 0
+hello => 0
+=====================
