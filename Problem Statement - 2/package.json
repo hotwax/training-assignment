@@ -8,8 +8,8 @@
   },
   "author": "sanskar soni",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
+    "moment": "^2.29.4",
     "prompt-sync": "^4.2.0"
   }
 }

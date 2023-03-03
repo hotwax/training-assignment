@@ -1,109 +1,84 @@
-import promptSync from 'prompt-sync';
-import fs from 'fs';
-// for current path
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { ReadLine } from 'readline'; 
+/*
+In this program instead of making a class for employee i 
+have created json object for employee
+*/
 
-// The __dirname and __filename global variables are defined in CommonJS 
-// modules, but not in ES modules.
-// We can fix the “__dirname is not defined in ES module scope” error by
-// using certain functions to create a custom __dirname variable that
-// works just like the global variable, containing the full path of
-// the file’s current working directly.
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const prompt = promptSync();
-const readline = ReadLine.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+const prompt = require('prompt-sync')();
+const fs = require('fs');
+const moment = require('moment');
 
+//filename
+const FILENAME = "employees.txt";
 
-// global variables --
-let employeeArray = [];  // Employee list
-let idCounter = 1; // for keeping track of employee id
-
-    
+// for storing all employees
+let employeeList = [];
 
 // creating a function for menu
-const showMenu = () => {
+const showMenu = async () => {
 
     console.log("Enter 1 For Add Employee to the file.");
     console.log("Enter 2 For Delete Employee From the file");
     console.log("Enter 3 For Searching from From the file");
+    console.log("Enter 4 For show all employee from From the file");
     console.log("Enter any other number to Exit");
 
-    const menuInput = prompt('');
+    let answer = prompt('');
 
-    switch (menuInput) {
+    switch (answer) {
         case '1':
             addEmployee();
-        break;
+            break;
         case '2':
-        console.log("1");
-        break;
+            deleteEmployee();
+            break;
         case '3':
-        console.log("3");
-        break;
+            searchEmployee();
+            break;
+        case '4':
+            showAll();
+            break;
         default:
             break;
     }
-     
 }
 
-const readFromEmployee = () => {
-    const dataFromFile = fs.readFileSync(path.join(__dirname, 'employees.txt'), 'utf-8').split('\r\n');
-    dataFromFile.forEach((data) => {
-        const employeeObject = createObject(data);
-        employeeArray.push(employeeObject);
-        idCounter = Math.max(idCounter, employeeObject.id);
-    })
-}
+// for employee addition
+const addEmployee = () => {
 
-// function to create object by giving a informatic string
-function createObject(str){
-    const tempArray = str.split("\\s*,\\s*");
-    return {
-        id: tempArray[0].trim(),
-        name: tempArray[1].trim(),
-        email: tempArray[2].trim(),
-        age: tempArray[3].trim(),
-        date: Date(tempArray[4].trim())
-    }
-}
+    //for employee name
+    let name = prompt("Enter the Name : ");
 
-async function addEmployee() {
-    // Taking all the inputs
-    console.log("Enter the Name : ");
-    let name = await getInput();
-
-    // For checking if the data entered by the user is valid or not
     let nameRegex = /^[a-zA-Z ]+$/;
     while (!name.match(nameRegex)) {
-      console.log("\nEnter a valid name!! \n");
-      name = await getInput();
+      console.log("\nEnter a valid name!");
+      name = prompt("Enter the Name : ");
     }
 
-    console.log("Enter the Email : ");
-    let email = await getInput();
+    //for email
+    let email = prompt("Enter the Email : ")
 
     // For checking if the data entered by the user is valid or not
-    let emailRegex = /^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$/;
+    let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     while (!email.match(emailRegex)) {
-      console.log("\nEnter a valid Email!! \n");
-      email = await getInput();
+      console.log("\nEnter a valid Email!");
+      email = prompt("Enter the Email : ")
     }
 
-    console.log("Enter the Age : ");
-    let age = await getIntegerInput();
+    //for age
+    let age = prompt("Enter the Age : ");
 
-    console.log("Enter the Date Of Birth : ");
-    let dobInString = await getInput();
-    let dob = new Date(dobInString);
+    while(age <= 5 || age > 100){
+        console.log("\nEnter a valid Age!");
+        age = prompt("Enter the Age : ");
+    }
+    
+    let dobInString = prompt("Enter the DOB in dd/mm/yyy : ");
+
+    let dob = Date(dobInString);
+
+    //employee json object
     let emp = {
-      id: idCounter,
       name: name,
       email: email,
       age: age,
@@ -111,35 +86,128 @@ async function addEmployee() {
     };
 
     // Adding employee to the list
-    employeeArray.push(emp);
-
-    // increasing id
-    idCounter++;
+    employeeList.push(emp);
 
     // ReWriting in a file --
-    // rewriteTheFile();
+    rewriteTheFile();
 
+    //print statement
+    console.log("\nEmployee Added SuccessFully\n");
+
+    // Recalling the menu function
+    showMenu();
 }
 
-function getInput() {
-    return new Promise(resolve => {
-        readline.question('', (answer) => {
-        resolve(answer);
+// function to write in a file
+
+const rewriteTheFile = () => {
+    // Writing in a file --
+    try {
+        const lines = employeeList.map((employee) => {
+            return `${employee.name},${employee.email},${employee.age},${new Date(employee.dob).toLocaleString().split(',')[0]}`;
         });
-    });
+        const data = lines.join("\n"); // adding newLine character to data and inserting in file
+        fs.writeFileSync(FILENAME, data, { flag: "w" });
+    } catch (error) {
+        console.error("Error writing file:", error);
+    }
 }
 
-function getIntegerInput() {
-    return new Promise(resolve => {
-        readline.question('', async (answer) => {
-        let intVal = parseInt(answer);
-        if (isNaN(intVal)) {
-            console.log("Enter a Valid Integer!!");
-            intVal = await getIntegerInput(readline);
+// Read all employees from file
+const readEmployeesFromFile = () => {
+    let employees = [];
+    try {
+        const data = fs.readFileSync(FILENAME, "utf8");
+
+        // spliting data with newLine character and removing space
+        const lines = data.trim().split("\n");
+
+        //traversing through lines and making an object
+        lines.forEach(line => {
+            const [name, email, age, dob] = line.trim().split(",");
+            employees.push({
+                name: name,
+                email: email,
+                age: age,
+                dob: Date(dob)
+            });
+        })
+    } catch (error) {
+        console.error("Error reading file:", error);
+    }
+
+    // return the created object list
+    return employees;
+}
+
+
+//Function to delete employee
+const deleteEmployee = () => {
+    // Taking input from the user
+    const empEmail = prompt('Enter the Employee Email to remove the employee : ');
+
+    //removing the employee one with the given email
+    employeeList = employeeList.filter(employee => {
+        return employee.email != empEmail;
+    })
+
+    // calling rewrite file
+    rewriteTheFile();
+
+    //acknowledgement
+    console.log("\nEmployee deleted Successfully\n");
+
+    //For menu
+    showMenu();
+}
+
+// for search operation
+const searchEmployee = () => {
+    //Taking input from the user (searches from all properties of emp)
+    const query = prompt("Enter the query(text) to search for employee : ");
+
+    //search result variable
+    const searchResult = [];
+
+    //searching
+    employeeList.forEach(emp => {
+        const searchString = emp.name + emp.email + emp.age + emp.dob;
+        if(searchString.toLowerCase().includes(query.toLowerCase())){
+            searchResult.push(emp);
         }
-        resolve(intVal);
-        });
-});
+    })
+
+    //printing the results
+    console.log("\n Your Search Result : ");
+    searchResult.forEach(emp => {
+        emp.dob = new Date(emp.dob).toLocaleString().split(',')[0];
+        console.log(emp);
+    })
+
+    //if no result found
+    if(!searchResult.length){
+        console.log("\nNo result found\n");
+    }
+
+    // for menu
+    showMenu();
 }
 
+// show all function
+const showAll = () => {
+    //printing the all employees
+    console.log("\n Your  Result : \n");
+    employeeList.forEach(employee => {
+        console.log(`${employee.name},${employee.email},${employee.age},${new Date(employee.dob).toLocaleString().split(',')[0]}\n`);
+    })
+
+    // for menu
+    showMenu();
+}
+
+// Starting the login from here
+employeeList = readEmployeesFromFile();
+
+// Showing menu for User
 showMenu();
+

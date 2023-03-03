@@ -1,41 +1,26 @@
-1, Rohan Sharma, rohan.sharma@example.com, 35, 01/01/1985
-2, Neha Gupta, neha.gupta@example.com, 28, 15/06/1993
-3, Amit Patel, amit.patel@example.com, 42, 23/12/1978
-4, Deepa Shah, deepa.shah@example.com, 31, 04/09/1990
-5, Vikas Gupta, vikas.gupta@example.com, 24, 12/02/1997
-6, Pooja Patel, pooja.patel@example.com, 29, 08/05/1992
-7, Kunal Sharma, kunal.sharma@example.com, 40, 31/12/1981
-8, Anjali Patel, anjali.patel@example.com, 27, 13/07/1994
-9, Dinesh Shah, dinesh.shah@example.com, 32, 21/11/1988
-10, Sonia Sharma, sonia.sharma@example.com, 22, 19/03/1999
-11, Vikram Sharma, vikram.sharma@example.com, 29, 01/07/1992
-12, Pallavi Singh, pallavi.singh@example.com, 25, 12/12/1996
-13, Rakesh Patel, rakesh.patel@example.com, 38, 05/09/1983
-14, Archana Sharma, archana.sharma@example.com, 32, 22/03/1990
-15, Jitendra Gupta, jitendra.gupta@example.com, 35, 15/05/1986
-16, Meera Patel, meera.patel@example.com, 28, 20/08/1993
-17, Gaurav Sharma, gaurav.sharma@example.com, 30, 02/02/1991
-18, Shweta Gupta, shweta.gupta@example.com, 26, 12/07/1995
-19, Shailesh Patel, shailesh.patel@example.com, 40, 30/09/1981
-20, Ankit Sharma, ankit.sharma@example.com, 32, 14/12/1988
-21, Priyanka Shah, priyanka.shah@example.com, 28, 18/06/1993
-23, Sandhya Sharma, sandhya.sharma@example.com, 30, 20/02/1991
-24, Ruchi Gupta, ruchi.gupta@example.com, 26, 10/05/1995
-25, Anurag Patel, anurag.patel@example.com, 40, 05/08/1981
-26, Manish Sharma, manish.sharma@example.com, 35, 15/11/1986
-27, Rashmi Patel, rashmi.patel@example.com, 30, 22/03/1991
-28, Ashish Gupta, ashish.gupta@example.com, 28, 20/06/1993
-29, Rajesh Patel, rajesh.patel@example.com, 35, 25/09/1986
-30, Rupa Shah, rupa.shah@example.com, 30, 20/02/1991
-31, Ravi Sharma, ravi.sharma@example.com, 26, 10/05/1995
-32, Jyoti Patel, jyoti.patel@example.com, 40, 05/08/1981
-34, Sanjay Patel, sanjay.patel@example.com, 30, 22/03/1991
-35, Shruti Gupta, shruti.gupta@example.com, 28, 20/06/1993
-36, Sumit Patel, sumit.patel@example.com, 35, 25/09/1986
-37, Swati Shah, swati.shah@example.com, 30, 20/02/1991
-38, Shubham Sharma, shubham.sharma@example.com, 26, 10/05/1995
-39, Anmol Patel, anmol.patel@example.com, 40, 05/08/1981
-40, Rupal Sharma, rupal.sharma@example.com, 35, 15/11/1986
-41, Sanskar Soni, s@123, 22, 19/03/2001
-42, Sumit, sum@123, 23, 12/04/2002
-43, dasd, soni@gmail.com, 44, 19/03/2001
+Rohan Sharma,rohan.sharma@example.com,35,01/01/1985
+Neha Gupta,neha.gupta@example.com,28,15/06/1993
+Amit Patel,amit.patel@example.com,42,23/12/1978
+Deepa Shah,deepa.shah@example.com,31,04/09/1990
+Vikas Gupta,vikas.gupta@example.com,24,12/02/1997
+Pooja Patel,pooja.patel@example.com,29,08/05/1992
+Kunal Sharma,kunal.sharma@example.com,40,31/12/1981
+Anjali Patel,anjali.patel@example.com,27,13/07/1994
+Dinesh Shah,dinesh.shah@example.com,32,21/11/1988
+Sonia Sharma,sonia.sharma@example.com,22,19/03/1999
+Vikram Sharma,vikram.sharma@example.com,29,01/07/1992
+Pallavi Singh,pallavi.singh@example.com,25,12/12/1996
+Rakesh Patel,rakesh.patel@example.com,38,05/09/1983
+Archana Sharma,archana.sharma@example.com,32,22/03/1990
+Jitendra Gupta,jitendra.gupta@example.com,35,15/05/1986
+Meera Patel,meera.patel@example.com,28,20/08/1993
+Gaurav Sharma,gaurav.sharma@example.com,30,02/02/1991
+Shweta Gupta,shweta.gupta@example.com,26,12/07/1995
+Shailesh Patel,shailesh.patel@example.com,40,30/09/1981
+Ankit Sharma,ankit.sharma@example.com,32,14/12/1988
+Priyanka Shah,priyanka.shah@example.com,28,18/06/1993
+Sandhya Sharma,sandhya.sharma@example.com,30,20/02/1991
+Ruchi Gupta,ruchi.gupta@example.com,26,10/05/1995
+Anurag Patel,anurag.patel@example.com,40,05/08/1981
+Manish Sharma,manish.sharma@example.com,35,15/11/1986
+Rashmi Patel,rashmi.patel@example.com,30,22/03/1991
