@@ -1,4 +1,4 @@
-const fs = require("fs");
+const files = require("fs");
 const readline = require("readline");
 
 //class Employee with constructor for its initialization
@@ -25,10 +25,10 @@ const read = readline.createInterface({
 
 
 // Read all employees from file
-function readEmployeesFromFile() {
+function readEmployee() {
     let employees = [];
     try {
-        const data = fs.readFileSync(FILENAME, "utf8");
+        const data = files.readFileSync(FILENAME, "utf8");
         // spliting data with newLine character and removing space
         const lines = data.trim().split("\n");
         for (let line of lines) {
@@ -36,68 +36,117 @@ function readEmployeesFromFile() {
             const employee = new Employee(name, email, parseInt(age), new Date(dob).toLocaleDateString().split(' ')[0]);
             employees.push(employee);
         }
-    } catch (err) {
-        console.error("Error reading file:", err);
+    } catch (error) {
+        console.error("Error reading file:", error);
     }
     return employees;
 }
 //function to display all over data we have in the file
 function ShowAll() {
     return new Promise(() => {
-        console.log(readEmployeesFromFile());
-        askOption();
+        console.table(readEmployee());
+        enterChoice();
     }
     );
 }
 
 // Write employees to file
-function writeEmployeesToFile(employees) {
+function writeEmployee(employees) {
     try {
         const lines = employees.map((employee) => {
             return `${employee.name},${employee.email},${employee.age},${employee.dob}`;
         });
         const data = lines.join("\n"); // adding newLine character to data and inserting in file
-        fs.writeFileSync(FILENAME, data, { flag: "w" });
-    } catch (err) {
-        console.error("Error writing file:", err);
+        files.writeFileSync(FILENAME, data, { flag: "w" });
+    } catch (error) {
+        console.error("Error writing file:", error);
     }
 }
 
-function addEmployeefile() {
-    read.question('\nEnter the employee name: ', (name) => {
+function takeName() {
+    return new Promise((resolve) => {
+        read.question('\nEnter the employee name: ', (name) => {
+            if (!name) {
+                console.log('Invalid input. Please enter a name.');
+                resolve(takeName());
+            }
+            resolve(name);
+        });
+    });
+}
+
+function takeEmail() {
+    return new Promise((resolve) => {
         read.question('Enter the email address: ', (email) => {
-            read.question('Enter the employee age: ', (age) => {
-                read.question('Enter the date of birth (YYYY-MM-DD): ', (dob) => {
+            if (!email || !/\S+@\S+\.\S+/.test(email)) {
+                console.log('Invalid input. Please enter a valid email address.');
+                resolve(takeEmail());
+            }
+            resolve(email);
+        });
+    });
+}
+
+function takeAge() {
+    return new Promise((resolve) => {
+        read.question('Enter the employee age: ', (age) => {
+            if (!age || isNaN(age)) {
+                console.log('Invalid input. Please enter a valid age.');
+                resolve(takeAge());
+            }
+            resolve(age);
+        });
+    });
+}
+
+function takeDOB() {
+    return new Promise((resolve) => {
+        read.question('Enter the date of birth (YYYY-MM-DD): ', (dob) => {
+            if (!dob || !/^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$/.test(dob)) {
+                console.log('Invalid input. Please enter a valid date of birth (YYYY-MM-DD).');
+                resolve(takeDOB());
+            }
+            resolve(dob);
+        });
+    });
+}
+
+function addEmployee() {
+    takeName().then((name) => {
+        takeEmail().then((email) => {
+            takeAge().then((age) => {
+                takeDOB().then((dob) => {
                     const employee = new Employee(name, email, age, dob);
                     //storing all data to a variable and appending it to the file
                     const employeeData = `${employee.name},${employee.email},${employee.age},${employee.dob}\n`;
-                    fs.appendFile('employees.txt', employeeData, (err) => {
-                        if (err) throw err;
+                    files.appendFile('employees.txt', employeeData, (error) => {
+                        if (error) console.log("somthing went wrong");
                         //message for succesfull insertion
                         console.log(`\n${employee.name} added to employees.txt`);
-                        askOption();
+                        enterChoice();
                     });
                 });
             });
         });
     });
 }
+
 // Delete employee
-function deleteEmployeefile() {
+function deleteEmployee() {
     read.question("Enter employee ID: ", (id) => {
-        const employees = readEmployeesFromFile();
+        const employees = readEmployee();
         // filtering the email which is not equal to requried email
         const filteredEmployees = employees.filter((employee) => {
             return employee.email !== id;
         });
         //if both are not equal it means email not found
         if (filteredEmployees.length < employees.length) {
-            writeEmployeesToFile(filteredEmployees);
+            writeEmployee(filteredEmployees);
             console.log("Employee deleted successfully");
         } else {
             console.log("Employee not found");
         }
-        askOption();
+        enterChoice();
     });
 }
 
@@ -106,28 +155,28 @@ function searchEmployee() {
     read.question('\nEnter the text to search: ', (query) => {
         read.question('Order by (name, email, age, dob): ', (sortBy) => {
             read.question('Sort direction (asc, desc): ', (sortDirection) => {
-                const employees = readEmployeesFromFile();
-                //filtering those employees which have the query 
-                const results = employees.filter((employees) => {
-                    return Object.keys(employees).some((val) => employees[val] === query);
+                const employees = readEmployee();
+                const results = employees.filter((employee) => {
+                    return Object.keys(employee).some((key) => employee[key] == query);
                 }).sort((first, second) => {
                     let sortOrder = sortDirection === 'asc' ? 1 : -1;
-                    if (first[sortBy] < second[sortBy]) {  //sorting them accordingly 
+                    if (first[sortBy] < second[sortBy]) {
                         return -1 * sortOrder;
-                    } else if (first[sortBy] > first[sortBy]) {
+                    } else if (first[sortBy] > second[sortBy]) {
                         return 1 * sortOrder;
                     } else {
                         return 0;
                     }
                 });
-                console.log(results); //result printing
-                askOption();
+                console.table(results);
+                enterChoice();
             });
         });
     });
 }
 
-async function askOption() {
+
+async function enterChoice() {
     console.log('\nPlease choose an option:');
     console.log('1. Add employee');
     console.log('2. Delete employee');
@@ -137,10 +186,10 @@ async function askOption() {
     read.question('\nEnter your choice: ', (option) => {
         switch (option) {
             case '1':
-                addEmployeefile();
+                addEmployee();
                 break;
             case '2':
-                deleteEmployeefile();
+                deleteEmployee();
                 break;
             case '3':
                 searchEmployee();
@@ -150,13 +199,14 @@ async function askOption() {
                 break;
             case '5':
                 read.close();
+                console.log("Thank you");
                 process.exit(1);
                 break;
             default:
-                console.log('\nInvalid option. Please try again.');
+                console.log('\nInvalid choice.');
+                enterChoice();
                 break;
         }
     });
 }
-
-askOption();
+enterChoice();

@@ -1,10 +1,8 @@
-Sadhana,sadhana@,19,Invalid
-Ritisha,Ritisha@,21,Invalid
-Shubham,Shubham@,38,Invalid
-Sourabh,Sourabh,26,1/1/1996
-sadhana,sadhana@2123,19,Invalid
-sadhana,sadhana@34,24,Invalid
-divyanshu,divyanshu@123,14,Invalid
-abc,asd,23,Invalid
-Dhurv,Dhruv@123,12,Invalid
-Dhruv,Dhruv@2123,23,Invalid
+Sadhana,Sadhana@gmail.com,21,6/20/2002
+Dhruv ,Dhruv@gmail.com,20,2/23/2001
+Ritisha,Ritisha@gmail.com,22,9/29/2000
+Sourabh,Sourabh@gmail.com,26,1/1/1996
+Sadhana,Sadhana21@gmail.com,17,3/23/2002
+renu,renu@gmail.com,21,4/21/2002
+sadhana,sadhana@gmail.com,21,2002-02-23
+user1,user.name@gmail.com,13,2002-02-12
