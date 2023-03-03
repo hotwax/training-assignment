@@ -1,6 +1,6 @@
 CASE #1 :
     Inputs:
-        URL : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
+        URLs : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
                 "https://www.github.com/"]
         Words : [retailers, github, open, source, shopify, order]
     Output:
@@ -17,42 +17,82 @@ CASE #1 :
         'shopify' => 59,
         'order' => 81
 
-CASE #2 :
+CASE #2 : (NO URL Provided)
     Inputs:
-        URL : [] (NO URL Provided)
+        URLs : [] 
         Words : [retailers, github, open, source, shopify, order]
     Output:
         No URLs Provided
 
-CASE #3 :
+CASE #3 : (no Words provided)
     Inputs:
-        URLS : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
+        URLs : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
                 "https://www.github.com/"]
-        Words : [] (no words provided)
+        Words : [] 
     Output :
         No Words Provided
 
-CASE #3 :
+CASE #4 : (Invalid URL Provided)
     Inputs:
-        URLS : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
-                "https://www.github.com/"]
-        Words : [] (no words provided)
-    Output :
-        No Words Provided
-
-CASE #4 :
-    Inputs:
-        URLS : ["www.goolge"]
+        URLs : ["www.goolge"]
         Words : [retailers, github, open, source, shopify, order]
     Output :
         Invalid URL
 
 CASE #5 : (No Internet)
     Inputs:
-        URLS : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
+        URLs : ["https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system",
                 "https://www.github.com/"]
         Words : [retailers, github, open, source, shopify, order]
     Output :
         No Internet Connection
 
 
+CASE #6 : (Repeated URL)
+    Inputs:
+        URLs : ["https://blog.hotwax.co/","https://www.github.com/","https://www.github.com/"]
+        Words : [hotwax, shopify, open, source,]
+    Outputs:
+            https://blog.hotwax.co/
+            { 'shopify' => 96, 'hotwax' => 5, 'source' => 4 }
+            https://www.github.com/
+            { 'source' => 8, 'open' => 7, 'hotwax' => 0 }
+            -----------OUTPUT#2-------------
+            { 'hotwax' => 5, 'shopify' => 96, 'open' => 10, 'source' => 12 }
+
+CASE #7: (Repeated Words)
+    Inputs:
+            URLs : ["https://blog.hotwax.co/","https://www.github.com/"]
+            Words : [hotwax, shopify, open, source,shopify]
+        Outputs:
+                https://blog.hotwax.co/
+                { 'shopify' => 96, 'hotwax' => 5, 'source' => 4 }
+                https://www.github.com/
+                { 'source' => 8, 'open' => 7, 'hotwax' => 0 }
+                -----------OUTPUT#2-------------
+                { 'hotwax' => 5, 'shopify' => 96, 'open' => 10, 'source' => 12 }
+CASE #8: (urls.txt does not Exist)
+    Inputs:
+            URLs : [] - (Missing)
+            Words : [hotwax, shopify, open, source,shopify]
+        Outputs:
+            urls.txt does not exist
+
+CASE #9: (words.txt does not Exist)
+    Inputs:
+            URLs : ["https://blog.hotwax.co/","https://www.github.com/","https://www.github.com/"]
+            Words : [] - (Missing)
+        Outputs:
+                words.txt does not exist
+
+CASE #10:
+    Inputs:
+            URLs : ["https://blog.hotwax.co/","https://www.github.com/","https://www.github.com/"]
+            Words : [hotwax,shopify, open, source,]
+        Outputs:
+                https://blog.hotwax.co/
+                { 'shopify' => 96, 'hotwax' => 5, 'source' => 4 }
+                https://www.github.com/
+                { 'source' => 8, 'open' => 7, 'hotwax' => 0 }
+                -----------OUTPUT#2-------------
+                { 'hotwax' => 5, 'shopify' => 96, 'open' => 10, 'source' => 12 }                

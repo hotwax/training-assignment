@@ -2,11 +2,22 @@ import axios from 'axios';
 import fs from 'fs';
 import * as cheerio from 'cheerio';
 
-// getting all the content from the files
-const urls = fs.readFileSync('urls.txt', 'utf8').split('\r\n');
-urls.length === 0 && console.log('No URLs Provided') && process.exit();
-const words = fs.readFileSync('words.txt', 'utf-8').toLowerCase().split('\r\n');
-words.length === 0 && console.log('No URLs Provided') && process.exit();
+// getting urls from urls.txt file
+const urls = [
+  ...new Set(fs.readFileSync('urls.txt', 'utf8').trim().split('\r\n')),
+];
+// checking for empty urls
+!urls.length ? console.log('No URLs Provided') && process.exit() : null;
+
+//getting words from words.txt file
+const words = [
+  ...new Set(
+    fs.readFileSync('words.txt', 'utf-8').trim().toLowerCase().split('\r\n')
+  ),
+];
+// checking for empty words
+console.log(words.length);
+!words ? console.log('No Words Provided') || process.exit() : null;
 // creating a map to store the word frequencies
 var wordFreq = new Map();
 var urlWordCount = new Map();

@@ -1,0 +1,3 @@
+Rishabh,rishu@mail.com,20,1990-10-20
+chuchu,chuchu@gmail.com,239,1990-04-12
+rj,rj@gmail.com,21,2001-01-04
