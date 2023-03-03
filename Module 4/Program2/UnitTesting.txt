@@ -1,0 +1,221 @@
+Case 1: For adding a new employee to the file.
+Input: 
+Employee name: John
+Email address: john@example.com
+Employee age: 30
+Date of birth (YYYY-MM-DD): 1992-02-20
+
+Output:
+John added to employees.txt
+
+Case 2: For deleting an existing employee from the file.
+Input: 
+Enter employee ID: john@example.com
+
+Output:
+Employee deleted successfully
+
+Case 3: For displaying all employee data.
+Input:
+Enter your choice: 4
+
+Output:
+[
+Employee {
+name: 'Alice',
+email: 'alice@example.com',
+age: 25,
+dob: '1997-06-05'
+},
+Employee {
+name: 'Bob',
+email: 'bob@example.com',
+age: 28,
+dob: '1994-12-10'
+},
+Employee {
+name: 'John',
+email: 'john@example.com',
+age: 30,
+dob: '1992-02-20'
+}
+]
+
+Case 4:  Sort employees by name in ascending order.
+Input:
+Enter your choice: 3
+Enter sorting order (asc/desc): asc
+Enter sorting criteria (name/email/age/dob): name
+
+Output:
+[
+Employee {
+name: 'Alice',
+email: 'alice@example.com',
+age: 25,
+dob: '1997-06-05'
+},
+Employee {
+name: 'Bob',
+email: 'bob@example.com',
+age: 28,
+dob: '1994-12-10'
+},
+Employee {
+name: 'John',
+email: 'john@example.com',
+age: 30,
+dob: '1992-02-20'
+}
+]
+
+
+Case 5: Sort employees by age in descending order.
+Input:
+Enter your choice: 3
+Enter sorting order (asc/desc): desc
+Enter sorting criteria (name/email/age/dob): age
+
+Output:
+[
+Employee {
+name: 'John',
+email: 'john@example.com',
+age: 30,
+dob: '1992-02-20'
+},
+Employee {
+name: 'Bob',
+email: 'bob@example.com',
+age: 28,
+dob: '1994-12-10'
+},
+Employee {
+name: 'Alice',
+email: 'alice@example.com'
+age: 25,
+dob: '1997-06-05'
+}
+]
+
+Case 6: Sort employees by date of birth in ascending order.
+Input:
+Enter your choice: 3
+Enter sorting order (asc/desc): asc
+Enter sorting criteria (name/email/age/dob): dob
+
+Output:
+[
+Employee {
+name: 'John',
+email: 'john@example.com',
+age: 30,
+dob: '1992-02-20'
+},
+Employee {
+name: 'Bob',
+email: 'bob@example.com',
+age: 28,
+dob: '1994-12-10'
+},
+Employee {
+name: 'Alice',
+email: 'alice@example.com',
+age: 25,
+dob: '1997-06-05'
+}
+]
+
+
+Case 7:  Sort employees by name in descending order.
+Input:
+Enter your choice: 3
+Enter sorting order (asc/desc): desc
+Enter sorting criteria (name/email/age/dob): name
+
+Output:
+[
+Employee {
+name: 'Peter',
+email: 'peter@example.com',
+age: 28,
+dob: '1994-10-12'
+},
+Employee {
+name: 'John',
+email: 'john@example.com',
+age: 30,
+dob: '1992-02-20'
+},
+Employee {
+name: 'Alice',
+email: 'alice@example.com',
+age: 25,
+dob: '1996-05-15'
+}
+]
+
+
+
+Case 8: Sort employees by email in descending order.
+Input:
+Enter your choice: 3
+Enter sorting order (asc/desc): desc
+Enter sorting criteria (name/email/age/dob): email
+
+Output:
+[
+Employee {
+name: 'Peter',
+email: 'peter@example.com',
+age: 28,
+dob: '1994-10-12'
+},
+Employee {
+name: 'John',
+email: 'john@example.com',
+age: 30,
+dob: '1992-02-20'
+},
+Employee {
+name: 'Alice',
+email: 'alice@example.com',
+age: 25,
+dob: '1996-05-15'
+}
+]
+
+Case 9: Handling an invalid option.
+Input:
+Enter your choice: 6
+
+Output:
+Invalid option. Please try again.
+
+Case 10: For displaying employee data with missing information.
+Input:
+Enter your choice: 4
+
+Output:
+[
+Employee {
+name: 'Eva',
+email: '',
+age: null,
+dob: '1998-11-20'
+}
+]
+
+Case 11: For displaying employee data with invalid information.
+Input:
+Enter your choice: 4
+
+Output:
+[
+Employee {
+name: '',
+email: 'johndoeexample.com',
+age: 'thirty',
+dob: '1992-02-20'
+}
+]
