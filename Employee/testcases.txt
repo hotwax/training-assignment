@@ -1,0 +1,120 @@
+==================================================================
+
+EmployeeData
+1, Divyanshu, 21, divyanshugour@gmail.com, 12/11/1999
+2, Chirag, 12, chirag@gmail.com, 10/10/2000
+
+
+=================================================================
+
+
+Test Cases for writeInFile method
+
+1. Proper path is given or not for the file
+2. fs module is able to create write stream or not
+3. data should be written in proper format otherwise it will give error while reading the file 
+
+=================================================================
+
+Test Cases for checkIdInData method
+
+1. Method shoul return the employee object if the id is present in the data otherwiser it should return undefined.
+
+=================================================================
+
+Test Cases for addEmployee method
+
+1. method should check proper input is given or not
+
+input: id = abc
+output: Id should be a number.
+
+input: name = 123
+output: Name should be a string.
+
+input: age = abc
+output: Age should be a number.
+
+input: email = abc
+output: Email should be in proper format.
+
+input: dob = 12/12/abc
+output: Date of birth should be in proper format.
+
+2. method should check if the id is already present in the data or not
+
+input: id = 1
+output: Id is already present in the data.
+
+3. method should show that the data is added successfully
+
+input: id = 2
+output: Employee Data is added successfully.
+
+=================================================================
+
+Test Cases for deleteEmployee method
+
+1. method should take proper id as input
+
+input: id = abc
+output: Id should be a number.
+
+2. method should check if the id is present in the data or not
+
+input: id = 1
+output: Id is not present in the data.
+
+3. method should delete the employee data from the data
+
+input: id = 2
+output: Employee data is deleted successfully.
+
+=================================================================
+
+Test Cases for showAllEmployees method
+
+1. method should show all the employees data only if the data is present in the file
+
+output:
+
+┌─────────┬─────┬─────────────┬──────┬───────────────────────────┬──────────────┐
+│ (index) │ id  │    name     │ age  │           email           │     dob      │
+├─────────┼─────┼─────────────┼──────┼───────────────────────────┼──────────────┤
+│    0    │ '1' │ 'Divyanshu' │ '21' │ 'divyanshugour@gmail.com' │ '12/11/1999' │
+│    1    │ '2' │  'Chirag'   │ '12' │    'chirag@gmail.com'     │ '10/10/2000' │
+└─────────┴─────┴─────────────┴──────┴───────────────────────────┴──────────────┘
+
+=================================================================
+
+Test Cases for searchEmployee method
+
+1. method should search for the query given by the user
+
+input: query = div
+       sortBy = name
+       sortType = asc
+
+output:
+
+┌─────────┬─────┬─────────────┬──────┬───────────────────────────┬──────────────┐
+│ (index) │ id  │    name     │ age  │           email           │     dob      │
+├─────────┼─────┼─────────────┼──────┼───────────────────────────┼──────────────┤
+│    0    │ '1' │ 'Divyanshu' │ '21' │ 'divyanshugour@gmail.com' │ '12/11/1999' │
+└─────────┴─────┴─────────────┴──────┴───────────────────────────┴──────────────┘
+
+=================================================================
+
+Test Cases for the main method
+
+1. method should show the menu to the user and take the input from the user
+2. method should catch error if the user gives invalid input or any other error occurs
+
+=================================================================
+
+Test Cases for the program calling the main method
+
+1. data should be read from the file and stored in the array and give error if the file is not present
+2. program should call the main method and show the menu to the user
+
+=================================================================
