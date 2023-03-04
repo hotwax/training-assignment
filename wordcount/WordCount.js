@@ -1,4 +1,4 @@
-const fileHandler = require("fs") // to read data from files 
+const fileHandler = require("fs"); // to read data from files 
 const axios = require("axios"); // to fetch data from a site
 const cheerio = require("cheerio"); // to convert html of the site to text
 
@@ -10,7 +10,7 @@ function sortMapAndReturnTopThreeWords(wordsCountForOneUrl) {
     }
   ).slice(0, 3))
 
-  return [wordsCountForOneUrl]
+  return [wordsCountForOneUrl];
 }
 
 function updateCountInMaps(wordFromFile) {
@@ -41,7 +41,7 @@ function updateCountInMaps(wordFromFile) {
           wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, wordCount]]);
         }
 
-        return [wordsCountForOneUrl, wordsCountForAllUrls]
+        return [wordsCountForOneUrl, wordsCountForAllUrls];
       }
     }
 
@@ -79,13 +79,13 @@ async function wordCount(urlsArray, wordsArray) {
       [wordsCountForOneUrl, wordsCountForAllUrls] = updateCountInMaps(wordFromFile)(wordsFromUrl)(wordsCountForOneUrl)(wordsCountForAllUrls);
     }
 
-    [wordsCountForOneUrl] = sortMapAndReturnTopThreeWords(wordsCountForOneUrl)
+    [wordsCountForOneUrl] = sortMapAndReturnTopThreeWords(wordsCountForOneUrl);
 
     console.log("Top 3 frequency words for url- " + url + "\n");
     wordsCountForOneUrl.forEach((value, key) => {
       console.log(key, value);
     })
-    console.log("-----------------------\n")
+    console.log("-----------------------\n");
   }
 
   console.log("Frequency of all words across all urls\n");
