@@ -1,0 +1,42 @@
+[
+    {
+        "firstName": "John",
+        "dateOfBirth": "2000-01-01",
+        "address": {
+            "city": "New York",
+            "state": "NY",
+            "pinCode": 12345,
+            "country": "USA"
+        }
+    },
+    {
+        "firstName": "Jane",
+        "dateOfBirth": "2001-02-02",
+        "address": {
+            "city": "London",
+            "state": "LDN",
+            "pinCode": 67890,
+            "country": "UK"
+        }
+    },
+    {
+        "firstName": "Bob",
+        "dateOfBirth": "1999-03-03",
+        "address": {
+            "city": "Paris",
+            "state": "PRS",
+            "pinCode": 24680,
+            "country": "France"
+        }
+    },
+    {
+        "firstName": "Alice",
+        "dateOfBirth": "1998-04-04",
+        "address": {
+            "city": "Tokyo",
+            "state": "TKO",
+            "pinCode": 13579,
+            "country": "Japan"
+        }
+    }
+]

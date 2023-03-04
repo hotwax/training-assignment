@@ -1,0 +1,124 @@
+Case 1: Serializing the data.
+
+Input:
+Given the right file path to be read.
+
+Output:
+"Serialization done successfully .."
+
+Case 2: Deserializing the data.
+Input:
+Given the right file path to be read.
+
+Output:
+Deserializing successful. Results from file output1.json.
+[
+    {
+        "firstName": "John",
+        "dateOfBirth": "2000-01-01",
+        "address": {
+            "city": "New York",
+            "state": "NY",
+            "pinCode": 12345,
+            "country": "USA"
+        }
+    },
+    {
+        "firstName": "Jane",
+        "dateOfBirth": "2001-02-02",
+        "address": {
+            "city": "London",
+            "state": "LDN",
+            "pinCode": 67890,
+            "country": "UK"
+        }
+    },
+    {
+        "firstName": "Bob",
+        "dateOfBirth": "1999-03-03",
+        "address": {
+            "city": "Paris",
+            "state": "PRS",
+            "pinCode": 24680,
+            "country": "France"
+        }
+    },
+    {
+        "firstName": "Alice",
+        "dateOfBirth": "1998-04-04",
+        "address": {
+            "city": "Tokyo",
+            "state": "TKO",
+            "pinCode": 13579,
+            "country": "Japan"
+        }
+    }
+]
+
+Case 5: Deserializing data from output2.json file.
+
+Input:
+Given the right file path to be read.
+
+Output:
+Deserializing successful. Results from file output2.json.
+[
+    {
+        "firstName": "John",
+        "dateOfBirth": "2000-01-01",
+        "address": {
+            "city": "New York",
+            "state": "NY",
+            "pinCode": 12345,
+            "country": "USA"
+        }
+    },
+    {
+        "firstName": "Jane",
+        "dateOfBirth": "2001-02-02",
+        "address": {
+            "city": "London",
+            "state": "LDN",
+            "pinCode": 67890,
+            "country": "UK"
+        }
+    },
+    {
+        "firstName": "Bob",
+        "dateOfBirth": "1999-03-03",
+        "address": {
+            "city": "Paris",
+            "state": "PRS",
+            "pinCode": 24680,
+            "country": "France"
+        }
+    },
+    {
+        "firstName": "Alice",
+        "dateOfBirth": "1998-04-04",
+        "address": {
+            "city": "Tokyo",
+            "state": "TKO",
+            "pinCode": 13579,
+            "country": "Japan"
+        }
+    }
+]
+
+
+Case 4: User chooses a file which contains no data.
+
+Input:
+Ujson enters a file name "test.json" which does not contains any data
+
+Output::
+The program displays an error message "SyntaxError: Unexpected token < in JSON at position 0"(catch block code)
+
+Case 5: User chooses a file which does not exists.
+
+Input:
+User enters a file name "Salary.json" which does not exist
+
+Output:
+The program displays an message "File not found"
+

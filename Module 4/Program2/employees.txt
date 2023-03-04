@@ -1,0 +1,15 @@
+Alice, alice@example.com, 25, 1996-05-15
+John, john@example.com, 30, 1992-02-20
+Peter, peter@example.com, 28, 1994-10-12
+Neymar,ney@example.com,34,1997-02-13
+Aditya, adi@example.com, 29, 1993-12-23
+Gaurav, gayrav@example.com, 21, 2001-03-24
+Adam, adam@example.com, 38, 1983-03-11
+gilchrist, gil@example.com, 26, 1994-11-22
+Sheriff, sheriff@example.com, 24, 1998-10-28
+God, god@example.com, 27, 1995-02-01
+Devil, devil@example.com, 90, 1910-11-23
+Rudimentary, r@example.com, 92, 1908-01-12
+Blessed, blessed@example.com, 98, 1906-10-10
+Cursed, c@example.com, 99, 1905-05-05
+Gamers, gamed@example.com, 23, 2001-12-21
