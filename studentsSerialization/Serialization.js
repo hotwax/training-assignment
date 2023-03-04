@@ -12,13 +12,13 @@ const student2 = new Student("Ankita", "1990-01-01", new Address("ujjain", "m.p.
 const student3 = new Student("Janvi", "1990-01-01", new Address("bhopal", "m.p.", 452201, "India"))
 const student4 = new Student("Shradha", "1990-01-01", new Address("indore", "m.p.", 452701, "India"))
 
-const students = [student1, student2, student3, student4]
+const students = [student1, student2, student3, student4]  // an array of students objects
 
 class SerializationTest {
   performSerialization() {
-    const data = JSON.stringify(students)
+    const studentsString = JSON.stringify(students) // object -> string to store students data  in some file
     read.question("Enter file name for serialization: ", (fileName) => {
-      fileHandler.writeFileSync(fileName, data)
+      fileHandler.writeFileSync(fileName, studentsString) // write data in file 
       console.log("Data serialized successfully.\n----------------------\n");
       enterChoice()
     })
@@ -28,12 +28,12 @@ class SerializationTest {
 class DeserializationTest {
   performDeserialization() {
     read.question("Enter file name for deserialization: ", (fileName) => {
-      if(!fileHandler.existsSync(fileName)){
+      if(!fileHandler.existsSync(fileName)){  // entered file doesn't exists
         console.log(fileName+" file doesn't exists\n");
       }
       else{
         const data = fileHandler.readFileSync(fileName, "utf-8")
-        JSON.parse(data).forEach((student) => console.log(student))
+        JSON.parse(data).forEach((student) => console.log(student)) // string to object and then looping to print data
         console.log("Data deserialized successfully.\n----------------------\n");
       }
       enterChoice()
