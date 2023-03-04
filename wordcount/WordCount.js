@@ -5,28 +5,35 @@ const cheerio = require("cheerio"); // to convert html of the site to text
 function sortMapAndReturnTopThreeWords(wordsCountForOneUrl) {
   //sorting in descending order of words frequencies and then taking top 3 frequencies words
   wordsCountForOneUrl = new Map([...wordsCountForOneUrl.entries()].sort(
-    function (a, b) {
-      return b[1] - a[1];
+    function (word1, word2) {
+      return word2[1] - word1[1];
     }
   ).slice(0, 3))
 
   return [wordsCountForOneUrl]
 }
 
-function updatefrequencyForAUrl(wordFromFile) {
+function updateCountInMaps(wordFromFile) {
 
-  return function getWordCount(wordsFromUrl) {
+  //total count of the word in the site
+  return function getWordCount(wordsFromUrl) { 
 
-    let wordCount = wordsFromUrl.filter(word =>
+    const wordCount = wordsFromUrl.filter(word =>
       word.toLowerCase() === wordFromFile.toLowerCase()
-    ).length //total count of the word in the site
+    ).length 
 
-    return function updateCountInMap(wordsCountForOneUrl) {
-      wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, wordCount]]);
+    return function updateCountInAUrlMap(wordsCountForOneUrl) {
 
+      //instead of updating the original map by using 'set' method, we are creating a new map and adding the word and its count.
+      //concept of immutability
+      wordsCountForOneUrl = new Map([...wordsCountForOneUrl, [wordFromFile, wordCount]]); 
+      
       return function UpdateCountInAllUrlsMap(wordsCountForAllUrls) {
-        //updating count of the word in the map which stores word total count
+
+        //updating count of the word in the map which stores word total count across all urls
         if (wordsCountForAllUrls.has(wordFromFile)) {
+
+          //if the word already exists then add the current wordCount to existing count 
           const oldCount = wordsCountForAllUrls.get(wordFromFile);
           wordsCountForAllUrls = new Map([...wordsCountForAllUrls, [wordFromFile, oldCount + wordCount]]);
         }
@@ -44,32 +51,32 @@ function updatefrequencyForAUrl(wordFromFile) {
 
 async function wordCount(urlsArray, wordsArray) {
   let wordsCountForOneUrl = new Map(); //map to count words frequencies on one site
-  let wordsCountForAllUrls = new Map(); //map to count words frequencies across all urls
+  let wordsCountForAllUrls = new Map(); //map to count words frequencies across all sites
 
-  for (let index = 0; index < urlsArray.length; index++) {
-    let url = urlsArray[index];
+  // we can't use forEach here because it doesn't work well with async and await
+  for (let index = 0; index < urlsArray.length; index++) { 
+    const url = urlsArray[index];
     let wordsFromUrl = "";
     let invalidUrl = false;
 
     await axios.get(url).then((response) => { //using axios to fetch url data 
-      let html = response.data; //html content of the site
 
-      const loadedDocument = cheerio.load(html);
-      wordsFromUrl = loadedDocument("body").text().toLowerCase().split(/\W+/); //html to text
-
-
+      // 'response.data' stores html content of the site
+      // cheerio converts html to text
+      wordsFromUrl = cheerio.load(response.data)("body").text().toLowerCase().split(/\W+/);
+    
     }).catch(function (err) {
       console.log("Invalid url- ", url + "\n");
       invalidUrl = true;
     });
 
-    if (invalidUrl) continue;
+    if (invalidUrl) continue;  // skip this url and continue with next one
 
     wordsCountForOneUrl = new Map();
 
     for (let index = 0; index < wordsArray.length; index++) {
       let wordFromFile = wordsArray[index];
-      [wordsCountForOneUrl, wordsCountForAllUrls] = updatefrequencyForAUrl(wordFromFile)(wordsFromUrl)(wordsCountForOneUrl)(wordsCountForAllUrls);
+      [wordsCountForOneUrl, wordsCountForAllUrls] = updateCountInMaps(wordFromFile)(wordsFromUrl)(wordsCountForOneUrl)(wordsCountForAllUrls);
     }
 
     [wordsCountForOneUrl] = sortMapAndReturnTopThreeWords(wordsCountForOneUrl)
@@ -91,9 +98,11 @@ function checkValidationForWordsAndUrls() {
   let wordsArray = [];
   let urlsArray = [];
   try {
-    urlsArray = fileHandler.readFileSync("urls.txt", "utf-8"); 
     //we can also use 'process.cwd()' or '__dirname' methods to get current directory path here
-    urlsArray = urlsArray?.length == 0 ? null : urlsArray.split(", "); //get urls from urls.txt file and using optional chaining by ?
+    urlsArray = fileHandler.readFileSync("urls.txt", "utf-8"); 
+    
+    //get urls from urls.txt file and using optional chaining by ?
+    urlsArray = urlsArray?.length == 0 ? null : urlsArray.split(", "); 
     if (urlsArray == null) {
       console.log("No urls found in urls.txt file.");
       return;
@@ -107,7 +116,9 @@ function checkValidationForWordsAndUrls() {
   }
   try {
     wordsArray = fileHandler.readFileSync("words.txt", "utf-8");
-    wordsArray = wordsArray?.length == 0 ? null : wordsArray.split(", "); //get words from words.txt file and using optional chaining by ?
+
+    //get words from words.txt file and using optional chaining by ?
+    wordsArray = wordsArray?.length == 0 ? null : wordsArray.split(", "); 
     if (wordsArray == null) {
       console.log("No words found in words.txt file.");
       return;
