@@ -1,42 +1,42 @@
 [
     {
         "firstName": "John",
-        "dateOfBirth": "1990-01-01",
+        "dateOfBirth": "2000-01-01",
         "address": {
             "city": "New York",
             "state": "NY",
-            "pinCode": 10001,
+            "pinCode": 12345,
             "country": "USA"
         }
     },
     {
-        "firstName": "Sarah",
-        "dateOfBirth": "1995-02-14",
+        "firstName": "Jane",
+        "dateOfBirth": "2001-02-02",
         "address": {
-            "city": "Los Angeles",
-            "state": "CA",
-            "pinCode": 90001,
-            "country": "USA"
+            "city": "London",
+            "state": "LDN",
+            "pinCode": 67890,
+            "country": "UK"
         }
     },
     {
-        "firstName": "Mike",
-        "dateOfBirth": "1998-05-20",
+        "firstName": "Bob",
+        "dateOfBirth": "1999-03-03",
         "address": {
-            "city": "Chicago",
-            "state": "IL",
-            "pinCode": 60601,
-            "country": "USA"
+            "city": "Paris",
+            "state": "PRS",
+            "pinCode": 24680,
+            "country": "France"
         }
     },
     {
-        "firstName": "Emily",
-        "dateOfBirth": "2000-12-31",
+        "firstName": "Alice",
+        "dateOfBirth": "1998-04-04",
         "address": {
-            "city": "Houston",
-            "state": "TX",
-            "pinCode": 77001,
-            "country": "USA"
+            "city": "Tokyo",
+            "state": "TKO",
+            "pinCode": 13579,
+            "country": "Japan"
         }
     }
 ]
