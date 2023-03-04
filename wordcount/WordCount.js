@@ -13,6 +13,7 @@ function sortMapAndReturnTopThreeWords(wordsCountForOneUrl) {
   return [wordsCountForOneUrl];
 }
 
+//splitting one 4 parameters function -> four 1 parameter functions  
 function updateCountInMaps(wordFromFile) {
 
   //total count of the word in the site
