@@ -1,0 +1,4 @@
+case 1: deserializing a non existing file
+
+Enter file name for deserialization: output10.ser
+output10.ser file doesn't exists
