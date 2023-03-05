@@ -1,77 +1,59 @@
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
-const fs = require('fs');
-const readline = require('readline');
+const fs = require("fs");
+const axios = require("axios");
 
-
-const wordCountMap = {};
 let urls = [];
 let words = [];
+let words_count = {};
 
-// Function to get the raw data
-async function getRawData(URL) {
-  return fetch(URL)
-    .then((response) => response.text())
-    .then((data) => {
-      return data;
-    });
-};
+// Read words from file
+function readWords() {
+  words = fs.readFileSync("words.txt", "utf-8").split(",");
+  for (const word of words) {
+    words_count[word] = 0
+  }
+}
+
+// Read urls from file
+function readUrls() {
+  urls = fs.readFileSync("urls.txt", "utf-8").split(",");
+}
 
 // Get text data from webpage
-function updateMap(url) {
-  const html = getRawData(url);
-  const parsed = cheerio.load(html);
-  const finalText = parsed.text();
-  words.forEach((word)=>{
-    countOccurrences(finalText, word);
-  });
-  
-};
-
-function readWords(){
-  words = fs.readFileSync("words.txt", "utf-8").split(",");
-}
-
-function readUrls(){
-    urls = fs.readFileSync("urls.txt", "utf-8").split(",");
-}
-
-
-// Count occurance of word on webpage
-function countOccurrences(str,word){
-    let a = str.split(" ");
-    let count = 0;
-    for (let i = 0; i < a.length; i++)
-      {
-      if (word==(a[i]))
-          count++;
-          
+async function calculateOccurance() {
+  try {
+    for (const url of urls) {
+      console.log(url);
+      console.log();
+      const response = await axios.get(url);
+      const $ = cheerio.load(response.data);
+      const text = $("body")
+        .text()
+        .toLowerCase()
+        .replace(/[^a-zA-Z ]/g, "")
+        .split(" ");
+      const wordCountMap = {};
+      for (const word of words) {
+        const count = text.filter((w) => w == word).length;
+        if (count > 0) {
+          wordCountMap[word] = count;
+          words_count[word] += count;
+        }
+      }
+      console.log(wordCountMap);
+      console.log();
     }
-    console.log(count)
-    wordCountMap[word] += count
-    console.log(wordCountMap)
+    console.log("Total Occurance");
+    console.log()
+    console.log(words_count);
+    console.log();
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-
-readUrls()
-readWords()
-urls.forEach((url)=>{
-    updateMap(url);
-});
-
-
-
-
-
-
-// const data = readFile('urls.txt');
-// console.log(data)
-// data.forEach(function (url) {
-//   console.log(url)
-//   // readFile('words.txt').forEach((word) => {
-//   //   console.log(word)
-//   // });
-// });
-
-
-
+readUrls();
+readWords();
+console.log();
+calculateOccurance();
