@@ -158,17 +158,21 @@ mysql> SELECT SALESPEOPLE.SNAME, SALESPEOPLE.SNUM FROM SALESPEOPLE
 
 8) Count the orders of each of the salespeople and output the results in descending order. 
 
-mysql> SELECT SNAME, SALESPEOPLE.SNUM, COUNT(SALESPEOPLE.SNUM) AS number_of_orders FROM SALESPEOPLE
-    -> JOIN ORDERS ON SALESPEOPLE.SNUM=ORDERS.SNUM
-    -> GROUP BY ORDERS.SNUM HAVING COUNT(ORDERS.SNUM)>1;
-+--------+------+------------------+
-| SNAME  | SNUM | number_of_orders |
-+--------+------+------------------+
-| Peel   | 1001 |                3 |
-| Serres | 1002 |                3 |
-| Rifkin | 1007 |                2 |
-+--------+------+------------------+
-3 rows in set (0.00 sec)
+mysql> SELECT salespeople.SNAME, COUNT(orders.SNUM) AS number_of_orders FROM salespeople
+    -> LEFT JOIN orders ON salespeople.SNUM = orders.SNUM
+    -> GROUP BY salespeople.SNUM
+    -> ORDER BY ORDERS_COUNT DESC;
++---------+--------------+
+| SNAME   | ORDERS_COUNT |
++---------+--------------+
+| Peel    |            3 |
+| Serres  |            3 |
+| Rifkin  |            2 |
+| AxelRod |            1 |
+| Motika  |            1 |
+| Fran    |            0 |
++---------+--------------+
+6 rows in set (0.00 sec)
 
 
 
