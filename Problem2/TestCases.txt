@@ -1,0 +1,156 @@
+1) Test Case: User chooses option 1 and enters valid employee information.
+
+Input:
+1
+Enter name
+username
+Enter email
+user@gmail.com
+Enter DOB (Format : YYYY-MM-DD)
+2003-02-12
+Enter age
+12
+
+Expected & Actual output 
+Done
+display menu again
+
+2) Test Case: User chooses option 1 and enters invalid employee name.
+
+Input & output:
+1
+Enter name
+123
+
+Enter valid name
+Enter name
+Sadhana
+Enter email
+
+Expected Output:
+Until user enters valid name it won't be allowed to enter email or to proceed futher.
+
+3) Test Case: User chooses option 1 and enters invalid email address.
+
+Input & output:
+Enter email
+Sadhana@gamil.com
+
+Enter valid email
+Enter email
+Sadhana@gmail.com
+Enter DOB (Format : YYYY-MM-DD)
+
+Expected Output:
+Until user enters valid email it won't be allowed to proceed futher.
+
+4) Test Case: User chooses option 1 and enters invalid date of birth.
+
+Input & output
+Enter DOB (Format : YYYY-MM-DD)
+2003-43-23
+Enter valid DOB
+Enter DOB (Format : YYYY-MM-DD)
+2002-03-23
+Enter age
+
+Expected Output:
+Until user enters valid Date it won't be allowed to proceed futher.
+
+5) Test Case: User chooses option 1 and enters invalid age.
+
+Input & output 
+
+Enter age
+xxxx
+
+Enter valid age
+Enter age
+23
+Done
+
+Expected output
+Until user enters valid Date it won't be allowed to proceed futher.
+
+6) Test Case: User chooses an invalid option.
+
+Input:
+12
+
+Expected Output:
+12
+Invalid
+===========================
+*****Enter your choice*****
+1.Add employee object
+2.Delete employee object
+3.ShowAll
+4.Search
+5.Exit
+===========================
+
+Actual Output:
+12
+Invalid
+===========================
+*****Enter your choice*****
+1.Add employee object
+2.Delete employee object
+3.ShowAll
+4.Search
+5.Exit
+===========================
+
+
+7) Test Case: User chooses option 2 to delete an employee that exists in the employees.txt file.
+Input:
+2
+1(auto generated id)
+
+Expected Output:
+Done
+===========================
+*****Enter your choice*****
+1.Add employee object
+2.Delete employee object
+3.ShowAll
+4.Search
+5.Exit
+===========================
+
+Actual Output:
+Done
+===========================
+*****Enter your choice*****
+1.Add employee object
+2.Delete employee object
+3.ShowAll
+4.Search
+5.Exit
+===========================
+
+8) Test Case: User chooses option 2 to delete an employee that does not exist in the employees.txt file.
+
+Input:
+2
+Non-Existing Employee ID
+
+Actual & Expected Output:
+Id not found
+===========================
+*****Enter your choice*****
+1.Add employee object
+2.Delete employee object
+3.ShowAll
+4.Search
+5.Exit
+===========================
+
+9) Test Case: User chooses option 3 to search for an employee that exists in the employees.txt file.
+
+10) Test Case: User chooses option 3 to search for an employee that does not exist in the employees.txt file.
+
+11) Test Case: User chooses option 4 to display all employees in the employees.txt file.
+
+12) Test Case: User chooses option 5 to exit the program.
+

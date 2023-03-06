@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.TreeSet;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileNotFoundException;
 //we will have to set class path 
 // set classpath=%classpath%;D:\Programs\jsoup-1.15.3.jar;
 class CountFrequency // a class to store count of words and words
@@ -44,9 +45,14 @@ class WebScrapping // a class to get web page and count certain words
 
   String load(String url) throws Exception // method to load data from web file
   {
-    Document doc = Jsoup.connect(url).get();
-    String text = doc.body().text();
-    text = text.replaceAll("[^a-zA-Z\\w]", " ");
+	  String text ="";
+    try {
+      Document doc = Jsoup.connect(url).get();
+       text = doc.body().text();
+      text = text.replaceAll("[^a-zA-Z\\w]", " ");
+    } catch (IllegalArgumentException e) {
+      System.out.println("Something wrong with URL");
+    }
     return text;
   }
 
@@ -67,12 +73,18 @@ class Main {
     WebScrapping ws = new WebScrapping();
 
     //storing all urls into a ArrayList
+	try{
     BufferedReader br = new BufferedReader(new FileReader("url.txt"));
     String stringURL = br.readLine();
-    ArrayList < String > url = new ArrayList < > ();
+    ArrayList < String > url = new ArrayList <> ();
     while (stringURL != null) {
-      url.add(stringURL);
-      stringURL = br.readLine();
+      try {
+        url.add(stringURL);
+        stringURL = br.readLine();
+      } catch(IndexOutOfBoundsException e)
+	  {
+		  System.out.println("No urls found");
+	  }
     }
 
     //storing all words to an arraylist
@@ -80,8 +92,13 @@ class Main {
     String stringWORD = br1.readLine();
     ArrayList < String > words = new ArrayList < > ();
     while (stringWORD != null) {
-      words.add(stringWORD);
-      stringWORD = br1.readLine();
+      try {
+        words.add(stringWORD);
+        stringWORD = br1.readLine();
+      }catch(IndexOutOfBoundsException e)
+	  {
+		  System.out.println("No urls found");
+	  }
     }
 
     int url_num = 1; //variable to give url number
@@ -111,5 +128,12 @@ class Main {
       treeSet.add(countfrequency);
 
     System.out.println(treeSet);
+
+	} catch (FileNotFoundException e) {
+        System.out.println("File not found");
+      }
+	  catch(IndexOutOfBoundsException e){
+		          System.out.println("Empty file");
+	  }
   }
 }

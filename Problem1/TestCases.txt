@@ -1,0 +1,201 @@
+1) Test case : File containing url is not present 
+
+Expected output 
+File not found(terminates)
+
+Actual output
+File not found(terminates)
+
+2) Test case : File containing words is not present 
+
+Expected output 
+File not found(terminates)
+
+Actual output
+File not found(terminates)
+
+3) Test case : If url file and word file have data accurate  
+
+Expected output & Actual output
+URL : 1
+{Word =short, frequency =31}
+{Word =story, frequency =26}
+{Word =are, frequency =9}
+
+URL : 2
+{Word =are, frequency =11}
+{Word =NCERT, frequency =4}
+{Word =YOU, frequency =1}
+
+URL : 3
+{Word =YOU, frequency =4}
+{Word =Line, frequency =3}
+{Word =are, frequency =2}
+
+Complete .......
+[{Word =short, frequency =31}
+, {Word =story, frequency =26}
+, {Word =are, frequency =22}
+, {Word =YOU, frequency =14}
+, {Word =NCERT, frequency =4}
+, {Word =Line, frequency =3}
+, {Word =Students, frequency =2}
+, {Word =population, frequency =1}
+]
+
+4) Test cases : if url does not have any url 
+
+Expected output
+error
+
+Actual output
+Complete .......
+[]
+
+5) Test cases : if words does not have anything 
+
+Expected output
+error
+
+Actual output
+Empty file
+
+6) Test case : if we have wrong url at second line of url.txt
+
+Expected output
+URL : 1
+{Word =short, frequency =31}
+{Word =story, frequency =26}
+{Word =are, frequency =9}
+
+URL : 2
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+
+URL : 3
+{Word =YOU, frequency =4}
+{Word =Line, frequency =3}
+{Word =are, frequency =2}
+
+Complete .......
+[{Word =short, frequency =31}
+, {Word =story, frequency =26}
+, {Word =YOU, frequency =13}
+, {Word =are, frequency =11}
+, {Word =Line, frequency =3}
+, {Word =Students, frequency =2}
+, {Word =population, frequency =1}
+, {Word =NCERT, frequency =0}
+]
+
+Actual output
+URL : 1
+{Word =short, frequency =31}
+{Word =story, frequency =26}
+{Word =are, frequency =9}
+
+URL : 2
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+Something wrong with URL
+{Word =short, frequency =0}
+{Word =story, frequency =0}
+{Word =are, frequency =0}
+
+URL : 3
+{Word =YOU, frequency =4}
+{Word =Line, frequency =3}
+{Word =are, frequency =2}
+
+Complete .......
+[{Word =short, frequency =31}
+, {Word =story, frequency =26}
+, {Word =YOU, frequency =13}
+, {Word =are, frequency =11}
+, {Word =Line, frequency =3}
+, {Word =Students, frequency =2}
+, {Word =population, frequency =1}
+, {Word =NCERT, frequency =0}
+]
+
+7) If url.txt is having dublicate urls.
+
+Actual & Expected output
+URL : 1
+{Word =short, frequency =31}
+{Word =story, frequency =26}
+{Word =are, frequency =9}
+
+URL : 2
+{Word =short, frequency =31}
+{Word =story, frequency =26}
+{Word =are, frequency =9}
+
+URL : 3
+{Word =NCERT, frequency =1}
+{Word =short, frequency =0}
+{Word =story, frequency =0}
+
+URL : 4
+{Word =NCERT, frequency =1}
+{Word =short, frequency =0}
+{Word =story, frequency =0}
+
+URL : 5
+{Word =YOU, frequency =4}
+{Word =Line, frequency =3}
+{Word =are, frequency =2}
+
+Complete .......
+[{Word =short, frequency =62}
+, {Word =story, frequency =52}
+, {Word =YOU, frequency =22}
+, {Word =are, frequency =20}
+, {Word =Students, frequency =4}
+, {Word =Line, frequency =3}
+, {Word =NCERT, frequency =2}
+]
+
+8) If wrong word is given in middle of word.txt
+
+Actual & Expected output
+URL : 1
+{Word =short, frequency =31}
+{Word =story, frequency =26}
+{Word =are, frequency =9}
+
+URL : 2
+{Word =are, frequency =11}
+{Word =NCERT, frequency =4}
+{Word =YOU, frequency =1}
+
+URL : 3
+{Word =YOU, frequency =4}
+{Word =Line, frequency =3}
+{Word =are, frequency =2}
+
+Complete .......
+[{Word =short, frequency =31}
+, {Word =story, frequency =26}
+, {Word =are, frequency =22}
+, {Word =YOU, frequency =14}
+, {Word =NCERT, frequency =4}
+, {Word =Line, frequency =3}
+, {Word =Students, frequency =2}
+, {Word =population, frequency =1}
+, {Word =xxxxxxxxxxxxxx, frequency =0}
+]

@@ -202,11 +202,18 @@ class StoreEmployee // A class which file related operations
 
   ArrayList < Employee > delete(int data) //method to delete some record by id only
   {
+	Boolean flag=false;
     for (int index = 0; index < alist.size(); index++) {
       if (alist.get(index).getID().equals(data))
-        alist.remove(index);
-      insert(alist);
+	  {
+		  alist.remove(index);
+		  flag=true;
+	  }
     }
+	if(flag)
+		System.out.println("No entry found");
+     insert(alist);
+	 
     return alist;
   }
 
@@ -226,14 +233,14 @@ class StoreEmployee // A class which file related operations
       br.close();
 
     } catch (IOException exception) {
-      System.out.println(exception);
+      System.out.println("File Not Found");
+	  System.exit(0);
     }
     return alist;
   }
 
   ArrayList < Employee > insert(ArrayList < Employee > list) //method to insert data into file
   {
-
     try {
       BufferedWriter br = new BufferedWriter(new FileWriter("employee.txt"));
       for (Employee emp: list) {
@@ -247,7 +254,6 @@ class StoreEmployee // A class which file related operations
 
     return alist;
   }
-
 }
 
 class Main {
@@ -274,9 +280,17 @@ class Main {
         case 1:
           InputStreamReader isr = new InputStreamReader(System.in);
           BufferedReader br = new BufferedReader(isr);
-
-          System.out.println("Enter name ");
-          name = br.readLine();
+		  
+		  while (true) //while accurate format is not given
+          {
+            System.out.println("Enter name ");
+			name = br.readLine();
+            String regex = "[a-zA-Z]+\\.?";
+            boolean res = name.matches(regex);
+            if (!res)
+              System.out.println("\nEnter valid name");
+            if (res) break;
+          }
 
           while (true) //while accurate format is not given
           {
@@ -299,9 +313,20 @@ class Main {
               System.out.println("Enter valid DOB");
             if (res) break;
           }
-
-          System.out.println("Enter age");
-          age = sc.nextInt();
+        
+		while (true) //while accurate format is not given
+          {
+			System.out.println("Enter age");
+			String temp=sc.next();
+            String regex = "[0-9]*";
+            boolean res = temp.matches(regex);
+            if (!res)
+              System.out.println("\nEnter valid age");
+            if (res){
+				age=Integer.parseInt(temp);
+				break;
+			}
+          }
 
           Employee emp = new Employee(name, email, DOB, age);
           list.add(emp);
