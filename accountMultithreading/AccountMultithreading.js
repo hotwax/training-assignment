@@ -17,11 +17,13 @@ function enterChoice() {
       case "1":
         console.log();
         AccountOverdrawDemo.run();
+        setTimeout(enterChoice, 8000);
         break;
 
       case "2":
         console.log();
         AccountOverdrawSafeDemo.run();
+        setTimeout(enterChoice, 8000);
         break;
 
       case "3":
@@ -32,6 +34,7 @@ function enterChoice() {
         console.log("Please enter a valid choice\n");
         enterChoice();
     }
+
   })
 }
 
