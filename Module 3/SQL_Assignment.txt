@@ -11,6 +11,34 @@ mysql> DESC salespeople;
 +-------+-------------+------+-----+---------+-------+
 4 rows in set (0.01 sec)
 
+or 
+
+mysql> SHOW columns FROM salespeople;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| snum  | int         | NO   | PRI | NULL    |       |
+| sname | varchar(30) | NO   |     | NULL    |       |
+| city  | varchar(30) | NO   |     | NULL    |       |
+| comm  | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+or 
+
+mysql> SELECT COLUMN_NAME
+    -> FROM information_schema.columns
+    -> WHERE TABLE_NAME = 'Salespeople';
++-------------+
+| COLUMN_NAME |
++-------------+
+| snum        |
+| sname       |
+| city        |
+| comm        |
++-------------+
+4 rows in set (0.01 sec)
+
 
 2) List all customers with a rating of 100. 
 
@@ -27,24 +55,24 @@ mysql> SELECT cname FROM customers WHERE rating = 100;
 
 3) Find the largest order taken by each salesperson on each date. 
 
-mysql> SELECT s.snum, s.sname, o.odate
-    -> FROM salespeople AS s
-    -> JOIN orders AS o ON o.snum = s.snum
-    -> GROUP BY o.snum, o.odate;
-+------+---------+----------+
-| snum | sname   | odate    |
-+------+---------+----------+
-| 1007 | Rifkin  | 10/03/90 |
-| 1004 | Motika  | 10/03/90 |
-| 1001 | Peel    | 10/03/90 |
-| 1002 | Serres  | 10/03/90 |
-| 1002 | Serres  | 10/04/90 |
-| 1001 | Peel    | 10/05/90 |
-| 1003 | AxelRod | 10/04/90 |
-| 1002 | Serres  | 10/06/90 |
-| 1001 | Peel    | 10/06/90 |
-+------+---------+----------+
-9 rows in set (0.04 sec)
+mysql> SELECT o.odate, o.snum, s.sname, MAX(o.amt) AS largest_order
+    -> FROM orders AS o
+    -> JOIN salespeople AS s ON o.snum = s.snum
+    -> GROUP BY o.odate, o.snum, s.sname;
++----------+------+---------+---------------+
+| odate    | snum | sname   | largest_order |
++----------+------+---------+---------------+
+| 10/03/90 | 1007 | Rifkin  |       1096.16 |
+| 10/03/90 | 1004 | Motika  |        1900.1 |
+| 10/03/90 | 1001 | Peel    |        767.19 |
+| 10/03/90 | 1002 | Serres  |       5160.45 |
+| 10/04/90 | 1002 | Serres  |         75.75 |
+| 10/05/90 | 1001 | Peel    |          4723 |
+| 10/04/90 | 1003 | AxelRod |       1713.23 |
+| 10/06/90 | 1002 | Serres  |       1309.95 |
+| 10/06/90 | 1001 | Peel    |       9891.88 |
++----------+------+---------+---------------+
+9 rows in set (0.01 sec)
 
 
 4) Arrange the Orders table by descending customer number. 
@@ -69,41 +97,40 @@ mysql> SELECT * FROM orders ORDER BY cnum;
 
 5) Find which salespeople currently have orders in the order table. 
 
-mysql> SELECT salespeople.sname
+mysql> select snum, sname, city, comm
     -> FROM salespeople
-    -> LEFT JOIN orders
-    -> ON salespeople.snum = orders.snum
-    -> GROUP BY salespeople.sname;
-+---------+
-| sname   |
-+---------+
-| Peel    |
-| Serres  |
-| AxelRod |
-| Motika  |
-| Rifkin  |
-| Fran    |
-+---------+
-6 rows in set (0.00 sec)
+    -> WHERE snum IN ( SELECT DISTINCT snum
+    ->                  FROM orders);
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1003 | AxelRod | New York  |   10 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
++------+---------+-----------+------+
+5 rows in set (0.01 sec)
 
 
 
 6) List names of all customers matched with the salespeople serving them. 
 
-mysql> SELECT cname
-    -> FROM customers
-    -> LEFT JOIN salespeople ON customers.snum = salespeople.snum;
-+----------+
-| cname    |
-+----------+
-| Hoffman  |
-| Giovanni |
-| Liu      |
-| Grass    |
-| Clemens  |
-| Cisneros |
-| Pererira |
-+----------+
+mysql> SELECT c.cname, s.sname
+    -> FROM customers AS c
+    -> JOIN salespeople AS s
+    -> ON c.snum = s.snum;
++----------+---------+
+| cname    | sname   |
++----------+---------+
+| Hoffman  | Peel    |
+| Giovanni | AxelRod |
+| Liu      | Serres  |
+| Grass    | Serres  |
+| Clemens  | Peel    |
+| Cisneros | Rifkin  |
+| Pererira | Motika  |
++----------+---------+
 7 rows in set (0.00 sec)
 
 
@@ -126,20 +153,22 @@ mysql> SELECT sname, snum
 
 8) Count the orders of each of the salespeople and output the results in descending order. 
 
-mysql> SELECT snum, COUNT(snum) AS number_of_orders
-    -> FROM orders
-    -> GROUP BY snum
-    -> ORDER BY number_of_orders DESC;
-+------+------------------+
-| snum | number_of_orders |
-+------+------------------+
-| 1001 |                3 |
-| 1002 |                3 |
-| 1007 |                2 |
-| 1004 |                1 |
-| 1003 |                1 |
-+------+------------------+
-5 rows in set (0.00 sec)
+mysql> SELECT salespeople.snum, salespeople.sname, COALESCE(COUNT(orders.onum), 0) as order_count
+    -> FROM salespeople
+    -> LEFT JOIN orders ON salespeople.snum = orders.snum
+    -> GROUP BY salespeople.snum, salespeople.sname
+    -> ORDER BY order_count DESC;
++------+---------+-------------+
+| snum | sname   | order_count |
++------+---------+-------------+
+| 1001 | Peel    |           3 |
+| 1002 | Serres  |           3 |
+| 1007 | Rifkin  |           2 |
+| 1003 | AxelRod |           1 |
+| 1004 | Motika  |           1 |
+| 1008 | Fran    |           0 |
++------+---------+-------------+
+6 rows in set (0.01 sec)
 
 
 9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
@@ -226,20 +255,20 @@ mysql> SELECT onum, amt, odate, cnum, snum
 
 14) Find all customers who booked orders on October 3. 
 
-mysql> SELECT customers.cname
-    -> FROM customers
-    -> LEFT JOIN orders ON customers.cnum = orders.cnum
-    -> WHERE orders.odate = '10/03/90';
-+----------+
-| cname    |
-+----------+
-| Pererira |
-| Cisneros |
-| Hoffman  |
-| Liu      |
-| Pererira |
-+----------+
-5 rows in set (0.00 sec)
+mysql> SELECT DISTINCT c.cname, c.cnum
+    -> FROM customers AS c
+    -> JOIN orders AS o
+    -> ON c.cnum = o.cnum
+    -> WHERE o.odate = '10/03/90';
++----------+------+
+| cname    | cnum |
++----------+------+
+| Pererira | 2008 |
+| Cisneros | 2007 |
+| Hoffman  | 2001 |
+| Liu      | 2003 |
++----------+------+
+4 rows in set (0.00 sec)
 
 15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
 
