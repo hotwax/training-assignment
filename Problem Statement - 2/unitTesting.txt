@@ -1,0 +1,229 @@
+Test the Program WordCountScrapper by the Following Testcases:
+
+TestCase 1: (Selecting Add Employee to the file and user enters the wrong name) 
+
+input : Enter the Name : Sanskar21213
+
+output: 
+Enter a valid name!
+
+TestCase 2: (Selecting Add Employee to the file and user enters the wrong email) 
+
+input : Enter the Email : ss212
+
+output: 
+Enter a valid Email !
+
+TestCase 3: (Selecting Add Employee to the file and user enters the age that is string) 
+
+input : Enter the Age : sad
+
+output: 
+Enter a valid Age!
+
+TestCase 4: (Selecting Add Employee to the file and user enters the age that is 102) 
+
+input : Enter the Age : 102
+
+output: 
+Enter a valid Age!
+
+TestCase 5: (Selecting Add Employee to the file and user enters the wrong day in DOB) 
+
+input : Enter the date of birth :
+Enter the day of birth : 44
+
+output: 
+Enter a valid day!
+
+TestCase 6: (Selecting Add Employee to the file and user enters the wrong month in DOB) 
+
+input : Enter the month of birth : 22
+
+output: 
+Enter a valid month!
+
+TestCase 7: (Selecting Add Employee to the file and user enters the wrong year in DOB) 
+
+input : Enter the month of birth : 2026
+
+output: 
+Enter a valid year!
+
+TestCase 8: (After adding employee successfully) 
+
+input : 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter 4 For show all employee from From the file
+Enter any other number to Exit
+1
+Enter the Name : Sanskar Soni
+Enter the Email : sans@gmail.com
+Enter the Age : 21
+Enter the date of birth :
+Enter the day of birth : 19
+Enter the month of birth : 03
+Enter the year of birth : 2001
+
+output: 
+Employee Added SuccessFully
+
+In file (at last)- 
+
+Rohan Sharma,rohan.sharma@example.com,35,3/6/2023
+Neha Gupta,neha.gupta@example.com,28,3/6/2023
+Amit Patel,amit.patel@example.com,42,3/6/2023
+Deepa Shah,deepa.shah@example.com,31,3/6/2023
+Vikas Gupta,vikas.gupta@example.com,24,3/6/2023
+Pooja Patel,pooja.patel@example.com,29,3/6/2023
+Kunal Sharma,kunal.sharma@example.com,40,3/6/2023
+Anjali Patel,anjali.patel@example.com,27,3/6/2023
+Dinesh Shah,dinesh.shah@example.com,32,3/6/2023
+Sonia Sharma,sonia.sharma@example.com,22,3/6/2023
+Sanskar Soni,sans@gmail.com,21,3/19/2001
+
+TestCase 9: (Deleting a employee from file) 
+
+input : 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter 4 For show all employee from From the file
+Enter any other number to Exit
+2
+Enter the Employee Email to remove the employee : sonia.sharma@example.com
+
+output: 
+Employee deleted Successfully
+
+in file(deleted sonia) -
+Rohan Sharma,rohan.sharma@example.com,35,3/6/2023
+Neha Gupta,neha.gupta@example.com,28,3/6/2023
+Amit Patel,amit.patel@example.com,42,3/6/2023
+Deepa Shah,deepa.shah@example.com,31,3/6/2023
+Vikas Gupta,vikas.gupta@example.com,24,3/6/2023
+Pooja Patel,pooja.patel@example.com,29,3/6/2023
+Kunal Sharma,kunal.sharma@example.com,40,3/6/2023
+Anjali Patel,anjali.patel@example.com,27,3/6/2023
+Dinesh Shah,dinesh.shah@example.com,32,3/6/2023
+Sanskar Soni,sans@gmail.com,21,3/19/2001
+
+
+TestCase 10: (Searching from the file with query sanskar) 
+
+input : 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter 4 For show all employee from From the file
+Enter any other number to Exit
+3
+Enter the query(text) to search for employee : sanskar
+
+
+output: 
+ Your Search Result :
+{
+  name: 'Sanskar Soni',
+  email: 'sans@gmail.com',
+  age: '21',
+  dob: '3/19/2001'
+}
+
+TestCase 11: (Selecting show all option) 
+
+input : Enter the month of birth : 2026
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter 4 For show all employee from From the file
+Enter any other number to Exit
+4
+
+output: 
+Your  Result :
+
+Rohan Sharma,rohan.sharma@example.com,35,3/6/2023
+
+Neha Gupta,neha.gupta@example.com,28,3/6/2023
+
+Amit Patel,amit.patel@example.com,42,3/6/2023
+
+Deepa Shah,deepa.shah@example.com,31,3/6/2023
+
+Vikas Gupta,vikas.gupta@example.com,24,3/6/2023
+
+Pooja Patel,pooja.patel@example.com,29,3/6/2023
+
+Kunal Sharma,kunal.sharma@example.com,40,3/6/2023
+
+Anjali Patel,anjali.patel@example.com,27,3/6/2023
+
+Dinesh Shah,dinesh.shah@example.com,32,3/6/2023
+
+Sanskar Soni,sans@gmail.com,21,3/19/2001
+
+TestCase 12: (if employee file does not exist) 
+
+output: 
+employees.txt File does not exist!
+
+TestCase 13: (if user enters the number in menu to exit which not 1 2 3 4) 
+
+input: 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter 4 For show all employee from From the file
+Enter any other number to Exit
+55
+
+output: 
+program stops and exists
+
+TestCase 14: (if query to search is number 24) 
+
+input: 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter 4 For show all employee from From the file
+Enter any other number to Exit
+3
+Enter the query(text) to search for employee : 24
+
+output: 
+ Your Search Result :
+{
+  name: 'Vikas Gupta',
+  email: 'vikas.gupta@example.com',
+  age: '24',
+  dob: '3/6/2023'
+}
+
+TestCase 15: (if query to search is number email) 
+
+input: 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter 4 For show all employee from From the file
+Enter any other number to Exit
+3
+Enter the query(text) to search for employee : dinesh.shah@example.com
+
+output: 
+ Your Search Result :
+{
+  name: 'Dinesh Shah',
+  email: 'dinesh.shah@example.com',
+  age: '32',
+  dob: '3/6/2023'
+}
+
+
+
+
+

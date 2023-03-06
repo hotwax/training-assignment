@@ -1,0 +1,15 @@
+{
+  "name": "searching-sorting-on-employee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "searchingSortingOnEmployee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sanskar soni",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.29.4",
+    "prompt-sync": "^4.2.0"
+  }
+}
