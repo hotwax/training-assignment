@@ -1,0 +1,37 @@
+CASE #1 : (Serialization)
+    Inputs:
+        The user chooses option 1 (serialize object)
+    Output:
+        Object Serialized in output1.json
+
+CASE #2 : (Deserialization)
+    Inputs:
+        The user chooses option 1 (serialize object)
+    Output:
+        Object Serialized Successfully
+
+CASE #3 : (output1.json missing)
+    Inputs:
+        The user chooses option 1 (serialize object)
+    Output:
+        Object Serialized in output1.json (creates a new file)
+
+CASE #4 : (output1.json file is empty)
+    Inputs:
+        The user chooses option 2 (deserialize object)
+    Output:
+        "SyntaxError: Unexpected token < in JSON at position 0"
+
+CASE #5: (output1.json file invalid JSON format)
+    Inputs:
+        The user chooses option 2 (deserialize object)
+    Output:
+        "SyntaxError: Unexpected token < in JSON at position 0"
+
+CASE #6: (Invalid Choice)
+    Inputs:
+        The user chooses option 5
+    Output:
+        Invalid Input (again shows the menu)
+
+
