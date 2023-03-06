@@ -1,4 +1,3 @@
-wrongURL
-https://dghashudhdhjsjdil/
 https://www.hotwaxsystems.com/
-https://www.hotwax.co/
+https://en.wikipedia.org/wiki/JavaScript
+https://www.geeksforgeeks.org/java/

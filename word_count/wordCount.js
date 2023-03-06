@@ -33,7 +33,6 @@ async function main() {
     return finalMap;
 }
 
-main();
 
 //function to get data from urls
 async function getFromURL() {
@@ -68,7 +67,7 @@ async function getFromURL() {
 function filterResponse(response) {
     //map to handle words count for single url
     let map = []
-    //storing the data of response in res
+    //storing the data of response in results
     let results = response.data;
     //storing data without html tags and scripts.
     let text = htmlToText(results).split(' ');
@@ -116,6 +115,9 @@ function getCount(array, word, map) {
     //in the end return frequency.
     return count;
 }
+
+//calling main function.
+main();
 
 //export the getFromURL function and finalMap array
 module.exports = { main, finalMap };
