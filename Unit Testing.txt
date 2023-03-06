@@ -1,0 +1,237 @@
+TABLES:-
+Salespeople
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1003 | AxelRod | New York  |   10 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+6 rows in set (0.08 sec)
+
+Customers
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+7 rows in set (0.00 sec)
+
+Orders
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+
+======================================================================Testing==============================================================================
+
+
+1) List all the columns of the Salespeople table. 
+
+expected output:-
+=> it should show the columns name, its data type and keys.
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| SNUM  | int(11)     | NO   | PRI | NULL    |       |
+| SNAME | varchar(30) | YES  |     | NULL    |       |
+| CITY  | varchar(20) | YES  |     | NULL    |       |
+| COMM  | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+
+
+
+
+2) List all customers with a rating of 100. 
+
+expected output:-
+=> it should show 3 rows with cnum 2001, 2006 and 2007.
++------+---------+--------+--------+------+
+| CNUM | CNAME   | CITY   | RATING | SNUM |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
+| 2007 | Pereira | Rome   |    100 | 1004 |
++------+---------+--------+--------+------+
+
+
+
+
+
+3) Find the largest order taken by each salesperson on each date. 
+expected output:-
+=> we have to print the largest order details for salespeople for each date.
+=> if two or more orders are done on same date ith same Snum id then print maximum one.
+=> should contains 9 rows.
++---------+------------+---------------+
+| SNAME   | ODATE      | largest_order |
++---------+------------+---------------+
+| AxelRod | 1990-10-04 |       1713.23 |
+| Motika  | 1990-10-03 |       1900.10 |
+| Peel    | 1990-10-03 |        767.19 |
+| Peel    | 1990-10-05 |       4723.00 |
+| Peel    | 1990-10-06 |       9891.88 |
+| Rifkin  | 1990-10-03 |       1098.16 |
+| Serres  | 1990-10-03 |       5160.45 |
+| Serres  | 1990-10-04 |         75.75 |
+| Serres  | 1990-10-06 |       1309.95 |
++---------+------------+---------------+
+
+
+
+
+
+4) Arrange the Order table by descending customer number. 
+expected output:-
+=> should contains 7 rows but the order of cnum should be 2008,2007,2006,2004,2003,2002,2001.
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2001 | Hoffman  | London  |    100 | 1001 |
++------+----------+---------+--------+------+
+
+
+
+
+
+5) Find which salespeople currently have orders in the order table. 
+expected output :-
+Should print details of salespeople with snum 1001,1007,1004,1002,1003
++---------+------+
+| SNAME   | SNUM |
++---------+------+
+| AxelRod | 1003 |
+| Motika  | 1004 |
+| Peel    | 1001 |
+| Rifkin  | 1007 |
+| Serres  | 1002 |
++---------+------+
+
+
+
+
+
+6) List names of all customers matched with the salespeople serving them. 
+expected output:-
+=> first of all we have print name of all customers so no. of rows is 7.
+=> second we have to print the name of the salespeople who is serving them.
+
++----------+---------------------+
+| CNAME    | salespeople_serving |
++----------+---------------------+
+| Hoffman  | Peel                |
+| Giovanni | AxelRod             |
+| Liu      | Serres              |
+| Grass    | Serres              |
+| Clemens  | Peel                |
+| Cisneros | Rifkin              |
+| Pereira  | Motika              |
++----------+---------------------+
+
+
+
+
+
+7) Find the names and numbers of all salespeople who have more than one customer.
+expected output:- 
+=> firstly we only have to print the name and Snum of Salespeople.
+=> then we have to print only thode salespeople who have more than one customers.
+=> after observing only 1001 and 1002 are coming more than 1 times in customer table.
++--------+------+
+| SNAME  | SNUM |
++--------+------+
+| Peel   | 1001 |
+| Serres | 1002 |
++--------+------+
+
+
+
+
+
+8) Count the orders of each of the salespeople and output the results in descending order. 
+expected output:-
+=> fistly we have to count the no. of order taken by each salespeople.
+=> Secondly print the output in descending order of number of orders.
+=> we have to join the salespeople and orders table and then have to group them Salespeople wise.
+=> it should contains 6 rows as no. of salespeople is 6.
++---------+--------------+
+| SNAME   | ORDERS_COUNT |
++---------+--------------+
+| Peel    |            3 |
+| Serres  |            3 |
+| Rifkin  |            2 |
+| AxelRod |            1 |
+| Motika  |            1 |
+| Fran    |            0 |
++---------+--------------+
+
+
+
+
+
+9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
+expected output:-
+=> we have to print the whole table if thre are customers present in table whose city is SanJose
+=> if there are no customers tat live in SanJose then print nothing (Empty set).
+=> As ther are customers present in SanJose, output should be -whole customer table printed.
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+
+
+
+
+
+10) Match salespeople to customers according to what city they live in.
+expected output:-
+=> we have to match the cities of salespeople and customers and print if they belong to same city.
+=> have to print all combination of salespeople and customers with same city but not duplicate rows.
++--------+----------+---------+
+| SNAME  | CNAME    | CITY    |
++--------+----------+---------+
+| Peel   | Hoffman  | London  |
+| Motika | Hoffman  | London  |
+| Fran   | Hoffman  | London  |
+| Serres | Liu      | SanJose |
+| Peel   | Clemens  | London  |
+| Motika | Clemens  | London  |
+| Fran   | Clemens  | London  |
+| Serres | Cisneros | SanJose |
++--------+----------+---------+
+
