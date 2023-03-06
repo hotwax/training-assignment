@@ -1,0 +1,88 @@
+﻿Test Cases for search function.
+
+============================================================================
+
+test 1: providing exact name to search.
+3
+Dhruv Singh
+name
+asc
+
+Output:-
+There are 8 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 3
+Enter search query: Dhruv Singh
+Sort by (name, email, age, dob): name
+Sort order (asc, desc): asc
+
+Found 1 employees:
+┌─────────┬───────────────┬───────────────────────────┬──────┬───────────────┐
+│ (index) │     name      │           email           │ age  │      dob      │
+├─────────┼───────────────┼───────────────────────────┼──────┼───────────────┤
+│    0    │ 'Dhruv Singh' │ 'singhdhruv861@gmail.com' │ '21' │ '12/01/20024' │
+└─────────┴───────────────┴───────────────────────────┴──────┴───────────────┘
+
+============================================================================
+
+test 2: providing first name or substrings as query and then sorting by name.
+3
+dh
+name
+asc
+
+output:-
+There are 8 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 3
+Enter search query: dh
+Sort by (name, email, age, dob): name
+Sort order (asc, desc): asc
+
+Found 2 employees:
+┌─────────┬────────────────────┬───────────────────────────┬──────┬───────────────┐
+│ (index) │        name        │           email           │ age  │      dob      │
+├─────────┼────────────────────┼───────────────────────────┼──────┼───────────────┤
+│    0    │   'Dhruv Singh'    │ 'singhdhruv861@gmail.com' │ '21' │ '12/01/20024' │
+│    1    │ 'Sadhana Deshmukh' │   'sadhna123@gmail.com'   │ '21' │ '21/06/2002'  │
+└─────────┴────────────────────┴───────────────────────────┴──────┴───────────────┘
+
+============================================================================
+
+test 3: providing substrings of mail as query and then sorting by age.
+3
+gmail
+age
+desc
+
+Output:-
+There are 8 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 3
+Enter search query: gmail
+Sort by (name, email, age, dob): age
+Sort order (asc, desc): desc
+
+Found 6 employees:
+┌─────────┬────────────────────┬───────────────────────────┬──────┬───────────────┐
+│ (index) │        name        │           email           │ age  │      dob      │
+├─────────┼────────────────────┼───────────────────────────┼──────┼───────────────┤
+│    0    │   'Naveen Patel'   │ 'naveen.patel@gmail.com'  │ '40' │ '03/03/19813' │
+│    1    │   'Rohit Sharma'   │ 'rohit.sharma@gmail.com'  │ '25' │ '01/01/1996'  │
+│    2    │    'Sana Khan'     │   'sana.khan@gmail.com'   │ '22' │ '12/12/1999'  │
+│    3    │   'Dhruv Singh'    │ 'singhdhruv861@gmail.com' │ '21' │ '12/01/20024' │
+│    4    │   'Sanskar Soni'   │    'sanskar@gmail.com'    │ '21' │ '23/12/2001'  │
+│    5    │ 'Sadhana Deshmukh' │   'sadhna123@gmail.com'   │ '21' │ '21/06/2002'  │
+└─────────┴────────────────────┴───────────────────────────┴──────┴───────────────┘
+
+============================================================================
+

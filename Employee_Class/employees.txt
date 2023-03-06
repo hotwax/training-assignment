@@ -1,0 +1,8 @@
+Rohit Sharma,rohit.sharma@gmail.com,25,01/01/1996
+Anjali Gupta,anjali.gupta@yahoo.com,30,05/05/1991
+Vikas Kumar,vikas.k@hotmail.com,35,07/07/1986
+Sana Khan,sana.khan@gmail.com,22,12/12/1999
+Naveen Patel,naveen.patel@gmail.com,40,03/03/19813
+Sadhana Deshmukh,sadhna123@gmail.com,21,21/06/2002
+Sanskar Soni,sanskar@gmail.com,21,23/12/2001
+Dhruv Singh,singhdhruv861@gmail.com,21,12/01/20024
