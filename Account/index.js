@@ -12,10 +12,5 @@ class Account {
   }
 }
 
-
-
-
-
-
 const account = new Account();
 account.withdraw("John", 200); // John withdraws 200 and has 800 left

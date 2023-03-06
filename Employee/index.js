@@ -111,12 +111,6 @@ class Employee {
   deleteEmployee(id) {
     console.log();
     readline.question("Enter the id of the employee: ", (emp_id) => {
-      if (!/^[0-9]+$/.test(emp_id)) {
-        console.log();
-        console.log("Id should be a number.");
-        console.log();
-        this.main();
-      }
       console.log();
       if (!this.checkIdInData(emp_id)) { // Checking if the given id is present in the array
         console.log("Employee data does not exist.");
@@ -128,9 +122,9 @@ class Employee {
         this.writeInFile(); // Writing the updated data to the file
         console.log("Employee data deleted successfully.");
       }
+      console.log();
+      this.main(); // Returning to the main menu
     });
-    console.log();
-    this.main(); // Returning to the main menu
   }
 
 
@@ -211,6 +205,7 @@ class Employee {
 
 var employeeData = [];
 var employee = new Employee();
+
 try {
   const data = fs.readFileSync("Employee.txt", "utf8");
   const lines = data.split("\n");

@@ -63,17 +63,14 @@ class Serialize {
 
     try {
       // Write the students array to a file named "output1.ser".
-      fs.writeFileSync(
-        "output1.ser",
-        JSON.stringify(students)
-      );
+      fs.writeFileSync("output1.ser", JSON.stringify(students));
+      console.log();
       console.log("Serialized data is saved in .ser file in the folder.");
     } catch (err) {
-      console.error(err);
+      console.log("Not able to write in the file.");
     }
   }
 }
-
 
 class Deserialize {
   deserializeStudentObject() {
@@ -81,13 +78,15 @@ class Deserialize {
       // Read the students array from the file "output1.ser".
       const data = fs.readFileSync("output1.ser");
       const students = JSON.parse(data);
+      console.log();
+      console.log("Deserialized data from .ser file in the folder.");
+      console.log();
       console.table(students);
     } catch (err) {
-      console.error(err);
+      console.log("Not able to read from the file.");
     }
   }
 }
-
 
 const serialize = new Serialize();
 serialize.serializeStudentObject();
