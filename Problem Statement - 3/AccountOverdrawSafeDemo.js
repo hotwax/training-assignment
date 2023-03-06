@@ -61,7 +61,6 @@ const AccountOverdrawDemo = async () => {
     // person 2 withdrawing amount
     const person2 = async () => {
         for (i = 0; i < 1000; i++) {
-            awaitTimeout(2).then();
             const amountWithdrawn = await accountHolder.withdraw(20);
             if (amountWithdrawn === 0) {
                 break; // Stop withdrawing if overdrawn

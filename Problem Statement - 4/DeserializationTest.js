@@ -30,8 +30,9 @@ const readFromFile = () => {
     }
 
     //student list from the data (Parsing the data) 
+    let students = [];
     try {
-        const students = JSON.parse(data);
+        students = JSON.parse(data);
     } catch (error) {
         console.log(error);
         exit();
