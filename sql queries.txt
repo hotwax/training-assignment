@@ -115,6 +115,23 @@ mysql> SELECT SALESPEOPLE.SNAME, SALESPEOPLE.SNUM FROM SALESPEOPLE,ORDERS
 +---------+------+
 5 rows in set (0.00 sec)
 
+or
+
+mysql> SELECT DISTINCT salespeople.SNAME ,salespeople.SNUM
+    -> FROM salespeople
+    -> JOIN customers ON salespeople.SNUM = customers.SNUM
+    -> JOIN orders ON customers.CNUM = orders.CNUM;
++---------+------+
+| SNAME   | SNUM |
++---------+------+
+| Rifkin  | 1007 |
+| Peel    | 1001 |
+| Motika  | 1004 |
+| Serres  | 1002 |
+| AxelRod | 1003 |
++---------+------+
+5 rows in set (0.00 sec)
+
 
 
 
@@ -264,6 +281,19 @@ mysql> SELECT ORDERS.* FROM ORDERS
 | 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
 +------+---------+------------+------+------+
 1 row in set (0.06 sec)
+
+or
+
+mysql> SELECT *
+    -> FROM orders o
+    -> INNER JOIN salespeople s ON o.SNUM = s.SNUM
+    -> WHERE s.SNAME = 'Motika';
++------+---------+------------+------+------+------+--------+--------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM | SNUM | SNAME  | CITY   | COMM |
++------+---------+------------+------+------+------+--------+--------+------+
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 | 1004 | Motika | London |   11 |
++------+---------+------------+------+------+------+--------+--------+------+
+1 row in set (0.03 sec)
 
 
 
