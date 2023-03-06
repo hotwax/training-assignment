@@ -67,15 +67,36 @@ const addEmployee = () => {
 
     //for age
     let age = prompt("Enter the Age : ");
-
-    while(age <= 5 || age > 100){
+    while(age <= 5 || age > 100 || isNaN(age+0)){
         console.log("\nEnter a valid Age!");
         age = prompt("Enter the Age : ");
     }
-    
-    let dobInString = prompt("Enter the DOB in dd/mm/yyy : ");
 
-    let dob = Date(dobInString);
+    // for date of birth
+    console.log("Enter the date of birth : ");
+
+    let day = prompt("Enter the day of birth : ");
+
+    while(day < 1 || day > 31 || isNaN(day+0)){
+        console.log("\nEnter a valid day!");
+        day = prompt("Enter the day : ");
+    }
+    let month = prompt("Enter the month of birth : ");
+
+    while(month < 1 || month > 12 || isNaN(month+0)){
+        console.log("\nEnter a valid month!");
+        month = prompt("Enter the month : ");
+    }
+
+    let year = prompt("Enter the year of birth : ");
+    while(year > new Date().getFullYear() || isNaN(year+0)){
+        console.log("\nEnter a valid year!");
+        year = prompt("Enter the year : ");
+    }
+    
+    //converting it in date format
+    let dobInString = `${year}-${month}-${day}`;
+    let dob = new Date(dobInString);
 
     //employee json object
     let emp = {
@@ -133,7 +154,12 @@ const readEmployeesFromFile = () => {
             });
         })
     } catch (error) {
-        console.error("Error reading file:", error);
+        if(error.code = "ENOENT"){
+            console.log(FILENAME + " File does not exist!");
+            exit();
+        }else{           
+            console.log("Erro while reading file " + FILENAME + " : " + error);
+        }
     }
 
     // return the created object list
@@ -196,7 +222,7 @@ const searchEmployee = () => {
 // show all function
 const showAll = () => {
     //printing the all employees
-    console.log("\n Your  Result : \n");
+    console.log("\nYour  Result : \n");
     employeeList.forEach(employee => {
         console.log(`${employee.name},${employee.email},${employee.age},${new Date(employee.dob).toLocaleString().split(',')[0]}\n`);
     })
