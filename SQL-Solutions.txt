@@ -128,13 +128,9 @@ Output -
 
 Query -
 
-SELECT 
-    c.cname AS CUSTOMER_NAME, s.sname AS SERVING_BY
-FROM
-    customers AS c,
-    salespeople AS s
-WHERE
-    s.snum = c.snum;
+SELECT c.cname AS CUSTOMER_NAME, s.sname AS SERVING_BY
+FROM customers AS c
+INNER JOIN salespeople AS s ON c.snum = s.snum;
 
 Output -
 
@@ -157,12 +153,11 @@ Query -
 SELECT 
     s.sname, s.snum
 FROM
-    salespeople AS s,
-    customers AS c
-WHERE
-    s.snum = c.snum
-GROUP BY c.snum
-HAVING COUNT(c.snum) > 1;
+    salespeople AS s
+        INNER JOIN
+    customers AS c ON s.snum = c.snum
+GROUP BY s.snum
+HAVING COUNT(c.cnum) > 1;
 
 Output -
 
@@ -179,14 +174,9 @@ Output -
 Query -
 
 SELECT 
-    s.sname, s.snum, COUNT(o.snum) AS order_count
-FROM
-    salespeople AS s,
-    orders AS o
-WHERE
-    s.snum = o.snum
-GROUP BY o.snum
-ORDER BY order_count DESC;
+    s.sname, s.snum, (SELECT count(*) FROM orders AS o WHERE s.snum = o.snum) AS order_count
+FROM 
+    salespeople AS s;
 
 Output - 
 
@@ -195,9 +185,10 @@ Output -
 +---------+------+-------------+
 | Peel    | 1001 |           3 |
 | Serres  | 1002 |           3 |
-| Rifkin  | 1007 |           2 |
 | AxelRod | 1003 |           1 |
 | Motika  | 1004 |           1 |
+| Rifkin  | 1007 |           2 |
+| Fran    | 1008 |           0 |
 +---------+------+-------------+
 
 -- 9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
@@ -237,10 +228,9 @@ Query -
 SELECT 
     s.sname, c.cname, s.city
 FROM
-    salespeople AS s,
-    customers AS c
-WHERE
-    s.city = c.city;
+    salespeople AS s
+        INNER JOIN
+    customers AS c ON s.city = c.city;
     
 Output - 
 
@@ -494,11 +484,10 @@ SELECT
     s.sname AS salesperson,
     s.snum AS salesperson_num
 FROM
-    orders AS o,
-    salespeople AS s
-WHERE
-    o.snum = s.snum
-GROUP BY o.snum , o.odate
+    orders AS o
+INNER JOIN salespeople AS s
+    ON o.snum = s.snum
+GROUP BY s.snum, o.odate
 HAVING order_amount > 3000;
 
 Output -
@@ -619,10 +608,10 @@ SELECT
     s.sname AS saleperson_name,
     s.comm AS salesperson_comm_rate
 FROM
-    salespeople AS s,
-    customers AS c
+    salespeople AS s
+    INNER JOIN customers AS c ON s.snum = c.snum
 WHERE
-    s.snum = c.snum AND s.comm > 12;
+    s.comm > 12;
 
 Output -
 
@@ -666,11 +655,11 @@ Query -
 SELECT 
     salespeople.*, customers.*
 FROM
-    salespeople,
+    salespeople
+INNER JOIN
     customers
-WHERE
-    salespeople.snum = customers.snum
-        AND salespeople.city = customers.city;
+ON 
+    salespeople.snum = customers.snum AND salespeople.city = customers.city;
 
 Output -
 
@@ -730,12 +719,11 @@ Query -
 SELECT 
     s.sname AS salesperson, MAX(o.amt) AS largest_order_amt
 FROM
-    salespeople AS s,
-    orders AS o
+    salespeople AS s
+    INNER JOIN orders AS o ON s.snum = o.snum
 WHERE
-    s.snum = o.snum
-GROUP BY s.sname
-HAVING s.sname IN ('Serres' , 'Rifkin'); 
+    s.sname IN ('Serres' , 'Rifkin')
+GROUP BY s.sname;
 
 Output - 
 
@@ -773,12 +761,8 @@ Output -
 
 Query -
 
-SELECT 
-    *
-FROM
-    customers
-WHERE
-    cname BETWEEN 'A' AND 'G';
+SELECT * FROM customers 
+WHERE cname BETWEEN "A%" AND "G%";
 
 Output -
 
@@ -794,13 +778,12 @@ Output -
 Query -
 
 SELECT 
-    *
+    c1.cname AS customer1_name,
+    c2.cname AS customer2_name,
+    c1.snum AS salesperson_num
 FROM
-    customers c1,
-    customers c2
-WHERE
-    c1.snum = c2.snum
-        AND c1.cname != c2.cname;
+    customers c1
+    INNER JOIN customers c2 ON c1.snum = c2.snum AND c1.cname < c2.cname;
 
 Output -
 
@@ -918,7 +901,7 @@ Output -
 
 -- 38) Find all orders with amounts smaller than any amount for a customer in SanJose. 
 
-Query -
+Query 1 -
 
 SELECT 
     *
@@ -936,6 +919,24 @@ WHERE
                     customers
                 WHERE
                     city = 'SanJose'));
+
+
+Query 2 (Using Joins)-
+
+SELECT 
+    *
+FROM
+    orders
+WHERE
+    amt < ANY (SELECT 
+                    o.amt
+                FROM 
+                    orders AS o
+                    INNER JOIN 
+                    customers AS c 
+                    ON o.cnum = c.cnum
+                WHERE 
+                    c.city = 'SanJose');
 
 Output - 
 
@@ -957,16 +958,12 @@ Output -
 Query -
 
 SELECT 
-    orders.*, customers.cname
+    o.*, c.cname
 FROM
-    orders,
-    customers
+    orders o
+    INNER JOIN customers c ON o.cnum = c.cnum
 WHERE
-    orders.cnum = customers.cnum
-        AND orders.amt > (SELECT 
-            AVG(amt)
-        FROM
-            orders);
+    o.amt > (SELECT AVG(amt) FROM orders);
 
 Output -
 
@@ -1116,10 +1113,8 @@ Query -
 SELECT 
     c1.cname, c2.cname
 FROM
-    customers c1,
-    customers c2
-WHERE
-    c1.snum = c2.snum AND c1.cnum != c2.cnum; 
+    customers c1
+    INNER JOIN customers c2 ON c1.snum = c2.snum AND c1.cnum != c2.cnum;
 
 Output -
 
@@ -1162,13 +1157,10 @@ Output -
 
 Query -
 
-SELECT 
-    o.onum, c.cname
-FROM
-    orders o,
-    customers c
-WHERE
-    o.cnum = c.cnum;
+SELECT o.onum, c.cname
+FROM orders o
+INNER JOIN customers c
+ON o.cnum = c.cnum;
 
 Output - 
 
@@ -1344,15 +1336,10 @@ Query -
 SELECT 
     s.sname, s.snum, SUM(o.amt) AS total_amount
 FROM
-    orders o,
-    salespeople s
-WHERE
-    o.snum = s.snum
-GROUP BY s.snum
-HAVING total_amount > (SELECT 
-        MAX(amt)
-    FROM
-        orders);
+    orders o
+    INNER JOIN salespeople s ON o.snum = s.snum
+GROUP BY s.snum, s.sname
+HAVING total_amount > (SELECT MAX(amt) FROM orders);
 
 Output -
 
@@ -1386,14 +1373,12 @@ SELECT * FROM orders INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads
 Query -
 
 SELECT 
-    salespeople.sname, customers.cname, customers.rating
+    s.sname, c.cname, c.rating
 FROM
-    customers,
-    salespeople
+    customers c
+INNER JOIN salespeople s ON c.snum = s.snum
 WHERE
-    customers.snum = salespeople.snum
-        AND salespeople.sname < customers.cname
-        AND customers.rating < 200;
+    s.sname < c.cname AND c.rating < 200;
 
 Output -
 
@@ -1487,14 +1472,10 @@ Query -
 SELECT 
     customers.cname, customers.rating
 FROM
-    orders,
-    customers
+    orders
+    INNER JOIN customers ON orders.cnum = customers.cnum
 WHERE
-    customers.cnum = orders.cnum
-        AND orders.amt >= (SELECT 
-            AVG(amt)
-        FROM
-            orders)
+    orders.amt >= (SELECT AVG(amt) FROM orders)
 GROUP BY orders.cnum;
 
 Output - 
@@ -1578,12 +1559,9 @@ Query -
 SELECT 
     orders.onum, salespeople.sname, customers.cname
 FROM
-    orders,
-    salespeople,
-    customers
-WHERE
-    orders.cnum = customers.cnum
-        AND orders.snum = salespeople.snum
+    orders
+    INNER JOIN salespeople ON orders.snum = salespeople.snum
+    INNER JOIN customers ON orders.cnum = customers.cnum
 ORDER BY orders.onum;
 
 Output -
@@ -1607,10 +1585,16 @@ Output -
 
 Query 1 -
 
-SELECT salespeople.sname, salespeople.comm 
-FROM salespeople, customers 
-WHERE customers.snum = salespeople.snum AND customers.city = 'London'
-GROUP BY salespeople.snum;
+SELECT 
+    salespeople.sname, salespeople.comm 
+FROM 
+    salespeople 
+INNER JOIN 
+    customers ON customers.snum = salespeople.snum 
+WHERE 
+    customers.city = 'London'
+GROUP BY 
+    salespeople.snum;
 
 Output -
 
@@ -1772,14 +1756,10 @@ Query -
 
 SELECT 
     orders.*
-FROM
-    orders,
-    customers,
-    salespeople
-WHERE
-    orders.cnum = customers.cnum
-        AND orders.snum = salespeople.snum
-        AND customers.city != salespeople.city; 
+FROM 
+    orders
+    INNER JOIN customers ON orders.cnum = customers.cnum
+    INNER JOIN salespeople ON orders.snum = salespeople.snum AND customers.city != salespeople.city;
 
 Output -
 
@@ -2010,12 +1990,10 @@ Query -
 
 SELECT 
     customers.cname, MIN(orders.amt) AS smallest_order
-FROM
-    customers,
-    orders
-WHERE
-    customers.cnum = orders.cnum
-GROUP BY orders.cnum;
+FROM 
+    customers
+    INNER JOIN orders ON customers.cnum = orders.cnum
+GROUP BY customers.cname;
 
 Output - 
 
@@ -2146,13 +2124,10 @@ Query -
 
 SELECT 
     salespeople.*
-FROM
-    salespeople,
-    customers
-WHERE
-    salespeople.snum = customers.snum
-        AND customers.city != salespeople.city
-GROUP BY snum;
+FROM 
+    salespeople
+    INNER JOIN customers ON salespeople.snum = customers.snum AND salespeople.city != customers.city
+GROUP BY salespeople.snum;
 
 Output -
 
@@ -2172,13 +2147,12 @@ Query -
 
 SELECT 
     salespeople.*
-FROM
-    salespeople,
-    customers
-WHERE
-    salespeople.snum = customers.snum
-        AND salespeople.comm > 0.11
-        AND customers.rating < 250
+FROM 
+    salespeople
+    INNER JOIN customers ON salespeople.snum = customers.snum
+WHERE 
+    salespeople.comm > 0.11
+    AND customers.rating < 250
 GROUP BY salespeople.snum;
 
 Output - 
@@ -2252,20 +2226,18 @@ SELECT
     customers.cname,
     customers.rating,
     COUNT(*) AS no_of_orders
-FROM
-    orders,
+FROM 
     customers
-WHERE
-    orders.cnum = customers.cnum
-GROUP BY orders.cnum
+    INNER JOIN orders ON customers.cnum = orders.cnum
+GROUP BY customers.cnum, customers.cname, customers.rating
 HAVING no_of_orders = (SELECT 
         MAX(no_of_orders)
     FROM
         (SELECT 
-            *, COUNT(*) AS no_of_orders
+            COUNT(*) AS no_of_orders
         FROM
             orders
-        GROUP BY orders.cnum) AS customers_with_orders);
+        GROUP BY cnum) AS customers_with_orders);
 
 Output -
 
@@ -2464,14 +2436,11 @@ Query -
 
 SELECT 
     c1.cname, c2.cname, c1.rating
-FROM
-    customers c1,
-    customers c2
-WHERE
-    c1.cnum != c2.cnum
-        AND c1.rating = c2.rating
-GROUP BY c1.cname , c2.cname
-ORDER BY rating DESC;
+FROM 
+    customers c1
+    INNER JOIN customers c2 ON c1.rating = c2.rating AND c1.cnum != c2.cnum
+GROUP BY c1.cname, c2.cname, c1.rating
+ORDER BY c1.rating DESC;
 
 Output -
 
@@ -2655,21 +2624,21 @@ SELECT
     (SELECT 
             SUM(orders.amt)
         FROM
-            orders,
-            customers
+            orders
+                INNER JOIN
+            customers ON customers.cnum = orders.cnum
         WHERE
-            customers.cnum = orders.cnum
-                AND customers.city IN ('Rome' , 'London')) AS total_amt_in_orders_by_customers_in_rome_london,
+            customers.city IN ('Rome' , 'London')) AS total_amt_in_orders_by_customers_in_rome_london,
     (SELECT 
             SUM(total_comm) * 5 AS five_x_comm
         FROM
             (SELECT 
                 (SUM(orders.amt) / 100) * salespeople.comm AS total_comm
             FROM
-                orders, salespeople
+                orders
+            INNER JOIN salespeople ON orders.snum = salespeople.snum
             WHERE
-                orders.snum = salespeople.snum
-                    AND salespeople.city IN ('London' , 'New York')
+                salespeople.city IN ('London' , 'New York')
             GROUP BY orders.snum) comm_of_salespersons_in_london_newyork) AS five_x_comm;
 
 Output - 
@@ -2694,16 +2663,17 @@ SELECT
     orders.onum,
     orders.amt,
     salespeople.city
-FROM
-    orders,
-    salespeople
-WHERE
-    orders.snum = salespeople.snum
-        AND CONCAT(orders.snum, orders.amt) IN (SELECT 
+FROM 
+    orders
+    INNER JOIN salespeople ON orders.snum = salespeople.snum
+WHERE 
+    CONCAT(orders.snum, orders.amt) IN (
+        SELECT 
             CONCAT(snum, MAX(amt))
-        FROM
+        FROM 
             orders
-        GROUP BY snum);
+        GROUP BY snum
+    );
 
 Output - 
 
