@@ -46,7 +46,7 @@ class Account {
 async function run() {
     //creating a joint account.
     const account = new Account('Account');
-    console.log('Not Synchronized');
+    console.log('Synchronized');
     console.log('Total amount in the account =' + account.getBalance());
 
     //variable to maintain the total ammount withdrawal by two people.
