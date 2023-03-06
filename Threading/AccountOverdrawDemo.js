@@ -48,11 +48,11 @@ async function run() {
         while (true) {
             //this varaible will store the amount withdwrawal
             //if balance remaining in the account is smaller than withdrawl ammount then flag will be 0.
-            const flag = await account.withdraw(50);//calling method
-            totalWithdraw+=flag;
-            console.log(`Amount withdrawn by person ${person} = ${flag}`);
+            const ammoutWithdraw = await account.withdraw(50);//calling method
+            totalWithdraw+=ammoutWithdraw;
+            console.log(`Amount withdrawn by person ${person} = ${ammoutWithdraw}`);
             //if flag becomes 0, then break the loop.
-            if (!flag) break;
+            if (!ammoutWithdraw) break;
         }
 
     };
