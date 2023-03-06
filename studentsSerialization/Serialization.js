@@ -28,16 +28,22 @@ class SerializationTest {
 class DeserializationTest {
   performDeserialization() {
     read.question("Enter file name for deserialization: ", (fileName) => {
-      if(!fileHandler.existsSync(fileName)){  // entered file doesn't exists
-        console.log(fileName+" file doesn't exists\n");
+      if (!fileHandler.existsSync(fileName)) {  // entered file doesn't exists
+        console.log(fileName + " file doesn't exists\n");
       }
-      else{
+      else if (fileName.split(".")[1] == "ser" || fileName.split(".")[1] == "txt" || fileName.split(".")[1] == "json") {
         const data = fileHandler.readFileSync(fileName, "utf-8")
         JSON.parse(data).forEach((student) => console.log(student)) // string to object and then looping to print data
         console.log("Data deserialized successfully.\n----------------------\n");
+         
+      }
+      else {
+        console.log("Please enter a valid file name. (only '.ser', '.txt', '.json' files can be deserialized.)\n");
       }
       enterChoice()
     })
+
+
   }
 }
 

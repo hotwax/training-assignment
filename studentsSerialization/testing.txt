@@ -1,4 +1,46 @@
-case 1: deserializing a non existing file
+case 1- deserializing a non existing file
 
 Enter file name for deserialization: output10.ser
 output10.ser file doesn't exists
+
+
+
+case 2- deserializing an invalid file
+
+Enter file name for deserialization: Student.js
+Please enter a valid file name. (only '.ser', '.txt', '.json' files can be deserialized.)
+
+
+
+--------valid test cases
+case 3- serialization
+
+Enter file name for serialization: output1.ser
+Data serialized successfully.
+
+
+
+case 4- deserialization
+
+Enter file name for deserialization: output1.ser
+{
+  firstName: 'Nidhi',
+  dateOfBirth: '1990-01-01',
+  address: { city: 'indore', state: 'm.p.', pinCode: 452001, country: 'India' }
+}
+{
+  firstName: 'Ankita',
+  dateOfBirth: '1990-01-01',
+  address: { city: 'ujjain', state: 'm.p.', pinCode: 458110, country: 'India' }
+}
+{
+  firstName: 'Janvi',
+  dateOfBirth: '1990-01-01',
+  address: { city: 'bhopal', state: 'm.p.', pinCode: 452201, country: 'India' }
+}
+{
+  firstName: 'Shradha',
+  dateOfBirth: '1990-01-01',
+  address: { city: 'indore', state: 'm.p.', pinCode: 452701, country: 'India' }
+}
+Data deserialized successfully.
