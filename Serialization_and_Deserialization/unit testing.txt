@@ -1,0 +1,95 @@
+Test Cases for AccountOverdraw problem.
+
+============================================================================
+
+test 1: when both output1.txt and output2.txt file present and we serialize and then deserializes the objects.
+
+Output:-
+PS E:\Work\Javascript work\Serialization_and_Deserialization> node SerializationTest.js output1.txt
+Serialized data saved to output1.txt
+
+PS E:\Work\Javascript work\Serialization_and_Deserialization> node DeserializationTest.js output1.txt
+Name: Dhruv
+Date of Birth: 1990-01-01T00:00:00.000Z
+Address: Indore, mp 452011, india
+---
+Name: Sadhana
+Date of Birth: 1995-02-02T00:00:00.000Z
+Address: Bhopal, mp 452013, india
+---
+Name: Sanskar
+Date of Birth: 2000-03-03T00:00:00.000Z
+Address: China, mp 132424, china
+---
+Name: Rishabh
+Date of Birth: 2005-04-04T00:00:00.000Z
+Address: indore, mp 456034, india
+---
+
+
+============================================================================
+
+test 2: changing date of birth to date typr then running the above test-1 again but with new file output2.txt.
+
+output:-
+
+PS E:\Work\Javascript work\Serialization_and_Deserialization> node SerializationTest.js output2.txt
+Serialized data saved to output2.txt
+
+PS E:\Work\Javascript work\Serialization_and_Deserialization> node DeserializationTest.js output2.txt
+Name: Dhruv
+Date of Birth: 1990-01-01T00:00:00.000Z
+Address: Indore, mp 452011, india
+---
+Name: Sadhana
+Date of Birth: 1995-02-02T00:00:00.000Z
+Address: Bhopal, mp 452013, india
+---
+Name: Sanskar
+Date of Birth: 2000-03-03T00:00:00.000Z
+Address: China, mp 132424, china
+---
+Name: Rishabh
+Date of Birth: 2005-04-04T00:00:00.000Z
+Address: indore, mp 456034, india
+---
+
+============================================================================
+
+test 3: Deserializing the output1.txt file again which contains serialized data of previous class version.
+
+PS E:\Work\Javascript work\Serialization_and_Deserialization> node DeserializationTest.js output1.txt
+Name: Dhruv
+Date of Birth: 1990-01-01T00:00:00.000Z
+Address: Indore, mp 452011, india
+---
+Name: Sadhana
+Date of Birth: 1995-02-02T00:00:00.000Z
+Address: Bhopal, mp 452013, india
+---
+Name: Sanskar
+Date of Birth: 2000-03-03T00:00:00.000Z
+Address: China, mp 132424, china
+---
+Name: Rishabh
+Date of Birth: 2005-04-04T00:00:00.000Z
+Address: indore, mp 456034, india
+---
+
+============================================================================
+
+test 4: deserializing when output1.txt file is not present.
+
+output:
+PS E:\Work\Javascript work\Serialization_and_Deserialization> node DeserializationTest.js output1.txt
+output1.txt file not found !!!
+
+============================================================================
+
+test 5: deserializing when output2.txt file is not present.
+
+output:
+PS E:\Work\Javascript work\Serialization_and_Deserialization> node DeserializationTest.js output2.txt
+output2.txt file not found !!!
+
+============================================================================
