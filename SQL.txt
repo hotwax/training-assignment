@@ -2502,10 +2502,7 @@ Empty set (0.00 sec)
 101) Which customers have above average orders? 
 Ans-
 SELECT 
-  c.cnum, 
-  c.cname, 
-  o.amt, 
-  o.onum 
+  c.*
 FROM 
   customers c, 
   orders o 
@@ -2522,15 +2519,15 @@ GROUP BY
   
   
 SELECT 
-  * 
+   *
 FROM 
-  customers 
+  customers c
 WHERE 
   cnum IN (
     SELECT 
       cnum 
     FROM 
-      orders 
+      orders o
     WHERE 
       amt > (
         SELECT 
