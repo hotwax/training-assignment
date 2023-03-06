@@ -46,4 +46,7 @@ class Employee {
     return this.dateOfBirth;
   }
 
+  public String toSring(){
+    return "Name: "+ this.name +", age: " + this.age +", email: " + this.email + ", date of birth: " + this.dateOfBirth;
+  }
 }

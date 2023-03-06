@@ -2,9 +2,23 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SerializationExample {
+  
+  static Scanner sc = new Scanner(System.in);
+
+  static String enterFileName(){
+    System.out.println("Enter the file name: ");
+    String fileName = sc.next();
+    String extension = fileName.split("\\.")[1];
+    if(!extension.equals("ser")){
+      System.out.println("please enter a valid file name. Extension allowed- '.ser'\n");
+      return enterFileName();
+    }else{
+      return fileName;
+    }
+  }
+
   public static void main(String[] args) {
     try {
-      Scanner sc = new Scanner(System.in);
 
       while (true) {
         System.out.println("Enter 1 to serialize");
@@ -13,20 +27,17 @@ public class SerializationExample {
         System.out.println();
 
         int choice = sc.nextInt();
+        String fileName = "" ;
 
         switch (choice) {
           case 1:
-            System.out.println("Enter the file name: ");
-            sc.nextLine();
-            String fileName = sc.nextLine();
+            fileName = enterFileName();
             new SerializationTest().serialize(fileName);
             System.out.println("---------------------------\n");
             break;
 
           case 2:
-            System.out.println("Enter the file name: ");
-            sc.nextLine();
-            fileName = sc.nextLine();
+            fileName = enterFileName();
             new DeserializationTest().deserialize(fileName);
             System.out.println("---------------------------\n");
             break;
@@ -45,7 +56,8 @@ public class SerializationExample {
     } catch (InputMismatchException e) {
       System.out.println(e);
       System.out.println("Please enter a valid input");
-    } catch (Exception e){
+    } catch (Exception e) {
+      e.printStackTrace();
       System.out.println(e);
     }
 

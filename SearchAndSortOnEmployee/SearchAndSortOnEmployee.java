@@ -22,28 +22,71 @@ public class SearchAndSortOnEmployee {
   // to store employees objects, hashset because it doesn't allow duplicate
   // entries
 
-  static void add() throws InputMismatchException, IOException {
+  final static String employeeFilePath = "employees.txt";
+
+  static String enterAge() {
+    System.out.println("Enter age of employee: ");
+    String age = sc.next();
+    String regex = "[0-9]+";
+    boolean match = age.matches(regex);
+    if (!match) {
+      System.out.println("Invalid age. Please enter a different age.\n");
+      return enterAge();
+    } else
+      return age;
+  }
+
+  static String enterName() {
+    System.out.println("Enter name of employee: ");
+    sc.nextLine();
+    String name = sc.nextLine();
+    return name;
+  }
+
+  static String enterEmail() {
+    System.out.println("Enter email of employee: ");
+    String email = sc.next();
+    String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    boolean match = email.matches(regex);
+    if (!match) {
+      System.out.println("Invalid email. Please enter a different email.\n");
+      return enterEmail();
+    }
+    return email;
+  }
+
+  static String enterDateOfBirth() {
+    System.out.println("Enter date of birth of employee (format- yyyy-mm-dd):");
+    String dateOfBirth = sc.next();
+    String regex = "^([0-9][0-9][0-9][0-9])-(0[1-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
+    boolean match = dateOfBirth.matches(regex);
+    if (!match) {
+      System.out.println("Invalid date. Please enter a different date.\n");
+      return enterDateOfBirth();
+    }
+    return dateOfBirth;
+  }
+
+  static boolean whetherEmailExists(String email) {
+    for (Employee employee : set) {
+      if (employee.getEmail().equals(email))
+        return true;
+    }
+    return false;
+  }
+
+  static void add() {
     // here we will take employee's details from user, create an employee object,
     // add object to set and call addToFile method
 
-    System.out.println("Enter name of the employee: ");
-    sc.nextLine();
-    String name = sc.nextLine();
-
-    System.out.println("Enter age of the employee: ");
-    String age = sc.next();
-    if (!checkAge(age))
-      throw new InputMismatchException("Please enter a valid age");
-
-    System.out.println("Enter email of the employee: ");
-    String email = sc.next();
-    if (!checkEmail(email))
-      throw new InputMismatchException("Please enter a valid email");
-
-    System.out.println("Enter date of birth of the employee: (format- yyyy-mm-dd)");
-    String dateOfBirth = sc.next();
-    if (!checkDateOfBirth(dateOfBirth))
-      throw new InputMismatchException("Please enter a valid date");
+    String name = enterName();
+    String age = enterAge();
+    String email = enterEmail();
+    if (whetherEmailExists(email)) {
+      System.out.println("Email already exists. Please enter a different email.");
+      enterEmail();
+    }
+    String dateOfBirth = enterDateOfBirth();
 
     Employee employeeObject = new Employee();
     employeeObject.setName(name);
@@ -60,279 +103,241 @@ public class SearchAndSortOnEmployee {
 
   }
 
-  static void addToFile(Employee employeeObject) throws IOException {
+  static void addToFile(Employee employeeObject) {
     // here we will perform file handling and add the employee object to
     // employee.txt
 
-    String employeefilePath = "employees.txt";
-    File employeefile = new File(employeefilePath);
-    employeefile.createNewFile();
-    FileWriter fileWriter = new FileWriter(employeefilePath, true); // true- appends to file
-    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-    bufferedWriter.write("Name: " + employeeObject.getName() + ", Age: " + employeeObject.getAge() + ", Email: "
-        + employeeObject.getEmail() + ", Date of birth: "
-        + employeeObject.getDateOfBirth());
+    FileWriter fileWriter = null;
+    BufferedWriter bufferedWriter = null;
+    File employeefile = null;
+    try {
+      employeefile = new File(employeeFilePath);
+      employeefile.createNewFile();
+      fileWriter = new FileWriter(employeeFilePath, true); // true- appends to file
+      bufferedWriter = new BufferedWriter(fileWriter);
+      bufferedWriter.write(employeeObject.toSring() + "\n");
 
-    bufferedWriter.newLine();
-
-    bufferedWriter.close();
-    fileWriter.close();
-
-    if (Desktop.isDesktopSupported()) { // Desktop class is used to open employee.txt file after adding data to the
-                                        // file
-      Desktop desktop = Desktop.getDesktop();
-      desktop.open(employeefile);
+      if (Desktop.isDesktopSupported()) { // Desktop class is used to open employee.txt file after adding data to the
+        // file
+        Desktop desktop = Desktop.getDesktop();
+        desktop.open(employeefile);
+      }
+      bufferedWriter.close();
+      fileWriter.close();
+    } catch (IOException err) {
+      System.out.println("some error occurred while writing data to the file. - " + err);
     }
 
   }
 
-  static void delete() throws InputMismatchException, IOException {
+  static void delete() {
     // here we will first remove the specified employee from set and rewrite the set
     // data to employee.txt file
 
-    System.out.println("Enter the email id of the employee: ");
-    String emailId = sc.next();
-
-    if(!checkEmail(emailId)) throw new InputMismatchException("Please enter a valid");
+    String email = enterEmail();
+    if (!whetherEmailExists(email)) {
+      System.out.println("Email doesn't exists. Please enter a different email.");
+      enterEmail();
+    }
 
     Iterator<Employee> iterator = set.iterator();
     while (iterator.hasNext()) { // we have used iterator in place of for loop because java throws an exception
                                  // if we apply loop on a class and remove from the same class in it.
       Employee employee = iterator.next();
-      if (employee.getEmail().equals(emailId)) {
+      if (employee.getEmail().equals(email)) {
         set.remove(employee);
         break;
       }
     }
 
-    String employeeFilePath = "employees.txt";
-    File employeeFile = new File(employeeFilePath);
-    FileWriter fileWriter = new FileWriter(employeeFilePath);
-    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-    for (Employee employeeObject : set) {
-      bufferedWriter.write("Name: " + employeeObject.getName() + ", Age: " + employeeObject.getAge() + ", Email: "
-          + employeeObject.getEmail()
-          + ", Date of birth: " + employeeObject.getDateOfBirth());
-      bufferedWriter.newLine();
-
-    }
-
-    bufferedWriter.close();
-    fileWriter.close();
-
-    System.out.println("Employee " + emailId + " is removed successfully.");
+    reWriteInFile();
+    System.out.println("Employee's data is removed successfully.");
     System.out.println("-------------------------------\n");
-    if (Desktop.isDesktopSupported()) { // Desktop class is used to open employee.txt file after adding data to the
-                                        // file
-      Desktop desktop = Desktop.getDesktop();
-      desktop.open(employeeFile);
+  }
+
+  static void reWriteInFile() {
+
+    FileWriter fileWriter = null;
+    BufferedWriter bufferedWriter = null;
+    File employeeFile = null;
+    try {
+      employeeFile = new File(employeeFilePath);
+      fileWriter = new FileWriter(employeeFilePath);
+      bufferedWriter = new BufferedWriter(fileWriter);
+
+      for (Employee employeeObject : set)
+        bufferedWriter.write(employeeObject.toSring() + "\n");
+
+      if (Desktop.isDesktopSupported()) { // Desktop class is used to open employee.txt file after adding data to the
+                                          // file
+        Desktop desktop = Desktop.getDesktop();
+        desktop.open(employeeFile);
+      }
+      bufferedWriter.close();
+      fileWriter.close();
+    } catch (IOException err) {
+      System.out.println("some error occurred while rewriting data to the file. - " + err);
     }
 
   }
 
-  static void fetch() throws IOException {
+  static void fetch() {
     // if employee.txt file is already present then we will fetch its data and add
     // it to set.
 
-    File employeeFile = new File("employees.txt");
-    if (employeeFile.createNewFile() == false) { // employee.txt already exists
-      FileReader fileReader = new FileReader("employees.txt");
-      BufferedReader bufferedReader = new BufferedReader(fileReader);
-      String employee = "";
-      while ((employee = bufferedReader.readLine()) != null) {
+    try {
+      File employeeFile = new File(employeeFilePath);
+      if (employeeFile.createNewFile() == false) { // employee.txt already exists
+        FileReader fileReader = new FileReader(employeeFilePath);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String employee = "";
+        while ((employee = bufferedReader.readLine()) != null) {
 
-        String[] employeeData = employee.split(", "); // all employee's data
+          String[] employeeData = employee.split(", "); // all employee's data
 
-        Employee employeeObject = new Employee();
+          Employee employeeObject = new Employee();
 
-        employeeObject.setName(employeeData[0].split(" ", 2)[1]); // here we have used limit: 2 in case user has entered
-                                                                  // full name(first name + last name)
-        employeeObject.setAge(Integer.parseInt(employeeData[1].split(" ")[1]));
-        employeeObject.setEmail(employeeData[2].split(" ")[1]);
-        employeeObject.setDate(employeeData[3].split(" ")[3]);
+          employeeObject.setName(employeeData[0].split(" ", 2)[1]); // here we have used limit: 2 in case user has
+                                                                    // entered
+                                                                    // full name(first name + last name)
+          employeeObject.setAge(Integer.parseInt(employeeData[1].split(" ")[1]));
+          employeeObject.setEmail(employeeData[2].split(" ")[1]);
+          employeeObject.setDate(employeeData[3].split(" ")[3]);
 
-        set.add(employeeObject);
+          set.add(employeeObject);
 
+        }
+
+        bufferedReader.close();
       }
 
-      bufferedReader.close();
+    } catch (IOException err) {
+      System.out.println("some error occurred while reading data from the file. - " + err);
     }
 
   }
 
-  static void searchAndSort() throws InputMismatchException {
-
-    System.out.println("Enter the field name to search: (name, age, email, date of birth)");
-    sc.nextLine();
-    String fieldName = sc.nextLine();
-
-    if (!fieldName.equals("name") && !fieldName.equals("age") && !fieldName.equals("email")
-        && !fieldName.equalsIgnoreCase("date of birth")) {
-      throw new InputMismatchException("Please enter 'name', 'age', 'email' or 'date Of Birth' as fieldname input value");
-    }
-
-    System.out.println("Enter the field value to search: ");
-    String fieldValue = sc.nextLine();
-
-    if (fieldName.equals("age") && !checkAge(fieldValue)) {
-      throw new InputMismatchException("Please enter a valid age");
-    } else if (fieldName.equalsIgnoreCase("date Of Birth") && !checkDateOfBirth(fieldValue)) {
-      throw new InputMismatchException("Please enter a valid date of birth");
-    } else if (fieldName.equalsIgnoreCase("email") && !checkEmail(fieldValue)) {
-      throw new InputMismatchException("Please enter a valid email");
-    }
-
-
-
-
-    ArrayList<Employee> resultOfSearchAndSort = new ArrayList<>();
-    // if user has chosen fieldName as "name" and fieldValue as "Ram" then all
-    // employees
-    // with "Ram" name
-    // will get added to this arraylist
-
-    if (fieldName.equals("name")) {
-      for (Employee employee : set) {
-        if (employee.getName().equals(fieldValue))
-          resultOfSearchAndSort.add(employee);
-      }
-    } else if (fieldName.equals("age")) {
-      for (Employee employee : set) {
-        if (employee.getAge() == Integer.parseInt(fieldValue))
-          resultOfSearchAndSort.add(employee);
-      }
-    } else if (fieldName.equals("email")) {
-      for (Employee employee : set) {
-        if (employee.getEmail().equals(fieldValue))
-          resultOfSearchAndSort.add(employee);
-      }
-    } else if (fieldName.equalsIgnoreCase("date Of Birth")) {
-      for (Employee employee : set) {
-        if (employee.getDateOfBirth().toString().equals(fieldValue))
-          resultOfSearchAndSort.add(employee);
-      }
-    }
-
-    if (resultOfSearchAndSort.size() == 0) {
-      System.out.println("\nEmployee with "+fieldValue+" "+fieldName+" doesn't exists.");
-      System.out.println("-------------------------------\n");
+  static void showAllEmployees() {
+    if (set.size() == 0) {
+      System.out.println("No employee exists yet. To add an employee enter 1.\n");
       return;
     }
+    System.out.println("Employee's data:");
+    for (Employee employee : set) {
+      System.out.println(employee.toSring());
+    }
+    System.out.println();
+  }
 
-    System.out.println("Enter which field to sort by: (name, age, date Of Birth)");
-    String sortBY = sc.nextLine();
-
-    if (!sortBY.equals("name") && !sortBY.equals("age") && !sortBY.equalsIgnoreCase("date Of Birth")) {
-      throw new InputMismatchException("Please enter 'name', 'age' or 'date of birth' as sort by input value");
+  static void searchAnEmployee() {
+    String email = enterEmail();
+    for (Employee employee : set) {
+      if (employee.getEmail().equals(email)) {
+        System.out.println("Employees' data:");
+        System.out.println(employee.toSring()+"\n");
+        return;
+      }
     }
 
-    if (fieldName.equalsIgnoreCase(sortBY)) {
-      System.out.println("Please enter different fieldname and sort bY input values");
-      System.out.println("-------------------------------\n");
-      return;
+    System.out.println("Email doesn't exists. Please enter a diferent email.\n");
+    searchAnEmployee();
+  }
+
+  static String enterSortByField() {
+    System.out.println("Enter the field to sort by: (name, age, dateOfBirth)");
+    String sortBY = sc.next();
+
+    if (!sortBY.equals("name") && !sortBY.equals("age") && !sortBY.equalsIgnoreCase("dateOfBirth")) {
+      System.out.println("Please enter 'name', 'age' or 'date of birth' as sort by input value\n");
+      return enterSortByField();
     }
 
+    return sortBY;
+  }
+
+  static String enterDirection() {
     System.out.println("Enter the direction to sort (ascending or descending): ");
     String direction = sc.next(); // ascending or descending
 
     if (!direction.equals("ascending") && !direction.equals("descending")) {
-      throw new InputMismatchException("Either enter ascending or descending as direction input value");
+      System.out.println("Either enter ascending or descending as direction input value\n");
+      return enterDirection();
     }
+    return direction;
+  }
 
+  static void sortEmployees() {
+    String sortBY = enterSortByField();
+    String direction = enterDirection();
 
-    // to sort the resultOfSearchAndSort arraylist data in ascending or descending
-    // order.
+    ArrayList<Employee> sortedList = new ArrayList<>(set);
+
     if (sortBY.equals("name")) {
-      resultOfSearchAndSort.sort(Comparator.comparing(Employee::getName,
+      sortedList.sort(Comparator.comparing(Employee::getName,
           direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
     } else if (sortBY.equals("age")) {
-      resultOfSearchAndSort.sort(Comparator.comparing(Employee::getAge,
+      sortedList.sort(Comparator.comparing(Employee::getAge,
           direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
     } else if (sortBY.equalsIgnoreCase("date Of Birth")) {
-      resultOfSearchAndSort.sort(Comparator.comparing(Employee::getDateOfBirth,
+      sortedList.sort(Comparator.comparing(Employee::getDateOfBirth,
           direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
     }
 
-    // display the result obtained of resultOfSearchAndSort
-    System.out.println();
-    for (Employee employeeObj : resultOfSearchAndSort) {
-      System.out.println(
-          "Name: " + employeeObj.getName() + ", Age: " + employeeObj.getAge() + ", Email: " + employeeObj.getEmail()
-              + ", Date of birth: "
-              + employeeObj.getDateOfBirth());
+    for (Employee employee : sortedList) {
+      System.out.println(employee.toSring());
     }
-    System.out.println("-------------------------------\n");
-
-  }
-
-  static boolean checkAge(String age) {
-    String regex = "[0-9]+";
-    boolean match = age.matches(regex);
-    return match;
-  }
-
-  static boolean checkDateOfBirth(String dateOfBirth) {
-    String regex = "^([0-9][0-9][0-9][0-9])-(0[0-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
-    boolean match = dateOfBirth.matches(regex);
-    return match;
-  }
-
-  static boolean checkEmail(String email) {
-    String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-    boolean match = email.matches(regex);
-    return match;
+    System.out.println();
   }
 
   public static void main(String[] args) {
 
-    try {
-      fetch(); // if employee.txt already exists then fetch its data
+    fetch(); // if employee.txt already exists then fetch its data
 
-      while (true) {
-        System.out.println("Enter 1 to add data");
-        System.out.println("Enter 2 to delete data");
-        System.out.println("Enter 3 to search and sort data");
-        System.out.println("Enter 4 to exit the program");
-        System.out.println();
+    while (true) {
+      System.out.println("Enter 1 to add data");
+      System.out.println("Enter 2 to delete data");
+      System.out.println("Enter 3 to search for an employee's data");
+      System.out.println("Enter 4 to sort employees");
+      System.out.println("Enter 5 to show all the employees");
+      System.out.println("Enter 6 to exit the program");
+      System.out.println();
 
-        int choice = sc.nextInt();
+      int choice = sc.nextInt();
 
-        switch (choice) {
-          case 1:
-            add(); // add an employee
-            break;
+      switch (choice) {
+        case 1:
+          add(); // add an employee
+          break;
 
-          case 2:
-            delete(); // delete an employee
-            break;
+        case 2:
+          delete(); // delete an employee
+          break;
 
-          case 3:
-            searchAndSort(); // search and sort the employees objects
-            break;
+        case 3:
+          searchAnEmployee(); // search an employee
+          break;
 
-          case 4:
-            System.out.println("-------------------------------\n");
-            System.out.println("Program is terminated successfully");
-            return;
+        case 4:
+          sortEmployees(); // sort the employees
+          break;
 
-          default:
-            System.out.println("-------------------------------\n");
-            System.out.println("Please enter a valid number\n");
+        case 5:
+          showAllEmployees(); // show all employees
+          break;
 
-        }
+        case 6:
+          System.out.println("-------------------------------\n");
+          System.out.println("Program is terminated successfully");
+          return;
+
+        default:
+          System.out.println("-------------------------------\n");
+          System.out.println("Please enter a valid number\n");
 
       }
 
-    } catch (InputMismatchException e) {
-      System.out.println(e);
-    } catch (IOException e) {
-      System.out.println(e);
-    } catch (Exception e) {
-      System.out.println(e);
     }
 
   }
 
-  
 }
