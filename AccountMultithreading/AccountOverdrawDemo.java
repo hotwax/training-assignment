@@ -9,7 +9,7 @@ class AccountOverdrawDemo extends Thread {
 
   public void run() {
     int totalWithdrawalAmount=0;
-
+    
     for (int transaction = 1; transaction <= 10; transaction++) {  //10 because 1000/100=10
       
       int withdrawalAmount = 100;
