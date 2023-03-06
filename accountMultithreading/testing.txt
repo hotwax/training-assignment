@@ -1,0 +1,64 @@
+case 1- Withdrawal with AccountOverdrawDemo method
+
+person1, withdrawal amount 200,   New balance: 800
+
+person2, withdrawal amount 200,   New balance: 600
+
+person1, withdrawal amount 200,   New balance: 400
+
+person2, withdrawal amount 200,   New balance: 200
+
+person1, withdrawal amount 200,   New balance: 0
+
+person1 you don't have sufficient balance
+
+person1  total withdrawal amount: 600
+-------------------
+
+person2, withdrawal amount 200,   New balance: -200
+
+person2 you don't have sufficient balance
+
+person2  total withdrawal amount: 600
+-------------------
+
+Final balance in the account: -200
+
+
+Here two threads are withdrawing 200 amount at a time. Since threads are working simulataneously, 
+so output of one may disrupt the others. And before one withdraws the amount 5th time and wait by 
+setTimeout() method other interfers in between and withdraws. The sum of the total withdrawal 
+amount of two people will be > 1000 (initial balance). Hence making the final balance -200 due 
+to concurrent access to withdraw() method.
+
+
+
+case 2- Withdrawal with AccountOverdrawSafeDemo method 
+
+person1, withdrawal amount 200,   New balance: 800
+
+person2, withdrawal amount 200,   New balance: 600
+
+person1, withdrawal amount 200,   New balance: 400
+
+person2, withdrawal amount 200,   New balance: 200
+
+person1, withdrawal amount 200,   New balance: 0
+
+person2 you don't have sufficient balance
+
+person2  total withdrawal amount: 400
+-------------------
+
+person1 you don't have sufficient balance
+
+person1  total withdrawal amount: 600
+-------------------
+
+Final balance in the account: 0
+
+
+Here concurrency is handled by wrapping the code of setTimeout() method and withdrawal in one promise. 
+The sum of the total withdrawal amount of two people will be = 1000 (initial balance). Hence final 
+balance is 0.
+ 

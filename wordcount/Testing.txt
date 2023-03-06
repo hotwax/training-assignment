@@ -1,0 +1,206 @@
+Case 1: One url 
+Input- 
+urls.txt- https://www.hotwaxsystems.com/
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+Top 3 frequency words for url- https://www.hotwaxsystems.com/
+
+OfBiz 26
+HotWax 12
+Apache 12
+-----------------------
+
+Frequency of all words across all urls
+
+Systems 10
+HotWax 12
+OfBiz 26
+Apache 12
+Commerce 5
+Omnichannel 2
+Order 4
+Store 0
+
+
+Case 2: More than one url 
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+Top 3 frequency words for url- https://www.hotwaxsystems.com/
+
+OfBiz 26
+HotWax 12
+Apache 12
+-----------------------
+
+Top 3 frequency words for url- https://www.hotwax.co/
+
+Store 21
+Omnichannel 12
+Order 8
+-----------------------
+
+Frequency of all words across all urls
+
+Systems 10
+HotWax 18
+OfBiz 26
+Apache 12
+Commerce 10
+Omnichannel 14
+Order 12
+Store 21
+
+
+Case 3: No word found
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- college, country, people
+output-
+
+Top 3 frequency words for url- https://www.hotwaxsystems.com/
+
+college 0
+country 0
+people 0
+-----------------------
+
+Top 3 frequency words for url- https://www.hotwax.co/
+
+college 0
+country 0
+people 0
+-----------------------
+
+Frequency of all words across all urls
+
+college 0
+country 0
+people 0
+
+
+Case 4: No words
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- 
+output-
+
+No words found in words.txt file.
+
+
+Case 5: No urls
+Input- 
+urls.txt-
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+No urls found in urls.txt file.
+
+
+Case 6: No urls.txt file
+Input- 
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+urls.txt file doesn't exists
+
+
+Case 7: No words.txt file
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+output-
+
+words.txt file doesn't exists
+
+
+Case 8: Given invalid url 
+Input- 
+urls.txt- https://asjdwtsgndkkdbdhc.com/, https://www.hotwax.co/
+words.txt- Systems,HotWax,OfBiz,Apache,Commerce,Omnichannel,Order,Store
+output-
+
+Invalid url-  https://asjdwtsgndkkdbdhc.com/
+
+Top 3 frequency words for url- https://www.hotwax.co/
+
+Store 21
+Omnichannel 12
+Order 8
+-----------------------
+
+Frequency of all words across all urls
+
+Systems 0
+HotWax 6
+OfBiz 0
+Apache 0
+Commerce 5
+Omnichannel 12
+Order 8
+Store 21
+
+
+Case 9: Repetitive words in words.txt file
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/
+words.txt- Systems, HotWax, OfBiz, Apache, Commerce, HotWax, Omnichannel, Order, Store, Store
+output-
+
+Top 3 frequency words for url- https://www.hotwaxsystems.com/
+
+OfBiz 26
+HotWax 12
+Apache 12
+-----------------------
+
+Top 3 frequency words for url- https://www.hotwax.co/
+
+Store 21
+Omnichannel 12
+Order 8
+-----------------------
+
+Frequency of all words across all urls
+
+Systems 10
+HotWax 18
+OfBiz 26
+Apache 12
+Commerce 10
+Omnichannel 14
+Order 12
+Store 21
+
+Case 10: Repetitive urls in urls.txt file
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/, https://www.hotwax.co/
+words.txt- Systems, HotWax, OfBiz, Apache, Commerce, Omnichannel, Order, Store
+output-
+
+Top 3 frequency words for url- https://www.hotwaxsystems.com/
+
+OfBiz 26
+HotWax 12
+Apache 12
+-----------------------
+
+Top 3 frequency words for url- https://www.hotwax.co/
+
+Store 21
+Omnichannel 12
+Order 8
+-----------------------
+
+Frequency of all words across all urls
+
+Systems 10
+HotWax 18
+OfBiz 26
+Apache 12
+Commerce 10
+Omnichannel 14
+Order 12
+Store 21
