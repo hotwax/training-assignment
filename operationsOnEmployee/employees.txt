@@ -1,1 +1,3 @@
 name: payal, age: 20, email: payalJain@gmail.com, date of birth: 2002-02-02
+name: nidhi, age: 20, email: nidhiPal@gmail.com, date of birth: 2001-01-02
+name: ankita, age: 22, email: ankitaJain@gmail.com, date of birth: 2000-07-02
