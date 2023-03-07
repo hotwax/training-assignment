@@ -1,4 +1,0 @@
-https://webomnizz.com/change-parent-component-state-from-child-using-hooks-in-react/
-https://medium.com/@salshaher/a-5-step-tutorial-on-clash-of-clans-api-2a1f397fcfcc
-https://www.hotwaxsystems.com/
-https://www.geeksforgeeks.org/how-to-sort-a-treemap-by-value-in-java/
