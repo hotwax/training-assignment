@@ -1,0 +1,26 @@
+Case #1:
+Running AccountOverDrawDemo
+Expected: The amount should  not go in negative means 'John' should not interfere 'Doe' transaction
+Output:
+John withdrew 200 and has 800 left
+Doe withdrew 200 and has 600 left
+John withdrew 200 and has 400 left
+Doe withdrew 200 and has 200 left
+John withdrew 200 and has 0 left
+Insufficient funds
+Doe withdrew 200 and has -200 left
+Insufficient funds
+Total Amount Withdrawn: 1200
+
+Case #2:
+Running AccountOverSafeDemo
+Expected: The amount should  not go in negative means 'John' should not interfere the 'Doe' transaction
+Output:
+John withdrew 200 and has 800 left
+Doe withdrew 200 and has 600 left
+John withdrew 200 and has 400 left
+Doe withdrew 200 and has 200 left
+John withdrew 200 and has 0 left
+Insufficient funds
+Insufficient funds
+Total Amount Withdrawn: 1000
