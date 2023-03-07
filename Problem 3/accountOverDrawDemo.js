@@ -6,11 +6,12 @@ class Account {
   }
   // async method to withdraw money
   async withdraw(amount, name) {
+    // check if the balance is sufficient
     if (this.balance < amount) {
       console.log('Insufficient funds');
       return false;
     } else {
-      // wait for 1 second
+      // Making a delay to simulate the time taken to withdraw money
       await new Promise((resolve) => setTimeout(resolve, 1000));
       this.balance -= amount;
       console.log(`${name} withdrew ${amount} and has ${this.balance} left`);
@@ -18,16 +19,26 @@ class Account {
     }
   }
 }
+//running the runner method multiple threads
 const runner = async () => {
+  // creating a  new account
   const account = new Account('John', 'Doe', 1000);
+  // variable to store the total amount withdrawn
   let amtWithdrawal = 0;
-  const thread1 = async (name, amt) => {
+  // performTransaction function to withdraw money
+  const performTransaction = async (name, amt) => {
+    // loop only run if the withdraw method returns true which means there is balance in the account
     while (true) {
+      // calling withdraw method
       if (await account.withdraw(amt, name)) amtWithdrawal += amt;
       else break;
     }
   };
-  await Promise.all([thread1('John', 100), thread1('Doe', 200)]);
+  // Promise.all() method to run multiple promise, rejects if any of the promise is rejected
+  await Promise.all([
+    performTransaction('John', 200),
+    performTransaction('Doe', 200),
+  ]);
   console.log(`Total Amount Withdrawn: ${amtWithdrawal}`);
 };
 runner();

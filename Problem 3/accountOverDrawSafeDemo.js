@@ -42,8 +42,8 @@ const runner = async () => {
   };
   // Promise.all() method to run multiple promise, rejects if any of the promise is rejected
   await Promise.all([
-    performTransaction('John', 100),
-    performTransaction('Doe', 100),
+    performTransaction('John', 200),
+    performTransaction('Doe', 200),
   ]);
   console.log(`Total Amount Withdrawn: ${amtWithdrawal}`);
 };
