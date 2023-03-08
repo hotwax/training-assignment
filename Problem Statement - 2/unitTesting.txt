@@ -1,0 +1,277 @@
+Test the Program WordCountScrapper by the Following Testcases:
+
+TestCase 1: (Selecting Add Employee to the file and user enters the wrong name) 
+
+input : Enter the Name : sas545
+
+output: 
+Enter a valid name!!
+
+TestCase 2: (Selecting Add Employee to the file and user enters the wrong email) 
+
+input : Enter the Email : sdas
+
+output: 
+Enter a valid Email!!
+
+TestCase 3: (Selecting Add Employee to the file and user enters the age that is string) 
+
+input : Enter the Age : sad
+
+output: 
+Enter a Valid Input
+java.util.InputMismatchException
+
+TestCase 4: (Selecting Add Employee to the file and user enters the age that is 102) 
+
+input : Enter the Age : 102
+
+output: 
+Enter a valid Age!!
+
+TestCase 5: (Selecting Add Employee to the file and user enters the wrong day in DOB) 
+
+input : Enter the date of birth :
+Enter the day of birth : 44
+
+output: 
+Enter a valid day!! 
+
+TestCase 6: (Selecting Add Employee to the file and user enters the wrong month in DOB) 
+
+input : Enter the month of birth : 22
+
+output: 
+Enter a valid month!! 
+
+TestCase 7: (Selecting Add Employee to the file and user enters the wrong year in DOB) 
+
+input : Enter the month of birth : 2026
+
+output: 
+Enter a valid year!! 
+
+TestCase 8: (After adding employee successfully) 
+
+input : 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter 4 For show all employee from From the file
+Enter any other number to Exit
+1
+Enter the Name : Sanskar Soni
+Enter the Email : sans@gmail.com
+Enter the Age : 21
+Enter the date of birth :
+Enter the day of birth : 19
+Enter the month of birth : 03
+Enter the year of birth : 2001
+
+output: 
+ Employee added successfully
+
+In file (at last)- 
+
+1, Rohan Sharma, rohan.sharma@example.com, 35, 01/01/1985
+2, Neha Gupta, neha.gupta@example.com, 28, 15/06/1993
+3, Amit Patel, amit.patel@example.com, 42, 23/12/1978
+4, Deepa Shah, deepa.shah@example.com, 31, 04/09/1990
+5, Vikas Gupta, vikas.gupta@example.com, 24, 12/02/1997
+6, Pooja Patel, pooja.patel@example.com, 29, 08/05/1992
+7, Kunal Sharma, kunal.sharma@example.com, 40, 31/12/1981
+8, Anjali Patel, anjali.patel@example.com, 27, 13/07/1994
+9, Dinesh Shah, dinesh.shah@example.com, 32, 21/11/1988
+10, Sonia Sharma, sonia.sharma@example.com, 22, 19/03/1999
+11, Vikram Sharma, vikram.sharma@example.com, 29, 01/07/1992
+12, Pallavi Singh, pallavi.singh@example.com, 25, 12/12/1996
+13, Rakesh Patel, rakesh.patel@example.com, 38, 05/09/1983
+14, Archana Sharma, archana.sharma@example.com, 32, 22/03/1990
+15, Jitendra Gupta, jitendra.gupta@example.com, 35, 15/05/1986
+16, Meera Patel, meera.patel@example.com, 28, 20/08/1993
+17, Gaurav Sharma, gaurav.sharma@example.com, 30, 02/02/1991
+18, Shweta Gupta, shweta.gupta@example.com, 26, 12/07/1995
+19, Shailesh Patel, shailesh.patel@example.com, 40, 30/09/1981
+20, Ankit Sharma, ankit.sharma@example.com, 32, 14/12/1988
+21, Priyanka Shah, priyanka.shah@example.com, 28, 18/06/1993
+23, Sandhya Sharma, sandhya.sharma@example.com, 30, 20/02/1991
+24, Ruchi Gupta, ruchi.gupta@example.com, 26, 10/05/1995
+25, Anurag Patel, anurag.patel@example.com, 40, 05/08/1981
+26, Manish Sharma, manish.sharma@example.com, 35, 15/11/1986
+27, Rashmi Patel, rashmi.patel@example.com, 30, 22/03/1991
+28, Ashish Gupta, ashish.gupta@example.com, 28, 20/06/1993
+29, Rajesh Patel, rajesh.patel@example.com, 35, 25/09/1986
+30, Rupa Shah, rupa.shah@example.com, 30, 20/02/1991
+31, Ravi Sharma, ravi.sharma@example.com, 26, 10/05/1995
+32, Jyoti Patel, jyoti.patel@example.com, 40, 05/08/1981
+34, Sanjay Patel, sanjay.patel@example.com, 30, 22/03/1991
+35, Shruti Gupta, shruti.gupta@example.com, 28, 20/06/1993
+36, Sumit Patel, sumit.patel@example.com, 35, 25/09/1986
+37, Swati Shah, swati.shah@example.com, 30, 20/02/1991
+38, Shubham Sharma, shubham.sharma@example.com, 26, 10/05/1995
+39, Anmol Patel, anmol.patel@example.com, 40, 05/08/1981
+40, Rupal Sharma, rupal.sharma@example.com, 35, 15/11/1986
+41, Sanskar Soni, s@123, 22, 19/03/2001
+42, Sumit, sum@123, 23, 12/04/2002
+43, dasd, soni@gmail.com, 44, 19/03/2001
+44, Sanskar Soni, s@gmail.com, 21, 19/03/2001
+
+TestCase 9: (Deleting a employee from file) 
+
+input : 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter any other number to Exit
+2
+Enter the id to delete :
+42
+
+output: 
+Employee Deleted Successfully.
+
+in file(deleted 42) -
+1, Rohan Sharma, rohan.sharma@example.com, 35, 01/01/1985
+2, Neha Gupta, neha.gupta@example.com, 28, 15/06/1993
+3, Amit Patel, amit.patel@example.com, 42, 23/12/1978
+4, Deepa Shah, deepa.shah@example.com, 31, 04/09/1990
+5, Vikas Gupta, vikas.gupta@example.com, 24, 12/02/1997
+6, Pooja Patel, pooja.patel@example.com, 29, 08/05/1992
+7, Kunal Sharma, kunal.sharma@example.com, 40, 31/12/1981
+8, Anjali Patel, anjali.patel@example.com, 27, 13/07/1994
+9, Dinesh Shah, dinesh.shah@example.com, 32, 21/11/1988
+10, Sonia Sharma, sonia.sharma@example.com, 22, 19/03/1999
+11, Vikram Sharma, vikram.sharma@example.com, 29, 01/07/1992
+12, Pallavi Singh, pallavi.singh@example.com, 25, 12/12/1996
+13, Rakesh Patel, rakesh.patel@example.com, 38, 05/09/1983
+14, Archana Sharma, archana.sharma@example.com, 32, 22/03/1990
+15, Jitendra Gupta, jitendra.gupta@example.com, 35, 15/05/1986
+16, Meera Patel, meera.patel@example.com, 28, 20/08/1993
+17, Gaurav Sharma, gaurav.sharma@example.com, 30, 02/02/1991
+18, Shweta Gupta, shweta.gupta@example.com, 26, 12/07/1995
+19, Shailesh Patel, shailesh.patel@example.com, 40, 30/09/1981
+20, Ankit Sharma, ankit.sharma@example.com, 32, 14/12/1988
+21, Priyanka Shah, priyanka.shah@example.com, 28, 18/06/1993
+23, Sandhya Sharma, sandhya.sharma@example.com, 30, 20/02/1991
+24, Ruchi Gupta, ruchi.gupta@example.com, 26, 10/05/1995
+25, Anurag Patel, anurag.patel@example.com, 40, 05/08/1981
+26, Manish Sharma, manish.sharma@example.com, 35, 15/11/1986
+27, Rashmi Patel, rashmi.patel@example.com, 30, 22/03/1991
+28, Ashish Gupta, ashish.gupta@example.com, 28, 20/06/1993
+29, Rajesh Patel, rajesh.patel@example.com, 35, 25/09/1986
+30, Rupa Shah, rupa.shah@example.com, 30, 20/02/1991
+31, Ravi Sharma, ravi.sharma@example.com, 26, 10/05/1995
+32, Jyoti Patel, jyoti.patel@example.com, 40, 05/08/1981
+34, Sanjay Patel, sanjay.patel@example.com, 30, 22/03/1991
+35, Shruti Gupta, shruti.gupta@example.com, 28, 20/06/1993
+36, Sumit Patel, sumit.patel@example.com, 35, 25/09/1986
+37, Swati Shah, swati.shah@example.com, 30, 20/02/1991
+38, Shubham Sharma, shubham.sharma@example.com, 26, 10/05/1995
+39, Anmol Patel, anmol.patel@example.com, 40, 05/08/1981
+40, Rupal Sharma, rupal.sharma@example.com, 35, 15/11/1986
+41, Sanskar Soni, s@123, 22, 19/03/2001
+43, dasd, soni@gmail.com, 44, 19/03/2001
+44, Sanskar Soni, s@gmail.com, 21, 19/03/2001
+
+
+
+TestCase 10: (Searching from the file with query sanskar) 
+
+input : 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter any other number to Exit
+3
+Enter the text to search :
+sanskar
+How do you want to sort the content -- ??
+Enter 1 to sort by ID
+Enter 2 to sort by Name
+Enter 3 to sort by email
+Enter 4 to sort by Age
+Enter 5 to sort by DOB
+2
+Direction for sorting -
+Enter 1 for Ascending and 2 for Descending
+1
+
+
+output: 
+Your Result -
+Id : 41, Name : Sanskar Soni, email : s@123, age : 22, DOB : 19/03/2001
+Id : 44, Name : Sanskar Soni, email : s@gmail.com, age : 21, DOB : 19/03/2001
+
+
+TestCase 12: (if employee file does not exist) 
+
+output: 
+employees.txt File does not exist!
+
+TestCase 13: (if user enters the number in menu to exit which not 1 2 3 4) 
+
+input: 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter any other number to Exit
+55
+
+output: 
+program stops and exists
+
+TestCase 14: (if query to search is number 24) 
+
+input: 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter any other number to Exit
+3
+Enter the text to search :
+24
+How do you want to sort the content -- ??
+Enter 1 to sort by ID
+Enter 2 to sort by Name
+Enter 3 to sort by email
+Enter 4 to sort by Age
+Enter 5 to sort by DOB
+2
+Direction for sorting -
+Enter 1 for Ascending and 2 for Descending
+1
+
+output: 
+Your Result -
+Id : 24, Name : Ruchi Gupta, email : ruchi.gupta@example.com, age : 26, DOB : 10/05/1995
+Id : 5, Name : Vikas Gupta, email : vikas.gupta@example.com, age : 24, DOB : 12/02/1997
+
+TestCase 15: (if query to search is number email) 
+
+input: 
+Enter 1 For Add Employee to the file.
+Enter 2 For Delete Employee From the file
+Enter 3 For Searching from From the file
+Enter any other number to Exit
+3
+Enter the text to search :
+vikas.gupta@example.com
+How do you want to sort the content -- ??
+Enter 1 to sort by ID
+Enter 2 to sort by Name
+Enter 3 to sort by email
+Enter 4 to sort by Age
+Enter 5 to sort by DOB
+1
+Direction for sorting -
+Enter 1 for Ascending and 2 for Descending
+2
+
+output: 
+Your Result -
+Id : 5, Name : Vikas Gupta, email : vikas.gupta@example.com, age : 24, DOB : 12/02/1997
+
+
+
+
+

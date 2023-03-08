@@ -1,0 +1,464 @@
+Test the Program WordCountScrapper by the Following Testcases:
+
+TestCase 1: (if url file is empty) 
+
+input : 
+url.txt =  
+words.txt =   [short apache harmful population song you they]
+
+output: 
+Urls File is Empty!
+
+TestCase 2: (if words file is empty) 
+
+input : 
+url.txt =  [
+    https://education.nationalgeographic.org/resource/pollution
+    https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+    https://en.wikipedia.org/wiki/Computer_programming
+    https://www.techtarget.com/whatis/definition/gaming
+    https://en.wikipedia.org/wiki/Music
+]
+words.txt =   []
+
+output: 
+Words File is Empty!
+
+TestCase 3: (if urls file does not exist) 
+
+input : 
+
+words.txt =   [they then]
+
+output: 
+urls.txt Does not exist!
+
+TestCase 4: (if words file does not exist) 
+
+input : 
+url.txt =  [
+    https://education.nationalgeographic.org/resource/pollution
+    https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+    https://en.wikipedia.org/wiki/Computer_programming
+    https://www.techtarget.com/whatis/definition/gaming
+    https://en.wikipedia.org/wiki/Music
+]
+
+output:
+Error occurred while reading file: file does not exist:  c:\Users\LENOVO\Desktop\Hotwax\module4\training-assignment\Problem Statement - 1\words.txt
+
+TestCase 5: (if it contain only one url in urls file) 
+
+input : 
+url.txt =  [
+    https://education.nationalgeographic.org/resource/pollution
+]
+words.txt =   [
+    software
+    apache
+    harmful
+    song 
+    you
+    they
+]
+
+output: 
+
+Output #1 - the top 3 words on the given list of urls
+
+===========
+
+https://education.nationalgeographic.org/resource/pollution
+
+they - 44
+
+you - 22
+
+harmful - 11
+
+===========================
+
+Output #2 - total number of occurrences across all the specified URLs
+
+===========
+
+they - 44
+
+you - 22
+
+harmful - 11
+
+apache - 0
+
+song  - 0
+
+software - 0
+
+TestCase 6: (if given word is not found) 
+
+input : 
+url.txt =  [
+    https://education.nationalgeographic.org/resource/pollution
+    https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+    https://en.wikipedia.org/wiki/Computer_programming
+    https://www.techtarget.com/whatis/definition/gaming
+    https://en.wikipedia.org/wiki/Music
+]
+words.txt =   [tigress]
+
+output: 
+Output #1 - the top 3 words on the given list of urls
+
+===========
+
+https://education.nationalgeographic.org/resource/pollution
+No words where found from given words !
+
+https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+No words where found from given words !
+
+https://en.wikipedia.org/wiki/Computer_programming
+No words where found from given words !
+
+https://www.techtarget.com/whatis/definition/gaming
+No words where found from given words !
+
+https://en.wikipedia.org/wiki/Music
+No words where found from given words ! 
+
+===========================
+
+Output #2 - total number of occurrences across all the specified URLs
+
+===========
+
+tigress - 0
+
+TestCase 7: (if multiple urls and multiple words exist) 
+
+input : 
+url.txt =  [
+    https://education.nationalgeographic.org/resource/pollution
+    https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+    https://en.wikipedia.org/wiki/Computer_programming
+    https://www.techtarget.com/whatis/definition/gaming
+    https://en.wikipedia.org/wiki/Music
+]
+words.txt =   [
+    software
+    apache
+    harmful
+    song 
+    you
+    they
+]
+
+output: 
+Output #1 - the top 3 words on the given list of urls
+
+===========
+
+https://education.nationalgeographic.org/resource/pollution
+
+they - 44
+
+you - 22
+
+harmful - 11
+
+https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+
+they - 4
+
+you - 2
+
+harmful - 1
+
+https://en.wikipedia.org/wiki/Computer_programming
+
+software - 56
+
+you - 2
+
+they - 2
+
+https://www.techtarget.com/whatis/definition/gaming
+
+they - 38
+
+software - 14
+
+you - 2
+
+https://en.wikipedia.org/wiki/Music
+
+they - 44
+
+you - 6
+
+software - 1
+
+===========================
+
+Output #2 - total number of occurrences across all the specified URLs
+
+===========
+
+they - 176
+
+software - 72
+
+you - 40
+
+harmful - 12
+
+apache - 0
+
+song  - 0
+
+TestCase 8: (if any of the url is wrong) 
+
+input : 
+url.txt =  [
+    https://education.nationalgeographic.org/resource/pollution
+https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+https://en.wikipedia.org/wiki/Computer_programming/dsad
+https://www.techtarget.com/whatis/definition/gaming
+https://en.wikipedia.org/wiki/Music
+
+]
+words.txt =   [
+    software
+    apache
+    harmful
+    song 
+    you
+    they
+]
+
+output: 
+Output #1 - the top 3 words on the given list of urls
+
+===========
+
+https://education.nationalgeographic.org/resource/pollution
+
+they - 44
+
+you - 22
+
+harmful - 11
+
+https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+
+they - 4
+
+you - 2
+
+harmful - 1
+
+https://en.wikipedia.org/wiki/Computer_programming/dsad
+Error occurred while fetching data : org.jsoup.HttpStatusException: HTTP error fetching URL. Status=404, URL=[https://en.wikipedia.org/wiki/Computer_programming/dsad]
+
+===========================
+
+Output #2 - total number of occurrences across all the specified URLs
+
+===========
+
+they - 48
+
+you - 24
+
+harmful - 12
+
+apache - 0
+
+song  - 0
+
+software - 0
+
+TestCase 9: (if Laptop is not connected to internet Connection)
+
+input : 
+url.txt =  https://education.nationalgeographic.org/resource/pollution
+            https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+            https://en.wikipedia.org/wiki/Computer_programming
+            https://www.techtarget.com/whatis/definition/gaming
+            https://en.wikipedia.org/wiki/Music
+words.txt =  [ 
+    software
+    apache
+    harmful
+    song 
+    you
+    they
+]
+output:
+Output #1 - the top 3 words on the given list of urls
+
+===========
+No Internet connection !
+
+
+TestCase 10: (if there are duplicate urls)
+
+input:
+url.txt =  https://education.nationalgeographic.org/resource/pollution
+            https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+            https://en.wikipedia.org/wiki/Computer_programming
+            https://www.techtarget.com/whatis/definition/gaming
+            https://en.wikipedia.org/wiki/Music
+            https://en.wikipedia.org/wiki/Music
+words.txt =  [ 
+    software
+    apache
+    harmful
+    song 
+    you
+    they
+]
+output:
+Output #1 - the top 3 words on the given list of urls
+
+===========
+
+https://education.nationalgeographic.org/resource/pollution
+
+they - 22
+
+harmful - 11
+
+you - 11
+
+https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+
+they - 2
+
+harmful - 1
+
+you - 1
+
+https://en.wikipedia.org/wiki/Computer_programming
+
+software - 56
+
+you - 1
+
+they - 1
+
+https://www.techtarget.com/whatis/definition/gaming
+
+they - 19
+
+software - 14
+
+you - 1
+
+https://en.wikipedia.org/wiki/Music
+
+they - 22
+
+you - 3
+
+software - 1
+
+===========================
+
+Output #2 - total number of occurrences across all the specified URLs
+
+===========
+
+software - 71
+
+they - 66
+
+you - 17
+
+harmful - 12
+
+apache - 0
+
+song  - 0
+
+TestCase 11: (if there are duplicate words)
+
+input:
+url.txt =  https://education.nationalgeographic.org/resource/pollution
+            https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+            https://en.wikipedia.org/wiki/Computer_programming
+            https://www.techtarget.com/whatis/definition/gaming
+            https://en.wikipedia.org/wiki/Music
+            https://en.wikipedia.org/wiki/Music
+words.txt =  [ 
+    software
+    apache
+    harmful
+    song 
+    you
+    you
+    they
+    they
+]
+output:
+Output #1 - the top 3 words on the given list of urls
+
+===========
+
+https://education.nationalgeographic.org/resource/pollution
+
+they - 22
+
+harmful - 11
+
+you - 11
+
+https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
+
+they - 2
+
+harmful - 1
+
+you - 1
+
+https://en.wikipedia.org/wiki/Computer_programming
+
+software - 56
+
+you - 1
+
+they - 1
+
+https://www.techtarget.com/whatis/definition/gaming
+
+they - 19
+
+software - 14
+
+you - 1
+
+https://en.wikipedia.org/wiki/Music
+
+they - 22
+
+you - 3
+
+software - 1
+
+===========================
+
+Output #2 - total number of occurrences across all the specified URLs
+
+===========
+
+software - 71
+
+they - 66
+
+you - 17
+
+harmful - 12
+
+apache - 0
+
+song  - 0

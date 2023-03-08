@@ -21,7 +21,7 @@ public class AccountOverdrawSafeDemo {
                 // For avoiding the race condition
                 synchronized (accountHolder) {
 
-                    amountWithdrawenByPerson1 += accountHolder.withdraw(2);
+                    amountWithdrawenByPerson1 += accountHolder.withdraw(30);
                 }
             }
         };
@@ -36,7 +36,7 @@ public class AccountOverdrawSafeDemo {
                 }
                 // For avoiding the race condition
                 synchronized (accountHolder) {
-                    amountWithdrawenByPerson2 += accountHolder.withdraw(2);
+                    amountWithdrawenByPerson2 += accountHolder.withdraw(40);
                 }
             }
         };

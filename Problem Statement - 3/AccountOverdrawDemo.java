@@ -36,7 +36,6 @@ class Account {
             this.balance = this.balance - amountToWithdraw;
             return amountToWithdraw;
         }
-
         return 0;
     }
 
@@ -61,7 +60,7 @@ public class AccountOverdrawDemo {
                     // TODO: handle exception
                     System.out.println("Exception Occured : " + exp);
                 }
-                amountWithdrawenByPerson1 += accountHolder.withdraw(2);
+                amountWithdrawenByPerson1 += accountHolder.withdraw(30);
             }
         };
 
@@ -73,7 +72,7 @@ public class AccountOverdrawDemo {
                     // TODO: handle exception
                     System.out.println("Exception Occured : " + exp);
                 }
-                amountWithdrawenByPerson2 += accountHolder.withdraw(2);
+                amountWithdrawenByPerson2 += accountHolder.withdraw(40);
             }
         };
 

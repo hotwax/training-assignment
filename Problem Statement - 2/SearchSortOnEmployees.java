@@ -95,6 +95,12 @@ public class SearchSortOnEmployees {
         // Creating file
         try {
             File Obj = new File("employees.txt");
+            
+            //Check if file does not exist
+            if(!Obj.exists()){
+                System.out.println("employees.txt File does not exist!");
+                System.exit(0);
+            }
 
             // Reading from the file and adding all the content to the list
             Scanner Reader = new Scanner(Obj);
@@ -213,9 +219,33 @@ public class SearchSortOnEmployees {
             }
             System.out.println("Enter the Age : ");
             Integer age = input.nextInt();
-
+            while (age > 100 || age < 5) {
+                System.out.println("\nEnter a valid Age!! \n");
+                age = input.nextInt();
+            }
+            // Taking date of birth input from the user
             System.out.println("Enter the Date Of Birth : ");
-            String dobInString = bufferReader.readLine();
+
+            System.out.println("Enter the Day : ");
+            Integer day = input.nextInt();
+            while (day > 31 || day < 1) {
+                System.out.println("\nEnter a valid day!! \n");
+                day = input.nextInt();
+            }
+            System.out.println("Enter the month : ");
+            Integer month = input.nextInt();
+            while (month > 12 || month < 1) {
+                System.out.println("\nEnter a valid month!! \n");
+                month = input.nextInt();
+            }
+            System.out.println("Enter the Day : ");
+            Integer year = input.nextInt();
+            while (year > 10000 || year < 1000) {
+                System.out.println("\nEnter a valid year!! \n");
+                year = input.nextInt();
+            }
+
+            String dobInString = day + "/" + month + "/" + year;
             Date dob = simpleDate.parse(dobInString);
             Employee emp = new Employee(idCounter, name, email, age, dob);
 
@@ -254,6 +284,7 @@ public class SearchSortOnEmployees {
             if (emp.getId() == toDeleteId) {
                 iterator.remove();
                 rewriteTheFile();
+                System.out.println("Employee Deleted Successfully.");
             }
         }
     }

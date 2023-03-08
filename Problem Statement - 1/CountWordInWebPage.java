@@ -7,8 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.LogManager;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 // For Jsoup Library
 
@@ -46,6 +48,12 @@ public class CountWordInWebPage {
         try {
             // Reading from the words file and adding all the content to the listOfwords
             File wordsFile = new File("words.txt");
+
+            // check if file does not exist
+            if (!wordsFile.exists()) {
+                System.out.println("words.txt Does not exist!");
+                System.exit(0);
+            }
             Scanner Reader = new Scanner(wordsFile); // Scanner object
 
             while (Reader.hasNextLine()) {
@@ -56,6 +64,12 @@ public class CountWordInWebPage {
 
             // Reading the urls file and adding all the content to the list of urls
             File urlsFile = new File("urls.txt");
+
+            // check if file does not exist
+            if (!urlsFile.exists()) {
+                System.out.println("urls.txt Does not exist!");
+                System.exit(0);
+            }
             Reader = new Scanner(urlsFile); // Scanner object
 
             while (Reader.hasNextLine()) {
@@ -70,6 +84,24 @@ public class CountWordInWebPage {
             System.out.println("Exception occurred" + exception);
         }
 
+        // Check if files are empty
+        if (listOfWords.size() == 0) {
+            System.out.println("Words File is Empty!");
+            System.exit(0);
+        }
+        if (listOfUrls.size() == 0) {
+            System.out.println("Urls File is Empty!");
+            System.exit(0);
+        }
+
+        // remiving duplicate elements
+        listOfUrls = listOfUrls.stream()
+                .distinct()
+                .collect(Collectors.toList());
+        listOfWords = listOfWords.stream()
+                .distinct()
+                .collect(Collectors.toList());
+
         /* fetching data from the urls */
         // looping through the listofUrls
         // just printing output 1
@@ -81,7 +113,19 @@ public class CountWordInWebPage {
 
             // Document class represents an HTML document loaded through the Jsoup library.
             // fetching the data
-            Document doc = Jsoup.connect(url).get();
+            Document doc = new Document("");
+            try {
+                doc = Jsoup.connect(url).get();
+
+            } catch (org.jsoup.HttpStatusException error) {
+                // TODO: handle exception
+                System.out.println("\n" + url);
+                System.out.println("Error occurred while fetching data : " + error);
+                break;
+            } catch (java.net.UnknownHostException error) {
+                System.out.println("No Internet connection !");
+                System.exit(0);
+            }
 
             // filtering text from Jsoup Document
             String text = doc.body().text();
@@ -107,6 +151,11 @@ public class CountWordInWebPage {
             // Printing the Output for the user
             System.out.println("\n" + url);
 
+            // if no words found
+            if (listOfWord.size() == 0) {
+                System.out.println("No words where found from given words !");
+            }
+
             // looping through the map and printing the key value
             // printing th top 3 value
             int count = 0;
@@ -118,6 +167,11 @@ public class CountWordInWebPage {
                 }
             }
 
+        }
+
+        // adding if words not found in web amking count zero
+        for (String word : listOfWords) {
+            totalWordOccurrence.put(word, totalWordOccurrence.getOrDefault(word, 0));
         }
 
         // sorting totalwords map by creating a list
