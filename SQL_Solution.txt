@@ -81,9 +81,9 @@ mysql> SELECT S.SNUM,S.SNAME FROM SALESPEOPLE S
 +------+---------+
 
 6) List names of all customers matched with the salespeople serving them. 
-mysql> SELECT CNAME,SNAME
-    ->     FROM SALESPEOPLE,CUSTOMERS
-    ->     WHERE SALESPEOPLE.SNUM = CUSTOMERS.SNUM;
+SELECT c.cname, s.sname
+FROM salespeople s
+         JOIN customers c ON c.snum = s.snum;   
 +----------+---------+
 | CNAME    | SNAME   |
 +----------+---------+
@@ -97,10 +97,13 @@ mysql> SELECT CNAME,SNAME
 +----------+---------+
 
 7) Find the names and numbers of all salespeople who have more than one customer. 
-mysql> SELECT sname,snum
-    ->     FROM salespeople WHERE 1 < (
-    ->         SELECT COUNT(sname) FROM customers WHERE salespeople.snum = snum
-    ->         );
+
+SELECT s.sname, s.snum
+FROM salespeople s
+         JOIN customers c on s.snum = c.snum
+GROUP by s.snum
+HAVING COUNT(s.snum) > 1;
+
 +--------+------+
 | sname  | snum |
 +--------+------+
@@ -110,20 +113,23 @@ mysql> SELECT sname,snum
 
 
 8) Count the orders of each of the salespeople and output the results in descending order. 
-mysql> SELECT S.SNUM,S.SNAME,COUNT(ONUM)
-    ->     FROM ORDERS O,salespeople S
-    ->     WHERE S.SNUM = O.SNUM
-    ->     GROUP BY S.SNUM
-    ->     ORDER BY COUNT(ONUM) DESC;
-+------+---------+-------------+
-| SNUM | SNAME   | COUNT(ONUM) |
-+------+---------+-------------+
-| 1001 | Peel    |           3 |
-| 1002 | Serres  |           3 |
-| 1007 | Rifkin  |           2 |
-| 1003 | AxelRod |           1 |
-| 1004 | Motika  |           1 |
-+------+---------+-------------+
+
+SELECT s.sname, s.snum, COUNT(o.onum) AS no_of_orders
+FROM salespeople s
+         LEFT JOIN orders o ON s.snum = o.snum
+GROUP BY o.snum
+ORDER BY no_of_orders DESC;
+
++---------+------+--------------+
+| sname   | snum | no_of_orders |
++---------+------+--------------+
+| Peel    | 1001 |            3 |
+| Serres  | 1002 |            3 |
+| Rifkin  | 1007 |            2 |
+| AxelRod | 1003 |            1 |
+| Motika  | 1004 |            1 |
+| Fran    | 1008 |            0 |
++---------+------+--------------+
 
 9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
 mysql> SELECT * FROM CUSTOMERS
@@ -143,21 +149,21 @@ mysql> SELECT * FROM CUSTOMERS
 
 
 10) Match salespeople to customers according to what city they live in. 
-mysql> SELECT C.CITY,C.CNAME,S.SNAME
-    ->     FROM CUSTOMERS C , SALESPEOPLE S
-    ->     WHERE C.CITY = S.CITY;
-+---------+----------+--------+
-| CITY    | CNAME    | SNAME  |
-+---------+----------+--------+
-| London  | Hoffman  | Fran   |
-| London  | Hoffman  | Motika |
-| London  | Hoffman  | Peel   |
-| SanJose | Liu      | Serres |
-| London  | Clemens  | Fran   |
-| London  | Clemens  | Motika |
-| London  | Clemens  | Peel   |
-| SanJose | Cisneros | Serres |
-+---------+----------+--------+
+SELECT c.city, s.sname, c.cname
+FROM customers c
+         JOIN salespeople s on c.city = s.city;
++---------+--------+----------+
+| city    | sname  | cname    |
++---------+--------+----------+
+| London  | Fran   | Hoffman  |
+| London  | Motika | Hoffman  |
+| London  | Peel   | Hoffman  |
+| SanJose | Serres | Liu      |
+| London  | Fran   | Clemens  |
+| London  | Motika | Clemens  |
+| London  | Peel   | Clemens  |
+| SanJose | Serres | Cisneros |
++---------+--------+----------+
 
 
 11) Find all the customers in SanJose who have a rating above 200. 
@@ -304,11 +310,19 @@ odate = '1990-03-10';
 | 1007 |  1098.16 | 1990-03-10 |
 +------+----------+------------+
 
-22) Find all customers located in cities where Serres has customers. 
-mysql> SELECT cnum,cname,city
-    ->     FROM customers WHERE snum = (
-    ->         SELECT snum FROM salespeople WHERE sname = "Serres"
-    ->         );
+22) Find all customers located in cities where Serres has customers.
+Using SubQuery :
+SELECT cnum, cname, city
+FROM customers
+WHERE snum = (SELECT snum
+              FROM salespeople
+              WHERE sname = 'Serres');
+
+Using Join :
+SELECT c.cnum, c.cname, c.city
+FROM customers c
+         JOIN salespeople s on c.snum = s.snum
+WHERE s.sname = 'Serres';
 +------+-------+---------+
 | cnum | cname | city    |
 +------+-------+---------+
@@ -425,7 +439,7 @@ mysql> SELECT snum,sname,comm,city FROM salespeople;
 +------+---------+------+-----------+
 
 32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
-mysql> SELECT * FROM customers WHERE cname BETWEEN 'A' AND 'G';
+mysql> SELECT * FROM customers WHERE cname BETWEEN "A%" AND "G%";
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -571,10 +585,10 @@ WHERE city = 'SanJose';
 
 SELECT *
 FROM orders
-WHERE amt < (SELECT MAX(o.amt)
-             FROM customers c,
-                  orders o
-             WHERE city = 'SanJose');
+WHERE amt < ANY (SELECT o.amt
+                 FROM orders o
+                          JOIN customers c on o.cnum = c.cnum
+                 WHERE c.city = 'SanJose');
 
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
@@ -582,7 +596,6 @@ WHERE amt < (SELECT MAX(o.amt)
 | 3001 |   18.69 | 1990-03-10 | 2008 | 1007 |
 | 3002 | 1900.10 | 1990-03-10 | 2007 | 1004 |
 | 3003 |  767.69 | 1990-03-10 | 2001 | 1001 |
-| 3005 | 5160.45 | 1990-03-10 | 2003 | 1002 |
 | 3006 | 1098.16 | 1990-03-10 | 2008 | 1007 |
 | 3007 |   75.75 | 1990-04-10 | 2004 | 1002 |
 | 3008 | 4723.00 | 1990-05-10 | 2006 | 1001 |
@@ -679,10 +692,17 @@ WHERE city IN ("Barcelona", "London");
 
 44) Find all salespeople with only one customer.
 
+Using SubQuery:
 SELECT *
 FROM salespeople
 WHERE 1 IN (SELECT COUNT(snum) FROM customers WHERE customers.snum = salespeople.snum GROUP BY salespeople.snum);
 
+Using Join:
+SELECT s.snum, s.sname
+FROM salespeople s
+         JOIN customers c on s.snum = c.snum
+GROUP BY s.snum
+HAVING COUNT(s.snum) = 1;
 +------+---------+-----------+------+
 | SNUM | SNAME   | CITY      | COMM |
 +------+---------+-----------+------+
@@ -930,12 +950,18 @@ WHERE rating = (SELECT rating
 
 58) Find all salespeople for whom there are customers that follow them in alphabetical order.
 
+Using SubQuery:
 SELECT *
 FROM salespeople
 WHERE snum IN (SELECT snum
                FROM customers
                WHERE salespeople.sname < customers.cname);
 
+Using Join:
+SELECT s.*
+FROM salespeople s
+         JOIN customers c on s.snum = c.snum
+WHERE s.sname < c.cname;
 
 +------+---------+----------+------+
 | SNUM | SNAME   | CITY     | COMM |
@@ -1433,20 +1459,17 @@ WHERE comm = (SELECT MAX(comm)
 
 90) Does the customer who has placed the maximum number of orders have the maximum rating?
 
-SELECT c.cnum,
-       c.rating,
-       o.onum,
-       COUNT(*) AS orders_count
+SELECT c.cnum, c.rating, COUNT(*) AS orders_count
 FROM customers c
-        JOIN orders o ON c.cnum = o.cnum
-        JOIN (SELECT cnum, COUNT(*) AS orders_count
-                     FROM orders
-                     GROUP BY cnum
-                     HAVING COUNT(*) = (SELECT MAX(cnt)
-                                        FROM (SELECT COUNT(*) AS cnt
-                                              FROM orders
-                                              GROUP BY cnum) AS subq)) AS subq2 ON subq2.cnum = c.cnum
-GROUP BY c.cnum;
+JOIN orders o ON c.cnum = o.cnum
+GROUP BY c.cnum
+HAVING COUNT(*) = (
+  SELECT COUNT(*) AS cnt
+  FROM orders
+  GROUP BY cnum
+  ORDER BY cnt DESC
+  LIMIT 1
+);
 
 +------+--------+------+--------------+
 | cnum | rating | onum | orders_count |
