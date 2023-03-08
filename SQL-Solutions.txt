@@ -171,23 +171,36 @@ Output -
 -- 8) Count the orders of each of the salespeople and output the results in descending 
 -- order. 
 
-Query -
+Query 1-
 
 SELECT 
     s.sname, s.snum, (SELECT count(*) FROM orders AS o WHERE s.snum = o.snum) AS order_count
 FROM 
-    salespeople AS s;
+    salespeople AS s
+ORDER BY 
+    order_count DESC;
 
-Output - 
+Query 2-
+
+SELECT 
+    s.sname, s.snum, COUNT(o.snum) AS order_count
+FROM
+    salespeople AS s
+        LEFT JOIN
+    orders AS o ON s.snum = o.snum
+GROUP BY s.sname , s.snum
+ORDER BY order_count DESC;
+
+Output -
 
 +---------+------+-------------+
 | sname   | snum | order_count |
 +---------+------+-------------+
 | Peel    | 1001 |           3 |
 | Serres  | 1002 |           3 |
+| Rifkin  | 1007 |           2 |
 | AxelRod | 1003 |           1 |
 | Motika  | 1004 |           1 |
-| Rifkin  | 1007 |           2 |
 | Fran    | 1008 |           0 |
 +---------+------+-------------+
 
