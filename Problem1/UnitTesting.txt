@@ -1,0 +1,133 @@
+Case 1 (Urls.txt does not exists)
+Inputs: Words.txt
+Outputs:The program will throw error message and exit.
+
+Case 2 (Words.txt does not exists)
+Inputs: Urls.txt
+Outputs: The program will throw error message and exit.
+
+Case 3 (Words.txt has no words)
+Inputs: Words.txt(empty file) && Urls.txt
+Outputs: The program will exit with message "no words found in words.txt"
+
+Case 4 (Urls.txt has no urls)
+Inputs: Words.txt && Urls.txt(empty file)
+Outputs: The program will exit without any message.
+
+Case 5 (Words.txt has words and Urls.txt has urls)
+Inputs: Words.txt && Urls.txt
+Outputs: The Program will display both the outputs#1 and output#2
+------------- Output #1 --------------
+For URL : https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system
+Word: shopify-48
+Word: order-38
+Word: retailers-21
+---------------------------------------
+For URL : https://www.github.com/
+Word: github-40
+Word: open-6
+Word: source-5
+------------- Output #2 --------------
+shopify-48
+github-40
+order-38
+retailers-21
+open-6
+source-5
+---------------------------------------
+
+Case 6 (no word found in the urls)
+Inputs: Words.txt && Urls.txt
+Outputs: The Program will display No words found in the urls
+------------- Output #1 --------------
+For URL : https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system
+---------------------------------------
+For URL : https://www.github.com/
+------------- Output #2 --------------
+rishu-0
+---------------------------------------
+
+Case 7 (invalid url)
+Inputs: Words.txt && Urls.txt  (with anyone invalid url)
+Output: The program will display error message and exit.
+------------- Output #1 --------------
+For URL : https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system
+Word: shopify-48
+Word: order-38
+Word: retailers-21
+---------------------------------------
+For URL : https://www.github.com/
+Word: github-40
+Word: open-6
+Word: source-5
+File not Found!!
+java.net.UnknownHostException: hashnode.
+at Problem1.WebScrapping.main(WebScrapping.java:69)
+
+
+Case 8 (Unreachable url)
+Inputs: Words.txt && Urls.txt  (with anyone unreachable url)
+Output: The program will display error message and exit.
+
+------------- Output #1 --------------
+For URL : https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system
+Word: shopify-48
+Word: order-38
+Word: retailers-21
+---------------------------------------
+For URL : https://www.github.com/
+Word: github-40
+Word: open-6
+Word: source-5
+File not Found!!
+org.jsoup.HttpStatusException: HTTP error fetching URL. Status=404, URL=[https://en.wikipedia.org/wiki/Computer_programming/dsad]
+
+Case 9 (Internet Not Avilable)
+Inputs: Words.txt && Urls.txt
+Output: Internet Not Available
+
+Case 10 (Duplicate words in Words.txt)
+Inputs: Words.txt && Urls.txt (Words file has duplicate words)
+Output: The program will display the output for distinct words only.
+------------- Output #1 --------------
+---------------------------------------
+For URL : https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system
+Word: shopify-48
+Word: order-38
+Word: retailers-21
+---------------------------------------
+For URL : https://www.github.com/
+Word: github-40
+Word: open-6
+Word: source-5
+------------- Output #2 --------------
+shopify-48
+github-40
+order-38
+retailers-21
+open-6
+source-5
+---------------------------------------
+
+Case 11 (Duplicate urls in Urls.txt)
+Inputs: Words.txt && Urls.txt (Urls file has duplicate urls)
+Output: The program will display the output for distinct urls only.
+------------- Output #1 --------------
+---------------------------------------
+For URL : https://blog.hotwax.co/7-critical-capabilities-of-a-shopify-omnichannel-order-management-system
+Word: shopify-48
+Word: order-38
+Word: retailers-21
+---------------------------------------
+For URL : https://www.github.com/
+Word: github-40
+Word: open-6
+Word: source-5
+------------- Output #2 --------------
+shopify-48
+github-40
+order-38
+retailers-21
+open-6
+source-5
+---------------------------------------

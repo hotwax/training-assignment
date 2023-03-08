@@ -99,8 +99,10 @@ class RunEmployee{
 
     public static void main(String[] args) {
         try {
+            // Get the current working directory
+            String homeDir = System.getProperty("user.dir");
             // File to read Employee Details
-            File file = new File("src/Problem2/Employee.txt");
+            File file = new File(homeDir + "/Problem2/Employee.txt");
             Scanner fileReader = new Scanner(file);
             // Reading Employee Details from File
             while (fileReader.hasNextLine()) {
@@ -124,7 +126,7 @@ class RunEmployee{
             e.printStackTrace();
         }
         catch (ParseException e){
-            System.out.println("Given Proper Formatting");
+            System.out.println("Given Pr    oper Formatting");
         }
         catch (Exception e){
             System.out.println("Something went wrong");
@@ -135,6 +137,7 @@ class RunEmployee{
             System.out.println("Type Delete : To Delete Entry");
             System.out.println("Type Search : To Search Entry");
             System.out.println("Type display : To Display Entries");
+            System.out.println("Type Exit   : To Exit");
             System.out.println("Enter your choice : ");
             try {
                 Scanner sc = new Scanner(System.in);
@@ -317,10 +320,18 @@ class RunEmployee{
             System.out.println("Enter age: ");
             int age = Integer.parseInt(br.readLine());
             // Checking if Age is valid
+            if(age<5 || age>102){
+                System.out.println("Please Enter Valid Age Only");
+                System.exit(0);
+            }
             System.out.println("Enter Date of Birth: ");
             String dateOfBirth = br.readLine();
-            // Checking if Date of Birth is valid
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            // Checking if Date of Birth is valid
+            if(dateOfBirth!=null && !dateOfBirth.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}$")){
+                System.out.println("Please Enter Valid Date of Birth Only");
+                System.exit(0);
+            }
             Date dobFormat = simpleDateFormat.parse(dateOfBirth);
             // Generating new Employee
             Employee newEmp =  new Employee(id,name,email,age,dobFormat);
@@ -338,8 +349,10 @@ class RunEmployee{
 
     private static void writeFile() {
         try {
+            // Get the current working directory
+            String homeDir = System.getProperty("user.dir");
             // Writing Employee Details to File
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src/Problem2/Employee.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(homeDir+"/Problem2/Employee.txt"));
             for(Employee emp :employeeList){
                 writer.write(emp.getEmpID()+","+emp.getName()+","+emp.getEmail()+","+emp.getAge()+","+RunEmployee.simpleDateFormat.format(emp.getDateOfBirth())+"\n");
             }

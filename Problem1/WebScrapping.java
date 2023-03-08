@@ -1,6 +1,6 @@
-package Problem1;// Importing JSoup Library
-/*
-* Jsoup is a Java Library to Parsing HTML to Java*/
+package Problem1;
+// Importing JSoup Library
+/* Jsoup is a Java Library to Parsing HTML to Java*/
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -9,10 +9,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Comparator;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 // Pair class : to store key,value in array
 class Pair{
@@ -39,7 +41,7 @@ public class WebScrapping {
             // Get the current working directory
             String homeDir = System.getProperty("user.dir");
             //  Create a file to get words from the file Words.txt
-            File wordsFile = new File(homeDir + "/src/Problem1/Words.txt");
+            File wordsFile = new File(homeDir + "/Problem1/Words.txt");
             BufferedReader wordBuffer = new BufferedReader(new FileReader(wordsFile));
             ArrayList<String> words = new ArrayList<>();
             //  Create a file to get words from the file Words.txt
@@ -47,20 +49,30 @@ public class WebScrapping {
                 map.put(wordReader, 0);
                 words.add(wordReader);
             }
-
+            words = (ArrayList<String>) words.stream().distinct().collect(Collectors.toList());
+            // checking for the words array
+            if(words.size() == 0 || map.size() == 0){
+                System.out.println("No words found in the file");
+                return;
+            }
             // Create a file to get urls from the file urls.txt
-            File url = new File(homeDir + "/src/Problem1/URL.txt");
+            File url = new File(homeDir + "/Problem1/URL.txt");
             // Using BufferedReader to read url from urls.txt
             BufferedReader urlBuffer = new BufferedReader(new FileReader(url));
 
 
             System.out.println("------------- Output #1 --------------");
             //reading urls line by line
-            String urlReader;
-            while ((urlReader = urlBuffer.readLine()) != null) {
+            ArrayList<String> urls = new ArrayList<>();
+            String urlR;
+            while ((urlR = urlBuffer.readLine()) != null) {
+                urls.add(urlR);
+            }
+            urls = (ArrayList<String>) urls.stream().distinct().collect(Collectors.toList());
+            for(String urlReader : urls){
             /* Jsoup has `connect` method to that accepts url as string and uses `Connection` Interface behind
                the scene to fetch a `Connection`  Object Reference : https://jsoup.org/apidocs/org/jsoup/Connection.html
-             */
+             *
                 /*  `.get()` parsed the result to Document*/
                 Document doc = Jsoup.connect(urlReader).get();
                 // Body method get the <body></body> tag and `.text()` extracts text from HTML tag
@@ -77,7 +89,7 @@ public class WebScrapping {
                     else if (!map.containsKey(word)) map.put(word, count);
                 }
                 list.sort((pair1, pair2) -> pair2.freq - pair1.freq);
-                for (int index = 0; index < 3; index++) {
+                for (int index = 0; list.size() >= 3 && index < 3; index++) {
                     System.out.println(list.get(index).toString());
                 }
 
@@ -100,14 +112,20 @@ public class WebScrapping {
                 System.out.println(entry.getKey() + "-" + entry.getValue());
             }
             System.out.println("---------------------------------------");
-            // Handling Exception for file
+            // Handling Exception for Internet Connection
+        } catch (java.net.UnknownHostException e){
+            System.out.println("Failed to Connect to the Internet");
+            e.printStackTrace();
+
+             // Handling Exception for file
         } catch (IOException e){
-            System.out.println("File not Found!!");
+                    System.out.println("File not Found!!");
             e.printStackTrace();
             // Handling any other Exception : Jsoup
         } catch (Exception e){
             System.out.println("Exception :" + e.getMessage());
         }
+
     }
 
 //    Function to count the occurrence of each word in the file

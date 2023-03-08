@@ -1,0 +1,50 @@
+Case 1 (When user requesting more amount than balance)
+Input: John and Junior withdrawing concurrently
+Output: "Account Holder: "+person+" \nInsufficient Balance"
+
+Case 2 (Running AccountOverDraw)
+Input: John and Junior withdrawing concurrently
+Output: Account Holder: John
+        Withdrawal: 200 | Current Balance: 600
+        Account Holder: Junior John
+        Withdrawal: 200 | Current Balance: 800
+        Account Holder: Junior John
+        Withdrawal: 200 | Current Balance: 200
+        Account Holder: John
+        Withdrawal: 200 | Current Balance: 400
+        Account Holder: John
+        Withdrawal: 200 | Current Balance: 0
+        Account Holder: Junior John
+        Insufficient Balance
+        Account Holder: Junior John
+        Insufficient Balance
+        Account Holder: John
+        Insufficient Balance
+        Account Holder: John
+        Insufficient Balance
+        Account Holder: Junior John
+        Insufficient Balance
+
+Their transactions might be interleave each other.
+
+Case 3 (Running AccountOverDrawSafe)
+Input: John and Junior withdrawing concurrently
+Output:
+    Account Holder: John
+    Withdrawal: 200 | Current Balance: 800
+    Account Holder: John
+    Withdrawal: 200 | Current Balance: 600
+    Account Holder: John
+    Withdrawal: 200 | Current Balance: 400
+    Account Holder: John
+    Withdrawal: 200 | Current Balance: 200
+    Account Holder: John
+    Withdrawal: 200 | Current Balance: 0
+    Account Holder: Junior John Insufficient Balance
+    Account Holder: Junior John Insufficient Balance
+    Account Holder: Junior John Insufficient Balance
+    Account Holder: Junior John Insufficient Balance
+    Account Holder: Junior John Insufficient Balance
+
+When one account has accessing the balance variable, the other account will be blocked.
+

@@ -1,6 +1,8 @@
 package Problem4;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -21,6 +23,11 @@ class DeserialiazationTest {
             inFile.close();
             // closing objectInputStream
             inObject.close();
+        } catch(EOFException err){
+            System.out.println("Empty File");
+        } catch (IOException err){
+            System.out.println("File not Found");
+            err.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,7 +41,7 @@ class DeserialiazationTest {
         String currDir = System.getProperty("user.dir");
         String newDir;
         // Replacing all "\" to "\\" and adding the subdirectory
-        newDir = currDir.replaceAll("\\\\", "\\\\\\\\") + "\\src\\Problem4\\";
+        newDir = currDir.replaceAll("\\\\", "\\\\\\\\") + "\\Problem4\\";
         return newDir;
     }
 
