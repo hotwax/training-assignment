@@ -13,4 +13,22 @@ class Account {
 }
 
 const account = new Account();
-account.withdraw("John", 200); // John withdraws 200 and has 800 left
+
+// thread-1
+async function withRam() {
+  while (account.balance > 0) {
+    await account.withdraw("Ram", 100);
+  }
+}
+
+// thread-2
+async function withShyam() {
+  while (account.balance > 0) {
+    await account.withdraw("Shyam", 100);
+  }
+}
+
+// thread-1 and thread-2 working simultaniously
+
+withRam()
+withShyam()

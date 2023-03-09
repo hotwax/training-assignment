@@ -1,0 +1,51 @@
+
+
+    Testcases for the serialization & deserialization program.
+
+    =============================================================
+
+    Testcase1: Check if fs module is able to write in file or not
+
+    output: Not able to write in the file.
+
+    =============================================================
+
+
+    Testcase2: Check if fs module is able to read from file or not
+
+    output: Not able to read from the file.
+
+
+    =============================================================
+
+    
+    Testcase3: Check if the data is serialized and stored in the file or not
+
+    output: A file is creating with name output.ser in which Json object is stored.
+    
+    output1.ser:
+
+    [{"name":"Ram","dob":"12/09/1998","address":{"city":"Delhi","state":"Delhi","pincode":"110001","country":"India"}},{"name":"Shyam","dob":"24/12/1970","address":{"city":"Indore","state":"Madhya Pradesh","pincode":"110001","country":"India"}},{"name":"Adarsht","dob":"20/06/2001","address":{"city":"Mumbai","state":"Maharashtra","pincode":"110001","country":"India"}},{"name":"Hardik","dob":"07/05/2004","address":{"city":"Pilani","state":"Goa","pincode":"110001","country":"India"}}]
+
+
+    =============================================================
+
+    Testcase4: Check if the data is deserialized or not
+
+    output: A JS object is parsed frome the JSON object stored in the .ser file and a table should be shown.
+
+    object:
+
+    ┌─────────┬───────────┬──────────────┬──────────┐
+    │ (index) │   name    │     dob      │ address  │
+    ├─────────┼───────────┼──────────────┼──────────┤
+    │    0    │   'Ram'   │ '12/09/1998' │ [Object] │
+    │    1    │  'Shyam'  │ '24/12/1970' │ [Object] │
+    │    2    │ 'Adarsht' │ '20/06/2001' │ [Object] │
+    │    3    │ 'Hardik'  │ '07/05/2004' │ [Object] │
+    └─────────┴───────────┴──────────────┴──────────┘
+
+
+    =============================================================
+
+
