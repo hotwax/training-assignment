@@ -1,0 +1,32 @@
+
+Testcases for Account
+
+============================================================
+
+Testcase 1: Check if the program is stop running when balance is 0.
+
+============================================================
+
+Testcase 2: Check if the balance is updated correctly when the balance is less than the amount to be withdrawn
+
+============================================================
+
+Testcase 3: Check if both threads running parallely or not
+
+output: 
+
+Ram withdraws 100 and has 900 left
+Shyam withdraws 100 and has 800 left
+Ram withdraws 100 and has 700 left
+Shyam withdraws 100 and has 600 left
+Ram withdraws 100 and has 500 left
+Shyam withdraws 100 and has 400 left
+Ram withdraws 100 and has 300 left
+Shyam withdraws 100 and has 200 left
+Ram withdraws 100 and has 100 left
+Shyam withdraws 100 and has 0 left
+
+============================================================
+
+
+

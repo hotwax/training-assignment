@@ -1,0 +1,76 @@
+
+Testcases for the Word Count Scraper
+
+=================================================================
+
+Testcase 1: Check if the words.txt file is not present
+
+output: Error reading words file
+        Please check the files. Files are not present or may be empty.
+
+
+=================================================================
+
+Testcase 2: Check if the urls.txt file is not present
+
+output: Error reading urls file
+        Please check the files. Files are not present or may be empty.
+
+
+=================================================================
+
+Testcase 3: Check if the words.txt file is empty
+
+output: Please check the files. Files are not present or may be empty.
+
+
+=================================================================
+
+Testcase 4: Check if the urls.txt file is empty
+
+output: Please check the files. Files are not present or may be empty.
+
+
+=================================================================
+
+Testcase 5: Check if the urls.txt file contains only valid urls
+
+ouput: Invalid url:  stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string
+       Invalid url:  www.google.com
+
+=================================================================
+
+Testcase 6: Check if the occurance of all the words in urls.txt file is calculated correctly
+
+output: 
+
+
+https://www.npmjs.com/package/cheerio
+
+{ is: 19, javascript: 1, for: 20 }
+
+https://stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string
+
+{ is: 55, javascript: 11, for: 44 }
+
+https://www.cheerios.com/
+
+{ is: 3, for: 17 }
+
+Total Occurance
+
+{ is: 77, javascript: 12, for: 81 }
+
+
+=================================================================
+
+Testcase 7: Check if the occurance of all the words in urls.txt file is printed correctly
+
+output:
+
+Sorted map in descending order.
+
+[ [ 'for', 84 ], [ 'is', 79 ], [ 'javascript', 12 ] ]
+
+
+=================================================================
