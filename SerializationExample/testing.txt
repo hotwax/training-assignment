@@ -1,0 +1,98 @@
+case 1- if file extension is not .ser during serialization and deserialization 
+
+Enter the file name:
+output1.java
+please enter a valid file name. Extension allowed- '.ser'
+
+Enter the file name:
+output.txt
+please enter a valid file name. Extension allowed- '.ser'
+
+Enter the file name:
+
+
+
+case 2- during deserialization if specified file is not found
+
+Enter the file name:
+output4.ser
+java.io.FileNotFoundException: output4.ser (The system cannot find the file specified)
+
+
+
+case 3- during deserialization if specified file is empty
+
+Enter the file name:
+output4.ser
+File is empty
+java.io.EOFException
+
+
+
+------- valid cases
+case 4- serialization with String format of dateOfBirth 
+
+Enter the file name:
+output1.ser
+
+Serialized
+
+
+
+case 5- deserialization with String format of dateOfBirth 
+
+Enter the file name:
+output1.ser
+Ram 01/01/2002 indore India 452001 m.p.
+Ram 01/01/2002 indore India 452001 m.p.
+Ram 01/01/2002 indore India 452001 m.p.
+Ram 01/01/2002 indore India 452001 m.p.
+
+Deserialized
+
+
+
+case 6- serialization with Date format of dateOfBirth 
+
+Enter the file name:
+output2.ser
+
+Serialized
+
+
+
+
+case 7- deserialization with Date format of dateOfBirth 
+
+Enter the file name:
+output2.ser
+Ram Tue Jan 01 00:00:00 IST 2002 indore India 452001 m.p.
+Ram Tue Jan 01 00:00:00 IST 2002 indore India 452001 m.p.
+Ram Tue Jan 01 00:00:00 IST 2002 indore India 452001 m.p.
+Ram Tue Jan 01 00:00:00 IST 2002 indore India 452001 m.p.
+
+Deserialized
+
+
+
+
+case 8-  deserialization with Date format of dateOfBirth in Student class and String format of dateOfBirth in serialized file
+
+Enter the file name:
+output1.ser
+java.lang.ClassCastException: cannot assign instance of java.lang.String to field Student.dateOfBirth of type java.util.Date in 
+instance of Student
+
+
+
+
+case 9- Resolved java.lang.ClassCastException by setting Object data type of dateOfBirth 
+
+Enter the file name:
+output1.ser
+Ram 01/01/2002 indore India 452001 m.p.
+Ram 01/01/2002 indore India 452001 m.p.
+Ram 01/01/2002 indore India 452001 m.p.
+Ram 01/01/2002 indore India 452001 m.p.
+
+Deserialized

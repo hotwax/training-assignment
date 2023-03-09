@@ -1,0 +1,190 @@
+Case 1: One url 
+Input- 
+urls.txt- https://www.hotwaxsystems.com/
+words.txt- Systems HotWax OfBiz Apache Commerce Omnichannel Order Store
+output-
+
+Top 3 words frequency words in descending order in url: https://www.hotwaxsystems.com/
+
+ofbiz=27
+hotwax=13
+apache=12
+---------------------------
+Total number of occurences of each word across all urls.
+
+ofbiz=27
+hotwax=13
+apache=12
+systems=12
+commerce=5
+order=4
+omnichannel=2
+store=0
+
+
+
+Case 2: More than one url 
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- Systems HotWax OfBiz Apache Commerce Omnichannel Order Store 
+output-
+
+Top 3 words frequency words in descending order in url: https://www.hotwaxsystems.com/
+
+ofbiz=27
+hotwax=13
+apache=12
+---------------------------
+Top 3 words frequency words in descending order in url: https://www.hotwax.co/
+
+store=21
+order=16
+omnichannel=12
+---------------------------
+Total number of occurences of each word across all urls.
+
+ofbiz=27
+store=21
+order=20
+hotwax=17
+omnichannel=14
+apache=12
+systems=12
+commerce=9
+
+
+
+Case 3: No word found
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- Selenium Python Networking
+output-
+
+Top 3 words frequency words in descending order in url: https://www.hotwaxsystems.com/
+
+python =0
+networking=0
+selenium =0
+---------------------------
+Top 3 words frequency words in descending order in url: https://www.hotwax.co/
+
+python =0
+networking=0
+selenium =0
+---------------------------
+Total number of occurences of each word across all urls.
+
+python =0
+networking=0
+selenium =0
+
+
+
+Case 4: No words
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+words.txt- 
+output-
+
+No words found in 'words.txt' file.
+
+
+
+Case 5: No urls
+Input- 
+urls.txt-
+words.txt- Systems HotWax OfBiz Apache Commerce Omnichannel Order Store
+output-
+
+No urls found in 'urls.txt' file
+
+
+
+Case 6: No urls.txt file
+Input- 
+words.txt- Systems HotWax OfBiz Apache Commerce Omnichannel Order Store
+output-
+
+java.io.FileNotFoundException: urls.txt (The system cannot find the file specified)
+
+
+
+Case 7: No words.txt file
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/ 
+output-
+
+java.io.FileNotFoundException: words.txt (The system cannot find the file specified)
+
+
+
+Case 8: Given an invalid url 
+Input- 
+urls.txt- https://asjdwtsgndkkdbdhc.com/, https://www.hotwax.co/
+words.txt- Systems HotWax OfBiz Apache Commerce Omnichannel Order Store
+output-
+
+Please add a valid url
+java.net.UnknownHostException: asjdwtsgndkkdbdhc.com
+
+
+
+Case 9: Repetitive words in words.txt file
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/
+words.txt- Systems, HotWax, OfBiz, Apache, Commerce, HotWax, Omnichannel, Order, Store, Store
+output-
+
+Top 3 words frequency words in descending order in url: https://www.hotwaxsystems.com/
+
+ofbiz=27
+hotwax=13
+apache=12
+---------------------------
+Top 3 words frequency words in descending order in url: https://www.hotwax.co/
+
+store=21
+order=16
+omnichannel=12
+---------------------------
+Total number of occurences of each word across all urls.
+
+ofbiz=27
+store=21
+order=20
+hotwax=17
+omnichannel=14
+apache=12
+systems=12
+commerce=9
+
+
+
+Case 10: Repetitive urls in urls.txt file
+Input- 
+urls.txt- https://www.hotwaxsystems.com/, https://www.hotwax.co/, https://www.hotwax.co/
+words.txt- Systems, HotWax, OfBiz, Apache, Commerce, Omnichannel, Order, Store
+output-
+
+Top 3 words frequency words in descending order in url: https://www.hotwaxsystems.com/
+
+ofbiz=27
+hotwax=13
+apache=12
+---------------------------
+Top 3 words frequency words in descending order in url: https://www.hotwax.co/
+
+store=21
+order=16
+omnichannel=12
+---------------------------
+Total number of occurences of each word across all urls.
+
+ofbiz=27
+store=21
+order=20
+hotwax=17
+omnichannel=14
+apache=12
+systems=12
+commerce=9
