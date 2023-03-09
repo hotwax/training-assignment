@@ -1,0 +1,1134 @@
+TABLES:-
+Salespeople
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1003 | AxelRod | New York  |   10 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+6 rows in set (0.08 sec)
+
+Customers
++------+----------+---------+--------+------+
+| CNUM | CNAME    | CITY    | RATING | SNUM |
++------+----------+---------+--------+------+
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+7 rows in set (0.00 sec)
+
+Orders
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+
+======================================================================Testing==============================================================================
+
+
+1) List all the columns of the Salespeople table. 
+
+expected output:-
+=> it should show the columns name, its data type and keys of Salespeople table
+
+
+
+
+
+2) List all customers with a rating of 100. 
+
+expected output:-
+=> it should show 3 rows with cnum 2001, 2006 and 2007.
+=> because there are only 3 customers whose rating is greater than 100.
+
+
+
+
+
+3) Find the largest order taken by each salesperson on each date. 
+expected output:-
+=> we have to print the largest order details for salespeople for each date.
+=> if two or more orders are done on same date with same Snum id then print maximum of them.
+=> should contains 9 rows because orders table only have 2 salespeople with same snum in date 3 and size of orders table is 10.
+
+
+
+
+
+4) Arrange the Order table by descending customer number. 
+expected output:-
+=> should contains 10 rows but the order of cnum should be 2008,2007,2006,2004,2003,2002,2001.
+
+
+
+
+
+
+5) Find which salespeople currently have orders in the order table. 
+expected output :-
+=> Should print details of salespeople with snum 1001,1007,1004,1002,1003
+=> only  fran don't have any order in orders table.
+
+
+
+
+
+6) List names of all customers matched with the salespeople serving them. 
+expected output:-
+=> first of all we have to print name of all customers hence number of rows is 7.
+=> second we have to print the name of the salespeople who is serving them corresponding to every customer.
+
+
+
+
+
+7) Find the names and numbers of all salespeople who have more than one customer.
+expected output:- 
+=> firstly we only have to print the name and number of Salespeople.
+=> then we have to print only those salespeople who have more than one customers.
+=> after observing only 1001 and 1002 are coming more than 1 times in customer table.
+
+
+
+
+
+8) Count the orders of each of the salespeople and output the results in descending order. 
+expected output:-
+=> firstly we have to count the no. of order taken by each salespeople.
+=> Secondly print the output in descending order of number of orders.
+=> we have to join the salespeople and orders table and then have to group them Salespeople wise (snum).
+=> it should contains 6 rows as no. of salespeople is 6.
+
+
+
+
+
+9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
+expected output:-
+=> we have to print the whole table if there are customers present in table whose city is SanJose
+=> if there are no customers that live in SanJose then print nothing (Empty set).
+=> As there are customers present in SanJose, output should be :-whole customer table will be printed.
+
+
+
+
+
+10) Match salespeople to customers according to what city they live in.
+expected output:-
+=> we have to match the cities of salespeople and customers and print if they belong to same city.
+=> have to print all combination of salespeople and customers with same city but not duplicate rows.
+
+
+
+
+
+11) Find all the customers in SanJose who have a rating above 200. 
+expected output:-
+=> we have to print only those customers who have rating > 200
+=> only one customer are their who have rating 300 that’s why only one row should be there.
+
+
+
+
+
+12) List the names and commissions of all salespeople in London. 
+expected output:-
+=> we have to only print name and commission from salespeople.
+=> only print those salespeople who have city=london.
+=> only 3 salespeople have city london.
+
+
+
+
+
+13) List all the orders of Salesperson Motika from the orders table.
+expected output:-
+=> snum of motika is 1004 and there are only one row with snum 1004 in orders table whose onum is 3002.
+=> only one row should be printed with amount 1900
+
+
+
+
+
+14) Find all customers who booked orders on October 3. 
+expected output:-
+=> there were 5 orders placed on October 3.
+=> customer with cnum 2008 have placed 2 orders and 2001, 2007, 2003 have placed 1 order.
+=> so total row printed should be 3.
+
+
+
+
+
+15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount.
+expected output:-
+=> we have to print snum of amount on each date.
+=> we have to only print those sums where sums > (maximum amount in orders table + 2000)
+=> max amount in orders table is 9891 and 9891+2000 = 11891.
+sums on dates are
+october 3 -> 8944
+october 4 -> 1788
+october 5 -> 4723
+october 6 -> 11201
+no one is greater than 11891.
+=> hence empty set should be printed.
+
+
+
+
+
+16) Select all orders that had amounts that were greater than at least one of the orders from October 6. 
+expected output:-
+=> orders on october 6 are 3010 and 3011 and their amt are 1308 and 9891.
+=> we have to print all orders that have amt greater than 1308 or 9891.
+=> or we can say that we have to print all orders greater than 1308.
+=> there are 5 orders whose amt is greater than 1308.
+
+
+
+
+
+17) Write a query that uses the EXISTS operator to extract all salespeople who have customers with a rating of 300.
+expected output:-
+=> The EXISTS operator is used to test for the existence of any record in a subquery.
+=> The EXISTS operator returns TRUE if the subquery returns one or more records.
+=> we can write nested subqueries to print the customers with rating = 300 using exists.
+=> there should be 2 rows printed with snum 1007 and 1002.
+
+
+
+
+
+18) Find all customers whose cnum is 1000 above the snum of Serres. 
+expected output:-
+=> snum of serres is 1002 and 1002+1000 = 2002
+=> all customers with cnum equal to 2002 should be printed.
+=> i.e. only one row should be printed.
+
+
+
+
+
+19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
+expected output:-
+=> if we assume commission as number, then we can find its percentage corresponding to total amount taken by each salespeople. 
+=> Commission in % = (comm/total amt in orders for each salespeople)*100;
+=> we have to join salespeople and customers table to calculate percentage.
+=> total rows should be 5 rows as Fran have not placed any order.
+
+
+
+
+
+20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000.
+expected output:-
+=> firstly we have to print maximum order for each salespeople for each date, we can use order by here.
+=> secondly we have to prune the data and show only those orders where maximum amount is greater than 3000, we can use having clause for that.
+
+
+
+
+
+21) List all the largest orders for October 3, for each salesperson. 
+expected output:-
+=> there are 5 orders taken by each salespeople on october 3.
+=> 1007 snum salespeople has 2 orders and 1001, 1004 and 1002 has 1 order.
+=> total number of rows should be 6 and salespeople with snum 1004 and 1008 have no orders (largest amt order is 0).
+
+
+
+
+22) Find all customers located in cities where Serres has customers. 
+expected output:-
+=> we have to first write a query to find where serres have customers.
+=> serres(1002) has customers in SanJose and Berlin.
+=> now print all those customers where city is SanJose or Berlin.
+=> output should contains 3 rows.
+
+
+
+
+
+23) Select all customers with a rating above 200. 
+expected output:-
+=> just print all those customers whose rating > 200.
+=> there are only 3 customers with cnum 2004 and 2008 having rating 300 which is greater than 200.
+=> output should contain 3 rows.
+
+
+
+
+24) Count the number of salespeople currently having orders in the orders table.
+expected output:-
+=> only  fran don't have order in the orders table.
+=> there should be 5 rows in the output.
+=> we just have to count the distinct snum in orders table.
+
+
+
+
+
+25) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
+expected output:-
+=> firstly we have to print only cname, sname, and comm.
+=> only print those salespeople whose commission>12.
+=> we have to join salespeople and customers.
+=> there should be 3 rows printed.
+
+
+
+
+
+26) Find salespeople who have multiple customers.
+expected output:-
+=> we have to print those salespeople who have multiple customers i.e. more than 1 customers.
+=> we have to print those salespeople whose snum is more than one times in customers table.
+=> they are 1001 and 1002 hence number of rows should be 3.
+
+
+
+27) Find salespeople with customers located in their own cities.
+expected output:-
+=> we have to find those customers whose city is equal to the city of salespeople serving them.
+=> peel's all 2 customers are located in his own city london.
+=> serres 1 customer are located in his own city SanJose.
+=> we can join customers and salespeople table.
+=> total rows printed should be 3.
+
+
+
+
+28) Find all salespeople whose name starts with ‘P’ and fourth character is ‘I’. 
+expected output :-
+=> there is no salespeople whose name starts with 'P' and 4th character is 'I'>
+=> hence empty set should be printed.
+=> we can use like with wildcards.
+
+
+
+
+
+29) Write a query that uses a subquery to obtain all orders for the customer named ‘Cisneros’. Assume you do not know his customer number.
+expected output:-
+=> if we assume we don't know the Cnum of Cisneros, we have to get it from customers table where name = Ciseneros.
+=> we will give select orders from orders table and give above query as subquery to match cnum.
+=> there should be 2 rows in the output.
+
+
+
+
+30) Find the largest orders for Serres and Rifkin. 
+expected output:-
+=> I am assuming that largest order means order with maximum amount.
+=> so we have to max amount order for serres and rifkin.
+=> what we can do is using group by we can find max order for each salespeople and later pruned it for serres and rifkin.
+=> we have to join salespeople and orders table for that purpose.
+=> obviously there should be 2 rows with amount 5160 and 1098. 
+
+
+
+
+
+31) Sort the salespeople table in the following order: snum, sname, commission, city.
+expected output:-
+=> just use order by on salespeople with snum, sname, comm, and city.
+=> if 2 snum is same then it should be sorted on the basis of sname.
+=> if sname is also same then it should be sorted on the basis of comm and so on...
+
+
+
+
+
+32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
+expected output:-
+=> we have to print all rows of customer table where cname starting character falls in between 'A' and 'G' inclusive.
+=> should contains 3 rows.
+
+
+
+
+
+33) Select all the possible combinations of customers you can assign.
+expected output:-
+=> the question is unclear.
+=> if we want to get combination of customers with salespeople then we have to use cross join on those two tables.
+=> it will show 6 * 7 = 42 rows.
+=> if we want to get combination of customers with customers then we have to use cross join on customers.
+=> with condition that cnum should not be equal.
+=> it will show (7-1)*7 = 42 rows.
+
+
+ 
+
+
+34) Select all orders that are greater than the average for October 4.
+expected output:-
+=> firstly we have to calculate the average amount for October 4.
+=> we have to provide above query as subquery to select columns from orders where amt is greater than that. 
+
+
+
+
+
+35) Write a select command using correlated subquery that selects the names and numbers of all customers with ratings equal to the maximum for their city. 
+expected output:-
+=> first of all we have to use correlated subqueries.
+=> we have to use correlated queries on customers table .
+=> we can find max(Rating) inside inner query and then print only those customers where rating = average rating and city of both subqueries are equal.
+=> there are 5 such customers present.
+
+
+
+
+
+36) Write a query that totals the orders for each day and places the results in descending order.
+expected output:-
+=> we have to sum amount date wise. we can use group by for that.
+=> then print that in descending order of aggregated amounts for each day.
+=> As there are 4 unique dates present in the orders table, the output should contains 4 rows.
+
+
+
+
+37) Write a select command that produces the rating followed by the name of each customer in SanJose. 
+expected output:-
+=> we have to print the name and rating of customer whose city is SanJose;
+=> we can use where clause.
+=> there are only 2 customers who live in sanjose.
+
+
+
+
+
+38) Find all orders with amounts smaller than any amount for a customer in SanJose. 
+expected output:-
+=> firstly we have to find the amount of orders done by customers who live in sanjose.
+=> then we can provide the above query as subquery to print orders where amount > any results of the above query.
+=> we can use nested queries with ANY.
+=> cnum 2003 and 2008 lives in sanJose and their amounts are 1098, 5160 and 18.
+=> there should be 8 rows printed.
+
+
+
+
+
+39) Find all orders with above average amounts for their customers. 
+expected output:-
+=> first we will find the average of amount of orders done by every customers.
+=> then print only those orders whose amount is Greater than above average amount.
+=> output should contains 3 rows.
+
+
+
+
+
+40) Write a query that selects the highest rating in each city. 
+expected output:-
+=> we have to group by customers table according to city and them find the highest rating.
+=> there should be 4 rows in the output as there are 4 unique cities in the customers table.
+
+
+
+
+
+41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00.
+expected output:-
+=> firstly we have to find the orders of those customers whose rating is greater than 100.
+=> and then for each order we have to find commission ie (comm of the salesperson serving that customer*amount of order done by that customer/100).
+=> above formula is right if we assume commission is present as percentage.
+=> output should contains 6 rows as orders done by customers whose rating is greater than 100 is 6.
+
+
+
+
+
+42) Count the customers with ratings above SanJose’s average. 
+expected output:-
+=> first we have to find the average of rating by given by customers who live in SanJose.
+=> we have to count those customers whose rating are greater than above average value, hence use nested subqueries.
+=> average should be (200+500)/2 =250
+=> there are 2 customers whose rating is greater than 250 ie 300.
+
+
+
+
+
+43) Find all salespeople that are located in either Barcelona or London. 
+expected output:-
+=> print those salespeople who like in Barcelona or London.
+=> 4 rows should be printed 3 in barcelona and 1 in london.
+
+
+
+
+
+44) Find all salespeople with only one customer. 
+expected output:-
+=> we have to join salespeople and customers table to find number of customers for each salespeople.
+=> now print only those salespeople who have number of customers equal to one.
+=> there are 3 such customers.
+
+
+
+
+
+45) Write a query that joins the Customer table to itself to find all pairs or customers served by a single salesperson.
+expected output:-
+=> firstly we have to join customers to customers.
+=> print only those customers whose salespeople are same
+=> there should be 4 rows in output.
+
+
+
+
+
+46) Write a query that will give you all orders for more than $1000.00. 
+expected output:-
+=> we have to print orders from order table where amt is greater than 1000. we can use where clause.
+=> there are 7 orders whose amt is greater than $1000.
+
+
+
+
+47) Write a query that lists each order number followed by the name of the customer who made that order. 
+expected output:-
+=> we have to print onum and cname corresponding to the cnum of that order.
+=> we have to inner join orders table with customers table.
+=> total number of row should be 10.
+
+
+
+
+
+48) Write a query that selects all the customers whose ratings are equal to or greater than ANY(in the SQL sense) of ‘Serres’.
+expected output:-
+=> first we have to find the rating of customers served by serres, we can join customers with salespeople. and then have to pass this query as subquery.
+=> then we will print the orders from orders table whose rating >= any of above serres customers ratings.
+=> there are two customers of serres 2003 and 2004, their ratings are 200 and 300.
+=> there are 4 such customers.
+
+
+
+49) Write two queries that will produce all orders taken on October 3 or October 4. 
+expected output:-
+=> we have to print orders from order table where date is october 3 or 4.
+=> there are 5 orders on 3rd october and 2 orders on 4th october.
+=> total row printed should be 7.
+
+
+
+
+
+50) Find only those customers whose ratings are higher than every customer in Rome. 
+expected output:-
+=> firstly we have to find customers who live in Rome.
+=> there are 2 customers who live in rome, 2002 and 2007 with rating 200 and 100.
+=> we can use ALL with WHERE clause.
+=> the output should have 300 ratings only.
+=> there are 2 such customers present.
+
+
+
+
+
+51) Write a query on the Customers table whose output will exclude all customers with a rating <= 100.00, unless they are located in Rome.
+expected output:-
+=> we have to exclude customers whose rating is <=100, means include those whose rating>100;
+=> other condition is, we have to Include customers located in Rome, regardless of their rating.
+=> means we have to include them if rating>100 or city=Rome;
+=> there should be 5 rows printed.
+
+
+
+
+
+52) Find all rows from the customer’s table for which the salesperson number is 1001. 
+expected output:-
+=> we have to print those customers where snum is equal to 1001.
+=> there should be 2 rows in output.
+
+
+
+
+
+53) Find the total amount in orders for each salesperson where their total of amounts are greater than the amount of the largest order in the table.
+expected output:-
+=> firstly we will find the largest orders in the table.
+=> then we will compare total of amount for each salespeople with above result provided by sabquery.
+=> use group by for snum.
+=> largest order in orders table is $9891.88.
+=> there should be one row printed.
+
+
+
+
+
+54) Write a query that selects all orders save those with zeroes or NULL in the amount file. 
+expected output:-
+=> 
+
+
+
+
+
+55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
+expected output:-
+=> The salesperson name should come before the customer name in alphabetical order.
+=> The customer should have a rating of less than 200.
+=> there is only one such combination of motika and pereira.
+
+
+
+
+
+56) Find all salespeople name and commission. 
+expected output:-
+=> we have to print sname and comm of every salespeople.
+=> output should contains 6 rows (salespeople table size).
+
+
+
+
+
+57) Write a query that produces the names and cities of all customers with the same rating as Hoffman. Write the query using Hoffman’s cnum rather than his rating, so that it would still be usable if his rating is changed. 
+expected output:-
+=> firstly we have to only print sname and city of customers
+=> we have to find rating of hoffman and then provide this as an subquery.
+=> his rating is 100 so 3 rows should be printed.
+
+
+
+
+
+58) Find all salespeople for whom there are customers that follow them in alphabetical order. 
+expected output:-
+=> we have to find those salespeoples whose customers comes after them alphabetically.
+=> we can use inner join on salespeople and customers table.
+=> there are only 2 such salespeople.
+
+
+
+
+
+59) Write a query that produces the names and ratings of all customers who have average orders. 
+expected output:-
+=> we have to only print cname and rating of customers who have average orders.
+=> here I am assuming that average order means average number of orders done by customers.
+=> we find average number of order and then round it off as order cant be in decimal.
+=> the average no. of orders is 10/7=1.4 => rounding of to 1.
+=> there are 4 customers who have placed 1 order.
+
+
+
+
+
+60) Find the SUM of all Amounts from the orders table.
+expected output:-
+=> we have to use sum() function to total all amount.
+=> there should be 1 row printed with total_amount as alise.
+
+
+
+
+
+61) Write a SELECT command that produces the order number, amount, and the date from rows in the order table.
+expected output:-
+=> firstly we have to only print onum, amt, and date from orders table.
+=> there should be 10 rows printed.
+
+
+
+
+
+62) Count the number of non NULL rating fields in the Customers table (including repeats). 
+expected output:-
+=> we have to count rows where rating is not null.
+=> there is no null rating present in customers table.
+=> hence number of count should be 7.
+
+
+
+
+
+63) Write a query that gives the names of both the salesperson and the customer for each order after the order number.
+expected output:-
+=> firstly we have to print onum, sname, cname. for that we have to join table orders salespeople, and customers.
+=> we can use inner join two times here to join all three columns.
+=> there should be 10 rows printed.
+
+
+
+
+
+64) List the commissions of all salespeople servicing customers in London. 
+expected output:-
+=> we have to find salespeople who serve to customers who live in london and then have to only print comm for that salespeoples.
+=> there is only one customer (Hoffman) who live in london and the salespeople who is serving him is 1001 and his comm is 12.
+
+
+
+
+
+65) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
+expected output:-
+=> we have to check the city of salespeople and their customers and we have to use any or all as well.
+=> we can use correlated sub queries here.
+=> there are 4 such salespeople 1002, 1003, 1004 and 1007.
+
+
+
+
+
+66) Write a query using the EXISTS operator that selects all salespeople with customers located in their cities who are not assigned to them.
+expected output:-
+=> we can use the EXISTS operator to check if there is at least one customer in each salesperson's city who is not assigned to them.4
+=> there are 3 such salespeople present 1002, 1004 and 1008.
+
+
+
+
+
+67) Write a query that selects all customers serviced by Peel or Motika. (Hint: The snum field relates the 2 tables to one another.
+expected output:-
+=> we have to print customers whose salespeople are peel and motika.
+=> we can use inner join on equality of snums.
+=> there are total 3 customers that are served by peel and motika, peel has 2 and motika has 1.
+
+
+
+
+
+68) Count the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.) 
+expected output:-
+=> we have to count distinct salesepeople orders on eac day.
+=> we can use group by with odate and count() function with distinct key word to count distinct snum.
+=> there should be 4 rows in the output.
+
+
+
+
+
+69) Find all orders attributed to salespeople who live in London. 
+expected output:-
+=> firstly we have to join Salespeople and Orders table.
+=> then we will print only those orders taken by salespeople whose city is london.
+=> there are 2 salespeople who live in london and they have made total 4 orders.
+
+
+
+
+
+70) Find all orders by customers not located in the same cities as their salespeople. 
+expected output :-
+=> we have to join salespeople and customers table .
+=> with condition that city should not be equal and salespeople should be serving to that customer.
+=> there should be 6 rows printed.
+
+
+
+
+
+71) Find all salespeople who have customers with more than one current order. 
+expected output :-
+=> firstly we have to join customers and orders table.
+=> we have to count the number of orders for each customers for that we can use count() function with condition greater than 1 and then orders by cnum.
+=> there are 3 such customers.
+
+
+
+
+
+72) Write a query that extracts from the customer’s table every customer assigned to a salesperson, who is currently having at least one another customer(besides the customer being selected) with orders in the Orders Table. 
+expected output :-
+=> firstly we have to find snums with more than one customers. for that we can use inner join on salespeople and customers tables and then order by snum.
+=> after getting that we have to print the customers of snum we are getting if and only if more than one customers of that snum have order in order table.
+=> for that we have to join orders table with customers table. and provide first query as nested inner query.
+=> there are total 4 such customers present.
+
+
+
+
+
+73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
+expected output :-
+=> firstly we have to find highest rating in each city.
+=> now if we talk about form we have to use concat() function.
+=> format of concat should be -> concat('for the city',cityName,', highest rating is ', maxRating).
+=> there should be 4 rows printed as there are total 4 unique cities.
+
+
+
+
+
+74) Write a query that will produce the snum values of all salespeople with orders, having amt greater than 1000 in the Orders Table (without repeats). 
+expected output :-
+=> we have to print distinct snum having order of amt >1000.
+=> we have to use join here with tables salespeople and orders.
+=> the output data should contains 5 rows.
+
+
+
+
+
+75) Write a query that lists customers in a descending order of rating. Output the rating field first, followed by the customer’s names and numbers.
+expected output :-
+=> we have to print rating followed by cname and cnum.
+=> print that data in descending order by rating, for that we can use order by desc.
+=> total number of rows printed should be 7.
+
+
+
+
+76) Find the average commission for salespeople in London. 
+expected output:-
+=> we can use AVG() function with comm as argument in salespeople table with condition city=london.
+=> salespeople with snum 1001, 1004 and 1008 live in london and their average is (12+11+25)/3 = 16. 
+
+
+
+
+
+77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
+expected output:-
+=> firstly we find the snum of salespeople who serves hoffman.
+=> then we will print all orders from orders table that are taken by that salespeople.
+=> salespeople serving Hoffman is peel (1001).
+=> and there are 3 orders taken by peel so output should contains 3 rows.
+
+
+
+
+78) Find all salespeople whose commission is in between 0.10 and 0.12 (both inclusive). 
+expected output:-
+=> assuming commission is given in percentage.
+=> we have to print only those salespeople whose comm is in between 10 and 12.
+=> we can also do comm/100.
+=> output should contains 3 rows with commission 0.12, 0.11 and 0.10.
+
+
+
+
+
+79) Write a query that will give you the names and cities of all salespeople in London with a commission above 0.10.
+expected output:-
+=> we have to print only name and cities of salespeople.
+=> and their comm/100 should be greater than 0.10 and city should be london.
+=> there are 3 such salespeople.
+
+
+
+
+
+80) Write a query that selects each customer’s smallest order. 
+expected output:-
+=> we have to use group by with cnum to group orders of all customers in orders table.
+=> then have to print only smallest orders of that customer if they have more than one orders.
+=> we will print only customers details like its name, number and minimum amount.
+=> there are 7 rows printed as there are 7 unique cnums in customers table.
+
+
+
+
+
+81) Write a query that selects the first customer in alphabetical order whose name begins with ‘G’. 
+expected output:-
+=> firstly we only have to print first customer, we can use limit 1 here.
+=> we have to print that customer whose name start with 'G', we can use like with wildcard 'G%';
+=> there should be only one row printed with name Giovanni.
+
+
+
+
+
+82) Write a query that counts the number of different non NULL city values in the customers table. 
+expected output:-
+=> we have to count distinct non null cities in customers table.
+=> as there is no null city present and the total no. of cities is 4.
+=> output should contain count = 4.
+
+
+
+
+
+83) Find the average amount from the Orders Table. 
+expected output:-
+=> just use Avg() function with amt as argument on orders table.
+=> avg value is 2665.84.
+
+
+
+
+
+84) Find all customers who are not located in SanJose and whose rating is above 200. 
+expected output:-
+=> there are two conditions here.
+=> city != SanJose and rating > 200.
+=> there are only one customer who fulfil all 2 conditions (2004).
+
+
+
+
+
+85) Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm &lt; 0.14);
+expected output:-
+=> we can replace the fields provide in query with * as there are every column covered in question.
+=> query should be -> SELECT * FROM salespeople WHERE (comm > + 0.12 OR comm < 0.14);
+
+
+
+
+
+86) Which salespersons attend to customers not in the city they have been assigned to? 
+expected output:-
+=> we have to find those salespeople who is serving to customers with city that does not belong to their city.
+=> ie salespeople city should not be equal to their customers city.
+=> there should be 4 rows printed in the output.
+
+
+
+
+
+87) Which salespeople get commission greater than 0.11 are serving customers rated less than 250? 
+expected output:-
+=> there are two conditions provided in question.
+=> comm of salespeople should be greater than 0.11.
+=> that salespeople customers should be rated less than 250.
+=> we have to join salespeople with customers table.
+=> there are 3 such salespeople.
+
+
+
+
+
+88) Which salespeople have been assigned to the same city but get different commission percentages? 
+expected output:-
+=> we have find those salespeople who are assigned to same city of other salespeople (self join).
+=> but the condition is that commission of them should be different.
+=> we also have to keep in mind that we are not comparing same salespeople (ie snum should be different)
+=> output should contains 3 rows.
+
+
+
+
+
+89) Which salesperson has earned the maximum commission?
+expected output:-
+=> we can use max() function with comm as argument in salespeople table.
+=> but we have to print the details of that salespeople as will that why we find the snum using above query as provide it as subquery to match snum from salespeople table.
+=> fran has the highest commission.
+
+
+
+
+
+90) Does the customer who has placed the maximum number of orders have the maximum rating? 
+expected output:-
+=> we need extra column to store out result in (YES and NO) or (0 and 1).
+=> we have to check the no. of orders placed by each customers.
+=> then we will find maximum rating in orders table (which is 300).
+=> then we will match rating of all that customers whose no. of orders is maximum with Maximum rating.
+=> if it is equal, then store 1 in result column (Does?).
+=> if it is not equal, then store 0 in result column (Does?).
+=> there are 3 customers 2004, 2006 and 2008 having maximum order 3 and rating 300, 100 and 300 respectively.
+
+
+
+
+
+91) List all customers in descending order of customer rating. 
+expected output:-
+=> just use ORDER BY rating with DESC and print customers table.
+=> the output should contains 7 rows.
+
+
+
+
+
+92) On which days has Hoffman placed orders? 
+expected output:-
+=> we have to print dates on which hoffman placed orders.
+=> we don't know the cnum of hoffman that’s why we have to join customers table with orders.
+=> there is only one order placed by hoffman on 3rd october.
+
+
+
+
+
+93) Which salesmen have no orders between 10/03/1990 and 10/05/1990? 
+expected output:-
+=> to print names of salespeople we have to join orders table with salespeople table.
+=> we can use Not between to find orders betwwen 3rd october and 5th october.
+=> we have to take care of null also like (Fran have not placed any orders).
+=> there are only 3 such salespeople present (peel, serres and fran).
+
+
+
+
+
+94) How many salespersons have succeeded in getting orders? 
+expected output:-
+=> we have to find total number of salespeople whose customers have placed order in orders table.
+=> or we can say we have to count unique snum in orders table.
+=> there are five such salespeople.
+=> only fran is not getting any order.
+
+
+
+
+
+95) How many customers have placed orders? 
+expected output:-
+=> we have to count the number of distinct cnum prsent in orders table.
+=> we can use group by or nested subqueries.
+=> every customer have placed some orders, hence number of rows in the output should be 7.
+
+
+
+
+
+96) On which date has each salesman booked an order of maximum value? 
+expected output:-
+=> we have to print maximum amount orders for each salespeople with order date.
+=> we will join salespeople table with orders table and then use max() function with amt as argument then group it by snum.
+=> there are only 5 entries in results as fran had not received any order.
+
+
+
+
+
+97) Who is the most successful salesperson? 
+expected output:-
+=> According to me the most successful salespeople are those who have received maximum number of orders.
+=> now we have to count the number of orders taken by each salespeople.
+=> and then print that salespeople who have received maximum orders.
+=> we have to use nested subqueries here.
+=> the ans should be peel.
+
+
+
+
+
+98) Which customers have the same rating? 
+expected output:-
+=> firstly we have to apply self join on customers table.
+=> we have to print those customers pair who have same ratings.
+=> we have to keep in mind that we are not comparing same customer with himself. 
+=> there are 10 such combinations present.
+
+
+
+
+
+99) Find all orders greater than the average for October 4th. 
+expected output:-
+=> first we have to find average amount for october 4.
+=> then print only those orders whose amount is greater than average.
+=> Average is (1713.23+75.75)/2 = 894.49
+=> there are 7 orders that are greater than above average should be printed.
+
+
+
+
+
+100) List all customers with ratings above Grass’s average. 
+expected output:-
+=> we are assuming that here they are talking about average of rating.
+=> average rating of grass is 300.
+=> there is no customer whose rating is greater than 300.
+=> hence empty set should be printed.
+
+
+
+
+
+101) Which customers have above average orders? 
+expected output:-
+=> firstly we have to find average amount in orders table.
+=> which comes out to be 2665.84.
+=> now print only those customers whose orders amount is greater than above average value.
+=> there are total 3 such customers present.
+
+
+
+
+102) Select the total amount in orders for each salesperson for which the total is greater than the amount of the largest order in the table.
+expected output:-
+=> we have to print total amount for each salespeople, we can use sum(amt) function with group by snum.
+=> secondly provide a subquery to find maximum order in the table to comapre above total amounts. which is 9891.88.
+=> later pruned using condition, sum of amount for each salespeople > largest order.
+=> there is only one salespeople Peel whose total order amount is 15382 which is greater than largest order in orders table.
+
+
+
+
+
+103) Give names and numbers of all salespersons that have more than one customer? 
+expected output:-
+=> Firstly, we have to print sname and snum of salespeople.
+=> print only for those salespeople who have more than 1 customers.
+=> we can use count(snum)>1 in customers table with GROUP BY snum.
+=> provide the above query as subquery to print name and number of that salespeople returned by subquery.
+=> only peel and serres have more than one customers.
+
+
+
+
+
+104) Select all salespeople by name and number who have customers in their city whom they don’t service. 
+expected output:-
+=> Firstly, we have to print sname and snum of salespeople.
+=> we have to print those salespeople whose customers are not belong to their city.
+=> for that we have to use join on salespeople and customers to compare their cities.
+=> there are 4 such salespeople present.
+
+
+
+
+
+105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
+expected output:-
+=> first of all they are asking a question to us. that’s why we have to use one extra field to answer their question in (YES and NO) or (1 or 0).
+=> what we can did is store total amount of orders by customer in Rome and London in RES1 (18995.4).
+=> store 5 times of total commission pail to salespeople in London and New York in RES2 (11130.9).
+=> use separate subqueries to calculate both the results.
+=> print RES1 and RES2 with additional column IS_IT_GREATER where we store result of RES1>RES2 which is TRUE or 1 in mysql;
+
+
+
+
+
+106) Which are the date, order number, amt and city for each salesperson (by name) for the maximum order he has obtained?
+expected output:-
+=> we have to print odate, onum, amt, city and sname for every salespeople
+=> print only maximum order obtained by that salespeople.
+=> there should be 5 rows printed as only 5 salespeople are getting orders.
+
+
+
+
+
+107) Which salesperson is having lowest commission? 
+expected output:-
+=> use min() function with comm as argument and then provide this subquery to another query to compare comm of every salespeople with min(comm).
+=> minimum commission is 10 and the name of the salespeople is AxelRod with snum 1003.
