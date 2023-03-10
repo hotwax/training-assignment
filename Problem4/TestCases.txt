@@ -1,0 +1,168 @@
+1) Test serialization:
+
+Input:
+User chooses option 1 (serialize file)
+User enters a file name "test.ser"(which exists)
+(which have DOB of String type)
+
+Expected Output:
+"Data inserted"
+The program displays the menu again
+
+Actual Output:
+""Data inserted"
+The program displays the menu again
+
+2) Test serialization:
+
+Input:
+User chooses option 1 (serialize file)
+User enters a file name "new.ser"(which does not exist)
+
+Expected Output:
+"Data inserted"(it will create the new.ser file)
+The program displays the menu again
+
+Actual Output:
+"Data inserted"
+The program displays the menu again
+
+3) Test deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "test.ser" which contains valid serialized data 
+(which have DOB of String type)
+
+Expected & Actual Output:
+Deserialization
+
+[ Name = XXXX
+ DOB = 21/06/2002
+ Address = { City = Indore, State = MP, PinCode = 452001, Country =India }
+]
+[ Name = AAA
+ DOB = 12/09/1998
+ Address = { City = Bhopal, State = MP, PinCode = 452045, Country =India }
+]
+[ Name = BBB
+ DOB = 23/07/2013
+ Address = { City = Ujjain, State = MP, PinCode = 452076, Country =India }
+]
+[ Name = CCC
+ DOB = 14/08/2012
+ Address = { City = Dewas, State = MP, PinCode = 452087, Country =India }
+]
+Data inserted
+The program displays the menu again
+
+4) Test deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "new.ser" which does not contains any data
+
+Expected & Actual Output:
+Deserialization
+
+java.io.EOFException (catch block statement)
+The program displays the menu again
+
+5) Test deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "output1.ser" which contains serialized data according to old class now class is updated
+
+Expected & Actual Output:
+Deserialization
+
+[ Name = XXXX
+ DOB = 21/06/2002
+ Address = { City = Indore, State = MP, PinCode = 452001, Country =India }
+]
+[ Name = AAA
+ DOB = 12/09/1998
+ Address = { City = Bhopal, State = MP, PinCode = 452045, Country =India }
+]
+[ Name = BBB
+ DOB = 23/07/2013
+ Address = { City = Ujjain, State = MP, PinCode = 452076, Country =India }
+]
+[ Name = CCC
+ DOB = 14/08/2012
+ Address = { City = Dewas, State = MP, PinCode = 452087, Country =India }
+]
+
+6) Test invalid file name:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "invalid.ser" which does not exist
+
+Expected & Actual Output:
+Deserialization
+
+java.io.FileNotFoundException: invalid.ser (The system cannot find the file specified)(catch block statement)
+
+7) Test deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "output2.ser" which contains serialized data according to new class which is updated
+
+Expected & Actual Output:
+1
+Enter file name
+output2.ser
+[ Name = XXXX
+ DOB = Sat Sep 06 00:00:00 IST 2003
+ Address = { City = Indore, State = MP, PinCode = 452001, Country =India }
+]
+[ Name = AAA
+ DOB = Wed Dec 09 00:00:00 IST 1998
+ Address = { City = Bhopal, State = MP, PinCode = 452045, Country =India }
+]
+[ Name = BBB
+ DOB = Fri Nov 07 00:00:00 IST 2014
+ Address = { City = Ujjain, State = MP, PinCode = 452076, Country =India }
+]
+[ Name = CCC
+ DOB = Fri Feb 08 00:00:00 IST 2013
+ Address = { City = Dewas, State = MP, PinCode = 452087, Country =India }
+]
+Data inserted
+Display menu again
+
+8) Test when the serialized file is added with some unwanted changes
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "output1.ser" which contains serialized data according to new class which is updated
+
+Expected & Actual Output:
+2
+Enter file name
+output1.ser
+Deserialization
+
+java.io.StreamCorruptedException: invalid stream header: ACED2005(Catch block execution) 
+Display menu again 
+
+9) Test invalid menu choice:
+
+Input:
+User enters an invalid menu choice "4"
+
+Expected & Actual Output:
+5
+Invalid
+The program displays the menu again
+
+10) Test to exit
+Input:
+User chooses option 3 (exit)
+
+Expected & Actual Output:
+Thank you
+The program closes the read interface and terminates.

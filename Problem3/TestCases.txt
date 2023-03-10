@@ -1,0 +1,117 @@
+1) Test case : When we run AccountOverdrawDemo.java file 
+
+There are chances that balance will go to negative or somtimes it may not but there are high chances of this happing this
+
+Output 1 :
+Ram has withdraw : 223
+Your balance : 713
+
+Sita has withdraw : 64
+Your balance : 713
+
+Ram has withdraw : 43
+Your balance : 670
+
+Sita has withdraw : 614
+Your balance : 56
+
+Ram, You don't have 218
+Your balance : 56
+
+Sita, You don't have 280
+Your balance : 56
+
+Ram, You don't have 760
+Your balance : 56
+
+Sita, You don't have 505
+Your balance : 56
+
+Ram, You don't have 875
+Your balance : 56
+
+Sita has withdraw : 11
+Your balance : 45
+
+Ram, You don't have 271
+Your balance : 45
+
+Sita, You don't have 788
+Your balance : 45
+
+Output 2:
+Ram has withdraw : 322
+Your balance : 678
+
+Sita, You don't have 774
+Your balance : 678
+
+Sita has withdraw : 161
+Your balance : -125
+
+Ram has withdraw : 642
+Your balance : -125
+
+Ram, You don't have 832
+Your balance : -125
+
+Sita, You don't have 186
+Your balance : -125
+
+Ram, You don't have 410
+Your balance : -125
+
+Sita, You don't have 586
+Your balance : -125
+
+Sita, You don't have 959
+Your balance : -125
+
+Ram, You don't have 151
+Your balance : -125
+
+Ram, You don't have 295
+Your balance : -125
+
+Sita, You don't have 173
+Your balance : -125 
+
+2) Test case : When we run AccountOverdrawSafeDemo.java file 
+
+To cure this problem we have AccountOverdrawSafeDemo.java we have created synchronized methods over here. There is no chance that it will go to negative balance
+
+Ram has withdraw : 327
+Your balance : 673
+
+Ram has withdraw : 350
+Your balance : 323
+
+Sita has withdraw : 103
+Your balance : 220
+
+Sita, You don't have 268
+Your balance : 220
+
+Ram, You don't have 228
+Your balance : 220
+
+Sita, You don't have 695
+Your balance : 220
+
+Ram has withdraw : 134
+Your balance : 86
+
+Sita has withdraw : 26
+Your balance : 60
+
+Sita, You don't have 68
+Your balance : 60
+
+Ram, You don't have 910
+Your balance : 60
+
+Sita, You don't have 936
+Your balance : 60
+
+Ram, You don't have 188
+Your balance : 60
