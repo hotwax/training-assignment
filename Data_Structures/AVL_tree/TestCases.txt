@@ -1,0 +1,290 @@
+Test 1:
+1
+10
+1
+20
+1
+30
+1
+40
+1
+50
+3
+4
+5
+
+Expected Output :-
+after inserting 10, 20, 30, 40 and 50 tree should be balanced
+inorder->10 20 30 40 50
+preorder-> 20 10 40 30 50
+poseorder-> 10 30 50 40 20
+
+My Output :-
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+10
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+20
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+30
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+40
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+50
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+3
+inorder-> 10 20 30 40 50 
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+4
+preorder-> 20 10 40 30 50 
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+5
+postorder-> 10 30 50 40 20 
+==========================
+
+====================================================================================
+
+Test 2:
+1
+10
+1
+20
+1
+20
+1
+30
+3
+
+Expected output:-
+duplicate insertion of 20 should be handled and
+inorder should be -> 10 20 30.
+
+My output:-
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+10
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+20
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+20
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+30
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+3
+inorder-> 10 20 30 
+==========================
+
+====================================================================================
+
+Test 3:
+1
+10
+1
+20
+1
+30
+2
+1000
+2
+20
+3
+
+Expected output:-
+10, 20 and 30 should be inserted.
+100 should not be deleted as it is not preset in tree
+20 should be deleted and
+inorder should be -> 10 30
+
+My Output:-
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+10
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+20
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+30
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+2
+enter Node value to delete
+100
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+2
+enter Node value to delete
+20
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+3
+inorder-> 10 30 
+==========================

@@ -21,12 +21,14 @@ public class My_Stack {
         //if head node is null then create one 
         if (head == null) {
             head = new Node(value_to_add);
+            System.out.println("Added Successfully.");
             return;
         }
         //inset at the end of the linked list and make newNode head
         Node newNode = new Node(value_to_add);
         newNode.next = head;
         head = newNode;
+        System.out.println("Added Successfully.");
     }
 
     public int pop() {
@@ -56,10 +58,12 @@ public class My_Stack {
         while (curr != null) {
             if (curr.val == prev_val) {
                 curr.val = new_val;
+                System.out.println("Updated Successfully.");
                 return;
             }
             curr = curr.next;
         }
+        System.out.println("Element to update is not found.");
     }
 
     public boolean search(int value_to_search) {

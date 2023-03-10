@@ -163,14 +163,17 @@ class My_LinkedList {
                     case 1:// add
                         System.out.println("enter no. to add");
                         add(sc.nextInt());
+                        traverseAll();
                         break;
                     case 2:// delete
                         System.out.println("enter no. to delete");
                         delete(sc.nextInt());
+                        traverseAll();
                         break;
                     case 3:// upadte
                         System.out.println("enter no. to update and the value");
                         update(sc.nextInt(), sc.nextInt());
+                        traverseAll();
                         break;
                     case 4:// sort
                         sort();

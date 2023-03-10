@@ -26,12 +26,14 @@ public class MyGraph {
         //make both Node a and b adjacent to each other (undirected graph)
         adj.get(from).add(to);
         adj.get(to).add(from);
+        System.out.println("Edge Added Successfully");
     }
 
     public void deleteEdge(int from, int to) {
         //remove both Nodes from each others adjacency list (undirected graph)
         adj.get(from).remove(to);
         adj.get(to).remove(from);
+        System.out.println("Edge Deleted Successfully");
     }
 
     //Traversals

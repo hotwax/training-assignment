@@ -22,12 +22,14 @@ public class My_Queue {
         if (head == null) {
             head = new Node(value_to_add);
             tail = head;
+            System.out.println("Added Successfully");
             return;
         }
         //else insert at the tail of LL and make newNode tail.
         Node newNode = new Node(value_to_add);
         tail.next = newNode;
         tail = tail.next;
+        System.out.println("Added Successfully");
     }
 
     public int poll() {
@@ -79,10 +81,12 @@ public class My_Queue {
         while (curr != null) {
             if (curr.val == prev_val) {
                 curr.val = new_val;
+                System.out.println("updated successfully");
                 return;
             }
             curr = curr.next;
         }
+        System.out.println("Element not found");
     }
 
     public void menu() {
