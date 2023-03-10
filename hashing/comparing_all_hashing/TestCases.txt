@@ -1,0 +1,69 @@
+
+Test 1:
+n=50005
+m=100001
+
+Output:-
+chaining= 10583
+time required= 88 ms
+
+linear probing= 20938
+time required= 43 ms
+
+quadratic probing= 18798
+time required= 31 ms
+
+Random probing= 11062
+time required= 73 ms
+
+Double hashing= 11156
+time required= 20 ms
+
+
+==============================================================================================================
+
+Test 1:
+n=5005
+m=10001
+
+Output:-
+chaining= 96
+time required= 7 ms
+
+linear probing= 268
+time required= 3 ms
+
+quadratic probing= 253
+time required= 2 ms
+
+Random probing= 158
+time required= 1 ms
+
+Double hashing= 121
+time required= 3 ms
+
+
+==============================================================================================================
+
+Test 1:
+n=5005
+m=100001
+
+Output:-
+chaining= 1028
+time required= 16 ms
+
+linear probing= 2466
+time required= 16 ms
+
+quadratic probing= 2159
+time required= 7 ms
+
+Random probing= 1241
+time required= 5 ms
+
+Double hashing= 1269
+time required= 7 ms
+
+
+==============================================================================================================
