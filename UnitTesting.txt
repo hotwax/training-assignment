@@ -1,6 +1,8 @@
 1) List all the columns of the Salespeople table.
 
- SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'salespeople';
+Approach: To get columns we can use Information Schema (Contains all the information about databases)
+Expected Output: All the column names of the salespeople table.
+Actual Output:
 +-------------+
 | COLUMN_NAME |
 +-------------+
@@ -10,22 +12,11 @@
 | COMM        |
 +-------------+
 
-OR 
-
-DESC salespeople;
-+-------+-------------+------+-----+---------+-------+
-| Field | Type        | Null | Key | Default | Extra |
-+-------+-------------+------+-----+---------+-------+
-| SNUM  | int         | NO   | PRI | NULL    |       |
-| SNAME | varchar(40) | YES  |     | NULL    |       |
-| CITY  | varchar(40) | YES  |     | NULL    |       |
-| COMM  | int         | YES  |     | NULL    |       |
-+-------+-------------+------+-----+---------+-------+
-
-
 2) List all customers with a rating of 100.
 
-mysql> SELECT * FROM Customers where rating = 100;
+Approach: we can select all the column of customer table with condition of rating 100 in where clause.
+Expected Output: All the column of customer table with all the customers with 100 rating.
+Actual Output:
 +------+---------+--------+--------+------+
 | CNUM | CNAME   | CITY   | RATING | SNUM |
 +------+---------+--------+--------+------+
@@ -34,23 +25,29 @@ mysql> SELECT * FROM Customers where rating = 100;
 | 2007 | Pereira | Rome   |    100 | 1004 |
 +------+---------+--------+--------+------+
 
-3) Find the largest order taken by each salesperson on each date. 
-mysql> SELECT ODATE,O.SNUM,SNAME,AMT
-    ->   FROM ORDERS O JOIN SALESPEOPLE S
-    ->   ON S.SNUM = O.SNUM WHERE AMT IN (
-    ->         SELECT MAX(AMT) FROM ORDERS GROUP BY ODATE
-    ->     );
-+------------+------+---------+---------+
-| ODATE      | SNUM | SNAME   | AMT     |
-+------------+------+---------+---------+
-| 1990-03-10 | 1002 | Serres  | 5160.45 |
-| 1990-05-10 | 1001 | Peel    | 4723.00 |
-| 1990-04-10 | 1003 | AxelRod | 1713.23 |
-| 1990-06-10 | 1001 | Peel    | 9891.88 |
-+------------+------+---------+---------+
+3) Find the largest order taken by each salesperson on each date.
 
-4) Arrange the Order table by descending customer number. 
-mysql> SELECT * FROM ORDERS ORDER BY CNUM DESC;
+Approach : We can use group by clause to get the largest order taken by each salesperson on each date.
+Expected Output:All the columns of order table containing Largest order taken by each salesperson on each date.
+Actual Output:
++------+------+---------+------------+------------+
+| onum | snum | sname   | odate      | max(o.amt) |
++------+------+---------+------------+------------+
+| 3003 | 1001 | Peel    | 1990-03-10 |     767.69 |
+| 3008 | 1001 | Peel    | 1990-05-10 |    4723.00 |
+| 3011 | 1001 | Peel    | 1990-06-10 |    9891.88 |
+| 3005 | 1002 | Serres  | 1990-03-10 |    5160.45 |
+| 3007 | 1002 | Serres  | 1990-04-10 |      75.75 |
+| 3010 | 1002 | Serres  | 1990-06-10 |    1309.95 |
+| 3009 | 1003 | AxelRod | 1990-04-10 |    1713.23 |
+| 3002 | 1004 | Motika  | 1990-03-10 |    1900.10 |
+| 3001 | 1007 | Rifkin  | 1990-03-10 |    1098.16 |
++------+------+---------+------------+------------+
+
+4) Arrange the Order table by descending customer number.
+Approach : We can use order by clause to arrange the order table by descending customer numbers.
+Expected Output: All the columns of the orders table are in descending of the customer number.
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -66,10 +63,10 @@ mysql> SELECT * FROM ORDERS ORDER BY CNUM DESC;
 | 3003 |  767.69 | 1990-03-10 | 2001 | 1001 |
 +------+---------+------------+------+------+
 
-5) Find which salespeople currently have orders in the order table. 
-mysql> SELECT S.SNUM,S.SNAME FROM SALESPEOPLE S
-    ->     JOIN ORDERS O ON
-    ->     S.SNUM = O.SNUM GROUP BY S.SNAME;
+5) Find which salespeople currently have orders in the order table.
+Approach: We can use inner join on salespeople and orders table on salespeople number to find which salespeople currently have orders in the order table.
+Expected Output: snum and sname from salespeoples table and tuples currently have orders in the order table. 
+Actual Output:
 +------+---------+
 | SNUM | SNAME   |
 +------+---------+
@@ -80,10 +77,10 @@ mysql> SELECT S.SNUM,S.SNAME FROM SALESPEOPLE S
 | 1007 | Rifkin  |
 +------+---------+
 
-6) List names of all customers matched with the salespeople serving them. 
-SELECT c.cname, s.sname
-FROM salespeople s
-         JOIN customers c ON c.snum = s.snum;   
+6) List names of all customers matched with the salespeople serving them.
+Approach: We can use inner join on salespeople and customer table on salespeople number to list names of all customers matched with the salespeople serving them.
+Expected Output: cname and sname from customers and salespoeple table containing names of all customers matched with the salespeople serving them.
+Actual Output:
 +----------+---------+
 | CNAME    | SNAME   |
 +----------+---------+
@@ -96,14 +93,10 @@ FROM salespeople s
 | Cisneros | Rifkin  |
 +----------+---------+
 
-7) Find the names and numbers of all salespeople who have more than one customer. 
-
-SELECT s.sname, s.snum
-FROM salespeople s
-         JOIN customers c on s.snum = c.snum
-GROUP by s.snum
-HAVING COUNT(s.snum) > 1;
-
+7) Find the names and numbers of all salespeople who have more than one customer.
+Approach: We can use inner join with the group and have clause with the condition to find salespeople with more than one customer
+Expected Output: Names and numbers of all salespeople who have more than one customer.
+Actual Output:
 +--------+------+
 | sname  | snum |
 +--------+------+
@@ -111,15 +104,10 @@ HAVING COUNT(s.snum) > 1;
 | Serres | 1002 |
 +--------+------+
 
-
-8) Count the orders of each of the salespeople and output the results in descending order. 
-
-SELECT s.sname, s.snum, COUNT(o.onum) AS no_of_orders
-FROM salespeople s
-         LEFT JOIN orders o ON s.snum = o.snum
-GROUP BY o.snum
-ORDER BY no_of_orders DESC;
-
+8) Count the orders of each of the salespeople and output the results in descending order.
+Approach: We will use left join on salespeople and orders table with the group by salespeople number and order by no of orders in decreasing order.
+Expected Output: salespeople's name,number along with the number of orders they have taken in descending order
+Actual Output :
 +---------+------+--------------+
 | sname   | snum | no_of_orders |
 +---------+------+--------------+
@@ -130,11 +118,10 @@ ORDER BY no_of_orders DESC;
 | Motika  | 1004 |            1 |
 | Fran    | 1008 |            0 |
 +---------+------+--------------+
-
-9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
-mysql> SELECT * FROM CUSTOMERS
-    -> WHERE (SELECT COUNT(CNAME) FROM CUSTOMERS
-    -> WHERE CITY = "SanJose")>=1;
+9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose.
+Approach: We can use the where clause condition on the total count of customers in sanJose if it is greater than or equal to 1
+Expected Output: customer number, name, city, rating from customers table along with salespeople number
+Actual Output :
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -147,11 +134,10 @@ mysql> SELECT * FROM CUSTOMERS
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
-
-10) Match salespeople to customers according to what city they live in. 
-SELECT c.city, s.sname, c.cname
-FROM customers c
-         JOIN salespeople s on c.city = s.city;
+10) Match salespeople to customers according to what city they live in.
+Approach: We will use inner join on salespeople and customers on salespeople number along with on condition of city
+Expected Output : All customer and salespeople who has same city .
+Actual Output :
 +---------+--------+----------+
 | city    | sname  | cname    |
 +---------+--------+----------+
@@ -166,16 +152,22 @@ FROM customers c
 +---------+--------+----------+
 
 
-11) Find all the customers in SanJose who have a rating above 200. 
-mysql> SELECT * FROM CUSTOMERS WHERE CITY = "SanJose" AND RATING > 200;
+11) Find all the customers in SanJose who have a rating above 200.
+
+Approach: We will use  where condition and operator on city and rating.
+Expected Output : customers details who has rating above 200 and his/her city is sanJose
+Actual Output :
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
-12) List the names and commissions of all salespeople in London. 
-mysql> SELECT SNAME, COMM FROM SALESPEOPLE WHERE CITY = "London";
+12) List the names and commissions of all salespeople in London.
+
+Approach: We will select name and commission columns from salespeople with where condition i.e. wildcard for London city
+Expected Output: name and comm of salespeople who are in London city
+Actual Output :
 +--------+------+
 | SNAME  | COMM |
 +--------+------+
@@ -185,18 +177,19 @@ mysql> SELECT SNAME, COMM FROM SALESPEOPLE WHERE CITY = "London";
 +--------+------+
 
 13) List all the orders of Salesperson Motika from the orders table.
-mysql> SELECT * FROM ORDERS WHERE SNUM = 1004;
+Approach: We will use inner join on salespeople and order table on salespeople number column  with the condition on salespeople name as 'Motika'
+Expected Output: We will all order salespeople named Motika
+Actual Output :
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
 | 3002 | 1900.10 | 1990-03-10 | 2007 | 1004 |
 +------+---------+------------+------+------+
 
-14) Find all customers who booked orders on October 3. 
-mysql> SELECT C.CNAME, O.ODATE
-    ->     FROM CUSTOMERS C JOIN ORDERS O
-    ->     ON C.CNUM = O.CNUM
-    ->     WHERE ODATE = "1990-03-10";
+14) Find all customers who booked orders on October 3.
+Approach: We will inner join on customers and order table on customer number table with condition where date is 3rd of October
+Expected Output: name of all the customer who ordered on 3rd of october.
+Actual Output:
 +----------+------------+
 | CNAME    | ODATE      |
 +----------+------------+
@@ -206,11 +199,11 @@ mysql> SELECT C.CNAME, O.ODATE
 | Liu      | 1990-03-10 |
 | Cisneros | 1990-03-10 |
 +----------+------------+
+15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount.
 
-15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
-mysql> SELECT SUM(AMT),ODATE
-    ->     FROM ORDERS
-    ->     WHERE AMT > 2000 GROUP BY ODATE;
+Approach: We will use SUM aggregate function on amt table of order and group by tuples by order date and condition of amt greater than 2000
+Expected Output: All the totals by date which is greater than 2000
+Actual Output :
 +----------+------------+
 | SUM(AMT) | ODATE      |
 +----------+------------+
@@ -218,13 +211,11 @@ mysql> SELECT SUM(AMT),ODATE
 |  4723.00 | 1990-05-10 |
 |  9891.88 | 1990-06-10 |
 +----------+------------+
+16) Select all orders that had amounts that were greater than at least one of the orders from October 6.
 
-16) Select all orders that had amounts that were greater than at least one of the orders from October 6. 
-mysql> SELECT ODATE,ONUM,AMT
-    ->     FROM ORDERS WHERE
-    ->     AMT > ANY (
-    ->         SELECT AMT FROM ORDERS WHERE ODATE = "1990-06-10"
-    -> );
+Approach: We can use sub-query and any operator to filter the tuples from the orders table who has any amt greater than amt on 6th of October
+Expected Output: Orders with a greater amount from the 6th of October orders
+Actual Output :
 +------------+------+---------+
 | odate      | onum | amt     |
 +------------+------+---------+
@@ -235,26 +226,22 @@ mysql> SELECT ODATE,ONUM,AMT
 | 1990-06-10 | 3011 | 9891.88 |
 +------------+------+---------+
 
-
 17) Write a query that uses the EXISTS operator to extract all salespeople who have customers with a rating of 300.
-mysql> SELECT SNUM,SNAME
-    ->     FROM SALESPEOPLE S WHERE EXISTS  (
-    ->         SELECT *
-    ->         FROM CUSTOMERS C
-    ->         WHERE C.SNUM = S.SNUM AND RATING = 300
-    ->     );
+
+Approach: We will use sub-query and exists operator as mentioned in the question with condition of rating and matching the salespeople number from both the table
+Expected Output: salespeople name and number of those salespeople who has customers with 300 rating.
+Actual Output: 
 +------+--------+
 | SNUM | SNAME  |
 +------+--------+
 | 1002 | Serres |
 | 1007 | Rifkin |
 +------+--------+
-
  18) Find all customers whose cnum is 1000 above the snum of Serres. 
-mysql> SELECT C.CNAME,C.CNUM,S.SNAME,S.SNUM FROM CUSTOMERS C
-    ->     JOIN SALESPEOPLE S ON
-    ->     C.SNUM = S.SNUM WHERE
-    ->     CNUM > 1002 + 1000;
+
+Approach: we will use inner join salespeople and customer table on salespeople number with where the condition of customer number greater 1000 more than Serres number 
+Expected Output: customer name, number, with salespeople name, number who satisfies the condition
+Actual Output:
 +----------+------+--------+------+
 | CNAME    | CNUM | SNAME  | SNUM |
 +----------+------+--------+------+
@@ -265,9 +252,11 @@ mysql> SELECT C.CNAME,C.CNUM,S.SNAME,S.SNUM FROM CUSTOMERS C
 | Cisneros | 2008 | Rifkin | 1007 |
 +----------+------+--------+------+
 
-19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
-SELECT snum, sname, CONCAT(comm, '%') as comm_in_percentage
-FROM salespeople;
+19) Give the salespeople’s commissions as percentages instead of decimal numbers.
+
+Approach: We will use string concatenation to add the '%' symbol to the commission column of salespeople table
+Expected Output: All the entries of the salespeople table with comm column with '%'
+Actual Output:
 +------+---------+--------------------+
 | snum | sname   | comm_in_percentage |
 +------+---------+--------------------+
@@ -281,11 +270,9 @@ FROM salespeople;
 
 20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000.
 
-SELECT MAX(amt) max_amount, snum, odate
-FROM orders
-GROUP BY odate, snum
-HAVING MAX(amt) >= 3000;
-
+Approach: We will use max aggregate function and group by the amt by order date column and condition on amt which is greater than 3000
+Expected Output: All the orders with greater than 3000 on each date
+Actual Output:
 +------------+------+------------+
 | max_amount | snum | odate      |
 +------------+------+------------+
@@ -296,11 +283,9 @@ HAVING MAX(amt) >= 3000;
 
 21) List all the largest orders for October 3, for each salesperson.
 
-SELECT snum, MAX(amt),odate
-FROM  orders
-GROUP BY snum HAVING
-odate = '1990-03-10';
-
+Approach: We will use the max aggregate function on the amt column and group by salespeople number with the condition on the order date which is 3rd of October
+Expected Output: All the largest orders on the 3rd of October for each salesperson
+Actual Output:
 +------+----------+------------+
 | snum | MAX(amt) | odate      |
 +------+----------+------------+
@@ -311,18 +296,10 @@ odate = '1990-03-10';
 +------+----------+------------+
 
 22) Find all customers located in cities where Serres has customers.
-Using SubQuery :
-SELECT cnum, cname, city
-FROM customers
-WHERE snum = (SELECT snum
-              FROM salespeople
-              WHERE sname = 'Serres');
 
-Using Join :
-SELECT c.cnum, c.cname, c.city
-FROM customers c
-         JOIN salespeople s on c.snum = s.snum
-WHERE s.sname = 'Serres';
+Approach: we will use inner join on customers and salespeople table on salespeople number with where condition on salespeople name 'Serres'
+Expected Output: All the customers in the city of Serres
+Actual Output:
 +------+-------+---------+
 | cnum | cname | city    |
 +------+-------+---------+
@@ -331,7 +308,10 @@ WHERE s.sname = 'Serres';
 +------+-------+---------+
 
 23) Select all customers with a rating above 200. 
-mysql> SELECT * FROM customers WHERE rating > 200;
+
+Approach: We will use where condition on rating column of Customers
+Expected Output: All the column of customer table with rating greater than 2000
+Actual Output:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -339,22 +319,22 @@ mysql> SELECT * FROM customers WHERE rating > 200;
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
-24) Count the number of salespeople currently having orders in the orders table. 
-SELECT COUNT(DISTINCT s.snum) as no_of_salespeople
-FROM salespeople s 
-        JOIN orders o ON s.snum = o.snum;
+24) Count the number of salespeople currently having orders in the orders table.
+
+Approach: We will use the count aggregate function on the salespeople number column of inner joined table salespeople, orders table on salespeople
+Expected Output: Number of salespeople who have an order 
+Actual Output:
 +-----------------------+
 | no_of_salespeople     |
 +-----------------------+
 |                     5 |
 +-----------------------+
 
-25) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
+25) Write a query that produces all customers serviced by salespeople with a commission above 12%.Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
 
-SELECT c.cname, s.sname,s.comm
-FROM customers c
-         JOIN salespeople s on c.SNUM = s.SNUM
-WHERE s.comm > 12;
+Approach: We will select the customer name, salespeople name and commission from the inner join of the customer and salespeople table on the salespeople column with the condition on commissions above 12%
+Expected Output: Customers names, Salespeople name, and commission who have commission above 12%
+Actual Output: 
 +----------+--------+------+
 | cname    | sname  | comm |
 +----------+--------+------+
@@ -364,11 +344,10 @@ WHERE s.comm > 12;
 +----------+--------+------+
 
 26) Find salespeople who have multiple customers. 
-SELECT s.*
-FROM salespeople s
-        JOIN customers c ON s.snum = c.cum
-GROUP BY s.snum HAVING COUNT(c.cnum) > 1;
 
+Approach: We will count all the customers greater than 1 from an inner joined table from salespeople and customers on salespeople number and grouped by salespeople.
+Expected Output: All the details from the salespeople table who has more than 1 customer.
+Actual Output:
 +------+--------+---------+------+
 | SNUM | SNAME  | CITY    | COMM |
 +------+--------+---------+------+
@@ -378,11 +357,9 @@ GROUP BY s.snum HAVING COUNT(c.cnum) > 1;
 
 27) Find salespeople with customers located in their own cities. 
 
-mysql> SELECT s.snum,sname,s.city as salespeple_city, c.cnum, c.cname, c.city as customers_city FROM
-         salespeople AS s JOIN
-             customers AS C ON
-                 s.city = c.city AND s.snum = c.snum;
-
+Approach: We will use inner join on salespeople and customer table on condition on same city and salespeople
+Expected Output: name, number, and city of the salespersons and customers who have the same city.
+Actual Output:
 +------+--------+-----------------+------+---------+----------------+
 | snum | sname  | salespeple_city | cnum | cname   | customers_city |
 +------+--------+-----------------+------+---------+----------------+
@@ -393,14 +370,17 @@ mysql> SELECT s.snum,sname,s.city as salespeple_city, c.cnum, c.cname, c.city as
 
 28) Find all salespeople whose name starts with ‘P’ and fourth character is ‘I’. 
 
-mysql> SELECT * FROM salespeople WHERE sname LIKE "P__I%";
+Approach: WE will use condition on the salespeople name with wildcard to select name that has 'P' at first position and 'I' at the 4th,
+Expected Output: All the details of salespeople who have 'P' at the starting and 'I' at the 4th position.
+Actual Output: 
+No such salespeople exists
 Empty set (0.00 sec)
 
 29) Write a query that uses a subquery to obtain all orders for the customer named ‘Cisneros’. Assume you do not know his customer number.  
-mysql>SELECT * FROM orders
-         WHERE cnum IN (
-             SELECT cnum FROM customers WHERE cname = "Cisneros"
-             );
+
+Approach: We can use a sub-query to select all the orders where the customer number is from the customer table whose name is "Cisneros"
+Expected Output: All the orders which is placed by ‘Cisneros’
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -409,9 +389,10 @@ mysql>SELECT * FROM orders
 +------+---------+------------+------+------+
 
 30) Find the largest orders for Serres and Rifkin. 
-mysql> SELECT s.snum, s.sname, MAX(o.amt) FROM
-           orders AS o JOIN salespeople s on s.SNUM = o.SNUM
-           GROUP BY sname HAVING sname IN ("Rifkin","Serres");
+
+Approach: We will use the max aggregate function on the amt column of the inner joined table of salespeople and orders which is grouped by salespeople whose names are Serres and Rifkin.
+Expected Output: name and number of Serres and Rifkin with largest amount.
+Actual Output:
 +------+--------+------------+
 | snum | sname  | MAX(o.amt) |
 +------+--------+------------+
@@ -419,8 +400,11 @@ mysql> SELECT s.snum, s.sname, MAX(o.amt) FROM
 | 1002 | Serres |    5160.45 |
 +------+--------+------------+
 
-31) Sort the salespeople table in the following order: snum, sname, commission, city. 
-mysql> SELECT snum,sname,comm,city FROM salespeople;
+31) Sort the salespeople table in the following order: snum, sname, commission, city.
+
+Approach: We can directly select sum, name, commission, and city from the salespeople table they will get sorted automatically
+Expected Output: snum, sname, comm, and city sorted accordingly.
+Actual Output:
 +------+---------+------+-----------+
 | snum | sname   | comm | city      |
 +------+---------+------+-----------+
@@ -433,7 +417,10 @@ mysql> SELECT snum,sname,comm,city FROM salespeople;
 +------+---------+------+-----------+
 
 32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
-mysql> SELECT * FROM customers WHERE cname BETWEEN "A%" AND "G%";
+
+Approach: We will use where condition on customer name 
+Expected Output: All the details of customers whose names comes between a and g range
+Actual Output:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -443,11 +430,13 @@ mysql> SELECT * FROM customers WHERE cname BETWEEN "A%" AND "G%";
 
 33) Select all the possible combinations of customers you can assign. 
 
+Approach: We can use join to get all the possible combinations of customers and salespeople
+Expected Output: 
 SELECT c.cname, c1.cname
 FROM customers c
          JOIN customers c1
-              ON c.cnum != c1.cnum;
-
+              ON c.cnum != c1.cnum AND c.snum != c1.snum;
+Actual Output:
 +----------+----------+
 | cname    | cname    |
 +----------+----------+
@@ -497,6 +486,9 @@ FROM customers c
 
 34) Select all orders that are greater than the average for October 4. 
 
+Approach: We can use sub-query to get the avg amount on october 4th and filter amount greater than average
+Expected Output: All the details of orders where order amt is greater than avg order on october 4th
+Actual Output: 
 SELECT * FROM orders WHERE amt > (
         SELECT AVG(amt) FROM orders
                     GROUP BY odate  HAVING odate = "1990-04-10"
@@ -515,23 +507,11 @@ SELECT * FROM orders WHERE amt > (
 +------+---------+------------+------+------+
 
 35) Write a select command using correlated subquery that selects the names and numbers of all customers with ratings equal to the maximum for their city. 
-SELECT
-    c1.cnum,
-    c1.cname,
-    c1.rating
-FROM
-    customers c1
-    JOIN (
-        SELECT
-            city,
-            MAX(rating) AS max_rating
-        FROM
-            customers
-        GROUP BY
-            city
-    ) c2 ON c1.city = c2.city
-    AND c1.rating = c2.max_rating;
 
+Approach: We will use correlated sub-query in which select city and maximum rating of customer of each cities
+        and retrieve number, name and rating from customsers table on the basis city and rating.
+Expected Output: number, name, and rating who as maximum rating in city.
+Actual Output:
 +------+----------+--------+
 | cnum | cname    | rating |
 +------+----------+--------+
@@ -545,28 +525,23 @@ FROM
 
 36) Write a query that totals the orders for each day and places the results in descending order. 
 
-SELECT odate,
-       SUM(amt) AS amount
-FROM orders
-GROUP BY odate
-ORDER BY amount DESC;
-
-+------+------------+----------+
-| onum | odate      | amount   |
-+------+------------+----------+
-| 3010 | 1990-06-10 | 11201.83 |
-| 3001 | 1990-03-10 |  8945.09 |
-| 3008 | 1990-05-10 |  4723.00 |
-| 3007 | 1990-04-10 |  1788.98 |
-+------+------------+----------+
+Approach: We will use sum aggregate on amt of orders table and calculates total amt on each day.
+Expected Output: Order date and sum of total amount on each day.
+Actual Output:
++------------+----------+
+| odate      | amount   |
++------------+----------+
+| 1990-06-10 | 11201.83 |
+| 1990-03-10 |  8945.09 |
+| 1990-05-10 |  4723.00 |
+| 1990-04-10 |  1788.98 |
++------------+----------+
 
 37) Write a select command that produces the rating followed by the name of each customer in SanJose. 
 
-SELECT rating,
-       cname
-FROM customers
-WHERE city = 'SanJose';
-
+Approach: We can directly select rating and name of customers and apply condition on city for SanJose
+Expected Output: rating and customers name of Liu and Cisneros who are from SanJose city.
+Actual Output:
 +--------+----------+
 | rating | cname    |
 +--------+----------+
@@ -576,13 +551,10 @@ WHERE city = 'SanJose';
 
 38) Find all orders with amounts smaller than any amount for a customer in SanJose. 
 
-SELECT *
-FROM orders
-WHERE amt < ANY (SELECT o.amt
-                 FROM orders o
-                          JOIN customers c on o.cnum = c.cnum
-                 WHERE c.city = 'SanJose');
-
+Approach: We can use sub-query to determine all the order's amt from city sanJose by inner join in customers
+         and orders then use any opeator with condition for lesser amount in order table.
+Expected Output: All the orders details which has smaller amount from any one orders from SanJose city
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -598,12 +570,10 @@ WHERE amt < ANY (SELECT o.amt
 
 39) Find all orders with above average amounts for their customers. 
 
-SELECT o.*,
-       c.cname
-FROM orders AS o
-         JOIN customers AS c ON o.cnum = c.cnum
-WHERE o.amt > (SELECT avg(amt)
-               FROM orders);
+Approach: We can use subquery the average (aggregate function) amout from orders table 
+          then joins the customer and order table on custmer number with where condition amt is greater from subquery
+Expected Output: Details of order whose amout is greater than average amount of all order
+Actual Output:
 +------+---------+------------+------+------+---------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM | cname   |
 +------+---------+------------+------+------+---------+
@@ -614,10 +584,9 @@ WHERE o.amt > (SELECT avg(amt)
 
 40) Write a query that selects the highest rating in each city. 
 
-SELECT MAX(rating) as Rating, city
-FROM customers
-GROUP BY city;
-
+Approach: We can use aggregate function to get maximum rating and can group result by city from customers table
+Expected Output: Highest rating and city column from customers table by each city.
+Actual Output:
 +--------+---------+
 | Rating | city    |
 +--------+---------+
@@ -629,38 +598,26 @@ GROUP BY city;
 
 41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00.
 
-SELECT oc.cname,
-       oc.rating,
-       oc.onum,
-       oc.amt,
-       s.comm                            AS comm_as_percentage,
-       ROUND((oc.amt * s.comm) / 100, 2) AS comm_as_amount
-FROM (SELECT o.*, c.cname, c.rating
-      FROM customers c,
-           orders o
-      WHERE c.cnum = o.cnum) oc
-         JOIN
-     salespeople s
-     ON s.snum = oc.snum
-WHERE oc.rating > 100;
-
-+----------+--------+------+---------+--------------------+----------------+
-| cname    | rating | ONUM | AMT     | comm_as_percentage | comm_as_amount |
-+----------+--------+------+---------+--------------------+----------------+
-| Giovanni |    200 | 3009 | 1713.23 |                 10 |         171.32 |
-| Liu      |    200 | 3005 | 5160.45 |                 13 |         670.86 |
-| Grass    |    300 | 3007 |   75.75 |                 13 |           9.85 |
-| Grass    |    300 | 3010 | 1309.95 |                 13 |         170.29 |
-| Cisneros |    300 | 3001 |   18.69 |                 15 |           2.80 |
-| Cisneros |    300 | 3006 | 1098.16 |                 15 |         164.72 |
-+----------+--------+------+---------+--------------------+----------------+
+Approach: We will use correlated subquery to inner join the order and customer table columns (customer name and rating with all orders column) on customer numbers,
+          inner join the result with salespeople on salespeople number and calculate the commissions using formula (amount*commission)/100 and round it to 2 decimal using aggregate function.
+Expected Output: customer name, rating, amt, salespeople name with commission in percentage and the calculated commission of that salespeople
+Actual Output:
++----------+--------+------+---------+---------+--------------------+----------------+
+| cname    | rating | ONUM | AMT     | sname   | comm_as_percentage | comm_as_amount |
++----------+--------+------+---------+---------+--------------------+----------------+
+| Giovanni |    200 | 3009 | 1713.23 | AxelRod |                 10 |         171.32 |
+| Liu      |    200 | 3005 | 5160.45 | Serres  |                 13 |         670.86 |
+| Grass    |    300 | 3007 |   75.75 | Serres  |                 13 |           9.85 |
+| Grass    |    300 | 3010 | 1309.95 | Serres  |                 13 |         170.29 |
+| Cisneros |    300 | 3001 |   18.69 | Rifkin  |                 15 |           2.80 |
+| Cisneros |    300 | 3006 | 1098.16 | Rifkin  |                 15 |         164.72 |
++----------+--------+------+---------+---------+--------------------+----------------+
 
 42) Count the customers with ratings above SanJose’s average.
 
-SELECT *
-FROM customers
-WHERE rating > (SELECT AVG(rating) FROM customers WHERE city = "SanJose");
-
+Approach: We will use a subquery to find the average rating sanJose city from customer table then use the result to select the customers who has greater rating.
+Expected Output: All the details of customers who has greater rating than customer in sanJose city.
+Actual Output: 
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -670,10 +627,9 @@ WHERE rating > (SELECT AVG(rating) FROM customers WHERE city = "SanJose");
 
 43) Find all salespeople that are located in either Barcelona or London.
 
-SELECT *
-FROM salespeople
-WHERE city IN ("Barcelona", "London");
-
+Approach: We can use condition on city of salespeople table and IN operator to choose Barcelona and London city.
+Expected Output: Details of salespeople who belongs to either Barcelona or London
+Actual Output:
 +------+--------+-----------+------+
 | SNUM | SNAME  | CITY      | COMM |
 +------+--------+-----------+------+
@@ -685,17 +641,10 @@ WHERE city IN ("Barcelona", "London");
 
 44) Find all salespeople with only one customer.
 
-Using SubQuery:
-SELECT *
-FROM salespeople
-WHERE 1 IN (SELECT COUNT(snum) FROM customers WHERE customers.snum = salespeople.snum GROUP BY salespeople.snum);
-
-Using Join:
-SELECT s.snum, s.sname
-FROM salespeople s
-         JOIN customers c on s.snum = c.snum
-GROUP BY s.snum
-HAVING COUNT(s.snum) = 1;
+Approach: We can use inner join on customers and salespeople table on salespeople number and
+          group the result by salespeople number and apply the condition of having  one salespeople
+Expected Output: Salespeople number, name, city, and commission of salespeople who has single customer
+Actual Output:
 +------+---------+-----------+------+
 | SNUM | SNAME   | CITY      | COMM |
 +------+---------+-----------+------+
@@ -706,14 +655,9 @@ HAVING COUNT(s.snum) = 1;
 
 45) Write a query that joins the Customer table to itself to find all pairs or customers served by a single salesperson.
 
-SELECT c1.name,
-       c2.name
-FROM customers c1
-         JOIN
-     customers c2 ON
-                 c1.snum = c2.snum AND
-                 c1.cname != c2.cname;
-
+Approach: As mentioned in the question we will self join the table on conditions where customers have same salespeople
+Expected Output: salespeople number,customer number, customer name, rating and cities who 
+Actual Output:
 +---------+---------+
 | cname   | cname   |
 +---------+---------+
@@ -721,13 +665,13 @@ FROM customers c1
 | Grass   | Liu     |
 | Liu     | Grass   |
 | Hoffman | Clemens |
-+---------+---------+     
++---------+---------+
+
 46) Write a query that will give you all orders for more than $1000.00.
 
-SELECT *
-FROM orders
-WHERE amt > 1000;
-
+Approach: we will use the where clause to select order with amt greater than 10000
+Expected Output: All the details of orders having amount greater than 1000
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -742,10 +686,9 @@ WHERE amt > 1000;
 
 47) Write a query that lists each order number followed by the name of the customer who made that order.
 
-SELECT o.onum, c.cname
-FROM customers AS c
-         JOIN orders o on c.CNUM = o.CNUM;
-
+Approach: We will use the inner join on table customer and orders on customer numbers.
+Expected Output: Order number along with customer name of each order
+Actual Output: 
 +------+----------+
 | onum | cname    |
 +------+----------+
@@ -763,15 +706,10 @@ FROM customers AS c
 
 48) Write a query that selects all the customers whose ratings are equal to or greater than ANY(in the SQL sense) of ‘Serres’.
 
-SELECT *
-FROM customers
-WHERE rating >= ANY (SELECT c.rating
-                     FROM customers c
-                              JOIN
-                          salespeople s ON
-                                      c.SNUM = s.SNUM
-                                  AND s.sname = "Serres");
-
+Approach: We will use subquery to get the rating of serres
+          using inner on customers and salespeople and filter the rating from customers table using any and >=.
+Expected Output: All the columns from customer table who has greater rating than Serres.
+Actual Output:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -782,12 +720,9 @@ WHERE rating >= ANY (SELECT c.rating
 +------+----------+---------+--------+------+
 49) Write two queries that will produce all orders taken on October 3 or October 4.
 
-SELECT * FROM orders WHERE odate IN ("1990-03-10","1990-04-10");
-
-SELECT *
-FROM orders
-WHERE odate = "1990-03-10";
-
+Approach: We will use IN (mention 3 and 4 October formatted) opeator to filter out the dates.
+Expected: All 7 orders from 3rd and 4th of October.
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -796,30 +731,14 @@ WHERE odate = "1990-03-10";
 | 3003 |  767.69 | 1990-03-10 | 2001 | 1001 |
 | 3005 | 5160.45 | 1990-03-10 | 2003 | 1002 |
 | 3006 | 1098.16 | 1990-03-10 | 2008 | 1007 |
-| 3007 |   75.75 | 1990-04-10 | 2004 | 1002 |
-| 3009 | 1713.23 | 1990-04-10 | 2002 | 1003 |
 +------+---------+------------+------+------+
 
-SELECT *
-FROM orders
-WHERE odate = "1990-04-10";
-
-+------+---------+------------+------+------+
-| ONUM | AMT     | ODATE      | CNUM | SNUM |
-+------+---------+------------+------+------+
-| 3007 |   75.75 | 1990-04-10 | 2004 | 1002 |
-| 3009 | 1713.23 | 1990-04-10 | 2002 | 1003 |
-+------+---------+------------+------+------+
 
 50) Find only those customers whose ratings are higher than every customer in Rome.
 
-SELECT *
-FROM customers
-WHERE rating >
-          ALL (SELECT rating
-               FROM customers
-               WHERE city = "Rome");
-
+Approach: We will use a subquery to find the rating of customers in Rome and compare that rating with other customers' ratings.
+Expected Output: All the columns of the customer table who has a greater rating customer in "Rome" i.e. Grass and Cisneros
+Actual Output:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -830,11 +749,10 @@ WHERE rating >
 
 51) Write a query on the Customers table whose output will exclude all customers with a rating &lt;= 100.00, unless they are located in Rome.
 
-SELECT *
-FROM customers
-WHERE rating != 100
-   OR city = "Rome";
 
+Approach:  We can directly select all the columns from the customer's table with conditions i.e rating is not 100 or the city is like Rome.
+Expected Output: All the customers from Rome and customers who do have not 100 ratings.
+Actual Output:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -847,10 +765,9 @@ WHERE rating != 100
 
 52) Find all rows from the customer’s table for which the salesperson number is 1001.
 
-SELECT *
-FROM customers
-WHERE snum = 1001;
-
+Approach: We can select all the customers with where clause for sum equals 1001.
+Expected Output: All the columns from customers whose salespeople number is 1000 i.e Hoffman and Clemens
+Actual Output:
 +------+---------+--------+--------+------+
 | CNUM | CNAME   | CITY   | RATING | SNUM |
 +------+---------+--------+--------+------+
@@ -860,46 +777,30 @@ WHERE snum = 1001;
 
 53) Find the total amount in orders for each salesperson where their total of amounts are greater than
 the amount of the largest order in the table.
-
-SELECT onum,
-       sname,
-       odate,
-       SUM(amt) AS amount
-FROM orders o
-         JOIN
-     salespeople s ON
-         o.SNUM = s.SNUM
-GROUP BY o.snum
-HAVING amount > (SELECT MAX(amt) FROM orders);
-
-+------+-------+------------+----------+
+Approach: We will calculate the total sales amount of each salesperson (sum aggregate function) by applying
+          inner join on orders and salespeople table on salespeople number and group by the result by salespeople number
+          then compare with the maximum amount from the orders table (using subquery and max aggregate function).
+Expected Output: order number, salespeople name, order date, and amount of peel he has more total sales than maximum in the complete order table
+Actual Output:
+------+-------+------------+----------+
 | onum | sname | odate      | amount   |
 +------+-------+------------+----------+
 | 3003 | Peel  | 1990-03-10 | 15382.57 |
 +------+-------+------------+----------+
 
 54) Write a query that selects all orders save those with zeroes or NULL in the amount file.
-SELECT *
-FROM orders
-WHERE amt = 0
-   OR amt = NULL;
 
-OR
-
-SELECT *
-FROM orders
-INTO OUTFILE 'C:\ProgramData\MySQL\MySQL Server \Uploads\8.0\amount.txt';
-
+Approach: We will select all columns from the orders table and apply the condition in where clause for the amount being 0 or null.
+Expected Output: Empty Set because the orders table has no entry with 0 or null as the amount
+Actual Output: 
 Empty set (0.00 sec)
 
 55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200.
 
-SELECT s.sname, c.cname, c.rating
-FROM salespeople s
-         JOIN customers c on s.SNUM = c.SNUM
-WHERE s.sname < c.cname
-  AND c.rating < 200;
-  
+Approach: We will use the inner join on customer and salespeople to get both salespeople and customer names together for comparison
+          and apply the condition of rating less than 200.
+Expected Output: Motika and Pereira satisfy the condition so there both of their name along with rating.
+Actual Output:
 +--------+---------+--------+
 | sname  | cname   | rating |
 +--------+---------+--------+
@@ -908,8 +809,9 @@ WHERE s.sname < c.cname
 
 56) Find all salespeople name and commission.
 
-SELECT sname, comm
-FROM salespeople;
+Approach: we will select the salespeople's names and commissions from the salespeople table.
+Expected Output: sname and comm column from salespeople table.
+Actual Output:
 +---------+------+
 | sname   | comm |
 +---------+------+
@@ -923,38 +825,22 @@ FROM salespeople;
 
 57) Write a query that produces the names and cities of all customers with the same rating as Hoffman. Write the query using Hoffman’s cnum rather than his rating, so that it would still be usable if his rating is changed.
 
-SELECT cnum
-FROM customers
-WHERE cname = "Hoffman";
-SELECT cname, city
-FROM customers
-WHERE rating = (SELECT rating
-              FROM customers
-              WHERE cnum = 2001);
-
+Approach: We will use subqueries to get the rating of Hoffman and then match it with the other customers' ratings.
+Expected Output: customer name and city whose rating same as Hoffman i.e. Clemens and Pereira.
+Actual Output:
 +---------+--------+
 | cname   | city   |
 +---------+--------+
-| Hoffman | London |
 | Clemens | London |
 | Pereira | Rome   |
 +---------+--------+
 
 58) Find all salespeople for whom there are customers that follow them in alphabetical order.
 
-Using SubQuery:
-SELECT *
-FROM salespeople
-WHERE snum IN (SELECT snum
-               FROM customers
-               WHERE salespeople.sname < customers.cname);
-
-Using Join:
-SELECT s.*
-FROM salespeople s
-         JOIN customers c on s.snum = c.snum
-WHERE s.sname < c.cname;
-
+Approach: WE will use the inner joins on salespeople and customers on salespeople number to get salespeople and customers name together
+          then compares thems i.e. the salesperson's name is less than the customer's name.
+Expected Output: All the details of the salespeople whose satisfy the condition of alphabetical order i.e. AxelRod and Motika.
+Actual Output:
 +------+---------+----------+------+
 | SNUM | SNAME   | CITY     | COMM |
 +------+---------+----------+------+
@@ -964,13 +850,10 @@ WHERE s.sname < c.cname;
 
 59) Write a query that produces the names and ratings of all customers who have average orders.
 
-SELECT c.cname, c.rating
-FROM customers c
-         JOIN orders o ON c.cnum = o.cnum
-WHERE o.amt > (SELECT AVG(amt)
-               FROM orders)
-               GROUP BY o.cnum;
-
+Approach: We will use inner join on the customer and orders table to get the amount and customer together 
+          then compares the amount to the average amt from orders and groups the result according to a customer number.
+Expected Output: cname and rating of both Liu and Clemens.
+Actual Output:
 +---------+--------+
 | cname   | rating |
 +---------+--------+
@@ -981,9 +864,9 @@ WHERE o.amt > (SELECT AVG(amt)
 
 60) Find the SUM of all Amounts from the orders table.
 
-SELECT SUM(amt)
-FROM orders;
-
+Approach: We will use aggregate function sum on the orders table.
+Expected Output: Total amt from the order table.
+Actual Output:
 +----------+
 | SUM(amt) |
 +----------+
@@ -993,9 +876,9 @@ FROM orders;
 
 61) Write a SELECT command that produces the order number, amount, and the date from rows in the order table.
 
-SELECT onum, amt, odate
-FROM orders;
-
+Approach: We can select order number, amount and order date from orders table to get desired output.
+Expected Output: onum, amt, and odate columns from order table with all the tuples.
+Actual Output:
 +------+---------+------------+
 | onum | amt     | odate      |
 +------+---------+------------+
@@ -1013,10 +896,9 @@ FROM orders;
 
 62) Count the number of non NULL rating fields in the Customers table (including repeats).
 
-SELECT COUNT(cnum)
-FROM customers
-WHERE rating IS NOT NULL;
-
+Approach: We will use aggregate function count to count the customer number of customer table and apply condition in where clause of not null.
+Expected Output: Number of not null rating customers i.e. 7
+Actual Output:
 +-------------+
 | COUNT(cnum) |
 +-------------+
@@ -1025,11 +907,10 @@ WHERE rating IS NOT NULL;
 
 63) Write a query that gives the names of both the salesperson and the customer for each order after the order number.
 
-SELECT onum, sname, cname
-FROM salespeople AS s
-         JOIN customers AS c ON s.snum = c.snum
-         JOIN orders AS o ON c.cnum = o.cnum;
-
+Approach: We will use inner join on all three table salespeople, customers, and, orders to get 
+          order number, salespeople, and customer name together on salespeople number and customer number according.
+Expected Output: All the order number and their respective salespeople and customer.
+Actual Output:
 +------+---------+----------+
 | onum | sname   | cname    |
 +------+---------+----------+
@@ -1047,11 +928,10 @@ FROM salespeople AS s
 
 64) List the commissions of all salespeople servicing customers in London.
 
-SELECT DISTINCT s.sname, s.comm
-FROM salespeople s
-         JOIN customers c ON s.snum = c.snum
-WHERE c.city = "London";
-
+Approach: We will use inner join on salespeople and customers table to get the customer city and salespeople details together and 
+          then apply the condition of the city is London and will use DISTINCT to avoid duplicates.
+Expected Output: Name and commission of Peel because he is the one who satisfies the condition.
+Actual Output:
 +-------+------+
 | sname | comm |
 +-------+------+
@@ -1060,12 +940,9 @@ WHERE c.city = "London";
 
 65) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city.
 
-SELECT *
-FROM salespeople
-WHERE city != ALL (SELECT customers.city
-                   FROM customers
-                   WHERE salespeople.snum = customers.snum);
-
+Approach: We will use the subquery to get the cities of each customer and then use "!=" and ALL operators to compare with salespeople city
+Expected Output: All the salespeople's number, names, city, and comm  which are not located on same city i.e. AxelRod, Motika, Rifkin, and Fran
+Actual Output:
 +------+---------+-----------+------+
 | SNUM | SNAME   | CITY      | COMM |
 +------+---------+-----------+------+
@@ -1077,12 +954,10 @@ WHERE city != ALL (SELECT customers.city
 
 66) Write a query using the EXISTS operator that selects all salespeople with customers located in their cities who are not assigned to them.
 
-SELECT s.*
-FROM salespeople AS s
-WHERE EXISTS(SELECT snum
-             FROM customers c
-             WHERE s.city = c.city AND s.snum != c.snum);
-
+Approach: We will use a subquery to get salespeople numbers from customer and salespeople table where they have same city but different salespeople
+          then use exists operator on results to get salespeople.
+Expected Output: sum, sname, city, and comm from the salespeople table which has the same city but a different customer. i.e Serres, Motika, and Fran.
+Actual Output:
 +------+--------+---------+------+
 | SNUM | SNAME  | CITY    | COMM |
 +------+--------+---------+------+
@@ -1093,12 +968,10 @@ WHERE EXISTS(SELECT snum
 
 67) Write a query that selects all customers serviced by Peel or Motika.
 (Hint: The snum field relates the 2 tables to one another.)
-
-SELECT c.*
-FROM customers AS c
-         JOIN salespeople s ON c.SNUM = s.SNUM
-WHERE s.sname IN ("Peel", "Motika");
-
+Approach: We will use inner join on salespeople and customer table to get the salespeople number and customer details together and 
+          then apply the condition of salespeople name is Peel or Motika using IN operator.
+Expected Output: cnum, cname, city and rating with snum of each customers who as been served by Peel and Motika
+Actual Output:
 +------+---------+--------+--------+------+
 | CNUM | CNAME   | CITY   | RATING | SNUM |
 +------+---------+--------+--------+------+
@@ -1109,11 +982,9 @@ WHERE s.sname IN ("Peel", "Motika");
 
 68) Count the number of salespeople registering orders for each day.
 (If a salesperson has more than one order on a given day, he or she should be counted only once.)
-
-SELECT odate, count(DISTINCT snum) AS orders
-FROM orders
-GROUP BY odate;
-
+Approach: We will use the count aggregate function with DISTINCT to count the salespeople number from the orders table and group by the result using order date.
+Expected Output: odate and orders on each day i.e 4,2,1,2 according in ascending order.
+Actual Output:
 +------------+--------+
 | odate      | orders |
 +------------+--------+
@@ -1124,12 +995,9 @@ GROUP BY odate;
 +------------+--------+
 
 69) Find all orders attributed to salespeople who live in London.
-
-SELECT o.*
-FROM orders o
-         JOIN salespeople s ON o.SNUM = s.SNUM
-WHERE s.city = "London";
-
+Approach: We will use inner join on salespeople and orders table on salespeople number and apply condition in where clause where city is London.
+Expected Output: All the columns from orders table where then salespeople city is London. i.e. 3003, 3008, 3011, and 3002 order number.
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -1141,12 +1009,9 @@ WHERE s.city = "London";
 
 70) Find all orders by customers not located in the same cities as their salespeople.
 
-SELECT o.*
-FROM orders AS o
-         JOIN customers c on o.CNUM = c.CNUM
-         JOIN salespeople s on s.SNUM = o.SNUM
-WHERE s.city != c.city;
-
+Approach: We will use inner to on all three tables orders, customers, and salespeople on customer and salespeople number where city of customer is not same as salespeople.
+Expected Output: All the columns from the customer table where salespeople and customers' city are not the same i.e.  total  6 tuples.
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -1161,12 +1026,10 @@ WHERE s.city != c.city;
 
 71) Find all salespeople who have customers with more than one current order.
 
-SELECT *
-FROM salespeople
-WHERE snum IN (SELECT snum
-               FROM orders
-               GROUP BY snum HAVING COUNT(snum) > 1);
-
+Approach: We will use subquery to get the salespeople number from orders table and group it by salespeople number and count of salespeople number is greater than 1
+          then get all the salespeople from the salespeople table where the snum exists in subquery result.
+Expected Output: All the columns from the salespeople table with Peel, Serres and Rifkin data.
+Actual Output:
 +------+--------+-----------+------+
 | SNUM | SNAME  | CITY      | COMM |
 +------+--------+-----------+------+
@@ -1177,13 +1040,10 @@ WHERE snum IN (SELECT snum
 
 72) Write a query that extracts from the customer’s table every customer assigned to a salesperson, who is currently having at least one another customer(besides the customer being selected) with orders in the Orders Table.
 
-
-SELECT *
-FROM customers
-WHERE snum IN (SELECT snum
-               FROM customers
-               GROUP BY snum HAVING COUNT(snum) > 1);
-
+Approach: We will use subquery to get salespeople number from customer and group the result by salespeople number where the count of salespeople number is greater than 1
+        then get all the customer who has salespeople number in subquery result.
+Expected Output: All the column from customer table who has more than single salespeople i.e Hoffman, Liu, Grass, and Clemens.
+Actual Output:
 +------+---------+---------+--------+------+
 | CNUM | CNAME   | CITY    | RATING | SNUM |
 +------+---------+---------+--------+------+
@@ -1196,10 +1056,9 @@ WHERE snum IN (SELECT snum
 73) Write a query on the customer’s table that will find the highest rating in each city.
 Put the output in this form: for the city (city), the highest rating is (rating).
 
-SELECT city, MAX(rating)
-FROM customers
-GROUP BY city;
-
+Approach : We will use aggregate function max to get the max rating and group it with city to get each highest rating in each city.
+Expected Output: All the four cities with their higher rating from customer table.
+Actual Output: 
 +---------+-------------+
 | city    | MAX(rating) |
 +---------+-------------+
@@ -1211,11 +1070,9 @@ GROUP BY city;
 
 74) Write a query that will produce the snum values of all salespeople with orders, having amt greater than 1000 in the Orders Table(without repeats).
 
-SELECT DISTINCT snum, onum, amt
-FROM orders
-WHERE amt > 1000
-GROUP BY snum;
-
+Approach: We will use the DISTINCT operator to select all the unique salespeople’s and where condition of amount greater than 1000 and group the result by salespeople number
+Expected Output: snum, onum and amt from orders table which has more than 1000 int amt column.
+Actual Output:
 +------+------+---------+
 | snum | onum | amt     |
 +------+------+---------+
@@ -1228,11 +1085,9 @@ GROUP BY snum;
 
 75) Write a query that lists customers in a descending order of rating.
 Output the rating field first, followed by the customer’s names and numbers.
-
-SELECT rating, cname, cnum
-FROM customers
-ORDER BY rating DESC;
-
+Approach: We will select rating, customer name, customer number from cusotmer table and order the result by rating column in descending.
+Expected Output: rating, cname, and cnum columns from the customers table in descending order by rating. i.e. 300 > 200 > 100
+Actual Output:
 +--------+----------+------+
 | rating | cname    | cnum |
 +--------+----------+------+
@@ -1247,11 +1102,9 @@ ORDER BY rating DESC;
 
 76) Find the average commission for salespeople in London.
 
-SELECT city, AVG(comm)
-FROM salespeople
-GROUP BY city
-HAVING city = "London";
-
+Approach:  We will use avg aggregate function on commission and group the result by city where city is London
+Expected Output: london city and average commission in london city. i.e 16
+Actual Output:
 +--------+-----------+
 | city   | AVG(comm) |
 +--------+-----------+
@@ -1260,10 +1113,9 @@ HAVING city = "London";
 
 77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001).
 
-SELECT *
-FROM orders
-WHERE snum IN (SELECT snum FROM orders WHERE cnum = 2001);
-
+Approach: We will use subquery to get the salespeople of Hoffman and then filter the orders according to the salespeople
+Expected Output: All the columns of orders table and tuples having salesperson number as 1001 i.e. order number 3003, 3008, and 3011.
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -1273,19 +1125,17 @@ WHERE snum IN (SELECT snum FROM orders WHERE cnum = 2001);
 +------+---------+------------+------+------+
 
 78) Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive).
-SELECT *
-FROM salespeople
-WHERE comm BETWEEN 0.10 AND 0.12;
 
+Approach: We will apply the between condition with where clause on comm column of salespeople
+Expected Output: There is no salespeople whose commission is between 0.10 and 0.12 so empty set
+Actual Output:
 Empty set (0.00 sec)
 
 79) Write a query that will give you the names and cities of all salespeople in London with a commission above 0.10.
 
-SELECT sname, city
-FROM salespeople
-WHERE city = "London"
-  AND comm > 0.10;
-
+Approach: We will select the name and city from salespeople table and apply condition in where clause for city is London and commission having greater than 0.10
+Expected Output: sname and city from customers where city is london and commission is greater than 0.10 i.e. Peel, Motika, Fran
+Actual Output:
 +--------+--------+
 | sname  | city   |
 +--------+--------+
@@ -1296,11 +1146,9 @@ WHERE city = "London"
 
 80) Write a query that selects each customer’s smallest order.
 
-SELECT c.cname, MIN(amt)
-FROM customers c
-         JOIN orders o ON c.cnum = o.cnum
-GROUP BY o.cnum;
-
+Approach: We will use inner join on the customer table and orders table on the customer number and calculate the minimum amount using aggregate function and group the result by customer number
+Expected Output: cname and minimum amt order placed by each customer
+Actual Output:
 +----------+----------+
 | cname    | MIN(amt) |
 +----------+----------+
@@ -1316,26 +1164,20 @@ GROUP BY o.cnum;
 
 81) Write a query that selects the first customer in alphabetical order whose name begins with ‘G’.
 
-SELECT *
-FROM customers
-WHERE cname LIKE "G%"
-ORDER BY cname ASC LIMIT 1;
-
+Approach: We will use wild card operator like to get the customer whose name starts with G and use order by customer name and limit the result to 1.
+Expected Output: First customer whose name start with g character i.e. Giovanni
+Actual Output:
 +------+----------+------+--------+------+
 | CNUM | CNAME    | CITY | RATING | SNUM |
 +------+----------+------+--------+------+
 | 2002 | Giovanni | Rome |    200 | 1003 |
 +------+----------+------+--------+------+
 
-
-
-
 82) Write a query that counts the number of different non NULL city values in the customers table.
 
-SELECT COUNT(DISTINCT city) AS Unique_Cities
-FROM customers
-WHERE city IS NOT NULL;
-
+Approach: We will use count aggregate function on city from customer table and condition for null in where clause.
+Expected Output: Total 4 are such in cusotmer table so Unique_Cities are 4.
+Actual Output:
 +---------------+
 | Unique_Cities |
 +---------------+
@@ -1344,9 +1186,9 @@ WHERE city IS NOT NULL;
 
 83) Find the average amount from the Orders Table.
 
-SELECT AVG(amt) AS avg_amt
-FROM orders;
-
+Approach: We will use avg aggregate function on the amount column of the orders table to get avg amount from the orders table.
+Expected Output: avg_amt from orders table which sum of all the orders amt divided by total number of orders. i.e. 2665.89000
+Actual Output:
 +-------------+
 | avg_amt     |
 +-------------+
@@ -1355,11 +1197,9 @@ FROM orders;
 
 84) Find all customers who are not located in SanJose and whose rating is above 200.
 
-SELECT *
-FROM customers
-WHERE city != "SanJose"
-  AND rating > 200;
-
+Approach: We will select all the columns of the customers table and apply the condition in where the clause for the city is SanJose and the rating is greater than 200.
+Expected Output: All the details of the customer named Grass. i.e. All the condition are matched with him.
+Actual Output:
 +------+-------+--------+--------+------+
 | CNUM | CNAME | CITY   | RATING | SNUM |
 +------+-------+--------+--------+------+
@@ -1368,10 +1208,9 @@ WHERE city != "SanJose"
 
 85) Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm &lt; 0.14);
 
-SELECT *
-FROM salespeople
-WHERE (comm > 0.12 OR comm < 0.14);
-
+Approach: We can replace column names with * or ALL to get a similar result.
+Expected Output: all the column of the salespeople table containing all the tuples. 
+Actual Output:
 +------+---------+-----------+------+
 | SNUM | SNAME   | CITY      | COMM |
 +------+---------+-----------+------+
@@ -1384,13 +1223,9 @@ WHERE (comm > 0.12 OR comm < 0.14);
 +------+---------+-----------+------+
 
 86) Which salespersons attend to customers not in the city they have been assigned to ?
-
-SELECT s.*
-FROM salespeople s
-         JOIN customers c
-              ON s.snum = c.snum
-WHERE s.city != c.city;
-
+Approach: We will inner join the customers and salespeople table on salespeople number and apply the condition in the where clause for cities not same for customer and salespeople
+Expected Output: All the column from customer table where the cities do not match with their customer customers i.e. AxelRod, Serres, Motika, and Rifkin
+Actual Output:
 +------+---------+-----------+------+
 | SNUM | SNAME   | CITY      | COMM |
 +------+---------+-----------+------+
@@ -1402,13 +1237,9 @@ WHERE s.city != c.city;
 
 87) Which salespeople get commission greater than 0.11 are serving customers rated less than 250?
 
-SELECT s.sname, c.cname, c.rating AS customer_rating
-FROM salespeople s
-         JOIN customers c on s.snum = c.snum
-WHERE s.comm > 0.11
-  AND c.rating < 250
-GROUP BY s.snum;
-
+Approach: We will join the salespeople and customers on the salespeople number and apply the condition in where clause for commission greater than 0.11 and rating less than 250 and group the result with 
+Expected Output: sname,cname and customer_rating of salespeople who satisfies the condition i.e. Peel, Serres, AxelRod and Motika.
+Actual Output:
 +---------+----------+-----------------+
 | sname   | cname    | customer_rating |
 +---------+----------+-----------------+
@@ -1420,11 +1251,9 @@ GROUP BY s.snum;
 
 88) Which salespeople have been assigned to the same city but get different commission percentages?
 
-SELECT s.*
-FROM salespeople s
-         JOIN salespeople s1 ON s.snum != s1.snum AND s.city = s1.city AND s.comm != s1.comm
-GROUP BY s.snum;
-
+Approach: We can use self join on salespeople table on different salespeople and commission but different same city.
+Expected Output: All the salespeople from same city but different commission percentages. i.e. Fran, Motika, and Peel.
+Actual Output:
 +------+--------+--------+------+
 | SNUM | SNAME  | CITY   | COMM |
 +------+--------+--------+------+
@@ -1433,12 +1262,11 @@ GROUP BY s.snum;
 | 1001 | Peel   | London |   12 |
 +------+--------+--------+------+
 
-89) Which salesperson has earned the maximum  commission?
+89) Which salesperson has earned the maximum commission?
 
-SELECT * FROM salespeople
-WHERE comm = (SELECT MAX(comm)
-              FROM salespeople);
-
+Approach: We can use subquery to get the maximum commission from salespeople table and match that commission in salespeople table.
+Expected Output: salespeople how as maximum commission in salespeople table. i.e Fran
+Actual Output: 
 +------+-------+--------+------+
 | SNUM | SNAME | CITY   | COMM |
 +------+-------+--------+------+
@@ -1447,18 +1275,11 @@ WHERE comm = (SELECT MAX(comm)
 
 90) Does the customer who has placed the maximum number of orders have the maximum rating?
 
-SELECT c.cnum, c.rating, COUNT(*) AS orders_count
-FROM customers c
-JOIN orders o ON c.cnum = o.cnum
-GROUP BY c.cnum
-HAVING COUNT(*) = (
-  SELECT COUNT(*) AS cnt
-  FROM orders
-  GROUP BY cnum
-  ORDER BY cnt DESC
-  LIMIT 1
-);
-
+Approach: We can count the maximum rating for each customer from the or ders table using the aggregate function in a subquery
+          then match the same count from the inner joined table of customers and the orders table on the customer number.
+  Expected Output: cnum, rating, cnum, and orders count columns should be there and 
+                   The maximum number of orders are 2 so and the ratings of customers who have placed maximum orders are 100 and 300 so the customer's number are 2004, 2006, and 2008
+Actual Output:
 +------+--------+------+--------------+
 | cnum | rating | onum | orders_count |
 +------+--------+------+--------------+
@@ -1469,10 +1290,9 @@ HAVING COUNT(*) = (
 
 91) List all customers in descending order of customer rating.
 
-SELECT *
-FROM customers
-ORDER BY rating DESC;
-
+Approach: We will select all the columns of the customers and use order by clause on rating in descending order.
+Expected Output: All the columns from the customers table are in descending order by rating.
+Actual Output:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -1487,10 +1307,9 @@ ORDER BY rating DESC;
 
 92) On which days has Hoffman placed orders?
 
-SElECT onum, DAYNAME(odate)
-FROM orders
-WHERE cnum = 2001;
-
+Approach: We will use DAYNAME to determine the day on order date from the orders table and filter the Hoffman
+Expected Output: order number and day of order placed by Hoffman.
+Actual Output:
 +------+----------------+
 | onum | DAYNAME(odate) |
 +------+----------------+
@@ -1499,11 +1318,11 @@ WHERE cnum = 2001;
 
 93) Which salesmen have no orders between 10/03/1990 and 10/05/1990?
 
-SELECT s.snum, s.sname, o.odate
-FROM salespeople s
-         JOIN orders o ON s.snum = o.snum
-WHERE ODATE NOT BETWEEN "1990-03-10" AND "1990-05-10";
-
+Approach: We will join salespeople and orders on the salespeople number to get the salespeople and orders together
+          and then apply the condition on order date to filter the salespeople who have not palced order between the given dates.
+Expected Output: snum, sname, and odate form salespeople and orders
+                 Serres and Peel has no order on dates between 3rd October to 5th October.
+Actual Output:
 +------+--------+------------+
 | snum | sname  | odate      |
 +------+--------+------------+
@@ -1513,9 +1332,9 @@ WHERE ODATE NOT BETWEEN "1990-03-10" AND "1990-05-10";
 
 94) How many salespersons have succeeded in getting orders?
 
-SELECT COUNT(DISTINCT snum) AS succeeded_orders
-FROM orders;
-
+Approach: We will use the count aggregate function with distinct on the sum of orders table to get all the salespeople to succeed in placing orders.
+Expected Output: number of salespeople who succeeded in getting order i.e 5.
+Actual Output:
 +------------------+
 | succeeded_orders |
 +------------------+
@@ -1523,10 +1342,9 @@ FROM orders;
 +------------------+
 
 95) How many customers have placed orders?
-
-SELECT COUNT(DISTINCT cnum) as no_of_customer
-FROM orders;
-
+Approach: We will use count aggregate function with distinct on cnum from orders table.
+Expected Output: all the customers who have placed order i.e 7 customers who have placed order.
+Actual Output:
 +----------------+
 | no_of_customer |
 +----------------+
@@ -1535,15 +1353,11 @@ FROM orders;
 
 96) On which date has each salesman booked an order of maximum value ?
 
-SELECT sname,o.amt,s.snum, o.odate
-FROM orders o
-         JOIN (SELECT snum, MAX(amt) AS max_amt
-               FROM orders
-               GROUP BY snum) max_amt
-              ON o.snum = max_amt.snum AND o.amt = max_amt.max_amt
-         JOIN salespeople s
-              ON o.snum = s.snum;
-
+Approach: We will use  correlated subqueries to join the order table with a custom orders table having columns snum, maximum amount(max aggregate function) grouped by snum on
+          salespeople number and amount of both the tables to get the maxinum order each salesperson and
+          join this table with salespeople to get the salespeople's people and maximum order together.
+Expected Output: sname, amt, snum, and odate from salespeople and orders to get maximum order placed by each salespeople on dates.
+Actual Output:
 +---------+---------+------+------------+
 | sname   | amt     | snum | odate      |
 +---------+---------+------+------------+
@@ -1554,15 +1368,12 @@ FROM orders o
 | Rifkin  | 1098.16 | 1007 | 1990-03-10 |
 +---------+---------+------+------------+              
 
-
 97) Who is the most successful salesperson?
 
-SELECT s.sname, s.snum, SUM(o.amt) as orders_amt
-FROM salespeople s
-         JOIN orders o ON s.snum = o.snum
-GROUP BY s.snum
-ORDER BY orders_amt DESC
-LIMIT 1;
+Approach: We can determine the most successful salesperson who has placed the maximum amount of order placed.
+          We will inner join salespeople and orders table on salespeople number and sum the maximum sales (using aggregate function sum) by salespeople and arrange result in descending order of total amount.
+Expected Output: The number and name and order amount of each salesperson.
+Actual Output:
 +-------+------+------------+
 | sname | snum | orders_amt |
 +-------+------+------------+
@@ -1571,32 +1382,29 @@ LIMIT 1;
 
 98) Which customers have the same rating?
 
-SELECT DISTINCT c1.cnum, c1.cname, c2.cname,c1.rating
-FROM customers c1
-         JOIN customers c2 ON c1.rating = c2.rating AND c1.cnum != c2.cnum;
-
-+------+----------+----------+--------+
-| cnum | cname    | cname    | rating |
-+------+----------+----------+--------+
-| 2007 | Pereira  | Hoffman  |    100 |
-| 2006 | Clemens  | Hoffman  |    100 |
-| 2003 | Liu      | Giovanni |    200 |
-| 2002 | Giovanni | Liu      |    200 |
-| 2008 | Cisneros | Grass    |    300 |
-| 2007 | Pereira  | Clemens  |    100 |
-| 2001 | Hoffman  | Clemens  |    100 |
-| 2006 | Clemens  | Pereira  |    100 |
-| 2001 | Hoffman  | Pereira  |    100 |
-| 2004 | Grass    | Cisneros |    300 |
-+------+----------+----------+--------+
+Approach: We will use the self-join on table customers with the same rating and different customer number and select the distinct customer number, names and ratings. 
+Expected Output: Customer who have same rating ie. 10 combinations present.
+Actual Output:
++------+----------+------+----------+--------+
+| cnum | cname    | cnum | cname    | rating |
++------+----------+------+----------+--------+
+| 2007 | Pereira  | 2001 | Hoffman  |    100 |
+| 2006 | Clemens  | 2001 | Hoffman  |    100 |
+| 2003 | Liu      | 2002 | Giovanni |    200 |
+| 2002 | Giovanni | 2003 | Liu      |    200 |
+| 2008 | Cisneros | 2004 | Grass    |    300 |
+| 2007 | Pereira  | 2006 | Clemens  |    100 |
+| 2001 | Hoffman  | 2006 | Clemens  |    100 |
+| 2006 | Clemens  | 2007 | Pereira  |    100 |
+| 2001 | Hoffman  | 2007 | Pereira  |    100 |
+| 2004 | Grass    | 2008 | Cisneros |    300 |
++------+----------+------+----------+--------+
 
 99) Find all orders greater than the average for October 4th.
-SELECT *
-FROM orders
-WHERE amt > (SELECT AVG(amt)
-             FROM orders
-             WHERE odate = '1990-04-10');
 
+Approach: We will use a subquery to get the average order on 4th October and then compares it with other tuples of orders table.
+Expected Output: The the columns of order table with tuples that have more amt than the average amount on October 4th. i.e. 3002, 3005, 3006, 3008, 3009, 3010, and 3011
+Actual Output:
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -1611,19 +1419,17 @@ WHERE amt > (SELECT AVG(amt)
         
 100) List all customers with ratings above Grass’s average.
 
-SELECT *
-FROM customers
-WHERE rating > (SELECT AVG(rating) FROM customers WHERE cname = 'GRASS');
-
+Approach: We can use a subquery to get the average rating of the customer named grass then compares it with other customers' ratings if greater then include it in the result.
+Expected Output: As there is no such customer in the customer table so an empty set.
+Actual Output:
 Empty set (0.00 sec)
 
 101) Which customers have above average orders?
 
-SELECT c.*
-FROM customers c
-         JOIN orders o
-              on c.CNUM = o.CNUM
-WHERE amt > ALL (SELECT AVG(amt) FROM orders);
+Approach: We will use a subquery to get the average order from the orders table using the aggregate function and then apply the condition of ALL and greater than to filter the result from 
+          customer and order table inner joined on customer number.
+Expected Output: All the column of customers table and tuples who has more order amt than average i.e Liu, Clemens.
+Actual Output: 
 +------+---------+---------+--------+------+
 | CNUM | CNAME   | CITY    | RATING | SNUM |
 +------+---------+---------+--------+------+
@@ -1632,14 +1438,10 @@ WHERE amt > ALL (SELECT AVG(amt) FROM orders);
 +------+---------+---------+--------+------+
 
 102) Select the total amount in orders for each salesperson for which the total is greater than the amount of the largest order in the table.
-
-SELECT s.sname, SUM(o.amt) as amt
-FROM salespeople s
-         JOIN orders o on s.snum = o.snum
-GROUP BY o.snum
-HAVING amt > (SELECT MAX(amt)
-                FROM orders);
-
+Approach: We can calculate the total amt of each salesperson using inner join on salespeople number group by the result by salespeople number
+        and filter the tuples by amt greater than maximum amount from orders table (calculated using subquery and aggregate function).
+Expected Output: Peel is only one who has amt greater than largest order in order table.
+Actual Output:
 +-------+----------+
 | sname | amt      |
 +-------+----------+
@@ -1648,10 +1450,10 @@ HAVING amt > (SELECT MAX(amt)
 
 103) Give names and numbers of all salespersons that have more than one customer?
 
-SELECT s.sname, s.snum
-FROM salespeople s
-WHERE snum IN (SELECT snum as cust_count FROM customers GROUP BY snum HAVING COUNT(cnum) > 1);
-
+Approach: We will use subquery to get the salespeople number from customer who has more than one customer by group by salespeople number.
+         Then select the name and number of the basis of salespeople number from subquery.
+Expected Output: sname and sum of all the salespeople who has more than one customer i.e. Peel and Serres
+Actual Output:
 +--------+------+
 | sname  | snum |
 +--------+------+
@@ -1661,10 +1463,9 @@ WHERE snum IN (SELECT snum as cust_count FROM customers GROUP BY snum HAVING COU
 
 104) Select all salespeople by name and number who have customers in their city whom they don’t service.
 
-SELECT DISTINCT s.sname, s.snum
-FROM salespeople s
-         JOIN customers c on s.snum != c.snum AND s.city = c.city;
-
+Approach: We can select name and number of salespeople from inner join on salespeople and cusotmer on not having same salespeople’s number but same city.
+Expected Output: sname and snum from salespeople where salespeople city matches to customer.
+Actual Output:
 +--------+------+
 | sname  | snum |
 +--------+------+
@@ -1675,19 +1476,10 @@ FROM salespeople s
 
 105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times?
 
-SELECT (
-SELECT SUM(amt) as total_amount_by_ROM_LON
-FROM orders
-WHERE cnum IN (SELECT cnum
-               FROM customers
-               WHERE city IN ('Rome', 'London')))
-AS total_amount_by_cust_in_ROM_LON,
-
-(SELECT SUM(total_comm) * 5 AS 5X_comm
-FROM (SELECT SUM((orders.amt / 100) * salespeople.comm) AS total_comm FROM orders,salespeople
-WHERE salespeople.snum = orders.snum AND city IN ('London', 'New York') GROUP BY orders.snum)
-AS total_comm_sp ) AS total_comm_by_sp_in_LON_NY;
-
+Approach: We will use subquery to get the customer number city Rome and London then sum amount of only those orders where the customer number matches.
+          Similarly for London and New York calculate the commission and multiply it by 5. Select the amount from both group of cities.
+Expected Output: Yes, we can see the total of both groups of cities. i.e amt_in_rome_london comm_in_london_newyork.
+Actual Output:
 +---------------------------------+----------------------------+
 | total_amount_by_cust_in_ROM_LON | total_comm_by_sp_in_LON_NY |
 +---------------------------------+----------------------------+
@@ -1696,14 +1488,9 @@ AS total_comm_sp ) AS total_comm_by_sp_in_LON_NY;
 
 106) Which are the date,order number, amt and city for each salesperson (by name) for the maximum order he has obtained?
 
-SELECT o.odate, o.onum, o.amt, s.city, s.sname
-FROM orders o
-         JOIN salespeople s ON o.snum = s.snum
-WHERE (s.snum, o.amt) IN (SELECT snum, MAX(amt)
-                          FROM orders
-                          GROUP BY snum)
-ORDER BY s.sname;
-
+Approach: We will select date,order number, amt and city from inner joined salespeople and orders table on salespeople number and apply the condition for maximum amt by each salespeople using group by.
+Expected Output: odate, onum, amt, city, and sname from order and salespeople table where the salespeople has maximum order amount.
+Actual Output:
 +------------+------+---------+-----------+---------+
 | odate      | onum | amt     | city      | sname   |
 +------------+------+---------+-----------+---------+
@@ -1714,15 +1501,13 @@ ORDER BY s.sname;
 | 1990-03-10 | 3005 | 5160.45 | SanJose   | Serres  |
 +------------+------+---------+-----------+---------+
 
-
 107) Which salesperson is having lowest commission?
-SELECT snum, sname, comm
-FROM salespeople
-ORDER BY comm ASC LIMIT 1;
-
+Approach: We will select salespeople number, name, and commission and use order by clause and limit on commission column of the salespeople table.
+Expected Output: snum, sname, and comm column from salespeople and tuples with minimum commission.
+Actual Output:
 +------+---------+------+
 | snum | sname   | comm |
 +------+---------+------+
 | 1003 | AxelRod |   10 |
 +------+---------+------+
-----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
