@@ -63,40 +63,61 @@ public class App {
         String key;
 
         // read words file and add to wordCount map
-        BufferedReader brwords = new BufferedReader(new FileReader(words));
 
-        System.out.println("Words:");
+        try {
+            BufferedReader brwords = new BufferedReader(new FileReader(words));
 
-        while ((key = brwords.readLine()) != null) {
-            System.out.println(key + " ");
-            wordCount.put(key, 0);
+            System.out.println("Words:");
 
-        }
-        System.out.println();
-        // read urls file and scrape each url
-        BufferedReader brurls = new BufferedReader(new FileReader(urls));
-        String st;
-        System.out.println("URLS:");
-        while ((st = brurls.readLine()) != null) {
-            
-            System.out.println(st);
-
-            // scrape url
-            Document doc = Jsoup.connect(st).get();
-
-            // get text from body
-            String text = doc.body().text();
-
-            // count occurrences of each word in text
-            for (String word : wordCount.keySet()) {
-                wordCount.put(word, wordCount.get(word) + countOccurrences(text, word));
+            while ((key = brwords.readLine()) != null) {
+                System.out.println(key + " ");
+                wordCount.put(key, 0);
             }
+            if (wordCount.size() == 0) {
+                System.out.println("Please check the files. Files are not present or may be empty.");
+                return;
+            }
+            System.out.println();
+        } catch (Exception e) {
+            System.out.println("Error reading words file" + e);
+        }
+
+        // read urls file and scrape each url
+
+        try {
+            BufferedReader brurls = new BufferedReader(new FileReader(urls));
+            String st;
+            System.out.println("URLS:");
+            while ((st = brurls.readLine()) != null) {
+                if (!st.matches(
+                        "^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$")) {
+                    System.out.println("Invalid url:" + st);
+                    return;
+                } else {
+                    System.out.println(st);
+                    // scrape url
+                    Document doc = Jsoup.connect(st).get();
+
+                    // get text from body
+                    String text = doc.body().text();
+
+                    // count occurrences of each word in text
+                    for (String word : wordCount.keySet()) {
+                        wordCount.put(word, wordCount.get(word) + countOccurrences(text, word));
+                    }
+                }
+            }
+            if (brurls.readLine() != null) {
+                System.out.println("Please check the files. Files are not present or may be empty.");
+                return;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error reading urls file" + e);
         }
 
         // sort map by value
         wordCount = sortByValue(wordCount);
-
-
 
         System.out.println();
         System.out.println("Word Count:");
