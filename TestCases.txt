@@ -920,7 +920,9 @@ Empty set
 
 54) Write a query that selects all orders save those with zeroes or NULL in the amount file.
 
-=> 
+=> We have to select all zero and NULL from orders
+=> We can simply do that by using where clause
+=> We will have empty set because there is no data in order which have null or zero in amt.
 
 55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
 
@@ -1474,6 +1476,16 @@ Empty set (0.00 sec)
 => Which are 1001, 1002, 1007, 1008
 => Customers with less than 250 rating with cnum 2001, 2002, 2003, 2006, 2007 
 => We want salespeople so there will be 4 rows in resulting table if we apply group by snum
+
++------+--------+---------+------+--------+
+| snum | sname  | city    | comm | rating |
++------+--------+---------+------+--------+
+| 1001 | Peel   | London  |   12 |    100 |
+| 1001 | Peel   | London  |   12 |    100 |
+| 1002 | Serres | SanJose |   13 |    200 |
++------+--------+---------+------+--------+
+
+=> Otherwise if we consider the given 0.11 as whole percentage then
 
 +------+---------+----------+------+------+----------+--------+
 | snum | sname   | city     | comm | cnum | cname    | rating |
