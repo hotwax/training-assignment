@@ -1,0 +1,80 @@
+Unit testing of AccountOverdrawDemo and AccountOverdrawSafeDemo When two Users have Withdrawn from same bank account.
+
+Test case 1 : withdraw Using AccountOverdrawDemo
+Output -
+User1 is withdrawing 100
+User2 is withdrawing 100
+User1 withdrew 100
+balance Left 900
+User1 is withdrawing 100
+User2 withdrew 100
+balance Left 800
+User2 is withdrawing 100
+User1 withdrew 100
+balance Left 700        
+User1 is withdrawing 100
+User2 withdrew 100      
+balance Left 600        
+User2 is withdrawing 100
+User1 withdrew 100
+balance Left 500        
+User1 is withdrawing 100
+User2 withdrew 100      
+balance Left 400        
+User2 is withdrawing 100
+User1 withdrew 100
+balance Left 300        
+User1 is withdrawing 100
+User2 withdrew 100      
+balance Left 200        
+User2 is withdrawing 100
+User1 withdrew 100
+balance Left 100        
+User1 is withdrawing 100
+User2 withdrew 100
+balance Left 0    
+Insufficient funds
+User1 withdrew 100
+balance Left -100
+Insufficient funds
+Total Amount Withdrawn: 1100
+
+In this program both thread 1 and thread 2 are running concurrently.
+And there are possibilities that before new balance was displayed new withdraw has been made.
+To overcome this we have AccountOverdrawSafeDemo.
+
+Test case 2 : withdraw Using AccountOverdrawSafeDemo
+Output -
+User1 is withdrawing 100
+User1 withdrew 100
+balance Left 900        
+User2 is withdrawing 100
+User2 withdrew 100      
+balance Left 800        
+User1 is withdrawing 100
+User1 withdrew 100      
+balance Left 700        
+User2 is withdrawing 100
+User2 withdrew 100
+balance Left 600
+User1 is withdrawing 100
+User1 withdrew 100
+balance Left 500
+User2 is withdrawing 100
+User2 withdrew 100
+balance Left 400
+User1 is withdrawing 100
+User1 withdrew 100
+balance Left 300
+User2 is withdrawing 100
+User2 withdrew 100
+balance Left 200
+User1 is withdrawing 100
+User1 withdrew 100
+balance Left 100
+User2 is withdrawing 100
+User2 withdrew 100
+balance Left 0
+Insufficient funds
+Insufficient funds
+Total Amount Withdrawn: 1000

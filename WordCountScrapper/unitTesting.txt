@@ -4,8 +4,8 @@ TestCase 1: (if there is Multiple URL)
 
 input : 
 url.txt =  https://www.britannica.com/art/short-story
-              https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
-              https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
+           https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
+           https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
 words.txt =   [short story are population Students NCERT REMOVE LINE YOU]
 
 output: 
@@ -63,7 +63,7 @@ input :
 words.txt =  [ short story are population Students NCERT REMOVE LINE YOU ]
 output: Url.txt File Not Found
 
-TestCase 6: (if url.txt file is missing) 
+TestCase 6: (if words.txt file is missing) 
 input : 
 url.txt =  https://www.britannica.com/art/short-story
 output: Words.txt File Not Found
@@ -102,7 +102,7 @@ words.txt =  [ short story are population Students NCERT REMOVE LINE YOU ]
 output:
 No Internet Connection
 
-TestCase 10 (if there are Duplicate in Words File)
+TestCase 10 (if there are Duplicate words in File)
 input : 
 url.txt =   https://www.britannica.com/art/short-story
               https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
@@ -128,6 +128,47 @@ are 27
 YOU 5
 NCERT 4
 LINE 3
+
+TestCase 11 (if there are Duplicate Urls in  File)
+input : 
+url.txt =   https://www.britannica.com/art/short-story
+               https://www.britannica.com/art/short-story
+               https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
+               https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
+words.txt =  [short story are YOU population Students NCERT REMOVE LINE]
+output:
+https://www.britannica.com/art/short-story
+short 36
+story 28
+are 14
+https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
+are 11
+NCERT 4
+YOU 1
+https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
+YOU 4
+LINE 3
+are 2
+Total occurrences for each word:
+short 36
+story 28
+are 27
+YOU 5
+NCERT 4
+LINE 3
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
