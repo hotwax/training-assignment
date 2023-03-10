@@ -35,11 +35,17 @@ public class CountWords {
         ArrayList<HashMap<String, Integer>> wordsFreq = new ArrayList<>();
 
         //====================================================================================================================
+<<<<<<< HEAD
         // Get the current working directory
         String homeDir = System.getProperty("user.dir");
         //taking input urls from urls.txt file.
         //created an object of File class to perform operations on input files.
         File inputFile = new File(homeDir+"\\word_count\\urls.txt");
+=======
+        //taking input urls from urls.txt file.
+        //created an object of File class to perform operations on input files.
+        File inputFile = new File("E:\\Work\\java work\\Module2\\src\\word_count\\urls.txt");
+>>>>>>> 87257c80c95c1a37785f61af56691f074dc00966
 
         //passing the object of File in FileReaded to read file and then pass the object of FileReader to BufferedReader
         BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
@@ -61,7 +67,11 @@ public class CountWords {
         //====================================================================================================================
         //taking input words from words.url.
         //recreate File object to perform operations on words.txt file.
+<<<<<<< HEAD
         inputFile = new File(homeDir+"\\word_count\\words.txt");
+=======
+        inputFile = new File("E:\\Work\\java work\\Module2\\src\\word_count\\words.txt");
+>>>>>>> 87257c80c95c1a37785f61af56691f074dc00966
 
         //recreate buffered reader object to read content of words.txt file.
         bufferedReader = new BufferedReader(new FileReader(inputFile));

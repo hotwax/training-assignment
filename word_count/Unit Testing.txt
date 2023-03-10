@@ -1,0 +1,231 @@
+Test Cases WordCount program.
+
+============================================================================
+
+test 1:
+urls:-
+https://www.hotwaxsystems.com/
+https://en.wikipedia.org/wiki/JavaScript
+https://www.geeksforgeeks.org/java/
+
+words:-
+hotwax
+the
+is
+
+Output:-
+https://www.hotwaxsystems.com/
+the - 23
+is - 9
+hotwax - 7
+
+https://en.wikipedia.org/wiki/JavaScript
+the - 393
+is - 99
+hotwax - 0
+
+https://www.geeksforgeeks.org/java/
+the - 15
+is - 9
+hotwax - 0
+
+Merged Results for all URLs
+the - 431
+is - 117
+hotwax - 7
+
+============================================================================
+
+test 2:
+urls:-
+https://www.hotwaxsystems.com/
+https://www.hotwax.co/
+
+words:-
+hotwax
+the
+is
+commerce
+java
+
+Output:-
+https://www.hotwaxsystems.com/
+the - 23
+is - 9
+hotwax - 7
+
+https://www.hotwax.co/
+hotwax - 5
+commerce - 2
+the - 0
+
+Merged Results for all URLs
+the - 23
+hotwax - 12
+is - 9
+commerce - 4
+java - 0
+
+============================================================================
+
+test 3:
+urls:-
+https://www.hotwaxsystems.com/
+https://www.hotwax.co/
+
+words:-
+hotwax
+the
+is
+commerce
+java
+javascript
+function
+their
+how
+
+Output:-
+https://www.hotwaxsystems.com/
+the - 23
+is - 9
+hotwax - 7
+
+https://www.hotwax.co/
+hotwax - 5
+commerce - 2
+how - 2
+
+https://www.scaler.com/topics/javascript-multithreading/
+the - 145
+is - 49
+javascript - 13
+
+https://en.wikipedia.org/wiki/JavaScript
+the - 393
+javascript - 101
+is - 99
+
+https://jestjs.io/docs/ecmascript-modules
+the - 21
+is - 5
+function - 1
+
+https://www.syncfusion.com/blogs/post/pure-and-impure-functions-in-javascript-a-complete-guide.aspx
+the - 62
+javascript - 23
+is - 16
+
+Merged Results for all URLs
+the - 644
+is - 178
+javascript - 137
+function - 56
+their - 19
+how - 14
+hotwax - 12
+java - 11
+commerce - 4
+
+============================================================================
+
+test 4: providing 0 words
+urls:-
+https://www.hotwaxsystems.com/
+https://www.hotwax.co/
+
+words:-
+
+Output:-
+
+https://www.hotwaxsystems.com/
+ - 0
+
+https://www.hotwax.co/
+ - 0
+
+https://www.scaler.com/topics/javascript-multithreading/
+ - 0
+
+https://en.wikipedia.org/wiki/JavaScript
+ - 0
+
+https://jestjs.io/docs/ecmascript-modules
+ - 0
+
+https://www.syncfusion.com/blogs/post/pure-and-impure-functions-in-javascript-a-complete-guide.aspx
+ - 0
+
+Merged Results for all URLs
+ - 0
+
+============================================================================
+
+test 5: providing 0 urls
+urls:-
+
+words:-
+hotwax
+the
+is
+commerce
+java
+javascript
+function
+their
+how
+
+Output:-
+
+URL NOT FOUND !!!
+
+Merged Results for all URLs
+
+============================================================================
+
+test 6: providing wrong urls
+urls:-
+https://dghashudhdhjsjdil/
+https://www.hotwaxsystems.com/
+https://www.hotwax.co/
+
+words:-
+hotwax
+the
+is
+commerce
+java
+javascript
+function
+their
+how
+
+
+Output:-
+wrongURL
+URL NOT FOUND !!!
+
+https://dghashudhdhjsjdil/
+URL NOT FOUND !!!
+
+https://www.hotwaxsystems.com/
+the - 23
+is - 9
+hotwax - 7
+
+https://www.hotwax.co/
+hotwax - 5
+commerce - 2
+how - 2
+
+Merged Results for all URLs
+the - 23
+hotwax - 12
+is - 9
+commerce - 4
+how - 3
+their - 2
+java - 0
+javascript - 0
+function - 0
+
+============================================================================

@@ -1,0 +1,131 @@
+Test Cases for add function
+
+============================================================================
+
+test 1: providing each fields correctly.
+1
+Dhruv Singh
+singhdhruv861@gmail.com
+21
+12/01/2002
+
+Output:-
+There are 7 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 1
+Enter employee name: Dhruv Singh
+Enter employee email: singhdhruv861@gmail.com
+Enter age:1
+Enter employee date of birth (DD/MM/YYYY): 12/01/2002
+
+Employee added successfully.
+
+============================================================================
+
+test 2: providing employee with email already present in the file.
+1
+Dhruv Singh
+singhdhruv861@gmail.com
+21
+12/01/2002
+
+output:-
+There are 9 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 1
+Enter employee name: Dhruv Singh
+Enter employee email: singhdhruv861@gmail.com
+Enter age:21
+Enter employee date of birth (DD/MM/YYYY): 12/01/2002
+
+Employee already present with same Email ID.
+
+============================================================================
+
+test 3: providing wrong employee name.
+1
+Dhruv124
+singhdhruv861@gmail.com
+21
+12/01/2002
+
+output:-
+There are 8 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 1
+Enter employee name: Dhruv124
+Invalid name. ENTER AGAIN:
+
+============================================================================
+
+test 4:  providing wrong email id.
+1
+Dhruv Singh
+singhdhruv861
+21
+12/01/2002
+
+output:-
+There are 9 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 1
+Enter employee name: Dhruv Singh
+Enter employee email: singhdhruv861
+Invalid email. ENTER AGAIN:
+
+============================================================================
+
+test 5: providing wrong employee age.(it should be numeric and between 1 to 120)
+1
+Dhruv Singh
+ds@gmail.com
+200
+12/01/2002
+
+output:-
+There are 9 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 1
+Enter employee name: Dhruv Singh
+Enter employee email: ds861@gmail.com
+Enter age: 200
+Invalid age. ENTER AGAIN:
+
+============================================================================
+
+test 6: providing wrong date of birth.
+1
+Dhruv Singh
+ds@gmail.com
+21
+12/17/2002
+
+output:-
+There are 8 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 1
+Enter employee name: Dhruv Singhj
+Enter employee email: ds@gmail.com
+Enter age:21
+Enter employee date of birth (DD/MM/YYYY): 12/17/2002
+Invalid date of birth. ENTER AGAIN:
+
+============================================================================

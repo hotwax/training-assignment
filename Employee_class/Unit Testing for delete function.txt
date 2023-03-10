@@ -1,0 +1,37 @@
+Test Cases for delete function.
+
+============================================================================
+
+test 1: providing email which are present in the file.
+2
+sana.khan@gmail.com
+
+Output:-
+There are 8 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 2
+Enter employee Email ID to delete: sana.khan@gmail.com
+
+Employee deleted successfully.
+
+============================================================================
+
+test 2: providing email which are not present in the file.
+2
+mailnotinfile@gmail.com
+
+output:-
+There are 7 employees in the system.
+1. Add employee
+2. Delete employee
+3. Search employees
+4. Exit
+Enter your choice: 2
+Enter employee Email ID to delete: mailnotinfile@gmail.com
+
+Employee not found.
+
+============================================================================
