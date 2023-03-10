@@ -38,13 +38,15 @@ public class Linear_Probing {
         int offset = 1;
         //hash finctoion(prob)=(hash(key)+i)%m  {i=1,2,....,m}
         //if probe location is already filled, then check for next location untill find an empty slot or same key to replace if existed
+        int count=0;
         while ((arr[probe] != null && arr[probe].key != k) && deleted[probe]) {
             probe = (probe + offset) % m;
+            count++;
         }
         //if probe is not equal to original hash of key then its a collision
         //if the same key is inseted again with different value then this is not a collision, its updation
         if (probe != hash(k) && (arr[probe] == null || arr[probe].key != k)) {
-            collisions++;
+            collisions+=count;
         }
         arr[probe] = new Pair(k, v);
         deleted[probe] = true;

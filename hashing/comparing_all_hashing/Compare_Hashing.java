@@ -10,7 +10,7 @@ import java.util.Random;
 public class Compare_Hashing {
 
     public static void main(String args[]) {
-        int n = 50005, m = 100001;
+        int n = 5005, m = 10001;
 
         Chaining_HashTable chaining = new Chaining_HashTable(m);
         Linear_Probing linearProbing = new Linear_Probing(n, m);

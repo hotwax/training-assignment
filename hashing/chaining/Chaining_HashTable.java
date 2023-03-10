@@ -27,7 +27,7 @@ public class Chaining_HashTable {
         //summation of size of all linkedList(chains) excluding first element
         for(int i=0;i<arr.length;i++){
               if(arr[i]!=null && arr[i].size()>1){
-                  bucketElements++;
+                  bucketElements+=(arr[i].size()-1);
               }
         }
         return bucketElements;
