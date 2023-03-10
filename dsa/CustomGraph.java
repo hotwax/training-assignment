@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class CustomGraph {
 
@@ -8,6 +9,11 @@ public class CustomGraph {
       Scanner sc = new Scanner(System.in);
       System.out.println("Enter the number of nodes: ");
       int noofnodes = sc.nextInt();
+
+      if (noofnodes == 0) {
+        System.out.println("Please enter a valid (>0) number of nodes");
+        return;
+      }
 
       Graph graph = new Graph();
       graph.makeArray(noofnodes);
@@ -20,6 +26,7 @@ public class CustomGraph {
         System.out.println("Enter 2 to remove edge");
         System.out.println("Enter 3 to apply dfs");
         System.out.println("Enter 4 to apply bfs");
+        System.out.println("Enter 5 to exit");
 
         System.out.println("\nNodes values should be between 1 and " + noofnodes + " both inclusive");
 
@@ -65,15 +72,21 @@ public class CustomGraph {
             System.out.println("-------------------------------------");
             break;
 
-          default:
+          case 5:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
+
+          default:
+            System.out.println("Please enter a valid choice (1,2,3,4,5).");
+            System.out.println("-------------------------------------");
+            break;
         }
 
-        
       }
 
+    } catch (InputMismatchException e) {
+      System.out.println("Please give a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
@@ -165,4 +178,92 @@ class Graph {
 
   }
 
+}
+
+class Queue {
+
+  Queue() {
+
+  }
+
+  Node head, tail;
+  int size;
+
+  boolean isEmpty() {
+    if (size == 0)
+      System.out.println("Queue is empty. Please enter 1 to add a number to queue.");
+    return size == 0;
+  }
+
+  void add(int val) {
+    Node temp = new Node(); // a temporary node
+    temp.data = val;
+
+    if (size == 0) {
+      head = tail = temp;
+    } else {
+      tail.next = temp;
+      tail = temp;
+    }
+
+    size++;
+  }
+
+  int remove() {
+    if (size == 0) {
+      System.out.println("List is empty");
+      return -1;
+    } else if (size == 1) {
+      int headData = head.data;
+      head = tail = null;
+      size = 0;
+      return headData;
+    } else {
+      int headData = head.data;
+      head = head.next;
+      size--;
+      return headData;
+    }
+  }
+
+  int peek() {
+    if (size == 0) {
+      System.out.println("List is empty");
+      return -1;
+    } else {
+      return head.data;
+    }
+  }
+
+  int search(int val) {
+    Node temp = head;
+
+    int idx = 0; // index
+    while (temp != null) {
+      if (temp.data == val)
+        return idx;
+      temp = temp.next;
+      idx++;
+    }
+
+    return -1;
+  }
+
+  void display(Node node) {
+    if (node == null)
+      return;
+
+    System.out.print(node.data + " ");
+    display(node.next);
+  }
+
+  int size() {
+    return size;
+  }
+
+}
+
+class Node {
+  int data;
+  Node next;
 }
