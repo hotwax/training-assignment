@@ -1,0 +1,64 @@
+
+Testcases for the serialization and deserialization program.
+
+==============================================================================
+
+1. program successfully writes to the file:
+
+Input: student1, student2, student3, and student4 objects
+
+Output: Serialized data is saved in .ser file in the folder.
+
+==============================================================================
+
+2. file is created in the expected location:
+
+Input: student1, student2, student3, and student4 objects
+
+Output: A file named output1.ser is created in the Serialization/src directory.
+
+==============================================================================
+
+3. program handles exceptions when it is not able to write to the file:
+
+Input: null
+
+Output: Not able to write in the file.
+
+==============================================================================
+
+4. program successfully reads from the file:
+
+Input: null
+
+Output: Deserialized Object Data.
+
+        Name: Ram
+        Date of Birth: 12/09/1998
+        City: Delhi
+        State: Delhi
+        Pincode: 110001
+        Country: India
+
+        Name: Shyam
+        Date of Birth: 24/12/1970
+        City: Indore
+        State: Madhya Pradesh
+        Pincode: 110001
+        Country: India
+
+        Name: Adarsht
+        Date of Birth: 20/06/2001
+        City: Mumbai
+        State: Maharashtra
+        Pincode: 110001
+        Country: India
+
+        Name: Hardik
+        Date of Birth: 07/05/2004
+        City: Pilani
+        State: Goa
+        Pincode: 110001
+        Country: India
+
+==============================================================================

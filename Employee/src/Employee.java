@@ -140,8 +140,10 @@ public class Employee {
                 System.out.println("Email: " + employee.email);
                 System.out.println("Date of birth: " + employee.dob);
                 System.out.println();
+                return;
             }
         }
+        System.out.println("Employee data does not exists.");
     }
 }
 
@@ -166,6 +168,11 @@ class ManageEmployee{
             }
         }catch (NumberFormatException | FileNotFoundException exc){  
             System.out.println("Not able to read the file. Exceptiion occured: " + exc);
+        }
+
+        if(employee.employeeData.size() < 1 ){
+            System.out.println("No data found in the file.");
+            return;
         }
 
         while (flag) {
@@ -218,6 +225,8 @@ class ManageEmployee{
                     case 5:    
                         flag = false;
                         break;
+                    default:
+                        System.out.println("Wrong choice.");
                 }
             }catch (InputMismatchException e){
                 System.out.println("Wrong input.");
@@ -225,3 +234,6 @@ class ManageEmployee{
         }
     }
 }
+
+
+

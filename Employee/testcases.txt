@@ -1,0 +1,129 @@
+
+Testcases for Employee program
+
+================================================================================================
+
+Testcase 1: Add an employee data in the file.
+
+Input: 3, Harish, 23, harish@harish.com, 12/12/2112
+
+Output: Employee data added successfully.
+
+================================================================================================
+
+Testcase 2: Delete an employe data from the file.
+
+Input: 3
+
+Output: Employee data deleted successfully.
+
+================================================================================================
+
+Testcase 3: Search an employee data.
+
+Input: 3
+
+Output: Employee data found.
+
+================================================================================================
+
+Testcase 4: Show data of all employees
+
+Input: null
+
+Output: 
+
+Id: 1
+Name: Divyanshu
+Age: 21
+Email: divyanshu@hotwax.com
+Date of birth: 12/10/2004
+
+Id: 3
+Name: Harish
+Age: 23
+Email: harish@harish.com
+Date of birth: 12/12/2112
+
+================================================================================================
+
+Testcase 5: Search for an employee whose data is not present in the file.
+
+Input: 10
+
+Output: Employee data does not exists.
+
+================================================================================================
+
+Testcase 6: Delete an employee whose data is not present in the file.
+
+Input: 10
+
+Output: Employee data does not exists.
+
+================================================================================================
+
+Testcase 7: Add an employee whose data is already present in the file.
+
+Input: 3, Harish, 23, harish@harish.com, 12/12/2112
+
+Output: Employee data already exists.
+
+================================================================================================
+
+Testcase 8: Show data when file is empty.
+
+Input:  null
+
+Output: No data found in the file.
+
+================================================================================================   
+
+Testcase 9: Search for an employee when file is empty.
+
+Input:  null
+
+Output: No data found in the file.
+
+================================================================================================
+
+Testcase 10: Delete an employee when file is empty.
+
+Input:  null
+
+Output: No data found in the file.
+
+================================================================================================
+
+Testcase 11: Wrong format input form user.
+
+Input: 3, Harish, @*&*#,
+
+Output: Wrong input.
+
+================================================================================================
+
+Testcase 12: Not able to read file.
+
+Input: null
+
+Output: Not able to read the file. Exceptiion occured: 
+
+================================================================================================
+
+Testcase 13: Not able to write in file.
+
+Input: null
+
+Output: Not able to write in the file.
+
+================================================================================================
+
+Testcase 14: User entered wrong choice.
+
+Input: 10
+
+Output: Wrong choice.
+
+================================================================================================
+
