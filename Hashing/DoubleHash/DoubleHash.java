@@ -119,7 +119,7 @@ class DoubleHash {
     return collision;
   }
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
     int value1, value2;
     DoubleHash c = new DoubleHash(5);

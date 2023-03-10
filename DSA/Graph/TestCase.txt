@@ -1,0 +1,88 @@
+Menu looks like this -
+===========================
+*****Enter your choice*****
+1. Create Adjancy matrix
+2. Print Adjancy matrix
+3. Traversing DFS
+4. Exit
+===========================
+
+1) Test cases asking for matrix dimensions
+
+Input & output:
+
+Enter number of vertices: 5
+Enter number of edges: 4
+
+
+2) Test case for creating an adjacency matrix:
+
+Input & output:
+
+1
+enter starting vertex
+0
+enter ending vertex
+1
+==================
+enter starting vertex
+0
+enter ending vertex
+2
+==================
+enter starting vertex
+0
+enter ending vertex
+3
+==================
+enter starting vertex
+0
+enter ending vertex
+4
+==================
+Done
+Menu display here
+
+3) Test case for printing the adjacency matrix:
+
+Input & output: 
+
+Enter your choice: 2
+
+0  1  1  1  1
+1  0  0  0  0
+1  0  0  0  0
+1  0  0  0  0
+1  0  0  0  0
+Menu display here
+
+4) Test case for traversing the graph using DFS:
+
+Input & output: 
+
+Enter your choice: 3
+
+0 1 2 3 4
+Menu display here
+
+5) Test case if we give less vertex and try to store more data
+
+Expected and actual ouput:
+It will want only till the given dimension is filled.
+
+Menu display here
+
+6) Test case if we give more vertex and try to store less data
+
+Expected and actual ouput:
+It will want untill the given dimension are filled.
+
+Menu display here
+
+7) Test case for exiting the program:
+
+Input & output: 
+
+Enter your choice: 4
+Thank you
+Terminated the program

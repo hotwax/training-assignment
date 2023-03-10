@@ -1,0 +1,141 @@
+Menu looks like this -
+===========================
+*****Enter your choice*****
+1.Insert at beginning
+2.Insert at ending
+3.Insert at specific position
+4.Deletion at beginning
+5.Deletion at ending
+6.Deletion at specific position
+7.Update
+8.Search
+9.ShowAll
+10. Sort
+11.Exit
+===========================
+
+1) Test Case for Insertion at beginning
+Input: 1
+Enter a number
+10
+
+Expected & Actual Output :
+Done
+List is :
+10  20  30  
+
+2) Test Case for Insertion at ending
+Input:
+2
+Enter a number
+40
+
+Output: 
+Done
+List is :
+10  20  30  40
+
+3) Insert at specific position
+Input: 
+3
+Enter a number
+555
+Enter a position
+2
+
+Output: 
+Done
+List is :
+10  555  20  30  40
+
+4) Test Case for Deletion at beginning
+Input: 
+4
+Output: 
+Done
+List is :
+555  20  30  40
+
+5) Test Case for Deletion at end
+Input: 
+5
+Output: 
+Done
+List is :
+555  20  30
+
+6) Test Case for Deletion at specific position
+Input: 
+6
+Enter a position
+2
+Output:
+Done
+List is :
+555  30
+
+7) Test Case for Searching for an element that is present in the linked list
+Input: 
+8
+Enter a number
+111
+
+Output:
+true
+
+8) Test Case for Searching for an element that is not present in the linked list
+Input: 
+8
+Enter a number
+12
+
+Output: 
+false
+
+9) Test Case for Updating an existing element in the linked list
+Input: 
+7
+Enter no. to be replaced
+555
+Enter new number
+111
+
+Output: 
+Done
+List is :
+111  30
+
+10) Test Case for Updating a non-existing element in the linked list
+Input: 
+7
+Enter no. to be replaced
+10
+Enter new number
+111
+
+Output: 
+Data not found
+List is :
+111  30
+
+11) Test Case for Sorting an unsorted linked list
+Input: 9
+
+Output:
+30  111
+
+13) Test Case for showall 
+Input:
+9
+
+Output:
+111 30
+
+14) Test case for exit 
+
+Input:
+11
+
+Ouput:
+Thank you 
+terminating program

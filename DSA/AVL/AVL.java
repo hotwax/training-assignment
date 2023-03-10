@@ -245,7 +245,7 @@ class AVL {
 
 }
 
-class Demo {
+class Main {
   public static void main(String[] args) {
     AVL tree = new AVL();
     int input1, input2;

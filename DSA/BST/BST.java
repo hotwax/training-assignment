@@ -93,19 +93,13 @@ class BST {
     else return false;
   }
 
-  void update(int pre, int nw) // update value of a node
-  {
-    delete(pre);
-    insert(nw);
-  }
-
   void showAll() //to display value
   {
     inOrder(root);
     System.out.println();
   }
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
     BST tree = new BST();
     int input1, input2;
@@ -117,8 +111,7 @@ class Demo {
         System.out.println("2.Deletion");
         System.out.println("3.showAll");
         System.out.println("4.Search");
-        System.out.println("5.Update");
-        System.out.println("6.Exit");
+        System.out.println("5.Exit");
         System.out.println("===========================");
         Scanner sc = new Scanner(System.in);
 		try {
@@ -128,13 +121,16 @@ class Demo {
           System.out.println("Enter a number ");
           input1 = sc.nextInt();
           tree.insert(input1);
-          System.out.println("Done ");
+          System.out.println("Done \nElements: ");
+		  tree.showAll();
           break;
 
         case 2:
           System.out.println("Enter a number ");
           input1 = sc.nextInt();
           tree.delete(input1);
+		  System.out.println("Elements: ");
+		  tree.showAll();
           break;
 
         case 3:
@@ -148,14 +144,6 @@ class Demo {
           break;
 
         case 5:
-          System.out.println("Enter no. to be replaced ");
-          input1 = sc.nextInt();
-          System.out.println("Enter a number");
-          input2 = sc.nextInt();
-          tree.update(input1, input2);
-          break;
-
-        case 6:
           System.out.println("Thank you");
           System.exit(0);
           break;

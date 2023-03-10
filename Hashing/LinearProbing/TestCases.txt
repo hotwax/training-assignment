@@ -1,0 +1,86 @@
+Menu
+==========================
+*****Enter your choice*****
+1.Put / Update
+2.Remove
+3.ShowAll
+4.Search
+5.Get collision
+6.Time
+7.Exit
+==========================
+
+Test Case for Insertion:
+
+Input:
+1
+Enter key
+1
+Enter value
+10
+
+Actual & expected output 
+Done
+Display menu here
+
+Test Case for Updating:
+
+Input:
+1
+Enter key: 
+1
+Enter value:
+100
+
+Actual & expected output: 
+Done
+Display menu here
+
+Test Case for Removal:
+
+Input:
+2
+Enter key
+1
+
+Actual & expected output:
+Done
+Display menu here
+
+Test Case for Searching:
+
+Input:
+4
+Enter key
+20
+
+Actual & expected output:
+key=20     Value=null
+Display menu here
+
+Input:
+4
+Enter key
+1
+
+Actual & expected output:
+key=1     Value=100
+Display menu here
+
+Test Case for Collision Count:
+
+Input:
+5
+
+Actual & expected output:
+No of collision : 10
+Display menu here
+
+Test Case for Time Calculation:
+
+Input:
+6
+
+Actual & expected output:
+Time in mili seconds 299835
+Display menu here

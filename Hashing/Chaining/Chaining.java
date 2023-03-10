@@ -61,7 +61,7 @@ class Chaining {
     }
     while (end.next != null && end.next.key != val)
       end = end.next;
-    if (end.next == null) {
+    if (end!=null && end.next == null) {
       System.out.println("Element not found");
       return;
     }
@@ -123,7 +123,7 @@ class Chaining {
   }
 }
 
-class Demo {
+class Main {
   public static void main(String[] args) {
     int value1, value2;
     Chaining chain = new Chaining(5);

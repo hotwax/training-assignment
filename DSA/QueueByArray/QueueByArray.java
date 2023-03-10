@@ -84,7 +84,7 @@ class QueueByArray {
   }
 }
 
-class Demo {
+class Main {
   public static void main(String[] args) {
     QueueByArray queue = new QueueByArray();
     int input1, input2;
@@ -107,11 +107,14 @@ class Demo {
           System.out.println("Enter a number ");
           input1 = sc.nextInt();
           queue.enqueue(input1);
-          System.out.println("Done ");
+          System.out.println("Done \nElements are :");
+		  queue.showAll();
           break;
 
         case 2:
           System.out.println("Element " + queue.dequeue());
+		  System.out.println("Queue :");
+		  queue.showAll();
           break;
 
         case 3:

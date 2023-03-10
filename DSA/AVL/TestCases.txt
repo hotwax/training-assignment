@@ -1,0 +1,98 @@
+Menu looks like :
+
+===========================
+*****Enter your choice*****
+1.Insert
+2.Deletion
+3.showAll
+4.Search
+5.Sort
+6.Update
+7.Exit
+===========================
+
+1) Insert values into the AVL tree
+
+Input & output:
+1
+Enter a number
+10
+Done
+Display the menu again
+
+Expected output:
+We will have to add elements to avl tree one by one
+
+2) Delete values from the AVL tree
+
+Input & output:
+2
+Enter a number
+20
+Done
+Display the menu again
+
+
+Expected output:
+It will delete the particular given number
+
+3) To display all elements present in a AVL tree
+
+Input & output:
+3
+Enter a number
+40 30 20 10
+Done
+Display the menu again
+
+
+Expected output:
+It will display all elements which are present in AVL tree
+
+4) Search for a value which is present in the AVL tree
+
+Input & output:
+4
+Enter a number
+10
+Element present : true
+Display the menu again
+
+Expected output:
+If value is present it return true
+
+5) Search for a value which is not present in the AVL tree
+
+Input & output:
+4
+Enter a number
+90
+Element present : false
+Display the menu again
+
+Expected output:
+If value is not present it return false
+
+6) Display the AVL tree in sorted order
+
+Input & output:
+5
+10 20 30 80
+Display the menu again
+
+Expected output:
+It will display all values in sorted order
+
+7) Exit the program
+
+Input & output:
+5
+Thank you
+Terimates the program 
+
+8) If user enters invalid choice
+
+Input & output:
+xxxx
+Invalid 
+Display menu again

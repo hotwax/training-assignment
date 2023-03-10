@@ -64,7 +64,7 @@ class StackByList {
     return false;
   }
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
     StackByList top = new StackByList();
     int input1, input2;

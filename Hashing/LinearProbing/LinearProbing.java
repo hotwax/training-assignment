@@ -84,7 +84,7 @@ class LinearProbing {
     System.out.println();
   }
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
     int value1, value2;
     LinearProbing linear = new LinearProbing(10);

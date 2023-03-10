@@ -85,7 +85,7 @@ class Quadratic {
   }
 }
 
-class Demo {
+class Main {
   public static void main(String[] args) {
     int value1, value2;
     Quadratic quad = new Quadratic(10);

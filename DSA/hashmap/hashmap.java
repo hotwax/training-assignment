@@ -127,7 +127,7 @@ class CustomHashMap<K,V> {
   }
 }
 
-class Demo {
+class Main {
   public static void main(String[] args) {
     int input1, input2;
     CustomHashMap < Integer, Integer > map = new CustomHashMap < > ();
@@ -151,14 +151,16 @@ class Demo {
           System.out.println("Enter value ");
           input2 = sc.nextInt();
           map.put(input1, input2);
-          System.out.println("Done ");
+          System.out.println("Done \nElements are :");
+		  map.showAll();
           break;
 
         case 2:
           System.out.println("Enter key ");
           input1 = sc.nextInt();
           map.remove(input1);
-          System.out.println("Done ");
+          System.out.println("Done \nElements are :");
+		  map.showAll();
           break;
 
         case 3:

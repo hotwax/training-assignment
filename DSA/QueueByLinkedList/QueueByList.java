@@ -93,7 +93,7 @@ class QueueByList {
       System.out.println("data not found");
   }
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
 	  
     QueueByList queue = new QueueByList();
@@ -118,11 +118,14 @@ class Demo {
           System.out.println("Enter a number ");
           input1 = sc.nextInt();
           queue.enQueue(input1);
-          System.out.println("Done ");
+          System.out.println("Done \nQueue:");
+		  queue.showAll();
           break;
 
         case 2:
           System.out.println("Element " + queue.deQueue());
+		  System.out.println("Queue:");
+		  queue.showAll();
           break;
 
         case 3:
@@ -141,6 +144,8 @@ class Demo {
           System.out.println("Enter a number");
           input2 = sc.nextInt();
           queue.update(input1, input2);
+		  System.out.println("Queue:");
+		  queue.showAll();
           break;
 
         case 6:

@@ -58,7 +58,7 @@ class StackByArray {
   }
   
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
     StackByArray top = new StackByArray();
     int input1, input2;

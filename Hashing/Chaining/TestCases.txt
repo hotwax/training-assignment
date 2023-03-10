@@ -1,0 +1,122 @@
+===========================
+*****Enter your choice*****
+1.Put / Update
+2.Remove
+3.ShowAll
+4.Search
+5.Get collision
+6.Get Time
+7.Exit
+===========================
+
+1) Test Case: Insert a new key-value pair into the hash table
+
+Input:
+Enter key
+1
+Enter value
+10
+
+Actual & Expected Output:
+Done
+Display menu here
+
+2) Test Case: Remove an existing key-value pair from the hash table
+
+Input:
+Enter your choice
+2
+Enter key
+1
+
+Actual & Expected Output:
+Done
+Display menu here
+
+3) Test Case: Try to remove a non-existing key-value pair from the hash table
+
+Input:
+Enter your choice
+2
+Enter key
+1
+
+Actual & Expected Output:
+Element not found
+Display menu here
+
+4) Test Case: Show all the key-value pairs in the hash table
+
+Input:
+Enter your choice
+3
+
+Actual & Expected Output:
+table 2=> { Key = 2, Value = 20}
+table 3=> { Key = 3, Value = 30} { Key = 6, Value = 60}
+table 4=> { Key = 4, Value = 40} { Key = 8, Value = 80}
+Display menu here
+
+5) Test Case: Search the value of an existing key from the hash table
+
+Input:
+Enter your choice
+4
+Enter key
+4
+
+Actual & Expected Output:
+key = 4 Value = 40
+Display menu here
+
+6) Test Case: Search the value of a non-existing key from the hash table
+
+Input:
+Enter your choice
+4
+Enter key
+10
+
+Actual & Expected Output:
+key = 10 Value = null
+Display menu here
+
+7) Test Case: Get the number of collisions in the hash table
+
+Input:
+Enter your choice
+5
+
+Actual & Expected Output:
+No of collision : 2
+Display menu here
+
+8) Test Case: Get the time taken to perform operations on the hash table
+
+Input:
+Enter your choice
+6
+
+Actual & Expected Output:
+Time in mili seconds 290632
+Display menu here
+
+9) Test Case: Invalid input
+
+Input:
+Enter your choice
+9
+
+Actual & Expected Output:
+Invalid
+Display menu here
+
+10) Test Case: Invalid input format
+
+Input:
+Enter your choice
+a
+
+Actual & Expected Output:
+Enter valid option
+Display menu here

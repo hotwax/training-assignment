@@ -1,0 +1,118 @@
+Menu looks like this
+
+===========================
+*****Enter your choice*****
+1.Push
+2.Pop
+3.Peek
+4.Search
+5.isEmpty
+6.ShowAll
+7.Exit
+===========================
+
+1) Push operation
+
+Input: 
+1
+Enter a number
+10
+Expected & Actual Output: 
+Done
+Display menu again
+
+2) Pop operation
+
+Input: 
+2
+Expected & Actual Output:  
+Element 45
+Display menu again
+
+3) Peek operation (if stack is empty)
+
+Input: 
+3
+Expected & Actual Output: 
+Stack is empty
+Element -1
+Display menu again
+
+4) Peek operation (if stack have element )
+
+Input: 
+3
+Expected & Actual Output:  
+Element 20
+Display menu again
+
+5) Search operation
+
+Input: 
+4
+Enter a number
+23
+Expected & Actual Output: 
+Element present : false
+Display menu again
+
+6) Search operation
+
+Input: 
+4
+Enter a number
+20
+Expected & Actual Output:
+Element present : true
+Display menu again
+
+7) isEmpty operation
+
+Input: 
+5
+Expected & Actual Output:
+Stack is empty : false
+Display menu again
+
+8) showAll operation
+
+Input: 
+6 
+Expected & Actual Output:
+20  10
+Display menu again
+
+9) Invalid choice
+
+Input: 
+8 (choice)
+
+Expected & Actual Output:
+"Invalid"
+Display menu again
+
+10) Push operation on full stack
+
+Input: 
+push 1001 times, push 5 (number to push)
+Expected & Actual Output: 
+"Stack is full"
+Display menu again
+
+11) Pop operation on empty stack
+
+Input: 
+2 (choice)
+Expected & Actual Output: 
+"Stack is empty"
+Display menu again
+
+12) Search operation on empty stack
+
+Input:
+4
+Enter a number:
+10
+Expected & Actual Output: 
+Element present : false
+Display menu again

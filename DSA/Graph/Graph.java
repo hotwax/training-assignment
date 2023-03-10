@@ -1,12 +1,12 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-class GrapH {
+class CustomGraph {
   int vertex;
   int edge;
   int[][] graph;
   Scanner sc = new Scanner(System.in);
 
-  GrapH(int vertex, int edge) //constructor to initialize vertex and edges
+  CustomGraph(int vertex, int edge) //constructor to initialize vertex and edges
   {
     this.vertex = vertex;
     this.edge = edge;
@@ -57,7 +57,7 @@ class GrapH {
   }
 
 }
-class Demo {
+class Main {
   public static void main(String ar[]) {
     Scanner sc = new Scanner(System.in);
     try {
@@ -65,7 +65,7 @@ class Demo {
       int vertex = sc.nextInt();
       System.out.println("Enter number of edges");
       int edge = sc.nextInt();
-      GrapH g = new GrapH(vertex, edge);
+      CustomGraph g = new CustomGraph(vertex, edge);
 
       while (true) {
         System.out.println("===========================");

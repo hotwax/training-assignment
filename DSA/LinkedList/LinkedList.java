@@ -197,7 +197,7 @@ class CustomLinkedList {
   }
 
 }
-class Demo {
+class Main {
   public static void main(String[] args) {
     CustomLinkedList start = new CustomLinkedList();
     int value1, value2;
@@ -224,14 +224,16 @@ class Demo {
           System.out.println("Enter a number ");
           value1 = sc.nextInt();
           start.insertAtB(value1);
-          System.out.println("Done ");
+          System.out.println("Done \nList is :");
+		  start.showAll();
           break;
 
         case 2:
           System.out.println("Enter a number ");
           value2 = sc.nextInt();
           start.insertAtE(value2);
-          System.out.println("Done ");
+          System.out.println("Done \nList is :");
+		  start.showAll();
           break;
 
         case 3:
@@ -240,24 +242,28 @@ class Demo {
           System.out.println("Enter a position ");
           value2 = sc.nextInt();
           start.insertAtSP(value1, value2);
-          System.out.println("Done ");
+          System.out.println("Done \nList is :");
+		  start.showAll();
           break;
 
         case 4:
           start.deleteAtB();
-          System.out.println("Done ");
+          System.out.println("Done \nList is :");
+		  start.showAll();
           break;
 
         case 5:
           start.deleteAtE();
-          System.out.println("Done ");
+          System.out.println("Done \nList is :");
+		  start.showAll();
           break;
 
         case 6:
           System.out.println("Enter a position ");
           value2 = sc.nextInt();
           start.deleteAtSP(value2);
-          System.out.println("Done ");
+          System.out.println("Done \nList is :");
+		  start.showAll();
           break;
 
         case 7:
@@ -266,7 +272,8 @@ class Demo {
           System.out.println("Enter new number ");
           value2 = sc.nextInt();
           start.update(value1, value2);
-          System.out.println("Done ");
+          System.out.println("List is :");
+		  start.showAll();
           break;
 
         case 8:
