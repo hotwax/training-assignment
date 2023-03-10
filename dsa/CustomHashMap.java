@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class CustomHashMap {
 
@@ -8,6 +9,11 @@ public class CustomHashMap {
       Scanner sc = new Scanner(System.in);
       System.out.println("Enter the size of map: ");
       int mapSize = sc.nextInt();
+
+      if (mapSize == 0) {
+        System.out.println("Please enter a valid (>0) size.");
+        return;
+      }
 
       HashMap map = new HashMap(mapSize);
 
@@ -19,7 +25,8 @@ public class CustomHashMap {
         System.out.println("Enter 1 to add");
         System.out.println("Enter 2 to remove");
         System.out.println("Enter 3 to get");
-        System.out.println("Enter 4 to check whether a value exists \n");
+        System.out.println("Enter 4 to check whether a key exists");
+        System.out.println("Enter 5 to exit the program");
 
         System.out.println("Note- key is of 'int' data type and value is of 'String' data type.");
 
@@ -29,6 +36,10 @@ public class CustomHashMap {
 
         switch (choice) {
           case 1:
+            if (mapSize == map.size) {
+              System.out.println("map is full");
+              return;
+            }
             System.out.print("Enter the Key: ");
             key = sc.nextInt();
             System.out.print("Enter the value: ");
@@ -52,23 +63,35 @@ public class CustomHashMap {
               System.out.println("Doesn't exists");
             else
               System.out.println(node.value);
+
+            System.out.println("-------------------------------------");
             break;
 
           case 4:
             System.out.print("Enter the Key: ");
             key = sc.nextInt();
-            System.out.println(map.containsKey(key));
+            if (map.containsKey(key))
+              System.out.println("exists");
+            else
+              System.out.println("Doesn't exists");
             System.out.println("-------------------------------------");
             break;
 
-          default:
+          case 5:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
+
+          default:
+            System.out.println("Please enter a valid choice (1,2,3,4,5).");
+            System.out.println("-------------------------------------");
+            break;
         }
 
       }
 
+    } catch (InputMismatchException e) {
+      System.out.println("Please give a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
