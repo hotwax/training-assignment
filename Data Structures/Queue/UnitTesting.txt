@@ -1,0 +1,33 @@
+Case 1 : (Invalid Choice)
+Input: d
+Output:Please Enter Integer Only
+
+Case 2 : (Invalid Element value while Creating new Queue)
+Input : Enter your choice : 0
+        Please Enter the first Element Value: asd
+Output : Please Enter Integer Only
+
+Case 3 : (Invalid Element value while Enqueue new Element)
+Input: Enter your choice : 1
+       Please Enter the Element Value: asd
+Output: Please Enter Integer Only
+
+Case 4 : (Enter choice out of range)
+Input : Enter your choice : 10
+Output : Please Enter Valid Choice
+
+Case 5 : (Displaying Empty Queue)
+Input : Enter your choice : 3
+Output : Queue is empty
+
+Case 6 : (Dequeue from a Empty Queue)
+Input : Enter your choice : 2
+Output : Queue is Empty
+
+Case 7 : (Front in a Empty Queue)
+Input : Enter your choice : 4
+Output : Queue is Empty
+
+case 8 : (Displaying a Empty Queue)
+Input : Enter your choice : 3
+Output : Queue is Empty

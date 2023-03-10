@@ -1,0 +1,33 @@
+Case 1 : (Invalid Choice)
+Input : sd
+Output : Enter Integer Only
+
+Case 2 : (Out of Range input choice)
+Input : 232
+Output : Invalid Choice
+
+Case 3 : (Operation without Creating Graph)
+Input : 1
+Output : Create a Graph First
+
+Case 4 : (Adding a invalid edge)
+Input : Enter your choice : 1
+        Please Enter the Node Value: dgw
+Output : Please Enter Integer Only!!
+
+Case 5 : (Searching a Node which is not present in Tree)
+Input : Enter your choice :5
+        Please Enter the Node Value: 200
+Output : The not is not present in Tree
+
+Case 6 : (Updating the value of a Node which is not present in Tree)
+Input : Enter your choice : 3
+        Please Enter the Node Value: 70
+        Please Enter the new value of the node: 100
+        Output : The Node does not exist in Tree
+
+Case 7 : (Updating the value of a Node with same value as previous)
+Input : Enter your choice : 3
+        Please Enter the Node Value: 10
+        Please Enter the new value of the node: 10
+        Output : The new value is same as the old value

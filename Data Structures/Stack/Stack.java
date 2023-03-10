@@ -80,7 +80,10 @@ import java.util.Scanner;
         }
 
         private static void peek(Node head) {
-            System.out.println("The top element is: " + head.data);
+            if(head == null)
+                System.out.println("Stack is empty");
+            else
+                System.out.println("The top element is: " + head.data);
         }
 
         //  Method to create a new Stack
@@ -99,12 +102,16 @@ import java.util.Scanner;
 //        Method to display the stack
         private static void displayStack(Node head) {
             Node temp = head;
-            System.out.println("The Stack is: ");
-            while (temp != null) {
-                System.out.print(temp.data + " ");
-                temp = temp.next;
+            if(temp == null)
+                System.out.println("Stack is empty");
+            else {
+                System.out.println("The Stack is: ");
+                while (temp != null) {
+                    System.out.print(temp.data + " ");
+                    temp = temp.next;
+                }
+                System.out.println();
             }
-            System.out.println();
         }
         // Method to pop an element from the Stack
         private static Node pop(Node head) {

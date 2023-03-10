@@ -10,13 +10,13 @@ class AVLTree {
         do {
             //  Printing the menu for the user
             System.out.println(" --------- MENU --------- ");
-            System.out.println("Press 0 : Create a New Binary Search Tree");
+            System.out.println("Press 0 : Create a New AVL Tree");
             System.out.println("Press 1 : Insert an element");
             System.out.println("Press 2 : Delete an element");
             System.out.println("Press 3 : Update an element");
-            System.out.println("Press 4 : Traverse the Binary Search Tree");
+            System.out.println("Press 4 : Traverse the AVL Tree");
             System.out.println("Press 5 : Search an element");
-            System.out.println("Press 6 : Sort the Binary Search Tree");
+            System.out.println("Press 6 : Sort the AVL Tree");
             System.out.println("Press 7 : Exit");
             System.out.println("Enter your choice : ");
             try {
@@ -35,7 +35,7 @@ class AVLTree {
                             System.out.print("Please Enter the Node Value: ");
                             root.insert(root, sc.nextInt());
                         } else {
-                            System.out.println("Please create a Binary Search Tree first");
+                            System.out.println("Please create a AVL first");
                         }
                         break;
                     case 2:
@@ -90,7 +90,7 @@ class AVLTree {
                         }
                         break;
                     case 6:
-                        System.out.print("Binary Search Tree Sorted : ");
+                        System.out.print(" Sorted : ");
                         if (root != null) {
                             root.sortAVLTree(root);
                             System.out.println();
@@ -102,7 +102,10 @@ class AVLTree {
                     default:
                         System.out.println("Invalid Input");
                 }
-            } catch (InputMismatchException e) {
+            } catch (NullPointerException e){
+                System.out.println("null pointer exception");
+            }
+            catch (InputMismatchException e) {
                 System.out.println("Enter Integer Only");
             }
         } while (choice != 7);
@@ -123,8 +126,12 @@ class AVLTree {
         }
     // Method to update the element in the AVL Tree
         public void updateElement(TreeNode root, int oldValue, int newValue) {
+            if(oldValue == newValue) {
+                System.out.println("The new value is same as the old value");
+                return;
+            }
             if (root == null) {
-                System.out.println("The Binary Search Tree is empty");
+                System.out.println("The  is empty");
                 return;
             }
             if (searchElement(root, oldValue)) {

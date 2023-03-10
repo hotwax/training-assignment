@@ -176,6 +176,10 @@ public class linkedList {
     //  Method to update a node in the linked list
     static Node deleteNode(Node head,int data){
         Node temp = head;
+        if(temp.next == null){
+            System.out.println("The Linked List will now be empty");
+            return null;
+        }
         while(temp.next != null){
             if(temp.next.data == data){
                 temp.next = temp.next.next;
@@ -188,6 +192,10 @@ public class linkedList {
     }
     // Method of update note in linked list
     static void updateNode(Node head,int data,int newValue){
+        if (data == newValue) {
+            System.out.println("The new value is same as the old value");
+            return;
+        }
         Node temp = head;
         while(temp.next != null){
             if(temp.next.data == data){
