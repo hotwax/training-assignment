@@ -1,0 +1,32 @@
+
+Testcase 1: User entered wrong choice
+
+Output: Please choose a valid option from the menu
+
+Testcase 2: User entered invalid input
+
+Output: Please enter a valid input
+
+Testcase 3: Pushing a value in stack.
+
+Input: 1 then 5
+
+Output: Stack: 5 4 2
+
+Testcase 4: Popping a value from stack.
+
+Input: 2
+
+Output: Stack: 4 2
+
+Testcase 5: Choice to get Peek value.
+
+Input: 3
+
+Output: Peek value: 4
+
+Testcase 6: Popping element from empty stack.
+
+Input: 2
+
+Output: Stack is Empty.

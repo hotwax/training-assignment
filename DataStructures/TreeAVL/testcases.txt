@@ -1,0 +1,54 @@
+
+Testcase 1: User entered wrong choice
+
+Output: Please choose a valid option from the menu
+
+Testcase 2: User entered invalid input
+
+Output: Please enter a valid input
+
+Testcase 3: Inserting a node.
+
+Input: 1 then 7
+
+Output: 
+3 5 7
+
+
+Testcase 4: deleting a node.
+
+Input: 2 then 5
+
+Output: Element deleted successfully
+
+3 7
+
+Testcase 5: User trying to delete a node which is not present in the tree.
+
+Input: 2 then 34
+
+Output: Element not found
+
+Testcase 6: User entered choice for level order traversal.
+
+Input: 3
+
+Output: 12 23 34 54 65 87
+
+Testcase 7: User entered choice for preorder traversal.
+
+Input: 4
+
+Output: 34 23 12 65 54 87
+
+Testcase 8: User entered choice for inorder traversal.
+
+Input: 5
+
+Output: 12 23 54 87 65 34
+
+Testcase 9: User entered choice to search an element.
+
+Input: 6 then 54
+
+Output: Element found

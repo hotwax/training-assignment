@@ -36,9 +36,10 @@ public class Queue {
 
     // dequeue an element from the queue
     public static Queue dequeue(Queue queue) {
-        if (queue.front == null)
+        if (queue.front == null){
+            System.out.println("Queue is empty");
             return queue;
-
+        }
         // Store previous front and move front one node ahead
         queue.front = queue.front.next;
 

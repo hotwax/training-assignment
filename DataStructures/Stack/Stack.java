@@ -36,9 +36,10 @@ public class Stack {
 
     // Method to pop an element from the stack
     public static Stack pop(Stack stack) {
-        if (stack.top == null)
+        if (stack.top == null){
+            System.out.println("Stack is empty");
             return stack;
-
+        }
         Node temp = stack.top;
         stack.top = stack.top.next;
 

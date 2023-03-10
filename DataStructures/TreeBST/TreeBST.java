@@ -101,7 +101,11 @@ public class TreeBST {
                 case 2:
                     System.out.print("Enter the value to be deleted: ");
                     value = sc.nextInt();
-                    delete(tree.root, value);
+                    if(delete(tree.root, value) != null){
+                        System.out.println("Element deleted successfully");
+                    } else {
+                        System.out.println("Element not found");
+                    }
                     break;
                 case 3:
                     flag = false;

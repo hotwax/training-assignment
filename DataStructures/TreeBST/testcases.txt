@@ -1,0 +1,40 @@
+
+Testcase 1: User entered wrong choice
+
+Output: Please choose a valid option from the menu
+
+Testcase 2: User entered invalid input
+
+Output: Please enter a valid input
+
+Testcase 3: Inserting a node.
+
+Input: 1 then 5
+
+Output: 
+2
+5
+
+Testcase 4: deleting a node.
+
+Input: 2 then 5
+
+Output: Element deleted successfully
+
+Testcase 5: User trying to delete a node which is not present in the tree.
+
+Input: 2 then 34
+
+Output: Element not found
+
+Testcase 6: User trying to insert node which is alread present in the tree.
+
+Input: 1 then 5
+
+Output:
+2
+5
+5
+4
+
+

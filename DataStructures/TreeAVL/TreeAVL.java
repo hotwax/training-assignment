@@ -197,6 +197,7 @@ public class TreeAVL {
                         System.out.println("Enter the value to be deleted");
                         int value1 = sc.nextInt();
                         root = delete(root, value1);
+
                         break;
                     case 3:
                         System.out.println("Inorder traversal of the tree is");

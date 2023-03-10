@@ -20,6 +20,7 @@ public class Graph {
         }
         adjMatrix[row][col] = true;
         adjMatrix[col][row] = true;
+        System.out.println("Edge inserted succesfully");
     }
 
     // Remove edges
@@ -30,6 +31,7 @@ public class Graph {
         }
         adjMatrix[row][col] = false;
         adjMatrix[col][row] = false;
+        System.out.println("Edge deleted succesfully");
     }
 
 
