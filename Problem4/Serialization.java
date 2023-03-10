@@ -26,7 +26,7 @@ class Student implements Serializable {
     this.name = name;
     // this.DOB = dateOfBirth; //old format of student class
     this.DOB = new Date("" + dateOfBirth); //new format of student class
-    this.account = account;
+    this.account = a;
   }
 
   public String toString() // to print a meaningful output
@@ -76,8 +76,11 @@ class SerializationTest // A class to serialize
     Student s3 = new Student("BBB", "23/07/2013", a3);
     Address a4 = new Address("Dewas", "MP", 452087, "India");
     Student s4 = new Student("CCC", "14/08/2012", a4);
-
-    ArrayList < Student > li = new ArrayList < > (4); //adding them in a list
+	System.out.println(s1);
+	System.out.println(s2);
+	System.out.println(s3);
+	System.out.println(s4);
+    ArrayList < Student > li = new ArrayList <> (4); //adding them in a list
     li.add(s1);
     li.add(s2);
     li.add(s3);
@@ -127,7 +130,7 @@ class Main {
     while (true) {
       System.out.println("===========================");
       System.out.println("*****Enter your choice*****");
-      System.out.println("1.Serialize (e.g ouput1.ser, ouput2.ser)");
+      System.out.println("1.Serialize (e.g output1.ser, output2.ser)");
       System.out.println("2.Deserialize");
       System.out.println("3.Exit");
       System.out.println("===========================");

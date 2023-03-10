@@ -13,7 +13,14 @@ Enter age
 
 Expected & Actual output 
 Done
-display menu again
+===========================
+*****Enter your choice*****
+1.Add employee object
+2.Delete employee object
+3.ShowAll
+4.Search
+5.Exit
+===========================
 
 2) Test Case: User chooses option 1 and enters invalid employee name.
 
@@ -34,7 +41,7 @@ Until user enters valid name it won't be allowed to enter email or to proceed fu
 
 Input & output:
 Enter email
-Sadhana@gamil.com
+Sadhana@gamilcom
 
 Enter valid email
 Enter email
@@ -68,6 +75,7 @@ Enter valid age
 Enter age
 23
 Done
+Display menu again
 
 Expected output
 Until user enters valid Date it won't be allowed to proceed futher.
@@ -80,26 +88,12 @@ Input:
 Expected Output:
 12
 Invalid
-===========================
-*****Enter your choice*****
-1.Add employee object
-2.Delete employee object
-3.ShowAll
-4.Search
-5.Exit
-===========================
+Display menu again
 
 Actual Output:
 12
 Invalid
-===========================
-*****Enter your choice*****
-1.Add employee object
-2.Delete employee object
-3.ShowAll
-4.Search
-5.Exit
-===========================
+Display menu again
 
 
 7) Test Case: User chooses option 2 to delete an employee that exists in the employees.txt file.
@@ -109,25 +103,11 @@ Input:
 
 Expected Output:
 Done
-===========================
-*****Enter your choice*****
-1.Add employee object
-2.Delete employee object
-3.ShowAll
-4.Search
-5.Exit
-===========================
+Display menu again
 
 Actual Output:
 Done
-===========================
-*****Enter your choice*****
-1.Add employee object
-2.Delete employee object
-3.ShowAll
-4.Search
-5.Exit
-===========================
+Display menu again
 
 8) Test Case: User chooses option 2 to delete an employee that does not exist in the employees.txt file.
 
@@ -137,20 +117,65 @@ Non-Existing Employee ID
 
 Actual & Expected Output:
 Id not found
-===========================
-*****Enter your choice*****
-1.Add employee object
-2.Delete employee object
-3.ShowAll
-4.Search
-5.Exit
-===========================
+Display menu again
 
-9) Test Case: User chooses option 3 to search for an employee that exists in the employees.txt file.
+9) Test Case: User chooses option 3 to display all employees in the employees.txt file.
 
-10) Test Case: User chooses option 3 to search for an employee that does not exist in the employees.txt file.
+Actual & Expected output :
 
-11) Test Case: User chooses option 4 to display all employees in the employees.txt file.
+[{ ID = 1, Name = sadhana, Email = sadhana@gmail.com, DOB = 2002-06-21, Age =20}
+, { ID = 2, Name = Dhruv, Email = Dhruv@gmail.com, DOB = 2002-03-21, Age =34}
+, { ID = 3, Name = Sanskar, Email = sanskar@gmail.com, DOB = 2002-03-19, Age =21}
+, { ID = 4, Name = renu, Email = renu@gmail.com, DOB = 2002-06-21, Age =23}
+]
+Display menu again
+
+10) Test Case: User chooses option 4 to search for an employee that exists in the employees.txt file.
+
+Actual & Expected output :
+
+4
+Enter Query-(e.g.) ID,Name, Email, DOB, Age
+name
+Enter Search value
+sadhana
+Sort by- (e.g.) ID,Name, Email, DOB, Age
+id
+Direction- (asc/desc)
+desc
+[{ ID = 7, Name = sadhana, Email = sadhana@gmail.com, DOB = 2002-06-21, Age =20}
+, { ID = 5, Name = sadhana, Email = sadhana@gmail.com, DOB = 2002-06-21, Age =20}
+, { ID = 1, Name = sadhana, Email = sadhana@gmail.com, DOB = 2002-06-21, Age =20}
+]
+Display menu again
+
+11) Test Case: User chooses option 4 to search for an employee that does not exist in the employees.txt file.
+
+Actual & Expected output :
+
+4
+Enter Query-(e.g.) ID,Name, Email, DOB, Age
+name
+Enter Search value
+xxxxxxxxxx
+Sort by- (e.g.) ID,Name, Email, DOB, Age
+id
+Direction- (asc/desc)
+asc
+[]
+Display menu again
 
 12) Test Case: User chooses option 5 to exit the program.
 
+Actual & Expected output :
+
+5
+Thank you
+
+13) Test case: If user enters invalid option in menu
+
+Actual & Expected output :
+
+111111
+Invalid
+Display menu again
