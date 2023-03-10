@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CustomQueue {
@@ -18,6 +19,7 @@ public class CustomQueue {
         System.out.println("Enter 2 to remove");
         System.out.println("Enter 3 to peek");
         System.out.println("Enter 4 to search");
+        System.out.println("Enter 5 to exit the program");
 
         int choice = sc.nextInt();
         int val;
@@ -31,37 +33,44 @@ public class CustomQueue {
             break;
 
           case 2:
-            System.out.println("Removed value: " + queue.remove());
+            if (!queue.isEmpty())
+              System.out.println("Removed value: " + queue.remove());
             System.out.println("-------------------------------------");
             break;
 
           case 3:
-            System.out.println("Peeked value: " + queue.peek());
+            if (!queue.isEmpty())
+              System.out.println("Peeked value: " + queue.peek());
             System.out.println("-------------------------------------");
             break;
 
           case 4:
-            System.out.print("Enter the value to search: ");
-            val = sc.nextInt();
-            if (queue.search(val) == -1)
-              System.out.println(val + " Doesn't exists.");
-            else
-              System.out.println("Searched value is present at index: " + queue.search(val));
+            if (!queue.isEmpty()) {
+              System.out.print("Enter the value to search: ");
+              val = sc.nextInt();
+              if (queue.search(val) == -1)
+                System.out.println(val + " Doesn't exists.");
+              else
+                System.out.println("Searched value is present at index: " + queue.search(val));
+            }
             System.out.println("-------------------------------------");
             break;
 
-          default:
+          case 5:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
-        }
 
-        
+          default:
+            System.out.println("Please enter a valid choice (1,2,3,4,5).");
+            System.out.println("-------------------------------------");
+            break;
+        }
 
       }
 
-    } catch (Exception e) {
-      System.out.println(e);
+    } catch (InputMismatchException e) {
+      System.out.println("Please give a valid number. " + e);
     }
 
   }
@@ -76,6 +85,12 @@ class Node {
 class Queue {
   Node head, tail;
   int size;
+
+  boolean isEmpty() {
+    if (size == 0)
+      System.out.println("Queue is empty. Please enter 1 to add a number to queue.");
+    return size == 0;
+  }
 
   void add(int val) {
     Node temp = new Node(); // a temporary node
