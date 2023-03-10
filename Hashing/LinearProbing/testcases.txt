@@ -1,0 +1,90 @@
+
+Testcase 1: User entered wrong choice.
+
+Input: 10
+
+Outpur: Please enter a valid input from the menu
+
+Testcase 2: User entered an invalid input.
+
+Input: @3jfj
+
+Output: Please enter a valid input
+
+Testcase 3: User entered a value to insert.
+
+Input: 1 then 23
+
+Output: 
+
+0 = 0
+1 = 0
+2 = 0
+3 = 23
+4 = 0
+5 = 0
+6 = 0
+7 = 0
+8 = 0
+9 = 0
+
+Testcase 4: User entered a value to delete.
+
+Input: 2 then 23
+
+0 = 0
+1 = 0
+2 = 0
+3 = 0
+4 = 0
+5 = 0
+6 = 0
+7 = 0
+8 = 0
+9 = 0
+
+Testcase 5: User trying to insert in full Hashtable.
+
+Input 1 then (any number)
+
+Output: Hashtable is full
+
+Testcase 6: User trying to delete from empty Hashmtable or if value is not in Hashtable.
+
+Input: 2 then (any number)
+
+Output: Element not found
+
+Testcase 7: User trying to insert a value which is already present in Hashtable.
+
+Input: 1 then 23
+
+Output: 
+0 = 0
+1 = 0
+2 = 0
+3 = 23
+4 = 23
+5 = 0
+6 = 0
+7 = 0
+8 = 0
+9 = 0
+
+Testcase 8: User trying to delete a value which is not present in Hashtable.
+
+Input: 2 then 34
+
+Output: Element not found
+
+Testcase 9: User entered choice to see time taken to handel collisions.
+
+Input;: 3
+
+Output: Time taken for collision: 503ns
+
+Testcase 10: User entered choice to see total number of collisions.
+
+Input: 4
+
+Output: Total number of collisions: 1.

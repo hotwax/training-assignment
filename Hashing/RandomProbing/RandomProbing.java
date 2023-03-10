@@ -59,7 +59,7 @@ class RandomProbing {
         int position;
         // checking if the this.table is full
         if (this.isFull()) {
-            System.out.println("Hash Table Full");
+            System.out.println("Hashtable is full");
             return;
         }
         boolean isStored = false;
@@ -190,4 +190,5 @@ class RandomProbing {
         }
     }
 
-};
+}
+}

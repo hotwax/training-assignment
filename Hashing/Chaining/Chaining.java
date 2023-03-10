@@ -110,6 +110,7 @@ class Chaining {
     }
 
     public static void main(String[] args) {
+        try {
         System.out.println("Enter the size of the Hash Table");
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
@@ -117,13 +118,14 @@ class Chaining {
         Boolean flag = true;
         while (flag) {
             try {
+                Scanner scn = new Scanner(System.in);
                 System.out.println("Select an option from the menu below");
                 System.out.println("1. Insert a new element in the Hash Table");
                 System.out.println("2. Delete an element from the Hash Table");
                 System.out.println("3. Time taken for collision handling");
                 System.out.println("4. Total number of collisions");
                 System.out.println("5. Exit");
-                int choice = sc.nextInt();
+                int choice = scn.nextInt();
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the value to be inserted");
@@ -156,4 +158,8 @@ class Chaining {
             }
         }
     }
+    catch (InputMismatchException e) {
+        System.out.println("Please enter a valid input");
+    }
+}
 }
