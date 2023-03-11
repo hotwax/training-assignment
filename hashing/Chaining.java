@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Chaining {
@@ -121,14 +122,14 @@ public class Chaining {
 
     public void initbuckets(int N) {
       buckets = new LinkedList[N];
-      for (int bi = 0; bi < buckets.length; bi++) {  //bi- bucket index
+      for (int bi = 0; bi < buckets.length; bi++) { // bi- bucket index
         buckets[bi] = new LinkedList();
       }
     }
 
     public void put(int key, String value) {
-      int bi = hash(key);  //bi- bucket index
-      int di = getIndexWithinBucket(key, bi);  //di- data index within bucket
+      int bi = hash(key); // bi- bucket index
+      int di = getIndexWithinBucket(key, bi); // di- data index within bucket
       if (di == -1) {
         buckets[bi].add(new HMNode(key, value));
         size++;
@@ -145,7 +146,7 @@ public class Chaining {
     }
 
     public int getIndexWithinBucket(int key, int bi) {
-      int di = 0; //di- data index within bucket
+      int di = 0; // di- data index within bucket
       for (int i = 0; i < buckets[bi].size; i++) {
         if (buckets[bi].get(i).key == key)
           return di;
@@ -159,8 +160,8 @@ public class Chaining {
     }
 
     public String get(int key) {
-      int bi = hash(key); //bi- bucket index
-      int di = getIndexWithinBucket(key, bi); //di- data index within bucket
+      int bi = hash(key); // bi- bucket index
+      int di = getIndexWithinBucket(key, bi); // di- data index within bucket
       if (di == -1) {
         return null;
       } else {
@@ -169,8 +170,8 @@ public class Chaining {
     }
 
     public boolean containsKey(int key) {
-      int bi = hash(key); //bi- bucket index
-      int di = getIndexWithinBucket(key, bi); //di- data index within bucket
+      int bi = hash(key); // bi- bucket index
+      int di = getIndexWithinBucket(key, bi); // di- data index within bucket
 
       if (di == -1) {
         return false;
@@ -180,8 +181,8 @@ public class Chaining {
     }
 
     public void remove(int key) {
-      int bi = hash(key); //bi- bucket index
-      int di = getIndexWithinBucket(key, bi); //di- data index within bucket
+      int bi = hash(key); // bi- bucket index
+      int di = getIndexWithinBucket(key, bi); // di- data index within bucket
       if (di == -1) {
         System.out.println("Doesn't exists.");
         return;
@@ -217,9 +218,18 @@ public class Chaining {
       Scanner sc = new Scanner(System.in);
       System.out.println("Enter the size of map: ");
       int arrSize = sc.nextInt();
+      if (arrSize == 0) {
+        System.out.println("Please enter a valid (>0) size.");
+        return;
+      }
+
       HashMap map = new HashMap(arrSize);
 
       while (true) {
+        if (mapSize == map.size) {
+          System.out.println("map is full");
+          return;
+        }
         System.out.println("Your HashMap: ");
         map.display();
         System.out.println();
@@ -229,6 +239,7 @@ public class Chaining {
         System.out.println("Enter 3 to get");
         System.out.println("Enter 4 to search");
         System.out.println("Enter 5 to find the number of collisions");
+        System.out.println("Enter 6 to exit the program");
 
         System.out.println();
         System.out.println("Note- key is of 'int' data type and value is of 'String' data type.");
@@ -276,14 +287,21 @@ public class Chaining {
 
             break;
 
-          default:
+          case 6:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
+
+          default:
+            System.out.println("Please enter a valid choice (1,2,3,4,5,6).");
+            System.out.println("-------------------------------------");
+            break;
         }
 
       }
 
+    } catch (InputMismatchException e) {
+      System.out.println("Please enter a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
