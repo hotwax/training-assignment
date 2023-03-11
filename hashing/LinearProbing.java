@@ -143,6 +143,7 @@ public class LinearProbing {
 
         switch (choice) {
           case 1:
+       
             System.out.println("Enter the key: ");
             key = sc.nextInt();
             System.out.println("Enter the value: ");
@@ -151,6 +152,7 @@ public class LinearProbing {
             long endingTime = System.currentTimeMillis();
             System.out.println("Time taken: " + (endingTime - startingTime) + " ms");
             System.out.println("-----------------------------------");
+          
             break;
 
           case 2:

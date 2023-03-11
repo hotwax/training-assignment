@@ -226,10 +226,7 @@ public class Chaining {
       HashMap map = new HashMap(arrSize);
 
       while (true) {
-        if (mapSize == map.size) {
-          System.out.println("map is full");
-          return;
-        }
+
         System.out.println("Your HashMap: ");
         map.display();
         System.out.println();
@@ -250,14 +247,19 @@ public class Chaining {
 
         switch (choice) {
           case 1:
-            System.out.print("Enter the Key: ");
-            key = sc.nextInt();
-            System.out.print("Enter the value: ");
-            val = sc.next();
-            map.put(key, val);
-            long endingTime = System.currentTimeMillis();
-            System.out.println("Time taken: " + (endingTime - startingTime) + " ms");
-            System.out.println("-------------------------------------");
+            if (mapSize == map.size) {
+              System.out.println("map is full");
+            } else {
+              System.out.print("Enter the Key: ");
+              key = sc.nextInt();
+              System.out.print("Enter the value: ");
+              val = sc.next();
+              map.put(key, val);
+              long endingTime = System.currentTimeMillis();
+              System.out.println("Time taken: " + (endingTime - startingTime) + " ms");
+              System.out.println("-------------------------------------");
+            }
+
             break;
 
           case 2:
