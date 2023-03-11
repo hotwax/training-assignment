@@ -1,0 +1,325 @@
+1. Test Case: Adding a value
+Input:
+1
+10
+
+Expected Output:
+The program should add the value 10 to the linked list and display the updated list.
+
+output:-
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+10
+10 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+
+===============================================================================================================================
+
+2. Test Case: Deleting a value that exists in the list
+Input:
+1
+10
+1
+20
+2
+10
+
+Expected Output:
+The program should add the value 10 and 20 to the linked list and display the updated list. Then, it should delete the value 10 and display the updated list.
+
+output:-
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+10
+10 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+20
+10 20 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+2
+enter no. to delete
+10
+20 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+
+===============================================================================================================================
+
+3. Test Case: Deleting a value that does not exist in the list
+Input:
+1
+10
+2
+20
+
+Expected Output:
+The program should add the value 10 to the linked list and display the updated list. Then, it should attempt to delete the value 20, which does not exist in the list. The program should display a message saying that the value is not present in the list.
+
+output:-
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+10
+10 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+2
+enter no. to delete
+20
+10 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+
+===============================================================================================================================
+
+4. Test Case: Updating a value that exists in the list
+Input:
+1
+10
+3
+10
+20
+
+Expected Output:
+The program should add the value 10 to the linked list and display the updated list. Then, it should update the value 10 to 20 and display the updated list.
+
+output:-
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+10
+10 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+3
+enter no. to update and the value
+10
+20
+20 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+===============================================================================================================================
+
+5. Test Case: Updating a value that does not exist in the list
+Input:
+1
+10
+3
+20
+30
+
+Expected Output:
+The program should add the value 10 to the linked list and display the updated list. Then, it should attempt to update the value 20 to 30, which does not exist in the list. The program should display a message saying that the value is not present in the list.
+
+output :-
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+10
+10 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+3
+enter no. to update and the value
+20
+30
+10 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+===============================================================================================================================
+
+6. Test Case: Sorting the linked list
+Input:
+1
+5
+1
+2
+1
+7
+1
+1
+1
+9
+4
+
+Expected Output:
+The program should add the values 5, 2, 7, 1, and 9 to the linked list and display the updated list after each addition. Then, it should sort the linked list and display the updated list.
+
+output :-
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+5
+5 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+2
+5 2 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+7
+5 2 7 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+1
+5 2 7 1 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+1
+enter no. to add
+9
+5 2 7 1 9 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+4
+1 2 5 7 9 
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+===============================================================================================================================
+
+7. Test Case: Termination of the program
+Input:
+6
+
+Expected Output:
+The program should terminate.
+
+output:-
+===========================
+1: add
+2: delete
+3: update
+4: sort
+5: traverse
+6: terminate the program
+6
+BUILD SUCCESSFUL (total time: 2 seconds)

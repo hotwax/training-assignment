@@ -1,0 +1,342 @@
+1.Adding elements to the queue:
+
+Input:
+1
+10
+1
+20
+1
+30
+4
+
+Expected Output:
+Added Successfully
+Added Successfully
+Added Successfully
+10 20 30 
+
+My output:-
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+10
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+20
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+30
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+4
+10 20 30 
+===========================
+
+======================================================================================================
+
+2. Removing elements from the queue:
+
+Input:
+1
+10
+1
+20
+2
+3
+
+Expected Output:
+Added Successfully
+Added Successfully
+polled value= 10
+peeked value= 20
+
+My output:-
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+10
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+20
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+2
+polled value= 10
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+3
+peeked value= 20
+===========================
+
+======================================================================================================
+
+3. Updating an element in the queue:
+
+Input:
+1
+10
+1
+20
+1
+30
+5
+10
+15
+4
+
+Expected Output:
+Added Successfully
+Added Successfully
+Added Successfully
+updated successfully
+15 20 30 
+
+My output:-
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+10
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+20
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+30
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+5
+enter no. to update and the value
+10
+15
+updated successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+4
+15 20 30 
+===========================
+
+======================================================================================================
+
+4. Searching an element in the queue:
+
+Input:
+1
+10
+1
+20
+1
+30
+6
+20
+6
+40
+
+Expected Output:
+Added Successfully
+Added Successfully
+Added Successfully
+true
+false
+
+My output:-
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+10
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+20
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to add
+30
+Added Successfully
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+6
+enter value to search
+20
+true
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+6
+enter value to search
+40
+false
+===========================
+
+======================================================================================================
+
+5. Terminating the program:
+
+Input:
+7
+
+Expected Output:
+Program terminated
+
+My output:-
+===========================
+1: add
+2: poll
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+7
+BUILD SUCCESSFUL (total time: 2 seconds)

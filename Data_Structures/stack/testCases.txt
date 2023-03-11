@@ -1,0 +1,349 @@
+
+1. Test Case: Push an element onto the stack
+
+Input: 1 (from menu)
+10 (to push onto stack)
+
+Expected Output: 
+"Added Successfully."
+
+My output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to push
+10
+Added Successfully.
+===========================
+
+=================================================================================
+
+2. Test Case: Pop an element from the stack
+
+Input: 2 (from menu)
+Expected Output: "stack is empty"
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+2
+stack is empty
+popped value= -1
+===========================
+
+=================================================================================
+
+3. Test Case: Peek the top element of the stack
+
+Input: 3 (from menu)
+Expected Output:
+"stack is empty"
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+3
+stack is empty
+peeked value= -1
+===========================
+
+=================================================================================
+
+4. Test Case: Traverse the stack
+
+Input: 4 (from menu)
+Expected Output:
+"stack is empty"
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+4
+stack is empty
+===========================
+
+=================================================================================
+
+5. Test Case: Update an element in the stack
+
+Input: 5 (from menu)
+5 (element to update)
+20 (new value)
+
+Expected Output:
+"Element to update is not found."
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+5
+enter no. to update and the value
+5
+20
+Element to update is not found.
+===========================
+
+=================================================================================
+
+6. Test Case: Search for an element in the stack
+
+Input: 6 (from menu)
+30 (value to search)
+
+Expected Output:
+"false"
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+6
+enter value to search
+30
+false
+===========================
+
+=================================================================================
+
+7. Test Case: Terminate the program
+
+Input: 7 (from menu)
+
+Expected Output:
+program terminates
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+7
+BUILD SUCCESSFUL (total time: 2 seconds)
+
+=================================================================================
+
+8. Test Case: Push multiple elements onto the stack and traverse
+
+Input: 1 (from menu)
+10 (to push onto stack)
+1 (from menu)
+20 (to push onto stack)
+1 (from menu)
+30 (to push onto stack)
+4 (from menu)
+Expected Output:
+"30 20 10"
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to push
+10
+Added Successfully.
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to push
+20
+Added Successfully.
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to push
+30
+Added Successfully.
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+4
+30 20 10 
+===========================
+
+=================================================================================
+
+9. Test Case: Update an element in the stack
+
+Input: 1 (from menu)
+10 (to push onto stack)
+1 (from menu)
+20 (to push onto stack)
+5 (from menu)
+10 (element to update)
+40 (new value)
+
+Expected Output:
+"Updated Successfully."
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to push
+10
+Added Successfully.
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to push
+20
+Added Successfully.
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+5
+enter no. to update and the value
+10
+40
+Updated Successfully.
+===========================
+
+=================================================================================
+
+10. Test Case: Search for an element in the stack
+
+Input: 1 (from menu)
+10 (to push onto stack)
+1 (from menu)
+20 (to push onto stack)
+6 (from menu)
+20 (value to search)
+
+Expected Output:
+"true"
+
+My Output :-
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to push
+10
+Added Successfully.
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+1
+enter no. to push
+20
+Added Successfully.
+===========================
+1: push
+2: pop
+3: peek
+4: traverse
+5: update
+6: search
+7: terminate the program
+
+6
+enter value to search
+20
+true
+===========================
+
