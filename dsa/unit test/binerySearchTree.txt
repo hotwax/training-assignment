@@ -49,10 +49,10 @@ input-
 Enter the value of the node:
 5
 output- 
+node with data 5 already exists.
 -------------------------------------
 Your binery search tree:
 5 <---- 10 ----> 15
-5 <---- 5 ----> null
 null <---- 5 ----> null
 null <---- 15 ----> null
 menu

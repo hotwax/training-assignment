@@ -33,11 +33,13 @@ public class BinerySearchTree {
       return new Node(val);
     }
 
-    if (val <= node.data)
+    if (val < node.data)
       node.left = add(node.left, val);
     else if (val > node.data)
       node.right = add(node.right, val);
-
+    else{
+      System.out.println("node with data "+val+" already exists.");
+    } 
     return node;
   }
 
