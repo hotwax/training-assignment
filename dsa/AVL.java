@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class AVL {
 
@@ -27,9 +28,11 @@ public class AVL {
 
         System.out.println("Enter 1 to add a node");
         System.out.println("Enter 2 to remove a node");
+        System.out.println("Enter 3 to check whether data exists");
+        System.out.println("Enter 4 to exit");
 
         int choice = sc.nextInt();
-        int val; 
+        int val;
 
         switch (choice) {
           case 1:
@@ -42,19 +45,33 @@ public class AVL {
           case 2:
             System.out.println("Enter the value of the node: ");
             val = sc.nextInt();
-            root = add(root, val);
+            root = remove(root, val);
             System.out.println("-------------------------------------");
             break;
 
-          default:
+          case 3:
+            System.out.println("Enter the value of the node: ");
+            val = sc.nextInt();
+            String result = whetherExists(root, val) ? (val + " exists") : (val + " doesn't exists");
+            System.out.println(result);
+            System.out.println("-----------------------------");
+            break;
+
+          case 4:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
+
+          default:
+            System.out.println("Please enter a valid choice (1,2,3).");
+            System.out.println("-------------------------------------");
+            break;
         }
 
-        
       }
 
+    } catch (InputMismatchException e) {
+      System.out.println("Please give a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
@@ -80,7 +97,8 @@ public class AVL {
 
     String lstr = (node.left == null ? "" : node.left.data + "");
     String rstr = (node.right == null ? "" : node.right.data + "");
-    String str = lstr + "  <---- " + node.data + "[ height = " + node.height + ", balance = " + node.bal + "]" + " ----> "
+    String str = lstr + "  <---- " + node.data + "[ height = " + node.height + ", balance = " + node.bal + "]"
+        + " ----> "
         + rstr;
 
     System.out.println(str);
@@ -97,7 +115,10 @@ public class AVL {
       node.left = add(node.left, val);
     } else if (val > node.data) {
       node.right = add(node.right, val);
-    }
+    } else{
+      System.out.println("node with data "+val+" already exists.");
+      return node;
+    } 
 
     node.height = height(node);
     node.bal = balance(node);
@@ -213,6 +234,19 @@ public class AVL {
     } else {
       return max(node.right);
     }
+  }
+
+  static boolean whetherExists(Node node, int val) {
+    if (node == null) {
+      return false;
+    }
+
+    if (val < node.data)
+      return whetherExists(node.left, val);
+    else if (val > node.data)
+      return whetherExists(node.right, val);
+    else
+      return true;
   }
 
 }
