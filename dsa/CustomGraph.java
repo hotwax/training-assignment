@@ -10,7 +10,7 @@ public class CustomGraph {
       System.out.println("Enter the number of nodes: ");
       int noofnodes = sc.nextInt();
 
-      if (noofnodes == 0) {
+      if (noofnodes==0) {
         System.out.println("Please enter a valid (>0) number of nodes");
         return;
       }
@@ -80,9 +80,11 @@ public class CustomGraph {
           default:
             System.out.println("Please enter a valid choice (1,2,3,4,5).");
             System.out.println("-------------------------------------");
-            break;
+            break;  
+            
         }
 
+        
       }
 
     } catch (InputMismatchException e) {
@@ -154,7 +156,8 @@ class Graph {
     }
   }
 
-  void bfs(int src, int noofnodes) {
+  void bfs(int src, int noofnodes) {  
+    
     Queue queue = new Queue();
     boolean[] visited = new boolean[noofnodes]; // if true- node is already visited, false- node is not visited yet
 
@@ -182,7 +185,8 @@ class Graph {
 
 class Queue {
 
-  Queue() {
+  Queue(){
+
 
   }
 
@@ -267,3 +271,4 @@ class Node {
   int data;
   Node next;
 }
+ 

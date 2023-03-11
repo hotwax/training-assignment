@@ -81,8 +81,14 @@ class Node {
   int data;
   Node next;
 }
-
+ 
 class Queue {
+
+  Queue(){
+
+
+  }
+
   Node head, tail;
   int size;
 
@@ -159,3 +165,4 @@ class Queue {
   }
 
 }
+
