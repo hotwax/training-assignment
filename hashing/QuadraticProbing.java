@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class QuadraticProbing {
 
@@ -122,10 +123,14 @@ public class QuadraticProbing {
       System.out.println("Initialize capacity of array: ");
       Scanner sc = new Scanner(System.in);
       int capacity = sc.nextInt();
+      if (capacity == 0) {
+        System.out.println("Please enter a valid (>0) size.");
+        return;
+      }
       initialize(capacity);
 
       while (true) {
-        System.out.print("Your hash table: ");
+        System.out.print("Your hash map: ");
         display();
         System.out.println();
 
@@ -134,6 +139,7 @@ public class QuadraticProbing {
         System.out.println("Enter 3 to search an element");
         System.out.println("Enter 4 to check whether an element is present");
         System.out.println("Enter 5 to find number of collisions");
+        System.out.println("Enter 6 to exit the program");
 
         System.out.println("Note- The data type of key and value is int.");
 
@@ -186,14 +192,21 @@ public class QuadraticProbing {
 
             break;
 
-          default:
+          case 6:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
+
+          default:
+            System.out.println("Please enter a valid choice (1,2,3,4,5,6).");
+            System.out.println("-------------------------------------");
+            break;
         }
 
       }
 
+    } catch (InputMismatchException e) {
+      System.out.println("Please enter a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
