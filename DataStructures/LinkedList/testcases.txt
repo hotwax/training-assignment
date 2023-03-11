@@ -1,0 +1,61 @@
+
+
+Testcase 1: User entered wrong choice
+
+Output: Please choose a valid option from the menu
+
+Testcase 2: User entered invalid input
+
+Output: Please enter a valid input
+
+Testcase 3: Inserting a node in the list
+
+Input: 1 20
+
+Output: LinkedList: 10->20->null
+
+Testcase 4: Deleting a node from the list
+
+Input: 2 20
+
+Output: 20 found and deleted
+
+LinkedList: 10->null
+
+Testcase 5: Updating a node in the list
+
+Input: 3 10 20
+
+Output: 10 found and updated
+
+LinkedList: 20->null
+
+Testcase 6: Sorting the list.
+
+Input: 4
+
+Output: LinkedList: 10->20->30->40->50->60->70->80->90->100->null
+
+Testcase 7: Inserting element on index.
+
+Input: 5 5 101
+
+Output: LinkedList: 10->20->30->40->50->101->60->70->80->90->100->null
+
+Testcase 8: Updating elemnet which is not in list.
+
+Input: 3 101 102
+
+Output: 101 not found
+
+Testcase 9: Deleting element which is not in list.
+
+Input: 2 101
+
+Output: 101 not found
+
+Testcase 10: Inserting element on index which is not in list.
+
+Input: 5 11 101
+
+Output: Index out of range

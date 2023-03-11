@@ -1,0 +1,32 @@
+
+Testcase 1: User entered wrong choice
+
+Output: Please choose a valid option from the menu
+
+Testcase 2: User entered invalid input
+
+Output: Please enter a valid input
+
+Testcase 3: Enqueu in the queue
+
+Input: 1 then 34
+
+Output: Queue: 1 34 
+
+Testcase 4: Dequeue in the queue
+
+Input: 2
+
+Output: Queue: 34
+
+Testcase 5: Update element in queue.
+
+Input: 3 then 1 then 45
+
+Output: Queue: 45 34
+
+Testcase 6: Deque element from empty queue
+
+Input: 2
+
+Output: Queue is empty

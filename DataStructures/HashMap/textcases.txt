@@ -1,0 +1,70 @@
+
+Testcase 1: User entered wrong choice
+
+Output: Please choose a valid option from the menu
+
+Testcase 2: User entered invalid input
+
+Output: Please enter a valid input
+
+Testcase 3: Inserting a key-value pair
+
+Input: 1 then 23 then 2
+
+Output: 
+0: 
+1: 
+2: 
+3: [23,2]
+4: 
+5: 
+6: 
+7: 
+8: 
+9: 
+
+Testcase 4: Deleting a key.
+
+Input: 2 then 23
+
+Output: Key Deleted Successfully
+0: 
+1: 
+2: 
+3: 
+4: 
+5: 
+6: 
+7: 
+8: 
+9: 
+
+Testcase 5: Searching a key.
+
+Input: 3 then 23
+
+Output: Key Found
+
+Testcase 6: Searching a key which is not present.
+
+Input: 3 then 23
+
+Output: Key Not Found
+
+
+Testcase 7: Inserting a key which is already present.
+
+Input: 1 then 34
+
+Output: Key already present
+
+0: 
+1: 
+2: 
+3: 
+4: [34,45][34,34]
+5: 
+6: 
+7: 
+8: 
+9: 
