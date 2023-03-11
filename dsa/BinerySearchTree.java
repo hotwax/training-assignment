@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class BinerySearchTree {
 
@@ -103,7 +104,8 @@ public class BinerySearchTree {
 
         System.out.println("Enter 1 to add a node");
         System.out.println("Enter 2 to remove a node");
-        System.out.println("Enter 3 to check whether data exsits");
+        System.out.println("Enter 3 to check whether data exists");
+        System.out.println("Enter 4 to exit");
 
         int choice = sc.nextInt();
 
@@ -120,7 +122,7 @@ public class BinerySearchTree {
           case 2:
             System.out.println("Enter the value of the node: ");
             val = sc.nextInt();
-            root = add(root, val);
+            root = remove(root, val);
             System.out.println("-------------------------------------");
             break;
 
@@ -132,15 +134,21 @@ public class BinerySearchTree {
             System.out.println("-----------------------------");
             break;
 
-          default:
+          case 4:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
+
+          default:
+            System.out.println("Please enter a valid choice (1,2,3,4).");
+            System.out.println("-------------------------------------");
+            break;
         }
 
-        
       }
 
+    } catch (InputMismatchException e) {
+      System.out.println("Please give a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
