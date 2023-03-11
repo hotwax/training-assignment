@@ -1,0 +1,199 @@
+// menu
+Your HashMap:
+
+Enter 1 to add
+Enter 2 to remove
+Enter 3 to get
+Enter 4 to search
+Enter 5 to find the number of collisions
+
+Note- key is of 'int' data type and value is of 'String' data type.
+
+
+case 1: entered 0 as size of map  
+
+input- 
+Enter the size of map:
+0
+output- 
+Please enter a valid (>0) size.
+(End)
+
+
+
+case 2: add data- entered invalid key
+
+input- 
+1
+Enter the Key: hjk
+
+output- 
+Please give a valid number. java.util.InputMismatchException
+(End)
+
+
+
+
+--valid cases
+Your HashMap:
+Key: 1 Value: nidhi
+
+case 3: add data- entered an already present key
+
+input- 
+1
+Enter the Key: 1
+Enter the value: palak
+Time taken: 20738 ms
+output- 
+-------------------------------------
+Your HashMap:
+Key: 1 Value: palak
+...menu
+
+
+
+case 4: add data- entered a different key
+
+input- 
+1
+Enter the Key: 2
+Enter the value: yash
+Time taken: 19901 ms
+output- 
+-------------------------------------
+Your HashMap:
+Key: 1 Value: palak
+Key: 2 Value: yash
+...menu
+
+
+
+case 5: remove a non existing pair
+
+input- 
+2
+Enter the Key: 89
+output- 
+Doesn't exists.
+-------------------------------------
+menu
+
+
+
+case 6: remove an existing pair
+
+input- 
+2
+Enter the Key: 2
+-------------------------------------
+output- 
+Your HashMap:
+Key: 1 Value: palak
+...menu
+
+
+
+case 7: get a non existing pair
+
+input- 
+3
+Enter the Key: 22
+output- 
+Doesn't exists
+-------------------------------------
+Your HashMap:
+Key: 1 Value: palak
+...menu
+
+
+
+case 8: get an existing pair
+
+input- 
+3
+Enter the Key: 1
+output- 
+palak
+--------------------------------------
+Your HashMap:
+Key: 1 Value: palak
+...menu
+
+
+
+case 9: check whether a key exists (doesn't exists)
+
+input- 
+4
+Enter the Key: 34
+output- 
+Doesn't exists
+-------------------------------------
+menu
+
+
+
+case 10: check whether a key exists (exists)
+
+input- 
+4
+Enter the Key: 1
+output- 
+exists
+-------------------------------------
+menu
+
+
+
+case 11: get number of collisions (no collisions)
+
+input- 
+5
+output- 
+0
+-------------------------------------
+menu
+
+
+
+case 12: get number of collisions (collisions)
+
+Enter the size of map:
+5
+
+1
+Enter the Key: 1
+Enter the value: nidhi
+Time taken: 12442 ms
+
+1
+Enter the Key: 11
+Enter the value: palak
+Time taken: 23854 ms
+
+1
+Enter the Key: 6
+Enter the value: yash
+Time taken: 44446 ms
+
+
+input- 
+5
+output- 
+3
+-------------------------------------
+menu
+
+
+
+case 13: end the program
+
+input- 
+6
+output- 
+Program terminated successfully.
+-------------------------------------
+(End)
+
+

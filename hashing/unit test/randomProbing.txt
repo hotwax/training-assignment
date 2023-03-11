@@ -1,0 +1,209 @@
+// menu
+Initialize capacity of array:
+5
+Your hash map:
+Enter 1 to add an element
+Enter 2 to remove an element
+Enter 3 to search an element
+Enter 4 to check whether an element is present
+Enter 5 to find number of collisions
+Enter 6 to exit the program
+Note- The data type of key and value is int.
+
+
+case 1: entered 0 as size of map  
+
+input- 
+Initialize capacity of array: 
+0
+output- 
+Please enter a valid (>0) size.
+(End)
+
+
+
+case 2: add data- entered invalid key or value (not a number)
+
+input- 
+1
+Enter the Key: hjk
+
+output- 
+Please give a valid number. java.util.InputMismatchException
+(End)
+
+
+
+
+--valid cases
+Your hash map: 1 10,
+
+case 3: add data- entered an already present key
+
+input- 
+1
+Enter the Key: 1
+Enter the value: 11
+Time taken: 17092 ms
+output- 
+-------------------------------------
+Your hash map: 1 11,
+...menu
+
+
+
+case 4: add data- entered a different key
+
+input- 
+1
+Enter the key:
+2
+Enter the value:
+20
+Time taken: 6056 ms
+output- 
+-------------------------------------
+Your hash map: 1 11, 2 20,
+...menu
+
+
+
+case 5: remove a non existing pair
+
+input- 
+2
+Enter the Key: 89
+output- 
+Doesn't exists.
+-------------------------------------
+menu
+
+
+
+case 6: remove an existing pair
+
+input- 
+2
+Enter the Key: 2
+-------------------------------------
+output- 
+Your hash map: 1 11, 
+...menu
+
+
+
+case 7: get a non existing pair
+
+input- 
+3
+Enter the Key: 22
+output- 
+Doesn't exists
+-------------------------------------
+Your hash map: 1 11, 
+...menu
+
+
+
+case 8: get an existing pair
+
+input- 
+3
+Enter the Key: 1
+output- 
+11
+--------------------------------------
+Your hash map: 1 11, 
+...menu
+
+
+
+case 9: check whether a key exists (doesn't exists)
+
+input- 
+4
+Enter the Key: 34
+output- 
+Doesn't exists
+-------------------------------------
+Your hash map: 1 11, 
+menu
+
+
+
+case 10: check whether a key exists (exists)
+
+input- 
+4
+Enter the Key: 1
+output- 
+exists
+-------------------------------------
+Your hash map: 1 11, 
+menu
+
+
+
+case 11: get number of collisions (no collisions)
+
+input- 
+5
+output- 
+0
+-------------------------------------
+menu
+
+
+
+case 12: get number of collisions (collisions)
+
+Enter the size of map:
+5
+
+1
+Enter the key:
+1
+Enter the value:
+100
+Time taken: 4627 ms
+
+1
+Enter the key:
+6
+Enter the value:
+66
+Time taken: 30021 ms
+
+1
+Enter the key:
+11
+Enter the value:
+110
+Time taken: 42022 ms
+
+1
+Enter the key:
+2
+Enter the value:
+200
+Time taken: 49092 ms
+
+input- 
+5
+output- 
+3
+-------------------------------------
+menu
+
+
+
+case 13: end the program
+
+input- 
+6
+output- 
+Program terminated successfully.
+-------------------------------------
+(End)
+
+
