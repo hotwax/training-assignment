@@ -1,0 +1,23 @@
+Comparing Different Collision Resolution Techniques –
+Input Taken For all – 
+•	The Capacity Taken is – 100
+•	80 Values are added to the HashMap in this Comparison.
+100 1 41 1 1 18467 2 1 6334 3 1 26500 4 1 19169 5 1 15724 6 1 11478 7 1 29358 8 1 26962 9 1 24464 10 1 5705 11 1 28145 12 1 23281 13 1 16827 14 1 9961 15 1 491 16 1 2995 17 1 11942 18 1 4827 19 1 5436 20 1 32391 21 1 14604 22 1 3902 23 1 153 24 1 292 25 1 12382 26 1 17421 27 1 18716 28 1 19718 29 1 19895 30 1 5447 31 1 21726 32 1 14771 33 1 11538 34 1 1869 35 1 19912 36 1 25667 37 1 26299 38 1 17035 39 1 9894 40 1 28703 41 1 23811 42 1 31322 43 1 30333 44 1 17673 45 1 4664 46 1 15141 47 1 7711 48 1 28253 49 1 6868 50 1 25547 51 1 27644 52 1 32662 53 1 32757 54 1 20037 55 1 12859 56 1 8723 57 1 9741 58 1 27529 59 1 778 60 1 12316 61 1 3035 62 1 22190 63 1 1842 64 1 288 65 1 30106 66 1 9040 67 1 8942 68 1 19264 69 1 22648 70 1 27446 71 1 23805 72 1 15890 73 1 6729 74 1 24370 75 1 15350 76 1 15006 77 1 31101 78 1 24393 79 1 3548 80 1 19629 81 99
+
+1. In Double Hashing Technique – 
+•	Collision Occurred -> 125
+•	Time taken by function: 11799040 microseconds
+2. In Chaining Technique –
+•	Collision Occurred -> 28
+•	Time taken by function: 8194750 microseconds
+3. In Linear Probing –
+•	Collision Occurred -> 91
+•	Time taken by function: 12668982 microseconds
+4. In Quadratic Probing – 
+•	Collisions Occurred -> 60
+•	Time taken by function: 7731950 microseconds
+5. In Random Probing – 
+•	Collisions Occurred -> 83
+•	Time taken by function: 8608521 microseconds
+
+

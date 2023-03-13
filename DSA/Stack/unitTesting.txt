@@ -1,0 +1,96 @@
+Menu looks like this
+
+===========================
+Your Stack --
+Stack is empty
+
+
+Enter 1 for push operation
+Enter 2 for pop operation
+Enter 3 for peek operation
+Enter 4 for search operation
+Enter 5 to exit
+===========================
+
+1) Push operation
+
+Input: 
+1
+
+Enter the data: 55
+
+Expected & Actual Output: 
+Your Stack --
+55
+Display menu again
+
+2) Pop operation
+
+Input: 
+2
+Expected & Actual Output:  
+Your Stack --
+Stack is empty
+Display menu again
+
+3) Peek operation (if stack is empty)
+
+Input: 
+3
+Expected & Actual Output: 
+Stack is empty.
+Display menu again
+
+4) Peek operation (if stack have element )
+
+Input: 
+3
+Expected & Actual Output:  
+The element is : 66
+Display menu again
+
+5) Search operation
+
+Input: 
+4
+Enter a number
+23
+Expected & Actual Output: 
+Not Present
+Display menu again
+
+6) Search operation
+
+Input: 
+4
+Enter a number
+20
+Expected & Actual Output:
+Present
+Display menu again
+
+7) Invalid choice
+
+Input: 
+8
+
+Expected & Actual Output:
+Program terminates
+
+8) Pop operation on empty stack
+
+Input: 
+2 
+Expected & Actual Output: 
+Stack is empty
+Display menu again
+
+9) Search operation on empty stack
+
+Input:
+4
+Enter a number:
+10
+Expected & Actual Output: 
+Not Present
+Display menu again

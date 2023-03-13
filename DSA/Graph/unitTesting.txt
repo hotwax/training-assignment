@@ -1,0 +1,87 @@
+Menu looks like :
+
+===========================
+Your Directed Graph --
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+
+
+Enter 1 for Add Edge operation
+Enter 2 for Delete Edge operation
+Enter 3 for BFS Traversal operation
+Enter 4 for DFS Traversal operation
+Enter 5 to exit
+===========================
+
+1) Test cases asking for matrix dimensions
+
+Input:
+Enter the no. of nodes.4
+
+Output:
+Your Directed Graph --
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+
+
+2) Test case for adding an edge:
+
+Input:
+1
+
+Enter the Node 1 : 2
+
+Enter the node2 : 1
+
+Output: 
+Your Directed Graph --
+0 0 0 0
+0 0 0 0
+0 1 0 0
+0 0 0 0
+
+3) Test case for deleting an Edge:
+
+Input:
+2
+
+Enter the Node 1 : 2
+
+Enter the node2 : 1
+
+Output:
+Your Directed Graph --
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+
+4) Test case for traversing the graph using DFS:
+
+Input:
+4
+
+Output:
+DFS Traversal - 0 1 2 3
+
+5) Test case if we give less vertex and try to store more data
+
+Expected and actual ouput:
+Invalid node index!
+
+6) Test case if we give more vertex and try to store less data
+
+Expected and actual ouput:
+Invalid node index!
+
+7) Test case for exiting the program:
+
+Input:
+5
+
+Output:
+Terminated the program

@@ -1,0 +1,94 @@
+Menu looks like :
+
+===========================
+Your AVL Tree --
+Level Order Traversal -
+
+Enter 1 for add operation
+Enter 2 for delete operation
+Enter 3 to exit
+===========================
+
+Testcase 1 : Insert values into the AVL tree
+
+Input:
+Your AVL Tree --
+Level Order Traversal -
+
+Enter 1 for add operation
+Enter 2 for delete operation
+Enter 3 to exit
+1
+
+Enter the data : 45
+
+Output:
+Level Order Traversal - 45
+Displays Menu again.
+
+Testcase 2: Delete values from the AVL tree
+
+Input: 
+Your AVL Tree --
+Level Order Traversal - 45
+
+Enter 1 for add operation
+Enter 2 for delete operation
+Enter 3 to exit
+2
+
+Enter the data : 45
+
+Output: 
+Data is deleted.
+Level Order Traversal - 
+Displays menu again.
+
+Testcase 3: To display all elements present in a AVL tree
+
+Already displays elements present in AVL tree using Level Order Traversal.
+
+In Menu : 
+Your AVL Tree --
+Level Order Traversal - 45
+
+Testcase 4: Search for a value which is present in the AVL tree
+
+Input & output:
+4
+Enter a number
+10
+Element present : true
+Display the menu again
+
+Expected output:
+If value is present it return true
+
+Tescase 5: Exit the program
+
+Input: 
+Your AVL Tree --
+Level Order Traversal -
+
+Enter 1 for add operation
+Enter 2 for delete operation
+Enter 3 to exit
+3
+
+Ouput:
+Program Ends
+
+Testcase 6: If user enters invalid choice
+
+Input:
+
+Your AVL Tree --
+Level Order Traversal -
+
+Enter 1 for add operation
+Enter 2 for delete operation
+Enter 3 to exit
+5
+
+Output:
+Process exited (Program stops and exits).

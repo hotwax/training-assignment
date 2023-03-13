@@ -1,0 +1,121 @@
+Menu looks like :
+
+===========================
+Your BST with Preorder --
+
+Enter 1 for addElement operation
+Enter 2 for DeleteElement operation
+Enter 3 for search operation
+Enter 4 for inorder traversal
+Enter 5 for preorder traversal
+Enter 6 for postorder traversal
+Enter 7 to exit
+
+===========================
+
+Testcase 1: Insertion
+
+Input:
+1
+
+Enter the Data: 55
+
+Output:
+Your BST with Preorder -- 55
+Display menu again
+
+Testcase 2: Deletion of element which is not present
+
+Input:
+2
+
+Enter the data to delete: 50
+
+Output:
+Key does not exist.
+Your BST with Preorder -- 55
+Display menu again
+
+Testcase 3: Deletion of element which is present
+Input:
+2
+
+Enter the data to delete: 55
+
+Output:
+Your BST with Preorder --
+Display menu again
+
+Testcase 4: See all inserted elements
+Already show in the menu - 
+Your BST with Preorder -- 55
+
+Testcase 5: Seaching for element which is present
+
+Input:
+3
+
+Enter the data to search : 55
+
+Output:
+Data is Present.
+Your BST with Preorder -- 55
+
+Testcase 6: Seaching for element which is not present
+
+Input:
+3
+
+Enter the data to search : 50
+
+Output
+Data is Not Present.
+Your BST with Preorder -- 55
+Display menu again
+
+Testcase 7: Invalid Input
+
+Input:
+10
+
+Output:
+Terminates the program
+
+Testcase 8: Terminating the program
+
+Input:
+7
+
+Ouput:
+Terminates the program
+
+Testcase 9: For inordeer Traversal
+
+Input:
+4
+
+Output:
+Inorder is - 22 55 66 82
+
+Testcase 10: For preorder Traversal
+
+Input:
+5
+
+Output:
+Preorder is - 55 22 66 82
+
+Testcase 11: For postorder Traversal
+
+Input:
+6
+
+Output:
+Postorder is - 22 82 66 55
+
+
+
+
+
+
+
