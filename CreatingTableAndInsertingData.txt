@@ -1,0 +1,81 @@
+-- Creating Database named - module3-- 
+
+CREATE DATABASE module3;
+
+USE module3;
+
+-- Creating Table Salespeople -- 
+
+CREATE TABLE Salespeople (
+SNUM INT NOT NULL PRIMARY KEY,
+SNAME VARCHAR(25),
+CITY VARCHAR(25),
+COMM INT
+);
+
+-- Creating Table Customers -- 
+
+CREATE TABLE Customers (
+    CNUM INT NOT NULL PRIMARY KEY,
+    CNAME VARCHAR(25),
+    CITY VARCHAR(25),
+    RATING INT,
+    SNUM INT,
+    FOREIGN KEY (SNUM)
+        REFERENCES Salespeople (SNUM)
+        ON DELETE CASCADE
+);
+
+-- Creating Table Orders -- 
+
+CREATE TABLE Orders (
+	ONUM INT NOT NULL PRIMARY KEY,
+    AMT double,
+    ODATE date,
+    CNUM INT,
+    SNUM INT,
+    FOREIGN KEY (CNUM)
+        REFERENCES Customers (CNUM)
+        ON DELETE CASCADE,
+    FOREIGN KEY (SNUM)
+        REFERENCES Salespeople (SNUM)
+        ON DELETE CASCADE
+);
+
+-- Inserting Data in Salespeople Table --
+
+INSERT INTO Salespeople 
+(SNUM, SNAME, CITY, COMM) VALUES 
+(1001, 'Peel', 'London', 12),
+(1002, 'Serres', 'SanJose', 13),
+(1004, 'Motika', 'London', 11),
+(1007, 'Rifkin', 'Barcelona', 15),
+(1003, 'AxelRod', 'New York', 10),
+(1008, 'Fran', 'London', 25);
+
+ -- Insertin Data in Customers 
+ 
+ INSERT INTO Customers 
+ (CNUM, CNAME, CITY, RATING, SNUM) VALUES
+ (2001, 'Hoffman', 'London', 100, 1001),
+ (2002, 'Giovanni', 'Rome', 200, 1003),
+ (2003, 'Liu', 'SanJose', 200, 1002),
+ (2004, 'Grass', 'Berlin', 300, 1002),
+ (2006, 'Clemens', 'London', 100, 1001),
+ (2008, 'Cisneros', 'SanJose', 300, 1007),
+ (2007, 'Pereira', 'Rome', 100, 1004);
+ 
+ -- Inserting Data to the Orders
+ 
+ INSERT INTO ORDERS 
+ (ONUM, AMT, ODATE, CNUM, SNUM) Values 
+ (3001, 18.69, '1990-10-03', 2008, 1007), 
+ (3003, 767.19, '1990-10-03', 2001, 1001), 
+ (3002, 1900.10, '1990-10-03', 2007, 1004), 
+ (3005, 5160.45, '1990-10-03', 2003, 1002), 
+ (3006, 1098.16, '1990-10-03', 2008, 1007), 
+ (3009, 1713.23, '1990-10-04', 2002, 1003), 
+ (3007, 75.75, '1990-10-04', 2004, 1002), 
+ (3008, 4723.00, '1990-10-05', 2006, 1001), 
+ (3010, 1309.95, '1990-10-06', 2004, 1002), 
+ (3011, 9891.88, '1990-10-06', 2006, 1001); 
