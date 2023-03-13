@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 // A address class --
-
 class Address implements Serializable {
 
     // explicitly declare and initialize serialVersionUID
@@ -91,8 +90,8 @@ class Student implements Serializable {
     Object dateOfBirth;
     Address address;
 
-    // iniatilizing simple date object for formatting
-    SimpleDateFormat simpleDate = new SimpleDateFormat("dd/mm/yyyy"); // for date formatting
+    // for date formatting in dd/mm/yyyy using SimpleDateFromat
+    SimpleDateFormat simpleDate = new SimpleDateFormat("dd/mm/yyyy");
 
     // Constructor
     Student(String firstName, String dateOfBirth, Address address) {
