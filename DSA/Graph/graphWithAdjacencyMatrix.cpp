@@ -34,8 +34,10 @@ public:
 
     // for checking if empty
 
-    bool isEmpty(){
-        if(!front){
+    bool isEmpty()
+    {
+        if (!front)
+        {
             return true;
         }
         return false;
@@ -64,7 +66,7 @@ public:
     {
         if (front == NULL)
         {
-            return;
+            return NULL;
         }
 
         Node *temp = front;
@@ -95,22 +97,22 @@ public:
             }
             temp = temp->next;
         }
-
-        print("Not Present");
     }
 };
 
-
 // A printing function
 
-void print(string message){
-    cout<<endl<<message;
+void print(string message)
+{
+    cout << endl
+         << message;
 }
 
 // Creating Directed Graph with adjacency Matrix
 
 class Graph
 {
+public:
     int **matrix;  // Matrix of graph
     int noOfNodes; // size of matrix
 
@@ -127,8 +129,10 @@ class Graph
             matrix[index] = new int[this->noOfNodes];
         }
 
-        for(int row = 0; row < this->noOfNodes; row++){
-            for(int col = 0; col < this->noOfNodes; col++){
+        for (int row = 0; row < this->noOfNodes; row++)
+        {
+            for (int col = 0; col < this->noOfNodes; col++)
+            {
                 matrix[row][col] = 0;
             }
         }
@@ -136,15 +140,26 @@ class Graph
 
     // function to add edge
 
-    void addEdge(){
+    void addEdge()
+    {
         // Taking input from user
         print("Enter the Node 1 : ");
         int node1;
-        cin>>node1;
+        cin >> node1;
+        if (node1 < 0 || node1 >= this->noOfNodes)
+        {
+            print("Invalid node index!");
+            return;
+        }
 
         print("Enter the node2 : ");
         int node2;
-        cin>>node2;
+        cin >> node2;
+        if (node2 < 0 || node2 >= this->noOfNodes)
+        {
+            print("Invalid node index!");
+            return;
+        }
 
         // creating an edge
 
@@ -153,25 +168,36 @@ class Graph
 
     // function to delete edge
 
-    void deleteEdge(){
+    void deleteEdge()
+    {
         // Taking input from user
         print("Enter the Node 1 : ");
         int node1;
-        cin>>node1;
+        cin >> node1;
+        if (node1 < 0 || node1 >= this->noOfNodes)
+        {
+            print("Invalid node index!");
+            return;
+        }
 
         print("Enter the node2 : ");
         int node2;
-        cin>>node2;
+        cin >> node2;
+        if (node2 < 0 || node2 >= this->noOfNodes)
+        {
+            print("Invalid node index!");
+            return;
+        }
 
-        // creating an edge
+        // deleting an edge
 
         matrix[node1][node2] = 0;
     }
 
     // BFS traversal
 
-
-    void bfs(){
+    void bfs()
+    {
 
         print("Bfs Traversal - ");
 
@@ -179,60 +205,99 @@ class Graph
 
         bool *visitedArray = new bool[this->noOfNodes];
 
-        for(int index=0; index<this->noOfNodes; index++){
+        for (int index = 0; index < this->noOfNodes; index++)
+        {
             visitedArray[index] = 0;
         }
 
         // BFS traversal for directed graph
 
-        for(int node = 0; node < this->noOfNodes; node++){
+        for (int node = 0; node < this->noOfNodes; node++)
+        {
 
-            if(!visitedArray[node]){
+            if (!visitedArray[node])
+            {
                 // Queue with my own declared class
                 Queue q;
                 q.enqueue(node);
                 visitedArray[node] = true;
 
-                while(!Queue.isEmpty()){
-                    int front = Queue.dequeue();
-                    cout<<" "<<front;
+                while (!q.isEmpty())
+                {
+                    int front = q.dequeue();
+                    cout << " " << front;
 
-                    for(int col = 0; col<this->noOfNodes; col++){
+                    for (int col = 0; col < this->noOfNodes; col++)
+                    {
                         int linkedNode = visitedArray[matrix[front][col]];
-                        if(!visitedArray[linkedNode]){
-                            Queue.enqueue(linkedNode);
+                        if (!visitedArray[linkedNode])
+                        {
+                            q.enqueue(linkedNode);
 
                             visitedArray[linkedNode] = true;
                         }
                     }
                 }
-            }    
+            }
         }
-
-
-
     }
 
+    // DFS Traversal
 
-    // Dfs Traversal
+    void dfsHelper(int node, bool *visitedArray)
+    {
+        visitedArray[node] = true;
+        cout << node << " ";
 
-    void dfs(){
+        for (int col = 0; col < this->noOfNodes; col++)
+        {
+            int linkedNode = matrix[node][col];
+            if (linkedNode && !visitedArray[col])
+            {
+                dfsHelper(col, visitedArray);
+            }
+        }
+    }
 
+    void dfs()
+    {
+        print("DFS Traversal - ");
+
+        // Declaring and initializing visitedArray for marking node visited
+
+        bool *visitedArray = new bool[this->noOfNodes];
+
+        for (int index = 0; index < this->noOfNodes; index++)
+        {
+            visitedArray[index] = false;
+        }
+
+        // DFS traversal for directed graph
+
+        for (int node = 0; node < this->noOfNodes; node++)
+        {
+            if (!visitedArray[node])
+            {
+                dfsHelper(node, visitedArray);
+            }
+        }
     }
 
     // Display Graph in matrix
 
-    void display(){
-        
-        for(int row = 0; row<noOfNodes; row++){
-            for(int col = 0; col < noOfNodes; col++){
-                cout<<matrix[row][col]<<" ";
+    void display()
+    {
+
+        for (int row = 0; row < noOfNodes; row++)
+        {
+            for (int col = 0; col < noOfNodes; col++)
+            {
+                cout << matrix[row][col] << " ";
             }
-            cout<<endl;
+            cout << endl;
         }
     }
-
-}
+};
 
 int main()
 {
@@ -241,7 +306,7 @@ int main()
 
     int nodes;
     print("Enter the no. of nodes : ");
-    cin>>nodes;
+    cin >> nodes;
 
     // declaring graph object
 
@@ -252,8 +317,8 @@ int main()
     while (true)
     {
         print("Your Directed Graph -- ");
-        cout<<endl;
-        map.display();
+        cout << endl;
+        g.display();
 
         cout << endl;
 
@@ -287,6 +352,4 @@ int main()
             return 0;
         }
     }
-
-
 }

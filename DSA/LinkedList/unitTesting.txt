@@ -1,0 +1,97 @@
+Menu looks like this -
+===========================
+Your Linked List --
+
+Enter 1 for InsertToHead
+Enter 2 for insertAtTail
+Enter 3 for InsertionAtPosition
+Enter 4 for deleteByKey
+Enter 5 for deleteFromHead
+Enter 6 for deleteFromTail
+Enter 7 for deleteByPosition
+Enter 8 for updateByKey
+Enter 9 for updateAtPosition
+Enter 10 for sort
+Enter 11 to exit
+===========================
+
+1) Test Case for Insertion at beginning
+Input: 
+1
+
+Enter the data:22
+
+Output :
+Your Linked List -- 22 
+
+2) Test Case for Insertion at ending
+Input:
+2
+
+Enter the data:33
+
+Output: 
+Your Linked List -- 22 33
+
+3) Insert at specific position
+Input: 
+3
+
+Enter the position: 1
+
+Enter the data: 56
+
+Output: 
+Your Linked List -- 56 22 33
+
+4) Test Case for Deletion at beginning
+Input: 
+5
+
+Output: 
+Your Linked List -- 22 33
+
+5) Test Case for Deletion at end
+Input: 
+6
+
+Output: 
+Your Linked List -- 22 
+
+6) Test Case for Deletion at specific position
+Input: 
+7
+Enter a position
+1
+Output:
+Your Linked List --
+
+7) Test Case for Updating an existing element in the linked list
+Input: 
+8
+
+Enter the key: 66
+
+Enter the data to Update: 557
+
+Output: 
+Your Linked List -- 557 558 55
+
+10) Test Case for Sorting an unsorted linked list
+Input: 
+10
+
+Output:
+Your Linked List -- 55 98 662 6495
+
+11) Test Case for showall elements
+
+already displyed in menu
+
+12) Test case for exit 
+
+Input:
+11
+
+Ouput:
+terminating program
