@@ -68,6 +68,10 @@ public static class HashMapArray {
     int get(int key) {
         int index = hashFunction(key);
         int index1 = hashFunction1(key);
+        if(table[index] == null) {
+            System.out.println("Key not found");
+            return -1;
+        }
         while (table[index] != null && (!(table[index].key == key))) {
             index += index1;
             index %= capacity;

@@ -1,74 +1,29 @@
 Case 1 : (Invalid Choice)
-Input: ased
-Output:Please Enter Integer Choice Only
+Input : sd
+Output : Enter Integer Only
 
-Case 2 : (Invalid Node value while Creating new Linked List)
-Input : Enter your choice : 0
-        Please Enter the first Node Value: asd
-Output : Please Enter Integer Choice Only
+Case 2 : (Out of Range input choice)
+Input : 232
+Output : Invalid Choice
 
-Case 3 : (Invalid Node value while Inserting new Node)
-Input: Enter your choice : 1
-       Please Enter the Node Value: asd
-Output: Please Enter Integer Choice Only
+Case 3 : (Operation without Creating a HashMap)
+Input : 1
+Output : Create a HashMap first
 
-Case 4 : (Invalid Node value while Deleting Node)
+Case 4 : (Deleting a Value which is not present in hashmap)
+Input : Enter your choice : 2
+        Please Enter the key: 10
+Output : Key not found
+
+Case 5 : (Searching a Value which is not present in Hashmap)
+Input : Enter your choice :5
+       Please Enter the key: 200
+Output : -1 (Key not found)
+
+Case 6 : (User trying to delete from empty Hashmap)
+Input : Enter your choice : 2
+Output : Hashmap is empty
+
+Case 7 : (User trying to get all collisions from empty Hashmap)
 Input : Enter your choice : 4
-        Please Enter the Node Value: asd
-Output : Please Enter Integer Choice Only
-
-Case 5 : (Invalid Node value while Searching Node)
-Input : Enter your choice : 8
-        Please Enter the Node Value: asd
-Output : Please Enter Integer Choice Only
-
-Case 6 : (Enter choice out of range)
-Input : Enter your choice : 10
-Output : Please Enter Valid Choice
-
-Case 7 : (Performing Operation without creating Linked List)
-Input : Enter your choice : 1
-Output : Please Create Linked List First
-
-Case 8 : (Deleting from a Empty Linked List)
-Input : Enter your choice : 4
-        Please Enter the Node Value: 10
-Output : Linked List is Empty / Create a Linked List First
-
-Case 9 : (Searching in a Empty Linked List)
-Input : Enter your choice : 8
-        Please Enter the Node Value: 10
-Output : Linked List is Empty / Create a Linked List First
-
-Case 10 : (Deleting a Node which is not present in Linked List)
-Input : Enter your choice : 4
-        Please Enter the Node Value: 10
-Output : Node not found in Linked List
-
-Case 11 : (Searching a Node which is not present in Linked List)
-Input : Enter your choice : 8
-        Please Enter the Node Value: 10
-Output : Node not found in Linked List
-
-Case 12 : (Deleting a Node from a Single Node Linked List)
-Input : Enter your choice : 4
-        Please Enter the Node Value: 10
-Output : Linked List will now be Empty
-
-Case 13 : (Searching a Node from a Single Node Linked List)
-Input : Enter your choice : 8 (Linked List is 10 -> null)
-        Please Enter the Node Value: 10
-Output : Node Found
-
-Case 14 : (Updating the value of a Node which is not present in Linked List)
-Input : Enter your choice : 6 (Linked List is 10 -> 20 -> 30 -> null)
-        Please Enter the Node Value: 70
-        Please Enter the new value of the node: 100
-        Output : Node does not exists in Linked List
-                10 20 30
-
-Case 15 : (Updating the value of a Node with same value as previous)
-Input : Enter your choice : 6 (Linked List is 10 -> 20 -> 30 -> null)
-        Please Enter the Node Value: 10
-        Please Enter the new value of the node: 10
-        Output : The new value is same as the old value
+Output : Collisions: 0 (Hashmap is empty)

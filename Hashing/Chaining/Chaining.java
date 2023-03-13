@@ -55,6 +55,10 @@ public class Chaining {
         public void delete(int key) {
             int index = hashFunction(key);
             Pair temp = arr[index];
+            if(temp == null) {
+                System.out.println("Key not found");
+                return;
+            }
             if (temp.key == key) {
                 arr[index] = temp.next;
             } else {
@@ -86,7 +90,7 @@ public class Chaining {
             for (int i = 0; i < size; i++) {
                 Pair head = arr[i];
                 while (head != null) {
-                    System.out.print(head.key + " -> " + head.value);
+                    System.out.print(head.key + " -> " + head.value + " ");
                     head = head.next;
                 }
                 System.out.println();

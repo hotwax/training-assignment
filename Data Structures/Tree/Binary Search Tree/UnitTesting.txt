@@ -6,14 +6,14 @@ Case 2 : (Out of Range input choice)
 Input : 232
 Output : Invalid Choice
 
-Case 3 : (Operation without Creating Graph)
+Case 3 : (Operation without Creating Binary Search Tree)
 Input : 1
-Output : Create a Graph First
+Output : Create a Binary Search Tree First
 
-Case 4 : (Adding a invalid edge)
-Input : Enter your choice : 1
-        Please Enter the Node Value: dgw
-Output : Please Enter Integer Only!!
+Case 4 : (Deleting a Node which is not present in Tree)
+Input : Enter your choice : 2
+        Please Enter the Node Value: 10
+Output : Node not found in Tree
 
 Case 5 : (Searching a Node which is not present in Tree)
 Input : Enter your choice :5

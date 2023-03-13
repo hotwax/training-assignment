@@ -21,12 +21,28 @@ class GraphMatrix {
 
     // Method to add an edge
     public void addEdge(int vertex, int vertex1) {
+        if(vertex >= this.vertex || vertex1 >= this.vertex || vertex < 0 || vertex1 < 0) {
+            System.out.println("The vertices does not exists");
+            return;
+        }
+        if(matrix[vertex][vertex1] == 1 || matrix[vertex1][vertex] == 1) {
+            System.out.println("The edge between " + vertex + " and " + vertex1 + " already exists");
+            return;
+        }
         matrix[vertex][vertex1] = 1;
         matrix[vertex1][vertex] = 1;
     }
 
     // Method to delete an edge
     public void deleteEdge(int vertex, int vertex1) {
+        if(vertex >= this.vertex || vertex1 >= this.vertex || vertex < 0 || vertex1 < 0) {
+            System.out.println("The vertices does not exists");
+            return;
+        }
+        if(matrix[vertex][vertex1] == 0 || matrix[vertex1][vertex] == 0) {
+            System.out.println("The edge between " + vertex + " and " + vertex1 + " does not exists");
+            return;
+        }
         matrix[vertex][vertex1] = 0;
         matrix[vertex1][vertex] = 0;
     }
