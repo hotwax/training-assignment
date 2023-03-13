@@ -136,6 +136,7 @@ class Main{
             System.out.println("Type Delete : To Delete Record");
             System.out.println("Type Search : To Search Record");
             System.out.println("Type display : To Display Records");
+            System.out.println("Type EXIT : To Display Records");
             System.out.println("Enter your selection ");
             try {
                 Scanner sc = new Scanner(System.in);
@@ -156,7 +157,7 @@ class Main{
                     case "display":
                         display();
                         break;
-                    case "exit":
+                    case "EXIT":
                         System.exit(0);
                         break;
                     default:

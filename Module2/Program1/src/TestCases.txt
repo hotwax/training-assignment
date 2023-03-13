@@ -1,0 +1,111 @@
+Case 1: If urls and word contains relevant data:
+
+Expected output:
+Python=616
+Java=485
+Programming=20
+C++=13
+hotwax=1
+
+Actual output:
+Pyhton=616
+Java=485
+Programming=20
+C++=13
+hotwax=1
+
+Case 2: urls.txt file is missing
+
+Expected output: 
+File not found
+After that the program terminates.
+
+Actual output:
+File not found
+After that the program teminates. 
+
+Case 3: words.txt file is missing. 
+
+Expected output 
+File not found
+
+Actual output
+File not found
+
+Case 4: If the words.txt file is empty.
+
+Expected Output: 
+File is not present or the file is empty.
+
+Actual Output:
+File is not present or the file is empty.
+
+Case 5: If the urls.txt file is empty.
+
+Expected Output:
+File is not present or may be empty.
+
+Actual Output:
+File is not present or may be empty.
+
+
+Case 6: if we entered a url which does not exist.
+
+Expected output
+URL : 1
+{Word =c++, frequency =31}
+{Word =java, frequency =28}
+{Word =Python, frequency =19}
+
+URL : 2
+Something wrong with URL
+
+Final:
+[{Word =c++, frequency =31}
+, {Word =java, frequency =28}
+, {Word =Python, frequency =19}
+]
+
+Actual output:
+URL : 1
+{Word =c++, frequency =31}
+{Word =java, frequency =28}
+{Word =Python, frequency =19}
+
+URL : 2
+Something wrong with URL
+
+Final:
+[{Word =c++, frequency =31}
+, {Word =java, frequency =28}
+, {Word =Python, frequency =19}
+]
+
+
+Case 7: If spelling of the word is given is wrong in words.txt
+
+Expected output:
+URL : 1
+{Word =c++, frequency =31}
+{Word =java, frequency =28}
+{Word =Python, frequency =19}
+
+Final:
+[{Word =c++, frequency =31}
+, {Word =java, frequency =28}
+, {Word =Python, frequency =19},
+]
+
+Actual Output:
+URL : 1
+{Word =c++, frequency =31}
+{Word =java, frequency =28}
+{Word =Pyhton, frequency =0}
+
+Final:
+[{Word =c++, frequency =31}
+, {Word =java, frequency =28}
+, {Word =Pyhton, frequency =0},
+]
+
+As we can see in the above test case that spelling of python is wrong and hence the frequency count is 0. 

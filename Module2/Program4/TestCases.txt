@@ -1,0 +1,47 @@
+Case 1: Output1.ser does not exists while Deserialization
+
+Input:
+Null or run the program
+
+Expected and Actual Output: 
+File does not exists
+java.io.FileNotFoundException: Output1.ser (The system cannot find the file specified)
+
+Case 2: Output1.ser is empty
+
+Input: 
+Null or run the program
+
+Expected & Actual Output: 
+File is Empty
+java.io.EOFException
+
+Case 3: Serialization done successfully.
+
+Input: 
+Null or run the program
+
+Expected & Actual Output: 
+Data Successfully Serialized.
+
+Case 4: Deserialization student objects from Output1.ser
+
+Input: 
+Null or run the program
+
+Output: Object has been Deserialized
+Ravi Jain 15-08-2001 Indore MP 462001 India
+Panther 10-12-2001 Jaipur Rajasthan 521001 India
+Shruti 12-03-2001 Lucknow Uttar Pradesh 456221 India
+Chandelier 21-04-1990 Mumbai Maharashtra 641011 India
+
+Case 5: After Changing dateofBirth type from java.lang.String to java.util.Date
+
+Input: 
+Null or run the program
+
+Expected & Actual Output: 
+java.io.InvalidClassException: Student; local class incompatible:
+stream classdesc serialVersionUID = -437576515925301227, local class
+serialVersionUID = 40185226767883506
+
