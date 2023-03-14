@@ -47,10 +47,10 @@ class WebContent {
   }
 
   // Sort the Map by Value
-  public static Map<String, Integer> sortByValue(Map<String, Integer> hm) {
+  public static Map<String, Integer> sortByValue(Map<String, Integer> hashmap) {
     // Create a list from elements of HashMap
     List<Map.Entry<String, Integer>> lists = new LinkedList<Map.Entry<String, Integer>>(
-        hm.entrySet());
+        hashmap.entrySet());
 
     // Sort the lists
     Collections.sort(
@@ -65,8 +65,8 @@ class WebContent {
 
     // put data from sorted list to hashmap
     Map<String, Integer> temp = new LinkedHashMap<String, Integer>();
-    for (Map.Entry<String, Integer> aa : lists) {
-      temp.put(aa.getKey(), aa.getValue());
+    for (Map.Entry<String, Integer> entry : lists) {
+      temp.put(entry.getKey(), entry.getValue());
     }
     return temp;
   }
@@ -86,6 +86,11 @@ public class Main {
       while (Reader.hasNext()) {
         urls.add(Reader.next());
       }
+      if(urls.size()==0)
+      {
+        System.out.println("No Url Found");
+        return ;
+      }
 
       // step 2 : - Fetch Words from the text file => words.txt
 
@@ -93,6 +98,11 @@ public class Main {
       Reader = new Scanner(new File("words.txt"));
       while (Reader.hasNext()) {
         words.add(Reader.next());
+      }
+      if(words.size()==0)
+      {
+        System.out.println("No Words Found");
+        return ;
       }
 
       // Step 3 : - Found words in URL
@@ -141,7 +151,7 @@ public class Main {
       }
       System.out.println("===========================================");
     } catch (FileNotFoundException e) {
-      System.out.println(e);
+      System.out.println("File Not Found");
     }
   }
 }
