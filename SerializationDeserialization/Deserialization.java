@@ -30,7 +30,7 @@ public class Deserialization
         } 
         catch (IOException | ClassNotFoundException exception) 
         {
-            System.out.println(exception);
+            System.out.println("File Not Found");
         }
     }
 }
