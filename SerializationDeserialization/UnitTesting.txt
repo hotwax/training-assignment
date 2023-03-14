@@ -1,0 +1,48 @@
+Test serialization 1:
+
+Run Serialization.java file to Serialize the Object
+Input: 
+Enter file name (File Exists) 
+"output1.ser" 
+
+Expected Output:
+Serialization Done
+=====================================================================================================
+Test serialization 2:
+
+Input:
+Enter file name (File DoesNot Exists) 
+"output1.ser" 
+
+Expected Output:
+Serialization Done
+
+======================================================================================================
+To Deserialize the Object Run Deserialization.txt file
+Test deserialization 3:
+
+ Enter file name (File Exists) 
+ output1.ser 
+ Name = Ram
+ DateOfBirth = Mon Jan 12 00:09:00 IST 1998
+ Address = City = Delhi, State = Delhi, PinCode = 110001, Country = India
+
+ Name = Shyam
+ DateOfBirth = Sat Jan 24 00:12:00 IST 1970
+ Address = City = Indore, State = Madhya Pradesh, PinCode = 110001, Country = India
+
+ Name = Adarsht
+ DateOfBirth = Sat Jan 20 00:06:00 IST 2001
+ Address = City = Mumbai, State = Maharashtra, PinCode = 110001, Country = India
+
+ Name = Hardik
+ DateOfBirth = Wed Jan 07 00:05:00 IST 2004
+ Address = City = Pilani, State = Goa, PinCode = 110001, Country = India
+========================================================================================================
+Test deserialization 4 :
+
+Enter file name (Entered File does Not exists) 
+output10.ser
+File Not Found
+
+========================================================================================================
