@@ -1,0 +1,97 @@
+Enter the size of the Hash map
+10
+
+Select an option from the DashBoard given below:
+1 : Insert
+2 : Delete
+3 : Get value of the key.
+4 : Display the Hashmap.
+5 : Search an element
+6 : Exit
+
+Case 1: Inserting value in the Hashmap.
+Input:
+Enter your choice : 
+1
+Please Enter the key and value: 
+2
+45
+
+Output:
+The key and value is inserted
+
+
+Case 2: Deleting an element from the Hashmap.
+
+Enter your choice :
+2
+Please Enter the node value : 
+4
+
+Output:
+The node is deleted.
+
+Case 3: Accessing the value of the key.
+
+Enter your choice :
+3
+Please Enter the key whose value you want: 1
+
+Output:
+56
+
+Case 4: Display the entire Hashmap.
+
+Input:
+Enter your choice : 
+4
+
+Output:
+Index 0 is connected to: 
+Index 1 is connected to: 1->56  
+Index 2 is connected to: 2->45
+Index 3 is connected to:
+Index 4 is connected to:
+Index 5 is connected to:
+Index 6 is connected to:
+Index 7 is connected to:
+Index 8 is connected to:
+Index 9 is connected to:
+
+Case 5: Searching an element in the Hashmap.
+Input:
+Enter your choice :
+5
+
+Output:
+Enter the key to search: 
+2
+2->45 is present in the hash map
+
+Case 6: Exiting the program.
+
+Enter your choice :
+6
+
+Output:
+Exiting the program.
+
+Case 7: The user entered an invalid option.
+
+Input:
+100
+
+Output:
+Invalid Choice!!
+Display menu again.
+
+Case 8: Searching a key not present in the Hashmap.
+
+Input:
+24
+
+Output:
+The key is not present in the Hashmap.
+Display the menu again.
+
+All the input mismatch exception have been handled by adding try and catch block in the code.

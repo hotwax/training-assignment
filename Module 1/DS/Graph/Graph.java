@@ -117,9 +117,8 @@ public class Graph {
                         System.out.println("Invalid Input");
                         break;
                 }
-            } catch (Exception e) {
-                // if user enter any other value than integer
-                System.out.println("e.getMessage()");
+            } catch (InputMismatchException ex) {
+                System.out.println(ex.getMessage());
             }
         }
 

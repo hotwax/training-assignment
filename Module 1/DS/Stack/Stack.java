@@ -125,6 +125,7 @@ public class Stack {
                     case 5:
                         flag = false;
                         break;
+                    
                      
                 }
                 System.out.println();

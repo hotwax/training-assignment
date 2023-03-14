@@ -144,7 +144,7 @@ public class SinglyLinkedList {
         do {
             // Printing the menu for the user
             System.out.println();
-            System.out.println("Select an option from the dashboard givene below:");
+            System.out.println("Select an option from the dashboard given below:");
             System.out.println("1 : Insert ");
             System.out.println("2 : Delete ");
             System.out.println("3 : Update ");
@@ -162,17 +162,20 @@ public class SinglyLinkedList {
                         if (head != null) {
                             System.out.print("Enter the Node Value: ");
                             head = insert(head, sc.nextInt());
+                            System.out.print("The node is successfully added. ");
                         }
                         break;
                     case 2:
                         System.out.print("Enter the Node Value: ");
                         head = deleteNode(head, sc.nextInt());
+                        System.out.print("The node is successfully deleted. ");
                         break;
                     case 3:
                         System.out.print(" Enter the Node Value which is to be updated: ");
                         updateNode(head, sc.nextInt());
                         break;
                     case 4:
+                        System.out.println("The linked list is successfully sorted.");
                         head = sortList(head);
                         break;
                     case 5:
