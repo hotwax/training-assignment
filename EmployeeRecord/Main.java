@@ -294,7 +294,15 @@ public class Main {
 
             // Enter Your Age
             System.out.println("Enter Your Age");
-            age = Reader.nextInt();
+            // age = Reader.nextInt();
+            String ageValid = Reader.next();
+            String regex = "[0-9]+";
+            while (!ageValid.matches(regex)) {
+              System.out.println("Age Should be a Number");
+              System.out.print("Enter Age Again ");
+              ageValid = Reader.next();
+            }
+            age = Integer.parseInt(ageValid);
 
             // Enter your Date of Birth
             System.out.println("Enter your Date of Birth in (dd/mm/yyyy) format ");
@@ -314,6 +322,7 @@ public class Main {
             Employee employee_object = new Employee( name , email, age, date_of_birth);
             list.add(employee_object); // Add the Object into the ArrayList 
             fileOperations_object.insertIntoFile(list); // Insert the list into File
+            System.out.println(name + " Added Successfully ");
             break;
           }
 
