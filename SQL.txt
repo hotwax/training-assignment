@@ -41,8 +41,9 @@ salespeople
 
 1) List all the columns of the Salespeople table. 
 Ans- 
-show columns 
-from 
+SHOW 
+  columns 
+FROM 
   salespeople;
 
 +-------+--------------+------+-----+---------+-------+
@@ -63,6 +64,22 @@ desc salespeople;
 | city  | varchar(100) | YES  |     | NULL    |       |
 | comm  | int          | YES  |     | NULL    |       |
 +-------+--------------+------+-----+---------+-------+
+
+SELECT 
+  COLUMN_NAME 
+FROM 
+  INFORMATION_SCHEMA.COLUMNS 
+WHERE 
+  TABLE_NAME = 'Salespeople';
+  
++-------------+
+| COLUMN_NAME |
++-------------+
+| snum        |
+| sname       |
+| city        |
+| comm        |
++-------------+
 
 2) List all customers with a rating of 100. 
 Ans- 
@@ -85,13 +102,14 @@ WHERE
 Ans- 
 SELECT 
   s.snum, 
-  s.sname, 
+  s.sname,
   MAX(o.amt) as max, 
   o.odate 
 FROM 
-  salespeople s, 
+  salespeople s
+INNER JOIN
   orders o 
-WHERE 
+ON 
   s.snum = o.snum 
 GROUP BY 
   S.SNUM, 
@@ -113,8 +131,8 @@ ORDER BY
 | 1004 | Motika  |  1900.1 | 1990-10-03 |
 | 1007 | Rifkin  | 1098.16 | 1990-10-03 |
 +------+---------+---------+------------+
-	
-4) Arrange the Order table by DESCending customer number. 
+
+4) Arrange the Order table by descending customer number. 
 Ans-  
 SELECT 
   cnum AS customer_no, 
@@ -151,9 +169,10 @@ SELECT
   o.odate, 
   o.amt 
 FROM 
-  salespeople sp, 
-  orders o 
-WHERE 
+  salespeople sp
+Inner join 
+  orders o
+ON  
   sp.snum = o.snum
 GROUP BY 
   snum  
@@ -177,9 +196,10 @@ SELECT
   c.cname, 
   s.sname 
 FROM 
-  salespeople s, 
+  salespeople s
+Right join
   customers c 
-WHERE 
+ON 
   s.snum = c.snum;
 
 +------+----------+---------+
@@ -201,9 +221,10 @@ SELECT
   s.snum, 
   COUNT(c.snum) AS no_orders 
 FROM 
-  salespeople s, 
+  salespeople s
+Left join  
   customers c 
-WHERE 
+ON 
   s.snum = c.snum 
 GROUP BY 
   s.snum, 
@@ -245,10 +266,11 @@ ORDER BY
 
 9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
 Ans- 
+
 SELECT 
-  * 
+  c.* 
 FROM 
-  customers 
+  customers c
 WHERE 
   (
     SELECT 
@@ -257,7 +279,21 @@ WHERE
       customers 
     WHERE 
       city = 'SanJose'
-  )>= 1;
+  ) >= 1;
+  
+SELECT 
+  * 
+FROM 
+  customers 
+WHERE 
+  EXISTS (
+    SELECT 
+      1 
+    FROM 
+      customers 
+    WHERE 
+      city = 'SanJose'
+  );
 
 +------+----------+---------+--------+------+
 | cnum | cname    | city    | rating | snum |
@@ -277,27 +313,29 @@ SELECT
   s.snum, 
   s.sname, 
   c.cnum, 
-  c.cname 
+  c.cname,
+  c.city
 FROM 
-  salespeople s, 
+  salespeople s
+INNER JOIN
   customers c 
-WHERE 
+ON 
   c.city = s.city 
 ORDER BY 
   s.snum;
 
-+------+--------+------+----------+
-| snum | sname  | cnum | cname    |
-+------+--------+------+----------+
-| 1001 | Peel   | 2001 | Hoffman  |
-| 1001 | Peel   | 2006 | Clemens  |
-| 1002 | Serres | 2003 | liu      |
-| 1002 | Serres | 2008 | Cisneros |
-| 1004 | Motika | 2001 | Hoffman  |
-| 1004 | Motika | 2006 | Clemens  |
-| 1008 | Fran   | 2001 | Hoffman  |
-| 1008 | Fran   | 2006 | Clemens  |
-+------+--------+------+----------+
++------+--------+------+----------+---------+
+| snum | sname  | cnum | cname    | city    |
++------+--------+------+----------+---------+
+| 1001 | Peel   | 2001 | Hoffman  | London  |
+| 1001 | Peel   | 2006 | Clemens  | London  |
+| 1002 | Serres | 2003 | liu      | SanJose |
+| 1002 | Serres | 2008 | Cisneros | SanJose |
+| 1004 | Motika | 2001 | Hoffman  | London  |
+| 1004 | Motika | 2006 | Clemens  | London  |
+| 1008 | Fran   | 2001 | Hoffman  | London  |
+| 1008 | Fran   | 2006 | Clemens  | London  |
++------+--------+------+----------+---------+
 
 11) Find all the customers in SanJose who have a rating above 200. 
 Ans- 
@@ -343,9 +381,10 @@ SELECT
   s.snum, 
   s.sname 
 FROM 
-  orders o, 
+  orders o
+INNER JOIN
   salespeople s 
-WHERE 
+ON
   o.snum = s.snum 
   AND s.sname = 'Motika';
 
@@ -358,28 +397,40 @@ WHERE
 14) Find all customers who booked orders on October 3. 
 Ans-
 SELECT 
-  * 
+    c.cnum,c.cname, orders.odate  
 FROM 
-  customers 
+  customers c
 WHERE 
   cnum IN (
     SELECT 
       cnum 
     FROM 
-      orders 
+      orders o
     WHERE 
       month(odate) = 10 
       AND day(odate) = 3
   );
   
-+------+----------+---------+--------+------+
-| cnum | cname    | city    | rating | snum |
-+------+----------+---------+--------+------+
-| 2001 | Hoffman  | London  |    100 | 1001 |
-| 2003 | liu      | SanJose |    200 | 1002 |
-| 2008 | Cisneros | SanJose |    300 | 1007 |
-| 2007 | Pereira  | Rome    |    100 | 1004 |
-+------+----------+---------+--------+------+
+SELECT 
+  c.cnum,c.cname, o.odate 
+FROM 
+  customers c 
+  INNER JOIN 
+  orders o 
+  ON c.cnum = o.cnum 
+WHERE 
+  o.odate = '1990-10-03'
+GROUP BY
+  c.cnum;
+
++------+----------+------------+
+| cnum | cname    | odate      |
++------+----------+------------+
+| 2001 | Hoffman  | 1990-10-03 |
+| 2003 | liu      | 1990-10-03 |
+| 2008 | Cisneros | 1990-10-03 |
+| 2007 | Pereira  | 1990-10-03 |
++------+----------+------------+
 
 15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
 Ans- 
@@ -397,7 +448,7 @@ HAVING
     FROM 
       orders
   );
-
+  
 Empty set 
 
 16) Select all orders that had amounts that were greater than at least one of the orders from October 6. 
@@ -440,7 +491,7 @@ WHERE
       customers c 
     WHERE 
       s.snum = c.snum 
-      and rating = 300
+      AND rating = 300
   );
 
 +------+--------+-----------+------+
@@ -453,11 +504,18 @@ WHERE
 18) Find all customers whose cnum is 1000 above the snum of Serres. 
 Ans- 
 SELECT 
+  c.* 
+FROM 
+  customers c 
+  JOIN salespeople s ON c.cnum = s.snum + 1000 
+  AND s.sname = 'Serres';
+
+SELECT 
   * 
 FROM 
   customers 
 WHERE 
-  cnum >(
+  cnum = (
     SELECT 
       snum + 1000 
     FROM 
@@ -465,15 +523,11 @@ WHERE
     WHERE 
       sname = 'Serres'
   );
-+------+----------+---------+--------+------+
-| cnum | cname    | city    | rating | snum |
-+------+----------+---------+--------+------+
-| 2003 | liu      | SanJose |    200 | 1002 |
-| 2004 | Grass    | Berlin  |    300 | 1002 |
-| 2008 | Cisneros | SanJose |    300 | 1007 |
-| 2006 | Cisneros | London  |    100 | 1001 |
-| 2007 | Pereira  | Rome    |    100 | 1004 |
-+------+----------+---------+--------+------+
++------+----------+------+--------+------+
+| cnum | cname    | city | rating | snum |
++------+----------+------+--------+------+
+| 2002 | Giovanni | Rome |    200 | 1003 |
++------+----------+------+--------+------+
 
 19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
 Ans-
@@ -482,15 +536,16 @@ SELECT
   s.sname,
   round(s.comm* 100 / SUM(o.amt),2) AS commission 
 FROM 
-  salespeople s,
+  salespeople s
+LEFT join
   orders o
-WHERE 
+ON 
   s.snum = o.snum 
 GROUP BY 
   snum
 ORDER BY
   snum;
-
+  
 +------+---------+------------+
 | snum | sname   | commission |
 +------+---------+------------+
@@ -499,7 +554,24 @@ ORDER BY
 | 1003 | AxelRod |       0.58 |
 | 1004 | Motika  |       0.58 |
 | 1007 | Rifkin  |       1.34 |
+| 1008 | Fran    |       NULL |
 +------+---------+------------+
+
+SELECT 
+    snum, sname, CONCAT(comm, '%') AS commission
+FROM
+    salespeople;
+
++------+---------+------------+
+| snum | sname   | commission |
++------+---------+------------+
+| 1001 | Peel    | 12%        |
+| 1002 | Serres  | 13%        |
+| 1004 | Motika  | 11%        |
+| 1007 | Rifkin  | 15%        |
+| 1003 | AxelRod | 10%        |
+| 1008 | Fran    | 25%        |
++------+---------+------------+	
 
 20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000. 
 Ans-
@@ -509,16 +581,17 @@ SELECT
   MAX(o.amt) AS MAX_amt, 
   o.odate 
 FROM 
-  orders o, 
+  orders o
+INNER JOIN
   salespeople s 
-WHERE 
+ON 
   o.snum = s.snum 
 GROUP BY 
   o.snum, 
   o.odate 
 HAVING 
   MAX_amt > 3000;
-	
+
 +------+--------+---------+------------+
 | snum | sname  | MAX_amt | odate      |
 +------+--------+---------+------------+
@@ -528,32 +601,32 @@ HAVING
 +------+--------+---------+------------+
 
 21) List all the largest orders for October 3, for each salesperson.  
-Ans-
+Ans-  
 SELECT 
-  s.snum, 
+  s.snum,
   s.sname, 
-  MAX(o.amt), 
-  o.odate 
+  o.odate, 
+  MAX(o.amt) as largest_order 
 FROM 
-  orders o, 
   salespeople s 
-WHERE 
-  o.snum = s.snum 
+  LEFT JOIN orders o 
+  ON 
+  s.snum = o.snum 
+  AND o.odate = '1990-10-03' 
 GROUP BY 
-  o.snum, 
-  o.odate 
-HAVING 
-  month(o.odate)= 10 
-  AND day(o.odate)= 3;
+  s.snum, 
+  o.odate;
 
-+------+--------+------------+------------+
-| snum | sname  | MAX(o.amt) | odate      |
-+------+--------+------------+------------+
-| 1007 | Rifkin |    1098.16 | 1990-10-03 |
-| 1001 | Peel   |     767.19 | 1990-10-03 |
-| 1004 | Motika |     1900.1 | 1990-10-03 |
-| 1002 | Serres |    5160.45 | 1990-10-03 |
-+------+--------+------------+------------+
++------+---------+------------+---------------+
+| snum | sname   | odate      | largest_order |
++------+---------+------------+---------------+
+| 1001 | Peel    | 1990-10-03 |        767.19 |
+| 1002 | Serres  | 1990-10-03 |       5160.45 |
+| 1004 | Motika  | 1990-10-03 |        1900.1 |
+| 1007 | Rifkin  | 1990-10-03 |       1098.16 |
+| 1003 | AxelRod | NULL       |          NULL |
+| 1008 | Fran    | NULL       |          NULL |
++------+---------+------------+---------------+
 
 22) Find all customers located in cities where Serres has customers. 
 Ans-
@@ -562,19 +635,23 @@ SELECT
 FROM 
   customers 
 WHERE 
-  city = (
+  city IN (
     SELECT 
-      city 
+      c.city 
     FROM 
-      salespeople 
-    WHERE 
-      sname = 'Serres'
+      customers c
+	  JOIN
+      salespeople s 
+    ON 
+      s.snum = c.snum 
+      AND s.sname = 'Serres'
   );
 
 +------+----------+---------+--------+------+
 | cnum | cname    | city    | rating | snum |
 +------+----------+---------+--------+------+
 | 2003 | liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
@@ -596,27 +673,14 @@ WHERE
 
 24) Count the number of salespeople currently having orders in the orders table. 
 Ans-
-SELECT 
-  s.snum, 
-  s.sname, 
-  COUNT(o.snum) AS count_snum 
-FROM 
-  salespeople s, 
-  orders o 
-WHERE 
-  s.snum = o.snum 
-GROUP BY 
-  s.snum;
+SELECT COUNT(DISTINCT snum) AS num_salespeople
+FROM Orders;
 
-+------+---------+------------+
-| snum | sname   | count_snum |
-+------+---------+------------+
-| 1007 | Rifkin  |          2 |
-| 1001 | Peel    |          3 |
-| 1004 | Motika  |          1 |
-| 1002 | Serres  |          3 |
-| 1003 | AxelRod |          1 |
-+------+---------+------------+
++-----------------+
+| num_salespeople |
++-----------------+
+|               5 |
++-----------------+
 
 25) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
 Ans-
@@ -625,12 +689,12 @@ SELECT
   s.sname, 
   s.comm 
 FROM 
-  salespeople s, 
+  salespeople s
+JOIN 
   customers c 
-WHERE 
+ON 
   s.snum = c.snum 
   AND s.comm > 12;
-
 
 +----------+--------+------+
 | cname    | sname  | comm |
@@ -646,9 +710,10 @@ SELECT
   s.snum, 
   s.sname 
 FROM 
-  salespeople s, 
+  salespeople s
+INNER JOIN
   customers c 
-WHERE 
+ON 
   s.snum = c.snum 
 GROUP BY 
   s.snum 
@@ -669,12 +734,12 @@ SELECT
   c.cname, 
   s.city 
 FROM 
-  salespeople s, 
+  salespeople s
+INNER JOIN
   customers c 
-WHERE 
+ON
   s.snum = c.snum 
   AND s.city = c.city;
-
 
 +--------+----------+---------+
 | sname  | cname    | city    |
@@ -698,23 +763,26 @@ Empty set (0.00 sec)
 
 29) Write a query that uses a subquery to obtain all orders for the customer named ‘Cisneros’. Assume you do not know his customer number. 
 Ans-
-SELECT 
-  c.cnum, 
-  c.cname, 
-  o.onum 
+SELECT
+	*
 FROM 
-  customers c, 
-  orders o 
+  Orders 
 WHERE 
-  c.cnum = o.cnum 
-  AND cname = 'Cisneros';
+  cnum = (
+    SELECT 
+      cnum 
+    FROM 
+      Customers 
+    WHERE 
+      cname = 'Cisneros'
+  );
 
-+------+----------+------+
-| cnum | cname    | onum |
-+------+----------+------+
-| 2008 | Cisneros | 3001 |
-| 2008 | Cisneros | 3006 |
-+------+----------+------+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
++------+---------+------------+------+------+
 
 30) Find the largest orders for Serres and Rifkin. 
 Ans-
@@ -723,8 +791,11 @@ SELECT
   s.sname, 
   MAX(o.amt) 
 FROM 
-  salespeople s, 
+  salespeople s
+INNER JOIN
   orders o 
+ON
+  s.snum=o.snum
 GROUP BY 
   s.sname 
 HAVING 
@@ -734,8 +805,8 @@ HAVING
 +------+--------+------------+
 | snum | sname  | MAX(o.amt) |
 +------+--------+------------+
-| 1007 | Rifkin |    9891.88 |
-| 1002 | Serres |    9891.88 |
+| 1007 | Rifkin |    1098.16 |
+| 1002 | Serres |    5160.45 |
 +------+--------+------------+
 
 31) Sort the salespeople table in the following order: snum, sname, commission, city. 
@@ -769,35 +840,45 @@ FROM
   customers 
 WHERE 
   cname BETWEEN 'A' 
-  AND 'G';
+  AND 'H';
 
+SELECT 
+    *
+FROM
+    customers
+WHERE
+    SUBSTR(cname, 1, 1) >= 'A'
+        AND SUBSTR(cname, 1, 1) <= 'G';
+		
 +------+----------+---------+--------+------+
 | cnum | cname    | city    | rating | snum |
 +------+----------+---------+--------+------+
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 | 2006 | Clemens  | London  |    100 | 1001 |
 +------+----------+---------+--------+------+
 
 33) Select all the possible combinations of customers you can assign. 
 Ans-
+
 SELECT 
-  * 
+  c1.cname, c2.cname, c1.snum  
 FROM 
-  customers c1, 
+  customers c1
+INNER JOIN
   customers c2 
-WHERE 
+ON 
   c1.snum = c2.snum 
-  AND c1.cname != c2.cname;
+  AND 
+  c1.cname != c2.cname AND c1.cname > c2.cname;
 
-
-+------+---------+---------+--------+------+------+---------+---------+--------+------+
-| cnum | cname   | city    | rating | snum | cnum | cname   | city    | rating | snum |
-+------+---------+---------+--------+------+------+---------+---------+--------+------+
-| 2006 | Clemens | London  |    100 | 1001 | 2001 | Hoffman | London  |    100 | 1001 |
-| 2004 | Grass   | Berlin  |    300 | 1002 | 2003 | liu     | SanJose |    200 | 1002 |
-| 2003 | liu     | SanJose |    200 | 1002 | 2004 | Grass   | Berlin  |    300 | 1002 |
-| 2001 | Hoffman | London  |    100 | 1001 | 2006 | Clemens | London  |    100 | 1001 |
-+------+---------+---------+--------+------+------+---------+---------+--------+------+
++---------+---------+------+
+| cname   | cname   | snum |
++---------+---------+------+
+| liu     | Grass   | 1002 |
+| Hoffman | Clemens | 1001 |
++---------+---------+------+
 
 34) Select all orders that are greater than the average for October 4. 
 Ans- 
@@ -858,7 +939,6 @@ WHERE
 36) Write a query that totals the orders for each day and places the results in descending order. 
 Ans-
 SELECT 
-  onum, 
   sum(amt) AS total, 
   odate 
 FROM 
@@ -868,14 +948,14 @@ GROUP BY
 ORDER BY 
   total DESC;
 
-+------+----------+------------+
-| onum | total    | odate      |
-+------+----------+------------+
-| 3010 | 11201.83 | 1990-10-06 |
-| 3001 |  8944.59 | 1990-10-03 |
-| 3008 |     4723 | 1990-10-05 |
-| 3009 |  1788.98 | 1990-10-04 |
-+------+----------+------------+
++----------+------------+
+| total    | odate      |
++----------+------------+
+| 11201.83 | 1990-10-06 |
+|  8944.59 | 1990-10-03 |
+|     4723 | 1990-10-05 |
+|  1788.98 | 1990-10-04 |
++----------+------------+
 
 37) Write a select command that produces the rating followed by the name of each customer in SanJose. 
 Ans-
@@ -903,16 +983,16 @@ SELECT
 FROM 
   orders 
 WHERE 
-  amt <(
+  amt < (
     SELECT 
       MAX(o.amt) 
     FROM 
-      customers c, 
-      orders o 
-    WHERE 
-      city = 'SanJose'
+      customers c 
+      JOIN 
+	  orders o 
+	  ON city = 'SanJose' 
+      AND c.cnum = o.cnum
   );
-
 
 +------+---------+------------+------+------+
 | onum | amt     | odate      | cnum | snum |
@@ -920,7 +1000,6 @@ WHERE
 | 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
 | 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
 | 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
-| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
 | 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
 | 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
 | 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
@@ -930,30 +1009,26 @@ WHERE
 
 39) Find all orders with above average amounts for their customers. 
 Ans-
-SELECT 
+SELECT  
   o.onum, 
   o.odate, 
   c.cname, 
   o.amt 
 FROM 
-  customers c, 
-  orders o 
-WHERE 
-  c.cnum = o.cnum 
-  AND o.amt >(
-    SELECT 
-      AVG(o2.amt) AS amt 
-    FROM 
-      orders o2
-  );
+orders o
+JOIN 
+customers c 
+ON 
+o.cnum = c.cnum
+WHERE o.amt > (SELECT AVG(amt) FROM orders o WHERE o.cnum = c.cnum);
 
-+------+------------+---------+---------+
-| onum | odate      | cname   | amt     |
-+------+------------+---------+---------+
-| 3005 | 1990-10-03 | liu     | 5160.45 |
-| 3011 | 1990-10-06 | Clemens | 9891.88 |
-| 3008 | 1990-10-05 | Clemens |    4723 |
-+------+------------+---------+---------+
++------+------------+----------+---------+
+| onum | odate      | cname    | amt     |
++------+------------+----------+---------+
+| 3006 | 1990-10-03 | Cisneros | 1098.16 |
+| 3010 | 1990-10-06 | Grass    | 1309.95 |
+| 3011 | 1990-10-06 | Clemens  | 9891.88 |
++------+------------+----------+---------+
 
 40) Write a query that selects the highest rating in each city. 
 Ans-
@@ -977,38 +1052,31 @@ GROUP BY
 41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00. 
 Ans-
 SELECT 
-  merge_table.snum, 
-  merge_table.cname, 
-  s.sname, 
-  merge_table.rating, 
-  s.comm, 
-  (merge_table.amt / 100)* s.comm AS comm_on_order 
+  o.onum, 
+  sp.snum, 
+  sp.sname, 
+  c.cname, 
+  c.rating, 
+  ROUND(o.amt * sp.comm / 100,2) AS commission 
 FROM 
-  (
-    Select 
-      o.*, 
-      c.cname, 
-      c.rating 
-    FROM 
-      customers c, 
-      orders o 
-    WHERE 
-      c.cnum = o.cnum
-  ) AS merge_table 
-  INNER JOIN salespeople AS s ON merge_table.snum = s.snum 
+  orders o 
+  RIGHT JOIN salespeople sp ON o.snum = sp.snum 
+  INNER JOIN customers c ON o.cnum = c.cnum 
 WHERE 
-  merge_table.rating > 100;
-
-+------+----------+---------+--------+------+--------------------+
-| snum | cname    | sname   | rating | comm | comm_on_order      |
-+------+----------+---------+--------+------+--------------------+
-| 1002 | Grass    | Serres  |    300 |   13 | 170.29350000000002 |
-| 1002 | Grass    | Serres  |    300 |   13 |             9.8475 |
-| 1002 | liu      | Serres  |    200 |   13 |           670.8585 |
-| 1007 | Cisneros | Rifkin  |    300 |   15 |            164.724 |
-| 1007 | Cisneros | Rifkin  |    300 |   15 |             2.8035 |
-| 1003 | Giovanni | AxelRod |    200 |   10 |            171.323 |
-+------+----------+---------+--------+------+--------------------+
+  c.rating > 100 
+ORDER BY 
+  o.onum;
+  
++------+------+---------+----------+--------+------------+
+| onum | snum | sname   | cname    | rating | commission |
++------+------+---------+----------+--------+------------+
+| 3001 | 1007 | Rifkin  | Cisneros |    300 |        2.8 |
+| 3005 | 1002 | Serres  | liu      |    200 |     670.86 |
+| 3006 | 1007 | Rifkin  | Cisneros |    300 |     164.72 |
+| 3007 | 1002 | Serres  | Grass    |    300 |       9.85 |
+| 3009 | 1003 | AxelRod | Giovanni |    200 |     171.32 |
+| 3010 | 1002 | Serres  | Grass    |    300 |     170.29 |
++------+------+---------+----------+--------+------------+
  
 42) Count the customers with ratings above SanJose’s average. 
 Ans-
@@ -1047,12 +1115,25 @@ WHERE
 +------+--------+-----------+------+
 | 1001 | Peel   | London    |   12 |
 | 1004 | Motika | London    |   11 |
-| 1007 | RifkIN | Barcelona |   15 |
+| 1007 | Rifkin | Barcelona |   15 |
 | 1008 | Fran   | London    |   25 |
 +------+--------+-----------+------+
 
 44) Find all salespeople with only one customer. 
 Ans-
+SELECT 
+    s.*
+FROM
+    salespeople AS s
+INNER JOIN 
+    customers AS c
+ON 
+    s.snum = c.snum
+GROUP BY 
+    s.snum
+HAVING 
+    COUNT(*) = 1;
+
 SELECT 
   * 
 FROM 
@@ -1062,9 +1143,10 @@ WHERE
     SELECT 
       s.snum 
     FROM 
-      salespeople s, 
+      salespeople s
+	  INNER JOIN 
       customers c 
-    WHERE 
+    ON 
       s.snum = c.snum 
     GROUP BY 
       s.snum 
@@ -1087,10 +1169,12 @@ SELECT
   c2.cname, 
   s.sname 
 FROM 
-  customers c1, 
-  customers c2, 
+  customers c1
+INNER JOIN
+  customers c2 
+INNER JOIN
   salespeople s 
-WHERE 
+ON 
   c1.snum = c2.snum 
   and c1.snum = s.snum 
   AND c1.cnum != c2.cnum;
@@ -1132,9 +1216,10 @@ SELECT
   o.onum, 
   c.cname 
 FROM 
-  customers c, 
+  customers c
+LEFT JOIN
   orders o 
-WHERE 
+ON 
   c.cnum = o.cnum
 ORDER BY
   o.onum;
@@ -1171,6 +1256,22 @@ WHERE
       s.sname = 'Serres'
   );
 
+SELECT 
+  * 
+FROM 
+  customers 
+WHERE 
+  rating >= ANY (
+    SELECT 
+      rating 
+    FROM 
+      customers, 
+      salespeople 
+    WHERE 
+      customers.snum = salespeople.snum 
+      AND salespeople.sname = 'Serres'
+  );
+
 +------+----------+---------+--------+------+
 | cnum | cname    | city    | rating | snum |
 +------+----------+---------+--------+------+
@@ -1192,6 +1293,14 @@ WHERE
     day(odate)= 3 
     or day(odate)= 4
   );
+  
+  SELECT *
+FROM orders
+WHERE odate = '1990-10-03' OR odate = '1990-10-04';
+
+SELECT *
+FROM orders
+WHERE odate IN ('1990-10-03', '1990-10-04');
 
 +------+---------+------------+------+------+
 | onum | amt     | odate      | cnum | snum |
@@ -1230,6 +1339,7 @@ WHERE
 
 51) Write a query on the Customers table whose output will exclude all customers with a rating&lt;= 100.00, unless they are located in Rome. 
 Ans-
+
 SELECT 
   * 
 FROM 
@@ -1277,9 +1387,10 @@ SELECT
     2
   ) AS sum 
 FROM 
-  orders o, 
-  salespeople s 
-WHERE 
+  salespeople s
+LEFT JOIN   
+  orders o
+ON
   s.snum = o.snum 
 GROUP BY 
   s.snum 
@@ -1318,6 +1429,31 @@ Empty set (0.00 sec)
 
 55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
 Ans-
+
+if we have to combine those salespeople & customers who are serving each other
+
+SELECT 
+  s.sname, 
+  c.cname, 
+  c.rating 
+FROM 
+  salespeople s
+LEFT JOIN  
+  customers c  
+ON 
+  s.snum=c.snum
+WHERE
+  s.sname < c.cname 
+  AND c.rating < 200;
+
++--------+---------+--------+
+| sname  | cname   | rating |
++--------+---------+--------+
+| Motika | Pereira |    100 |
++--------+---------+--------+
+
+if we have to combine all salespeople & customers irrespective 
+
 SELECT 
   s.sname, 
   c.cname, 
@@ -1326,15 +1462,20 @@ FROM
   customers c, 
   salespeople s 
 WHERE 
-  c.snum = s.snum 
-  AND s.sname < c.cname 
+  s.sname < c.cname 
   AND c.rating < 200;
 
-+--------+---------+--------+
-| sname  | cname   | rating |
-+--------+---------+--------+
-| Motika | Pereira |    100 |
-+--------+---------+--------+
++---------+---------+--------+
+| sname   | cname   | rating |
++---------+---------+--------+
+| Peel    | Pereira |    100 |
+| Motika  | Pereira |    100 |
+| AxelRod | Pereira |    100 |
+| AxelRod | Clemens |    100 |
+| AxelRod | Hoffman |    100 |
+| Fran    | Pereira |    100 |
+| Fran    | Hoffman |    100 |
++---------+---------+--------+
 
 56) Find all salespeople name and commission. 
 Ans-
@@ -1358,6 +1499,29 @@ FROM
 57) Write a query that produces the names and cities of all customers with the same rating as Hoffman. Write the query using Hoffman’s cnum rather than his rating, so that it would still be usable if his rating is changed. 
 Ans-
 SELECT 
+  c.cname, c.city 
+FROM 
+  customers h 
+  JOIN customers c ON h.rating = c.rating 
+WHERE 
+  h.cnum = 2001;
+  
+SELECT 
+  cname, 
+  city 
+FROM 
+  customers 
+WHERE 
+  rating = (
+    SELECT 
+      rating 
+    FROM 
+      customers 
+    WHERE 
+      cnum = 2001
+  );
+
+SELECT 
   cname, 
   city 
 FROM 
@@ -1375,7 +1539,7 @@ WHERE
         FROM 
           customers 
         WHERE 
-          cname = 'Hoffman'
+          cnum = 'Hoffman'
       )
   );
 
@@ -1394,9 +1558,10 @@ SELECT
   s.sname, 
   c.cname 
 FROM 
-  customers c, 
+  customers c
+INNER JOIN
   salespeople s 
-WHERE 
+ON 
   s.snum = c.snum 
   AND s.sname < c.cname;
 
@@ -1409,29 +1574,23 @@ WHERE
 
 59) Write a query that produces the names and ratings of all customers who have average orders. 
 Ans-
+
 SELECT 
-  c.cname, 
-  c.rating 
+  c.cname, c.rating 
 FROM 
-  customers c, 
-  orders o 
-WHERE 
-  c.cnum = o.cnum 
-  AND o.amt >(
+  customers c 
+  JOIN orders o ON c.cnum = o.cnum 
+GROUP BY 
+  c.cnum 
+HAVING 
+  AVG(o.amt) = (
     SELECT 
-      AVG(amt) AS amt 
+      AVG(amt) 
     FROM 
       orders
-  ) 
-GROUP BY 
-  cname;
-
-+---------+--------+
-| cname   | rating |
-+---------+--------+
-| liu     |    200 |
-| Clemens |    100 |
-+---------+--------+
+  );
+  
+Empty set (0.00 sec) 
 
 60) Find the SUM of all Amounts from the orders table. 
 Ans-
@@ -1487,7 +1646,6 @@ FROM
 WHERE 
   rating IS NOT NULL;
 
-
 +--------------+
 | count_rating |
 +--------------+
@@ -1501,13 +1659,11 @@ SELECT
   s.sname, 
   c.cname 
 FROM 
-  orders o, 
-  customers c, 
-  salespeople s 
-WHERE 
-  o.snum = c.snum 
-  AND c.snum = s.snum 
-  AND o.cnum = c.cnum;
+  orders o 
+  INNER JOIN salespeople s ON o.snum = s.snum 
+  INNER JOIN customers c ON o.cnum = c.cnum 
+ORDER BY 
+  onum;
 
 +------+---------+----------+
 | onum | sname   | cname    |
@@ -1531,9 +1687,10 @@ SELECT
   s.comm, 
   c.city 
 FROM 
-  customers c, 
+  customers c
+INNER JOIN
   salespeople s 
-WHERE 
+ON 
   s.snum = c.snum 
   AND c.city = 'London' 
 GROUP BY 
@@ -1555,16 +1712,16 @@ WHERE
       city = 'London'
   );
 
-+-------+------+
-| sname | comm |
-+-------+------+
-| Peel  |   12 |
-+-------+------+
++-------+------+--------+
+| sname | comm | city   |
++-------+------+--------+
+| Peel  |   12 | London |
++-------+------+--------+
 
 65) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
 Ans-
 SELECT 
-  * 
+  *  
 FROM 
   salespeople s 
 WHERE 
@@ -1575,7 +1732,7 @@ WHERE
       customers c 
     WHERE 
       c.snum = s.snum
-  );
+  ) ;
 
 +------+---------+-----------+------+
 | snum | sname   | city      | comm |
@@ -1618,14 +1775,14 @@ SELECT
   c.*, 
   s.sname 
 FROM 
-  customers c, 
-  salespeople s 
-WHERE 
+  customers c
+INNER JOIN
+  salespeople s
+ON  
   s.snum = c.snum 
-  AND (
+WHERE 
     s.sname = 'Peel' 
-    or s.sname = 'Motika'
-  );
+    or s.sname = 'Motika';
 
 +------+---------+--------+--------+------+--------+
 | cnum | cname   | city   | rating | snum | sname  |
@@ -1641,9 +1798,10 @@ SELECT
   o.odate, 
   COUNT(DISTINCT s.sname) AS num_order 
 FROM 
-  salespeople s, 
+  salespeople s
+JOIN
   orders o 
-WHERE 
+ON 
   s.snum = o.snum 
 GROUP BY 
   o.odate;
@@ -1662,11 +1820,12 @@ Ans-
 SELECT 
   o.* 
 FROM 
-  orders o, 
+  orders o
+LEFT JOIN
   salespeople s 
-WHERE 
+ON 
   o.snum = s.snum 
-  AND s.city = 'London';
+WHERE s.city = 'London';
 
 +------+---------+------------+------+------+
 | onum | amt     | odate      | cnum | snum |
@@ -1680,29 +1839,39 @@ WHERE
 70) Find all orders by customers not located in the same cities as their salespeople. 
 Ans-
 SELECT 
-  o.* 
+  o.onum, o.amt, o.odate,
+  s.city as salespeople_city, 
+  c.city as customer_city 
 FROM 
-  orders o, 
-  customers c, 
-  salespeople s 
+  orders o 
+  JOIN customers c ON o.cnum = c.cnum 
+  JOIN salespeople s ON o.snum = s.snum 
 WHERE 
-  o.cnum = c.cnum 
-  AND o.snum = s.snum 
-  AND c.city != s.city;
+  c.city != s.city;
 
-+------+---------+------------+------+------+
-| onum | amt     | odate      | cnum | snum |
-+------+---------+------------+------+------+
-| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
-| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
-| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
-| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
-| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
-| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
-+------+---------+------------+------+------+
++------+---------+------------+------------------+---------------+
+| onum | amt     | odate      | salespeople_city | customer_city |
++------+---------+------------+------------------+---------------+
+| 3009 | 1713.23 | 1990-10-04 | New York         | Rome          |
+| 3010 | 1309.95 | 1990-10-06 | SanJose          | Berlin        |
+| 3007 |   75.75 | 1990-10-04 | SanJose          | Berlin        |
+| 3006 | 1098.16 | 1990-10-03 | Barcelona        | SanJose       |
+| 3001 |   18.69 | 1990-10-03 | Barcelona        | SanJose       |
+| 3002 |  1900.1 | 1990-10-03 | London           | Rome          |
++------+---------+------------+------------------+---------------+
 
 71) Find all salespeople who have customers with more than one current order. 
 Ans-
+SELECT 
+  DISTINCT s.* 
+FROM 
+  salespeople s 
+  INNER JOIN orders o ON s.snum = o.snum 
+GROUP BY 
+  o.cnum 
+HAVING 
+  COUNT(*) > 1;
+  
 SELECT 
   * 
 FROM 
@@ -1718,54 +1887,62 @@ WHERE
     HAVING 
       count(snum) > 1
   );
+
++------+--------+-----------+------+
+| snum | sname  | city      | comm |
++------+--------+-----------+------+
+| 1001 | Peel   | London    |   12 |
+| 1002 | Serres | SanJose   |   13 |
+| 1007 | Rifkin | Barcelona |   15 |
++------+--------+-----------+------+
   
 SELECT 
-  s.* 
+  s.*, count(s.snum) as number_of_orders
 FROM 
-  salespeople s, 
+  salespeople s
+Inner Join
   orders o 
-WHERE 
+ON 
   s.snum = o.snum 
 GROUP BY 
   o.snum 
 HAVING 
   count(s.snum)> 1;
 
-+------+--------+-----------+------+
-| snum | sname  | city      | comm |
-+------+--------+-----------+------+
-| 1007 | Rifkin | Barcelona |   15 |
-| 1001 | Peel   | London    |   12 |
-| 1002 | Serres | SanJose   |   13 |
-+------+--------+-----------+------+
++------+--------+-----------+------+------------------+
+| snum | sname  | city      | comm | number_of_orders |
++------+--------+-----------+------+------------------+
+| 1007 | Rifkin | Barcelona |   15 |                2 |
+| 1001 | Peel   | London    |   12 |                3 |
+| 1002 | Serres | SanJose   |   13 |                3 |
++------+--------+-----------+------+------------------+
 
 72) Write a query that extracts from the customer’s table every customer assigned to a salesperson, who is currently having at least one another customer(besides the customer being selected) with orders in the Orders Table. 
 Ans-
-SELECT 
-  * 
-FROM 
-  customers 
-WHERE 
-  snum IN (
-    SELECT 
+SELECT c.cnum, c.cname , o.onum, o.amt
+FROM customers c
+JOIN orders o 
+ON c.cnum = o.cnum
+WHERE c.snum IN (
+  SELECT 
       snum 
     FROM 
       customers 
     GROUP BY 
       snum 
     HAVING 
-      count(*) > 1
-  );
+      count(*) > 1)
+GROUP BY c.cnum
+HAVING COUNT(c.cnum) >= 1;
 
-	
-+------+---------+---------+--------+------+
-| cnum | cname   | city    | rating | snum |
-+------+---------+---------+--------+------+
-| 2001 | Hoffman | London  |    100 | 1001 |
-| 2003 | liu     | SanJose |    200 | 1002 |
-| 2004 | Grass   | Berlin  |    300 | 1002 |
-| 2006 | Clemens | London  |    100 | 1001 |
-+------+---------+---------+--------+------+
++------+---------+---------+--------+------+------+---------+
+| cnum | cname   | city    | rating | snum | onum | amt     |
++------+---------+---------+--------+------+------+---------+
+| 2001 | Hoffman | London  |    100 | 1001 | 3003 |  767.19 |
+| 2003 | liu     | SanJose |    200 | 1002 | 3005 | 5160.45 |
+| 2004 | Grass   | Berlin  |    300 | 1002 | 3007 |   75.75 |
+| 2006 | Clemens | London  |    100 | 1001 | 3008 |    4723 |
++------+---------+---------+--------+------+------+---------+
 
 73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
 Ans-
@@ -1790,7 +1967,6 @@ GROUP BY
 Ans-
 SELECT 
   snum, 
-  onum, 
   amt 
 FROM 
   orders 
@@ -1799,39 +1975,29 @@ WHERE
 GROUP BY 
   snum;
 
-+------+------+---------+
-| snum | onum | amt     |
-+------+------+---------+
-| 1004 | 3002 |  1900.1 |
-| 1002 | 3005 | 5160.45 |
-| 1007 | 3006 | 1098.16 |
-| 1003 | 3009 | 1713.23 |
-| 1001 | 3008 |    4723 |
-+------+------+---------+
++------+---------+
+| snum | amt     |
++------+---------+
+| 1004 |  1900.1 |
+| 1002 | 5160.45 |
+| 1007 | 1098.16 |
+| 1003 | 1713.23 |
+| 1001 |    4723 |
++------+---------+
+  
+SELECT DISTINCT o.snum
+FROM orders o
+WHERE o.amt > 1000;
 
-SELECT 
-  s.snum, 
-  s.sname, 
-  o.onum, 
-  o.amt 
-FROM 
-  salespeople s, 
-  orders o 
-WHERE 
-  s.snum = o.snum 
-  AND amt > 1000 
-GROUP BY 
-  snum;
-
-+------+---------+------+---------+
-| snum | sname   | onum | amt     |
-+------+---------+------+---------+
-| 1001 | Peel    | 3011 | 9891.88 |
-| 1002 | Serres  | 3010 | 1309.95 |
-| 1004 | Motika  | 3002 |  1900.1 |
-| 1007 | Rifkin  | 3006 | 1098.16 |
-| 1003 | AxelRod | 3009 | 1713.23 |
-+------+---------+------+---------+
++------+
+| snum |
++------+
+| 1004 |
+| 1002 |
+| 1007 |
+| 1003 |
+| 1001 |
++------+
 
 75) Write a query that lists customers in a descending order of rating. Output the rating field first, followed by the customer’s names and numbers. 
 Ans-
@@ -1872,8 +2038,17 @@ WHERE
 |  16.0000 | London |
 +----------+--------+
 
-77) FINd all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
+77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
 Ans-
+SELECT 
+    o.*
+FROM
+    orders o
+JOIN
+    customers c ON o.snum = c.snum
+WHERE
+    c.cnum = 2001;
+	
 SELECT 
   * 
 FROM 
@@ -1898,14 +2073,14 @@ WHERE
 
 78) Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive). 
 Ans-
+if we consider given percentage as comm/100
 SELECT 
   sname, 
   comm 
 FROM 
   salespeople 
 WHERE 
-  comm / 100 BETWEEN 0.10 
-  and 0.12;
+  comm / 100 BETWEEN 0.10 and 0.12;
 
 +---------+------+
 | sname   | comm |
@@ -1914,6 +2089,17 @@ WHERE
 | Motika  |   11 |
 | AxelRod |   10 |
 +---------+------+
+
+or 
+
+if we consider given percentage as whole 0.10% & 0.12%
+
+SELECT *
+FROM salespeople
+WHERE comm BETWEEN 0.10 AND 0.12;
+
+Empty set (0.00 sec)
+
 
 79) Write a query that will give you the names and cities of all salespeople in London with a commission above 0.10.
 Ans-
@@ -1941,9 +2127,10 @@ SELECT
   c.cname, 
   MIN(o.amt) as min_amt 
 FROM 
-  customers c, 
+  customers c
+LEFT JOIN
   orders o 
-WHERE 
+ON 
   c.snum = o.snum 
 GROUP BY 
   c.cnum;
@@ -1951,13 +2138,13 @@ GROUP BY
 +------+----------+---------+
 | cnum | cname    | min_amt |
 +------+----------+---------+
+| 2001 | Hoffman  |  767.19 |
+| 2002 | Giovanni | 1713.23 |
+| 2003 | liu      |   75.75 |
+| 2004 | Grass    |   75.75 |
 | 2008 | Cisneros |   18.69 |
 | 2006 | Clemens  |  767.19 |
-| 2001 | Hoffman  |  767.19 |
 | 2007 | Pereira  |  1900.1 |
-| 2004 | Grass    |   75.75 |
-| 2003 | liu      |   75.75 |
-| 2002 | Giovanni | 1713.23 |
 +------+----------+---------+
 
 81) Write a query that selects the first customer in alphabetical order whose name begins with ‘G’. 
@@ -1982,23 +2169,25 @@ LIMIT
 82) Write a query that counts the number of different non NULL city values in the customers table. 
 Ans-
 SELECT 
-  city, 
-  COUNT(city) AS COUNT 
+  COUNT(distinct city) AS COUNT 
 FROM 
   customers 
 WHERE 
-  city != 'NULL' 
-GROUP BY 
-  city;
+  city != 'NULL' ;
 
-+---------+-------+
-| city    | COUNT |
-+---------+-------+
-| London  |     2 |
-| Rome    |     2 |
-| SanJose |     2 |
-| Berlin  |     1 |
-+---------+-------+
+
+SELECT 
+  COUNT(distinct city) AS COUNT 
+FROM 
+  customers 
+WHERE 
+  city IS NOT NULL ;
+
++-------+
+| COUNT |
++-------+
+|     4 |
++-------+
 
 83) Find the average amount from the Orders Table. 
 Ans-
@@ -2031,15 +2220,12 @@ WHERE
 
 85) Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm &lt; 0.14); 
 Ans-
-SELECT 
-  * 
-FROM 
-  salespeople 
-WHERE 
-  (
-    comm > 0.12 
-    OR comm < 0.14
-  );
+
+SELECT * FROM salespeople WHERE comm >+ 0.12 OR comm < 0.14;
+
+OR 
+
+SELECT * FROM salespeople WHERE comm/100 >+ 0.12 OR comm/100 < 0.14;
 
 +------+---------+-----------+------+
 | snum | sname   | city      | comm |
@@ -2060,11 +2246,12 @@ SELECT
   c.cname, 
   c.city 
 FROM 
-  salespeople s, 
+  salespeople s
+LEFT JOIN
   customers c 
-WHERE 
+ON 
   s.snum = c.snum 
-  AND s.city != c.city;
+WHERE s.city != c.city;
 
 +------+---------+-----------+------+------+----------+---------+
 | snum | sname   | city      | comm | cnum | cname    | city    |
@@ -2077,32 +2264,66 @@ WHERE
 
 87) Which salespeople get commission greater than 0.11 are serving customers rated less than 250? 
 Ans-
-SELECT 
-  s.*, 
-  c.cnum, 
-  c.cname, 
+If we consider they given comm as comm/100
+
+SELECT
+  s.*,  
   c.rating 
 FROM 
-  salespeople s, 
+  salespeople s
+INNER JOIN 
   customers c 
-WHERE 
+ON 
   s.snum = c.snum 
-  AND s.comm > 0.11 
-  AND c.rating < 250 
-GROUP BY 
-  s.snum;
+  AND s.comm/100 > 0.11 
+  AND c.rating < 250
+GROUP BY s.snum;
 
-+------+---------+----------+------+------+----------+--------+
-| snum | sname   | city     | comm | cnum | cname    | rating |
-+------+---------+----------+------+------+----------+--------+
-| 1001 | Peel    | London   |   12 | 2001 | Hoffman  |    100 |
-| 1003 | AxelRod | New York |   10 | 2002 | Giovanni |    200 |
-| 1002 | Serres  | SanJose  |   13 | 2003 | liu      |    200 |
-| 1004 | Motika  | London   |   11 | 2007 | Pereira  |    100 |
-+------+---------+----------+------+------+----------+--------+
++------+--------+---------+------+--------+
+| snum | sname  | city    | comm | rating |
++------+--------+---------+------+--------+
+| 1001 | Peel   | London  |   12 |    100 |
+| 1002 | Serres | SanJose |   13 |    200 |
++------+--------+---------+------+--------+
+
+if we consider given percentages as whole percentage
+
+SELECT
+  s.*,  
+  c.rating 
+FROM 
+  salespeople s
+INNER JOIN 
+  customers c 
+ON 
+  s.snum = c.snum 
+  AND s.comm> 0.11 
+  AND c.rating < 250
+GROUP BY s.snum;
+
++------+---------+----------+------+--------+
+| snum | sname   | city     | comm | rating |
++------+---------+----------+------+--------+
+| 1001 | Peel    | London   |   12 |    100 |
+| 1003 | AxelRod | New York |   10 |    200 |
+| 1002 | Serres  | SanJose  |   13 |    200 |
+| 1004 | Motika  | London   |   11 |    100 |
++------+---------+----------+------+--------+
 
 88) Which salespeople have been assigned to the same city but get different commission percentages? 
 Ans-
+SELECT 
+  s1.* 
+FROM 
+  salespeople s1 
+  JOIN salespeople s2 ON s1.city = s2.city 
+  AND s1.snum != s2.snum 
+  AND s1.comm != s2.comm 
+GROUP BY 
+  s1.snum 
+HAVING 
+  COUNT(*) > 0;
+
 SELECT 
   s1.* 
 FROM 
@@ -2129,25 +2350,29 @@ WHERE
 89) Which salesperson has earned the maximum commission? 
 Ans-
 SELECT 
-  * 
+  s.*, 
+  (
+    (round(SUM(o.amt)/ 100,2) )
+  ) * s.comm AS total_money_earned 
 FROM 
-  salespeople 
-WHERE 
-  comm =(
-    SELECT 
-      MAX(comm) 
-    FROM 
-      salespeople
-  );
+  salespeople AS s 
+  INNER JOIN orders AS o ON o.snum = s.snum 
+GROUP BY 
+  o.snum 
+ORDER BY 
+  total_money_earned DESC 
+LIMIT 
+  1;
 
-+------+-------+--------+------+
-| snum | sname | city   | comm |
-+------+-------+--------+------+
-| 1008 | Fran  | London |   25 |
-+------+-------+--------+------+
++------+-------+--------+------+--------------------+
+| snum | sname | city   | comm | total_money_earned |
++------+-------+--------+------+--------------------+
+| 1001 | Peel  | London |   12 |            1845.84 |
++------+-------+--------+------+--------------------+
 
 90) Does the customer who has placed the maximum number of orders have the maximum rating? 
 Ans-
+
 SELECT 
   c.cnum, 
   c.rating, 
@@ -2182,6 +2407,8 @@ HAVING
 | 2004 |    300 | 3007 |            2 |
 | 2006 |    100 | 3008 |            2 |
 +------+--------+------+--------------+
+
+The answer is yes they do have maximum rating 
 
 91) List all customers in descending order of customer rating. 
 Ans-
@@ -2226,47 +2453,51 @@ WHERE
 | 1990-10-03 |
 +------------+
 
+SELECT 
+  DISTINCT DAYNAME(odate) AS DAY 
+FROM 
+  orders 
+WHERE 
+  cnum = (
+    SELECT 
+      cnum 
+    FROM 
+      customers 
+    WHERE 
+      cname = 'Hoffman'
+  );
+
++-----------+
+| DAY       |
++-----------+
+| Wednesday |
++-----------+
+			
 93) Which salesmen have no orders between 10/03/1990 and 10/05/1990? 
 Ans-
 SELECT 
-  onum, 
-  snum 
+  s.snum,
+  s.sname
 FROM 
-  orders 
+  salespeople s 
+LEFT JOIN
+  orders o
+ON s.snum=o.snum
 WHERE 
   odate NOT BETWEEN '1990-10-03' 
   AND '1990-10-05';
   
-+------+------+
-| onum | snum |
-+------+------+
-| 3010 | 1002 |
-| 3011 | 1001 |
-+------+------+
-
-SELECT 
-  s.sname, 
-  o.odate 
-FROM 
-  orders o, 
-  salespeople s 
-WHERE 
-  s.snum = o.snum 
-  AND odate NOT BETWEEN '1990-10-03' 
-  AND '1990-10-05';
-
-+--------+------------+
-| sname  | odate      |
-+--------+------------+
-| Serres | 1990-10-06 |
-| Peel   | 1990-10-06 |
-+--------+------------+
++------+--------+
+| snum | sname  |
++------+--------+
+| 1002 | Serres |
+| 1001 | Peel   |
++------+--------+
 
 94) How many salespersons have succeeded in getting orders? 
 Ans-
 SELECT 
-  snum, 
-  sname 
+count(snum) as number_of_salespeople
 FROM 
   salespeople 
 WHERE 
@@ -2277,15 +2508,11 @@ WHERE
       orders
   );
 
-+------+---------+
-| snum | sname   |
-+------+---------+
-| 1001 | Peel    |
-| 1002 | Serres  |
-| 1004 | Motika  |
-| 1007 | Rifkin  |
-| 1003 | AxelRod |
-+------+---------+
++-----------------------+
+| number_of_salespeople |
++-----------------------+
+|                     5 |
++-----------------------+
 
 SELECT 
   s.snum, 
@@ -2312,8 +2539,7 @@ GROUP BY
 95) How many customers have placed orders? 
 Ans-
 SELECT 
-  cnum, 
-  cname 
+   count(snum) as number_of_customers
 FROM 
   customers 
 WHERE 
@@ -2324,18 +2550,12 @@ WHERE
       orders
   );
 
-+------+----------+
-| cnum | cname    |
-+------+----------+
-| 2001 | Hoffman  |
-| 2002 | Giovanni |
-| 2003 | liu      |
-| 2004 | Grass    |
-| 2008 | Cisneros |
-| 2006 | Clemens  |
-| 2007 | Pereira  |
-+------+----------+
-
++---------------------+
+| number_of_customers |
++---------------------+
+|                   7 |
++---------------------+  
+  
 SELECT 
   o.cnum, 
   COUNT(*) AS count 
@@ -2361,27 +2581,29 @@ ORDER BY
 96) On which date has each salesman booked an order of maximum value? 
 Ans-
 SELECT 
-  s.sname, 
   s.snum, 
+  s.sname, 
   MAX(o.amt) AS MAX_amt, 
   o.odate 
 FROM 
-  salespeople s, 
+  salespeople s
+LEFT JOIN  
   orders o 
-WHERE 
+ON
   s.snum = o.snum 
 GROUP BY 
   s.snum;
-  
-+---------+------+---------+------------+
-| sname   | snum | MAX_amt | odate      |
-+---------+------+---------+------------+
-| Rifkin  | 1007 | 1098.16 | 1990-10-03 |
-| Peel    | 1001 | 9891.88 | 1990-10-03 |
-| Motika  | 1004 |  1900.1 | 1990-10-03 |
-| Serres  | 1002 | 5160.45 | 1990-10-03 |
-| AxelRod | 1003 | 1713.23 | 1990-10-04 |
-+---------+------+---------+------------+
+
++------+---------+---------+------------+
+| snum | sname   | MAX_amt | odate      |
++------+---------+---------+------------+
+| 1001 | Peel    | 9891.88 | 1990-10-06 |
+| 1002 | Serres  | 5160.45 | 1990-10-06 |
+| 1004 | Motika  |  1900.1 | 1990-10-03 |
+| 1007 | Rifkin  | 1098.16 | 1990-10-03 |
+| 1003 | AxelRod | 1713.23 | 1990-10-04 |
+| 1008 | Fran    |    NULL | NULL       |
++------+---------+---------+------------+
 
 97) Who is the most successful salesperson? 
 Ans-
@@ -2390,22 +2612,23 @@ SELECT
   s.snum, 
   sum(o.amt) AS max_amt 
 FROM 
-  salespeople s, 
+  salespeople s
+INNER JOIN
   orders o 
-WHERE 
+ON 
   s.snum = o.snum 
 GROUP BY 
   s.snum 
 ORDER BY 
-  max_amt 
+  max_amt desc
 LIMIT 
   1;
 
-+--------+------+--------------------+
-| sname  | snum | max_amt            |
-+--------+------+--------------------+
-| Rifkin | 1007 | 1116.8500000000001 |
-+--------+------+--------------------+
++-------+------+----------+
+| sname | snum | max_amt  |
++-------+------+----------+
+| Peel  | 1001 | 15382.07 |
++-------+------+----------+
 
 98) Which customers have the same rating? 
 Ans-
@@ -2414,11 +2637,13 @@ SELECT
   c2.cname AS customer1, 
   c1.rating 
 FROM 
-  customers c1, 
+  customers c1
+INNER JOIN
   customers c2 
-WHERE 
+ON 
   c1.cnum != c2.cnum 
-  AND c1.rating = c2.rating 
+WHERE
+ c1.rating = c2.rating 
 GROUP BY 
   c1.cname, 
   c2.cname;
@@ -2504,9 +2729,10 @@ Ans-
 SELECT 
   c.*
 FROM 
-  customers c, 
+  customers c
+INNER JOIN
   orders o 
-WHERE 
+ON
   c.cnum = o.cnum 
   AND o.amt > (
     SELECT 
@@ -2516,7 +2742,6 @@ WHERE
   ) 
 GROUP BY 
   c.cnum;
-  
   
 SELECT 
    *
@@ -2552,9 +2777,10 @@ SELECT
   s.snum, 
   sum(o.amt) AS max_amt 
 FROM 
-  salespeople s, 
+  salespeople s
+LEFT JOIN
   orders o 
-WHERE 
+ON 
   s.snum = o.snum 
 GROUP BY 
   s.snum 
@@ -2576,27 +2802,40 @@ HAVING
 Ans-
 SELECT 
   s.sname, 
-  s.snum, 
-  COUNT(s.snum) AS num_customers 
+  s.snum
 FROM 
-  salespeople s, 
+  salespeople s
+JOIN  
   customers c 
-WHERE 
+ON 
   s.snum = c.snum 
 GROUP BY 
   s.snum 
 HAVING 
-  num_customers > 1;
+  COUNT(s.snum)  > 1;
 
-+--------+------+---------------+
-| sname  | snum | num_customers |
-+--------+------+---------------+
-| Peel   | 1001 |             2 |
-| Serres | 1002 |             2 |
-+--------+------+---------------+
++--------+------+
+| sname  | snum |
++--------+------+
+| Peel   | 1001 |
+| Serres | 1002 |
++--------+------+
 
 104) Select all salespeople by name and number who have customers in their city whom they don’t service. 
-Ans-
+Ans-  
+SELECT 
+  s.sname, 
+  s.snum 
+FROM 
+  customers c
+JOIN
+  salespeople s 
+ON 
+  c.snum != s.snum 
+  AND c.city = s.city 
+GROUP BY 
+  s.snum;
+
 SELECT 
   sname, 
   snum 
@@ -2613,28 +2852,17 @@ WHERE
       AND salespeople.snum != customers.snum
   );
   
-SELECT 
-  s.sname, 
-  s.snum 
-FROM 
-  customers c, 
-  salespeople s 
-WHERE 
-  c.snum != s.snum 
-  AND c.city = s.city 
-GROUP BY 
-  s.snum;
-
 +--------+------+
 | sname  | snum |
 +--------+------+
-| Serres | 1002 |
-| Motika | 1004 |
 | Fran   | 1008 |
+| Motika | 1004 |
+| Serres | 1002 |
 +--------+------+
 
 105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
 Ans-
+Yes it exceed
 
 SELECT 
   (
@@ -2649,9 +2877,9 @@ SELECT
   ) AS max_order, 
   (
     SELECT 
-      sum(
+      round(sum(
         (o.amt / 100)* s.comm
-      )* 5 AS total_comm 
+      ),2)* 5 AS total_comm 
     FROM 
       salespeople s, 
       orders o 
@@ -2659,12 +2887,12 @@ SELECT
       s.snum = o.snum 
       AND s.city IN('New York', 'London')
   ) AS max_comm;
-
-+-----------+--------------------+
-| max_order | max_comm           |
-+-----------+--------------------+
-|   18995.4 | 11130.911999999998 |
-+-----------+--------------------+
+	  
++-----------+----------+
+| max_order | max_comm |
++-----------+----------+
+|   18995.4 |  11130.9 |
++-----------+----------+
 
 106) Which are the date, order number, amt and city for each salesperson (by name) for the maximum order he has obtained? 
 Ans-
@@ -2672,25 +2900,26 @@ SELECT
   s.sname, 
   o.odate, 
   o.onum, 
-  MAX(o.amt), 
+  MAX(o.amt) as max_amt, 
   s.city 
 FROM 
-  salespeople s, 
+  salespeople s
+INNER JOIN
   orders o 
-WHERE 
+ON 
   s.snum = o.snum 
 GROUP BY 
   s.snum;
 
-+---------+------------+------+------------+-----------+
-| sname   | odate      | onum | MAX(o.amt) | city      |
-+---------+------------+------+------------+-----------+
-| Rifkin  | 1990-10-03 | 3001 |    1098.16 | Barcelona |
-| Peel    | 1990-10-03 | 3003 |    9891.88 | London    |
-| Motika  | 1990-10-03 | 3002 |     1900.1 | London    |
-| Serres  | 1990-10-03 | 3005 |    5160.45 | SanJose   |
-| AxelRod | 1990-10-04 | 3009 |    1713.23 | New York  |
-+---------+------------+------+------------+-----------+
++---------+------------+------+---------+-----------+
+| sname   | odate      | onum | max_amt | city      |
++---------+------------+------+---------+-----------+
+| Rifkin  | 1990-10-03 | 3001 | 1098.16 | Barcelona |
+| Peel    | 1990-10-03 | 3003 | 9891.88 | London    |
+| Motika  | 1990-10-03 | 3002 |  1900.1 | London    |
+| Serres  | 1990-10-03 | 3005 | 5160.45 | SanJose   |
+| AxelRod | 1990-10-04 | 3009 | 1713.23 | New York  |
++---------+------------+------+---------+-----------+
 
 107) Which salesperson is having lowest commission? 
 Ans-
@@ -2698,14 +2927,9 @@ SELECT
   * 
 FROM 
   salespeople 
-WHERE 
-  comm =(
-    SELECT 
-      MIN(comm) 
-    FROM 
-      salespeople
-  );
-	
+ORDER BY comm
+LIMIT 1;	
+
 +------+---------+----------+------+
 | snum | sname   | city     | comm |
 +------+---------+----------+------+

@@ -1439,17 +1439,22 @@ Empty set (0.00 sec)
 
 => Here we can use * instead of individual column name
 => also we can use between keyword because it works as inclusive
-=> If we consider the 0.12 & 0.14 as percentage then it will give empty set
+=> If we consider the 0.12 OR 0.14 as percentage then it will give empty set
 => If we consider the given data is comm/100 then we will have 
 => Two rows because Peel have comm as 12 and Serres have 13 
 => All other does not satisfy the condition
 
-+------+--------+---------+------+
-| snum | sname  | city    | comm |
-+------+--------+---------+------+
-| 1001 | Peel   | London  |   12 |
-| 1002 | Serres | SanJose |   13 |
-+------+--------+---------+------+
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1003 | AxelRod | New York  |   10 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+
 
 86) Which salespersons attend to customers not in the city they have been assigned to? 
 
@@ -1481,20 +1486,19 @@ Empty set (0.00 sec)
 | snum | sname  | city    | comm | rating |
 +------+--------+---------+------+--------+
 | 1001 | Peel   | London  |   12 |    100 |
-| 1001 | Peel   | London  |   12 |    100 |
 | 1002 | Serres | SanJose |   13 |    200 |
 +------+--------+---------+------+--------+
 
 => Otherwise if we consider the given 0.11 as whole percentage then
 
-+------+---------+----------+------+------+----------+--------+
-| snum | sname   | city     | comm | cnum | cname    | rating |
-+------+---------+----------+------+------+----------+--------+
-| 1001 | Peel    | London   |   12 | 2001 | Hoffman  |    100 |
-| 1003 | AxelRod | New York |   10 | 2002 | Giovanni |    200 |
-| 1002 | Serres  | SanJose  |   13 | 2003 | liu      |    200 |
-| 1004 | Motika  | London   |   11 | 2007 | Pereira  |    100 |
-+------+---------+----------+------+------+----------+--------+
++------+---------+----------+------+--------+
+| snum | sname   | city     | comm | rating |
++------+---------+----------+------+--------+
+| 1001 | Peel    | London   |   12 |    100 |
+| 1003 | AxelRod | New York |   10 |    200 |
+| 1002 | Serres  | SanJose  |   13 |    200 |
+| 1004 | Motika  | London   |   11 |    100 |
++------+---------+----------+------+--------+
 
 88) Which salespeople have been assigned to the same city but get different commission percentages? 
 
@@ -1568,18 +1572,26 @@ Empty set (0.00 sec)
 | 1990-10-03 |
 +------------+
 
+=> if we want day on that date 
+
++-----------+
+| DAY       |
++-----------+
+| Wednesday |
++-----------+
+
 93) Which salesmen have no orders between 10/03/1990 and 10/05/1990? 
 
 => We have to find which salespeople havn't received any order between 3rd & 5th oct
 => We have 2 orders on 6th oct which will be displayed over here
 => We should apply left join here to get data corresponding to each salesmen
 
-+------+--------+------+
-| snum | sname  | onum |
-+------+--------+------+
-| 1002 | Serres | 3010 |
-| 1001 | Peel   | 3011 |
-+------+--------+------+
++------+--------+
+| snum | sname  |
++------+--------+
+| 1002 | Serres |
+| 1001 | Peel   |
++------+--------+
 
 94) How many salespersons have succeeded in getting orders? 
 
