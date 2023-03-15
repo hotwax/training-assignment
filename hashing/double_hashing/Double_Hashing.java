@@ -20,7 +20,7 @@ public class Double_Hashing {
         }
     }
 
-    public Double_Hashing(int n, int m) {
+    public Double_Hashing(int m, int n) {
         this.m = m;
         this.n = n;
         collisions = 0;
@@ -81,20 +81,18 @@ public class Double_Hashing {
         while (arr[probe] != null && arr[probe].key != k) {
             probe = (probe + offset) % m;
             if (probe == start) {
-                System.out.println("not found;--inside");
+                System.out.println("Value not found");
                 return;
             }
         }
         //if encounter a null value then value to delete is not present
         if (arr[probe] == null) {
-            System.out.println("not found;--outside");
+            System.out.println("Value not found");
             return;
         }
         //we can't make arr value null(it will create problrm in searching) thats why maintained a deleted boolean array
         deleted[probe] = false;
-        for (int i = 0; i < m; i++) {
-            System.out.print(deleted[i] + " ");
-        }
+        System.out.println("Value Deleted Successfully");
         System.out.println();
     }
 
@@ -114,7 +112,6 @@ public class Double_Hashing {
         }
         //if encountered a null value then key is not present
         if (arr[probe] == null || !deleted[probe]) {
-            System.out.println("not found;--outside");
             return -1;
         }
         return arr[probe].val;
@@ -144,7 +141,7 @@ public class Double_Hashing {
         int m = sc1.nextInt();
         System.out.println("Enter size of HashMap");
         int n = sc1.nextInt();
-        Double_Hashing map = new Double_Hashing(n, m);
+        Double_Hashing map = new Double_Hashing(m, n);
         int val = 10, key = 1;
 
         while (flag) {

@@ -24,6 +24,7 @@ public class MyGraph {
     //adding edge 
     public void addEdge(int from, int to) {
         //make both Node a and b adjacent to each other (undirected graph)
+        if(from >= no_Of_Vertices || to >= no_Of_Vertices) return;
         adj.get(from).add(to);
         adj.get(to).add(from);
         System.out.println("Edge Added Successfully");
@@ -31,8 +32,21 @@ public class MyGraph {
 
     public void deleteEdge(int from, int to) {
         //remove both Nodes from each others adjacency list (undirected graph)
-        adj.get(from).remove(to);
-        adj.get(to).remove(from);
+        for (int i=0; i<adj.get(from).size(); i++){
+            if (adj.get(from).get(i) == to){
+                adj.get(from).remove(i);
+                break;
+            }
+        }
+ 
+        // Traversing through the second vector list
+        // and removing the first element from it
+        for (int i=0; i<adj.get(to).size(); i++){
+            if (adj.get(to).get(i) == from){
+                adj.get(to).remove(i);
+                break;
+            }
+        }
         System.out.println("Edge Deleted Successfully");
     }
 
@@ -68,6 +82,7 @@ public class MyGraph {
                 bfs_main(node, visited);
             }
         }
+        System.out.println();
     }
 
     public void bfs_main(int start, boolean[] visited) {
@@ -85,7 +100,6 @@ public class MyGraph {
                 }
             }
         }
-        System.out.println();
     }
 
     public static void main(String args[]) {

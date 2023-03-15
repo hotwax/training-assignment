@@ -21,7 +21,7 @@ public class Quadratic_Probing {
         }
     }
 
-    public Quadratic_Probing(int n, int m) {
+    public Quadratic_Probing(int m, int n) {
         this.m = m;
         this.n = n;
         collisions = 0;
@@ -63,19 +63,19 @@ public class Quadratic_Probing {
         while (arr[probe] != null && arr[probe].key != k) {
             probe = (hash(k) + offset + offset * offset) % m;
             if (probe == start) {
+                System.out.println("value Not Present.");
                 return;
             }
             offset++;
         }
         //if encounter a null value then value to delete is not present
         if (arr[probe] == null) {
+            System.out.println("value Not Present.");
             return;
         }
         //we can't make arr value null(it will create problrm in searching) thats why maintained a deleted boolean array
         deleted[probe] = false;
-        for (int i = 0; i < m; i++) {
-            System.out.print(deleted[i] + " ");
-        }
+        System.out.println("value deleted successfully");
         System.out.println();
     }
 
@@ -126,7 +126,7 @@ public class Quadratic_Probing {
         int m = sc1.nextInt();
         System.out.println("Enter size of HashMap");
         int n = sc1.nextInt();
-        Quadratic_Probing map = new Quadratic_Probing(n, m);
+        Quadratic_Probing map = new Quadratic_Probing(m, n);
 
         while (flag) {
 
@@ -152,8 +152,7 @@ public class Quadratic_Probing {
                         break;
                     case 3: //deletion
                         System.out.println("enter key to delete");
-                        map.delete(map.get(sc.nextInt()));
-                        System.out.println("value deleted successfully");
+                        map.delete(sc.nextInt());
                         break;
                     case 4:// traverse
                         System.out.println("traversal= ");

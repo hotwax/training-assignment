@@ -20,7 +20,7 @@ public class Linear_Probing {
         }
     }
 
-    public Linear_Probing(int n, int m) {
+    public Linear_Probing(int m, int n) {
         this.m = m;
         this.n = n;
         collisions = 0;
@@ -61,18 +61,18 @@ public class Linear_Probing {
         while (arr[probe] != null && arr[probe].key != k) {
             probe = (probe + offset) % m;
             if (probe == start) {
+                System.out.println("value Not Present");
                 return;
             }
         }
         //if encounter a null value then value to delete is not present
         if (arr[probe] == null) {
+            System.out.println("value Not Present");
             return;
         }
         //we can't make arr value null(it will create problrm in searching) thats why maintained a deleted boolean array
         deleted[probe] = false;
-        for (int i = 0; i < m; i++) {
-            System.out.print(deleted[i] + " ");
-        }
+        System.out.println("value deleted successfully");
         System.out.println();
     }
 
@@ -86,13 +86,11 @@ public class Linear_Probing {
             probe = (probe + offset) % m;
             //if we again reach to where we started, then element is not present 
             if (probe == start) {
-                System.out.println("not found;");
                 return -1;
             }
         }
         //if encountered a null value then key is not present
         if (arr[probe] == null || !deleted[probe]) {
-            System.out.println("not found;--outside");
             return -1;
         }
         return arr[probe].val;
@@ -119,7 +117,7 @@ public class Linear_Probing {
         int m = sc1.nextInt();
         System.out.println("Enter size of HashMap");
         int n = sc1.nextInt();
-        Linear_Probing map = new Linear_Probing(n, m);
+        Linear_Probing map = new Linear_Probing(m, n);
 
         while (flag) {
 
@@ -146,8 +144,7 @@ public class Linear_Probing {
                         break;
                     case 3: //delete
                         System.out.println("enter key to delete");
-                        map.delete(map.get(sc.nextInt()));
-                        System.out.println("value deleted successfully");
+                        map.delete(sc.nextInt());
                         break;
                     case 4:// traverse
                         System.out.println("traversal= ");

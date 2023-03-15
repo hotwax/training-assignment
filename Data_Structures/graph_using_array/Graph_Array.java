@@ -46,9 +46,9 @@ public class Graph_Array {
         visited[start] = true;
         System.out.print(start + " ");
         //call every node of graph wheather it is connected or disconnnected.
-        for (int neighbor : adj[start]) {
-            if (neighbor == 1 && !visited[neighbor]) {
-                dfs_main(neighbor, visited);
+        for (int i = 0; i < no_Of_Vertices; i++) {
+            if (adj[start][i] == 1 && !visited[i]) {
+                dfs_main(i, visited);
             }
         }
     }
@@ -58,28 +58,26 @@ public class Graph_Array {
         //call every node of graph wheather it is connected or disconnnected.
         for (int node = 0; node < no_Of_Vertices; node++) {
             if (!visited[node]) {
-                bfs_main(node);
+                bfs_main(node, visited);
             }
         }
+        System.out.println();
     }
 
-    public void bfs_main(int start) {
+    public void bfs_main(int start, boolean[] visited) {
         Queue<Integer> q = new LinkedList<>();
         q.add(start);
-        boolean visited[] = new boolean[no_Of_Vertices];
         visited[start] = true;
         while (!q.isEmpty()) {
             int u = q.poll();
             System.out.print(u + " ");
             //store all adjacent node of u into the queue if they are not visited
-            for (int neighbor : adj[u]) {
-                if (neighbor == 1 && !visited[neighbor]) {
-                    q.add(neighbor);
-                    visited[neighbor] = true;
+            for (int i = 0; i < no_Of_Vertices; i++) {
+                if (adj[start][i] == 1 && !visited[i]) {
+                    bfs_main(i, visited);
                 }
             }
         }
-        System.out.println();
     }
 
     public static void main(String args[]) {

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Chaining_HashTable {
     LinkedList<Pair> arr[];
-    int m,n;
+    int m;
     int collisions;
     class Pair{
         int key;
@@ -16,7 +16,6 @@ public class Chaining_HashTable {
     }
     public Chaining_HashTable(Integer m){
         this.m=m;
-        this.n=n;
         collisions=0;
         //creating bucket of size m
         arr=new LinkedList[m];
@@ -45,7 +44,6 @@ public class Chaining_HashTable {
         }
         //adding key to chain
         arr[hashValue].add(new Pair(k,v));
-        
     }
     public void traverse(){
         for(int i=0;i<arr.length;i++){
@@ -57,22 +55,27 @@ public class Chaining_HashTable {
     }
     public void delete(Integer k){
         int hashValue=hash(k);
-        if(arr[hashValue]==null) return ;
+        if(arr[hashValue]==null){
+            System.out.println("value Not Present");
+            return;
+        }
         //iterating to find matching key
         for(Pair p:arr[hashValue]){
             //if found pair with given key, then removing it
             if(p.key==k){
                 arr[hashValue].remove(p);
+                System.out.println("value deleted successfully");
                 return;
             }
         }
+        System.out.println("value Not Present");
     }
     public int hash(Integer k){
         return (k.hashCode()%m);
     }
     public int get(Integer k){ //O(size of chain)
         //iterate to chain stored at hash location to find value of provided key
-        
+        if(arr[hash(k)]==null) return -1;
         for(Pair p:arr[hash(k)]){
             if(p.key==k) return p.val;
         }
@@ -106,8 +109,7 @@ public class Chaining_HashTable {
                         break;
                    case 3: //delete
                        System.out.println("enter key to delete");
-                       map.delete(map.get(sc.nextInt()));
-                        System.out.println("value deleted successfully");
+                       map.delete(sc.nextInt());
                         break;
                    case 4:// traverse
                         System.out.println("traversal= ");
@@ -126,7 +128,6 @@ public class Chaining_HashTable {
             catch(Exception e){
                 System.out.println("Invalid input: please enter Integer value");
             }
-            
         }
     }
 }
