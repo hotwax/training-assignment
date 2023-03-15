@@ -33,6 +33,7 @@ public:
             queue[rear] = data;
             rear++;
         }
+        cout<<data<<" Inserted Sucessfully "<<endl;
         return;
     }
 
@@ -81,7 +82,7 @@ public:
             cout << " Queue is Empty " << endl;
             return;
         }
-        cout << queue[front] << endl;
+        cout <<"Element at Front is " <<queue[front] << endl;
         return;
     }
 };
@@ -93,7 +94,7 @@ int main()
     cin>>Size ;
     Queue q(Size);
     int choice = 0;
-    while (choice != 5)
+    while (true)
     {        
                   // MENU
         cout << "1. enqueue " << endl;
@@ -120,10 +121,10 @@ int main()
             break;
         case 5:
             cout<<"EXIT"<<endl;
-            break ;
+            return 0 ;
         default:
             cout<<"Invalid Choice"<<endl;
-            return 0 ;
+            break ;
         }
     }
     return 0;

@@ -96,6 +96,7 @@ public:
             }
             array_node->next = newNode;
         }
+        cout << "Insertion Done" << endl;
     }
 
     // Function to delete the Given key  if present
@@ -111,6 +112,7 @@ public:
             {
 
                 hash_table[hash_position] = array_node->next;
+                cout << "Operation Successful" << endl;
                 delete array_node;
                 return;
             }
@@ -207,7 +209,7 @@ public:
     }
     void getCollision()
     {
-        cout << collisions << endl;
+        cout <<"The Number of Collision Occured is "<<collisions << endl;
     }
 };
 int main()
@@ -283,7 +285,10 @@ int main()
         }
         case 7:
             cout << "Exit" << endl;
-            break;
+            return 0 ;
+        default:
+            cout<<"Invalid choice"<<endl;
+            break ;
         }
     }
 

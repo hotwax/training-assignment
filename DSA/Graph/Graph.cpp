@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 // Create a Queue Data Structure which is Used in BFS Traversal
+int vertices=0;
 class Queue
 {
 public:
@@ -94,6 +95,17 @@ public:
         cout << "Enter the Value of Vertex2" << endl;
         cin >> node2;
 
+        if(node1>vertices)
+        {
+            cout<<"Vertex1 Value is Inavlid , Vertex value should be Between 0 to "<<vertices<<endl;
+            return ;
+        }
+        if(node2>vertices)
+        {
+            cout<<"Value2 Value is Inavlid , Vertex value should be Between 0 to "<<vertices<<endl;
+            return ;
+        }
+
         adjacencyMatrix[node1][node2] = 1;
         adjacencyMatrix[node2][node1] = 1;
 
@@ -101,6 +113,7 @@ public:
         {
             firstNode = node1;
         }
+        cout<<"Edge Added"<<endl;
     }
 
     // Graph Traversal using BFS
@@ -177,6 +190,8 @@ public:
         // delete node by mark them 0 in matrix
         adjacencyMatrix[node1][node2] = 0;
         adjacencyMatrix[node2][node1] = 0;
+
+        cout<<"Operation Successful"<<endl;
         return;
     }
 
@@ -201,7 +216,7 @@ public:
 
 int main()
 {
-    int vertices;
+    
     cout << "Enter Number of vertices" << endl;
     cin >> vertices;
 
@@ -264,7 +279,8 @@ int main()
             break;
         }
         default:
-            return 0;
+            cout<<"Invalid Choice"<<endl;
+            break ;
         }
     }
     return 0;

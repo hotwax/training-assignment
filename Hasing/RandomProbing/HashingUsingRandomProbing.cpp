@@ -89,6 +89,7 @@ public:
             hash_table[hash_position]->value = value;
             return;
         }
+        cout<<"Insertion Done"<<endl;
     }
 
     // Function to delete the Given key  if present
@@ -110,6 +111,7 @@ public:
 
                 // decrementing size
                 size--;
+                cout<<"Operation Done"<<endl;
                 return;
             }
             else
@@ -185,7 +187,7 @@ public:
     }
     void getCollision()
     {
-        cout << collisions << endl;
+        cout <<"The Number of Collision Occured is "<<collisions << endl;
     }
 };
 int main()
@@ -259,9 +261,12 @@ int main()
             mp.getCollision();
             break;
         }
-        case 7:
+       case 7:
             cout << "Exit" << endl;
-            break;
+            return 0 ;
+        default:
+            cout<<"Invalid choice"<<endl;
+            break ;
         }
     }
 

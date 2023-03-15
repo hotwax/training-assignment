@@ -98,6 +98,7 @@ public:
             if (pointer_to_node->key == Key)
             {
                 hashTable[hash_position] = pointer_to_node->next;
+                cout << "Operation Successful" << endl;
                 return;
             }
             // Find the Node to delete
@@ -189,6 +190,7 @@ public:
             if (pointer_to_node == NULL)
             {
                 cout << "Key Not Found" << endl;
+                return ;
             }
             if (pointer_to_node->key == Key)
             {
@@ -197,6 +199,7 @@ public:
             else
             {
                 cout << "Key Not Found" << endl;
+                return ;
             }
         }
     }
@@ -212,7 +215,7 @@ int main()
     Hashmap mp(capacity);
 
     int choice = 0;
-    while (choice != 6)
+    while (true)
     {
         cout << endl;
         cout << "1. Insert the Key Value Pair in Hashmap" << endl;
@@ -232,6 +235,7 @@ int main()
             cout << "Enter the Key and Value to insert in the map ( Note : Enter key and its value separated by space )" << endl;
             cin >> key >> value;
             mp.Insert(key, value);
+            cout<<"Insertion Done"<<endl;
             break;
         }
         case 2:
@@ -265,9 +269,10 @@ int main()
         }
         case 6:
             cout << "Exit" << endl;
-            break;
-        default:
             return 0;
+        default:
+            cout<<"Invalid Choice"<<endl;
+            break;
         }
     }
     return 0;

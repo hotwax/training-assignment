@@ -38,6 +38,7 @@ public:
         }
         newNode->next = top;
         top = newNode;  // points top pointer to newNode
+        cout<<data<<" Inserted Sucessfully "<<endl; 
     }
 
     // return the top element of the stack 
@@ -63,10 +64,10 @@ public:
         }
         else
         {
+            cout << "The popped element is " << top->data << endl;
             Node *to_delete_node = top;
             top = top->next;
             delete to_delete_node;
-            cout<<"Operation SuccessFul"<<endl;
         }
     }
     
@@ -78,6 +79,7 @@ public:
         if (!nodePtr)
         {
             cout << "Stack is empty" << endl;
+            return ;
         }
         cout << endl;
         while (nodePtr != NULL)
@@ -89,6 +91,7 @@ public:
                 cout << "->";
             }
         }
+        cout<<endl;
     }
 };
 
@@ -97,33 +100,41 @@ int main()
 
     Stack s;
     int choice = 0;
-    while (choice != 5)
+    while (true)
     {
         cout << "1. push" << endl;
         cout << "2. pop" << endl;
         cout << "3. top" << endl;
-        cout << "4. Exit" << endl;
+        cout << "4. Display the stack" << endl;
+        cout << "5. Exit" << endl;
         cout << endl;
         cout << "Enter Your Choice" << endl;
         cin >> choice;
         switch (choice)
         {
-        case 1:
-        {
-            cout << "Enter Element to Insert" << endl;
-            int value = 0;
-            cin >> value;
-            s.push(value);
-            break;
-        }
-        case 2:
-            s.pop();
-            break;
-        case 3:
-            s.topp();
-            break;
-        default:
-            return 0;
+            case 1:
+            {
+                cout << "Enter Element to Insert" << endl;
+                int value = 0;
+                cin >> value;
+                s.push(value);
+                break;
+            }
+            case 2:
+                s.pop();
+                break;
+            case 3:
+                s.topp();
+                break;
+            case 4:
+                s.display();
+                break ;
+            case 5:
+                cout << "Exit" << endl;
+                return 0;
+            default:
+                cout << "Invalid Choice" << endl;
+                break ;
         }
     }
 }

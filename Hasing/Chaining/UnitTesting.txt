@@ -1,0 +1,114 @@
+Firstly , Program ask for Capacity of Hashmap
+Enter the Capacity of the Hashmap 
+10
+
+Main Menu
+1. Insert the Key Value Pair in Hashmap
+2. Delete the key from the hashmap
+3. Search the Key in the HashMap
+4. Preview the Hashmap
+5. Get the Value of the key in HashMap
+6. Get the Collisions
+7. Exit
+
+Test case 1 Enter Choice 1 Insert the Key Value Pair in Hashmap
+
+input
+Enter Your Choice
+1
+
+Expected Output
+Enter the Key and Value to insert in the map ( Note : Enter key and its value separated by space )
+10 20
+Insertion Done
+
+Test case 2 Enter Choice 2 Delete the key from the hashmap
+
+input
+Enter Your Choice
+2
+
+Expected output
+Enter the Key to be Deleted
+10
+Operation Successful
+
+Test case 3 Enter Choice 2 Delete the key which is not present in hashmap
+
+input
+Enter Your Choice
+2
+
+Expected output
+Enter the Key to be Deleted
+76
+Key is Not Present in the HashMap
+
+Test case 4 Enter Choice 3 Search the key 
+
+input
+Enter Your Choice
+3
+output
+Enter the Key to search
+10
+Key Found and its Value is 20
+
+Test case 5 Enter Choice 3 Search the key which is not present
+
+Input
+Enter Your Choice
+3
+Expected output
+Enter the Key to search
+89
+Key Not found
+
+Test case 6 Enter Choice 4 Preview
+
+input
+Enter Choice 4
+Expected Output
+Position 0 is connected to the keys are : 10->20  
+Position 1 is connected to the keys are :
+Position 2 is connected to the keys are : 2->8  92->76
+Position 3 is connected to the keys are :
+Position 4 is connected to the keys are :
+Position 5 is connected to the keys are :
+Position 6 is connected to the keys are :
+Position 7 is connected to the keys are : 7->8 
+
+Test case 7 Enter Choice 5 Get the Value of the key in HashMap
+
+Enter Your Choice
+5
+Enter the Key to get its Value
+10
+The Value of the Key 10 is 20
+
+Test case 8 Enter Choice 5 Get the Value of the key in HashMap (Key which not exists)
+
+Enter Your Choice
+5
+Enter the Key to get its Value
+55
+Key Not Found
+
+TestCase 9 Get Collisions
+
+Enter Choice 6
+
+output
+The Number of Collision Occured is 2
+
+Test case 10 Enter Choice 6 Exit 
+Enter Your Choice
+6
+Exit
+
+Test case 11 Enter Invalid Choice
+
+Enter Your Choice
+10
+Invalid Choice
+ 

@@ -1,0 +1,82 @@
+Main Menu
+
+1) Push
+2) Pop
+3) Display stack
+4) Top
+5) Exit
+
+TestCase1 : Push Element in Stack (If stack not full) 
+
+Enter choice:
+1
+
+Enter value to be pushed:
+10
+
+output:
+10 Inserted Sucessfully 
+
+TestCase2 : Push Element in Stack (If stack full) 
+
+Enter the Choice
+1
+
+Enter value to be pushed:
+10
+
+output:
+"Stack Overflow"
+
+TestCase3 : Pop Element from the stack (If stack not Empty) 
+
+Enter the Choice
+2
+output:
+The popped element is 10
+
+TestCase4 : Pop Element from the  Stack (If stack Empty) 
+Enter the Choice
+2
+output:
+Stack Underflow
+
+TestCase5 : get Top Element from the stack (If stack not empty) 
+Enter the Choice
+4
+output
+Element at Top is 10
+
+TestCase6 : get Top Element from the stack (If stack empty) 
+Enter the Choice
+4
+output
+Stack is Empty 
+
+TestCase7 : Display the stack (If stack not empty) 
+Enter the Choice
+3
+output:
+10 20 30 40 50
+
+TestCase8 : Display the stack (If stack empty) 
+Enter the Choice
+4
+output:
+stack is Empty
+
+Test case9  to Exit
+
+Enter Your Choice
+6
+
+Ouput:
+Exit
+
+Test case10  Invalid Choice
+
+Enter Your Choice
+10
+
+Ouput:
+Invalid Choice

@@ -25,6 +25,7 @@ public:
         {
             top++;
             stack[top] = value;
+            cout<<value<<" Inserted Sucessfully "<<endl; 
         }
     }
     
@@ -64,7 +65,7 @@ public:
             cout << "Stack is Empty" << endl;
             return;
         }
-        cout << stack[top] << endl;
+        cout <<"Element at Top is "<<stack[top] << endl;
     }
 };
 
@@ -110,13 +111,14 @@ int main()
         case 5:
         {
             cout << "Exit" << endl;
-            break;
+            return 0;
         }
         default:
         {
             cout << "Invalid Choice" << endl;
+            break ;
         }
         }
-    } while (choice != 5);
+    } while (true);
     return 0;
 }

@@ -45,6 +45,7 @@ public:
 
         rear->next = newNode;
         rear = newNode;
+        cout<<data<<" Inserted Sucessfully "<<endl;
     }
 
     // Pop the element from queue
@@ -71,7 +72,12 @@ public:
     // print the Front of the Queue
     void Front()
     {
-        cout<<front->data<<endl;
+        if(front==NULL)
+        {
+            cout << " Queue is Empty " << endl;
+            return; 
+        }
+        cout<<"Element at Front is " <<front->data<<endl;
     }
     
     // print the Queue
@@ -122,8 +128,12 @@ int main()
         case 4:
             q.display();
             break;
+        case 5:
+            cout<<"EXIT"<<endl;
+            return 0 ;
         default:
-            return 0  ;
+            cout<<"Invalid Choice"<<endl;
+            break ;
         }
     }
 }

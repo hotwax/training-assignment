@@ -65,6 +65,7 @@ public:
             Node * to_delete_node = node_pointer->next;
             node_pointer->next = node_pointer->next->next;
             delete (to_delete_node);
+            cout<<"Operation Successful"<<endl;
         }
         else
         {
@@ -103,6 +104,7 @@ public:
         {
             head = node_pointer->next;
             delete (node_pointer);
+            cout<<"Operation Successful"<<endl;
             return;
         }
         // find position
@@ -133,7 +135,11 @@ public:
         if(node_pointer == NULL)
         cout<<"Node not Found"<<endl;
         else if (node_pointer->data == previous_value)
-        node_pointer->data = new_value;
+        {
+            node_pointer->data = new_value;
+            cout<<"Operation Successful"<<endl;
+
+        }
 
         return ;
 
@@ -238,7 +244,7 @@ int main()
     Node *head = NULL;
     linkedList ll;
     int choice = 0;
-    while (choice != 6)
+    while (true)
     {
         // Menu
         cout << "Linked List" << endl
@@ -302,9 +308,17 @@ int main()
 
         case 4:
         {
+
             cout << "Sort the List" << endl;
+            if(head==NULL)
+            {
+                cout<<"List Is Empty"<<endl;
+                break ;
+            }
             Node * node_pointer = ll.merge_sort(head);
             head  = node_pointer ;
+            cout<<"Listed Sorted SuccessFully"<<endl;
+            ll.print(head);
             break;
         }
 
@@ -315,9 +329,10 @@ int main()
         }
         case 6 :
             cout<<"EXIT"<<endl;
-            break ;
+            return 0 ;
         default:
-           return 0 ;
+            cout<<"Invalid Choice"<<endl;
+            break;
         }
     }
 }

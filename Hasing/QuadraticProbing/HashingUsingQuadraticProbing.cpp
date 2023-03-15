@@ -88,6 +88,7 @@ public:
             hash_table[hash_position]->value = value;
             return;
         }
+        cout<<"Insertion Done"<<endl;
     }
 
     // Function to delete the Given key  if present
@@ -109,6 +110,7 @@ public:
                 delete to_delete_node;
                 // decrementing size
                 size--;
+                cout<<"Operation Done"<<endl;
                 return;
             }
             else
@@ -149,14 +151,17 @@ public:
     void display()
     {
         // i = index of array (hash_map)
+        int flag = 0 ;
         for (int i = 0; i < CAPACITY; i++)
         {
             if (hash_table[i] != NULL)
             {
+                flag = 1 ;
                 cout << hash_table[i]->key << " -> " << hash_table[i]->value;
                 cout << endl;
             }
         }
+        if(!flag) cout<<"HashMap is Empty"<<endl;
     }
 
     // Get the Value of the Key
@@ -184,7 +189,7 @@ public:
     }
     void getCollision()
     {
-        cout << collisions << endl;
+        cout <<"The Number of Collision Occured is "<<collisions << endl;
     }
 };
 int main()
@@ -260,7 +265,10 @@ int main()
         }
         case 7:
             cout << "Exit" << endl;
-            break;
+            return 0 ;
+        default:
+            cout<<"Invalid choice"<<endl;
+            break ;
         }
     }
 
