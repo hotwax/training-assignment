@@ -666,13 +666,12 @@ SELECT * FROM orders WHERE amt < ( SELECT MAX(amt) FROM orders WHERE cnum IN (SE
 
 39) Find all orders with above average amounts for their customers. 
 
-SELECT * FROM orders WHERE amt > (SELECT AVG(amt) FROM Orders) ;
-output:
+SELECT * FROM orders o1 WHERE amt > (SELECT AVG(o2.amt) FROM orders o2 WHERE o1.cnum=o2.cnum GROUP BY o2.cnum);
 +------+---------+----------+------+------+
 | ONUM | AMT     | ODATE    | CNUM | SNUM |
 +------+---------+----------+------+------+
-| 3005 | 5160.45 | 10/03/90 | 2003 | 1002 |
-| 3008 | 4723.00 | 10/05/90 | 2006 | 1001 |
+| 3006 | 1098.16 | 10/03/90 | 2008 | 1007 |
+| 3010 | 1309.95 | 10/06/90 | 2004 | 1002 |
 | 3011 | 9891.88 | 10/06/90 | 2006 | 1001 |
 +------+---------+----------+------+------+
 
