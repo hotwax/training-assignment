@@ -191,6 +191,7 @@ int main()
                 int value ;
                 cin>>value ;
                 root = t.insertNode(root , value);
+                cout<<value<<" Inserted Successful "<<endl;
                 break ;
             }
             case 2 :
@@ -221,28 +222,36 @@ int main()
             }
             case 4 :
             {
-                cout<<"Traversal Techniques :- "<<endl;
-                cout<<"1. PreOrder"<<endl;
-                cout<<"2. PostOrder"<<endl;
-                cout<<"3. Inorder"<<endl;
-                cout<<"Enter Your Choice"<<endl;
-                int choice1 = 0 ;
-                cin>>choice1 ;
-                if(choice1==1) t.preorder(root);
-                else if(choice1==2) t.postorder(root);
-                else if(choice1==3) t.inorder(root);
-                else cout<<"Invalid Choice"<<endl;
-                cout<<endl;
+                if(root==NULL)
+                {
+                    cout<<"There is no Node in Tree to Traverse"<<endl;
+                }
+                else
+                {
+                    cout<<"Traversal Techniques :- "<<endl;
+                    cout<<"1. PreOrder"<<endl;
+                    cout<<"2. PostOrder"<<endl;
+                    cout<<"3. Inorder"<<endl;
+                    cout<<"Enter Your Choice"<<endl;
+                    int choice1 = 0 ;
+                    cin>>choice1 ;
+                    if(choice1==1) t.preorder(root);
+                    else if(choice1==2) t.postorder(root);
+                    else if(choice1==3) t.inorder(root);
+                    else cout<<"Invalid Choice"<<endl;
+                    cout<<endl;
+                }
                 break ;
             }
             case 5:
             {
                 cout<<"EXIT"<<endl;
-                break ;
+                return 0 ;
             }
             default:
             {
-                return 0 ;
+                cout<<"Invalid Choice"<<endl;
+                break ;
             }
             
         }
