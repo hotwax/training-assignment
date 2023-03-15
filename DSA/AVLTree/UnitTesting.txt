@@ -1,0 +1,99 @@
+   Main Menu
+
+1. Insert Node   
+2. Traversal     
+3. Search        
+4. Delete        
+5. Exit
+Enter Your Choice 
+
+Testcase 1 Enter Your Choice 1 : Insert values into the AVL tree
+
+Enter the value of Node to insert
+10
+
+Expected output:
+Element Added in tree and Add elements to avl tree one by one
+
+Testcase 2 Enter Your Choice 1 : Insert out of range value into the AVL tree
+
+Input
+Enter the value of Node to insert
+20000
+Expected output:
+Value Should be Between 0 to 100
+
+TestCase 3 Enter Your Choice 4 Delete values from the AVL tree Which exists in Tree
+
+Enter the value of Node to delete
+1
+
+Expected Output:
+Operation Successful (It will delete the particular given number)
+
+TestCase 4 Enter Your Choice 4 Delete values from the AVL tree which doesnot exists
+
+Enter the value of Node to delete
+89
+
+Expected Output 
+Element Not present
+
+Test Case 5 Enter Your Choice 2 Traversal and Select 1 2 or 3 
+Imput 
+Enter Your Choice
+2
+Output
+Traversal Techniques :- 
+1. PreOrder
+2. PostOrder
+3. Inorder
+Enter Your Choice
+1
+
+Tree = 2 1 12 3 
+
+Test Case 6 Enter Your Choice 2 Traversal And give other than 1 2 or 3
+Imput 
+Enter Your Choice
+2
+Output
+Traversal Techniques :- 
+1. PreOrder
+2. PostOrder
+3. Inorder
+Enter Your Choice
+5
+
+Invalid Choice
+
+TestCase 7 Enter Choice 3 and Search for a value which is present in the AVL tree
+
+Input 
+Enter the value of Node to Search
+2
+Expected Output
+Element Found
+
+TestCase 8 Enter Choice 3 and Search for a value which is not present in the AVL tree
+
+Input 
+Enter the value of Node to Search
+87
+Expected Output
+Element Not Found
+
+Testcase 9 Enter Choice 5 Exit the program
+
+Input 
+5
+Expected Output
+EXIT
+
+
+Testcase 9 If User enter Invalid Number
+
+Input 
+10
+Expected Output
+invalid Choice

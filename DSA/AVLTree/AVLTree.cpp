@@ -2,6 +2,7 @@
 using namespace std;
 
 // Create a Node of a Tree having four fields data , left , right and height
+int flag = 0 ;
 class Node
 {
 public:
@@ -200,6 +201,7 @@ public:
             // node with only one child or no child
 
             // 0 child
+            flag = 1 ; 
             if (root->left == NULL && root->right == NULL)
             {
                 delete root;
@@ -380,7 +382,9 @@ int main()
             cout << "Enter the value of Node to delete" << endl;
             int value;
             cin >> value;
-            if (t.deleteNode(root, value))
+            flag=0 ;
+            t.deleteNode(root,value);
+            if (flag==1)
             {
                 cout << "Operation Successful" << endl;
             }
