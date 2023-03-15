@@ -1,0 +1,39 @@
+1. If words.txt file is not present
+
+output : File not found
+
+
+2. if urls.txt file is not present
+
+output : File not found
+
+
+3. Checking if the output of the problem is correct or not
+
+output :
+
+Top 3 words are on website url : https://webomnizz.com/change-parent-component-state-from-child-using-hooks-in-react/ are -
+Parent -> 8
+hooks -> 5
+create -> 2
+
+Top 3 words are on website url : https://medium.com/@salshaher/a-5-step-tutorial-on-clash-of-clans-api-2a1f397fcfcc are -
+create -> 3
+data -> 2
+clash -> 1
+tools -> 1
+
+Top 3 words are on website url : https://www.hotwaxsystems.com/ are -
+technology -> 8
+data -> 4
+future -> 2
+
+Top 3 words are on website url : https://www.geeksforgeeks.org/how-to-sort-a-treemap-by-value-in-java/ are -
+sorted -> 6
+keys -> 3
+always -> 1
+
+Total top 3 words are :
+Parent -> 8
+technology -> 8
+data -> 6

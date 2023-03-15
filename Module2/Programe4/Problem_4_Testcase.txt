@@ -1,0 +1,43 @@
+Serializes
+
+
+Testcase 1 : Program successfully serialize the data
+
+Input : "No need for the output"
+
+Output : Data Successfully Serialized.
+
+
+Testcase 2 : Check if the serialized data is inserted in a file 
+
+Input : "No need for the input"
+
+Output : data is inserted in a file which has path =  .../Output1.ser 
+
+
+Testcase 3 : What if the file is not found 
+
+Input : "No need for the input"
+
+Output : FileNotFoundException exception occurred 
+
+
+Deserializes
+
+Testcase 4 : What if the file is not found 
+
+Input : "No need for the input"
+
+Output : FileNotFoundException exception occurred 
+
+
+Testcase 5 : deserializes the data 
+
+Input : "No need for the input"
+
+Output :
+Pushpraj Singh 10/03/2001 Indore Madhya Pradesh 452001 India
+Anuj Pawar 15/04/2015 Bhopal Madhya Pradesh 462801 India
+Gourav Singh 17/12/2001 Indore Madhya Pradesh 452001 India
+Shivam Shukla 21/10/2002 Badnawar Madhya Pradesh 452521 India
+
