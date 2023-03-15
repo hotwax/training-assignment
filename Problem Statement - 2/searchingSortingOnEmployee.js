@@ -193,23 +193,45 @@ const searchEmployee = () => {
     const query = prompt("Enter the query(text) to search for employee : ");
 
     //search result variable
-    const searchResult = [];
+    let searchResult = [];
 
     //searching
     employeeList.forEach(emp => {
         const searchString = emp.name + emp.email + emp.age + emp.dob;
         if(searchString.toLowerCase().includes(query.toLowerCase())){
-            searchResult.push(emp);
+            newEmp = emp;
+            newEmp.dob = new Date(emp.dob).toLocaleString().split(',')[0];
+            searchResult.push(newEmp);
         }
     })
 
+    //sorting and asking how to sort
+    console.log(
+        '\nHow do you want to order the results - \n' + 
+        'Enter 1 to Order By Name \n' +
+        'Enter 2 to Order By Email \n' +
+        'Enter 3 to Order By Age \n' +
+        'Enter 4 to Order By Date of Birth \n'
+        );
+    let keyToSort = prompt('');
+    while(keyToSort < 1 || keyToSort > 4){
+        console.log('\nEnter a Valid Input!');
+        keyToSort = prompt('');
+    }
+
+    //For Direction of sorting
+    console.log('\nEnter the Direction to Sort\nEnter 1 for Ascending or 2 for Descending');
+    let direction = prompt('');
+    while(direction < 1 || direction > 2){
+        console.log('\nEnter a Valid Input!');
+        direction = prompt('');
+    }
+
+    searchResult = sortData(keyToSort, direction, searchResult);
+
     //printing the results
     console.log("\n Your Search Result : ");
-    searchResult.forEach(emp => {
-        emp.dob = new Date(emp.dob).toLocaleString().split(',')[0];
-        console.log(emp);
-    })
-
+    console.table(searchResult);
     //if no result found
     if(!searchResult.length){
         console.log("\nNo result found\n");
@@ -222,13 +244,48 @@ const searchEmployee = () => {
 // show all function
 const showAll = () => {
     //printing the all employees
-    console.log("\nYour  Result : \n");
-    employeeList.forEach(employee => {
-        console.log(`${employee.name},${employee.email},${employee.age},${new Date(employee.dob).toLocaleString().split(',')[0]}\n`);
+    let searchResult = [];
+    //searching
+    employeeList.forEach(emp => {
+        newEmp = emp;
+        newEmp.dob = new Date(emp.dob).toLocaleString().split(',')[0];
+        searchResult.push(newEmp);
     })
-
+    console.table(searchResult);
     // for menu
     showMenu();
+}
+
+//Creating a function which sorts data in array on the basis arg 1 which is key
+// and arg 2 which is direction and arg 3 the array which is data
+const sortData = (key, direction, data) => {
+    let sortedData = [];
+    switch (key) {
+        case '1':
+            sortedData = data.sort((emp1, emp2) => {
+                return direction = 1 ? (emp1.name > emp2.name ? 1 : -1) : (emp1.name < emp2.name ? 1 : -1);
+            })
+            break;
+        case '2':
+            sortedData = data.sort((emp1, emp2) => {
+                return direction = 1 ? (emp1.email > emp2.email ? 1 : -1) : (emp1.email < emp2.email ? 1 : -1);
+            })
+            break;
+        case '3':
+            sortedData = data.sort((emp1, emp2) => {
+                return direction = 1 ? (emp1.age > emp2.age ? 1 : -1) : (emp1.age < emp2.age ? 1 : -1);
+            })
+            break;
+        case '4':
+            sortedData = data.sort((emp1, emp2) => {
+                return direction = 1 ? (emp1.dob > emp2.dob ? 1 : -1) : (emp1.dob < emp2.dob ? 1 : -1);
+            })
+            break;
+        default:
+            break;
+    }
+
+    return sortedData;
 }
 
 // Starting the login from here
