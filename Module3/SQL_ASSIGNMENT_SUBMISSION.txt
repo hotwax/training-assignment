@@ -329,19 +329,18 @@ SNUM FROM SALESPEOPLE WHERE SALESPEOPLE.SNAME = "Serres");
 19.Give the salespeople’s commissions as percentages instead of decimal numbers. 
 
 Database changed
-mysql> SELECT SNUM,SNAME,CITY,(COMM*100)/(SELECT SUM(COMM) FROM SALESPEOPLE)
-    -> FROM SALESPEOPLE;
-+------+---------+-----------+------------------------------------------------+
-| SNUM | SNAME   | CITY      | (COMM*100)/(SELECT SUM(COMM) FROM SALESPEOPLE) |
-+------+---------+-----------+------------------------------------------------+
-| 1001 | Peel    | London    |                                        13.9535 |
-| 1002 | Serres  | SanJose   |                                        15.1163 |
-| 1004 | Motika  | London    |                                        12.7907 |
-| 1007 | Rifkin  | Barcelona |                                        17.4419 |
-| 1003 | AxelRod | New York  |                                        11.6279 |
-| 1008 | Fran    | London    |                                        29.0698 |
-+------+---------+-----------+------------------------------------------------+
-6 rows in set (0.00 sec)
+mysql> SELECT snum, sname, CONCAT(comm, '%') as comm_in_percentage
+FROM salespeople;
++------+---------+--------------------+
+| snum | sname   | comm_in_percentage |
++------+---------+--------------------+
+| 1001 | Peel    | 12%                |
+| 1002 | Serres  | 13%                |
+| 1003 | AxelRod | 10%                |
+| 1004 | Motika  | 11%                |
+| 1007 | Rifkin  | 15%                |
+| 1008 | Fran    | 25%                |
++------+---------+--------------------+
 
 
 20.Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000.
@@ -931,22 +930,9 @@ mysql> SELECT SUM(AMT) FROM ORDERS GROUP BY SNUM HAVING SUM(AMT)>(SELECT MAX(AMT
 
 54.Write a query that selects all orders save those with zeroes or NULL in the amount file. 
 
-mysql> SELECT * FROM ORDERS WHERE AMT IS NOT NULL;
-+------+---------+----------+------+------+
-| ONUM | AMT     | ODATE    | CNUM | SNUM |
-+------+---------+----------+------+------+
-| 3001 |   18.69 | 10/03/90 | 2008 | 1007 |
-| 3003 |  767.19 | 10/03/90 | 2001 | 1001 |
-| 3002 | 1900.10 | 10/03/90 | 2007 | 1004 |
-| 3005 | 5160.45 | 10/03/90 | 2003 | 1002 |
-| 3006 | 1098.16 | 10/03/90 | 2008 | 1007 |
-| 3009 | 1713.23 | 10/04/90 | 2002 | 1003 |
-| 3008 | 4723.00 | 10/05/90 | 2006 | 1001 |
-| 3010 | 1309.95 | 10/06/90 | 2004 | 1002 |
-| 3011 | 9891.88 | 10/06/90 | 2006 | 1001 |
-| 3007 |   75.75 | 10/04/90 | 2004 | 1002 |
-+------+---------+----------+------+------+
-10 rows in set (0.00 sec)
+mysql> SELECT * FROM Orders WHERE AMT = 0 OR NULL;
+Empty set
+0 rows in set (0.00 sec)
 
 55. Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
 
@@ -1747,16 +1733,12 @@ mysql> SELECT DISTINCT(SNAME),S.SNUM FROM CUSTOMERS C, SALESPEOPLE S WHERE C
 
 105. Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
 
-mysql> SELECT (SELECT SUM(O.AMT) AS "TOTAL AMT" FROM CUSTOMERS C,ORDERS O WH
-ERE C.CNUM = O.CNUM AND C.CITY IN ('Rome','London')) AS "MAX ORDER", (SELECT
- SUM( (O.AMT/100 )*S.COMM)*5 AS "TOTAL COMMISSION" FROM SALESPEOPLE S,ORDERS
- O WHERE S.SNUM = O.SNUM AND S.CITY IN ('New York', 'London')) AS "Max Commi
-sion";
-+-----------+---------------+
-| MAX ORDER | Max Commision |
-+-----------+---------------+
-|  18995.40 |  11130.911908 |
-+-----------+---------------+
+SELECT IF(  ( (SELECT (ROUND(Sum(AMT)) /5)  FROM Orders    WHERE    CNUM IN(SELECT CNUM FROM Customers    WHERE  City IN("ROME","LONDON") )  )   >   (SELECT ROUND(ROUND(SUM(AMT)) * COMM /100)    FROM Orders INNER JOIN Salespeople   ON Salespeople.SNUM =Orders.SNUM    WHERE  COMM IN(SELECT COMM FROM Salespeople  WHERE CITY in("London","NewYork")  )) ) , "YES","NO") as "CHECK THE AMOUNT " ;
++-------------------+
+| CHECK THE AMOUNT  |
++-------------------+
+| YES               |
++-------------------+
 1 row in set (0.00 sec)
 
 
