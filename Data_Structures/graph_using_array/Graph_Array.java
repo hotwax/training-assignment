@@ -19,6 +19,7 @@ public class Graph_Array {
     }
 
     public void addEdge(int from, int to) {
+        if(from >= no_Of_Vertices || to >= no_Of_Vertices || from < 0 || to < 0 ) return;
         //make the node a and b adjacent. (undirected)
         adj[from][to] = 1;
         adj[to][from] = 1;

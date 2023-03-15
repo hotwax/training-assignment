@@ -24,7 +24,7 @@ public class MyGraph {
     //adding edge 
     public void addEdge(int from, int to) {
         //make both Node a and b adjacent to each other (undirected graph)
-        if(from >= no_Of_Vertices || to >= no_Of_Vertices) return;
+        if(from >= no_Of_Vertices || to >= no_Of_Vertices || from < 0 || to < 0) return;
         adj.get(from).add(to);
         adj.get(to).add(from);
         System.out.println("Edge Added Successfully");
