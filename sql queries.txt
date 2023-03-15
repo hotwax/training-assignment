@@ -1131,7 +1131,8 @@ mysql> SELECT * FROM ORDERS
     -> WHERE AMT=0 OR AMT IS NULL;
 Empty set (0.05 sec)
 
-
+To save output in file (output.txt):-
+mysql> SELECT * FROM ORDERS INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/output.txt';
 
 
 
