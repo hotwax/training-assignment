@@ -1,0 +1,104 @@
+1. user entered the wrong choice
+
+input: 12
+
+output: Kindly enter the correct option.
+
+
+
+
+2. If user Entered wrong datatype value 
+
+Input : abc
+
+Output : null
+
+
+
+
+
+3. Insertion in a chaining hashmap 
+
+Input : Enter the key and value
+0 15
+
+Output : Hashmap :
+0->15
+
+
+
+4. Deletion in a chaining hashmap
+
+Input : Enter key to delete the value from the hashmap
+1
+
+Output : Hashmap :
+0->15
+
+
+
+5. if user entered a duplicate key during insertion
+
+Input : Enter the key and value
+0 89
+
+Output : Hashmap :
+0->89
+
+
+
+6. get a value by it's key
+
+Input : Enter the key whose value you want
+0
+
+Output : 89
+
+
+7. if user entered a value which is not present in a chaining hashmap 
+
+Input : 80
+
+output : null
+
+
+8. display the hashmap
+
+Input : "No need for input"
+
+Output : Hashmap :
+0->89
+
+
+9. Search the value in a chaining hashmap 
+
+Input : Enter a value to search
+85
+
+Output : value is not found in a hashmap
+
+
+or 
+
+Input : Enter a value to search
+89
+
+Output : 0->89 is present in the hash map
+
+
+
+10. total collision 
+
+Input : "NO need for input"
+
+Output : 0
+
+
+
+11. Total time taken 
+
+Input : "No need for the input"
+
+Output : Time in milli seconds is 257294
+
+

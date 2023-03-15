@@ -1,0 +1,40 @@
+1. user entered the wrong choice
+
+input: 12
+
+output: Kindly enter the correct option.
+
+
+
+
+2. Enqueue functionality
+
+Input : Enter the value to be inserted
+5
+
+Output : Queue : 5
+
+
+3. Dequeue functionality
+
+
+Input : "No need for the input"
+
+Output : Queue : 6 
+
+
+
+
+4. Is queue is empty functionality
+
+Input : "No need for the input"
+
+Output : false 
+
+
+
+5. Peak functionality
+
+Input : "No need for the input"
+
+Output : 6
