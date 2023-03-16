@@ -5,83 +5,63 @@ Test Cases for Serialization and Deserialization problem.
 test 1: when both output1.txt and output2.txt file present and we serialize and then deserializes the objects.
 
 Output:-
-PS E:\Work\Java work\Serialization_and_Deserialization> node SerializationTest.js output1.txt
-Serialized data saved to output1.txt
+PS E:\Work\Java work\Serialization_and_Deserialization> java SerializationTest output1.txt
+Dhruv1 12/01/2002 Indore MP 452011 India
+Dhruv2 12/01/2002 Indore MP 452011 India
+Dhruv3 12/01/2002 Indore MP 452011 India
+Dhruv4 12/01/2002 Indore MP 452011 India
+Enter file name you want to Serialize
+data is Serialized
 
-PS E:\Work\Java work\Serialization_and_Deserialization> node DeserializationTest.js output1.txt
-Name: Dhruv
-Date of Birth: 1990-01-01T00:00:00.000Z
-Address: Indore, mp 452011, india
----
-Name: Sadhana
-Date of Birth: 1995-02-02T00:00:00.000Z
-Address: Bhopal, mp 452013, india
----
-Name: Sanskar
-Date of Birth: 2000-03-03T00:00:00.000Z
-Address: China, mp 132424, china
----
-Name: Rishabh
-Date of Birth: 2005-04-04T00:00:00.000Z
-Address: indore, mp 456034, india
----
+PS E:\Work\Java work\Serialization_and_Deserialization> java DeserializationTest output1.txt
+Deserializing Output1.txt data
+Dhruv1 12/01/2002 Indore MP 452011 India
+Dhruv2 12/01/2002 Indore MP 452011 India
+Dhruv3 12/01/2002 Indore MP 452011 India
+Dhruv4 12/01/2002 Indore MP 452011 India
+data is Deserialized
 
 
 ============================================================================
 
-test 2: changing date of birth to date typr then running the above test-1 again but with new file output2.txt.
+test 2: changing date of birth to date type then running the above test-1 again but with new file output2.txt.
 
 output:-
 
-PS E:\Work\Java work\Serialization_and_Deserialization> node SerializationTest.js output2.txt
-Serialized data saved to output2.txt
+PS E:\Work\Java work\Serialization_and_Deserialization> java SerializationTest output2.txt
+Dhruv1 Sun Dec 01 00:00:00 IST 2002 Indore MP 452011 India
+Dhruv2 Sun Dec 01 00:00:00 IST 2002 Indore MP 452011 India
+Dhruv3 Sun Dec 01 00:00:00 IST 2002 Indore MP 452011 India
+Dhruv4 Sun Dec 01 00:00:00 IST 2002 Indore MP 452011 India
+Enter file name you want to Serialize
+data is Serialized
 
-PS E:\Work\Java work\Serialization_and_Deserialization> node DeserializationTest.js output2.txt
-Name: Dhruv
-Date of Birth: 1990-01-01T00:00:00.000Z
-Address: Indore, mp 452011, india
----
-Name: Sadhana
-Date of Birth: 1995-02-02T00:00:00.000Z
-Address: Bhopal, mp 452013, india
----
-Name: Sanskar
-Date of Birth: 2000-03-03T00:00:00.000Z
-Address: China, mp 132424, china
----
-Name: Rishabh
-Date of Birth: 2005-04-04T00:00:00.000Z
-Address: indore, mp 456034, india
----
+PS E:\Work\Java work\Serialization_and_Deserialization> java DeserializationTest output1.txt
+Deserializing Output1.txt data
+Dhruv1 Sun Dec 01 00:00:00 IST 2002 Indore MP 452011 India
+Dhruv2 Sun Dec 01 00:00:00 IST 2002 Indore MP 452011 India
+Dhruv3 Sun Dec 01 00:00:00 IST 2002 Indore MP 452011 India
+Dhruv4 Sun Dec 01 00:00:00 IST 2002 Indore MP 452011 India
+data is Deserialized
 
 ============================================================================
 
 test 3: Deserializing the output1.txt file again which contains serialized data of previous class version.
 
-PS E:\Work\Java work\Serialization_and_Deserialization> node DeserializationTest.js output1.txt
-Name: Dhruv
-Date of Birth: 1990-01-01T00:00:00.000Z
-Address: Indore, mp 452011, india
----
-Name: Sadhana
-Date of Birth: 1995-02-02T00:00:00.000Z
-Address: Bhopal, mp 452013, india
----
-Name: Sanskar
-Date of Birth: 2000-03-03T00:00:00.000Z
-Address: China, mp 132424, china
----
-Name: Rishabh
-Date of Birth: 2005-04-04T00:00:00.000Z
-Address: indore, mp 456034, india
----
+PS E:\Work\Java work\Serialization_and_Deserialization>java SerializationTest output1.txt
+Deserializing Output1.txt data
+Dhruv1 12/01/2002 Indore MP 452011 India
+Dhruv2 12/01/2002 Indore MP 452011 India
+Dhruv3 12/01/2002 Indore MP 452011 India
+Dhruv4 12/01/2002 Indore MP 452011 India
+data is Deserialized
 
 ============================================================================
 
 test 4: deserializing when output1.txt file is not present.
 
 output:
-PS E:\Work\Java work\Serialization_and_Deserialization> node DeserializationTest.js output1.txt
+PS E:\Work\Java work\Serialization_and_Deserialization> java DeserializationTest output1.txt
 output1.txt file not found !!!
 
 ============================================================================
@@ -91,5 +71,14 @@ test 5: deserializing when output2.txt file is not present.
 output:
 PS E:\Work\Java work\Serialization_and_Deserialization> node DeserializationTest.js output2.txt
 output2.txt file not found !!!
+
+============================================================================
+
+Test 6: Test when the serialized file is added with some unwanted changes
+
+output:
+PS E:\Work\Java work\Serialization_and_Deserialization> java DeserializationTest output2.txt
+Deserializing Output1.txt data
+Exception during deserialization: java.io.StreamCorruptedException: invalid stream header: ACED2005
 
 ============================================================================
