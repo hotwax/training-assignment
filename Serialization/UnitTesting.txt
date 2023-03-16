@@ -74,6 +74,7 @@ Enter your choice: 2
 
 Enter the file name: output4.ser
 File not found
+<<<<<<< HEAD
 
 
 TestCase4 deserialization:
@@ -175,3 +176,5 @@ User chooses option 3 (exit)
 
 Expected Output:
 The program closes the read interface and terminates.
+=======
+>>>>>>> 3dd7953c246ae27e17afc229f90a3a65c8df6f6a
