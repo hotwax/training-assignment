@@ -1,0 +1,106 @@
+Test the Program Serialization and Deserialization by the Following Testcases:
+
+TestCase 1: (if file does not exist while deserializing) 
+
+input : 
+Enter the filename : output.ser
+
+output: 
+output.ser File does not exist!
+
+TestCase 2: (if strigified the list of students) 
+
+input : 
+Strigified this objects on list -
+
+const student1 = new Student("Sanskar", new Date(19/03/2001), new Address("Bamhori", "Madhya Pradesh", 464672, "India"));
+const student2 = new Student("Sumit", new Date(14/03/2002), new Address("Chindwara", "Madhya Pradesh", 464472, "India"));
+const student3 = new Student("Shubham", new Date(12/08/2001), new Address("Indore", "Madhya Pradesh", 464671, "India"));
+const student4 = new Student("Somya", new Date(01/02/2001), new Address("Mandsaur", "Madhya Pradesh", 464692, "India"));
+
+Enter the file name : output1.ser
+
+output: 
+File Created Successfully and Stringified the data.
+
+TestCase 3: (if parsed the list of students) 
+
+input : 
+Parsing this objects on list in a file -
+
+const student1 = new Student("Sanskar", new Date(19/03/2001), new Address("Bamhori", "Madhya Pradesh", 464672, "India"));
+const student2 = new Student("Sumit", new Date(14/03/2002), new Address("Chindwara", "Madhya Pradesh", 464472, "India"));
+const student3 = new Student("Shubham", new Date(12/08/2001), new Address("Indore", "Madhya Pradesh", 464671, "India"));
+const student4 = new Student("Somya", new Date(01/02/2001), new Address("Mandsaur", "Madhya Pradesh", 464692, "India"));
+
+Enter the filename : output1.ser
+
+output: 
+[
+  {
+    firstName: 'Sanskar',
+    dateOfBirth: '1970-01-01T00:00:00.000Z',
+    address: {
+      city: 'Bamhori',
+      State: 'Madhya Pradesh',
+      pinCode: 464672,
+      country: 'India'
+    }
+  },
+  {
+    firstName: 'Sumit',
+    dateOfBirth: '1970-01-01T00:00:00.000Z',
+    address: {
+      city: 'Chindwara',
+      State: 'Madhya Pradesh',
+      pinCode: 464472,
+      country: 'India'
+    }
+  },
+  {
+    firstName: 'Shubham',
+    dateOfBirth: '1970-01-01T00:00:00.000Z',
+    address: {
+      city: 'Indore',
+      State: 'Madhya Pradesh',
+      pinCode: 464671,
+      country: 'India'
+    }
+  },
+  {
+    firstName: 'Somya',
+    dateOfBirth: '1970-01-01T00:00:00.000Z',
+    address: {
+      city: 'Mandsaur',
+      State: 'Madhya Pradesh',
+      pinCode: 464692,
+      country: 'India'
+    }
+  }
+]
+
+TestCase 4: (if while deserializing the file doesnot contain anything) 
+
+input : 
+Enter the filename : output1.ser
+
+output: 
+Data does not exist in a file!
+
+TestCase 5: (if while deserializing the file contains wrong contain) 
+
+input : 
+Enter the filename : output1.ser
+
+output: 
+SyntaxError: Unexpected token : in JSON at position 535
+
+TestCase 6: (if while deserializing the file contains wrong contain) 
+
+input : 
+Enter the filename : output1.ser
+
+output: 
+SyntaxError: Unexpected token : in JSON at position 535
+
+
