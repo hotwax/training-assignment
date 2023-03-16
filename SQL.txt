@@ -1311,16 +1311,16 @@ mysql> SELECT * FROM CUSTOMERS WHERE CNUM IN (SELECT DISTINCT CNUM FROM ORDERS )
 
 96) On which date has each salesman booked an order of maximum value? 
 
-mysql> SELECT ODATE, SNUM, MAX(AMT) FROM ORDERS GROUP BY SNUM;
-+----------+------+----------+
-| ODATE    | SNUM | MAX(AMT) |
-+----------+------+----------+
-| 10/03/90 | 1001 |  9891.88 |
-| 10/03/90 | 1002 |  5160.45 |
-| 10/04/90 | 1003 |  1713.23 |
-| 10/03/90 | 1004 |  1900.10 |
-| 10/03/90 | 1007 |  1098.16 |
-+----------+------+----------+
+mysql> SELECT ODATE,SNUM,AMT FROM ORDERS WHERE (SNUM,AMT) IN (SELECT SNUM,MAX(AMT) FROM ORDERS GROUP BY SNUM);
++------------+------+---------+
+| ODATE      | SNUM | AMT     |
++------------+------+---------+
+| 1990-10-03 | 1004 |  1900.1 |
+| 1990-10-03 | 1002 | 5160.45 |
+| 1990-10-03 | 1007 | 1098.16 |
+| 1990-10-04 | 1003 | 1713.23 |
+| 1990-10-06 | 1001 | 9891.88 |
++------------+------+---------+
 
 97) Who is the most successful salesperson? 
 
