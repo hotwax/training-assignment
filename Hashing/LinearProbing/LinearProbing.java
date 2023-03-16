@@ -69,7 +69,7 @@ class LinearProbing {
       index = (index + 1) % max;
     keys[index] = vals[index] = null;
 
-    // size--;        
+    size--;        
   }
   int getCollision() // to count number of collision
   {
