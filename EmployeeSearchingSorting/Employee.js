@@ -55,7 +55,8 @@ function insertFileDataIntoList() {
             collectData.push(employee);
         });
     } catch (err) {
-        console.log("Not able to read the file", err);
+        console.log("Not able to read the file or File Not Exists");
+        console.log("Program Will Create new file");
     }
     return collectData;
 }
@@ -66,49 +67,64 @@ function checkIdInData(id) {
     }
     return false;
 }
-
+// check whether the email already present in the Array 
+function whetherEmailExists(email) {
+    return employeeData.filter((emp) => emp.email == email).length == 1;
+}
 // Add the employee in the list 
 function addEmployeeInfoToFile() {
     console.log();
     readline.question("Enter the id of the employee: ", (id) => {
         while(!id) { // Id Field is empty 
-            console.log("Employee id Shouldn't be empty ");
+            console.log("\nEmployee id Shouldn't be empty ");
             id = prompt("Enter Employee Id "); }
 
         while (isNaN(id)) {  // Id not numeric Value 
-            console.log("Employee id Should be a Numeric Value");
+            console.log("\nEmployee id Should be a Numeric Value");
             id = prompt("Enter another Id ");
         }
         while (checkIdInData(id)) { // check if id already exist or not
-            console.log("Employee id", id, "Already Exists");
+            console.log("\nEmployee id", id, "Already Exists");
             id = prompt("Enter another Id ");
         }
         
         readline.question("Enter the name of the employee: ", (name) => {
+            let nameRegex = /^[a-zA-Z ]+$/;
+            while (!name.match(nameRegex)) 
+            {
+                console.log("\nEnter a valid name!");
+                name = prompt("Enter the Name : ");
+            }
             while(!name)
             {
-                console.log("Name field shouldn't be empty");
+                console.log("\nName field shouldn't be empty");
                 name = prompt("Enter Name ");
             }
             readline.question("Enter the age of the employee: ", (age) => {
                 while(!age) {
-                    console.log("Age Shouldn't be empty ");
+                    console.log("\nAge Shouldn't be empty ");
                     age = prompt("Enter age "); }
                 while(isNaN(age))
                 {
-                    console.log("Age should be Numeric ");
-                    age = prompt("Enter age again");
+                    console.log("\nAge should be Numeric ");
+                    age = prompt("Enter age again ");
                 }
                 readline.question("Enter the email of the employee: ", (email) => {
                     // Validation for email
-                    while (!email.match("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")) {
-                        console.log("Invalid Email Format , Sample Email : abc@gmail.com");
+                    while(!whetherEmailExists(email))
+                    {
+                        console.log("\nEmail Already Exists");
                         email = prompt("Enter Email Again ");
                     }
+                    while (!email.match("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")) {
+                        console.log("\nInvalid Email Format , Sample Email : abc@gmail.com");
+                        email = prompt("Enter Email Again ");
+                    }
+                   
                     readline.question("Enter the date of birth of the employee: ", (dob) => {
                         // Validation for dob
                         while (!dob.match("^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-2][0-9])?[0-9][0-9]$")) {
-                            console.log("Invalid Date of Birth Format");
+                            console.log("\nInvalid Date of Birth Format");
                             console.log("Sample Date of Birth : 01/01/2023 ");
                             dob = prompt("Enter Date of Birth again ");
                         }
@@ -133,7 +149,7 @@ function deleteEmployee() {
     readline.question("Enter the id of the employee: ", (emp_id) => {
         console.log();
         if (!checkIdInData(emp_id)) {  // check if id exist or not 
-            console.log("Employee data does not exist.");
+            console.log("\nEmployee data does not exist.");
         } else {
             for (const employee of employeeData) {
                 if (employee.id == emp_id) {
@@ -153,8 +169,20 @@ function deleteEmployee() {
 function searchEmployeeFromFile() {
 
     readline.question('\nEnter the Value to Search: ', (query) => {
-        readline.question('Sort By : \nId \nName \nEmail\nDate of Birth\nAge\n', (sortBy) => {
-            readline.question('Sort Order:\n1. Ascending\n2. Descending\n', (sortDirection) => {
+        let criteria = ["Id","id","Name","name","Email","email","DOB","dob","Dob","Age","age"];
+        readline.question('Sort By : \nId \nName \nEmail\nDOB\nAge\n', (sortBy) => {
+            while(!criteria.includes(sortBy))
+            {
+                console.log("\nInvalid Criteria To sort the Records");
+                sortBy = prompt("Enter Sort By criteria Again\nId \nName \nEmail\nDOB\nAge\n"); 
+            }
+            readline.question('Sort Order:\nAscending\nDescending\n', (sortDirection) => {
+                let order = ["desc", "asc" , "ascending" , "descending","Asc","Desc"];
+                while(!order.includes(sortDirection)) {
+                    console.log("\nInvalid Order Input");
+                    sortDirection = prompt("Enter Sorted Order Again:\nAsc or Ascending\nDesc or Descending\n"); 
+                }
+
                 employeeData.filter((employeeData) => {
                     return Object.keys(employeeData).forEach(key => {
                         if (employeeData[key] === undefined) {
@@ -176,7 +204,10 @@ function searchEmployeeFromFile() {
                     }
                 });
                 console.log("============================================================================");
-                console.table(results);
+                if(results.length == 0)
+                    console.log("\nEmployee Not Found");
+                else
+                    console.table(results);
                 console.log("============================================================================");
                 dashBoard();
             });
@@ -186,7 +217,14 @@ function searchEmployeeFromFile() {
 function displayShowAll() {  
     // function to display all the records of the file
     console.log("============================================================================");
-    console.table(employeeData);
+    if(employeeData.length == 0)
+    {
+        console.log("There is No data in the File");
+    }
+    else
+    {
+        console.table(employeeData);
+    }
     console.log("============================================================================");
 
     dashBoard();

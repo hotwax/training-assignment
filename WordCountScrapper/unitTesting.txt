@@ -109,6 +109,8 @@ url.txt =   https://www.britannica.com/art/short-story
               https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
 words.txt =  [short short story story are are YOU population Students NCERT REMOVE LINE]
 output:
+Program will Fetch data only once for duplicate Words.
+
 https://www.britannica.com/art/short-story
 short 36
 story 28
@@ -137,6 +139,8 @@ url.txt =   https://www.britannica.com/art/short-story
                https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
 words.txt =  [short story are YOU population Students NCERT REMOVE LINE]
 output:
+
+Program will Fetch data only once for duplicate Urls.
 https://www.britannica.com/art/short-story
 short 36
 story 28

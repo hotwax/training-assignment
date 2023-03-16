@@ -55,8 +55,8 @@ function deserialization(filename) {
   let objectsList;
   try {
     objectsList = file.readFileSync(filename, 'utf8');//reading data from it
-  } catch (exception) {
-    console.log("File not found");
+  } catch(err) {
+      console.log("File Not Found");
     Main();
     return ;
   }

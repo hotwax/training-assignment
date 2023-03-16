@@ -199,10 +199,7 @@ Sort Order:
 2. Descending
 asc
 Output:
-┌─────────┐
-│ (index) │
-├─────────┤
-└─────────┘
+Employee Not Found
 
 Test Case 11 :Display all employees in the employees.txt file.
 Please choose an option:
@@ -214,3 +211,79 @@ Please choose an option:
 Enter your choice: 4
 
 display all the records
+
+TestCase12- Add an employee- entered an already existing email
+Input:
+10
+Nathan
+nathangmail.com
+55
+07/09/2001
+
+Output:
+Email Id Already Exists
+Enter Email Again
+
+TestCase13- Show all employees- no "employees.txt" file exists yet
+
+    Main Menu
+Please choose an option:
+1. Add employee to file
+2. Delete employee from the file
+3. Search employee from the file
+4. Display all the data of employee
+5. Exit
+
+Enter your choice: 4
+============================================================================
+There is No data in the File
+============================================================================
+
+TestCase14- Sort employees- entered a wrong Criteria to Sort By
+
+Sort By :
+Id
+Name
+Email
+DOB
+Age
+gender
+
+Output
+Invalid Criteria To sort the Records
+Enter Sort By criteria Again
+Id
+Name
+Email
+DOB
+Age
+
+TestCase15- Sort employees- entered a wrong Order to Sort
+
+Sort Order:
+Ascending
+Descending
+nnnnnn
+
+output
+Invalid Order Input
+Enter Sorted Order Again:
+Asc or Ascending
+Desc or Descending
+
+TestCase16 - User chooses option 1 and enters invalid employee name
+Enter the name of the employee: Chirag1234
+
+Enter a valid name!
+Enter the Name :
+
+
+
+
+
+
+
+
+
+
+
