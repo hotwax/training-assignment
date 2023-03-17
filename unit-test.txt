@@ -1,0 +1,2512 @@
+-- Tables
+
+SalesPeoples Table
+
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1003 | AxelRod | NewYork   |   10 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+
+
+Customers Table
++------+----------+---------+---------+------+
+| CNUM | CNAME    | CITY    | RATINGS | SNUM |
++------+----------+---------+---------+------+
+| 2001 | Hoffman  | London  |     100 | 1001 |
+| 2002 | Giovanni | Rome    |     200 | 1003 |
+| 2003 | Liu      | SanJose |     200 | 1002 |
+| 2004 | Grass    | Berlin  |     300 | 1002 |
+| 2006 | Clemens  | London  |     100 | 1001 |
+| 2008 | Cisneros | SanJose |     300 | 1007 |
+| 2007 | pereira  | Rome    |     100 | 1004 |
++------+----------+---------+---------+------+
+
+
+Orders Table 
++------+---------+------------+------+------+
+| ONUM | Amt     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+
+
+
+Queries
+
+1) List all the columns of the Salespeople table. 
+
+Approach:-
+   -> This query retrieves the column names and data types of all columns in the Salespeople table, 
+      providing metadata information about the structure of the table.
+
+Expected Output:-
+   -> This query returns all the columns of the salepeople. 
+
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| SNUM  | int         | NO   | PRI | NULL    |       |
+| SNAME | varchar(40) | YES  |     | NULL    |       |
+| CITY  | varchar(40) | YES  |     | NULL    |       |
+| COMM  | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+Tables involved:-
+   -> Salespeoples
+
+
+2) List all customers with a rating of 100. 
+
+Approach:-
+   -> This query selects the customer number (CNUM), customer name (CNAME), and city from the Customers table, 
+      filtering the results by only including customers with a rating of 100. 
+
+Expected Output:-
+   -> This query returns the each customers details whose ratings is 100.
++------+---------+--------+
+| CNUM | CNAME   | CITY   |
++------+---------+--------+
+| 2001 | Hoffman | London |
+| 2006 | Clemens | London |
+| 2007 | pereira | Rome   |
++------+---------+--------+
+
+Tables involved:-
+   -> Customers
+
+
+3) Find the largest order taken by each salesperson on each date. 
+
+Approach:-
+   -> This query selects the salesperson name (SNAME), order date (ODATE), and the maximum order amount (MAX_ORDER) made by each salesperson and on each date from the 
+      Salespeople and Orders tables, joining them on matching salesperson numbers. 
+   -> It groups the results by the salesperson number (SNUM) and order date (ODATE), and retrieves the maximum order amount made on that date.
+
+Expected Output:-
+   -> This query returns the largest Order of each salespeople on each date.
+
++---------+------------+-----------+
+| SNAME   | ODATE      | MAX_ORDER |
++---------+------------+-----------+
+| Rifkin  | 1990-10-03 |   1098.16 |
+| Motika  | 1990-10-03 |    1900.1 |
+| Peel    | 1990-10-03 |    767.19 |
+| Serres  | 1990-10-03 |   5160.45 |
+| Serres  | 1990-10-04 |     75.75 |
+| Peel    | 1990-10-05 |      4723 |
+| AxelRod | 1990-10-04 |   1713.23 |
+| Serres  | 1990-10-06 |   1309.95 |
+| Peel    | 1990-10-06 |   9891.88 |
++---------+------------+-----------+ 
+
+Tables involved:-
+   -> Salespeoples
+   -> Orders
+
+
+4) Arrange the Order table by descending customer number. 
+
+Approach:-
+   -> This query selects the order number (ONUM), order amount (AMT), order date (ODATE), customer number (CNUM), 
+      and salesperson number (SNUM) from the Orders table, ordering the results in descending order by the customer 
+      number (CNUM).
+
+Expected Output:-
+
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
++------+---------+------------+------+------+
+
+Tables involved:-
+   -> Orders  
+
+
+5) Find which salespeople currently have orders in the order table. 
+
+Approach:-
+   -> This query selects the salesperson number (SNUM) and salesperson name (SNAME) from the Salespeople table, 
+      filtering the results by only including salespeople who have made at least one order. 
+   -> It achieves this by using a subquery to retrieve the distinct salesperson numbers that appear in the Orders table.
+
+Expected Output:-
+   -> This query returns the salespeople details who have an orders . 
++------+---------+
+| SNUM | SNAME   |
++------+---------+
+| 1001 | Peel    |
+| 1002 | Serres  |
+| 1003 | AxelRod |
+| 1004 | Motika  |
+| 1007 | Rifkin  |
++------+---------+
+  
+Tables involved:-
+   -> Salespeoples
+   -> Orders
+
+
+6) List names of all customers matched with the salespeople serving them. 
+  
+Approach:-
+   -> This query selects the customer number (CNUM), customer name (CNAME), and salesperson number (SNUM) from the Customers table, filtering the 
+      results by only including customers who are assigned to a salesperson that has at least two customers. 
+   -> It achieves this by using a subquery to retrieve the salesperson numbers that have more than one customer assigned to them in the Customers table.
+
+Expected Output:-
+   -> This query returns the names of all customers whose salespeoples is same.
++------+---------+------+
+| CNUM | CNAME   | SNUM |
++------+---------+------+
+| 2001 | Hoffman | 1001 |
+| 2003 | Liu     | 1002 |
+| 2004 | Grass   | 1002 |
+| 2006 | Clemens | 1001 |
++------+---------+------+
+
+Tables involved:-
+   -> Customers
+
+
+ 7) Find the names and numbers of all salespeople who have more than one customer. 
+   
+ Approach:-
+    -> This query selects the salesperson number (SNUM) and salesperson name (SNAME) from the Salespeople table, filtering the 
+       results by only including salespeople who have at least two customers assigned to them. 
+    -> It achieves this by using a subquery to retrieve the salesperson numbers that appear more than once in the Customers table.
+
+ Expected Output:-
+    -> This query returns the name and number of each salespeoples who have more then on customers.    
+
++------+--------+
+| SNUM | SNAME  |
++------+--------+
+| 1001 | Peel   |
+| 1002 | Serres |
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+8) Count the orders of each of the salespeople and output the results in descending order. 
+
+Approach:-
+   -> This query selects the salesperson number (SNUM), salesperson name (SNAME), and the count of orders (Number_Of_Order) 
+      made by each salesperson from the Salespeople and Orders tables, joining them on matching salesperson numbers. 
+   -> It groups the results by salesperson number, orders are counted, and the results are sorted in descending order of the number 
+      of orders made.
+
+Expected Output:-
+   -> This query returns the count of orders by each salepeoples in the descending order.
++------+---------+-----------------+
+| SNUM | SNAME   | Number_Of_Order |
++------+---------+-----------------+
+| 1001 | Peel    |               3 |
+| 1002 | Serres  |               3 |
+| 1007 | Rifkin  |               2 |
+| 1003 | AxelRod |               1 |
+| 1004 | Motika  |               1 |
++------+---------+-----------------+
+
+Tables involved:-
+   -> Salespeoples
+   -> orders
+
+
+9) List the customer table if and only if one or more of the customers in the 
+   Customer table are located in SanJose. 
+ 
+Approach:-
+   -> This SQL query selects the customer number (CNUM), customer name (CNAME), customer city (CITY), customer rating (RATINGS), 
+      and salesperson number (SNUM) from the Customers table, filtering the results by only including customers where there exists 
+      another customer located in the city of "SanJose". 
+
+Expected Output:-
++------+----------+---------+---------+------+
+| CNUM | CNAME    | CITY    | RATINGS | SNUM |
++------+----------+---------+---------+------+
+| 2001 | Hoffman  | London  |     100 | 1001 |
+| 2002 | Giovanni | Rome    |     200 | 1003 |
+| 2003 | Liu      | SanJose |     200 | 1002 |
+| 2004 | Grass    | Berlin  |     300 | 1002 |
+| 2006 | Clemens  | London  |     100 | 1001 |
+| 2008 | Cisneros | SanJose |     300 | 1007 |
+| 2007 | pereira  | Rome    |     100 | 1004 |
++------+----------+---------+---------+------+
+
+Tables involved:-
+   -> Customers
+
+
+10) Match salespeople to customers according to what city they live in. 
+
+Approach:-
+   -> This query selects the salesperson name (SNAME), customer name (CNAME), and customer city (City) from the Salespeople and Customers tables, 
+      joining them on the matching city. 
+   -> It only includes results where there is a match between the city of the salesperson and the customer. 
+
+Expected Output:-
+
++--------+----------+---------+
+| SNAME  | CNAME    | City    |
++--------+----------+---------+
+| Fran   | Hoffman  | London  |
+| Motika | Hoffman  | London  |
+| Peel   | Hoffman  | London  |
+| Serres | Liu      | SanJose |
+| Fran   | Clemens  | London  |
+| Motika | Clemens  | London  |
+| Peel   | Clemens  | London  |
+| Serres | Cisneros | SanJose |
++--------+----------+---------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+11) Find all the customers in SanJose who have a rating above 200. 
+
+Approach:-
+   -> This query selects the customer number (CNUM), customer name (CNAME), and customer rating (RATINGS) from the Customers table, 
+      filtering the results by only including customers located in the city of "SanJose" with a rating greater than 200. 
+
+Expected Output:-
+
++------+----------+---------+
+| CNUM | CNAME    | RATINGS |
++------+----------+---------+
+| 2008 | Cisneros |     300 |
++------+----------+---------+
+
+Tables involved:-
+   -> Customers
+
+12) List the names and commissions of all salespeople in London. 
+
+Approach:-
+   -> This query selects the salesperson name (SNAME) and commission rate (COMM) from the Salespeople table, 
+      filtering the results by only including salespeople located in the city of "London".
+
+Expected Output:-
+   -> This query returns the salespeoples name, commisions of "London". 
++--------+------+
+| SNAME  | COMM |
++--------+------+
+| Peel   |   12 |
+| Motika |   11 |
+| Fran   |   25 |
++--------+------+   
+
+Tables involved:-
+   -> Salespeoples
+
+
+13) List all the orders of Salesperson Motika from the orders table.
+  
+Approach:-
+   -> This SQL query selects the order number (ONUM), amount (AMT), order date (ODATE), and salesperson name (SNAME) from the Orders table, 
+      joining it with the Salespeople table on the matching salesperson number (SNUM). 
+   -> It filters the results by only including orders made by the salesperson named "Motika".
+
+Expected Output:-
+   -> This query returns all Orders details which assigned to salespeople "Motika".
++------+--------+------------+--------+
+| ONUM | AMT    | ODATE      | SNAME  |
++------+--------+------------+--------+
+| 3002 | 1900.1 | 1990-10-03 | Motika |
++------+--------+------------+--------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Orders
+
+
+14) Find all customers who booked orders on October 3. 
+  
+Approch:-
+   -> This query selects distinct customer number (CNUM), customer name (CNAME), and customer rating (RATINGS) 
+      from the Customers table, joining it with the Orders table on the matching customer number. 
+   -> It filters the results by only including customers who placed an order on October 3, 1990.
+
+Expected Output:-
+   -> This query returns each customers details who booked orders on October 3.
++------+----------+---------+
+| CNUM | CNAME    | RATINGS |
++------+----------+---------+
+| 2001 | Hoffman  |     100 |
+| 2003 | Liu      |     200 |
+| 2008 | Cisneros |     300 |
+| 2007 | pereira  |     100 |
++------+----------+---------+
+
+Tables involved:-
+   -> Customers
+   -> Orders
+
+
+15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
+
+Approach:-
+   -> This query selects the order date (ODATE) and the rounded total amount of orders (Total_Amount) from the Orders table, grouping by order date. 
+   -> It then filters the results by only including dates where the total amount is greater than or equal to the maximum order amount plus 2000.
+
+Expected Output:- 
+Empty set (0.00 sec)
+
+Tables involved:-
+   -> Orders
+
+
+16) Select all orders that had amounts that were greater than at least one of the orders from October 6. 
+
+Approach:-
+   -> This query selects the order number (ONUM) and amount (Amt) from the Orders table where the amount is greater than any 
+      amount from orders placed on October 6, 1990. 
+   -> It uses a subquery to retrieve the maximum amount for that specific date and compares it to the amount in the main query.
+
+Expected Output:-
+
++------+---------+
+| ONUM | Amt     |
++------+---------+
+| 3002 |  1900.1 |
+| 3005 | 5160.45 |
+| 3008 |    4723 |
+| 3009 | 1713.23 |
+| 3011 | 9891.88 |
++------+---------+
+
+Tables involved:-
+   -> Orders
+
+
+17) Write a query that uses the EXISTS operator to extract all salespeople 
+    who have customers with a rating of 300.
+    
+Approach:-
+   -> This query selects the salespeople with their SNUM, SNAME, CITY, and COMM, where there exists a customer 
+      with a RATINGS of 300, and the customer's SNUM is equal to the salesperson's SNUM. 
+   -> The EXISTS function is used to check the existence of a record in the subquery. 
+
+Expected Output:-
++------+--------+-----------+------+
+| SNUM | SNAME  | CITY      | COMM |
++------+--------+-----------+------+
+| 1002 | Serres | SanJose   |   13 |
+| 1007 | Rifkin | Barcelona |   15 |
++------+--------+-----------+------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+18) Find all customers whose cnum is 1000 above the snum of Serres. 
+
+Approach:-
+   -> This query selects the CNAME, CNUM, CITY, RATINGS, and SNUM from the Customers table 
+      where the CNUM is equal to 1000 plus the SNUM of the salesperson whose name is "Serres".
+
+Expected Output:-
+   -> This query returns all customers whose "CNUM" is 1000 higher then the "SNUM" of "Serres".
++----------+------+------+---------+------+
+| CNAME    | CNUM | CITY | RATINGS | SNUM |
++----------+------+------+---------+------+
+| Giovanni | 2002 | Rome |     200 | 1003 |
++----------+------+------+---------+------+
+
+Tables involved:-
+   -> Customers
+   -> Salespeoples
+
+
+19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
+
+Approach:-
+   -> This SQL query selects the Salespeople's number, name, and commission rate in percentage 
+      from the "Salespeople" table.
+
+Expected Output:-
+   -> This query returns the salespeople commissions which is already in percentage.    
++------+---------+-------------------------+
+| SNUM | SNAME   | Commision_In_Percentage |
++------+---------+-------------------------+
+| 1001 | Peel    |                      12 |
+| 1002 | Serres  |                      13 |
+| 1003 | AxelRod |                      10 |
+| 1004 | Motika  |                      11 |
+| 1007 | Rifkin  |                      15 |
+| 1008 | Fran    |                      25 |
++------+---------+-------------------------+ 
+
+Tables involved:-
+   -> Salespeoples
+
+
+20) Find the largest order taken by each salesperson on each date, eliminating 
+    those Maximum orders, which are less than 3000. 
+
+Approach:-
+   -> This SQL query selects the salesperson number, order date, and maximum amount for orders grouped by date and 
+      salesperson, and filters for those having a maximum amount greater than or equal to 3000.
+
+Expected Output:-
+
++------+------------+----------+
+| SNUM | ODATE      | MAXORDER |
++------+------------+----------+
+| 1002 | 1990-10-03 |  5160.45 |
+| 1001 | 1990-10-05 |     4723 |
+| 1001 | 1990-10-06 |  9891.88 |
++------+------------+----------+ 
+
+Tables involved:-
+   -> Orders
+
+
+21) List all the largest orders for October 3, for each salesperson. 
+  
+Approach:-
+   -> This query selects the name of the salesperson, the maximum amount of each salesperson's orders, and the order date. 
+      It then groups the results by salesperson name and filters by orders with the date "1990-10-03".
+
+Expected Output:-
++--------+---------+------------+
+| SNAME  | MAX_AMT | ODATE      |
++--------+---------+------------+
+| Rifkin | 1098.16 | 1990-10-03 |
+| Motika |  1900.1 | 1990-10-03 |
+| Peel   | 9891.88 | 1990-10-03 |
+| Serres | 5160.45 | 1990-10-03 |
++--------+---------+------------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Orders  
+
+
+22) Find all customers located in cities where Serres has customers. 
+
+Approach:-
+   -> This SQL query selects the customer number, name, city, and ratings from the Customers table where the city is included in a 
+      list of cities returned by a subquery. The subquery selects the city of all customers that are assigned to a salesperson with 
+      the name "Serres". This query uses a nested subquery to first identify the SNUM of the salesperson with the name "Serres" and 
+      then selects all the customers that are assigned to this salesperson. 
+   -> Finally, the outer query selects only those customers whose city is included in the list of cities returned by the subquery, 
+      resulting in a table of customers who are assigned to the salesperson with the name "Serres".
+
+Expected Output:-
+
++------+----------+---------+---------+
+| CNUM | CNAME    | CITY    | RATINGS |
++------+----------+---------+---------+
+| 2003 | Liu      | SanJose |     200 |
+| 2004 | Grass    | Berlin  |     300 |
+| 2008 | Cisneros | SanJose |     300 |
++------+----------+---------+---------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+23) Select all customers with a rating above 200. 
+  
+Approach:-
+   -> This SQL query selects the customer number, name, city, ratings, and salesperson number from the Customers table 
+      where the customer's ratings are greater than 200. It uses a simple WHERE clause to filter the rows based on the 
+      specified condition. 
+   -> The resulting table will have one row for each customer that has ratings greater than 200.
+
+Expected Output:-
+   -> This query returns all customers details whose rating in higher then 200.
+
++------+----------+---------+---------+------+
+| CNUM | CNAME    | CITY    | RATINGS | SNUM |
++------+----------+---------+---------+------+
+| 2004 | Grass    | Berlin  |     300 | 1002 |
+| 2008 | Cisneros | SanJose |     300 | 1007 |
++------+----------+---------+---------+------+
+
+Tables involved:-
+   -> Customers
+
+
+24) Count the number of salespeople currently having orders in the orders table. 
+
+Approach:-
+   -> This SQL query counts the number of distinct Salesperson numbers (SNUM) in the Orders table and returns the count as "NO_Of_Salespeople". 
+      It uses the COUNT function with the DISTINCT keyword to count the number of unique SNUM values in the Orders table.
+
+Expected Output:-
+   -> This query returns the number of salespeople who have currently an orders in order table.
+
++-------------------+
+| NO_Of_Salespeople |
++-------------------+
+|                 5 |
++-------------------+
+
+Tables involved:-
+   -> Orders
+
+
+25) Write a query that produces all customers serviced by salespeople with a commission above 12%. 
+    Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
+
+Approach:-
+   -> This SQL query selects the name of the customer, salesperson, and commission rate from the Salespeople and Customers tables, respectively. 
+      It uses an inner join to combine the tables based on the Salesperson number and filters the results to include only those rows where the 
+      commission rate is greater than 12. 
+   -> The resulting table will have one row for each customer and salesperson that meet the specified criteria, with columns for their names and 
+      the commission rate.
+
+Expected Output:-
+
++----------+--------+--------------+
+| CNAME    | SNAME  | Rate_Of_Comm |
++----------+--------+--------------+
+| Liu      | Serres |           13 |
+| Grass    | Serres |           13 |
+| Cisneros | Rifkin |           15 |
++----------+--------+--------------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+26) Find salespeople who have multiple customers. 
+
+Approach:-
+   -> This query selects the Salesperson number, name, city, and commission from the Salespeople table where the Salesperson number appears more than once in the Customers table. It uses a subquery with the IN operator to retrieve the Salesperson numbers 
+      from the Customers table where the number of unique customer numbers (CNUM) is greater than one. 
+   -> The results are filtered to include only the salespeople with matching Salesperson numbers. 
+
+Expected Output:-
+   -> This query returns each salespeoples who have an multoiple customers.
++------+--------+---------+------+
+| SNUM | SNAME  | CITY    | COMM |
++------+--------+---------+------+
+| 1001 | Peel   | London  |   12 |
+| 1002 | Serres | SanJose |   13 |
++------+--------+---------+------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+27) Find salespeople with customers located in their own cities. 
+
+Approach:-
+   -> This query selects the name of the salesperson, customer, and city from the Salespeople and Customers tables, respectively. It uses an inner join to combine the tables based on the Salesperson number and city, 
+      and filters the results to include only matching rows. 
+   -> The resulting table will have one row for each pair of salesperson and customer that share the same city and Salesperson number. 
+
+Expected Output:-
+   -> This query returns all salespeoples details whose customers located in own cities.
+
++--------+---------+---------+
+| SNAME  | CNAME   | CITY    |
++--------+---------+---------+
+| Peel   | Hoffman | London  |
+| Serres | Liu     | SanJose |
+| Peel   | Clemens | London  |
++--------+---------+---------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+28) Find all salespeople whose name starts with ‘P’ and fourth character is ‘I’. 
+
+Approach:-
+   ->This query selects the Salesperson number and name from the Salespeople table where the name starts 
+     with the letter "p", followed by any two characters, and then followed by the letters "i" and any 
+     number of characters. 
+   -> It uses the LIKE operator with wildcard characters ("%") to match patterns of names that meet the specified criteria.
+
+Expected Output:-
+   -> This query returns all salepeoples details whose name starts with 'P' 
+      and fourth charcter is 'I'.
+
+Tables involved:-
+   -> Salespeoples
+
+
+29) Write a query that uses a subquery to obtain all orders for the customer named ‘Cisneros’.
+    Assume you do not know his customer number. 
+
+Approach:-
+   -> This query selects the order number, amount, and date from the Orders table where the customer 
+      number (CNUM) is equal to the customer number of the customer named "Cisneros" in the Customers table. 
+   -> It uses a subquery to retrieve the customer number of the customer named "Cisneros", and the WHERE clause 
+      to filter the Orders table by the retrieved customer number. 
+
+Expected Output:-
+
++------+---------+------------+
+| ONUM | AMT     | ODATE      |
++------+---------+------------+
+| 3001 |   18.69 | 1990-10-03 |
+| 3006 | 1098.16 | 1990-10-03 |
++------+---------+------------+
+
+Tables involved:-
+   -> Customers
+   -> Orders
+
+
+30) Find the largest orders for Serres and Rifkin. 
+
+Approach:-
+   -> This SQL query selects the name of salespeople and their maximum order amount from the Salespeople and Orders tables, respectively. It uses an inner join to combine the tables based on the Salesperson number, 
+      and filters the results to include only salespeople named "RifKiN" or "Serres". 
+   -> The results are grouped by salesperson name using the GROUP BY clause.
+
+Expected Output:-
+
++--------+------------+
+| SNAME  | MAX_AMOUNT |
++--------+------------+
+| Serres |    5160.45 |
+| Rifkin |    1098.16 |
+
+Tables involved:-
+   -> Salespeoples
+   -> Orders
+
+31) Sort the salespeople table in the following order: snum, sname, commission, city. 
+    
+Approach:-
+   -> This SQL query selects the Salesperson number, name, commission, and city from the Salespeople table. It retrieves all columns for each salesperson. 
+   -> The resulting table will have one row for each salesperson, with columns for their number, name, commission, and city.
+
+Expected Output:-
+
++------+---------+------------+-----------+
+| SNUM | SNAME   | Commission | CITY      |
++------+---------+------------+-----------+
+| 1001 | Peel    |         12 | London    |
+| 1002 | Serres  |         13 | SanJose   |
+| 1003 | AxelRod |         10 | NewYork   |
+| 1004 | Motika  |         11 | London    |
+| 1007 | Rifkin  |         15 | Barcelona |
+| 1008 | Fran    |         25 | London    |
++------+---------+------------+-----------+
+
+Tables involved:-
+   -> Salespeoples
+
+32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
+    
+Approach:-
+   -> This query selects the customer names from the Customers table where the name starts with the letters 'A' through 'G'.
+
+Expected Output:-
+   -> This query returns all customers whose name fall between 'A' to 'G'.
++----------+
+| CNAME    |
++----------+
+| Giovanni |
+| Grass    |
+| Clemens  |
+| Cisneros |
++----------+
+
+Tables involved:
+   -> Customers
+
+
+33) Select all the possible combinations of customers you can assign. 
+
+Approach:-
+   -> This query uses the CROSS JOIN operator to generate all possible combinations of customers from the Customers table, and selects 
+      the customer names of each customer in the pair using table aliases.
+   -> The resulting table will have all possible combinations of customers as rows, with two columns: "Customer 1" and "Customer 2".
+
+Expected Output:-
+
++-------------+------------+
+| Customer 1  | Customer 2 |
++-------------+------------+
+| pereira     | Hoffman    |
+| Cisneros    | Hoffman    |
+| Clemens     | Hoffman    |
+| Grass       | Hoffman    |
+| Liu         | Hoffman    |
+| Giovanni    | Hoffman    |
+| Hoffman     | Hoffman    |
+| pereira     | Giovanni   |
+| Cisneros    | Giovanni   |
+| Clemens     | Giovanni   |
+| Grass       | Giovanni   |
+| Liu         | Giovanni   |
+| Giovanni    | Giovanni   |
+| Hoffman     | Giovanni   |
+| pereira     | Liu        |
+| Cisneros    | Liu        |
+| Clemens     | Liu        |
+| Grass       | Liu        |
+| Liu         | Liu        |
+| Giovanni    | Liu        |
+| Hoffman     | Liu        |
+| pereira     | Grass      |
+| Cisneros    | Grass      |
+| Clemens     | Grass      |
+| Grass       | Grass      |
+| Liu         | Grass      |
+| Giovanni    | Grass      |
+| Hoffman     | Grass      |
+| pereira     | Clemens    |
+| Cisneros    | Clemens    |
+| Clemens     | Clemens    |
+| Grass       | Clemens    |
+| Liu         | Clemens    |
+| Giovanni    | Clemens    |
+| Hoffman     | Clemens    |
+| pereira     | Cisneros   |
+| Cisneros    | Cisneros   |
+| Clemens     | Cisneros   |
+| Grass       | Cisneros   |
+| Liu         | Cisneros   |
+| Giovanni    | Cisneros   |
+| Hoffman     | Cisneros   |
+| pereira     | pereira    |
+| Cisneros    | pereira    |
+| Clemens     | pereira    |
+| Grass       | pereira    |
+| Liu         | pereira    |
+| Giovanni    | pereira    |
+| Hoffman     | pereira    |
++-------------+------------+
+
+Tables involved:-
+   -> Customers
+
+
+34) Select all orders that are greater than the average for October 4. 
+  
+Approach:-
+   -> This SQL query selects the order number, amount, and date from Orders table where the amount is greater than the
+      average amount of orders placed on a specific date ("1990-10-04") using a subquery with grouping and averaging. 
+
+Expected Output:-
+   -> This query returns all orders details whose amount is greater then the average of all orders in October 4.
++------+---------+------------+
+| ONUM | AMT     | ODATE      |
++------+---------+------------+
+| 3002 |  1900.1 | 1990-10-03 |
+| 3005 | 5160.45 | 1990-10-03 |
+| 3006 | 1098.16 | 1990-10-03 |
+| 3008 |    4723 | 1990-10-05 |
+| 3009 | 1713.23 | 1990-10-04 |
+| 3010 | 1309.95 | 1990-10-06 |
+| 3011 | 9891.88 | 1990-10-06 |
++------+---------+------------+
+
+Tables involved:-
+   -> Orders
+
+
+35) Write a select command using correlated subquery that selects the names and numbers of all customers with ratings equal to the maximum for their city.
+
+Approach:-
+   -> This SQL query selects the name, city, and ratings of customers from table Customers where their 
+      ratings are equal to the maximum ratings of customers in the same city.It uses a subquery to find 
+      the maximum ratings for each city.
+
+Expected Output:-
+
++----------+---------+---------+
+| CNAME    | CITY    | Ratings |
++----------+---------+---------+
+| Hoffman  | London  |     100 |
+| Giovanni | Rome    |     200 |
+| Grass    | Berlin  |     300 |
+| Clemens  | London  |     100 |
+| Cisneros | SanJose |     300 |
++----------+---------+---------+
+
+Tables involved:-
+   -> Customers
+
+
+36) Write a query that totals the orders for each day and places the results in descending order. 
+
+Approach:-
+   -> This SQL query retrieves the order date and the total number of orders for each date, grouping 
+      the results by the order date, and then ordering the results in descending order based on the 
+      count of orders.
+
+Expected Output:-
+
++------------+--------------+
+| ODATE      | Total_Orders |
++------------+--------------+
+| 1990-10-03 |            5 |
+| 1990-10-04 |            2 |
+| 1990-10-06 |            2 |
+| 1990-10-05 |            1 |
++------------+--------------+
+
+Tables involved:-
+    -> Orders
+
+
+37) Write a select command that produces the rating followed by the name of each customer in SanJose. 
+
+Approach:-
+   -> This SQL query selects the customer name and their ratings from the "Customers" table where the city is "SANJOSE". 
+   -> It uses a simple SELECT statement with a WHERE clause to filter the results based on the specified condition.
+
+Expected Output:-
+
++----------+---------+
+| CNAME    | RATINGS |
++----------+---------+
+| Liu      |     200 |
+| Cisneros |     300 |
++----------+---------+
+
+Tables involved:-
+   -> Customers
+
+
+38) Find all orders with amounts smaller than any amount for a customer in SanJose. 
+
+Approach:-
+   -> This SQL query selects the order number (ONUM) and order amount (AMT) from the Orders table for orders made by customers in San Jose 
+      with an order amount less than the maximum order amount made by customers in San Jose. 
+   -> The results are obtained through a join between the Customers and Orders tables and grouping the Orders table by ONUM. 
+   -> The HAVING clause filters the results to include only those orders with an amount less than the maximum order amount 
+      made by customers in San Jose. 
+   -> The maximum order amount is obtained through a subquery that selects the maximum order amount made by customers in 
+      "SanJose" from the Orders and Customers tables.
+
+Expected Output: - 
++------+---------+
+| ONUM | AMT     |
++------+---------+
+| 3001 |   18.69 |
+| 3002 |  1900.1 |
+| 3003 |  767.19 |
+| 3006 | 1098.16 |
+| 3007 |   75.75 |
+| 3008 |    4723 |
+| 3009 | 1713.23 |
+| 3010 | 1309.95 |
++------+---------+
+
+Tables involved:-
+   -> Customers
+   -> Orders
+
+
+39) Find all orders with above average amounts for their customers. 
+
+Approach:-
+   -> This SQL query selects the order number (ONUM), order amount (AMT), and customer number (CNUM) from the Orders table. 
+   -> The results are filtered to only include orders with an amount greater than the average order amount across all orders in the Orders table. 
+   -> The average order amount is obtained through a subquery that selects the average order amount from the Orders table. 
+
+Expected Output:-
+   -> this query returns all orders detail which amounts is higher then the average amount of all Orders.
++------+---------+------+
+| ONUM | AMT     | CNUM |
++------+---------+------+
+| 3005 | 5160.45 | 2003 |
+| 3008 |    4723 | 2006 |
+| 3011 | 9891.88 | 2006 |
++------+---------+------+
+
+Tables involved:-
+   -> Orders
+
+
+40) Write a query that selects the highest rating in each city. 
+
+Approach:-
+   -> This SQL query selects the city and the maximum ratings value (Max_Ratings) associated with customers in that city from the Customers table. 
+   -> The results are obtained by grouping the Customers table by city and selecting the maximum ratings value associated with customers in each city.
+
+Expected Output:-
+
++---------+-------------+
+| CITY    | Max_Ratings |
++---------+-------------+
+| London  |         100 |
+| Rome    |         200 |
+| SanJose |         300 |
+| Berlin  |         300 |
++---------+-------------+
+
+Tables involved:-
+   -> Customers
+
+
+41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00. 
+
+Approach:-
+   -> This query selects the salesperson name (SNAME), order number (ONUM), order amount (AMT), and the calculated commission amount (Commision_Amount) 
+      from the Salespeople, Customers, and Orders tables. 
+   -> The results are filtered to only include customers with ratings higher than 100, and grouped by the order number (ONUM). 
+   -> The commission amount is calculated by multiplying the order amount by the salesperson's commission rate, and then dividing by 100.
+
+Expected Output:-
+
++---------+------+---------+------+------------------+
+| SNAME   | ONUM | AMT     | COMM | Commision_Amount |
++---------+------+---------+------+------------------+
+| Serres  | 3005 | 5160.45 |   13 |              671 |
+| Serres  | 3010 | 1309.95 |   13 |              170 |
+| Serres  | 3007 |   75.75 |   13 |               10 |
+| AxelRod | 3009 | 1713.23 |   10 |              171 |
+| Rifkin  | 3006 | 1098.16 |   15 |              165 |
+| Rifkin  | 3001 |   18.69 |   15 |                3 |
++---------+------+---------+------+------------------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+42) Count the customers with ratings above SanJose’s average. 
+
+Approach:-
+   -> This query selects the count of customers (Count_Of_Customers) from the Customers table, filtered 
+      to only include customers with ratings higher than the average ratings value associated 
+      with customers in the city of Sanjose. 
+   -> The average ratings value associated with Sanjose customers is obtained through a subquery that 
+      groups the Customers table by city and selects the average ratings value of customers associated 
+      with Sanjose.
+
+Expected Output:-
++--------------------+
+| Count_Of_Customers |
++--------------------+
+|                  2 |
++--------------------+
+
+Tables involved:-
+   -> Customers
+
+
+43) Find all salespeople that are located in either Barcelona or London. 
+
+Approach:-
+   -> This query selects the salesperson number (SNUM), name (SNAME), and city from the Salespeople table. 
+   -> The results are filtered to only include salespeople who work in either Barcelona or London.
+
+Expected Output:-
+   -> This query returns all salespeople details who live in "Barcelona" or "London". 
+
++------+--------+-----------+
+| SNUM | SNAME  | CITY      |
++------+--------+-----------+
+| 1001 | Peel   | London    |
+| 1004 | Motika | London    |
+| 1007 | Rifkin | Barcelona |
+| 1008 | Fran   | London    |
++------+--------+-----------+
+
+Tables involved:-
+   -> Salespeoples
+
+44) Find all salespeople with only one customer. 
+
+Approach:-
+   -> This query selects the salesperson number (SNUM), name (SNAME), and customer name (CNAME) from the Salespeople 
+      and Customers tables. 
+   -> The results are obtained by performing an inner join between the two tables on the salesperson number (SNUM) 
+      column, grouping the results by SNUM, and filtering to only include salespeople with a count of unique customer 
+      numbers (CNUM) equal to 1. 
+
+Expected Output:-      
+   -> This query returns salespeople only one customer.
+
++------+---------+----------+
+| SNUM | SNAME   | CNAME    |
++------+---------+----------+
+| 1003 | AxelRod | Giovanni |
+| 1007 | Rifkin  | Cisneros |
+| 1004 | Motika  | pereira  |
++------+---------+----------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+45) Write a query that joins the Customer table to itself to find all pairs or customers served by a single salesperson. 
+
+Approach:-
+   -> This query selects the name (CNAME) of two customers and their associated salesperson number (SNUM) from the Customers table. 
+   -> The results are obtained by performing a self-join between the Customers table,where the join condition requires that the two 
+      customers have the same salesperson number but different customer numbers (CNUM). 
+   -> The results display the names of the two customers and their shared salesperson number.
+
+Expected Output:-
+
++------------+------------+------+
+| Customer 1 | Customer 2 | SNUM |
++------------+------------+------+
+| Hoffman    | Clemens    | 1001 |
+| Liu        | Grass      | 1002 |
+| Grass      | Liu        | 1002 |
+| Clemens    | Hoffman    | 1001 |
++------------+------------+------+
+
+Tables involved:-
+   -> Customers
+
+
+46) Write a query that will give you all orders for more than $1000.00. 
+
+Approach:-
+   -> This query selects the order number (ONUM) and amount (AMT) from the Orders table. 
+   -> The results are filtered to only include orders where the amount is greater than 1000.00.
+
+Expected Output:-
+   -> This query returns the all orders which amount is higher then 1000.00.
++------+---------+
+| ONUM | AMT     |
++------+---------+
+| 3002 |  1900.1 |
+| 3005 | 5160.45 |
+| 3006 | 1098.16 |
+| 3008 |    4723 |
+| 3009 | 1713.23 |
+| 3010 | 1309.95 |
+| 3011 | 9891.88 |
++------+---------+
+  
+Tables involved:-
+   -> Orders  
+
+47) Write a query that lists each order number followed by the name of the customer who made that order. 
+
+Approach:-
+   -> This query selects the order number (ONUM) from the Orders table and the customer name (CNAME) from the Customers table. 
+      The results are obtained by performing an inner join between the Orders and Customers tables on the customer number (CNUM) 
+      column, which combines matching rows from both tables based on the CNUM values.
+
+Expected Output:-
++------+----------+
+| ONUM | CNAME    |
++------+----------+
+| 3001 | Cisneros |
+| 3002 | pereira  |
+| 3003 | Hoffman  |
+| 3005 | Liu      |
+| 3006 | Cisneros |
+| 3007 | Grass    |
+| 3008 | Clemens  |
+| 3009 | Giovanni |
+| 3010 | Grass    |
+| 3011 | Clemens  |
++------+----------+ 
+
+Tables involved:-
+   -> Orders
+   -> Customers
+
+
+48) Write a query that selects all the customers whose ratings are equal to or greater than ANY(in the SQL sense) of ‘Serres’. 
+
+Approach:-
+   -> This query selects the customer number (CNUM), name (CNAME), and ratings from the Customers table. The results are filtered to 
+      only include customers whose ratings value is greater than or equal to any ratings value associated with salespeople who have the 
+      name "Serres". 
+   -> The ratings values associated with "Serres" are obtained through a subquery that joins the Customers and Salespeople tables on the 
+      salespeople number (SNUM) and selects the ratings values of customers associated with "Serres".
+
++------+----------+---------+
+| CNUM | CNAME    | RATINGS |
++------+----------+---------+
+| 2002 | Giovanni |     200 |
+| 2003 | Liu      |     200 |
+| 2004 | Grass    |     300 |
+| 2008 | Cisneros |     300 |
++------+----------+---------+
+
+
+
+49) Write two queries that will produce all orders taken on October 3 or October 4. 
+
+Approach:-
+   -> This SQL query selects the order number (ONUM), amount (AMT), and date (ODATE) from the Orders table where 
+      the date is either "1990-10-03" or "1990-10-04". 
+   -> The results are combined using the UNION operator, which removes duplicates and concatenates the results 
+      of the two SELECT statements.
+
+Expected Output:-
+
++------+---------+------------+
+| ONUM | AMT     | ODATE      |
++------+---------+------------+
+| 3001 |   18.69 | 1990-10-03 |
+| 3002 |  1900.1 | 1990-10-03 |
+| 3003 |  767.19 | 1990-10-03 |
+| 3005 | 5160.45 | 1990-10-03 |
+| 3006 | 1098.16 | 1990-10-03 |
+| 3007 |   75.75 | 1990-10-04 |
+| 3009 | 1713.23 | 1990-10-04 |
++------+---------+------------+
+
+Tables involved:-
+   -> Orders
+
+
+50) Find only those customers whose ratings are higher than every customer in Rome. 
+
+Approach:-
+   -> This SQL query selects the customer number (CNUM), name (CNAME), city, and ratings from the Customers table. 
+      The results are filtered to only include customers whose ratings value is greater than the maximum ratings 
+      value of any customer in the city of "Rome". 
+   -> The maximum ratings value for each city is obtained through a subquery that groups customers by city and selects 
+      the maximum ratings value for each group, filtered to only include the "Rome" city.
+
+Expected Output:- 
+   -> This query returns only those customers whose ratings is higher then every customers who live in "Rome".
+
++------+----------+---------+---------+
+| CNUM | CNAME    | CITY    | RATINGS |
++------+----------+---------+---------+
+| 2004 | Grass    | Berlin  |     300 |
+| 2008 | Cisneros | SanJose |     300 |
++------+----------+---------+---------+
+
+Tables involved:-
+   -> Customers
+
+
+51) Write a query on the Customers table whose output will exclude all customers with a rating&lt;= 100.00, unless they are located in Rome. 
+
+Approach:-
+   -> This query selects the customer number (CNUM), name (CNAME), city, ratings, and salesperson number (SNUM) 
+      from the Customers table. 
+   -> The results are filtered to only include customers who either have a city of "Rome" or a ratings value 
+      not equal to 100. 
+
+Expected Output:-
++------+----------+---------+---------+------+
+| CNUM | CNAME    | CITY    | RATINGS | SNUM |
++------+----------+---------+---------+------+
+| 2002 | Giovanni | Rome    |     200 | 1003 |
+| 2003 | Liu      | SanJose |     200 | 1002 |
+| 2004 | Grass    | Berlin  |     300 | 1002 |
+| 2008 | Cisneros | SanJose |     300 | 1007 |
+| 2007 | pereira  | Rome    |     100 | 1004 |
++------+----------+---------+---------+------+
+
+Tables involved:-
+   -> Customers
+
+
+52) Find all rows from the customer’s table for which the salesperson number is 1001. 
+
+Approach:-
+   -> This query selects all the attributes from Customer table and use WHERE clause to filter the result SNUM = 1001. 
+
+Expected Output:-
+   -> This query returns all customers whose salespeople number is "1001".
+
++------+---------+--------+---------+------+
+| CNUM | CNAME   | CITY   | RATINGS | SNUM |
++------+---------+--------+---------+------+
+| 2001 | Hoffman | London |     100 | 1001 |
+| 2006 | Clemens | London |     100 | 1001 |
++------+---------+--------+---------+------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+53) Find the total amount in orders for each salesperson where their total of amounts are greater than the amount of the largest order in the table. 
+
+Approach:-
+   -> This query selects the salesperson number (SNUM) and the total amount of their orders, rounded to the nearest integer. 
+   -> The results are grouped by SNUM and filtered to only include salespeople with a total order amount greater than the maximum 
+      order amount of any single order.
+
+Expected Output:-
+   -> This query returns the total orders amount for each salespeople whose total amount is higher then the highest order. 
++------+--------------+
+| SNUM | Total_Amount |
++------+--------------+
+| 1001 |        15382 |
++------+--------------+
+
+Tables involved:-
+   -> Orders
+
+
+54) Write a query that selects all orders save those with zeroes or 
+   NULL in the amount file. 
+
+-- doubt
+
+
+55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
+
+Approach:-
+   -> This SQL query selects salespeople names, customer names, and customer ratings from the Salespeople and Customers tables joined on Salespeople number, filtering results by customers with ratings less than 200 and 
+      salespeople names that are alphabetically less than the customer names. 
+   -> The results are ordered by salesperson name and customer name.
+
+Expected Output:-
+
++--------+---------+---------+
+| SNAME  | CNAME   | Ratings |
++--------+---------+---------+
+| Motika | pereira |     100 |
++--------+---------+---------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+56) Find all salespeople name and commission. 
+
+Approach:-
+   -> This query selects the name "SNAME" and commision "COMM" from Salespeople table.
+
+Expected Output:-
+
++---------+------+
+| SNAME   | COMM |
++---------+------+
+| Peel    |   12 |
+| Serres  |   13 |
+| AxelRod |   10 |
+| Motika  |   11 |
+| Rifkin  |   15 |
+| Fran    |   25 |
++---------+------+
+
+Tables involved:-
+   -> Salepeoples
+
+
+57) Write a query that produces the names and cities of all customers with the same rating as Hoffman. Write the query using Hoffman’s cnum rather than his rating, so that it would still be usable if his rating is changed. 
+
+Approach:-
+   -> This query selects customer names and cities from the Customers table where their ratings match the ratings of the customer with CNUM "2001", 
+      using a subquery to retrieve the ratings value.
+
+Expected Output:-
+   -> This query returns the names and cities of all Customers with the same ratings as "Hoffman".
+
++---------+--------+
+| CNAME   | CITY   |
++---------+--------+
+| Clemens | London |
+| pereira | Rome   |
++---------+--------+
+
+Tables involved:-
+   -> Customers
+
+
+58) Find all salespeople for whom there are customers that follow them in alphabetical order. 
+
+Approach:-
+   -> This query selects salespeople names and customer names by joining the Salespeople and Customers tables 
+      on the Salespeople number. The results are ordered by customer name.
+
+Expected Output:-
++---------+----------+
+| SNAME   | CNAME    |
++---------+----------+
+| Rifkin  | Cisneros |
+| Peel    | Clemens  |
+| AxelRod | Giovanni |
+| Serres  | Grass    |
+| Peel    | Hoffman  |
+| Serres  | Liu      |
+| Motika  | pereira  |
++---------+----------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+59) Write a query that produces the names and ratings of all customers who have average orders. 
+
+Approach:-
+   -> This SQL query selects customer names and ratings from the Customers table, along with the count of orders made by 
+      each customer by joining with the Orders table. 
+   -> The results are grouped by customer number and filtered by the count of orders matching the average order count per customer. 
+   -> The average order count per customer is calculated as the total number of orders divided by the number of distinct customers 
+      who made orders.
+
+Expected Output:-
+   -> This query returns the name and ratings of all customer who have an average orders.
+
++----------+---------+-----------------+
+| CNAME    | Ratings | COUNT OF ORDERS |
++----------+---------+-----------------+
+| pereira  |     100 |               1 |
+| Hoffman  |     100 |               1 |
+| Liu      |     200 |               1 |
+| Giovanni |     200 |               1 |
++----------+---------+-----------------+
+
+Table involved:-
+   -> Customers
+   -> Orders 
+
+
+60) Find the SUM of all Amounts from the orders table. 
+
+Approach:-
+   -> This SQL query selects the rounded sum of the "AMT" column from the "Orders" table 
+      and renames the result as "SUM_OF_AMT".  
+
+Expected Output:-
+   -> This query return the sum of all orders amounts.
+
++------------+
+| SUM_OF_AMT |
++------------+
+|      26658 |
++------------+
+
+Tables involved:-
+   -> Orders
+
+
+61) Write a SELECT command that produces the order number, amount, and the date from rows in the order table. 
+
+Approach:-
+   -> This query retrieves the order number (ONUM), amount (AMT), and date (ODATE) for each order in the Orders 
+      table, using the SELECT statement and aliases for the column names.
+
+Expected Output:-
+
++--------------+---------+------------+
+| Order_Number | Amount  | ODATE      |
++--------------+---------+------------+
+|         3001 |   18.69 | 1990-10-03 |
+|         3002 |  1900.1 | 1990-10-03 |
+|         3003 |  767.19 | 1990-10-03 |
+|         3005 | 5160.45 | 1990-10-03 |
+|         3006 | 1098.16 | 1990-10-03 |
+|         3007 |   75.75 | 1990-10-04 |
+|         3008 |    4723 | 1990-10-05 |
+|         3009 | 1713.23 | 1990-10-04 |
+|         3010 | 1309.95 | 1990-10-06 |
+|         3011 | 9891.88 | 1990-10-06 |
++--------------+---------+------------+
+
+Tables involved:-
+   -> Orders
+
+
+62) Count the number of non NULL rating fields in the Customers table (including repeats). 
+
+Approach:-
+   -> This query retrieves the count of non-null values in the Ratings column of the Customers table, 
+      using the COUNT aggregate function and the IS NOT NULL operator.
+
+Expected Output:-
+   -> This query returns count the number of not null ratings of each Customers. 
++-------------------+
+| Number_Of_Ratings |
++-------------------+
+|                 7 |
++-------------------+
+
+Tables involved:-
+   -> Customers
+
+
+63) Write a query that gives the names of both the salesperson and the customer for each order after the order number. 
+
+Approach:-
+   -> This query retrieves the order number (ONUM), name of the salesperson (SNAME), and name of the customer (CNAME) for 
+      each order in the Orders table, using subqueries with the SELECT statement and aliases for the Salespeople and 
+      Customers tables.
+
+Expected Output:-
+
++------+---------+----------+
+| ONUM | SNAME   | CNAME    |
++------+---------+----------+
+| 3001 | Rifkin  | Cisneros |
+| 3002 | Motika  | pereira  |
+| 3003 | Peel    | Hoffman  |
+| 3005 | Serres  | Liu      |
+| 3006 | Rifkin  | Cisneros |
+| 3007 | Serres  | Grass    |
+| 3008 | Peel    | Clemens  |
+| 3009 | AxelRod | Giovanni |
+| 3010 | Serres  | Grass    |
+| 3011 | Peel    | Clemens  |
++------+---------+----------+
+
+Tables invloved:-
+   -> Salespeoples
+   -> Customers
+   -> Orders
+
+
+64) List the commissions of all salespeople servicing customers in London. 
+
+Approach:-
+   -> This query retrieves the salesperson's name (SNAME) and commission rate (COMM) from the Salespeople 
+      table for salespeople who have customers located in London, using a subquery with the IN operator.
+
+Expected Output:-
+   -> This query return all salespeoples who servicing the customers in London.
+
++-------+------+
+| SNAME | COMM |
++-------+------+
+| Peel  |   12 |
++-------+------+
+
+Tables involved:-
+   -> Salespeoples 
+   -> Customers
+
+
+65) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
+
+Approach:-
+   -> This query retrieves the salesperson's number (SNUM) and name (SNAME) from the Salespeople table for 
+      salespeople who do not have any customers in the same city as them, using a subquery with the ALL 
+      operator and a join between the Customers and Salespeople tables.
+
+Expected Output:-
+   -> This query returns all salepeople details who have no customers in their own city. 
++------+---------+
+| SNUM | SNAME   |
++------+---------+
+| 1003 | AxelRod |
+| 1004 | Motika  |
+| 1008 | Fran    |
++------+---------+
+ 
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+ 
+
+66) Write a query using the EXISTS operator that selects all salespeople with customers located in their cities who are not assigned to them. 
+
+Approach:-
+   -> This query retrieves the salesperson's number (SNUM), name (SNAME), and city (CITY) from the Salespeople table for salespeople who 
+      work in a city where at least one other salesperson also has customers, using a subquery with the EXISTS operator.
+
+Expected Output:-
+
++------+--------+---------+
+| SNUM | SNAME  | CITY    |
++------+--------+---------+
+| 1002 | Serres | SanJose |
+| 1004 | Motika | London  |
+| 1008 | Fran   | London  |
++------+--------+---------+ 
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+67) Write a query that selects all customers serviced by Peel or Motika. (Hint: The snum field relates the 2 tables to one another.) 
+
+Approach:-
+   -> This query retrieves the customer number (CNUM), name (CNAME), city (CITY), and rating (RATINGS) from the Customers table for 
+      customers who are assigned to salespeople named "PEEL" or "Motika", using a subquery with the ANY operator.
+
+Expected Output:-
+   -> This query returns all the customers, who is serviced by salepeople "Peel" or "Motika".  
+
++------+---------+--------+---------+
+| CNUM | CNAME   | CITY   | RATINGS |
++------+---------+--------+---------+
+| 2001 | Hoffman | London |     100 |
+| 2006 | Clemens | London |     100 |
+| 2007 | pereira | Rome   |     100 |
++------+---------+--------+---------+
+
+Tables invloved:-
+   -> Customers
+   -> Orders
+
+68) Count the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.) 
+
+Approach:-
+   -> This query calculates the number of distinct salespeople (SNUM) who have made orders on each date (ODATE), 
+      using the COUNT function and GROUP BY clause.
+
+Expected Ouput:-
+   -> This query return the count of salepeople get orders on each day.
++-----------------------+------------+
+| Number of Salespeople | ODATE      |
++-----------------------+------------+
+|                     4 | 1990-10-03 |
+|                     2 | 1990-10-04 |
+|                     1 | 1990-10-05 |
+|                     2 | 1990-10-06 |
++-----------------------+------------+
+
+Tables involved:-
+   -> Orders
+
+
+69) Find all orders attributed to salespeople who live in London. 
+ 
+Approach:-
+   -> This query retrieves the order number (ONUM), amount (AMT), and order date (ODATE) from the Orders table for orders made by salespeople located in London, 
+      using a subquery with the IN operator.
+
+Expected Output:-
+   -> This query returns the all orders details which assigned salespeople live in London.     
++------+---------+------------+
+| ONUM | AMT     | ODATE      |
++------+---------+------------+
+| 3003 |  767.19 | 1990-10-03 |
+| 3008 |    4723 | 1990-10-05 |
+| 3011 | 9891.88 | 1990-10-06 |
+| 3002 |  1900.1 | 1990-10-03 |
++------+---------+------------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Orders
+
+70) Find all orders by customers not located in the same cities as their salespeople. 
+
+Approach:-
+   -> This query retrieves the order number (ONUM) and amount (AMT) from the Orders table 
+      for customers whose salespeople are located in different cities, using a nested subquery 
+      with the IN operator.
+
+Expected Output:-
+   > This query returns the all Orders details whose customers not live in same city with the 
+     assigned salepeople.       
++------+---------+
+| ONUM | AMT     |
++------+---------+
+| 3001 |   18.69 |
+| 3002 |  1900.1 |
+| 3006 | 1098.16 |
+| 3007 |   75.75 |
+| 3009 | 1713.23 |
+| 3010 | 1309.95 |
++------+---------+
+
+Tables invloved:-
+   -> Salepeoples
+   -> Customer
+   -> Orders
+
+71) Find all salespeople who have customers with more than one current order. 
+
+Subquery
+
+Approach:-
+   -> This query selects salesperson number, salesperson name, and commission from the Salespeople table. 
+      The "WHERE" clause filters the results to only include salespeople whose salesperson number appears 
+      in the results of a subquery.
+
+   -> The subquery selects "SNUM" values from the "Orders" table and groups them by "CNUM" (customer number). 
+      The "HAVING" clause filters the results to only include cases where the count of "ONUM" values is
+      greater than 1 (i.e. customers who have placed more than one order).
+
+Expected Output:-
+   -> This query returns all salepeople details who have an customers with more then one 
+      current orders.
++------+--------+------+
+| SNUM | SNAME  | COMM |
++------+--------+------+
+| 1001 | Peel   |   12 |
+| 1002 | Serres |   13 |
+| 1007 | Rifkin |   15 |
++------+--------+------+
+
+JOIN
+
+Approach:-
+   -> This SQL query retrieves the salesperson's number, name, and commission from the Salespeople table for those 
+      who have made more than one order for a customer, using an inner join and group by clause.
+
+Expected Output:-
+   -> This query returns all salepeople details who have an customers with more then one 
+      current orders.
+
++------+--------+------+
+| SNUM | SNAME  | COMM |
++------+--------+------+
+| 1007 | Rifkin |   15 |
+| 1002 | Serres |   13 |
+| 1001 | Peel   |   12 |
++------+--------+------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Orders  
+ 
+72) Write a query that extracts from the customer’s table every customer assigned to a salesperson, who is currently having at least one another customer(besides the customer being selected) with orders in the Orders Table. 
+
+Approach:-
+   -> This query selects salesperson number, customer number, customer name, and order number from the "Orders" and "Customers" tables. 
+      The "JOIN" keyword is used to combine the two tables based on the "SNUM" column. 
+   -> The "WHERE" clause filters the results to include only cases where the customer number in the "Customers" table is different from 
+      the customer number in the "Orders" table and the salesperson number in both tables is the same. 
+   -> The results are then grouped by customer number using the "GROUP BY" clause.
+
+Expected Output:-
+
++------+------+---------+------+
+| SNUM | CNUM | CNAME   | ONUM |
++------+------+---------+------+
+| 1001 | 2001 | Hoffman | 3008 |
+| 1002 | 2003 | Liu     | 3007 |
+| 1002 | 2004 | Grass   | 3005 |
+| 1001 | 2006 | Clemens | 3003 |
++------+------+---------+------+
+
+Tables involved:-
+   -> Customers
+   -> Orders
+
+
+73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
+
+Approach:-
+   -> This query concatenates a string using the "CONCAT" function to display the highest rating for each city in the "Customers" table. 
+      The "MAX" function is used to get the highest rating for each city. 
+   -> The results are grouped by city using the "GROUP BY" clause. The final concatenated string is given an alias of "HIGHEST RATINGS OF CITY".
+
+Expected Output:-    
++------------------------------------------------+
+| HIGHEST RATINGS OF CITY                        |
++------------------------------------------------+
+| For the city London,the highest rating is 100  |
+| For the city Rome,the highest rating is 200    |
+| For the city SanJose,the highest rating is 300 |
+| For the city Berlin,the highest rating is 300  |
++------------------------------------------------+
+
+Tables invloved:-
+   -> Customers
+
+74) Write a query that will produce the snum values of all salespeople with orders, having amt greater than 1000 in the Orders Table(without repeats). 
+
+Approach:-
+   -> This query selects distinct values of "SNUM", "ONUM", and "AMT" columns from the Orders table 
+      where the "AMT" is greater than 1000. The results are grouped by "SNUM" column.    
+
+Expected Output:-
++------+------+---------+
+| SNUM | ONUM | AMT     |
++------+------+---------+
+| 1001 | 3008 |    4723 |
+| 1002 | 3005 | 5160.45 |
+| 1003 | 3009 | 1713.23 |
+| 1004 | 3002 |  1900.1 |
+| 1007 | 3006 | 1098.16 |
++------+------+---------+
+
+Tables involved:-
+   -> Orders
+
+
+75) Write a query that lists customers in a descending order of rating. Output the rating field first, followed by the customer’s names and numbers. 
+
+Approach:-
+   ->This SQL query selects the columns "RATINGS", "CNAME", and "CNUM" from the table Customers. 
+     The results are sorted in descending order by the "RATINGS" column.
+
+Expected Output:-
+   -> This query returns customers ratings , name and number ordered by ratings maximum to minimum.
+
++---------+----------+------+
+| RATINGS | CNAME    | CNUM |
++---------+----------+------+
+|     300 | Grass    | 2004 |
+|     300 | Cisneros | 2008 |
+|     200 | Giovanni | 2002 |
+|     200 | Liu      | 2003 |
+|     100 | Hoffman  | 2001 |
+|     100 | Clemens  | 2006 |
+|     100 | pereira  | 2007 |
++---------+----------+------+ 
+
+Tables involved:-
+   -> Customers
+
+
+76) Find the average commission for salespeople in London. 
+
+Approach:-
+   -> This SQL query uses the AVG function to calculate the average commission earned by salespeople in the city of London. 
+      The WHERE clause filters the results to only include salespeople who work in London.
+
+Expected Output:-
+   -> This query return the average commision for salepeople in London.    
++---------------+
+| AVG_COMMISION |
++---------------+
+|       16.0000 |
++---------------+
+
+Tables involved:-
+   -> Salespeoples
+
+
+77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
+
+Approach:-
+   -> This query selects the "ONUM" and "AMT" columns from the Orders table where the "SNUM" column matches 
+      any of the values returned by the subquery. 
+   -> The subquery selects the "SNUM" column from the Customers table where the "CNUM" column is equal to 2001. 
+      The query uses the "IN" operator to match the values returned by the subquery.
+
+Expected Ouput:-
+   -> This query returns the all Orders details which assigned to salespeople whose provide services to Hoffman (cnum 2001).
+
++------+---------+
+| ONUM | AMT     |
++------+---------+
+| 3003 |  767.19 |
+| 3008 |    4723 |
+| 3011 | 9891.88 |
++------+---------+
+
+Tables involved:-
+   -> Customers
+   -> Orders
+
+
+78) Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive). 
+
+Approach:-
+   -> This query select salepeople number "SNUM" and name "SNAME" from Salepeople where 
+      the commision is greater then equal to 0.10 and less then equal to 0.12.
+
+Expected Output:-
+   -> This query returns the salepeople details whose commision is greater then equal to 0.10
+      and less then equal to 0.12. 
+
++------+---------+
+| SNUM | SNAME   |
++------+---------+
+| 1001 | Peel    |
+| 1003 | AxelRod |
+| 1004 | Motika  |
++------+---------+
+
+Tables invloved:-
+   -> Salespeoples
+
+
+79) Write a query that will give you the names and cities of all salespeople in London with a commission above 0.10.
+
+Approach:-
+   -> This query selects the salespeople name "SNAME" and "CITY" from Salespeople table where the city is "London"
+      and commision "COMM"(in decimal) is greater then 0.10.
+
+Expected Output:-
+   ->This query returns the salespeople name and city whose city is London and commision is greater then 0.10. 
++--------+--------+
+| SNAME  | CITY   |
++--------+--------+
+| Peel   | London |
+| Motika | London |
+| Fran   | London |
++--------+--------+
+
+Tables invloved:-
+   -> Salespeoples
+
+
+80) Write a query that selects each customer’s smallest order. 
+
+Approach:-
+   -> This query selects the minimum value of the "AMT" column for each unique value of the "CNUM" 
+      column in the "Orders" table.   
+   -> The query uses the "GROUP BY" clause to group the results by "CNUM".
+
+Expected Output:-
+   -> This query returns all customers numbers with smallest orders amount.   
++------+-----------------+
+| CNUM | Smallest_Orders |
++------+-----------------+
+| 2008 |           18.69 |
+| 2007 |          1900.1 |
+| 2001 |          767.19 |
+| 2003 |         5160.45 |
+| 2004 |           75.75 |
+| 2006 |            4723 |
+| 2002 |         1713.23 |
++------+-----------------+
+
+Table involved:-
+   -> Orders
+
+
+81) Write a query that selects the first customer in alphabetical order whose name begins with ‘G’. 
+
+Approach:-
+   -> This query selects the first row from the "Customers" table where the "CNAME" column starts with the letter "G". 
+      The selected columns are "CNUM" and "CNAME". 
+   -> The query uses the "LIKE" operator with the pattern "G%" to match the names starting with "G". 
+      The "LIMIT" clause is used to limit the results to one row.
+
+Expected Output:-
+   -> This query returns the first customer whose name begins with 'G'. 
++------+----------+
+| CNUM | CNAME    |
++------+----------+
+| 2002 | Giovanni |
++------+----------+
+
+Table involved:-
+   -> Customers
+
+
+82) Write a query that counts the number of different non NULL city values in the customers table. 
+
+Approach:-
+   -> This query retreives the count od distinct city from Customers table where the City is not null.
+
+Expected Output:-
++----------------+
+| NUMBER_OF_CITY |
++----------------+
+|              4 |
++----------------+
+
+Table invloved:-
+   -> Customers
+
+83) Find the average amount from the Orders Table. 
+
+Approach:-
+   -> This query retreives the average amount from Orders tables.
+
+Expected Output:-
+
++------------+
+| AVG_AMOUNT |
++------------+
+|       2666 |
++------------+
+
+Tables involved:-
+   -> Orders
+
+
+84) Find all customers who are not located in SanJose and whose rating is above 200. 
+
+Approach:-
+   -> This query selecting the number, name, city, ratings from Customers where the Customers ratings 
+      is higher then 200 and city is not "SanJose".
+
+Expected Output:-
+   -> This query returns the customers details whose ratings is higher then 200 and city is not "SanJose".           
++------+-------+--------+---------+
+| CNUM | CNAME | CITY   | RATINGS |
++------+-------+--------+---------+
+| 2004 | Grass | Berlin |     300 |
++------+-------+--------+---------+
+
+Tables invloved:-
+   -> Customers
+
+
+85) Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm &lt; 0.14); 
+
+Approach:-
+   -> This query select the number , name ,city and commision from salespeople where the commision 
+      is greater then 0.12 or less then 0.14
+
+Expected Output:-
+   -> This query returns the salepeople details whose commision is higher then 0.12 and less then 0.14.
+
++------+---------+-----------+------+
+| SNUM | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1003 | AxelRod | NewYork   |   10 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+
+Tables invloved:-
+   -> Salespeoples
+
+
+86) Which salespersons attend to customers not in the city they have been assigned to? 
+  
+Approach:-
+   -> This query retrieves salespeople and their associated customer names where the salesperson's city 
+      is not the same as the customer's city. 
+   -> The Salespeople and Customers tables are joined on the SNUM column and filtered by city mismatch.
+ 
+
+Expected Output:-
+   -> This query returns the salepeople name , number and customer name those are not in same city but the
+      salespeople assigned the those cutomers.
++------+---------+----------+
+| SNUM | SNAME   | CNAME    |
++------+---------+----------+
+| 1003 | AxelRod | Giovanni |
+| 1002 | Serres  | Grass    |
+| 1007 | Rifkin  | Cisneros |
+| 1004 | Motika  | pereira  |
++------+---------+----------+       
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+87) Which salespeople get commission greater than 0.11 are serving customers rated less than 250? 
+
+-- SUBQUERY
+
+Approach 1:-
+   -> This query selecting the salepeople number ,name, commision on which the commision is greter then 0.11
+      and use subquery to check the ratings of salepeople is less then 250 
+
+
+--JOINS
+
+Approach 2:-
+   -> This query retrieves salespeople and their commission rates who have at least one customer with a rating below 250. 
+   -> The Salespeople and Customers tables are joined on the SNUM column, filtered by commission rate and customer rating, 
+      and grouped by SNUM.
+
+Expected Output:-
+   -> This query returns salespeople details , who have get the commision higher then 0.11 
+      and get ratings less then the 250. 
++------+--------+------+
+| SNUM | SNAME  | COMM |
++------+--------+------+
+| 1001 | Peel   |   12 |
+| 1002 | Serres |   13 |
++------+--------+------+    
+
+Tables invloved:-
+   -> Salespeoples
+   -> Customers
+
+
+88) Which salespeople have been assigned to the same city but get different commission percentages? 
+
+Approach:-
+   -> This query retrieves salespeople who have customers in the same city as another salesperson, 
+       by joining the Customers table with itself and selecting distinct SNUM values. 
+   
+Expected Output:- 
+   -> This query returns salespeople details , wh have an assigned to same city but get different commision
+      percentages.
++------+---------+------+
+| SNUM | SNAME   | COMM |
++------+---------+------+
+| 1002 | Serres  |   13 |
+| 1003 | AxelRod |   10 |
+| 1004 | Motika  |   11 |
+| 1007 | Rifkin  |   15 |
++------+---------+------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+89) Which salesperson has earned the maximum commission? 
+
+Approach:-
+   -> This query retrieves the salespeople with the highest commission by calculating the commission 
+      for each salespeople based on their total order amount and commission rate. 
+   -> The results are sorted in descending order by commission and limited to the top result.
+
+Expected Output:-
+   -> This query returns the salespeople details , who have an earn maximum commision. 
+
++------+-------+---------------+
+| SNUM | SNAME | MAX_COMMISION |
++------+-------+---------------+
+| 1001 | Peel  |          1846 |
++------+-------+---------------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Orders 
+
+
+90) Does the customer who has placed the maximum number of orders have the maximum rating? 
+ 
+ -- doubt
+ 
+
+91) List all customers in descending order of customer rating. 
+
+Approach:-
+   -> This query select the customers number, name, city and ratings from customers Order by Ratings in descending.
+
+Expected Output:-
+   -> This query returns the custormers details order of ratings in descending order. 
+
++------+----------+---------+---------+
+| CNUM | CNAME    | CITY    | RATINGS |
++------+----------+---------+---------+
+| 2004 | Grass    | Berlin  |     300 |
+| 2008 | Cisneros | SanJose |     300 |
+| 2002 | Giovanni | Rome    |     200 |
+| 2003 | Liu      | SanJose |     200 |
+| 2001 | Hoffman  | London  |     100 |
+| 2006 | Clemens  | London  |     100 |
+| 2007 | pereira  | Rome    |     100 |
++------+----------+---------+---------+
+
+Table invloved:-
+   -> Customers
+
+
+92) On which days has Hoffman placed orders?
+
+-- subquery
+Approach 1:-
+   -> This SQL query selects the order dates from the Orders table for the customer with the name "Hoffman". 
+   -> It does this by first selecting the CNUM associated with the customer name "Hoffman" from the Customers 
+      table using a subquery. 
+   -> It then uses this CNUM value to filter the Orders table to retrieve the order dates. 
+
+Expected Output:-
+   -> This query returns the date on which the customer "Hoffman" placed the orders.     
++------------+
+| Order Date |
++------------+
+| 1990-10-03 |
++------------+
+
+Tables involved:-
+   -> Orders
+   -> Customers
+
+-- Joins
+Approach 2:-
+   -> This query selects the order dates from the Orders table for the customer with the name "Hoffman". 
+   -> We uses a inner join between the Customers and Orders tables on the CNUM column, and 
+      then filtering the results to only include rows where the customer name is "Hoffman".
+
+
+Expected Output:-
+   -> This query returns the date on which the customer "Hoffman" placed the orders.     
++------------+
+| Order Date |
++------------+
+| 1990-10-03 |
++------------+
+
+Tables involved:-
+   -> Orders
+   -> Customers 
+
+
+93) Which salesmen have no orders between 10/03/1990 and 10/05/1990? 
+
+Approach:-
+   ->This SQL query selects the salespeople who did not have any orders placed between October 3 and October 5, 1990. 
+
+Expected Output:-
+   ->This query returns salespeople number, name, city, and commission, who have not get any orders 
+     between october 3 and october 5.
++------+-------+--------+------+
+| SNUM | SNAME | CITY   | COMM |
++------+-------+--------+------+
+| 1008 | Fran  | London |   25 |
++------+-------+--------+------+
+
+Tables invloved:-
+   -> salespeoples
+
+
+94) How many salespersons have succeeded in getting orders? 
+
+Approach:-
+   -> In this query we count the distinct salespeople from Orders tables.
+
+Expected Output:-
+   -> This query returns count of Salespeople, who have get the orders. 
+
++--------------------+
+| N0. OF SALESPERSON |
++--------------------+
+|                  5 |
++--------------------+
+
+Tables invloved:-
+   -> Orders
+
+
+95) How many customers have placed orders? 
+
+Approach:-
+   -> In this query we count the distinct customers from Orders tables.
+
+Expected Output:-
+   -> This query returns count of customers, who have placed the orders.      
+
++------------------+
+| N0. OF CUSTOMERS |
++------------------+
+|                7 |
++------------------+
+
+Tables invloved:-
+   -> Orders
+
+
+96) On which date has each salesman booked an order of maximum value? 
+
+Approach:-
+   -> This SQL query selects the salespeople number, order date, and amount from the Orders table where the 
+      amount is equal to the maximum amount for each salespeople, using a subquery to find the maximum amount 
+      on each salespeople.
+
+Expected Output:-
+   -> This query returns Date on which all salespeople take a order of maximum amount. 
+
++------+------------+---------+
+| SNUM | ODATE      | AMT     |
++------+------------+---------+
+| 1004 | 1990-10-03 |  1900.1 |
+| 1002 | 1990-10-03 | 5160.45 |
+| 1007 | 1990-10-03 | 1098.16 |
+| 1003 | 1990-10-04 | 1713.23 |
+| 1001 | 1990-10-06 | 9891.88 |
++------+------------+---------+
+
+Tables invloved:-
+   -> Orders
+
+
+97) Who is the most successful salesperson? 
+  
+Approach:-
+   -> This query selects the salesperson number, name, and commission earned from the Salespeople table by 
+      joining it with the Orders table. 
+   -> It groups the results by salesperson number and orders them in descending order of commission, 
+      returning the top commission earner using the LIMIT keyword.
+
+Expected Output:-
+   -> This query returns Salespeople with the highest commision earned ,including their number and names. 
+
++------+-------+-----------+
+| SNUM | SNAME | Commision |
++------+-------+-----------+
+| 1001 | Peel  |      1846 |
++------+-------+-----------+
+
+Tables invloved:-
+   -> Salespeoples
+   -> Orders
+
+
+98) Which customers have the same rating? 
+
+ Approach:-
+    -> This SQL query selects distinct pairs of customer names and their ratings from the Customers table, 
+       where the customers have the same ratings but different customer numbers, ordered by ratings. 
+    -> We uses a self-join on the Customers table to compare customers' ratings.
+
+ Expected Output:-
+    -> This query returns Customers Names whose ratings in same. 
+
++----------+----------+---------+
+| CNAME    | CNAME    | RATINGS |
++----------+----------+---------+
+| pereira  | Hoffman  |     100 |
+| Clemens  | Hoffman  |     100 |
+| pereira  | Clemens  |     100 |
+| Hoffman  | Clemens  |     100 |
+| Clemens  | pereira  |     100 |
+| Hoffman  | pereira  |     100 |
+| Liu      | Giovanni |     200 |
+| Giovanni | Liu      |     200 |
+| Cisneros | Grass    |     300 |
+| Grass    | Cisneros |     300 |
++----------+----------+---------+
+
+Table involved:-
+   ->Customers
+
+
+99) Find all orders greater than the average for October 4th. 
+
+Approach:-
+   -> This query selects the order number, amount, and date from the Orders table where the amount is 
+      greater than the average amount of orders made on a specific date ("1990-10-04").
+
+Expected Output:-
+   -> This query returns Orders details whose amount is greater then the average of October 4th 
+      Orders amount.
+
++------+---------+------------+
+| ONUM | AMT     | ODATE      |
++------+---------+------------+
+| 3002 |  1900.1 | 1990-10-03 |
+| 3005 | 5160.45 | 1990-10-03 |
+| 3006 | 1098.16 | 1990-10-03 |
+| 3008 |    4723 | 1990-10-05 |
+| 3009 | 1713.23 | 1990-10-04 |
+| 3010 | 1309.95 | 1990-10-06 |
+| 3011 | 9891.88 | 1990-10-06 |
++------+---------+------------+
+
+Tables Involved:-
+   -> Orders
+
+
+100) List all customers with ratings above Grass’s average. 
+
+Approach:-
+   -> This query selects the customer number, name, and ratings from the Customers table where the 
+      ratings are higher than the average ratings of customers with the name "Grass."
+
+Expected Output:-
+   -> This query returns a customers details whose ratings are higher than the average ratings 
+      of customers with the name "Grass" 
+
+Tables involved:-
+   -> Customers
+
+
+101) Which customers have above average orders? 
+
+Approach:-
+   -> This query selects customer number, name, and ratings from the Customers table, where the customer number is 
+      found in a subquery that retrieves all customer numbers from the Orders table that have a higher order count 
+      than the average count of orders per customer.
+
+Expected Output:-
+   -> This query returns the Name,Number and Ratings of those customers who have above average 
+      number of orders.
+
++------+----------+---------+
+| CNUM | CNAME    | Ratings |
++------+----------+---------+
+| 2004 | Grass    |     300 |
+| 2006 | Clemens  |     100 |
+| 2008 | Cisneros |     300 |
++------+----------+---------+
+
+Tables Involved:-
+   -> Salespeoples
+   -> Orders
+
+
+102) Select the total amount in orders for each salesperson for which the total is greater than the amount of the largest order in the table. 
+
+Approach:-
+   -> This query uses an INNER JOIN operation to combine records from the Salespeople and 
+      Orders tables, where the salespeople number matches the SNUM in the orders table. 
+   -> The SELECT statement returns the salesperson number, name,and the total sum of order 
+      amounts. 
+   -> The HAVING clause filters the results to only include salespeople whose total order 
+      amount is greater than the maximum amount in the Orders table.
+
+Expected Output:-
+   -> This query returns the salespeople's numbers, names, and total order amounts from the 
+      Orders table, where the total order amount is greater than the maximum amount in the 
+      same table.  
++------+-------+--------------+
+| SNUM | SNAME | Total_Amount |
++------+-------+--------------+
+| 1001 | Peel  |        15382 |
++------+-------+--------------+
+
+Tables Involved:-
+   -> Salespeoples
+   -> Orders
+
+
+103) Give names and numbers of all salespersons that have more than one customer? 
+
+mysql> SELECT SNUM,SNAME,COMM FROM Salespeople
+    -> where
+    -> SNUM IN(SELECT SNUM FROM Customers
+    -> Group By SNUM
+    -> HAVING
+    -> count(CNUM ) > 1);
+
+Approach:-
+   -> This query selects the number, name, and commission from the Salespeople table, 
+      where the salesperson number is found in a subquery that retrieves all customer 
+      numbers that appear more than once in the Customers table.
+
+Expected Output:-
+   -> This query returns Names and Numbers of all salespeoples who have more then one customers.
+
++------+--------+------+
+| SNUM | SNAME  | COMM |
++------+--------+------+
+| 1001 | Peel   |   12 |
+| 1002 | Serres |   13 |
++------+--------+------+
+
+Tables involved:-
+   -> Salespeoples
+   -> Customers
+
+
+104) Select all salespeople by name and number who have customers in their city whom they don’t service. 
+
+Approach:-
+   -> This query uses a JOIN operation to retrieve unique records from the Salespeople and 
+      Customers tables, where the city of the customer matches the city of the salesperson 
+      but their numbers are different. 
+   -> The SELECT statement returns the salesperson ID, name, and customer city 
+
+Expected Output:-
+   -> This query returns the Name and Number of each salespeople who have the city customer in their city
+      but they don't serviced them 
+
++------+--------+---------+
+| SNUM | SNAME  | CITY    |
++------+--------+---------+
+| 1008 | Fran   | London  |
+| 1004 | Motika | London  |
+| 1002 | Serres | SanJose |
++------+--------+---------+
+
+Tables Involved:-
+   -> Salespeoples
+   -> Customers
+
+
+105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
+ 
+Approach:-
+   -> In this query we compare the output of two queries on given condition using SELECT IF. 
+   -> In first query we calculate the total orders amount of customers which live in
+      Rome and London.And we use Subquery for find the order amount and Customers number
+      Orders and Customers tables.
+   -> In Second query we calculate the total commision of salespeople who live in London and Newyork.
+      We uses a INNER JOIN to join the Salespeople and Orders table   
+   -> And the check the total Orders amount of Customer is above the 5 times of commision of SalesPeoples
+      of London and NewYork.
+
+Expected Output:-        
++-------------------+
+| CHECK THE AMOUNT  |
++-------------------+
+| YES               |
++-------------------+
+
+Tables Invloved:-
+   -> Salespeoples 
+   -> Customers
+   -> Orders
+
+
+106) Which are the date, order number, amt and city for each salesperson (by name) for themaximum order he has obtained? 
+
+Approach:- 
+   -> The query begin with selecting Name and Number from Salespeople, order number
+      and maximum amount from Orders table.
+   -> We uses a INNER JOIN to join the Salespeople and Orders table.
+   -> And use GROUP BY to find the maximum order of each SalesPeoples.
+
+Expected Output:-
+   -> This query returns the date, order number ,order amount and city for each salespeoples 
+      for the maximum order he obtained.
+
++---------+------+------+----------------+---------------+
+| SNAME   | SNUM | ONUM | Maximum Amount | Customer_CITY |
++---------+------+------+----------------+---------------+
+| Rifkin  | 1007 | 3001 |        1098.16 | SanJose       |
+| Motika  | 1004 | 3002 |         1900.1 | Rome          |
+| Peel    | 1001 | 3003 |        9891.88 | London        |
+| Serres  | 1002 | 3005 |        5160.45 | SanJose       |
+| AxelRod | 1003 | 3009 |        1713.23 | Rome          |
++---------+------+------+----------------+---------------+
+
+Tables Involved:-
+   -> Salespeoples
+   -> Orders
+
+
+107) Which salesperson is having lowest commission? 
+
+Approach1:-
+   -> This SQL query calculates the lowest commission earned by the salesperson.
+   -> The query begins with selecting a SNUM and SNAME from Salespeople table then 
+      calculate the total commision earned by all Salespeople.
+   -> Use LEFT JOIN operation to join the Salespeople and orders. 
+   -> Use Group By and Order By for fetch the detail of Salespeople with lowest commision.     
+
+Expected Output:-
+   -> This query returns the Name and Number of Salespeople who have an lowest commision.      
+
++------+-------+-----------+
+| SNUM | SNAME | Commision |
++------+-------+-----------+
+| 1008 | Fran  |      NULL |
++------+-------+-----------+
+
+Tables Involved:-
+   -> Salespeoples
+   -> Orders
+
+
+Approach2:-
+   -> The query begins with selecting a SNUM , SNAME AND COMM from salespeople
+      table.
+   -> Use Order by and Limit for fetch the details of Salespeople with lowest COMM.    
+
+Expected Ouput:-
+   -> This query returns the Name and Number of Salespeople who have an lowest commision.
+
++------+---------+------+
+| SNUM | SNAME   | COMM |
++------+---------+------+
+| 1003 | AxelRod |   10 |
++------+---------+------+
+
+Tables Used:-
+   -> Salespeople
+
+
