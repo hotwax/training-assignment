@@ -1,0 +1,329 @@
+Test 1:
+7
+1
+50 500
+1
+51 510
+1
+49 490
+1
+16 160
+1
+57 570
+1
+15 150
+1
+19 190
+4
+5
+
+Expected Output:-
+Above provided key-value pairs should be stored and
+HashMap should be printed when we select 4 from menu.
+number of collisions should be 4.
+
+
+My Output :-
+Enter size of bucket
+7
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+50 500
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+51 510
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+49 490
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+16 160
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+57 570
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+15 150
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+19 190
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+4
+traversal= 
+[49,490] [50,500] [57,570] [15,150] [51,510] [16,160] [19,190] 
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+5
+total collisions= 4
+
+==============================================================================================================
+
+Test 2: updation should not be counted as collision. 
+7
+1
+50 500
+1
+51 510
+1
+49 490
+1
+49 10000
+1
+57 570
+1
+15 150
+1
+19 190
+4
+5
+
+Expected Output:-
+Above provided key-value pairs should be stored and value of key 49 should be updated from 490 to 10000.
+HashMap should be printed when we select 4 from menu.
+number of collisions should be 3. (updation of value of key 49 should not be counted as collision.)
+
+
+My Output :-
+Enter size of bucket
+7
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+50 500
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+51 510
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+49 490
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+49 10000
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+57 570
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+15 150
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+19 190
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+4
+traversal= 
+[49,10000] [50,500] [57,570] [15,150] [51,510] [16,160] [19,190] 
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+5
+total collisions= 3
+
+==============================================================================================================
+
+Test 3: delete() and get() function. 
+7
+1
+50 500
+1
+49 490
+1
+51 510
+2
+51
+3
+51
+2
+51
+
+
+Expected Output:-
+key value pair with keys 50, 49, 51 should be stored.
+after selecting 2(get) we should get the value of key 51 ie 510.
+then we delete value for key 51 it should show value deleted successfully.
+then we call get for key 51 and we should receive value=-1.
+
+
+My Output :-
+Enter size of bucket
+7
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+50 500
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+49 490
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+1
+enter key and value to put
+51 510
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+2
+enter key
+51
+value= 510
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+3
+enter key to delete
+51
+value deleted successfully
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+2
+enter key
+51
+value= -1

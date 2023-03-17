@@ -1,0 +1,298 @@
+
+Test 1:
+16 (bucket size)
+8 (hashmap size)
+1
+72 4234
+1
+18 2431
+1
+43 7878
+1
+36 243
+1
+6 60000
+1
+10 1000
+5
+1
+5 5000
+5
+1
+15 1500
+5
+
+Expected Output:-
+first of all keys-value pairs with key 72,18,43,36,6 and 10 should be added.
+number of collision should be 0
+key-value pair 5-5000 should be added.
+number of collision should be 0
+key-value pair 15-1500 should be added.
+number of collision should be 0
+
+
+My Output :-
+Enter size of bucket
+16
+Enter size of HashMap
+8
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+72 4234
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+18 2431
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+43 7878
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+36 243
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+6 60000
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+10 1000
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+5
+total collisions= 0
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+5 5000
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+5
+total collisions= 0
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+15 1500
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+5
+total collisions= 0
+========================
+
+
+==============================================================================================================
+
+Test 2: updation should not be counted as collision. 
+16 (bucket size)
+8 (hashMap size)
+1
+50 500
+1
+51 510
+1
+49 490
+1
+49 10000
+1
+57 570
+1
+15 150
+4
+5
+
+Expected Output:-
+Above provided key-value pairs should be stored and value of key 49 should be updated from 490 to 10000.
+HashMap should be printed when we select 4 from menu.
+number of collisions should be 0. (updation of value of key 49 should not be counted as collision.)
+
+
+My Output :-
+Enter size of bucket
+16
+Enter size of HashMap
+8
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+50 500
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+51 510
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+49 490
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+49 10000
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+57 570
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+1
+enter key and value to put
+15 150
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+4
+traversal= 
+[49,10000,1] [50,500,2] [51,510,3] [57,570,9] [15,150,15] 
+
+========================
+
+1: put
+2: get
+3: delete
+4: traverse
+5: get collisions
+6: terminate the program
+
+5
+total collisions= 0
+========================
