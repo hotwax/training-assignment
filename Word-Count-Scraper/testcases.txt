@@ -1,0 +1,74 @@
+
+Testcases for the Word Count Scraper
+
+=================================================================
+
+Testcase 1: Check if the words.txt file is not present
+
+output: Error reading words file
+
+
+=================================================================
+
+Testcase 2: Check if the urls.txt file is not present
+
+output: Error reading urls file
+
+=================================================================
+
+Testcase 3: Check if the words.txt file is empty
+
+output: Please check the files. Files are not present or may be empty.
+
+
+=================================================================
+
+Testcase 4: Check if the urls.txt file is empty
+
+output: Please check the files. Files are not present or may be empty.
+
+
+=================================================================
+
+Testcase 5: Check if the urls.txt file contains only valid urls
+
+ouput: Invalid url:  stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string
+       Invalid url:  www.google.com
+
+=================================================================
+
+Testcase 6: Check if the occurance of all the words in urls.txt file is calculated correctly
+
+output: 
+
+Words:
+Java 
+Python 
+C++ 
+C# 
+Ruby 
+HotWax 
+
+URLS:
+https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
+https://www.geeksforgeeks.org/java
+https://www.geeksforgeeks.org/python-programming-language
+https://www.geeksforgeeks.org/c-plus-plus
+https://www.hotwax.co/
+
+Word Count:
+{Java=485, Ruby=3, C++=381, Python=634,  C#=11, HotWax=1}
+
+=================================================================
+
+Testcase 7: Check if the occurance of all the words in urls.txt file is printed correctly
+
+output:
+
+Sorted map in descending order.
+
+{Python=634, Java=485, C++=381, C#=11, Ruby=3, HotWax=1}
+
+
+=================================================================
+

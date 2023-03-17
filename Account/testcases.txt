@@ -1,0 +1,31 @@
+
+
+Testcase 1: Without using synchronus keyword.
+
+Output:
+thread2 withdraws 100 and has 800 left
+thread1 withdraws 100 and has 800 left
+thread2 withdraws 100 and has 700 left
+thread2 withdraws 100 and has 500 left
+thread1 withdraws 100 and has 600 left
+thread1 withdraws 100 and has 300 left
+thread2 withdraws 100 and has 400 left
+thread1 withdraws 100 and has 200 left
+thread2 withdraws 100 and has 100 left
+thread1 withdraws 100 and has 0 left
+
+================================================================================================
+
+Testcase 2: Using synchronus keyword.
+
+Output:
+thread1 withdraws 100 and has 900 left
+thread1 withdraws 100 and has 800 left
+thread1 withdraws 100 and has 700 left
+thread1 withdraws 100 and has 600 left
+thread1 withdraws 100 and has 500 left
+thread2 withdraws 100 and has 400 left
+thread2 withdraws 100 and has 300 left
+thread2 withdraws 100 and has 200 left
+thread2 withdraws 100 and has 100 left
+thread2 withdraws 100 and has 0 left
