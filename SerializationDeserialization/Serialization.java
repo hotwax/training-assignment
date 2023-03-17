@@ -47,6 +47,7 @@ class Serialization
             FileOutputStream fileOutputStreamObject = new FileOutputStream(fileName);
             ObjectOutputStream objectOutputStreamObject = new ObjectOutputStream(fileOutputStreamObject);
             objectOutputStreamObject.writeObject(objectList); //writting objects in file
+            System.out.println("Serialization Done");
             objectOutputStreamObject.close();
 
         } catch (Exception e) {

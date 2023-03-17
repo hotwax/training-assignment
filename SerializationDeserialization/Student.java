@@ -9,7 +9,7 @@ class Address implements Serializable
     Integer pinCode ;
     String country  ;
 
-    // private static final long serialVersionUID = 1l; // Provide a unique Id for sender and Reciever
+    // private static final long serialVersionUID = 1l; // Provide a unique Id for sender and Recieve/
 
     public Address(String city , String state , Integer pinCode , String country )
     {

@@ -1,6 +1,7 @@
 
 // Import the File class
 import java.io.File;
+import java.io.FileNotFoundException;
 // FileWriter Class
 import java.io.FileWriter;
 // Import the IOException class to handle errors
@@ -63,7 +64,7 @@ class Employee {
 
   @Override
   public String toString() { // to print the Object of the class
-    return (getId() + "," + getName() + "," + getEmail() + "," + getAge() + "," + getDOB());
+    return (getId() + "," + getName() + "," + getEmail() + "," + getAge() + "," + getDOB()+"\n");
   }
 
   public static class OrderByID implements Comparator<Employee> // class to sort by id
@@ -121,7 +122,7 @@ class FileOperations {
         temporary_List.add(employee_object);
       }
     } catch (IOException e) {
-      System.out.println(e);
+      System.out.println("Employee.txt File Not found\nCreating Employee.txt File...");
     } catch (InputMismatchException e) {
       System.out.println(e);
     }
@@ -173,16 +174,14 @@ class FileOperations {
   // Method to Search the record in the List
   ArrayList<Employee> searchRecord(ArrayList<Employee> list, int response, String key) {
     ArrayList<Employee> foundRecords = new ArrayList<Employee>(); // Store all the Records Corresponding to the key
-    try
-    {
+    try {
       switch (response) // Switch Case
       {
         case 1: // Search by Id
           for (Employee employee : list) {
-              if (employee.getId().equals(Integer.parseInt(key)))
+            if (employee.getId().equals(Integer.parseInt(key)))
               foundRecords.add(employee);
-          
-  
+
           }
           break;
         case 2: // Search By Name
@@ -213,11 +212,10 @@ class FileOperations {
           break;
 
       }
-    }
-    catch (NumberFormatException e) {
+    } catch (NumberFormatException e) {
       System.out.println("Value should be numeric");
     }
-    return foundRecords;  // Return the list Which Contain all the Records Corresponding to the Key
+    return foundRecords; // Return the list Which Contain all the Records Corresponding to the Key
   }
 
   ArrayList<Employee> sortRecords(ArrayList<Employee> list, int response) {
@@ -261,7 +259,6 @@ public class Main {
 
     String name, email, date_of_birth;
     int age;
-
     while (true) // menu
     {
       System.out.println("      Menu      ");
@@ -280,6 +277,11 @@ public class Main {
             Reader.nextLine();
             System.out.println("Enter Your Name ");
             name = Reader.nextLine();
+            while(name.length()==0)
+            {
+              System.out.println("Name field Shouldn't be empty\nEnter Name");
+              name = Reader.nextLine();
+            }
 
             // Enter your Email Address
             System.out.println("Enter Your Email Address ");
@@ -294,8 +296,15 @@ public class Main {
 
             // Enter Your Age
             System.out.println("Enter Your Age");
-            age = Reader.nextInt();
-
+            // age = Reader.nextInt();
+            String ageValid = Reader.next();
+            String regex = "[0-9]+";
+            while (!ageValid.matches(regex)) {
+              System.out.println("Age Should be a Number");
+              System.out.print("Enter Age Again ");
+              ageValid = Reader.next();
+            }
+            age = Integer.parseInt(ageValid);
             // Enter your Date of Birth
             System.out.println("Enter your Date of Birth in (dd/mm/yyyy) format ");
             Reader.nextLine();
@@ -311,9 +320,10 @@ public class Main {
             }
 
             // Create a Employee class Object
-            Employee employee_object = new Employee( name , email, age, date_of_birth);
-            list.add(employee_object); // Add the Object into the ArrayList 
+            Employee employee_object = new Employee(name, email, age, date_of_birth);
+            list.add(employee_object); // Add the Object into the ArrayList
             fileOperations_object.insertIntoFile(list); // Insert the list into File
+            System.out.println(name + " Added Successfully ");
             break;
           }
 
@@ -331,8 +341,7 @@ public class Main {
             // Filters in Searching like Search by , Sort By .
             System.out.println("Search By : \n1. Employee Id \n2. Name \n3. Email\n4. Date of Birth\n5. Age");
             int response = Reader.nextInt(); // choice
-            if(response<1 || response>5) 
-            {
+            if (response < 1 || response > 5) {
               System.out.println("Choose option from 1 to 5");
               break;
             }

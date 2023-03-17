@@ -1,0 +1,104 @@
+Test serialization 1:
+
+Run Serialization.java file to Serialize the Object
+Input: 
+Enter file name (File Exists) 
+"output1.ser" 
+
+Expected Output:
+Serialization Done
+=====================================================================================================
+Test serialization 2:
+
+Input:
+Enter file name (File DoesNot Exists) 
+"output1.ser" 
+
+Expected Output:
+Serialization Done
+
+======================================================================================================
+To Deserialize the Object Run Deserialization.txt file
+Test deserialization 3:
+
+ Enter file name (File Exists) 
+ output1.ser 
+ Name = Ram
+ DateOfBirth = Mon Jan 12 00:09:00 IST 1998
+ Address = City = Delhi, State = Delhi, PinCode = 110001, Country = India
+
+ Name = Shyam
+ DateOfBirth = Sat Jan 24 00:12:00 IST 1970
+ Address = City = Indore, State = Madhya Pradesh, PinCode = 110001, Country = India
+
+ Name = Adarsht
+ DateOfBirth = Sat Jan 20 00:06:00 IST 2001
+ Address = City = Mumbai, State = Maharashtra, PinCode = 110001, Country = India
+
+ Name = Hardik
+ DateOfBirth = Wed Jan 07 00:05:00 IST 2004
+ Address = City = Pilani, State = Goa, PinCode = 110001, Country = India
+========================================================================================================
+Test deserialization 4 :
+
+Enter file name (Entered File does Not exists) 
+output10.ser
+File Not Found
+
+========================================================================================================
+Test deserialization 5 :
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "new.ser" which does not contains any data
+
+Expected & Actual Output::
+The program displays an error message "SyntaxError: Unexpected token < in JSON at position 0"(catch block code)
+The program displays the menu again
+
+=========================================================================================================
+Test deserialization 6:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "new.ser" which contains serialized data according to old class now class is updated
+
+Expected & Actual Output:
+it will deserialize the older version of class according to newer version
+The program displays the menu again
+
+========================================================================================================
+Testcase 7 : invalid file name
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "invalid.ser" which does not exist
+
+Expected & Actual Output:
+The program displays an message "File not found"
+The program displays the menu again
+========================================================================================================
+TestCase8 :  invalid JSON format
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "invalid.json" which contains invalid JSON data
+
+Expected & Actual Output:
+The program displays an error message "SyntaxError: Unexpected token < in JSON at position 0"
+terminates the program
+========================================================================================================
+Testcase9 invalid menu choice:
+Input:
+User enters an invalid menu choice "4"
+
+Expected & Actual Output:
+The program displays an error message "Invalid choice"
+The program displays the menu again
+========================================================================================================
+Testcase10 exit:
+Input:
+User chooses option 3 (exit)
+
+Expected & Actual Output:
+The program closes the read interface and terminates.

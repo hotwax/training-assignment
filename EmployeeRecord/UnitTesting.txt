@@ -1,0 +1,164 @@
+Test Case 1: Option 1 from Main Menu (Add Employee)
+Input:
+Main Menu  
+Please choose an option:
+1. Add employee to file
+2. Delete employee from the file
+3. Search employee from the file
+4. Display all the data of employee
+5. Exit
+
+Enter Choice 1 (Add Employee) 
+
+1
+Nathan 
+nathan@gmail.com
+30
+15/10/2001
+
+Nathan Added SuccessFully 
+
+Test Case 2: User chooses option 1 and enters invalid email address.
+
+1
+Nathan 
+nathangmail.com
+30
+15/10/2001
+
+Expected Output:
+Invalid Email Format
+Sample Email : abc@gmail.com
+Enter Email again
+
+Until user enters valid email it won't be allowed to proceed futher.
+
+Test Case 3 : User chooses option 1 and enters invalid age.
+
+1
+Nathan 
+nathangmail.com
+twentyTwo
+15/10/2001
+
+Expected output
+
+Age Should be a Number
+Enter Age Again
+Until user enters valid Date it won't be allowed to proceed futher.
+
+Test Case 4 : User chooses option 1 and enters invalid date of birth.
+
+1
+Nathan 
+nathangmail.com
+30
+15102001
+
+Expected Output:
+Invalid Date of Birth Format
+Sample Date of Birth : 01/01/2023
+Enter Date of Birth again
+
+Until user enters valid Date it won't be allowed to proceed futher.
+
+Test Case 5 : User chooses an invalid option.
+
+Enter Choice 10
+
+Invalid Choice
+
+Display menu again
+
+Test Case 6 : User chooses option 2 to delete an employee that exists in the employees.txt file.
+
+Enter the Employee Id to be Deleted 
+14
+Operation Done
+
+Test Case 7 : User chooses option 2 to delete an employee that does not exist in the employees.txt file.
+
+Enter the Employee Id to be Deleted 
+50
+Id not Found
+
+Test Case 8 : User chooses option 3 to search for an employee that exists in the employees.txt file.
+
+Enter Your Choice
+3
+Search Records of Employees
+Search By :
+1. Employee Id
+2. Name
+3. Email
+4. Date of Birth
+5. Age
+2
+Enter Value to be Searched
+Chirag
+Sort By : 
+1. Employee Id
+2. Name
+3. Email
+4. Date of Birth
+5. Age
+5
+1. Ascending 
+2. Descending
+1
+_______________________________________________________
+
+1,chirag,cjain3631@gmail.com,21,21/01/2001
+7,Chirag,cjain3631@gmail.com,21,31/01/2001
+13,Chirag,chirag@gmail.com,22,31/01/2001
+9,Chirag,chiragjain@hotwax.co,31,10/10/2001
+3,chirag,cjain3631@gmail.com,34,20/01/2001
+_______________________________________________________
+
+Test Case 9 : User chooses option 3 to search for an employee that does not exist in the employees.txt file.
+
+Enter Your Choice
+3
+Search Records of Employees
+Search By : 
+1. Employee Id 
+2. Name 
+3. Email
+4. Date of Birth
+5. Age
+1
+Enter Value to be Searched
+50
+Record Not found 
+
+Test Case 10 : User chooses option 4 to exit the program.
+
+Enter Your Choice  
+4
+Exit
+
+
+TestCase11 if User Left Name Field Empty
+
+input - 
+{empty Name}
+cjain2631@gmail.com
+21
+31/01/2001
+
+output:
+Name field Shouldn't be empty
+Enter Name
+Chirag Jain
+
+TestCase12 Employee.txt file not found 
+
+output:
+Employee.txt File Not found
+Creating Employee.txt File...
+      Menu      
+1. Add Employee
+2. Delete Employee 
+3. Search Employee
+4. EXIT
+Enter Your Choice
