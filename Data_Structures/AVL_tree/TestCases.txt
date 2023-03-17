@@ -288,3 +288,142 @@ enter Node value to delete
 3
 inorder-> 10 30 
 ==========================
+
+====================================================================================
+
+Test 4: Deletion
+1
+10
+1
+20
+2
+10
+3
+
+
+Expected output :-
+10 and 20 should be inserted.
+then 10 should be deleted
+inorder should be -> 20
+
+My Output:-
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+10
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+20
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+2
+enter Node value to delete
+10
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+3
+inorder-> 20 
+==========================
+
+====================================================================================
+
+Test 5: searching
+1
+10
+1
+20
+6
+20
+6
+30
+
+
+Expected output :-
+10 and 20 should be inserted.
+searching 20 should return true.
+searching 30 should be false.
+
+My Output:-
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+10
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+1
+enter Node value to add
+20
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+6
+enter value to search
+20
+true
+==========================
+1: add Node
+2: remove Node
+3: inorder traversal
+4: preorder traversal
+5: postorder traversal
+6: search
+7: terminate the program
+
+6
+enter value to search
+30
+false
+==========================
+
