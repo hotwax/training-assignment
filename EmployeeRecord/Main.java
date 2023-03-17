@@ -305,6 +305,10 @@ public class Main {
               ageValid = Reader.next();
             }
             age = Integer.parseInt(ageValid);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76a2263664316f88d7564589de5d43100fd751cb
             // Enter your Date of Birth
             System.out.println("Enter your Date of Birth in (dd/mm/yyyy) format ");
             Reader.nextLine();

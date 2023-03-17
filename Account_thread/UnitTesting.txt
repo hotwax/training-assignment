@@ -66,4 +66,8 @@ Hey person1 Your SBI Account does not have sufficient balance
 Total Amount was 1000 initially
 Total Amount Withdrawl by Person 1 600
 Total Amount Withdrawl by Person 2 400
+<<<<<<< HEAD
 Total Amount Withdraw is 1000
+=======
+Total Amount Withdraw is 1000
+>>>>>>> 76a2263664316f88d7564589de5d43100fd751cb

@@ -136,6 +136,7 @@ Test Case 10 : User chooses option 4 to exit the program.
 Enter Your Choice  
 4
 Exit
+<<<<<<< HEAD
 
 
 TestCase11 if User Left Name Field Empty
@@ -162,3 +163,5 @@ Creating Employee.txt File...
 3. Search Employee
 4. EXIT
 Enter Your Choice
+=======
+>>>>>>> 76a2263664316f88d7564589de5d43100fd751cb

@@ -46,6 +46,7 @@ output10.ser
 File Not Found
 
 ========================================================================================================
+<<<<<<< HEAD
 Test deserialization 5 :
 
 Input:
@@ -102,3 +103,5 @@ User chooses option 3 (exit)
 
 Expected & Actual Output:
 The program closes the read interface and terminates.
+=======
+>>>>>>> 76a2263664316f88d7564589de5d43100fd751cb

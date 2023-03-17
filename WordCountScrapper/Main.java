@@ -64,11 +64,17 @@ class WebContent {
         });
 
     // put data from sorted list to hashmap
+<<<<<<< HEAD
     Map<String, Integer> temp = new LinkedHashMap<String, Integer>();
     for (Map.Entry<String, Integer> entry : lists) {
       temp.put(entry.getKey(), entry.getValue());
+=======
+    Map<String, Integer> maplist= new LinkedHashMap<String, Integer>();
+    for (Map.Entry<String, Integer> entryy : lists) {
+      maplist.put(entryy.getKey(), entryy.getValue());
+>>>>>>> 76a2263664316f88d7564589de5d43100fd751cb
     }
-    return temp;
+    return maplist;
   }
 
 }
@@ -104,7 +110,10 @@ public class Main {
         System.out.println("No Words Found");
         return ;
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 76a2263664316f88d7564589de5d43100fd751cb
       // Step 3 : - Found words in URL
 
       WebContent webContentObj = new WebContent(); // Create Object of WebContent Class
