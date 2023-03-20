@@ -1008,6 +1008,7 @@ select sname, cname from customers, salespeople where salespeople.snum= customer
 +---------+----------+
 
 
+
 59) Write a query that produces the names and ratings of all customers who have average orders. 
 
 SELECT C.CNUM,CNAME, RATING, COUNT(O.CNUM) AS AVERAGE_ORDERS FROM CUSTOMERS C JOIN ORDERS O ON C.CNUM=O.CNUM GROUP BY O.CNUM HAVING COUNT(O.CNUM)=(SELECT ROUND(AVG(TOTAL)) AS AVG_VALUE FROM (SELECT COUNT(CNUM) AS TOTAL FROM ORDERS GROUP BY CNUM) AS TABLE1);
@@ -1110,6 +1111,7 @@ select sname, comm from salespeople where city="London";
 
 
 
+
 65) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
 
 
@@ -1123,7 +1125,6 @@ select sname from salespeople where snum = any ( select snum from customers wher
 | Motika  |
 | Rofkin  |
 +---------+
-
 
 
 

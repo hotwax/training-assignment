@@ -15,7 +15,6 @@ Salespeople Table
 
 Customers Table
 
-select * from customers;
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
@@ -31,7 +30,6 @@ select * from customers;
 
 Orders Table
 
-select * from orders;
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -123,12 +121,13 @@ Table involved: Salespeople, Orders
 4) Arrange the Order table by descending customer number. 
 
 
-Approach: Using order by to selecr the customer table in descending order by cnum
+Approach: Using order by to siaplay teh customer table in descending order by cnum
+
+select * from orders order by cnum desc;
 
 
 Expected Output:
 
-select * from orders order by cnum desc;
 
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
@@ -640,7 +639,7 @@ Tables involved: Customers
 25) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
 
 
-Approach:
+Approach: Join the salespeople and customers tables on snum, selects customers with salespeople having commission equal to 12%, and outputs the cname, sname, and comm columns.
 
 select c.cname, s.sname, s.comm from salespeople s inner join customers c where s.snum= c.snum and s.comm=12;
 
@@ -727,7 +726,6 @@ Tables involved: Salespeople
 
 
 
-
 29) Write a query that uses a subquery to obtain all orders for the customer named ‘Cisneros’. Assume you do not know his customer number. 
 
 
@@ -781,9 +779,7 @@ Tables involved: Salespeople, Orders
 31) Sort the salespeople table in the following order: snum, sname, commission, city. 
 
 
-Approach:
-
-Sort the salespeople table in ascending order by snum, sname, commission, and city using the ORDER BY clause.
+Approach: Sort the salespeople table in ascending order by snum, sname, commission, and city using the ORDER BY clause.
 
 select * from salespeople order by snum,sname,comm,city;
 
@@ -967,6 +963,7 @@ Tables involved: Orders
 
 
 
+
 37) Write a select command that produces the rating followed by the name of each customer in SanJose. 
 
 
@@ -984,6 +981,7 @@ Expected Output:
 +----------+--------+
 
 Tables involved: Customers
+
 
 
 
@@ -1017,6 +1015,7 @@ Tables involved: Orders, Customers
 
 
 
+
 39) Find all orders with above average amounts for their customers. 
 
 
@@ -1036,6 +1035,7 @@ Expected Output:
 +------+---------+------------+------+------+
 
 Tables involved: Orders
+
 
 
 
@@ -1061,10 +1061,13 @@ Expected Output:
 Tables involved: Customers
 
 
+
+
+
 41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00.
 
 
-Approach: Calculate the amount of the salesperson's commission on each order made by a customer with a rating above 100.00 using a join between the salespeople, customers, and orders tables. Use the commission rate, the order amount, and the rating to calculate the commission amount for each order.
+Approach: Calculate the amount of the salesperson's commission on each order made by a customer with a rating above 100 using a join between the salespeople, customers, and orders tables. Use the commission rate, the order amount, and the rating to calculate the commission amount for each order.
 
 
 select sname, cname, rating, (comm* amt)/100 from salespeople , customers, orders  where salespeople.snum= customers.snum and customers.cnum= orders.cnum and rating>100;
@@ -1084,6 +1087,7 @@ Expected Output:
 +---------+----------+--------+--------------------+
 
 Tables involved: Salespeople, Orders, Customers
+
 
 
 
@@ -1108,6 +1112,7 @@ Tables involved: Customers
 
 
 
+
 43) Find all salespeople that are located in either Barcelona or London. 
 
 Approach: Find all salespeople located in either Barcelona or London using a WHERE clause to filter the salespeople by city:
@@ -1127,6 +1132,7 @@ Expected Output:
 +------+--------+------------+------+
 
 Tables involved: Salespeople
+
 
 
 
@@ -1176,6 +1182,8 @@ Tables involved: Salespeople,Customers
 
 
 
+
+
 46) Write a query that will give you all orders for more than $1000.00. 
 
 
@@ -1199,6 +1207,8 @@ Expected Output:
 +------+---------+------------+------+------+
 
 Tables involved: Orders
+
+
 
 
 47) Write a query that lists each order number followed by the name of the customer who made that order. 
@@ -1230,6 +1240,8 @@ Tables involved: Orders, Customers
 
 
 
+
+
 48) Write a query that selects all the customers whose ratings are equal to or greater than ANY(in the SQL sense) of ‘Serres’. 
 
 
@@ -1246,6 +1258,11 @@ select * from customers where rating >= any(select rating from customers where s
 | 2004 | Grass    | Berlin  |    300 | 1002 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
+
+Tables involved: Salespeople, Customers
+
+
+
 
 
 49) Write two queries that will produce all orders taken on October 3 or October 4.
@@ -1276,7 +1293,6 @@ Tables involved: Orders
 
 
 
-
 50) Find only those customers whose ratings are higher than every customer in Rome. 
 
 
@@ -1297,6 +1313,10 @@ Expected Output:
 +----------+
 
 Tables involved: Customers
+
+
+
+
 
 
 51) Write a query on the Customers table whose output will exclude all customers with a rating&lt;= 100.00, unless they are located in Rome. 
@@ -1323,6 +1343,8 @@ Tables involved: Customers
 
 
 
+
+
 52) Find all rows from the customer’s table for which the salesperson number is 1001. 
 
 Approach: Select all customers from the customers table where the rating is greater than 100 or the city is Rome, excluding customers with a rating less than or equal to 100 unless they are located in Rome.
@@ -1343,6 +1365,9 @@ Tables involved: Customers
 
 
 
+
+
+
 53) Find the total amount in orders for each salesperson where their total of amounts are greater than the amount of the largest order in the table. 
 
 Appraoch: Select the sname and total amount of orders for each salesperson, using an inner join between the salespeople and orders tables on snum, grouping by sname, and filtering with a "having" clause to include only salespeople with a total amount greater than the largest order amount in the orders table.
@@ -1358,6 +1383,7 @@ Expected Output:
 +-------+------------+
 
 Tables involved: Salespeople, Orders
+
 
 
 
@@ -1424,6 +1450,8 @@ Tables involved: Salespeople
 
 
 
+
+
 57) Write a query that produces the names and cities of all customers with the same rating as Hoffman. Write the query using Hoffman’s cnum rather than his rating, so that it would still be usable if his rating is changed. 
     
 Approach: Select the cname and city columns from the customers table to find the names and cities of all customers with the same rating as Hoffman. Use a subquery to find the rating of the customer with the name "Hoffman". This query is not dependent on Hoffman's rating but instead uses his cnum to find his rating, so it will still work if his rating changes.
@@ -1445,6 +1473,7 @@ Tables involved:Customers
 
 
 
+
 58) Find all salespeople for whom there are customers that follow them in alphabetical order. 
 
 
@@ -1462,6 +1491,7 @@ Expected Result:
 +---------+----------+
 
 Tables involved: Salespeople, Customers
+
 
 
 
@@ -1532,6 +1562,7 @@ Tables involved: Orders
 
 
 
+
 62) Count the number of non NULL rating fields in the Customers table (including repeats). 
 
 Approach:
@@ -1549,6 +1580,7 @@ Expected Output:
 +---------------+
 
 Tables involved: Customers
+
 
 
 
@@ -1581,6 +1613,8 @@ Tables involved: Salespeople, Customers, Orders
 
 
 
+
+
 64) List the commissions of all salespeople servicing customers in London.
 
 
@@ -1603,23 +1637,26 @@ Tables involved: Salespeople
 
 
 
+
 65) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
 
 
-Approach: Retrieve sname from salespeople table for all salespeople where their city is not equal to any city in the customers table where city matches that of the salesperson.
+Approach: Select the salespeople's names from the salespeople table where the snum is present in the result set of snum values retrieved from the customers table where the city is not equal to the salespeople's city. 
 
-select sname from salespeople where not city = any ( select city from customers where city= salespeople.city );
-
-Expected Result:
+select sname from salespeople where snum = any ( select snum from customers where city!= salespeople.city );
 
 +---------+
 | sname   |
 +---------+
+| Serres  |
 | AxelRod |
+| Motika  |
 | Rofkin  |
 +---------+
 
 Tables involved: Salespeople, Customers
+
+
 
 
 
@@ -1647,6 +1684,7 @@ Tables involved: Salespeople, Customers
 
 
 
+
 67) Write a query that selects all customers serviced by Peel or Motika. (Hint: The snum field relates the 2 tables to one another.) 
 
 select * from customers where snum in (select snum from salespeople where sname= "Peel" or sname= "Motika");
@@ -1669,6 +1707,8 @@ Tables involved: Salespeople, Customers
 
 
 
+
+
 68) Count the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.)
 
 Approach: Retrieve the number of salespeople who register orders for each day using the orders table, grouping the results by odate and counting distinct snum for each day.
@@ -1687,6 +1727,7 @@ Expected Output:
 +------------+-----------------------+
 
 Tables involved: Orders
+
 
 
 
@@ -1713,6 +1754,8 @@ Expected Output:
 +------+---------+------------+------+------+
 
 Tables involved: Salespeople, Customers, Orders
+
+
 
 
 
@@ -1767,6 +1810,7 @@ Tables involved: Salespeople, Customers, Orders
 
 
 
+
 72) Write a query that extracts from the customer’s table every customer assigned to a salesperson, who is currently having at least one another customer(besides the customer being selected) with orders in the Orders Table. 
 
 Approach: Retrieve all fields from customers table for every customer assigned to a salesperson who currently has at least one other customer with orders in the Orders table. Use a subquery to group customers by snum and count the number of customers for each snum, filtering the results to only include snums that have more than one customer. Use the resulting snums to select the customers that are assigned to those salespeople.
@@ -1794,8 +1838,7 @@ Tables involved: Customers
 
 73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
 
-Approach: Retrieve the city and highest rating for each city from customers table, grouping the results by city and using the MAX function to get the highest rating for each group. Format the output as "For the city (city), the highest rating is (rating)".
-
+Approach: Retrieve the city and highest rating for each city from customers table, grouping the results by city and using the MAX function to get the highest rating for each group. 
 
 select city, max(rating) from customers group by city;
 
@@ -1889,10 +1932,11 @@ Tables involved: Salespeople
 
  
 
+
 77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
 
 
-Approach: Retrieve all orders assigned to the salesperson who serves customer "Hoffman" (cnum 2001), by selecting all rows from the "orders" table where "snum" is in the subquery selecting "snum" from "customers" where "cname" is "Hoffman".
+Approach: Retrieve all orders assigned to the salesperson who serves customer "Hoffman", by selecting all rows from the "orders" table where "snum" is in the subquery selecting "snum" from "customers" where "cname" is "Hoffman".
 
 select * from orders where snum in ( select snum from customers where cname ="Hoffman" );
 
@@ -1909,6 +1953,7 @@ Expected Output:
 +------+---------+------------+------+------+
 
 Tables involved: Customers, Orders
+
 
 
 
@@ -1958,6 +2003,7 @@ Tables involved: Salespeople
 
 
 
+
 80) Write a query that selects each customer’s smallest order. 
 
 Approach: Using SQL: Retrieve the smallest order amount for each customer, by selecting "cnum", "cname", and the minimum value of "amt" column from "customers" and "orders" tables joined on "cnum" and grouped by "cnum" and "cname".
@@ -1980,6 +2026,8 @@ Expected Output:
 +------+----------+----------+
 
 Tables involved: Customers
+
+
 
 
 
@@ -2009,7 +2057,7 @@ Tables involved: Customers
 82) Write a query that counts the number of different non NULL city values in the customers table. 
 
 
-Approach: Count the number of distinct non-NULL city values in the "customers" table, by selecting the count of distinct "city" column from "customers" table where "city" is not null.
+Approach: Count the number of distinct non-NULL city values in the customers table, by selecting the count of distinct "city" column from customers table where "city" is not null.
 
 select count( distinct city) from customers where  city is not null;
 
@@ -2048,11 +2096,13 @@ Tables involved: Orders
 
 
 
+
 84) Find all customers who are not located in SanJose and whose rating is above 200. 
 
 Approach: Retrieve all customers whose "city" is not "SanJose" and "rating" is greater than 200.
 
 select * from customers where city <> "Sanjose" and rating>200;
+
 
 Expected Output:
 
@@ -2164,6 +2214,7 @@ Tables involved: Salespeople
 
 
 
+
 89) Which salesperson has earned the maximum commission? 
 
 Approach: Retrieve the salesperson who has earned the maximum commission, by selecting "sname" column from the "salespeople" table where "comm" is equal to the subquery selecting the maximum "comm" from the "salespeople" table.
@@ -2184,6 +2235,8 @@ Tables involved: Salespeople
 
 
 
+
+
 90) Does the customer who has placed the maximum number of orders have the maximum rating? 
 
 
@@ -2199,6 +2252,7 @@ select cname, customers.cnum, rating , count(orders.cnum) , (if(rating= (select 
 +----------+------+--------+--------------------+---------+
 
 Tables involved: Customers, Orders
+
 
 
 
@@ -2230,6 +2284,7 @@ Tables involved: Customers
 
 
 
+
 92) On which days has Hoffman placed orders? 
 
 Approach: Retrieve the days on which Hoffman has placed orders, by selecting "odate" column from the "orders" table where "cnum" is in the subquery selecting "cnum" from the "customers" table where "cname" is equal to "Hoffman".
@@ -2245,6 +2300,7 @@ Expected Output:
 +------------+
 
 Tables involved: Customers, Orders
+
 
 
 
@@ -2288,6 +2344,8 @@ Expected Output:
 Tables involved: Salespeople, Orders
 
 
+
+
 95) How many customers have placed orders? 
 
 Approach: Retrieve the count of customers who have placed orders, by selecting the distinct count of "cnum" column from the "orders" table.
@@ -2305,6 +2363,8 @@ Expected Output:
 +-----------------------+
 
 Tables involved: Orders
+
+
 
 
 
@@ -2331,7 +2391,13 @@ Tables involved: Salespeople, Orders
 
 
 
+
+
+
 97) Who is the most successful salesperson? 
+
+Approach: Join the Salespeople and Orders tables on the snum attribute, group the result set by snum, calculate the sum of the AMT attribute for each salesperson, orders the result set by total_amount in descending order, and then limit the output to one row. 
+
 
 
 SELECT s.SNAME, SUM(o.AMT) AS total_amount FROM SALESPEOPLE s JOIN ORDERS o ON s.SNUM = o.SNUM GROUP BY s.SNUM ORDER BY total_amount DESC LIMIT 1;
@@ -2344,6 +2410,7 @@ SELECT s.SNAME, SUM(o.AMT) AS total_amount FROM SALESPEOPLE s JOIN ORDERS o ON s
 +-------+--------------+
 
 Tables involved: Salespeople, Orders
+
 
 
 
@@ -2367,6 +2434,7 @@ Expected Output:
 +----------+----------+
 
 Tables involved: Customers
+
 
 
 
@@ -2411,6 +2479,7 @@ Tables involved: Customers
 
 
 
+
 101) Which customers have above average orders? 
 
 
@@ -2448,6 +2517,7 @@ Expected Output:
 +------+----------+
 
 Tables involved: Orders
+
 
 
 
@@ -2499,7 +2569,7 @@ Tables involved: Salespeople, Customers
 
 105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
 
-Approach: Join the ORDERS, CUSTOMERS, and SALESPEOPLE tables and calculate whether the total amount in orders by customers in Rome and London exceed the commission paid to salespeople in London and New York by more than 5 times. Use the IF statement to output "Yes" if the condition is true and "No" if the condition is false.
+Approach: Join the ORDERS, CUSTOMERS, and SALESPEOPLE tables and calculate whether the total amount in orders by customers in Rome and London exceed the commission paid to salespeople in London and New York by more than 5 times. Use the IF statement to output "Yes" if the condition is true and vice versa.
 
 
 SELECT IF(SUM(o.AMT) > SUM(s.COMM) * 5, 'Yes', 'No') AS Verdict FROM ORDERS o JOIN CUSTOMERS c ON o.CNUM = c.CNUM JOIN SALESPEOPLE s ON o.SNUM = s.SNUM WHERE c.CITY IN ('Rome', 'London')   AND s.CITY IN ('London', 'New York');
