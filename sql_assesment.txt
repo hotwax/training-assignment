@@ -1110,18 +1110,20 @@ select sname, comm from salespeople where city="London";
 
 
 
-
 65) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
 
 
-select sname from salespeople where not city = any ( select city from customers where city= salespeople.city );
+select sname from salespeople where snum = any ( select snum from customers where city!= salespeople.city );
 
 +---------+
 | sname   |
 +---------+
+| Serres  |
 | AxelRod |
+| Motika  |
 | Rofkin  |
 +---------+
+
 
 
 

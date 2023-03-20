@@ -123,7 +123,7 @@ Table involved: Salespeople, Orders
 4) Arrange the Order table by descending customer number. 
 
 
-Approach: Using order by to siaplay teh customer table in descending order by cnum
+Approach: Using order by to selecr the customer table in descending order by cnum
 
 
 Expected Output:
