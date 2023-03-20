@@ -1,0 +1,99 @@
+Testcase 1 : With using a async await 
+
+Output : 
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 900
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 800
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 700
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 600
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 500
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 400
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 300
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 200
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 100
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 0
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 0
+Current Bank Balance is : 0
+ Insufficient balance
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 0
+Current Bank Balance is : 0
+ Insufficient balance
+
+
+Testcase 2 : Without using async await 
+
+Output : 
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 900
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 800
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 700
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 600
+
+Amount  Withdraw by : Pushpraj
+Withdraw Amount is : 100
+Current Bank Balance is : 500
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 400
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 300
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 200
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 100
+
+Amount  Withdraw by : Lakshyaraj
+Withdraw Amount is : 100
+Current Bank Balance is : 0
+
+
+

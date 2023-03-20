@@ -1,0 +1,113 @@
+1. If user selected invalid choice 
+
+Input : 45
+
+Output : Wrong input please choose number between 1 to 5.
+
+
+2. Inserting data in a file
+
+Input : 
+
+Enter your choice: 1
+Enter Name : Hello world
+Enter Email : hello@gmail.com
+Enter Age : 21
+Enter date of birth : 12/03/2001
+
+
+Output : Operation Performed Successfully
+
+
+3. If you Entered a wrong data 
+
+Input : Enter your choice: 1
+Enter Name : fdfdj1213
+Enter Email : dfd@gmail.com
+Enter Age : 21
+Enter date of birth : 12/03/2001
+Entered Name is Incorrect 
+
+
+
+4. Deletion in a file
+Input : 
+Enter your choice: 2
+Enter Employee ID to delete the data : 5
+
+Output : 
+Operation Performed Successfully
+
+
+5. Deletion if user entered invaild id
+
+Input : 
+Enter your choice: 2
+Enter Employee ID to delete the data : 100
+
+Output : You Entered Invalid Id 
+
+
+6. Show the all employee data
+
+Input : Enter your choice: 4
+
+Output : 
+Enter your choice: 4
+ID :  0   Name :                   Pushpraj Singh Jadoun      Email :                    pushpraj@gmail.com    Age :                    21     DOB :                   10/03/2001
+ID :  1   Name :                   Emily Chaudhary      Email :                   emilychaudhary@email.com    Age :                    29     DOB :                   12/05/1994
+ID :  2   Name :                   James Singh      Email :                   jamessingh@email.com    Age :                    23     DOB :                   15/02/2000
+ID :  3   Name :                   Krishnapal Singh      Email :                    krishnapal@gmail.com    Age :                    23     DOB :                   16/02/2023
+ID :  4   Name :                   Ashutosh Dodiya      Email :                    dodiya@gmail.com    Age :                    24     DOB :                   06/01/1999
+
+
+7. Search the file
+
+Input : 
+Enter your choice: 3
+
+Text to search :pushpraj
+
+Sort the data by :
+
+Type : id or name or email or age or dob: id
+
+Order the data by Ascending or descending 
+
+Type ASC or DESC : asc
+
+
+Output : Data Found
+
+[
+  Employee {
+    id: 0,
+    name: '                  Pushpraj Singh Jadoun',
+    email: '                   pushpraj@gmail.com',
+    age: '                  21',
+    dob: '                  10/03/2001'
+  }
+]
+
+
+8. if no search result found in search functionality
+
+Input :
+
+Enter your choice: 3
+
+Text to search :ritrtrer
+
+Sort the data by :
+
+Type : id or name or email or age or dob: id
+
+Order the data by Ascending or descending
+
+Type ASC or DESC : asc
+
+
+Output : No result found 
+
+
+
