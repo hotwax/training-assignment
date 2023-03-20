@@ -1,0 +1,42 @@
+1. If words.txt file is not present
+
+output : Error reading words file
+
+
+
+2. If urls.txt file is not present
+
+Output : Error reading words file
+
+
+3. Checking if the output of the problem is correct or not
+
+Output : 
+
+Top 3 words from url : :https://www.geeksforgeeks.org/how-to-sort-a-treemap-by-value-in-java/ are :
+java  : 17
+data  : 8
+sorted  : 6
+
+Top 3 words from url : :https://medium.com/@salshaher/a-5-step-tutorial-on-clash-of-clans-api-2a1f397fcfcc are :
+clash  : 19
+create  : 8
+data  : 4
+
+Top 3 words from url : :https://webomnizz.com/change-parent-component-state-from-child-using-hooks-in-react/ are :
+create  : 6
+hooks  : 6
+future  : 0
+
+Top 3 words from url : :https://www.hotwaxsystems.com/ are :
+technology  : 9
+data  : 4
+future  : 2
+
+Total Top 3 words  are :
+
+clash  : 19
+java  : 17
+data  : 16
+
+
