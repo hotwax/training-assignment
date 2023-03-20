@@ -1509,7 +1509,7 @@ Tables involved:-
 Approach:-
    -> This query retrieves the salesperson's number (SNUM) and name (SNAME) from the Salespeople table for 
       salespeople who do not have any customers in the same city as them, using a subquery with the ALL 
-      operator and a join between the Customers and Salespeople tables.
+      operator.
 
 Expected Output:-
    -> This query returns all salepeople details who have no customers in their own city. 
@@ -1519,6 +1519,7 @@ Expected Output:-
 | 1003 | AxelRod |
 | 1004 | Motika  |
 | 1008 | Fran    |
+| 1007 | Rifkin  |
 +------+---------+
  
 Tables involved:-

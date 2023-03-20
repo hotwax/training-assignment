@@ -775,7 +775,7 @@ mysql> SELECT CNAME , RATINGS
 | Cisneros |     300 |
 +----------+---------+
 
--- 38) Find all orders with amounts smaller than any amount for a customer in SanJose. 
+38) Find all orders with amounts smaller than any amount for a customer in SanJose. 
 
 mysql> SELECT Orders.ONUM , Orders.AMT
     -> FROM Customers INNER JOIN orders
@@ -1249,8 +1249,8 @@ mysql> SELECT SNAME ,COMM FROM Salespeople
 
 mysql> SELECT SNUM , SNAME FROM Salespeople
     -> WHERE
-    -> SNUM != ALL (SELECT Customers.SNUM 
-    -> FROM Customers JOIN Salespeople
+    -> SNUM != ALL (SELECT SNUM 
+    -> FROM Customers 
     -> WHERE
     -> Salespeople.city = Customers.city
     -> );
@@ -1261,7 +1261,9 @@ mysql> SELECT SNUM , SNAME FROM Salespeople
 | 1003 | AxelRod |
 | 1004 | Motika  |
 | 1008 | Fran    |
+| 1007 | Rifkin  |
 +------+---------+
+
  
 
 66) Write a query using the EXISTS operator that selects all salespeople with customers located in their cities who are not assigned to them. 
