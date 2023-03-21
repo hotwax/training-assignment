@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.Date;
 import java.util.Comparator;
 import java.util.Collections;
@@ -21,15 +23,20 @@ import java.util.InputMismatchException;
 // main class
 public class Employee {
 
+    static int highestid = 0;
+
+    static int incrementid() {
+        highestid = highestid + 1;
+        return highestid;
+    }
+
     // creating the employeerecord class to contain the Employee data
-    static class employeerecord {
+    static class employeerecord extends Employee {
         int empid;
         String name;
         String email;
         int age;
         String dateofbirth;
-
-        int highestid = 0;
 
         // constructor
         public employeerecord(int empid, String name, String email, int age, String dateofbirth) {
@@ -48,7 +55,7 @@ public class Employee {
 
         // method to set highest id
         public void sethighestid(int id) {
-            this.highestid = id;
+            // this.highestid = id;
         }
 
         // method to get employee id
@@ -115,33 +122,162 @@ public class Employee {
         }
     }
 
-    // method to add new employee in the file and arraylist
-    public static void addemployee(ArrayList<employeerecord> employeedata, int highid) {
-        Scanner sc = new Scanner(System.in); // System.in is a standard input stream
+    // This function is used to add a new employee record to an ArrayList of
+    // employee data.
+    public static void addemployee(ArrayList<employeerecord> employeedata) {
+        int highid = highestid;
+        Scanner scc = new Scanner(System.in); // System.in is a standard input stream
+        // It prompts the user to enter the employee's name, email, date of birth, and
+        // age.
         System.out.println("Enter a Name :");
-        String nameinput = sc.nextLine();
+        String nameinput = scc.nextLine();
 
         System.out.println("Enter a Email :");
-        String emailinput = sc.nextLine();
+        String emailinput = scc.nextLine();
 
         System.out.println("Enter the Date of Birth");
-        String dateofbirth = sc.nextLine();
+        String dateofbirth = scc.nextLine();
 
         System.out.println("Enter the Age");
-        int ageinput = sc.nextInt();
+        int ageinput = scc.nextInt();
 
-        System.out.println("data entered ");
+        // It then validates the user input using regular expressions to ensure that the
+        // input is in the correct format.
 
-        int newid = highid;
+        String rfmail = "^(.+)@(.+)$";
+        String rfname = "^[a-zA-Z\\s]+";
+        String rfdob = "^(1[0-2]|0[1-9])/(3[01]" + "|[12][0-9]|0[1-9])/[0-9]{4}$";
 
-        // creating the employeerecord object to store the data
-        employeerecord newdata = new employeerecord(newid, nameinput, emailinput, ageinput, dateofbirth);
-        // adding data in a arraylist
-        employeedata.add(newdata);
-        // writing the arraylist data into a file
-        writeFile(employeedata);
-        highid = highid + 1;
+        Pattern patternofname = Pattern.compile(rfname);
+        Matcher matcherofname = patternofname.matcher((CharSequence) nameinput);
 
+        Pattern patternofemail = Pattern.compile(rfmail);
+        Matcher matcherofemail = patternofemail.matcher((CharSequence) emailinput);
+
+        Pattern patternofdob = Pattern.compile(rfdob);
+        Matcher matcherofdob = patternofdob.matcher((CharSequence) dateofbirth);
+
+        boolean issafename = matcherofname.matches();
+        boolean issafeemail = matcherofemail.matches();
+        boolean issafedob = matcherofdob.matches();
+        boolean issafeage = (ageinput > 0) && (ageinput < 120);
+
+        // If the input is valid, it creates a new employee record object with a unique
+        // ID and adds it to the ArrayList.
+        // If the input is invalid, it prints an error message indicating which input is
+        // invalid.
+
+        if (!issafename) {
+            System.out.println("Invalid Name");
+        } else if (!issafeemail) {
+            System.out.println("Invalid Email");
+        } else if (!issafedob) {
+            System.out.println("Invalid Date of birth");
+        } else if (!issafeage) {
+            System.out.println("Invalid Age");
+        } else {
+            int newid = highid;
+            employeerecord newdata = new employeerecord(newid, nameinput, emailinput, ageinput, dateofbirth);
+            employeedata.add(newdata);
+            // Finally, it calls the writeFile function to write the updated ArrayList to a
+            // file.
+            writeFile(employeedata);
+            highid = incrementid();
+            System.out.println("Employee Added Successfully!!");
+            System.out.println();
+        }
+
+    }
+
+    public static void deletedata(ArrayList<employeerecord> employeedata) {
+        Scanner sc = new Scanner(System.in);
+        // asking for employee id
+        System.out.println("Enter Employee ID: ");
+        int empidinput = sc.nextInt();
+
+        boolean isfound = false;
+        // Traversing arraylist and find the employee id and if found then remove it
+        // from the arraylist and rewrite the file
+        for (int i = 0; i < employeedata.size(); i++) {
+            if (employeedata.get(i).getempid() == empidinput) {
+                employeedata.remove(i);
+                System.out.println("Data deleted");
+                isfound = true;
+
+            }
+        }
+        // if data found then write deleted data in file
+        if (isfound) {
+            writeFile(employeedata);
+        } else {
+            System.out.println("Invalid id");
+        }
+
+    }
+
+    public static void searchdata(ArrayList<employeerecord> employeedata) {
+        Scanner sc = new Scanner(System.in);
+        // asking to enter the text
+        System.out.println("Enter the text to Search ");
+        Scanner newsc = new Scanner(System.in);
+        String query = newsc.nextLine();
+        // creating another array list to store the matched records in a list
+        ArrayList<employeerecord> searcheddata = new ArrayList<>();
+
+        for (employeerecord emp : employeedata) {
+            // converting the data in a single string
+            String temp = emp.getempid() + emp.getname() + emp.getemail() + emp.getage() + emp.dateofbirth;
+            // if string is equal to the query string
+            if (temp.contains(query)) {
+                // add that data in a another created list
+                searcheddata.add(emp);
+            }
+        }
+        // now asking for how to sort that found data or ordered by
+        System.out.println("Enter the option how you want to sort the records: ");
+        System.out.println("Type id : To Sort the records by ID");
+        System.out.println("Type name : To Sort the records  by Name");
+        System.out.println("Type emailAddress : To Sort the records  by emailAddress");
+        System.out.println("Type age : To Sort the records  by Age");
+        System.out.println("Type dob : To Sort the records  by Date of Birth");
+        String select = sc.next().toLowerCase();
+        // sort the data based on the selection by user
+        switch (select) {
+            case "id":
+                searcheddata.sort(new OrderbyId());
+                break;
+            case "name":
+                searcheddata.sort(new OrderbyName());
+                break;
+            case "emailAddress":
+                searcheddata.sort(new OrderbyemailAddress());
+                break;
+            case "age":
+                searcheddata.sort(new OrderbyAge());
+                break;
+            case "dob":
+                searcheddata.sort(new OrderbyDOB());
+                break;
+            default:
+                System.out.println("Kindly select from the given options.");
+        }
+
+        // now asking from the user to order the data by asc or desc
+        System.out.println("Enter whether you want the data in increasing or decreasing order: ");
+        System.out.println("Type asc : For Ascending");
+        System.out.println("Type desc : For Descending");
+        String selection = sc.next().toLowerCase();
+        // if asc is entered then show the data as it is.
+        if ("asc".equals(selection)) {
+            for (employeerecord emp : searcheddata) {
+                System.out.println(emp.toString());
+            }
+        } else { // else reverse the data and then print
+            Collections.reverse(searcheddata);
+            for (employeerecord emp : searcheddata) {
+                System.out.println(emp.toString());
+            }
+        }
     }
 
     // method to write a data in a file
@@ -220,8 +356,8 @@ public class Employee {
     public static void main(String[] args) {
         // creating the arraylist to store the employee data in it
         ArrayList<employeerecord> employeedata = new ArrayList<>();
-        // current highestid
-        int higeid = 0;
+        // Creating object of Employee
+        Employee mainemp = new Employee();
 
         try {
             // getting current working directory
@@ -245,12 +381,11 @@ public class Employee {
                 // adding the data in a arraylist
                 employeedata.add(emp);
                 // increment the highest id
-                higeid++;
+                mainemp.incrementid();
 
             }
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("File not found");
         }
 
         // adding the menu driven functionality
@@ -268,111 +403,20 @@ public class Employee {
 
                 switch (selection) {
                     case "add":
-
-                        Scanner scc = new Scanner(System.in); // System.in is a standard input stream
-                        System.out.println("Enter a Name :");
-                        String nameinput = scc.nextLine();
-
-                        System.out.println("Enter a Email :");
-                        String emailinput = scc.nextLine();
-
-                        System.out.println("Enter the Date of Birth");
-                        String dateofbirth = scc.nextLine();
-
-                        System.out.println("Enter the Age");
-                        int ageinput = scc.nextInt();
-
-                        System.out.println("data entered ");
-
-                        int newid = higeid;
-
-                        employeerecord newdata = new employeerecord(newid, nameinput, emailinput, ageinput,
-                                dateofbirth);
-                        employeedata.add(newdata);
-                        writeFile(employeedata);
-                        higeid = higeid + 1;
-                        System.out.println("Employee Added Successfully!!");
+                        // adding
+                        addemployee(employeedata);
                         break;
+
                     case "delete":
-                        // asking for employee id
-                        System.out.println("Enter Employee ID: ");
-                        int empidinput = sc.nextInt();
 
-                        // Traversing arraylist and find the employee id and if found then remove it
-                        // from the arraylist and rewrite the file
-                        for (int i = 0; i < employeedata.size(); i++) {
-                            if (employeedata.get(i).getempid() == empidinput) {
-                                employeedata.remove(i);
-
-                            }
-                        }
-                        writeFile(employeedata);
+                        deletedata(employeedata);
                         break;
+
                     case "search":
-                        // asking to enter the text
-                        System.out.println("Enter the text to Search ");
-                        Scanner newsc = new Scanner(System.in);
-                        String query = newsc.nextLine();
-                        // creating another array list to store the matched records in a list
-                        ArrayList<employeerecord> searcheddata = new ArrayList<>();
-
-                        for (employeerecord emp : employeedata) {
-                            // converting the data in a single string
-                            String temp = emp.getempid() + emp.getname() + emp.getemail() + emp.getage()
-                                    + emp.dateofbirth;
-                            // if string is equal to the query string
-                            if (temp.contains(query)) {
-                                // add that data in a another created list
-                                searcheddata.add(emp);
-                            }
-                        }
-                        // now asking for how to sort that found data or ordered by
-                        System.out.println("Enter the option how you want to sort the records: ");
-                        System.out.println("Type id : To Sort the records by ID");
-                        System.out.println("Type name : To Sort the records  by Name");
-                        System.out.println("Type emailAddress : To Sort the records  by emailAddress");
-                        System.out.println("Type age : To Sort the records  by Age");
-                        System.out.println("Type dob : To Sort the records  by Date of Birth");
-                        String select = sc.next().toLowerCase();
-                        // sort the data based on the selection by user
-                        switch (selection) {
-                            case "id":
-                                searcheddata.sort(new OrderbyId());
-                                break;
-                            case "name":
-                                searcheddata.sort(new OrderbyName());
-                                break;
-                            case "emailAddress":
-                                searcheddata.sort(new OrderbyemailAddress());
-                                break;
-                            case "age":
-                                searcheddata.sort(new OrderbyAge());
-                                break;
-                            case "dob":
-                                searcheddata.sort(new OrderbyDOB());
-                                break;
-                            default:
-                                System.out.println("Kindly select from the given options.");
-                        }
-
-                        // now asking from the user to order the data by asc or desc
-                        System.out.println("Enter whether you want the data in increasing or decreasing order: ");
-                        System.out.println("Type asc : For Ascending");
-                        System.out.println("Type desc : For Descending");
-                        selection = sc.next().toLowerCase();
-                        // if asc is entered then show the data as it is.
-                        if ("asc".equals(selection)) {
-                            for (employeerecord emp : searcheddata) {
-                                System.out.println(emp.toString());
-                            }
-                        } else { // else reverse the data and then print
-                            Collections.reverse(searcheddata);
-                            for (employeerecord emp : searcheddata) {
-                                System.out.println(emp.toString());
-                            }
-                        }
+                        searchdata(employeedata);
 
                         break;
+
                     case "display":
                         // calling the display method to display the data
                         display(employeedata);
