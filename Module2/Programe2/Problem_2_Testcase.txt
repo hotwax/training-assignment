@@ -1,6 +1,6 @@
 1. If user selected invalid choice 
 
-Input : 1
+Input : 12
 
 output : Invalid selection
 
