@@ -1561,14 +1561,17 @@ SALESPEOPLE
 77. Find all orders credited to the same salesperson who services Hoffman.(cnum 2001).
 
 
-Approach : selecting all the attributes from the orders tables where customers id is equal  to 2001 as given in the question
+Approach : selecting all the attributes from the orders tables where salespoeple id is equal to the salespeople id in customers table where customeres id is equal to 2001.
 
 Expected outcome :
-+------+--------+----------+------+------+
-| ONUM | AMT    | ODATE    | CNUM | SNUM |
-+------+--------+----------+------+------+
-| 3003 | 767.19 | 10/03/90 | 2001 | 1001 |
-+------+--------+----------+------+------+
++------+---------+----------+------+------+
+| ONUM | AMT     | ODATE    | CNUM | SNUM |
++------+---------+----------+------+------+
+| 3003 |  767.19 | 10/03/90 | 2001 | 1001 |
+| 3008 | 4723.00 | 10/05/90 | 2006 | 1001 |
+| 3011 | 9891.88 | 10/06/90 | 2006 | 1001 |
++------+---------+----------+------+------+
+3 rows in set (0.01 sec)
 
 Tables involved :
 ORDERS

@@ -1339,13 +1339,16 @@ mysql> SELECT AVG(COMM) FROM SALESPEOPLE WHERE CITY = "London";
 77. Find all orders credited to the same salesperson who services Hoffman.(cnum 2001).
 
 
-mysql> SELECT * FROM ORDERS WHERE CNUM = 2001;
-+------+--------+----------+------+------+
-| ONUM | AMT    | ODATE    | CNUM | SNUM |
-+------+--------+----------+------+------+
-| 3003 | 767.19 | 10/03/90 | 2001 | 1001 |
-+------+--------+----------+------+------+
-1 row in set (0.00 sec)
+mysql> SELECT * FROM ORDERS WHERE SNUM IN (SELECT SNUM FROM CUSTOMERS WHERE
+CNUM = 2001);
++------+---------+----------+------+------+
+| ONUM | AMT     | ODATE    | CNUM | SNUM |
++------+---------+----------+------+------+
+| 3003 |  767.19 | 10/03/90 | 2001 | 1001 |
+| 3008 | 4723.00 | 10/05/90 | 2006 | 1001 |
+| 3011 | 9891.88 | 10/06/90 | 2006 | 1001 |
++------+---------+----------+------+------+
+3 rows in set (0.01 sec)
 
 78. Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive). 
 
