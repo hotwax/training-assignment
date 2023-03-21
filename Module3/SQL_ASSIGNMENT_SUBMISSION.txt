@@ -1110,14 +1110,17 @@ mysql> SELECT COMM FROM SALESPEOPLE WHERE CITY = "London";
 65.Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
 
 
-mysql> SELECT * FROM SALESPEOPLE WHERE SALESPEOPLE.CITY <> ALL (SELECT CUSTOMERS.CITY FROM CUSTOMERS);
+mysql> SELECT * FROM SALESPEOPLE WHERE SNUM = ANY(SELECT SNUM FROM CUSTOMERS
+ WHERE CITY != SALESPEOPLE.CITY);
 +------+---------+-----------+------+
 | SNUM | SNAME   | CITY      | COMM |
 +------+---------+-----------+------+
+| 1002 | Serres  | SanJose   |   13 |
+| 1004 | Motika  | London    |   11 |
 | 1007 | Rifkin  | Barcelona |   15 |
 | 1003 | AxelRod | New York  |   10 |
 +------+---------+-----------+------+
-2 rows in set (0.01 sec)
+4 rows in set (0.01 sec)
 
 
 66. Write a query using the EXISTS operator that selects all salespeople with customers located in their cities who are not assigned to them.

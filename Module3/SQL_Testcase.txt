@@ -1326,13 +1326,15 @@ CUSTOMERS
 
 65.Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
 
-Approach : selection all columns from salespeople where salespeople city is not equal to ALL select customer city from customers
+Approach : selection all columns from salespeople where salespeople id is equal to salespeople id in customers tables where salespeople city is not equal to customers city.
 
 
 Expected outcome :
 +------+---------+-----------+------+
 | SNUM | SNAME   | CITY      | COMM |
 +------+---------+-----------+------+
+| 1002 | Serres  | SanJose   |   13 |
+| 1004 | Motika  | London    |   11 |
 | 1007 | Rifkin  | Barcelona |   15 |
 | 1003 | AxelRod | New York  |   10 |
 +------+---------+-----------+------+
