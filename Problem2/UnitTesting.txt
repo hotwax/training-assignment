@@ -1,0 +1,140 @@
+Case 1 (If Employee is not present)
+Input:
+Output:
+File not Found
+
+Case 2 (Invalid Employee Name)
+Input: Enter your choice :
+      add
+      Enter Name: 456223
+Output:
+      Please Enter Valid Name Only
+
+Case 3 (Invalid Employee Email)
+Input: Enter your choice :
+    Enter your choice :
+    add
+    Enter Name: rishu
+    Enter Email:
+    we.com
+Output:
+    Please Enter Valid Email Only
+
+Case 4 (Invalid Employee Age)
+Input: Enter your choice :
+       add
+       Enter Name: rishu
+       Enter Email:
+       rishu22@gmail.com
+       Enter age:
+       200
+Output:
+   Please Enter Valid Age Only
+
+Case 5 (Invalid Employee DOB)
+Input: Enter your choice :
+       add
+       Enter Name: rishu
+       Enter Email:
+       rishu@mgial.com
+       Enter age:
+       42
+       Enter Date of Birth:
+       15/15/5001
+
+Output:
+      Please Enter Valid Date of Birth Only
+
+Case 6 (Searching Non-existing Employee)
+Input: Enter your choice :
+       search
+       Enter Text to Search: shubham
+       Enter the Sorting Type:
+       Type id : To Sort by ID
+       Type name : To Sort by Name
+       Type email : To Sort by Email
+       Type age : To Sort by Age
+       Type dob : To Sort by Date of Birth
+       id
+Output:
+       No Record Found
+
+Case 7 (Deleting Non-existing Employee)
+Input: Enter your choice :
+       delete
+       Enter Employee ID:
+       200
+Output : Employee Not Found
+
+Case 8 (Invalid Option Chosen)
+Input:--------- MENU ---------
+      Type Add    : To Insert Entry
+      Type Delete : To Delete Entry
+      Type Search : To Search Entry
+      Type display : To Display Entries
+      Enter your choice :
+      1
+Output: Please Enter Mentioned Command Only 👆
+
+Case 9 (If Employee file is Empty)
+Input: Enter your choice :
+       display
+Output: File is Empty
+
+Case 10 (Adding a new Employee)
+Input: Enter your choice :
+       add
+       Enter Name: rishu
+       Enter Email: rishu@gmail.com
+       Enter age: 22
+        Enter Date of Birth: 15/05/1999
+Output: Employee Added Successfully
+
+Case 11 (Delete an Employee)
+Input: Enter your choice :
+       delete
+       Enter Employee ID:
+       132
+Output: Employee Deleted Successfully
+
+Case 12 (Search an Employee)
+Input: Enter your choice :
+       search
+       Enter Text to Search: rishu
+       Enter the Sorting Type:
+       Type id : To Sort by ID
+       Type name : To Sort by Name
+       Type email : To Sort by Email
+       Type age : To Sort by Age
+       Type dob : To Sort by Date of Birth
+       id
+Output: Employee{empID=133, name='rishu', email='rishu@gmail.com', age=22, dateOfBirth='15/08/2001'}
+
+Case 13 (Display all Employees)
+Input: Enter your choice :
+       display
+Output: Employee{empID=1, name='John Doe', email='johndoe@email.com', age=23, dateOfBirth='15/02/2000'}
+Employee{empID=2, name='Ravi Patel', email='ravipatel@email.com', age=29, dateOfBirth='01/06/1994'}
+Employee{empID=3, name='Priya Sharma', email='priyasharma@email.com', age=27, dateOfBirth='02/08/1996'}
+Employee{empID=4, name='David Kumar', email='davidkumar@email.com', age=31, dateOfBirth='10/12/1992'}
+Employee{empID=5, name='Emily Singh', email='emilysingh@email.com', age=25, dateOfBirth='20/03/1998'}
+Employee{empID=6, name='Michael Verma', email='michaelverma@email.com', age=33, dateOfBirth='01/01/1990'}
+Employee{empID=7, name='Sarah Kaur', email='sarahkaur@email.com', age=22, dateOfBirth='12/08/2001'}
+Employee{empID=8, name='Tom Malhotra', email='tommalhotra@email.com', age=30, dateOfBirth='25/10/1993'}
+Employee{empID=9, name='Linda Patel', email='lindapatel@email.com', age=24, dateOfBirth='15/06/1999'}
+Employee{empID=10, name='Mark Sharma', email='marksharma@email.com', age=26, dateOfBirth='04/08/1998'}
+Employee{empID=11, name='Emily Chaudhary', email='emilychaudhary@email.com', age=29, dateOfBirth='12/05/1994'}
+Employee{empID=12, name='James Singh', email='jamessingh@email.com', age=23, dateOfBirth='15/02/2000'}
+Employee{empID=13, name='Jennifer Bhatia', email='jenniferbhatia@email.com', age=31, dateOfBirth='11/11/1992'}
+Employee{empID=14, name='William Mehra', email='williammehra@email.com', age=33, dateOfBirth='03/03/1990'}
+Employee{empID=15, name='Sophia Chopra', email='sophiachopra@email.com', age=24, dateOfBirth='05/05/1999'}
+Employee{empID=16, name='David Reddy', email='davidreddy@email.com', age=27, dateOfBirth='06/06/1996'}
+Employee{empID=17, name='Jessica Gill', email='jessicagill@email.com', age=25, dateOfBirth='09/09/1998'}
+Employee{empID=18, name='Michael Rawat', email='michaelrawat@email.com', age=28, dateOfBirth='12/12/1995'}
+Employee{empID=19, name='Sarah Kaur', email='sarahkaur@email.com', age=26, dateOfBirth='05/05/1997'}
+Employee{empID=20, name='William Mukherjee', email='williammukherjee@email.com', age=29, dateOfBirth='04/04/1994'}
+
+Case 14 (Exit From Program)
+Input: Enter your choice :
+       exit
+Output: Thank You For Using Our Program

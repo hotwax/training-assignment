@@ -1,0 +1,40 @@
+Case 1 (Output1.ser does not exists while Deserialization)
+Inputs:Output.txt does not exists while Deserialization
+Outputs: File does not exists
+java.io.FileNotFoundException: Output1.ser (The system cannot find the file specified)
+
+Case 2 (Output1.ser is empty)
+Input: Output1.ser is empty
+Output: File is Empty
+java.io.EOFException
+
+Case 3 (Serialization student objects in Output1.ser)
+Input: Output1.ser
+Output: Object has been Serialized
+
+Case 4 (Deserialization student objects from Output1.ser)
+Input: Output1.ser
+Output: Object has been Deserialized
+Rishu 15-08-2001 Indore MP 462001 India
+Raju 10-12-2001 Jaipur Rajasthan 521001 India
+Shyam 12-03-2001 Lucknow Uttar Pradesh 456221 India
+Babu Rao 21-04-1990 Mumbai Maharashtra 641011 India
+
+Case 5 (After Changing dateofBirth type from java.lang.String to java.util.Date)
+Input: Output1.ser
+Output: java.io.InvalidClassException: Student; local class incompatible:
+        stream classdesc serialVersionUID = -437576515925301227, local class
+        serialVersionUID = 40185226767883506
+
+Case 6 (After adding serialVersionUID in Student class)
+Input: Output1.ser
+Output: java.lang.ClassCastException: cannot assign instance of java.lang.String to field
+        Student.dateOfBirth of type java.util.Date in instance of Student
+
+Case 7 (Changing dateofBirth type to Object type)
+Input: Output1.ser
+Output: Object has been Deserialized
+Rishu 15-08-2001 Indore MP 462001 India
+Raju 10-12-2001 Jaipur Rajasthan 521001 India
+Shyam 12-03-2001 Lucknow Uttar Pradesh 456221 India
+Babu Rao 21-04-1990 Mumbai Maharashtra 641011 India
