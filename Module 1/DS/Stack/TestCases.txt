@@ -1,0 +1,61 @@
+Choose an option from the Dashboard given below:
+
+1. Push
+2. Pop
+3. Update value in the stack. 
+4. Peek or top
+5. EXIT
+
+Case 1: Pushing the element in the stack. (Previous state Stack: 78 45 12)
+
+Input:
+1
+Enter the value to be inserted
+34
+
+Output:
+Stack: 34 78 45 12
+
+Case 2: Popping or deleting the element from the stack.
+
+Input:
+2
+
+Output:
+Stack: 78 45 12 
+
+Case 3: Updating an element:
+
+Input:
+3
+Enter the value to be updated 
+45
+56
+
+Stack: 78 56 12
+
+Case 4: Accessing the top element of the stack.
+Input
+4
+
+Output:
+Top element: 78
+Stack: 78 56 12
+
+Case 5: Exiting the program.
+Input:
+5
+
+Output:
+Stack: 78 56 12
+Exiting the program
+
+Case 6: User chooses invalid option
+
+Input:
+10
+
+Output:
+Invalid choice
+
+And all the input mismatch cases are handled using try catch block.

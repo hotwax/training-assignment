@@ -1,0 +1,97 @@
+Please Enter the first Node Value: 12
+
+Select an option from the dashboard given below:
+1 : Insert
+2 : Delete
+3 : Update 
+4 : Sort LinkedList
+5 : Display LinkedList
+6 : Search in LinkedList
+7 : Exit
+------------------------------------------
+
+Case 1: Inserting element in the linked list.
+Enter your choice :  
+1
+Enter the node value: 78
+
+Output:
+The node is successfully added. 
+
+
+Case 2: Display all the elements in the linked List
+Input:
+Enter your choice : 
+5
+
+Output:
+The Linked List is : 
+12 10 9 34 78 
+
+Case 3: Sorting the elements in the linked list.
+Enter your choice : 
+4
+
+Output:
+The linked is sorted successfully.
+9 10 12 34 78
+
+
+
+Case 4: Deleting an element from the linked list.
+Input:
+Enter your choice :
+2
+Enter the Node Value: 12
+
+Output:
+The Linked List is : 
+9 10 34 78
+
+Case 5: Updating an element from the linked list.
+Input:
+Enter your choice :
+3
+Enter the Node Value which is to be updated: 10 20
+
+Output:
+The Linked List is :
+9 20 34 78
+
+Case 6: Searching an element which is present in the linked list.
+Input:
+Enter your choice:
+6
+Enter the value to be searched: 9
+
+Output:
+Node Found
+
+Case 7: Searching an element not found in the linked list.
+Input:
+Enter your choice:
+6
+Enter the value to be searched: 10
+
+Output:
+Node Not Found
+
+Case 8: Exiting the program.
+Input:
+Enter your choice:
+7
+
+Output:
+Exiting Program.
+
+Case 9: If user enter invalid option.
+
+Input:
+Enter your choice:
+10
+
+Output:
+Invalid option
+Display menu again.
+
+All the input mismatch exceptions are handled by adding try catch block in the code.

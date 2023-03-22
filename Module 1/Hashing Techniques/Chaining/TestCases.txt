@@ -1,0 +1,66 @@
+MENU:
+Select an option from the Dashboard given below:
+1 : Insert
+2 : Delete
+3 : Display the Hashmap
+4 : Number of Collisions
+5 : Get Value of Key
+6 : Time
+7 : Exit
+
+
+
+Case 1 : Invalid Choice
+Input :
+one
+
+Output : 
+Enter Integer Only
+
+
+Case 2 : Out of Range input choice
+Input : 
+100
+
+Output :
+Invalid Choice
+
+Case 3 : Deleting a Value which is not present in hashmap
+Input :
+Enter your choice : 2
+Please Enter the key: 10
+
+Output :
+Key not found
+
+Case 4 : Searching a Value which is not present in Hashmap
+Input :
+Enter your choice :5
+Please Enter the key: 200
+
+Output : 
+-1 
+
+Case 6 : User trying to delete from empty Hashmap
+
+Input :
+Enter your choice : 2
+
+Output :
+Hashmap is empty
+
+Case 7 : User trying to get all collisions from empty Hashmap
+Input : 
+Enter your choice : 4
+
+Output : 
+Collisions: 0 
+
+Case 8 : Time taken
+
+Input:
+7
+
+Output:
+124543 (in milliseconds)
+Display menu here

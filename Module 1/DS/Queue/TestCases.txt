@@ -1,0 +1,74 @@
+Choose an option from the Dashboard given below:
+1. Enqueue
+2. Dequeue
+3. Update
+4. Exit
+
+
+Case 1: Inserting value in the queue (Previous state 45 32 89) 
+Input:
+1
+Enter the value to be inserted
+90
+
+Output:
+Queue: 45 32 89 90
+
+Case 2: Deleteing an element from the queue.
+
+Input:
+2
+
+Output:
+Queue: 32 89 90
+
+Case 3: Updating an element in the queue.
+
+Input:
+3
+Enter the value to be updated 
+32
+92
+
+Output:
+Queue: 92 89 90
+
+Case 4: Exiting the program.
+
+Input:
+4
+
+Output:
+Queue: 89 89 90 
+
+Exiting the program
+
+Case 5: For Invalid Option selected by the user.
+
+Input: 
+7
+
+Output: 
+Invalid
+Display menu again
+
+
+Case 6: Performing operation on an empty queue.
+
+Input: 
+Any random option from menu
+
+Output: 
+Queue is empty
+Display menu again
+
+Case 7: Performing operation when the queue is full.
+
+Input: 
+Any random option from menu
+
+Output: 
+Queue is full
+Display menu again
+
+All the input mismatch cases has been handled by adding try catch block in the code.

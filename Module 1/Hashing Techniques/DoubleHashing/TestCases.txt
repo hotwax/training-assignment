@@ -1,0 +1,71 @@
+MENU:
+Select an option from the Dashboard given below:
+1 : Insert
+2 : Delete
+3 : Display the Hashmap
+4 : Number of Collisions
+5 : Get Value of Key
+6 : Time
+7 : Exit
+
+
+Case 1: Inserting value in the hashmap.
+
+Input:
+Please enter the key: 9
+Please enter the value of the key: 23
+
+Actual & Expected Output:
+Display menu here
+
+
+Case 2: Deleting a key from the hashmap.
+
+Input:
+2
+Enter key 
+9
+
+Actual & Expected Output:
+The key is deleted.
+Display menu here.
+
+
+Case 3: Deleting a key which is not present
+Input:
+2
+Enter key:
+9
+
+Actual & Expected Output:
+The key does not exist.
+Display menu here.
+
+Case 4: Getting the value of the key.
+
+Input:
+4
+Enter key
+9
+
+Actual & Expected Output:
+key:9 Value:100
+Display menu here
+
+Case 5: Getting the number of Collisions
+
+Input:
+5
+
+Actual & Expected Output:
+No of collision : 2 (if any other inputs provided so answer according to inputs provided.)
+Display menu here
+
+Case 6: Time taken
+
+Input:
+6
+
+Actual & Expected Output:
+124589 (in milliseconds)
+Display menu here

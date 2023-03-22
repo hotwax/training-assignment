@@ -1,0 +1,90 @@
+Kindly Select an option from the Dashboard given below:
+1. Insert
+2. Delete
+3. Sorting
+4. Search
+5. EXIT
+
+
+Case 1: Inserting element in the tree.  
+
+Input:
+Enter your option:
+1
+
+Enter value to be inserted.
+67
+
+Output:
+The value is inserted. Continue.....
+Tree:    67 21 12 45
+
+Case 2: Sorting the elements present.
+Input:
+Enter your option:
+3
+
+Output:
+Sorted:  12 21 45 67
+Tree:    12  21  45  67
+
+Case 3; searching an element which is present.
+Input:
+Enter your option:
+4
+Enter value to be seached.
+67
+
+Output:
+true
+Tree:    12  21  45  67
+
+Case 4: Searching an element which is not present.
+Input:
+Enter your option:
+4
+Enter value to be searched.
+11
+
+Output:
+false
+Tree:    12  21  45  67
+
+Case 5: Deleting an element which is present.
+Input:
+2
+Enter the element.
+21
+
+Output:
+The element is deleted.
+Tree:    12  45  67
+
+Case 6: Deleting an element which is not present
+Input:
+2
+Enter the element.
+21
+
+Output:
+The element is not present.
+
+Case 7: User entered an invalid option.
+Input:
+10
+
+Output:
+Invalid option!!
+Display menu again.
+
+
+Case 8: Exiting the program.
+
+Input:
+Enter your option:
+5
+
+Tree:    12  45  67
+Exiting the program...
+
+All the input mismatch exceptions have been handled by adding try catch block in the code.
