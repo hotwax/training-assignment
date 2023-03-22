@@ -1,0 +1,197 @@
+Case 1: Adding employee information to the file.
+
+Input:
+Add
+Enter name
+Aman
+Enter email
+aman@gmail.com
+Enter DOB (Format : YYYY-MM-DD)
+2003-12-10
+Enter age
+22
+
+Expected Output:
+The employee is added successfully.
+
+Actual Output:
+The employee is added successfully.
+
+Case 2: User selects an invalid option.
+
+Input:
+100
+
+Expected Output:
+Kindly choose from the options displayed in the menu.
+Display menu again
+
+Actual Output:
+Kindly choose from the options displayed in the menu.
+Display menu again
+
+Case 3: User chooses option Add and enters invalid email address.
+
+Input:
+Enter email
+aman@gamilcom
+
+Enter valid email
+Enter email
+aman@gmail.com
+Enter DOB (Format : YYYY-MM-DD)
+
+Expected Output:
+Until user enters valid email it won't be allowed to proceed futher.
+
+Actual Output:
+Until user enters valid email it won't be allowed to proceed futher.
+
+Case 4: User chooses option Add and enters invalid date of birth.
+
+Input:
+Enter DOB (Format : YYYY-MM-DD)
+2013-43-23
+Enter valid DOB
+Enter DOB (Format : YYYY-MM-DD)
+2002-03-26
+Enter age
+
+Expected Output:
+Until user enters valid Date it won't be allowed to proceed futher.
+
+Actual Output:
+Until user enters valid Date it won't be allowed to proceed futher.
+
+
+Case 5: User chooses option Add and enters invalid age.
+
+Input:
+
+Enter age
+Ten
+
+Enter valid age
+Enter age
+23
+Display menu again
+
+Expected output
+Until user enters valid Date it won't be allowed to proceed futher.
+
+Actual Output:
+Until user enters valid Date it won't be allowed to proceed futher.
+
+Case 6: The User chooses option Delete to delete an employee that exists in the employees.txt file.
+
+Input:
+Delete
+Enter Employee ID: 1
+
+Expected Output:
+The employee is deleted successfully.
+Display menu again
+
+Actual Output:
+The employee is deleted successfully.
+
+Display menu again
+
+Case 7: Deleting an employee record that does not exist in the employees.txt file.
+
+Input:
+Delete
+Non-Existing Employee ID
+
+Actual & Expected Output:
+Id not found
+Display menu again
+
+Case 8: User chooses option display to display all employees in the employees.txt file.
+
+Expected Output: 
+
+Id: 1
+Name: Aman
+Age: 22
+Email: aman@gmail.com
+Date of birth: 12/10/2004
+
+Id: 3
+Name: Harish
+Age: 23
+Email: harish@harish.com
+Date of birth: 12/02/2002
+
+Display menu again.
+
+Actual Output:
+Id: 1
+Name: Aman
+Age: 22
+Email: aman@gmail.com
+Date of birth: 12/10/2004
+
+Id: 3
+Name: Harish
+Age: 23
+Email: harish@harish.com
+Date of birth: 12/02/2002
+
+Display menu again.
+
+Case 9: User chooses option search to search for an employee that exists in the employees.txt file.
+
+Input:
+
+Search
+Enter Search value
+Aman
+Enter Query-(e.g.) ID,Name, Email, DOB, Age
+name
+Direction- (asc/desc)
+desc
+
+Actual & Expected output :
+Id: 1
+Name: Aman
+Age: 22
+Email: aman@gmail.com
+Date of birth: 12/10/2004
+
+Display menu again
+
+Case 10: User chooses option search to search for an employee that does not exist in the employees.txt file.
+
+Input:
+Search
+
+Enter Search value
+A value which is not present in the file say Dinosaur.
+Enter Query-(e.g.) ID,Name, Email, DOB, Age
+name
+Direction- (asc/desc)
+asc
+
+Actual & Expected Output:
+[]
+Display menu again
+
+Case 11: User chooses option EXIT to exit the program.
+
+Input:
+
+EXIT
+
+Actual & Expected output :
+
+Exiting!!!
+
+Case 12: If user enters invalid option in menu
+
+Input:
+10000000
+
+Actual & Expected output :
+Invalid Selection
+Display menu again
