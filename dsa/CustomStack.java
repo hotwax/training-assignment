@@ -3,9 +3,8 @@ import java.util.Scanner;
 
 public class CustomStack {
 
-  
   public static void main(String[] args) {
-    
+
     try {
       Stack stack = new Stack();
       Scanner sc = new Scanner(System.in);
@@ -19,10 +18,11 @@ public class CustomStack {
         System.out.println("Enter 2 to pop");
         System.out.println("Enter 3 to peek");
         System.out.println("Enter 4 to search");
-        System.out.println("Enter 5 to exit the program");
+        System.out.println("Enter 5 to update");
+        System.out.println("Enter 6 to exit the program");
 
-        int val;
-        int choice= sc.nextInt();
+        int val, idx;
+        int choice = sc.nextInt();
 
         switch (choice) {
           case 1:
@@ -61,6 +61,20 @@ public class CustomStack {
             break;
 
           case 5:
+            if (!stack.isEmpty()) {
+              System.out.print("Enter the index at which value needs to be updated: ");
+              idx = sc.nextInt();
+              System.out.print("Enter the new value: ");
+              val = sc.nextInt();
+              int oldValue = stack.update(idx, val);
+              if (oldValue!=Integer.MAX_VALUE) {
+                System.out.println("Old value: " +oldValue);
+              }
+            }
+            System.out.println("-------------------------------------");
+            break;
+
+          case 6:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
@@ -146,6 +160,20 @@ class Stack {
 
     System.out.print(node.data + " ");
     display(node.next);
+  }
+
+  int update(int idx, int val){
+    if(idx<0 || idx>=size){
+      System.out.println("Please enter a valid index");
+      return Integer.MAX_VALUE;
+    }
+    Node temp=head;
+    for (int i = 0; i < idx; i++) {
+      temp=temp.next;
+    }
+    int oldValue = temp.data;
+    temp.data=val;
+    return oldValue;
   }
 
 }
