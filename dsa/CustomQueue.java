@@ -97,7 +97,7 @@ class Node {
   Node next;
 }
  
-class Queue {
+public class Queue {
 
   Queue(){
 
