@@ -526,8 +526,22 @@ Empty set
 
 => We will use here between keyword
 => We have to give all customers who starts with A or G
-=> we will have to write H over there for upper limit it is being treated as inclusive.
 => There will be four rows as there are four record according to condition
+
+1st approch
+=> Used between operator with A and G but it didn't fetch the names started with g.
+=> But if we enter G only in the table then it, will print it
+=> So the here it is not taking words which have anything after G 
+
+2nd approch 
+=> If we write the between with A to H then we can have the needed answer.
+=> We will have to write H over there for upper limit it is being treated as inclusive.
+=> But if we want to include all alphabets from A to Z then how can we do this.
+
+3rd approch 
+=> Using substring method 
+=> Signature substr(column_name,start index, length)
+=> We can use it to get accurate result in all conditions.
 
 +------+----------+---------+--------+------+
 | cnum | cname    | city    | rating | snum |
@@ -628,6 +642,7 @@ Empty set
 => Here we will use joins in nested query and then print the results by another query
 => The max amount of customer living in SanJose is 5160.45
 => There will be 8 rows who have less amt than this max_amt
+=> Or we can use any operator here with subqueries
 
 +------+---------+------------+------+------+
 | onum | amt     | odate      | cnum | snum |

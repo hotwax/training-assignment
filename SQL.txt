@@ -994,6 +994,22 @@ WHERE
       AND c.cnum = o.cnum
   );
 
+SELECT 
+  * 
+FROM 
+  orders 
+WHERE 
+  amt < ANY(
+    SELECT 
+      o.amt
+    FROM 
+      customers c 
+      JOIN 
+	  orders o 
+	  ON city = 'SanJose' 
+      AND c.cnum = o.cnum
+);
+  
 +------+---------+------------+------+------+
 | onum | amt     | odate      | cnum | snum |
 +------+---------+------------+------+------+
