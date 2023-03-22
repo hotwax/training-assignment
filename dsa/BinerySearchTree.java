@@ -92,6 +92,20 @@ public class BinerySearchTree {
     return node;
   }
 
+  static void inOrderTraversal(Node node){
+    if(node==null) return;
+    inOrderTraversal(node.left);
+    System.out.print(node.data+" ");
+    inOrderTraversal(node.right);
+  }
+
+  static void postOrderTraversal(Node node){
+    if(node==null) return;
+    postOrderTraversal(node.left);
+    postOrderTraversal(node.right);
+    System.out.print(node.data+" ");
+  }
+
   public static void main(String[] args) {
 
     try {
@@ -107,7 +121,9 @@ public class BinerySearchTree {
         System.out.println("Enter 1 to add a node");
         System.out.println("Enter 2 to remove a node");
         System.out.println("Enter 3 to check whether data exists");
-        System.out.println("Enter 4 to exit");
+        System.out.println("Enter 4 for inorder traversal");
+        System.out.println("Enter 5 for post order traversal");
+        System.out.println("Enter 6 to exit");
 
         int choice = sc.nextInt();
 
@@ -137,6 +153,16 @@ public class BinerySearchTree {
             break;
 
           case 4:
+            inOrderTraversal(root);
+            System.out.println("\n-------------------------------------");
+            break;
+            
+          case 5:
+            postOrderTraversal(root);  
+            System.out.println("\n-------------------------------------");
+            break;
+
+          case 6:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;

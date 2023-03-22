@@ -208,3 +208,29 @@ output-
 menu
 
 
+
+case 11: in order traversal
+
+binery search tree:
+9 <---- 11 ----> 12
+null <---- 9 ----> null
+null <---- 12 ----> null
+
+input- 4
+9 11 12
+-------------------------------------
+menu
+
+
+
+case 12: post order traversal
+
+binery search tree:
+9 <---- 11 ----> 12
+null <---- 9 ----> null
+null <---- 12 ----> null
+
+input- 4
+9 12 11
+-------------------------------------
+menu
