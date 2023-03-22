@@ -376,7 +376,8 @@ Tables involved- salespeople
 
 32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
 
-Approach- Since we have to search names in a range, so use BETWEEN 'A' AND 'G'.
+Approach- Since we have to search names in a range, so use BETWEEN 'A' AND 'H'.
+BETWEEN selects words in dictionary order. So, all names between 'A' and 'G' will get chosen.
 
 Expected output- names of customers whose first letter of name starts with ‘A’-'G'. If no such customer found
 return empty set.
@@ -388,7 +389,8 @@ Tables involved- customers
 
 33) Select all the possible combinations of customers you can assign. 
 
-Approach- Use self join on cnum being not equal in the customers table and snum being equal.
+Approach- Use INNER JOIN on cnum being not equal in the customers table and snum being equal.
+Also, use 'customer_1.cname' < 'customer_2.cname'  or  'customer_2.cname' < 'customer_1.cname' to avoid repetition.   
 
 Expected output- two different customers' names.
 
@@ -531,7 +533,8 @@ Tables involved- customers, salespeople
 
 45) Write a query that joins the Customer table to itself to find all pairs or customers served by a single salesperson.
 
-Approach- Use SELF JOIN on snum of both customers equal and cnum not equal 
+Approach- Use INNER JOIN on snum of both customers equal and cnum not equal.
+use 'customer_1.cname' < 'customer_2.cname'  or  'customer_2.cname' < 'customer_1.cname' to avoid repetition.   
 
 Expected output- names and numbers of salespeople having number of customers=1.
  
@@ -1154,8 +1157,9 @@ Tables involved- salespeople, orders
 
 98) Which customers have the same rating? 
 
-Approach- use a self join on customer 1's rating = customer 2's rating and customer 1's number != customer 2's number in customers 
+Approach- use a inner join on customer 1's rating = customer 2's rating and customer 1's number != customer 2's number in customers 
 table.
+Also, use 'customer_1 name' < 'customer_2 name'  or  'customer_2 name' < 'customer_1 name' to avoid repetition.   
 
 Expected outcome- customer 1's name and customer 2's name with same rating.
 
