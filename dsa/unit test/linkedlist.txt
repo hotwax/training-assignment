@@ -183,3 +183,52 @@ output-
 Program terminated successfully.
 (End)
 
+
+
+case 16: invalid choice
+
+input- 20
+
+output- Please enter a valid choice.
+menu
+
+
+
+case 17: update a value (invalid, incorrect index(<0 or >=size))
+list- 11, 12
+
+input- 12
+Enter the index at which value needs to be updated:
+111
+Enter the new value:
+123
+output- Please enter a valid index
+-------------------------------------
+...menu
+
+
+
+case 18: update a value (valid)
+list- 11, 12
+
+input- 12
+Enter the index at which value needs to be updated:
+1
+Enter the new value:
+1111
+output- Old value: 12
+-------------------------------------
+Your linked list: 11 1111
+...menu
+
+
+
+case 19: sort the list (merge sort)
+list- 90 12 45
+
+input- 13
+
+output-
+-------------------------------------
+Your linked list: 12 45 90
+...menu

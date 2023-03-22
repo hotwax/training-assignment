@@ -23,8 +23,10 @@ public class CustomLinkedList {
         System.out.println("Enter 8 to get from First");
         System.out.println("Enter 9 to get at a position");
         System.out.println("Enter 10 to reverse the list");
-        System.out.println("Enter 11 to get the mid node");
-        System.out.println("Enter 12 to exit the program");
+        System.out.println("Enter 11 to get the middle node");
+        System.out.println("Enter 12 to update a value");
+        System.out.println("Enter 13 to merge sort the list");
+        System.out.println("Enter 14 to exit the program");
 
         int choice = sc.nextInt();
         int val, idx;
@@ -94,17 +96,39 @@ public class CustomLinkedList {
             break;
 
           case 11:
-            System.out.println(ll.midNode());
+            System.out.println(ll.midNode(ll.head, ll.tail).data);
             System.out.println("-------------------------------------");
             break;
 
           case 12:
+            System.out.println("Enter the index at which value needs to be updated:");
+            idx = sc.nextInt();
+            System.out.println("Enter the new value: ");
+            val = sc.nextInt();
+            int oldValue = ll.updateValue(idx, val);
+            if (oldValue != Integer.MAX_VALUE) {
+              System.out.println("Old value: " + oldValue);
+            }
+            System.out.println("-------------------------------------");
+            break;
+
+          case 13:
+            if (ll.size != 0) {
+              LinkedList sortedList = ll.mergeSort(ll.head, ll.tail);
+              ll.head = sortedList.head;
+              ll.tail = sortedList.tail;
+            }
+            else System.out.println("List is empty");
+            System.out.println("-------------------------------------");
+            break;
+
+          case 14:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
 
           default:
-            System.out.println("Please enter a valid choice (1,2,3,4,5).");
+            System.out.println("Please enter a valid choice.");
             System.out.println("-------------------------------------");
             break;
         }
@@ -226,8 +250,7 @@ class LinkedList {
   void removeAt(int idx) {
     if (size == 0) {
       System.out.println("List is empty");
-    }
-    else if (idx < 0 || idx >= size) {
+    } else if (idx < 0 || idx >= size) {
       System.out.println("Invalid arguments");
     } else if (idx == 0) {
       removeFirst();
@@ -296,10 +319,10 @@ class LinkedList {
     tail = temp;
   }
 
-  int midNode() {
-    if(size==0){
+  Node midNode(Node head, Node tail) {
+    if (size == 0) {
       System.out.println("List is empty");
-      return -1;
+      return new Node();
     }
 
     Node slow = head; // slow with reference to speed
@@ -310,7 +333,70 @@ class LinkedList {
       fast = fast.next.next;
     }
 
-    return slow.data;
+    return slow;
   }
 
+  int updateValue(int idx, int val) {
+    if (size == 0) {
+      System.out.println("List is empty");
+      return Integer.MAX_VALUE;
+    } else if (idx < 0 || idx >= size) {
+      System.out.println("Please enter a valid index");
+      return Integer.MAX_VALUE;
+    }
+
+    else {
+      Node temp = head;
+      for (int i = 0; i < idx; i++) {
+        temp = temp.next;
+      }
+      int oldVal = temp.data;
+      temp.data = val;
+      return oldVal;
+    }
+  }
+
+  LinkedList mergeSort(Node head, Node tail) {
+    if (head == tail) {
+      LinkedList l = new LinkedList();
+      l.addLast(head.data);
+      return l;
+    }
+
+    Node midNode = midNode(head, tail);
+
+    LinkedList l1 = mergeSort(head, midNode);
+    LinkedList l2 = mergeSort(midNode.next, tail);
+
+    return mergeTwoSortedLists(l1, l2);
+  }
+
+  LinkedList mergeTwoSortedLists(LinkedList l1, LinkedList l2) {
+
+    LinkedList ans = new LinkedList();
+    Node n1 = l1.head;
+    Node n2 = l2.head;
+
+    while (n1 != null && n2 != null) {
+      if (n1.data <= n2.data) {
+        ans.addLast(n1.data);
+        n1 = n1.next;
+      } else {
+        ans.addLast(n2.data);
+        n2 = n2.next;
+      }
+    }
+
+    while (n1 != null) {
+      ans.addLast(n1.data);
+      n1 = n1.next;
+    }
+
+    while (n2 != null) {
+      ans.addLast(n2.data);
+      n2 = n2.next;
+    }
+
+    return ans;
+  }
 }
