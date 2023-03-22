@@ -19,10 +19,11 @@ public class CustomQueue {
         System.out.println("Enter 2 to remove");
         System.out.println("Enter 3 to peek");
         System.out.println("Enter 4 to search");
-        System.out.println("Enter 5 to exit the program");
+        System.out.println("Enter 5 to update");
+        System.out.println("Enter 6 to exit the program");
 
         int choice = sc.nextInt();
-        int val;
+        int val, idx;
 
         switch (choice) {
           case 1:
@@ -57,6 +58,20 @@ public class CustomQueue {
             break;
 
           case 5:
+          if (!queue.isEmpty()) {
+            System.out.print("Enter the index at which value needs to be updated: ");
+            idx = sc.nextInt();
+            System.out.print("Enter the new value: ");
+            val = sc.nextInt();
+            int oldValue = queue.update(idx, val);
+            if (oldValue!=Integer.MAX_VALUE) {
+              System.out.println("Old value: " +oldValue);
+            }
+          }
+          System.out.println("-------------------------------------");
+          break;
+
+          case 6:
             System.out.println("Program terminated successfully.");
             System.out.println("-------------------------------------");
             return;
@@ -163,6 +178,21 @@ class Queue {
   int size() {
     return size;
   }
+
+  int update(int idx, int val){
+    if(idx<0 || idx>=size){
+      System.out.println("Please enter a valid index");
+      return Integer.MAX_VALUE;
+    }
+    Node temp=head;
+    for (int i = 0; i < idx; i++) {
+      temp=temp.next;
+    }
+    int oldValue = temp.data;
+    temp.data=val;
+    return oldValue;
+  }
+
 
 }
 

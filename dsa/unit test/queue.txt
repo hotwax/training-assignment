@@ -102,3 +102,31 @@ input- 6
 output-  Please enter a valid choice (1,2,3,4,5).
 -------------------------------------
 menu
+
+
+
+case 10: update a value (invalid index)
+Stack- 1 2
+
+input- 5
+Enter the index at which value needs to be updated: 12
+Enter the new value: 20
+Please enter a valid index
+-------------------------------------
+menu
+
+
+
+case 11: update a value (valid index)
+Stack- 1 2
+
+input- 5
+Enter the index at which value needs to be updated: 1
+Enter the new value: 11
+Old value: 2
+-------------------------------------
+Your Stack: 1 11
+...menu
+
+
+
