@@ -1,5 +1,6 @@
 package AVLTREE;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AVL {
@@ -10,8 +11,8 @@ public class AVL {
               Node left;
               Node right;
 
-              Node(int data) {
-                     this.data = data;
+              Node(int val) {
+                     this.data = val;
                      this.left = null;
                      this.right = null;
                      this.height = 1;
@@ -74,6 +75,13 @@ public class AVL {
 
        }
 
+       Boolean isEmpty() {
+              if (root == null) {
+                     return true;
+              }
+              return false;
+       }
+
        void insertion(int data) {
               root = insertionrec(root, data);
 
@@ -126,7 +134,7 @@ public class AVL {
        // Inorder Traversal in BST
        void inorder() {
               if (root == null) {
-                     System.out.println("BST is empty");
+                     System.out.println("-1");
                      return;
               }
               inorderrec(root);
@@ -146,7 +154,7 @@ public class AVL {
 
        void preorder() {
               if (root == null) {
-                     System.out.println("BST is empty");
+                     System.out.println("-1");
                      return;
               }
               preorderrec(root);
@@ -165,7 +173,7 @@ public class AVL {
        // Postorder Traversal in BST
        void postorder() {
               if (root == null) {
-                     System.out.println("BST is empty");
+                     System.out.println("-1");
                      return;
               }
               postorderrec(root);
@@ -185,6 +193,10 @@ public class AVL {
        // Delete a key if it is present in Binary Search Tree
 
        void deletion(int key) {
+              if (root == null) {
+                     System.out.println("-1");
+                     return;
+              }
               root = deleted(root, key);
               if (root == null)
                      return;
@@ -249,7 +261,7 @@ public class AVL {
 
        void morristraversal() {
               if (root == null) {
-                     System.out.println("BST is empty");
+                     System.out.println("-1");
                      return;
               }
               Node curr = root;
@@ -333,6 +345,10 @@ public class AVL {
                                           System.out.println();
                                           System.out.println("Enter the key");
                                           int key = input.nextInt();
+                                          if (avl.isEmpty()) {
+                                                 System.out.println("Avl tree is empty");
+                                                 break;
+                                          }
                                           if (avl.search(key)) {
                                                  System.out.println("Key is found in AVL tree");
                                           } else {
@@ -343,6 +359,10 @@ public class AVL {
 
                                    case 3:
                                           System.out.println();
+                                          if (avl.isEmpty()) {
+                                                 System.out.println("Avl tree is empty");
+                                                 break;
+                                          }
                                           System.out.println("Inorder traversal -");
                                           avl.inorder();
                                           System.out.println();
@@ -350,6 +370,10 @@ public class AVL {
 
                                    case 4:
                                           System.out.println();
+                                          if (avl.isEmpty()) {
+                                                 System.out.println("Avl tree is empty");
+                                                 break;
+                                          }
                                           System.out.println("Preorder traversal -");
                                           avl.preorder();
                                           System.out.println();
@@ -357,6 +381,10 @@ public class AVL {
 
                                    case 5:
                                           System.out.println();
+                                          if (avl.isEmpty()) {
+                                                 System.out.println("Avl tree is empty");
+                                                 break;
+                                          }
                                           System.out.println("Postorder traversal -");
                                           avl.postorder();
                                           System.out.println();
@@ -364,6 +392,10 @@ public class AVL {
 
                                    case 6:
                                           System.out.println();
+                                          if (avl.isEmpty()) {
+                                                 System.out.println("Avl tree is empty");
+                                                 break;
+                                          }
                                           System.out.println("Morris Traversal -");
                                           avl.morristraversal();
                                           System.out.println();
@@ -373,6 +405,10 @@ public class AVL {
                                           System.out.println();
                                           System.out.println("Enter the key ");
                                           int k = input.nextInt();
+                                          if (avl.isEmpty()) {
+                                                 System.out.println("Avl tree is empty");
+                                                 break;
+                                          }
                                           if (avl.search(k)) {
                                                  avl.deletion(k);
                                                  System.out.println("deleted Key will be-" + k);
@@ -392,6 +428,8 @@ public class AVL {
                             }
 
                      } while (choices != 8);
+              } catch (InputMismatchException exception) {
+                     System.out.println(exception);
               }
 
        }

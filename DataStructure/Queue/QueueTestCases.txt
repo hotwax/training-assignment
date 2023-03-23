@@ -1,0 +1,144 @@
+Operations:-
+1: Push
+2: Pop
+3: Front element of Queue
+4: Size of Queue
+5: Queue is empty or not
+6: Display the data of Queue
+
+Tese Case 1(Push in Queue):
+  Input:-
+   choice-1
+    50
+   choice-1
+    60
+   choice-1
+    70
+   choice-1
+    80 
+   choice-3
+   choice-2
+   choice-3
+   choice-2
+   choice-3
+   choice-5
+   choice-4
+   choice-5
+  Output:-
+   Front element of queue is - 50
+   Deleted data from queue is -50 
+   Front element of queue is - 60
+   Deleted data from queue is -60 
+   Front element of queue is -70  
+   Queue is not empty
+   Size of Queue is - 2 
+   Values of Queue is - 70 80 
+
+---------------------------------------------------------------------------------------------
+
+Test Case 2(Pop in Queue):
+  Input:
+   choice-1
+    40
+   choice-1
+    20
+   choice-2
+   choice-2
+   choice-2
+   choice-3
+   choice-4
+   choice-5
+   choice-6
+  Output:
+   Deleted data from Queue is - 40
+   Deleted data from Queue is - 20
+   Queue is empty
+   Queue is empty
+   Size of Queue is 0
+   Queue is empty 
+
+-------------------------------------------------------------------------------------------
+
+Test Case 3(Invalid Input type ):
+  Input:
+   choice-1
+    12
+   choice-A
+    23
+   choice-1
+    40
+   choice-2
+   choice-2
+   choice-2
+   choice-3
+   choice-4
+   choice-5
+   choice-6          
+
+  Output:
+   Input Mismatch exception
+
+----------------------------------------------------------------------------------------------  
+
+Test Case 4(Front element in Queue):
+  Input:
+   choice-1
+    30
+   choice-3
+   choice-4
+   choice-1
+    50
+   choice-3
+   choice-4
+   choice-1
+    60
+   choice-3
+   choice-4
+   choice-1
+    70
+   choice-3
+   choice-4
+   choice-1
+    80
+   choice-3
+   choice-4
+   choice-1
+    20
+   choice-3
+   choice-4  
+   choice-1
+    10
+   choice-3
+   choice-4
+
+  Output:
+   Front element of Queue is - 30
+   Size of Queue is - 1      
+   Front element of Queue is - 30
+   Size of Queue is - 2 
+   Front element of Queue is - 30
+   Size of Queue is - 3 
+   Front element of Queue is - 30
+   Size of Queue is - 4 
+   Front element of Queue - 30
+   Size of Queue is - 5 
+   Fornt element of Queue - 30
+   Size of Queue is - 6 
+   Front element of Queue - 30
+   Size of Queue is - 7 
+   Values of Queue is  - 30 50 60 70 80 20 10
+
+   ------------------------------------------------------------------------------------------------
+
+Test case 5(Queue is empty or not):
+  Input:
+   choice-5
+   choice-1
+    23
+   choice-5       
+
+  Output:
+   Queue is Empty
+   Queue is not empty 
+
+---------------------------------------------------------------------------------------------------

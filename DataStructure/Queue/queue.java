@@ -1,8 +1,9 @@
 package Queue;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class queue<V> {
+public class Queue<V> {
 
 	class Node {
 		V data;
@@ -19,7 +20,7 @@ public class queue<V> {
 	private int size;
 
 	// Constructor calling of class queue
-	public queue() {
+	public Queue() {
 		front = null;
 		rear = null;
 		size = 0;
@@ -44,6 +45,9 @@ public class queue<V> {
 
 	// dequeue operation in queue
 	public void pop() {
+		if (front == null) {
+			return;
+		}
 		front = front.next;
 		size--;
 
@@ -51,6 +55,9 @@ public class queue<V> {
 
 	// get the front Value from queue
 	public V Front() {
+		if (front == null) {
+			return null;
+		}
 		return front.data;
 	}
 
@@ -78,10 +85,10 @@ public class queue<V> {
 
 		// check the queue is empty or not
 		if (front == null) {
-			System.out.println("Queue is empty");
+			System.out.println("-1");
 			return;
 		} else {
-			System.out.println("Values in Queue is -");
+
 			Node temp = front;
 			while (temp != null) {
 
@@ -89,14 +96,14 @@ public class queue<V> {
 				temp = temp.next;
 
 			}
-			System.out.println();
+
 		}
 
 	}
 
 	public static void main(String[] args) {
 		try (Scanner input = new Scanner(System.in)) {
-			queue<String> q = new queue<String>();
+			Queue<String> queue = new Queue<String>();
 			int choices;
 			do {
 				System.out.println();
@@ -118,15 +125,15 @@ public class queue<V> {
 					case 1:
 						System.out.println("Enter the data");
 						String data = input.next();
-						q.push(data);
+						queue.push(data);
 						break;
 					case 2:
 
-						if (q.isempty()) {
+						if (queue.isempty()) {
 							System.out.println("Queue is empty");
 						} else {
-							String front1 = q.Front();
-							q.pop();
+							String front1 = queue.Front();
+							queue.pop();
 
 							System.out.println("Deleted data from queue is - " + front1);
 						}
@@ -134,23 +141,22 @@ public class queue<V> {
 
 					case 3:
 
-						boolean empty = q.isempty();
-						if (empty) {
+						if (queue.isempty()) {
 							System.out.println("Queue is empty");
 						} else {
-							String front = q.Front();
+							String front = queue.Front();
 							System.out.println("Front of queue is - " + front);
 
 						}
 						break;
+
 					case 4:
-						int size = q.Size();
+						int size = queue.Size();
 						System.out.println("Size of queue - " + size);
 						break;
 
 					case 5:
-						boolean isempty = q.isempty();
-						if (isempty) {
+						if (queue.isempty()) {
 							System.out.println("Queue is empty");
 
 						} else {
@@ -159,7 +165,13 @@ public class queue<V> {
 						break;
 
 					case 6:
-						q.display();
+						if (queue.isempty()) {
+							System.out.println("Queue is empty");
+							break;
+						}
+						System.out.println("Values in Queue is -");
+						queue.display();
+						System.out.println();
 						break;
 
 					case 7:
@@ -172,6 +184,8 @@ public class queue<V> {
 				}
 
 			} while (choices != 7);
+		} catch (InputMismatchException exception) {
+			System.out.println(exception);
 		}
 
 	}

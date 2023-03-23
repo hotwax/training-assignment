@@ -1,0 +1,190 @@
+Operations:
+ 1.Insertion in BST
+ 2.Searching in BST
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in BST
+
+Test Case 1(Insertion in BST):
+  Input:
+   choice-1
+    20
+   choice-1
+    50
+   choice-1
+    70
+   choice-1
+    10
+   choice-1
+    15 
+   choice-3
+   choice-4
+   choice-5
+   choice-6        
+  
+  Output:
+   Inorder Traversal-
+   10 15 20 50 70
+   Preorder traversal-
+   20 10 15 50 70
+   Postorder traversal-
+   15 10 70 50 20 
+   Morris traversal-
+   10 15 20 50 70 
+
+------------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in BST
+ 2.Searching in BST
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in BST
+
+Test Case 2(Deletion in BST):
+  Input:
+   choice-1
+    20
+   choice-1
+    50
+   choice-1
+    70
+   choice-1
+    10
+   choice-1
+    15 
+   choice-3
+   choice-4      
+   choice-7
+    key-50
+   choice-3
+   choice-4
+   choice-7
+    key-20 
+   choice-3
+   choice-4
+   choice-7
+    key-20 
+   choice-3
+   choice-4 
+
+  Output:
+   Inorder traversal-
+   10 15 20 50 70
+   Preorder traversal-
+   20 
+   Deleted Key is-50
+   Inorder traversal-
+   10 15 20 70 
+   Preorder traversal-
+   20 10 15 70 
+   Deleted Key is-20
+   Inorder traversal-
+   10 15 70
+   Preorder traversal-
+   70 10 15
+   Key not found
+   Inorder traversal-
+   10 15 70
+   Preorder traversal-
+   70 10 15
+
+--------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in BST
+ 2.Searching in BST
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in BST
+
+Test Case 3(BST is Empty):
+  Input:
+   choice-3
+   choice-4
+   choice-5
+   choice-6
+  
+  Output:
+   BST is empty
+   BST is empty
+   BST is empty
+   BST is empty
+
+---------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in BST
+ 2.Searching in BST
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in BST
+
+Test Case 4(Invalid input):
+  Input:
+   choice-10
+
+  Output:
+   invalid choice 
+
+-----------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in AVL tree
+ 2.Searching in AVL tree
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in AVL tree
+
+Test Case 5(Invalid Input Type):
+  Input:
+   choice-1
+    a
+   choice-3
+
+  Output:-
+   Input Mismatch exception   
+
+------------------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in BST
+ 2.Searching in BST
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in BST
+
+Test Case 6(Search in BST):
+  Input:
+   choice-1
+    20
+   choice-1
+    50
+   choice-1
+    70
+   choice-1
+    10
+   choice-1
+    15 
+   choice-2
+    key-50
+   choice-2
+    key-40
+
+  Output:
+   key is found
+   key is not found
+
+-------------------------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 package BSTTREE;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BST {
@@ -9,8 +10,8 @@ public class BST {
         Node left;
         Node right;
 
-        Node(int d) {
-            this.data = d;
+        Node(int val) {
+            this.data = val;
             this.left = null;
             this.right = null;
         }
@@ -21,6 +22,13 @@ public class BST {
     // Constructor call
     BST() {
         root = null;
+    }
+
+    Boolean isEmpty() {
+        if (root == null) {
+            return true;
+        }
+        return false;
     }
 
     void insertion(int data) {
@@ -36,7 +44,7 @@ public class BST {
 
             if (data < node.data) {
                 node.left = insertrec(data, node.left);
-            } else if (data > root.data) {
+            } else if (data > node.data) {
                 node.right = insertrec(data, node.right);
             } else {
                 return node;
@@ -49,7 +57,7 @@ public class BST {
     // Preorder Traversal in BST
     void inorder() {
         if (root == null) {
-            System.out.println("BST is empty");
+            System.out.println("-1");
             return;
         }
 
@@ -70,7 +78,7 @@ public class BST {
 
     void preorder() {
         if (root == null) {
-            System.out.println("BST is empty");
+            System.out.println("-1");
             return;
         }
         preorderrec(root);
@@ -78,7 +86,6 @@ public class BST {
 
     private void preorderrec(Node node) {
         if (node == null) {
-
             return;
         }
 
@@ -91,7 +98,7 @@ public class BST {
 
     void postorder() {
         if (root == null) {
-            System.out.println("BST is empty");
+            System.out.println("-1");
             return;
         }
         postorderrec(root);
@@ -100,7 +107,6 @@ public class BST {
 
     private void postorderrec(Node node) {
         if (node == null) {
-
             return;
         }
 
@@ -111,6 +117,10 @@ public class BST {
 
     // Delete a key if it is present in Binary Search Tree
     void deletion(int key) {
+        if (root == null) {
+            System.out.println("-1");
+            return;
+        }
         root = deleted(root, key);
 
     }
@@ -163,7 +173,7 @@ public class BST {
 
     void morristraversal() {
         if (root == null) {
-            System.out.println("BST is empty");
+            System.out.println("-1");
             return;
         }
         Node curr = root;
@@ -248,6 +258,10 @@ public class BST {
                         System.out.println();
                         System.out.println("Enter the key");
                         int key = input.nextInt();
+                        if (bst.isEmpty()) {
+                            System.out.println("BST is empty");
+                            break;
+                        }
                         if (bst.search(key)) {
                             System.out.println("Key is found in BST");
                         } else {
@@ -258,6 +272,10 @@ public class BST {
 
                     case 3:
                         System.out.println();
+                        if (bst.isEmpty()) {
+                            System.out.println("BST is empty");
+                            break;
+                        }
                         System.out.println("Inorder traversal -");
                         bst.inorder();
                         System.out.println();
@@ -265,6 +283,10 @@ public class BST {
 
                     case 4:
                         System.out.println();
+                        if (bst.isEmpty()) {
+                            System.out.println("BST is empty");
+                            break;
+                        }
                         System.out.println("Preorder traversal -");
                         bst.preorder();
                         System.out.println();
@@ -272,6 +294,10 @@ public class BST {
 
                     case 5:
                         System.out.println();
+                        if (bst.isEmpty()) {
+                            System.out.println("BST is empty");
+                            break;
+                        }
                         System.out.println("Postorder traversal -");
                         bst.postorder();
                         System.out.println();
@@ -279,6 +305,10 @@ public class BST {
 
                     case 6:
                         System.out.println();
+                        if (bst.isEmpty()) {
+                            System.out.println("BST is empty");
+                            break;
+                        }
                         System.out.println("Morris Traversal -");
                         bst.morristraversal();
                         System.out.println();
@@ -288,6 +318,10 @@ public class BST {
                         System.out.println();
                         System.out.println("Enter the key ");
                         int k = input.nextInt();
+                        if (bst.isEmpty()) {
+                            System.out.println("BST is empty");
+                            break;
+                        }
                         if (bst.search(k)) {
                             bst.deletion(k);
                             System.out.println("deleted Key will be-" + k);
@@ -307,6 +341,8 @@ public class BST {
                 }
 
             } while (choices != 8);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
         }
 
     }

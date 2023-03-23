@@ -1,0 +1,191 @@
+Operations:
+ 1.Insertion in AVL tree
+ 2.Searching in AVL tree
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in AVL tree
+
+Test Case 1(Insertion in AVL):
+  Input:
+   choice-1
+    20
+   choice-1
+    50
+   choice-1
+    70
+   choice-1
+    10
+   choice-1
+    15 
+   choice-3
+   choice-4
+   choice-5
+   choice-6        
+  
+  Output:
+   Inorder Traversal-
+   10 15 20 50 70
+   Preorder traversal-
+   50 15 10 20 70
+   Postorder traversal-
+   10 20 15 70 50
+   Morris traversal-
+   10 15 20 50 70 
+
+------------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in AVL tree
+ 2.Searching in AVL tree
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in AVL tree
+
+Test Case 2(Deletion in AVL):
+  Input:
+   choice-1
+    20
+   choice-1
+    50
+   choice-1
+    70
+   choice-1
+    10
+   choice-1
+    15 
+   choice-3
+   choice-4      
+   choice-7
+    key-50
+   choice-3
+   choice-4
+   choice-7
+    key-15 
+   choice-3
+   choice-4
+   choice-7
+    key-15 
+   choice-3
+   choice-4 
+
+  Output:
+   Inorder traversal-
+   10 15 20 50 70
+   Preorder traversal-
+   50 15 10 20 70
+   Deleted Key is-50
+   Inorder traversal-
+   10 15 20 70 
+   Preorder traversal-
+   15 10 70 20
+   Deleted Key is-15
+   Inorder traversal-
+   10 20 70
+   Preorder traversal-
+   20 10 70
+   Key not found
+   Inorder traversal-
+   10 20 70
+   Preorder traversal-
+   20 10 70
+
+--------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in AVL tree
+ 2.Searching in AVL tree
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in AVL tree
+
+Test Case 3(Avl is empty):
+  Input:
+   choice-3
+   choice-4
+   choice-5
+   choice-6
+  
+  Output:
+   Avl tree is empty
+   Avl tree is empty
+   Avl tree is empty
+   Avl tree is empty
+
+---------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in AVL tree
+ 2.Searching in AVL tree
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in AVL tree
+
+Test Case 4(Invalid Input):
+  Input:
+   choice-10
+
+  Output:
+   invalid choice 
+
+-----------------------------------------------------------------------------------------
+
+Operations:
+ 1.Insertion in AVL tree
+ 2.Searching in AVL tree
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in AVL tree
+
+Test Case 5(Invalid Input Type):
+  Input:
+   choice-1
+    a
+   choice-3
+
+  Output:-
+   Input Mismatch exception   
+
+------------------------------------------------------------------------------------------------
+
+
+Operations:
+ 1.Insertion in AVL tree
+ 2.Searching in AVL tree
+ 3.Inorder Traversal
+ 4.Preorder Traversal
+ 5.Postorder Traversal
+ 6.Morris Traversal
+ 7.Deletion in AVL tree
+
+Test Case 6(Search in AVL):
+  Input:
+   choice-1
+    20
+   choice-1
+    50
+   choice-1
+    70
+   choice-1
+    10
+   choice-1
+    15 
+   choice-2
+    key-50
+   choice-2
+    key-40
+
+  Output:
+   key is found
+   key is not found
+
+-------------------------------------------------------------------------------------------

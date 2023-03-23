@@ -1,5 +1,6 @@
 package LinkList;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class linklist {
@@ -8,8 +9,8 @@ public class linklist {
 		int data;
 		Node next;
 
-		Node(int data) {
-			this.data = data;
+		Node(int val) {
+			this.data = val;
 			this.next = null;
 		}
 
@@ -76,6 +77,7 @@ public class linklist {
 
 			} else if (temp == null && count <= pos) {
 				System.out.println("Invalid Position");
+				return;
 
 			} else if (temp != null) {
 				newnode.next = temp.next;
@@ -131,7 +133,9 @@ public class linklist {
 	// deletion from Any Position
 
 	int deletefromanypos(int pos) {
-
+		if (isempty()) {
+			return -1;
+		}
 		if (pos < 1) {
 			return -1;
 		}
@@ -160,7 +164,7 @@ public class linklist {
 	// Sort List
 	void sort() {
 		if (head == null) {
-			System.out.println("List is empty");
+			System.out.println("-1");
 			return;
 		}
 
@@ -240,6 +244,10 @@ public class linklist {
 	// Update the data at particular position
 
 	void updateAtpos(int data, int pos) {
+		if (isempty()) {
+			System.out.println("List is empty");
+			return;
+		}
 		if (pos < 1) {
 			System.out.println("invalid position");
 			return;
@@ -263,7 +271,7 @@ public class linklist {
 	void print() {
 
 		if (head == null) {
-			System.out.println("List is empty");
+			System.out.println("-1");
 			return;
 		}
 
@@ -274,7 +282,6 @@ public class linklist {
 			temp = temp.next;
 
 		}
-		System.out.println();
 
 	}
 
@@ -350,15 +357,20 @@ public class linklist {
 						list.insertionatanypos(dt1, pos);
 						break;
 					case 4:
-						list.print();
-						break;
-
-					case 5:
-						int d = list.deletefromhead();
-						if (d == -1) {
+						if (list.isempty()) {
 							System.out.println("List is empty");
 							break;
 						}
+						list.print();
+						System.out.println();
+						break;
+
+					case 5:
+						if (list.isempty()) {
+							System.out.println("List is Empty");
+							break;
+						}
+						int d = list.deletefromhead();
 						System.out.println("deleted data is " + "- " + d);
 						break;
 
@@ -434,6 +446,8 @@ public class linklist {
 				}
 
 			} while (choice != 11);
+		} catch (InputMismatchException exception) {
+			System.out.println(exception);
 		}
 
 	}
