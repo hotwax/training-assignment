@@ -176,18 +176,17 @@ Expected Result:
 The query should return peel, 1001, serres, 1002.
 
 Approach:
-I will use the concept of subquery to get the results. First use the select command
-to get sname, snum from the salespeople tables after that use IN operator for snum 
-and in subquery use group by command on snum and having clause with COUNT aggregate 
-function to get the answer.
+I will use left join between salespeople and customers table on snum column, group by on snum
+and sname column and having clause on snum column.
 
 Actual Result:
-+--------+------+
-| sname  | snum |
-+--------+------+
-| Peel   | 1001 |
-| Serres | 1002 |
-+--------+------+
++--------+------+------------------+
+| sname  | snum | number_of_orders |
++--------+------+------------------+
+| Peel   | 1001 |                2 |
+| Serres | 1002 |                2 |
++--------+------+------------------+
+2 rows in set (0.01 sec)
 
 8) Count the orders of each of the salespeople and output the results in descending order. 
 
@@ -374,6 +373,7 @@ Actual Result:
 18) Find all customers whose cnum is 1000 above the snum of Serres. 
 
 Expected Result:
+The cnum of serres is 1002 and after adding 1000 is 2002.
 The query should return 2003, 2004, 2006, 2007, 2008.
 
 Approach:
@@ -396,19 +396,19 @@ Expected Result:
 The query should return all the columns from salespeople table and should return comm column as (comm*100).
 
 Approach:
-Simply use select statement and AS operator to achieve the result.
+Simply use select statement and AS, Concat function to achieve the result.
 
 Actual Result:
-+------+---------+-----------+-----------------+
-| snum | sname   | city      | comm_percentage |
-+------+---------+-----------+-----------------+
-| 1001 | Peel    | London    |            1200 |
-| 1002 | Serres  | SanJose   |            1300 |
-| 1003 | AxelRod | New York  |            1000 |
-| 1004 | Motika  | London    |            1100 |
-| 1007 | Rifkin  | Barcelona |            1500 |
-| 1008 | Fran    | London    |            2500 |
-+------+---------+-----------+-----------------+
++------+---------+-----------+------------+
+| snum | sname   | city      | commission |
++------+---------+-----------+------------+
+| 1001 | Peel    | London    | 12%        |
+| 1002 | Serres  | SanJose   | 13%        |
+| 1003 | AxelRod | New York  | 10%        |
+| 1004 | Motika  | London    | 11%        |
+| 1007 | Rifkin  | Barcelona | 15%        |
+| 1008 | Fran    | London    | 25%        |
++------+---------+-----------+------------+
 
 20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000. 
 
@@ -419,13 +419,13 @@ Approach:
 We will use inner join between salespeople and orders table on snum column group by odate and having max_order > 3000.
 
 Actual Result:
-+--------+------------+-----------+
-| sname  | odate      | max_order |
-+--------+------------+-----------+
-| Rifkin | 1990-10-03 |   5160.45 |
-| Peel   | 1990-10-05 |   4723.00 |
-| Serres | 1990-10-06 |   9891.88 |
-+--------+------------+-----------+
++--------+----------+-----------+
+| sname  | odate    | max_order |
++--------+----------+-----------+
+| Serres | 10/03/90 |   5160.45 |
+| Peel   | 10/05/90 |      4723 |
+| Peel   | 10/06/90 |   9891.88 |
++--------+----------+-----------+
 
 21) List all the largest orders for October 3, for each salesperson. 
 
@@ -555,27 +555,32 @@ Expected Result:
 The query should all the columns from orders table where onum is 3001, 3006.
 
 Approach:
-I will use subquery to return the snum of cisneros and in outer query I will select the relevant data with the snum
-with the help of where clause.
+I will use subquery to return the snum of cisneros and in outer query I will use IN operator 
+to get the result.
 
 Actual Result:
 +------+---------+------------+------+------+
 | onum | amt     | odate      | cnum | snum |
 +------+---------+------------+------+------+
-| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
-| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3001 |   18.69 | 10/03/90   | 2008 | 1007 |
+| 3006 | 1098.16 | 10/03/90   | 2008 | 1007 |
 +------+---------+------------+------+------+
 
 30) Find the largest orders for Serres and Rifkin. 
-Expected Result
+Expected Result:
+The query should return snum, sname, max_amt for Rifkin and Serres.
+
+Approach:
+By using inner join on snum column, group by, having clause on sname, snum column 
+we can get the result. 
 
 Actual Result:
-+------+---------+----------+------+------+--------+
-| onum | amt     | odate    | cnum | snum | sname  |
-+------+---------+----------+------+------+--------+
-| 3005 | 5160.45 | 10/03/90 | 2003 | 1002 | Serres |
-| 3006 | 1098.16 | 10/03/90 | 2008 | 1007 | Rifkin |
-+------+---------+----------+------+------+--------+
++------+--------+---------+
+| snum | sname  | max_amt |
++------+--------+---------+
+| 1007 | Rifkin | 1096.16 |
+| 1002 | Serres | 5160.45 |
++------+--------+---------+
 
 31) Sort the salespeople table in the following order: snum, sname, commission, city. 
 Expected Result:
@@ -606,11 +611,24 @@ Actual Result:
 +------+---------+-----------+------+
 
 32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
+
 Expected Result:
 The query should return all the rows from customers with snum 2006, 2008, 2004, 2002.
 
-Approach:
-I will use where clause on cname column to get the result or we can use Between operator to get the answer.
+Previous Approach:
+I used the between operator to get the answer.
+
+Edge Case:
+But it was not able to include the names starting with g.
+
+Previous Appraoch:
+I used LIKE operator to get the answer.
+
+Edge Case:
+It was giving names starting with either A or G not both.
+
+Approach(Final):
+I used substr function with where clause to get the answer.
 
 Actual Result:
 +------+----------+---------+--------+------+
@@ -749,18 +767,20 @@ Actual Result:
 
 39) Find all orders with above average amounts for their customers. 
 Expected Result:
-The query should return all rows from orders table where onum is 3005, 3008, 3011
+The query should return all rows from orders table where onum is 3006, 3010, 3011
+
+Appraoch:
+Using inner join on orders and customers table on cnum column and a subquery which will
+select the average amount for respective customer on cnum column we can get the answer.
 
 Actual Result:
-The answer is based on assumption that we have to show the orders that have amount more than 2665.34 which is the 
-average of all the amounts in the orders table.
-+------+---------+------------+------+------+
-| onum | amt     | odate      | cnum | snum |
-+------+---------+------------+------+------+
-| 3005 | 5160.45 | 1990-03-10 | 2003 | 1002 |
-| 3008 | 4723.00 | 1990-05-10 | 2006 | 1001 |
-| 3011 | 9891.88 | 1990-06-10 | 2006 | 1001 |
-+------+---------+------------+------+------+
++------+------------+----------+---------+
+| onum | odate      | cname    | amt     |
++------+------------+----------+---------+
+| 3006 | 10/03/90   | Cisneros | 1098.16 |
+| 3010 | 10/06/90   | Grass    | 1309.95 |
+| 3011 | 10/06/90   | Clemens  | 9891.88 |
++------+------------+----------+---------+
 
 40) Write a query that selects the highest rating in each city. 
 Expected Result:
@@ -1117,6 +1137,8 @@ Actual Result:
 
 59) Write a query that produces the names and ratings of all customers who have average orders. 
 Expected Result:
+The answer gets equal to and greater than the average orders. If it is only equal to the average then 
+the query will return empty set.
 The query should return cname, rating of Liu, Clemens.
 
 Approach:
@@ -1124,6 +1146,7 @@ Use inner join on cnum columm between customers and orders table and an inner qu
 from orders.
 
 Actual Result:
+
 +---------+--------+
 | CNAME   | RATING |
 +---------+--------+
@@ -1340,10 +1363,11 @@ Actual Result:
 
 71) Find all salespeople who have customers with more than one current order. 
 Expected Result:
-The quety should return all rows from salespeople with the number if orders column of snum 1007, 1001, 1002.
+The query should return all rows from salespeople with the number if orders column of snum 1007, 1001, 1002.
 
 Approach:
-I will use inner join between 
+I will use inner join between salespeople and orders table on snum column with group by and
+having clause on snum columm to get the answer.
 
 Actual Result:
 +------+--------+-----------+------+------------------+
@@ -1361,17 +1385,17 @@ Expected Result:
 The query should return cnum, cname, city, rating, snum, onum, amt of cnum having 2001, 2003, 2004, 2006.
 
 Appraoch:
-Using inner join, group by, having, where clause we can get the answer.
+Using IN operator, group by, having, where clause we can get the answer.
 
 Actual Result:
-+------+---------+---------+--------+------+------+---------+
-| cnum | cname   | city    | rating | snum | onum | amt     |
-+------+---------+---------+--------+------+------+---------+
-| 2001 | Hoffman | London  |    100 | 1001 | 3003 |  767.19 |
-| 2003 | liu     | SanJose |    200 | 1002 | 3005 | 5160.45 |
-| 2004 | Grass   | Berlin  |    300 | 1002 | 3007 |   75.75 |
-| 2006 | Clemens | London  |    100 | 1001 | 3008 |    4723 |
-+------+---------+---------+--------+------+------+---------+
++------+---------+---------+--------+------+
+| cnum | cname   | city    | rating | snum |
++------+---------+---------+--------+------+
+| 2001 | Hoffman | London  |    100 | 1001 |
+| 2003 | Liu     | SanJose |    200 | 1002 |
+| 2004 | Grass   | Berlin  |    300 | 1002 |
+| 2006 | Clemens | London  |    100 | 1001 |
++------+---------+---------+--------+------+
 
 
 73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
@@ -1645,15 +1669,15 @@ Expected Result:
 The query should return sname, comm of Fran.
 
 Approach:
-Using a subquery which will return max commission as result and using that to compare with comm in outer query will
-get the answer.
+using inner join between salespeople and orders table on snum column, group by clause on snum
+column and order by clause in earned_money column with limit as 1 we can get the answer.
 
 Actual Result:
-+-------+------+
-| sname | comm |
-+-------+------+
-| Fran  |   25 |
-+-------+------+
++------+-------+--------+------+--------------+
+| snum | sname | city   | comm | earned_money |
++------+-------+--------+------+--------------+
+| 1001 | Peel  | London |   12 |      1845.84 |
++------+-------+--------+------+--------------+
 
 
 90) Does the customer who has placed the maximum number of orders have the maximum rating? 
@@ -1664,13 +1688,13 @@ Approach:
 Using subquery group by, having clause and max aggregate function we can get the answer.
 
 Actual Result:
-+------+--------+------+--------------+
-| cnum | rating | onum | orders_count |
-+------+--------+------+--------------+
-| 2008 |    300 | 3001 |            2 |
-| 2004 |    300 | 3007 |            2 |
-| 2006 |    100 | 3008 |            2 |
-+------+--------+------+--------------+
++------+----------+--------+--------+
+| cnum | cname    | rating | orders |
++------+----------+--------+--------+
+| 2004 | Grass    |    300 |      2 |
+| 2006 | Clemens  |    100 |      2 |
+| 2008 | Cisneros |    300 |      2 |
++------+----------+--------+--------+
 
 
 91) List all customers in descending order of customer rating. 
@@ -1685,12 +1709,12 @@ Actual Result:
 | cnum | cname    | city    | rating | snum |
 +------+----------+---------+--------+------+
 | 2004 | Grass    | Berlin  |    300 | 1002 |
-| 2007 | Cisneros | SanJose |    300 | 1007 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
 | 2002 | Giovanni | Rome    |    200 | 1003 |
-| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2003 | liu      | SanJose |    200 | 1002 |
 | 2001 | Hoffman  | London  |    100 | 1001 |
 | 2006 | Clemens  | London  |    100 | 1001 |
-| 2008 | Pererira | Rome    |    100 | 1004 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
 +------+----------+---------+--------+------+
 
 
@@ -1709,20 +1733,29 @@ Actual Result:
 | 10/03/90 |
 +----------+
 
+if we want day on that date.
++-----------+
+| day       |
++-----------+
+| Wednesday |
++-----------+
+
 
 93) Which salesmen have no orders between 10/03/1990 and 10/05/1990? 
 Expected Result:
 The query should return all the rows from salespeople where snum is 1008.
 
 Approach:
-Using subquery adnd NOT IN, BETWEEN operator will get the answer.
+Using inner join between salespeople and orders table on snum column and not between operator
+we can get the answer.
 
 Actual Result:
-+------+-------+--------+------+
-| snum | sname | city   | comm |
-+------+-------+--------+------+
-| 1008 | Fran  | London |   25 |
-+------+-------+--------+------+
++------+--------+----------+
+| snum | sname  | odate    |
++------+--------+----------+
+| 1002 | Serres | 10/06/90 |
+| 1001 | Peel   | 10/06/90 |
++------+--------+----------+
 
 
 94) How many salespersons have succeeded in getting orders? 
