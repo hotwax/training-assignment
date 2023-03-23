@@ -1,0 +1,52 @@
+Test Case 1-
+Insert elements into the queue and display them:
+Input:
+Choose option 1 to insert elements
+Enter 4 elements: 10 20 30 40
+Choose option 3 to display elements
+Output:
+Insert the element in queue :
+Insert the element in queue :
+Insert the element in queue :
+Insert the element in queue :
+Queue elements are : 10 20 30 40
+
+
+Test Case 2-
+Delete elements from the queue and display them:
+Input:
+Choose option 1 to insert elements
+Enter 3 elements: 5 7 8
+Choose option 2 to delete element
+Choose option 3 to display elements
+Output:
+Insert the element in queue :
+Insert the element in queue :
+Insert the element in queue :
+Element deleted from queue is : 5
+Queue elements are : 7 8
+
+
+Test Case 3-
+Delete element from an empty queue:
+Input:
+Choose option 2 to delete element
+Output:
+Queue Underflow
+
+
+Test Case 4-
+Insert element into a full queue:
+Input:
+Choose option 1 to insert elements
+Enter 100 elements
+Output:
+Queue Overflow
+
+
+Test Case 5-
+Choose an invalid option:
+Input:
+Choose option 5
+Output:
+Invalid choice

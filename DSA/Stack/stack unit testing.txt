@@ -1,0 +1,73 @@
+Test case-1
+Pushing an element into an empty stack:
+Input:
+1
+5
+3
+Output:
+Enter value to be pushed:
+Stack elements are: 5 3
+
+
+Test case-2
+Pushing an element into a full stack:
+Input:
+1
+1
+2
+1
+3
+Output:
+Enter value to be pushed:
+Stack Overflow
+
+
+Test case-3
+Popping an element from a non-empty stack:
+Input:
+1
+4
+2
+Output:
+Enter value to be pushed:
+The popped element is 4
+Stack is empty
+
+
+Test case-4
+Popping an element from an empty stack:
+Input:
+2
+Output:
+Stack Underflow
+
+
+
+Test case-5
+Displaying elements from a non-empty stack:
+Input:
+1
+1
+2
+1
+3
+3
+Output:
+Enter value to be pushed:
+Stack elements are: 3 2 1
+
+
+Test case-6
+Displaying elements from an empty stack:
+Input:
+3
+Output:
+Stack is empty
+
+
+Test case-7
+Invalid Choice:
+Input:
+5
+Output:
+Invalid Choice

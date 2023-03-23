@@ -1,0 +1,47 @@
+Test case 1:
+for inserting an element:
+Input:
+Choice: 1
+Element to be inserted: 10
+Key at which element to be inserted: 5
+Output:
+Element should be successfully inserted at key 5.
+
+
+
+Test case 2:
+for searching an element:
+Input:
+Choice: 2
+Key of the element to be searched: 5
+Output:
+The program should display "Element at key 5: 10".
+
+
+
+Test case 3:
+for deleting an element:
+Input:
+Choice: 3
+Key of the element to be deleted: 5
+Output:
+The program should display "Element Deleted" and the element with key 5 should be removed from the hash table.
+
+
+
+Test case 4:
+for deleting a non-existent element:
+Input:
+Choice: 3
+Key of the element to be deleted: 7
+Output:
+The program should display "No Element found at key 7".
+
+
+
+Test case 5:
+for exiting the program:
+Input:
+Choice: 4
+Output:
+The program should terminate without any errors.
