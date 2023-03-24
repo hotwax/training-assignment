@@ -1,138 +1,348 @@
-#include <iostream>
-#include <cstdlib> // for rand() and srand()
-#include <ctime> // for time()
+#include <bits/stdc++.h>
 using namespace std;
+using namespace std::chrono;
+// Random Probing
+// hash Node Class
 
-#define MAX 10
-
-class RandomProbingHash {
-    int table[MAX];
-    int size;
-
+class HashNode
+{
 public:
-    RandomProbingHash() {
-        for(int i = 0; i < MAX; i++)
-            table[i] = -1;
-        size = 0;
-        srand(time(NULL)); // initialize random seed
-    }
+    int value;
+    int key;
 
-    int hash(int key) {
-        return key % MAX;
-    }
-
-    void insert(int key) {
-        if(size == MAX) {
-            cout << "Table is full!" << endl;
-            return;
-        }
-
-        int index = hash(key);
-
-        if(table[index] == -1) {
-            table[index] = key;
-            size++;
-        } else {
-            int i = 1;
-            int randomOffset;
-
-            do {
-                randomOffset = rand() % MAX; // generate random number from 0 to MAX-1
-            } while(randomOffset == 0); // make sure offset is not 0
-
-            int newIndex = (index + i*randomOffset) % MAX;
-
-            while(table[newIndex] != -1 && newIndex != index) {
-                i++;
-                newIndex = (index + i*randomOffset) % MAX;
-            }
-
-            if(newIndex == index) {
-                cout << "Key cannot be inserted!" << endl;
-                return;
-            }
-
-            table[newIndex] = key;
-            size++;
-        }
-    }
-
-    void remove(int key) {
-        int index = hash(key);
-
-        if(table[index] == key) {
-            table[index] = -1;
-            size--;
-        } else {
-            int i = 1;
-            int randomOffset;
-
-            do {
-                randomOffset = rand() % MAX; // generate random number from 0 to MAX-1
-            } while(randomOffset == 0); // make sure offset is not 0
-
-            int newIndex = (index + i*randomOffset) % MAX;
-
-            while(table[newIndex] != key && newIndex != index) {
-                i++;
-                newIndex = (index + i*randomOffset) % MAX;
-            }
-
-            if(newIndex == index) {
-                cout << "Key not found!" << endl;
-                return;
-            }
-
-            table[newIndex] = -1;
-            size--;
-        }
-    }
-
-    void display() {
-        for(int i = 0; i < MAX; i++) {
-            if(table[i] != -1)
-                cout << i << ": " << table[i] << endl;
-            else
-                cout << i << ": " << endl;
-        }
+    HashNode(int key, int value)
+    {
+        this->key = key;
+        this->value = value;
     }
 };
 
-int main() {
-    RandomProbingHash rph;
+// HashMap Class
 
-    int choice, key;
+class HashMap
+{
 
-    do {
-        cout << "1. Insert\n";
-        cout << "2. Remove\n";
-        cout << "3. Display\n";
-        cout << "4. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+    // Hash elements array
 
-        switch(choice) {
-            case 1:
-                cout << "Enter the key to insert: ";
-                cin >> key;
-                rph.insert(key);
-                break;
-            case 2:
-                cout << "Enter the key to remove: ";
-                cin >> key;
-                rph.remove(key);
-                break;
-            case 3:
-                rph.display();
-                break;
-            case 4:
-                break;
-            default:
-                cout << "Invalid choice!" << endl;
+    HashNode **hashNodeArray;
+
+    // hash capacity
+
+    int capacity;
+
+    // size
+    int size;
+
+    // counting collisions
+
+    int collisions;
+
+    // Taking a random number
+
+    int randomNumber;
+
+public:
+    // Constructor
+    HashMap(int capacity)
+    {
+        this->capacity = capacity;
+        size = 0;
+        collisions = 0;
+        // creating hashNode array
+        hashNodeArray = new HashNode *[capacity];
+
+        // initializing all values with NULL
+
+        for (int i = 0; i < capacity; i++)
+        {
+            hashNodeArray[i] = NULL;
         }
-    } while(choice != 4);
 
-    return 0;
+        // iniatializing
+
+        this->randomNumber = rand() % this->capacity;
+    }
+
+    // print function
+
+    void print(string message)
+    {
+        cout << endl
+             << message;
+    }
+
+    // hash function to find index for a key
+
+    int hashCode(int key)
+    {
+        return key % capacity;
+    }
+
+    // function for value insertion --
+
+    void insertNode(int key, int value)
+    {
+
+        // if hashmap is full
+        if (this->size >= capacity)
+        {
+            print("HashMap is Full");
+            return;
+        }
+
+        HashNode *tempNodeRef = new HashNode(key, value);
+
+        int hashIndex = hashCode(key);
+
+        // for counting collisions
+
+        int counter = 0;
+
+        // finding the free space
+
+        // Using linear Probing
+
+        while (hashNodeArray[hashIndex] != NULL && hashNodeArray[hashIndex]->key != key)
+        {
+            this->collisions++;
+            counter++;
+            // incrementing hashIndex and again making a hashcode for indexing
+            hashIndex = hashIndex + (counter * this->randomNumber);
+            hashIndex %= capacity;
+        }
+
+        if (hashNodeArray[hashIndex] == NULL)
+        {
+            // increasing the size of HashMap
+            size++;
+            hashNodeArray[hashIndex] = tempNodeRef;
+        }
+
+        // if already exit update it
+
+        // updating the value on particular key
+
+        if (hashNodeArray[hashIndex]->key == key)
+        {
+            hashNodeArray[hashIndex]->value = value;
+        }
+    }
+
+    // switch case function for insertion
+
+    void insertForMenu()
+    {
+        // taking Input
+
+        int key;
+        print("Enter the Key: ");
+        cin >> key;
+        int value;
+        print("Enter the value: ");
+        cin >> value;
+
+        insertNode(key, value);
+    }
+
+    // for deleting a key value pair
+
+    int deleteNode(int key)
+    {
+        int hashIndex = hashCode(key);
+
+        // finding the node
+
+        while (hashNodeArray[hashIndex] != NULL)
+        {
+            if (hashNodeArray[hashIndex] && hashNodeArray[hashIndex]->key == key)
+            {
+                // removing the key value pair node
+                HashNode *tempNodeRef = hashNodeArray[hashIndex];
+
+                hashNodeArray[hashIndex] = NULL;
+
+                // decrementing size
+                size--;
+
+                return tempNodeRef->value;
+            }
+            else
+            {
+                // if not found
+
+                hashIndex++;
+                hashIndex %= capacity;
+            }
+        }
+        cout << "endl"
+             << "Key Not Found.";
+        return 0;
+    }
+
+    // void function for deleting
+
+    void deleteNodeVoid()
+    {
+        // Taking input from the user
+
+        int key;
+        print("Enter the Key: ");
+        cin >> key;
+
+        print("The key deleted with value : ");
+        cout << deleteNode(key);
+    }
+
+    int getValueInMap(int key)
+    {
+        int hashIndex = hashCode(key);
+        // for counting collisions
+        int counter = 0;
+
+        // finding the key for value
+
+        while (hashNodeArray[hashIndex] != NULL)
+        {
+
+            if (hashNodeArray[hashIndex] && hashNodeArray[hashIndex]->key == key)
+            {
+                return hashNodeArray[hashIndex]->value;
+            }
+
+            counter++;
+
+            hashIndex += this->randomNumber;
+            hashIndex %= capacity;
+        }
+        cout << endl
+             << "Key Not found.";
+        return -1;
+    }
+
+    // void get value
+
+    void getValue()
+    {
+        // taking Input from the user
+
+        int key;
+        print("Enter the key to find the value: ");
+        cin >> key;
+
+        print("Value is : ");
+        cout << getValueInMap(key);
+    }
+
+    // Getting a size
+
+    int sizeOfMap()
+    {
+        return size;
+    }
+
+    // void function to get a size so that it does not return something menu can run soomthly
+
+    void getSize()
+    {
+        print("The size of Map is : ");
+        cout << sizeOfMap();
+    }
+
+    void display()
+    {
+        //			cout<<endl<<"Your HashMap -- ";
+        cout << endl;
+        for (int i = 0; i < capacity; i++)
+        {
+            cout << i << " -- ";
+            if (hashNodeArray[i] != NULL)
+            {
+                cout << hashNodeArray[i]->key << " -> " << hashNodeArray[i]->value;
+            }
+            cout << endl;
+        }
+    }
+
+    // function to see collision
+
+    void seeCollision()
+    {
+        cout << this->collisions;
+    }
+};
+
+// Print function
+
+void print(string message)
+{
+    cout << endl
+         << message;
 }
 
- 
+int main()
+{
+
+    // For Calculating Time
+
+    auto start = high_resolution_clock::now();
+
+    // -- end For Calculating Time
+
+    int capacity;
+    print("Enter the capacity for which the key will be moded to and array will crested on this - ");
+    cin >> capacity;
+    HashMap map(capacity);
+
+    // while for menu --
+    bool menu = true;
+    while (menu)
+    {
+        print("Collisions - ");
+        map.seeCollision();
+        print("Your Hash Map -- ");
+        map.display();
+
+        cout << endl;
+
+        print("Enter 1 for Add Key Value operation");
+        print("Enter 2 for Delete with key operation");
+        print("Enter 3 for Size of Map operation");
+        print("Enter 4 for Get value From Map operation");
+
+        print("Enter 5 to exit");
+        cout << endl;
+        int input;
+        cin >> input;
+        int data;
+
+        switch (input)
+        {
+        case 1:
+            map.insertForMenu();
+            break;
+        case 2:
+            map.deleteNodeVoid();
+            break;
+        case 3:
+            map.getSize();
+            break;
+        case 4:
+            map.getValue();
+            break;
+
+        default:
+            menu = false;
+        }
+    }
+
+    // For calculating Time
+
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
+
+    // end For Calculating Time
+}
