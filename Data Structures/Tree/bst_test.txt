@@ -1,0 +1,80 @@
+Case 1: Insertion
+Input:
+10, 5, 15, 7, 19, 3, 12, 1 (inserted elements)
+
+Expected Output:
+elements should be inserted as per bst structure
+
+Output:
+
+Inorder Traversal: 1 3 5 7 10 12 15 19
+
+
+
+Case 2:Deletion if the element is leaf node 
+Input: 
+
+1 (element to be deleted)  
+
+Output:
+Element deleted successfully.
+
+Inorder Traversal:
+3 5 7 10 12 15 19
+
+
+
+Case 4: Deletion if the element has single child node
+Input: 
+
+3 (element to be deleted)  
+
+Output:
+Element deleted successfully.
+
+Inorder Traversal: 5 7 10 12 15 19
+
+
+
+
+Case 5: Search
+
+Input:
+Enter the element to be searched:
+10
+
+Output:
+Found
+
+
+
+Case 6: Updation
+Input:
+
+Enter the element to be updated:
+10
+Enter the new value:
+20
+
+Output:
+Element updated successfully.
+
+Inorder Traversal: 5 7 12 15 19 20
+
+
+
+Case 7: Inorder Test
+Input:
+Enter your choice:
+5
+
+Output:
+Inorder Traversal: 5 7 12 15 19 20
+
+
+
+Case 8: Invalid Choice
+Input:890
+
+Output:Invalid Choice
+

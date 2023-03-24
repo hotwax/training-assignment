@@ -1,0 +1,130 @@
+
+Case 1: Test Enqueue Operation
+Input:
+
+1
+Enter data to enqueue: 
+10
+
+Expected Output: Element 10 should be added to the queue
+
+Output: 
+Queue elements: 10
+
+
+
+
+
+Case 2: Test Dequeue Operation
+Input:
+
+
+Enqueue: 2,4,78
+
+Choose an operation:  // (dequeue)
+2 
+
+
+Expected Output:
+Front element should be deleted
+
+Output:
+
+Queue elements: 2 4 78
+
+
+
+
+Case 3: Test Peek Operation
+Input:
+Choose an operation: 3  //peek
+
+Expected Output:
+The value of the head (front)of the queue should be displayed
+
+Output:
+Peek value is 2
+
+
+
+
+Case 4: Test Search Operation (when key is present in the queue)
+Input:
+
+Enter key to search:
+4
+
+Expected Output:
+"Element is present in the queue" 
+
+Output:
+4 is present in the queue
+
+
+
+
+
+Case 5: Test Search Operation (when key is not present in the queue)
+Input:
+
+Enter key to search:
+56
+
+Expected Output:
+The message "element is not present in the queue" should be displayed
+
+Output:
+56 is not present in the queue
+
+
+
+Case 6: Test Display Operation
+Input:
+
+Choose an operation: 5  //display
+
+Expected Output: All the elements in the queue should be displayed
+
+Output:
+
+Queue elements:
+2 4 78
+
+
+
+Case 7: Test IsEmpty Operation (when queue is not empty)
+Input:
+
+Choose an operation: 6 //IsEmpty()
+
+Expected Output:
+The message "Queue is not empty" should be displayed
+
+Output:
+Queue is not empty
+
+
+
+Case 8: Test IsEmpty Operation (when queue is empty)
+Input:
+
+Choose an opearation : 6 // IsEmpty()
+
+Expected Output:
+The message "Queue is empty" should be displayed
+
+Output:
+Queue is empty
+
+
+
+Case 9: Test Invalid Input
+Input: 91
+
+Expected Output:
+The message "Invalid choice" should be displayed
+
+Output: Invalid choice
+
+
+

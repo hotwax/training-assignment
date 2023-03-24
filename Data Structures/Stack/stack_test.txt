@@ -1,0 +1,86 @@
+Case 1: Pushing in the sstack
+Input: 
+
+Enter your choice: 1
+Enter value to push: 2
+
+Enter your choice: 1
+Enter value to push: 4
+
+Enter your choice: 1
+Enter value to push: 6
+
+Expected Output:
+The elements should be added to the top of the stack, stack will look like (6,4,2) from top.
+
+Output:
+
+Stack: 6,4,2
+
+
+
+
+Case 2: Test pop functionality
+Input:
+Enter your choice: 2
+
+Expected Output:
+The top element 6 should be removed
+
+Output:
+Popped successfully.
+Stack- 4,2
+
+
+
+Case 3: Test peek() method
+Input: No input needed
+
+Expected Output:
+The value of the top element should be returned without removing it
+
+Output: 4
+
+
+
+
+Case 4: Test search() method
+Input:
+Enter your choice: 4
+Enter value to search: 4
+
+Expected Output: Should return the information that value is present or not
+
+Output: Value found in stack.
+
+
+
+
+Case 5: Test display() method
+Input: no input required
+
+Output: 4,2
+
+
+
+Case 6: Test pop method on an empty stack
+Input: 
+
+//poppinfg three times
+
+Enter your choice: 2
+Enter your choice: 2
+Enter your choice: 2
+
+Expected Output:
+The stack is empty
+
+Output:
+The stack is empty
+
+
+
+case 7: Invalid Input
+
+Input: sarfn
+Output: Invalid Input
