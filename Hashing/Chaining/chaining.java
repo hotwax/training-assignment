@@ -1,5 +1,6 @@
 package Chaining;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.System;
 
@@ -8,9 +9,9 @@ class Node {
     int val;
     Node next;
 
-    Node(String k, int v) {
-        this.key = k;
-        this.val = v;
+    Node(String key, int val) {
+        this.key = key;
+        this.val = val;
         this.next = null;
     }
 }
@@ -138,21 +139,24 @@ class Hashmap {
     }
 
     // Delete the key from Map if its present
-    void delete(String key) {
+    String delete(String key) {
         if (size == 0) {
-            System.out.println("Map is empty");
-            return;
+            return null;
         }
         int index = hashcode(key);
 
         if (arr[index] == null) {
-            System.out.println("Key is not present in Map");
+            return null;
         } else if (arr[index].key.equals(key) && arr[index].next == null) {
+            Node temp = arr[index];
             arr[index] = null;
             size--;
+            return temp.key;
         } else if (arr[index].key.equals(key) && arr[index].next != null) {
+            Node temp = arr[index];
             arr[index] = arr[index].next;
             size--;
+            return temp.key;
         } else if (arr[index].next != null) {
             Node temp1 = arr[index];
             Node temp2 = temp1.next;
@@ -161,16 +165,15 @@ class Hashmap {
                 temp2 = temp2.next;
             }
             if (temp2 == null) {
-                System.out.println("Key is not present in Map");
+                return null;
             } else {
+                Node temp = temp2;
                 temp1.next = temp2.next;
                 size--;
+                return temp.key;
             }
-        } else {
-            System.out.println("Key is not present");
-
         }
-
+        return null;
     }
 
     // get size of Map
@@ -185,12 +188,10 @@ class Hashmap {
     // get the value fro key
     int get(String key) {
         if (size == 0) {
-            System.out.println("Map is empty");
             return -1;
         }
         int index = hashcode(key);
         if (arr[index] == null) {
-            System.out.println("Key is not present in Map");
             return -1;
         } else {
             Node temp = arr[index];
@@ -202,7 +203,6 @@ class Hashmap {
                 temp = temp.next;
             }
 
-            System.out.println("Key is not present in Map");
             return -1;
 
         }
@@ -249,16 +249,31 @@ public class chaining {
                     case 2:
                         System.out.println("Enter the key");
                         String key = input.next();
+                        if (hashmap.isempty()) {
+                            System.out.println("Map is empty");
+                            break;
+                        }
                         int value = hashmap.get(key);
                         if (value != -1) {
                             System.out.println("Value of the key is - " + value);
+                        } else {
+                            System.out.println("Key is not Prsent");
                         }
                         break;
 
                     case 3:
                         System.out.println("Enter the key");
                         String delkey = input.next();
-                        hashmap.delete(delkey);
+                        if (hashmap.isempty()) {
+                            System.out.println("Map is Empty");
+                            break;
+                        }
+                        String Key = hashmap.delete(delkey);
+                        if (Key == null) {
+                            System.out.println("Key is not present in Map");
+                        } else {
+                            System.out.println("Deleted Key is -" + Key);
+                        }
                         break;
 
                     case 4:
@@ -307,6 +322,8 @@ public class chaining {
                 }
 
             } while (choice != 10);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
         }
     }
 }

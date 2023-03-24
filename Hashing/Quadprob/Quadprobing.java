@@ -1,20 +1,20 @@
 package Quadprob;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import java.lang.System;
 
 public class Quadprobing {
-    int capacity;
-    String keys[];
-    String vals[];
-    int currsize;
+    private int capacity;
+    private String keys[];
+    private String vals[];
+    private int currsize;
     int collision;
     long time;
 
     // constructor
-    Quadprobing(int c) {
-        capacity = c;
+    Quadprobing(int totalsize) {
+        capacity = totalsize;
         keys = new String[capacity];
         vals = new String[capacity];
         currsize = 0;
@@ -24,13 +24,13 @@ public class Quadprobing {
 
     // covert the string in to integer
     // compress the value under the capacity
-    int hash(String key) {
+    private int hash(String key) {
         int k = key.hashCode();
         return k % capacity;
     }
 
     // get current time in miilis
-    long gettime() {
+    private long gettime() {
         return System.currentTimeMillis();
     }
 
@@ -53,7 +53,7 @@ public class Quadprobing {
     }
 
     // get the size of Map
-    int getsize() {
+    public int getsize() {
         return currsize;
     }
 
@@ -70,18 +70,22 @@ public class Quadprobing {
     public String getval(String key) {
 
         if (isempty()) {
-
             return null;
         }
         int prob = hash(key);
-
         int quadindex = 0;
-        while (keys[prob] != null && quadindex < capacity) {
-            if (keys[prob].equals(key)) {
-                return vals[prob];
+        while (quadindex < capacity) {
+            if (keys[prob] == null) {
+                quadindex++;
+                prob = (prob + (quadindex * quadindex)) % capacity;
+            } else {
+                if (keys[prob].equals(key)) {
+                    return vals[prob];
+                }
+                quadindex++;
+                prob = (prob + (quadindex * quadindex)) % capacity;
+
             }
-            quadindex++;
-            prob = (prob + (quadindex * quadindex)) % capacity;
 
         }
         return null;
@@ -139,10 +143,9 @@ public class Quadprobing {
     }
 
     // deleted the key from Map
-    void deleted(String key) {
+    String deleted(String key) {
         if (!contain(key)) {
-            System.out.println("Key is not present in Map");
-            return;
+            return null;
         }
 
         // Find position key and delete
@@ -152,9 +155,8 @@ public class Quadprobing {
             quadindex++;
             index = (index + quadindex * quadindex) % capacity;
         }
-
+        String temp = keys[index];
         keys[index] = vals[index] = null;
-        System.out.println("Key is deleted");
 
         // rehash all keys
         quadindex = 0;
@@ -168,6 +170,7 @@ public class Quadprobing {
             insertion(tmp1, tmp2);
         }
         currsize--;
+        return temp;
     }
 
     public static void main(String[] args) {
@@ -226,7 +229,12 @@ public class Quadprobing {
                             System.out.println("Map is empty");
                             break;
                         }
-                        quad.deleted(delkey);
+                        String Key = quad.deleted(delkey);
+                        if (Key != null) {
+                            System.out.println("deleted Key is -" + Key);
+                        } else {
+                            System.out.println("Key is not present in Map");
+                        }
                         break;
 
                     case 4:
@@ -277,6 +285,8 @@ public class Quadprobing {
                 }
 
             } while (choice != 10);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
         }
 
     }

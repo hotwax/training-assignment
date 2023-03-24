@@ -1,22 +1,23 @@
 package Linearprob;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.System;
 
 public class Linearprobing {
 
-    int capacity;
-    String keys[];
-    String vals[];
-    int currsize;
+    private int capacity;
+    private String keys[];
+    private String vals[];
+    private int currsize;
     int collision;
     long time;
 
     // constructor
-    public Linearprobing(int c) {
-        capacity = c;
-        keys = new String[capacity];
-        vals = new String[capacity];
+    public Linearprobing(int totalsize) {
+        capacity = totalsize;
+        keys = new String[totalsize];
+        vals = new String[totalsize];
         currsize = 0;
         collision = 0;
         time = 0;
@@ -61,13 +62,15 @@ public class Linearprobing {
         }
     }
 
-    long gettime() {
+    private long gettime() {
         return System.currentTimeMillis();
     }
 
     // Get the value from a key
     public String getval(String key) {
-
+        if(isempty()){
+            return null;
+        }
         int prob = hash(key);
         int index = prob;
         while (keys[prob] != null) {
@@ -75,7 +78,7 @@ public class Linearprobing {
                 return vals[prob];
             }
             prob = (prob + 1) % capacity;
-            if (index == prob) {
+            if (index == prob ) {
                 return null;
             }
         }
@@ -131,18 +134,21 @@ public class Linearprobing {
     }
 
     // Delete the key from Map
-    void deleted(String key) {
+    String deleted(String key) {
+        if (isempty()) {
+            return null;
+        }
         if (!contain(key)) {
-            System.out.println("Key is not present in Map");
-            return;
+            return null;
         }
 
         // Find position key and delete
         int prob = hash(key);
-        while (!key.equals(keys[prob]))
+        while (!key.equals(keys[prob])) {
             prob = (prob + 1) % capacity;
+        }
+        String temp = keys[prob];
         keys[prob] = vals[prob] = null;
-        System.out.println("Key is deleted");
         // rehash all keys
         for (prob = (prob + 1) % capacity; keys[prob] != null; prob = (prob + 1) % capacity) {
             String tmp1 = keys[prob], tmp2 = vals[prob];
@@ -151,6 +157,7 @@ public class Linearprobing {
             insertion(tmp1, tmp2);
         }
         currsize--;
+        return temp;
     }
 
     public static void main(String[] args) {
@@ -210,7 +217,12 @@ public class Linearprobing {
                             System.out.println("Map is empty");
                             break;
                         }
-                        linear.deleted(delkey);
+                        String Key = linear.deleted(delkey);
+                        if (Key != null) {
+                            System.out.println("Deleted data is - " + Key);
+                        } else {
+                            System.out.println("Key is not present");
+                        }
                         break;
 
                     case 4:
@@ -260,6 +272,8 @@ public class Linearprobing {
                 }
 
             } while (choice != 10);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
         }
 
     }

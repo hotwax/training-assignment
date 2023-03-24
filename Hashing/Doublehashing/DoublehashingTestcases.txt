@@ -1,0 +1,215 @@
+Initial capacity of HashMap-5
+
+Operations in HashMap( Double hashing)
+
+  1. Insert the key and value in Map
+  2. Get the Values Using Key
+  3. Delete the key in Map
+  4. Display 
+  5. GetSize
+  6. Clear the Data 
+  7. Check the Map is Empty or not
+  8. Number of Collision
+  9. Total time taken for insertion
+
+  Test Case 1(Insertion in Map):
+    Input:
+     choice-1
+      key-2
+      val-20
+     choice-1
+      key-2
+      val-30
+     choice-1
+      key-5
+      val-50
+     choice-1
+      key-6
+      val-60
+     choice-1
+      key-3
+      val-80 
+     choice-1
+      key-9
+      val-90 
+     choice-2
+      key-3
+     choice-2
+      key-2 
+     choice-4
+    
+    Output:
+     Map is full
+
+     value of key is- 80
+     value of key is- 20
+
+     Display the Keys and Values of Map
+     5->50
+     3->80
+     6->60
+     2->20
+---------------------------------------------------------------------------------------------
+
+Operations in HashMap(Double hashing)
+
+  1. Insert the key and value in Map
+  2. Get the Values Using Key
+  3. Delete the key in Map
+  4. Display 
+  5. GetSize
+  6. Clear the Data 
+  7. Check the Map is Empty or not
+  8. Number of Collision
+  9. Total time taken for insertion
+
+  Test Case 2(Deletion in Map):
+    Input:
+     choice-3 
+     choice-1
+      key-2
+      val-20
+     choice-1
+      key-3
+      val-30
+     choice-1
+      key-5
+      val-50
+     choice-1
+      key-6
+      val-60
+     choice-1
+      key-3
+      val-80 
+     choice-4
+     choice-3
+      key=2
+     choice-3
+      key=7 
+    
+    Output:
+     Map is Empty
+     
+     Display the Keys and Values of Map
+     5->50
+     3->80
+     6->60
+     2->20
+     
+     Deleted Key is - 2
+
+     Key is not present
+
+----------------------------------------------------------------------------------------------
+
+Operations in HashMap(Double hashing)
+
+  1. Insert the key and value in Map
+  2. Get the Values Using Key
+  3. Delete the key in Map
+  4. Display 
+  5. GetSize
+  6. Clear the Data 
+  7. Check the Map is Empty or not
+  8. Number of Collision
+  9. Total time taken for insertion
+
+  Test Cases 3(Check the Map is empty or not):
+   Input:
+    choice-7
+    choice-1
+     key-2
+     val-45
+    choice-1
+     key-6
+     val-30
+    choice-7
+    choice-6
+    choice-7
+
+   Output:
+    Map is empty
+    Map is not empty
+    Data is deleted from Map
+    Map is empty   
+
+---------------------------------------------------------------------------------------------
+
+Operations in HashMap(Double hashing)
+
+  1. Insert the key and value in Map
+  2. Get the Values Using Key
+  3. Delete the key in Map
+  4. Display 
+  5. GetSize
+  6. Clear the Data 
+  7. Check the Map is Empty or not
+  8. Number of Collision
+  9. Total time taken for insertion
+
+ Test Case 4(Get the value from Map):
+   Input:
+    choice-2
+    key-5
+    choice-1
+     key-4
+     val-40
+    choice-1
+     key-6
+     val-60  
+    choice-2
+     key-6 
+    choice-2
+     key-2
+
+   Output:
+    Map is empty
+    value of key is - 60
+    Key is not present    
+
+---------------------------------------------------------------------------------------------
+
+Operations in HashMap(Double hashing)
+
+  1. Insert the key and value in Map
+  2. Get the Values Using Key
+  3. Delete the key in Map
+  4. Display 
+  5. GetSize
+  6. Clear the Data 
+  7. Check the Map is Empty or not
+  8. Number of Collision
+  9. Total time taken for insertion
+  
+  Test Case 5(Invalid input type):
+    Input:
+     choice-a
+     choice-1
+      key-2
+      val-12
+     choice-4
+
+    Output:
+     Input Mismatch exception  
+---------------------------------------------------------------------------------------------
+
+Operations in HashMap(Double hashing)
+
+  1. Insert the key and value in Map
+  2. Get the Values Using Key
+  3. Delete the key in Map
+  4. Display 
+  5. GetSize
+  6. Clear the Data 
+  7. Check the Map is Empty or not
+  8. Number of Collision
+  9. Total time taken for insertion
+
+  Test Case 6(Invalid choices):
+    Input:
+     choice-17
+
+    Output:
+     Invalid choice 
+
+---------------------------------------------------------------------------------------------

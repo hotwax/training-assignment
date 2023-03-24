@@ -1,15 +1,16 @@
 package Doublehashing;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.System;
 
 public class Doublehashing {
-    int capacity;
-    boolean isnotprime[];
-    int keys[];
-    int vals[];
-    int Prime;
-    int size;
+    private int capacity;
+    private boolean isnotprime[];
+    private int keys[];
+    private int vals[];
+    private int Prime;
+    private int size;
     int collision = 0;
     long time;
 
@@ -58,17 +59,17 @@ public class Doublehashing {
     }
 
     // get the current time in millis
-    long gettime() {
+    private long gettime() {
         return System.currentTimeMillis();
     }
 
     // hash1 function is used to compressed the Key under the capacity
-    int hash1(int key) {
+    private int hash1(int key) {
         return key % capacity;
     }
 
     // hash2 function is call whenver the collision occur
-    int hash2(int key) {
+    private int hash2(int key) {
         if (Prime > 0) {
             return Prime - (key % Prime);
         } else {
@@ -104,17 +105,13 @@ public class Doublehashing {
     public int getval(int key) {
         int i = hash1(key);
         int index = i;
-        while (keys[i] != -1) {
-            if (keys[i] == key) {
-                return vals[i];
-            }
-
+        while (keys[i] != key) {
             i = (i + hash2(key)) % capacity;
-            if (i == index) {
+            if (index == i) {
                 return -1;
             }
         }
-        return -1;
+        return vals[i];
     }
 
     // Insertion of Key and value in Map
@@ -149,24 +146,22 @@ public class Doublehashing {
     }
 
     // Deletion the key from Map
-    void deletion(int key) {
+    Integer deletion(int key) {
         if (isempty()) {
-            System.out.println("Map is empty");
-            return;
+            return -1;
         }
         if (!contain(key)) {
-            System.out.println("Key is not present in Map");
-            return;
+            return -1;
         }
         int i = hash1(key);
         while (keys[i] != key) {
             i = (i + hash2(key)) % capacity;
         }
+        int temp = keys[i];
         keys[i] = -1;
         vals[i] = 0;
         size--;
-        System.out.println("Key is deleted");
-
+        return temp;
     }
 
     // display the Keys and Value
@@ -233,7 +228,16 @@ public class Doublehashing {
                     case 3:
                         System.out.println("Enter the key");
                         int delkey = input.nextInt();
-                        doublehashing.deletion(delkey);
+                        if (doublehashing.isempty()) {
+                            System.out.println("Map is empty");
+                            break;
+                        }
+                        int Key = doublehashing.deletion(delkey);
+                        if (Key == -1) {
+                            System.out.println("Key is not present in Map");
+                        } else {
+                            System.out.println("Deleted Key is -" + Key);
+                        }
                         break;
 
                     case 4:
@@ -282,6 +286,8 @@ public class Doublehashing {
                 }
 
             } while (choice != 10);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
         }
 
     }

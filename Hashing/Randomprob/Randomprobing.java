@@ -1,24 +1,24 @@
 package Randomprob;
 
+import java.util.InputMismatchException;
 import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
 public class Randomprobing {
-    int capacity;
-    boolean isnotprime[];
-    int keys[];
-    int vals[];
-    int random[];
-    int size;
+    private int capacity;
+    private int keys[];
+    private int vals[];
+    private int random[];
+    private int size;
     int collision;
     long time;
-    Set<Integer> set = new LinkedHashSet<>();
+    private Set<Integer> set = new LinkedHashSet<>();
 
     // Constructor
-    Randomprobing(int c) {
-        capacity = c;
+    Randomprobing(int totalsize) {
+        capacity = totalsize;
         keys = new int[capacity];
         vals = new int[capacity];
         size = 0;
@@ -51,7 +51,7 @@ public class Randomprobing {
     }
 
     // get the current time in millis
-    long gettime() {
+    private long gettime() {
         return System.currentTimeMillis();
     }
 
@@ -67,12 +67,12 @@ public class Randomprobing {
 
     // hash1 find the index of key with the help of random fuction
     // And compress the index under the capapcity
-    int randomnum(int i) {
+    private int randomnum(int i) {
 
         return random[i];
     }
 
-    int hash1(int key) {
+    private int hash1(int key) {
         return key % capacity;
     }
 
@@ -128,13 +128,14 @@ public class Randomprobing {
         }
         // if map is not full
         else {
-            while (keys[prob] != -1 && randomindex < capacity) {
-                if (keys[prob] == key) {
-                    return vals[prob];
-                }
+            while (keys[prob] !=key && randomindex < capacity) {
+                
 
                 prob = (index + randomnum(randomindex)) % capacity;
                 randomindex++;
+            }
+            if (keys[prob] == key) {
+                return vals[prob];
             }
         }
 
@@ -175,14 +176,12 @@ public class Randomprobing {
     }
 
     // deletion of Given Key if its present in Map
-    void deletion(int key) {
+    Integer deletion(int key) {
         if (isempty()) {
-            System.out.println("Map is empty");
-            return;
+            return -1;
         }
         if (!contain(key)) {
-            System.out.println("Key is not present in Map");
-            return;
+            return -1;
         }
         int prob = hash1(key);
         int index = prob;
@@ -191,10 +190,11 @@ public class Randomprobing {
             prob = (index + randomnum(randomindex)) % capacity;
             randomindex++;
         }
+        int temp = keys[prob];
         keys[prob] = -1;
         vals[prob] = 0;
         size--;
-        System.out.println("Key is deleted");
+        return temp;
 
     }
 
@@ -267,7 +267,16 @@ public class Randomprobing {
                     case 3:
                         System.out.println("Enter the key");
                         int delkey = input.nextInt();
-                        randomprobing.deletion(delkey);
+                        if (randomprobing.isempty()) {
+                            System.out.println("Map is empty");
+                            break;
+                        }
+                        int Key = randomprobing.deletion(delkey);
+                        if (Key != -1) {
+                            System.out.println("deleted Key is -" + Key);
+                        } else {
+                            System.out.println("key is not present in Map");
+                        }
                         break;
 
                     case 4:
@@ -317,6 +326,8 @@ public class Randomprobing {
                 }
 
             } while (choice != 10);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
         }
 
     }
