@@ -79,32 +79,53 @@ public class BinarySearchTree
 
     // Method to delete a given value from the BST
         void delete(int data)
-        {
-            root= deleteRec(root,data);
+        {   
+            boolean[] found = new boolean[1]; // using an array to pass found as reference
+
+            found[0]= false;
+            root= deleteRec(root,data, found);
+
+            
+
+            if (root==null)
+            {
+                System.out.println("Tree is empty, Cannot delete!");
+                return;
+            }
+
+            if(found[0]==false){
+                System.out.println("Key not found in tree!");
+            }
+
+            
+
         }
 
 
-
-        Node deleteRec( Node root,int key)
+        Node deleteRec( Node root,int key,boolean [] found)
         {
             if (root==null)
             {
                 return null;
             }
+
+
             if (key< root.data)
             {
-                root.left= deleteRec(root.left,key);
+                root.left= deleteRec(root.left,key,found);
             }
 
             else if (root.data <key)
             {
-                root.right= deleteRec(root.right,key);
+                root.right= deleteRec(root.right,key,found);
             }
 
             else
-            {
+            {           
+                found[0] = true; 
+
                 if (root.left==null)
-                {
+                {   
                     return root.right;
                 }
                 else if (root.right==null)
@@ -115,13 +136,14 @@ public class BinarySearchTree
                 else{
 
                     root.data = getInorderSuccessor( root.right);
-                    root.right= deleteRec(root.right,root.data);
+                    root.right= deleteRec(root.right,root.data,found);
 
                 }
 
 
             }
 
+        
             return root;
 
         }
@@ -158,7 +180,7 @@ public class BinarySearchTree
             if (root!= null)
             {
                 inOrderRec(root.left);
-                System.out.println(root.data );
+                System.out.print(root.data + " ");
                 inOrderRec(root.right);
 
             }

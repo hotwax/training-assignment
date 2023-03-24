@@ -32,6 +32,7 @@ public class CustomHashmap {
     void insert(int key, int value){
         // Check if the hash map is already at full capacity
         if (size >= capacity){
+
             System.out.println("Capacity is full");
             return;
         }
@@ -47,9 +48,24 @@ public class CustomHashmap {
             System.out.println("Key-value pair inserted.");
         }
         // If the hash table slot is not empty, add the new key-value pair to the end of the linked list in that slot
-        else{
+        else{ 
+
+
             Entry current = table[hash];
+
+            if (current.key == key){
+                current.value = value;
+                System.out.println("Key-value pair updated.");
+                return;
+            }
+
             while (current.next != null){
+
+                if (current.key == key){
+                    current.value = value;
+                    System.out.println("Key-value pair updated.");
+                    return;
+                }
                 current = current.next;
             }
             current.next = newEntry;
@@ -75,16 +91,17 @@ public class CustomHashmap {
                 if (current.key == key){
                     if (previous == null){
                         table[hash] = table[hash].next;
+                        size -= 1;
                         return true;
                     }
                     else{
                         previous.next = current.next;
+                        size -= 1;
                         return true;
                     }
                 }
                 previous = current;
                 current = current.next;
-                size -= 1;
             }
             return false;
         }
@@ -204,7 +221,7 @@ public class CustomHashmap {
             int cap = input.nextInt();
 
             CustomHashmap map = new CustomHashmap(cap);
-
+            
             while (true) {
 
                 System.out.println("Choose an option:");

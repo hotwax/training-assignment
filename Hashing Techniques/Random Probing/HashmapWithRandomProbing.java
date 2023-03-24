@@ -2,7 +2,7 @@
 import java.util.*;
 import java.util.Random;
 
-public class HasmapWithRandomProbing {
+public class HashmapWithRandomProbing {
 
     // class fields
 
@@ -29,9 +29,9 @@ public class HasmapWithRandomProbing {
 
 
     // method to add an entry to the hash map
-    public void put(String key, int value) {
+    public void insert(int key, int value) {
 
-        if (size >= capacity) {
+        if (numItems >= capacity) {
             System.out.println("Capacity is full");
             return;
         }
@@ -50,7 +50,7 @@ public class HasmapWithRandomProbing {
                 timeTakentoInsert += (endTime - startTime);
                 size+=1;
                 return;
-            } else if (table[index].getKey().equals(key)) {
+            } else if (table[index].getKey()==(key)) {
                 table[index].setValue(value);
                 long endTime = System.currentTimeMillis();
                 timeTakentoInsert += (endTime - startTime);
@@ -68,18 +68,16 @@ public class HasmapWithRandomProbing {
 
 
     // method to get the value associated with a given key
-    public int get(String key) {
-        int index = hash(key);
+    public int get(int key) {
+        int index = 0;
         int numProbes = 0;
 
         // loop until the key is found or the entire table has been probed
         while (numProbes < capacity) {
-            if (table[index] == null) {
-                return -1;
-            } else if (table[index].getKey().equals(key)) {
+             if (table[index]!= null && table[index].getKey()==(key)) {
                 return table[index].getValue();
             } else {
-                index = (index + random.nextInt(size - 1) + 1) % size;
+                index = index+1;
                 numProbes++;
             }
         }
@@ -90,18 +88,16 @@ public class HasmapWithRandomProbing {
 
 
     // method to check if a key exists in the hash map
-public boolean searchKey(String key) {
-    int index = hash(key);
+public boolean searchKey(int key) {
+    int index = 0;
     int numProbes = 0;
 
     // loop until the key is found or the entire table has been probed
     while (numProbes < capacity) {
-        if (table[index] == null) {
-            return false;
-        } else if (table[index].getKey().equals(key)) {
+         if (table[index]!= null && table[index].getKey()==(key)) {
             return true;
         } else {
-            index = (index + random.nextInt(size - 1) + 1) % size;
+            index = index+1;
             numProbes++;
         }
     }
@@ -116,32 +112,33 @@ public boolean searchKey(String key) {
     }
 
 
-    // private method to compute the hash of a given key
-    private int hash(String key) {
-        int hash = key.hashCode() % capacity;
+    // private method to cominserte the hash of a given key
+    private int hash(int key) {
+        int hash = key % capacity;
         return hash >= 0 ? hash : hash + capacity;
     }
 
 
     // method to delete an entry from the hash map
-    public void delete(String key) {
-        int index = hash(key);
+    public void delete(int key) {
+        int index = 0;
         int numProbes = 0;
+        int val=-1;
     
         while (numProbes < capacity) {
-            if (table[index] == null) {
-                System.out.println("Error: Key not found");
-                return;
-            } else if (table[index].getKey().equals(key)) {
+             if ( table[index]!= null && table[index].getKey()==(key)) {
+                val=table[index].getValue();
                 table[index] = null;
                 numItems--;
+                System.out.println("Key value pair deleted-" + key + " " + val); 
+
                 return;
             } else {
-                index = (index + random.nextInt(size - 1) + 1) % size;
+                index+=1;
                 numProbes++;
             }
         }
-        System.out.println("Key Deleted");
+        System.out.println("Key not found"); 
 
     }
     
@@ -164,9 +161,11 @@ public boolean searchKey(String key) {
     // method to display the entries in the hash map
     public void display() {
         for (int i = 0; i < capacity; i++) {
-            if (table[i] != null) {
-                System.out.println("Index " + i + ": " + table[i].key + " " + table[i].value);
-            }
+            if (table[i] != null)
+                System.out.println(i + " :(" + table[i].key + " " + table[i].value + ")");
+            else
+                System.out.println(i + ":");
+            
         }
     }
 
@@ -187,15 +186,15 @@ public boolean searchKey(String key) {
 
 
     private class Entry {
-        private String key;
+        private int key;
         private int value;
 
-        public Entry(String key, int value) {
+        public Entry(int key, int value) {
             this.key = key;
             this.value = value;
         }
 
-        public String getKey() {
+        public int getKey() {
             return key;
         }
 
@@ -226,21 +225,21 @@ public boolean searchKey(String key) {
             switch (choice) {
                 case 1:
                     System.out.print("Enter the key: ");
-                    String key = scanner.next();
+                    int key = scanner.nextInt();
                     System.out.print("Enter the value: ");
                     int value = scanner.nextInt();
-                    map.put(key, value);
+                    map.insert(key, value);
                     break;
 
                 case 2:
                 System.out.print("Enter the key: ");
-                key = scanner.next();
+                key = scanner.nextInt();
                 map.delete(key);
                 break;
 
                 case 3:
                     System.out.print("Enter the key: ");
-                    key = scanner.next();
+                    key = scanner.nextInt();
                     value = map.get(key);
                     if (value == -1) {
                         System.out.println("Key not found");
@@ -256,7 +255,7 @@ public boolean searchKey(String key) {
                 case 5:
 
                 System.out.println("Enter key:");
-                        key = scanner.nextLine();
+                        key = scanner.nextInt();
                         boolean found = map.searchKey(key);
                         if (found) {
                             System.out.println("Key found.");

@@ -14,15 +14,22 @@ public class Graph {
     }
 
     void addEdge(int to, int from)
-    {
+    {  
         adj[to][from]= 1;
         adj[from][to]= 1;
     }
 
     void removeEdge(int to, int from) {
+
+        if (adj[to][from]==0 || adj[from][to]==0)
+            System.out.println("Edge does not exist");
+        
+
         adj[to][from] = 0;
         adj[from][to] = 0;
     }
+
+    
 
     void display(){
 
@@ -132,7 +139,7 @@ public class Graph {
                 int vt1= sc.nextInt();
                 int vt2= sc.nextInt();
 
-                g.addEdge(vt1,vt2);
+                g.removeEdge(vt1,vt2);
                 break;
 
                 case 3:

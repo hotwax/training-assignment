@@ -79,6 +79,8 @@ public class Stack {
         Scanner scanner = new Scanner(System.in);
         Stack stack = new Stack();
         int choice = 0;
+
+        try{
         do {
             System.out.println("Stack Operations:");
             System.out.println("1. Push");
@@ -132,6 +134,9 @@ public class Stack {
             }
         } while (choice != 6);
         scanner.close();
+    }catch(Exception e){
+        System.out.println("Invalid input");
+    }
     }
 
 }

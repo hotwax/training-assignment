@@ -43,18 +43,34 @@ public class HashmapWithLinearProbing {
 
         int hash = getHash(key);
 
+        // if the key already exists, update the value
+
+        if (table[hash] != null && table[hash].key == key) {
+            table[hash].value = value;
+            return;
+        }
+        
+
+
         // If the table slot at the hash index is not null and the key is not -1
         while (table[hash] != null && table[hash].key != -1) {
             // Move to the next slot using linear probing
             hash += 1;
             hash = hash % capacity;
+
+            if(table[hash]!= null &&table[hash].key==key){
+                table[hash].value=value;
+                return;
+            }
+            // System.out.println("Collision at " + hash + " for key " + key);
+            collision += 1;
+
         }
 
         table[hash] = newEntry;
         long e = System.currentTimeMillis();
         timeTakentoInsert += (e - s);
         size += 1;
-        collision += 1;
 
     }
 
@@ -79,6 +95,7 @@ public class HashmapWithLinearProbing {
             hash += 1;
             currentCheckCount+=1;
             hash = hash % capacity;
+
         }
 
         // If the key was not found, return -1

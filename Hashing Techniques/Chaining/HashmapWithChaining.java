@@ -7,6 +7,8 @@ Entry[] table; // array of linked lists
 int collision;
 int size;
 long timeTakentoInsert;
+double loadfactor;
+int threshold;
 
 static class Entry {
     int key;
@@ -25,16 +27,17 @@ HashmapWithChaining(int cap) {
     table = new Entry[cap];
     this.collision = 0;
     this.size = 0;
+    this.timeTakentoInsert= 0;
+    this.loadfactor= 0.75;
+    this.threshold= (int)(cap*this.loadfactor);
+
 }
 
 // Method to insert a new key-value pair into the hash map
 void insert(int key, int value) {
 
     // Check if the hash map is already at full capacity
-    if (size >= capacity) {
-        System.out.println("Capacity is full");
-        return;
-    }
+    
 
     long s,e;
 
@@ -54,7 +57,27 @@ void insert(int key, int value) {
     // If the hash table slot is not empty, add the new key-value pair to the end of the linked list in that slot
     else {
         Entry current = table[hash];
+
+        if (current.key == key){
+            current.value = value;
+            System.out.println("Key-value pair updated.");
+            return;
+        }
+
+
         while (current.next != null) {
+
+
+            if (current.key == key){
+                current.value = value;
+                System.out.println("Key-value pair updated.");
+
+                e= System.currentTimeMillis(); 
+                timeTakentoInsert += (e- s);
+
+                return;
+            }
+
             current = current.next;
         }
         current.next = newEntry;
@@ -63,9 +86,46 @@ void insert(int key, int value) {
         collision += 1;
     }
 
-     e= System.currentTimeMillis(); 
 
+    if (size >= threshold){
+        System.out.println("Load factor reached. Rehashing...");
+        rehash();
+    }
+
+    e= System.currentTimeMillis(); 
     timeTakentoInsert += (e- s);
+
+}
+
+
+void rehash(){
+    int newCap = capacity*2;
+    Entry[] newTable = new Entry[newCap];
+
+    int tempc= capacity;
+    capacity= newCap;
+    
+    for (int i=0; i<tempc; i++){
+        Entry current = table[i];
+        while (current != null){
+            int hash = getHash(current.key);
+            Entry newEntry = new Entry(current.key, current.value, null);
+            if (newTable[hash] == null){
+                newTable[hash] = newEntry;
+            }
+            else{
+                Entry temp = newTable[hash];
+                while (temp.next != null){
+                    temp = temp.next;
+                }
+                temp.next = newEntry;
+            }
+            current = current.next;
+        }
+    }
+    table = newTable;
+    capacity = newCap;
+    threshold = (int)(capacity*loadfactor);
 
 }
 
@@ -81,12 +141,15 @@ int remove(int key) {
             if (current.key == key) {
                 if (previous == null) {
                     // if the first element in the linked list matches the key
-                    int rem = table[hash].value;
+                    int rem = current.value;
                     table[hash] = table[hash].next;
+                    size -= 1;
+                    return rem;
                 } else {
-                    // if the key is found in the middle of the linked list
-                    int rem = table[hash].value;
+                    
+                    int rem = current.value;
                     previous.next = current.next;
+                    size -= 1;
                     return rem;
                 }
             }
@@ -149,8 +212,6 @@ long getTimetaken(){
         }
 
         return false;
-
-
 
 
     }
@@ -229,8 +290,8 @@ long getTimetaken(){
         do {
             System.out.println("1. Insert");
             System.out.println("2. Remove");
-            System.out.println("3. Get value");
-            System.out.println("4. Search");
+            System.out.println("3. Search");
+            System.out.println("4. Get Value");
             System.out.println("5. Collision");
             System.out.println("6. Time taken");
             System.out.println("7. Display");

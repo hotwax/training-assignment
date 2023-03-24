@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 class Queue {
     Node head;
+    int len;
 
     class Node {
         int data;
@@ -26,6 +27,7 @@ class Queue {
 
         if (head == null) {
             head = newnode;
+            len += 1;
             return;
         }
 
@@ -35,6 +37,7 @@ class Queue {
         }
 
         ptr.next = newnode;
+        len += 1;
     }
 
     boolean dequeue() {
@@ -43,6 +46,7 @@ class Queue {
         }
 
         head = head.next;
+        len -= 1;
         return true;
     }
 
@@ -77,6 +81,7 @@ class Queue {
         Queue queue = new Queue();
 
         while (true) {
+            
             System.out.println("\nChoose an operation:");
             System.out.println("1. Enqueue");
             System.out.println("2. Dequeue");

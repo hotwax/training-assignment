@@ -39,6 +39,15 @@ public class LinkedList {
 
     void insertEnd( int data)
     {  
+        
+
+        if(head==null)
+        {
+            head= new Node(data);
+            len+=1;
+            return;
+        }
+
         Node newnode= new Node(data);
         Node ptr= head;
 
@@ -120,7 +129,7 @@ public class LinkedList {
             return;
         }
 
-        if (pos>len || pos<0)
+        if (pos>len || pos<=0)
         {
             System.out.println("Invalid Position");
             return;
@@ -128,7 +137,7 @@ public class LinkedList {
 
         
 
-        int i=0;
+        int i=1;
         Node ptr= head;
         while (i!= pos)
         {
@@ -172,7 +181,7 @@ public class LinkedList {
         else{
 
             Node curr= sorted;
-            while (curr.next.data< newnode.data && curr.next!= null)
+            while ( curr.next!=null && curr.next.data< newnode.data && curr.next!= null)
             {
                 curr= curr.next;
             }
@@ -186,7 +195,7 @@ public class LinkedList {
 
 // Search
 
-    void search( int data){
+    int search( int data){
 
         Node ptr= head;
         int index=0;
@@ -195,8 +204,8 @@ public class LinkedList {
 
             if (ptr.data== data){
 
-                System.out.println("Element found at %s".formatted(index));
-                break;
+                // System.out.println("Element found at %s".formatted(index));
+                return index;
             }
 
             index+=1;
@@ -206,6 +215,7 @@ public class LinkedList {
         }
 
         System.out.println("Element not found");
+        return -1;
 
     }
 
@@ -215,6 +225,10 @@ public class LinkedList {
     {
     try (Scanner sc = new Scanner(System.in)) {
         LinkedList linkedList = new LinkedList();
+        int choice = 0;
+
+               
+            do {
 
                 System.out.println("Menu:");
                 System.out.println("1. Insert at start");
@@ -228,8 +242,6 @@ public class LinkedList {
                 System.out.println("9. Exit");
                 System.out.print("Enter your choice: ");
 
-            int choice = 0;
-            do {
                 
                 
                 choice = sc.nextInt();
@@ -238,24 +250,24 @@ public class LinkedList {
                         System.out.print("Enter data to insert at start: ");
                         int dataStart = sc.nextInt();
                         linkedList.insertStart(dataStart);
-                        System.out.print("Data Inserted, Enter your choice: ");
+                        System.out.println("Data Inserted");
 
                         break;
                     case 2:
                         System.out.print("Enter data to insert at end: ");
                         int dataEnd = sc.nextInt();
                         linkedList.insertEnd(dataEnd);
-                        System.out.print("Data Inserted, Enter your choice: ");
+                        System.out.println("Data Inserted");
 
                         break;
                     case 3:
                         linkedList.deleteStart();
-                        System.out.print("Data deleted from start, Enter your choice: ");
+                        System.out.println("Data deleted from start");
 
                         break;
                     case 4:
                         linkedList.deleteEnd();
-                        System.out.print("Data deleted from end, Enter your choice: ");
+                        System.out.println("Data deleted from end");
 
                         break;
                     case 5:
@@ -269,25 +281,27 @@ public class LinkedList {
                         System.out.print("Enter new data: ");
                         int dataUpdate = sc.nextInt();
                         linkedList.updateByPos(pos, dataUpdate);
-                        System.out.print("Data updated, Enter your choice: ");
+                        System.out.print("Data updated");
 
                         break;
                     case 7:
                         linkedList.sort();
                         System.out.println("List sorted.");
-                        System.out.print("List sorted, Enter your choice: ");
+                        System.out.print("List sorted");
 
                         break;
                     case 8:
                         System.out.print("Enter data to search: ");
                         int searchData = sc.nextInt();
-                        linkedList.search(searchData);
-                        System.out.print("Enter your choice: ");
+                        int res= linkedList.search(searchData);
+
+                        if (res!=-1)
+                        System.out.println("Element found at %s".formatted(res));                       
+    
 
                         break;
                     case 9:
                         System.out.println("Exiting...");
-                        System.out.print("Enter your choice: ");
 
                         break;
                     default:
@@ -295,7 +309,8 @@ public class LinkedList {
                         break;
                 }
             } while (choice != 9);
-    }
+    } catch (Exception e) {
+        System.out.println("Error: " + e.getMessage());}
 
 }
     

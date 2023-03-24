@@ -83,6 +83,13 @@ public class HashmapWithDoubleHashing {
 
         // Use double hashing to find an empty slot in the hash table
         while(table[h1]!= null){
+
+            // If the key already exists, update the value
+            if(table[h1].key==key){
+                table[h1].value= value;
+                return;
+            }
+            
             h1+=h2;
             h1%= capacity;
             collision+=1;
@@ -102,13 +109,16 @@ public class HashmapWithDoubleHashing {
     // Remove a key-value pair from the hash map
     int remove(int key) {
         int hash= hash1(key);
-        while(table[hash]!= null) {
-            if(table[hash].key==key){
+        int i=0;
+        while(i<capacity) {
+            if(table[hash]!= null && table[hash].key==key){
                 Entry temp= table[hash];
                 table[hash]= dummyNode;
+                size-=1;
                 return temp.value;
             }
             hash+=1;
+            i+=1;
             hash= hash%capacity;
         }
         return -1;

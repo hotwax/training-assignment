@@ -9,6 +9,7 @@ public class HashmapWithQuadraticProbing {
     long timeTakentoInsert; // the total time taken to insert all elements
     int size; 
 
+
     // Entry class to store key-value pairs
     static class Entry {
         int key;
@@ -41,6 +42,13 @@ public class HashmapWithQuadraticProbing {
         Entry newEntry = new Entry(key, value);
         int hash = getHash(key);
 
+
+        // If the key already exists, update the value
+        if (table[hash] != null && table[hash].key == key) {
+            table[hash].value = value;
+            return;
+        }
+
         // If the hash table slot is empty or marked deleted, add the new entry
         if (table[hash] == null || table[hash].key == -1) {
             table[hash] = newEntry;
@@ -52,19 +60,27 @@ public class HashmapWithQuadraticProbing {
 
             // If the slot is already occupied, use quadratic probing to find an empty slot
             for (int i = 0; i < capacity; i++) {
-                int t = (hash + i * i) % capacity;
-                if (table[t] == null || table[t].key == -1) {
-                    table[t] = newEntry;
 
-                    long e = System.currentTimeMillis();
-                    timeTakentoInsert += (e - s);
-                    size += 1;
-                    collision+=1;
+                
+                int t = (hash + i * i) % capacity;
+                System.out.println("t: " + t + " hash: " + hash + " i: " + i+ " key: " + key + " value: " + value);
+
+                // If the key already exists, update the value
+                if (table[t] != null && table[t].key == key) {
+                    table[hash].value = value;
                     return;
                 }
 
-            }
+                if (table[t] == null || table[t].key == -1) {
 
+                    table[t] = newEntry;
+                    long e = System.currentTimeMillis();
+                    timeTakentoInsert += (e - s);
+                    size += 1;
+                    return;
+                }
+                collision+=1;
+            }
 
             //no empty slot is found after probing
             System.out.println("No slot found");
@@ -73,20 +89,21 @@ public class HashmapWithQuadraticProbing {
 
 
     // Method to remove a key-value pair from the hash table given the key
-    int remove(int key) {
+    int remove(int key){
         int hash = getHash(key);
-        while (table[hash] != null) {
-
+        int idx=hash;
+        int i = 0;
+        while (table[hash] != null && i < capacity) {
             if (table[hash].key == key) {
-                Entry temp = table[hash];
-                table[hash] = dummyNode;    // Mark the slot as deleted using the dummy node
-                return temp.value;
+                int value = table[hash].value;
+                table[hash].key = -1;
+                table[hash].value = -1;
+                size -= 1;
+                return value;
             }
-            
-            hash += 1;
-            hash = hash % capacity;
+            i++;
+            hash = (idx + i * i) % capacity;
         }
-        // If the key is not found, return -1
         return -1;
     }
 
@@ -95,13 +112,14 @@ public class HashmapWithQuadraticProbing {
 // Method to get the value associated with a key in the hash table
 int getValue(int key) {
     int hash = getHash(key);
+    int idx= hash;
     int i = 0;
     while (table[hash] != null && i < capacity) {
         if (table[hash].key == key) {
             return table[hash].value;
         }
         i++;
-        hash = (hash + i * i) % capacity;
+        hash = (idx+ i * i) % capacity;
     }
     // If the key is not found, return -1
     return -1;
@@ -113,13 +131,14 @@ int getValue(int key) {
 // Method to search for a key in the hash table
 boolean search(int key) {
     int hash = getHash(key);
+    int idx=hash;
     int i = 0;
     while (table[hash] != null && i < capacity) {
         if (table[hash].key == key) {
             return true;
         }
         i++;
-        hash = (hash + i * i) % capacity;
+        hash = (idx + i * i) % capacity;
     }
     return false;
 }
