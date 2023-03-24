@@ -1,17 +1,18 @@
 package Graph;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import Queue.queue;
+import Queue.Queue;
 
-public class graph {
+public class Graph {
     int numberofnodes;
-    boolean vis[];
-    boolean directed;
-    int arr[][];
+    private boolean vis[];
+    private boolean directed;
+    private int arr[][];
     int numberofedges;
 
-    graph(int noofnodes, boolean dir) {
+    Graph(int noofnodes, boolean dir) {
         this.numberofnodes = noofnodes;
         this.directed = dir;
         arr = new int[numberofnodes][numberofnodes];
@@ -25,11 +26,12 @@ public class graph {
             System.out.println("invalid Edges");
             return;
         }
-        if (source != destination) {
+        if (source != destination && arr[source][destination] == 0) {
             if (directed) {
                 arr[source][destination] = 1;
                 numberofedges++;
             } else {
+
                 arr[source][destination] = 1;
                 arr[destination][source] = 1;
                 numberofedges++;
@@ -37,16 +39,8 @@ public class graph {
         }
     }
 
-    void display() {
-        for (int i = 0; i < numberofnodes; i++) {
-            System.out.print(i + "->");
-            for (int j = 0; j < numberofnodes; j++) {
-                if (arr[i][j] == 1) {
-                    System.out.print(j + ",");
-                }
-            }
-            System.out.println();
-        }
+    int[][] graphDisplay() {
+        return arr;
     }
 
     void DFS() {
@@ -78,7 +72,7 @@ public class graph {
 
     }
 
-    void BFS(queue<Integer> q) {
+    void BFS(Queue<Integer> q) {
 
         for (int i = 0; i < numberofnodes; i++) {
             if (!vis[i]) {
@@ -92,7 +86,7 @@ public class graph {
 
     }
 
-    void bfs(int node, queue<Integer> q) {
+    void bfs(int node, Queue<Integer> q) {
 
         vis[node] = true;
         q.push(node);
@@ -153,8 +147,8 @@ public class graph {
                         break;
                 }
             } while (type != 1 && type != 2);
-            graph g = new graph(numberofnode, dir);
-            queue<Integer> q = new queue<Integer>();
+            Graph graph = new Graph(numberofnode, dir);
+            Queue<Integer> queue = new Queue<Integer>();
 
             int choices;
 
@@ -180,31 +174,41 @@ public class graph {
                         int Source = input.nextInt();
                         System.out.println("Enter destination node");
                         int destination = input.nextInt();
-                        g.Addedge(Source, destination);
+                        graph.Addedge(Source, destination);
                         break;
 
                     case 2:
                         System.out.println("DFS Traversal - ");
 
-                        g.DFS();
+                        graph.DFS();
                         System.out.println();
                         break;
 
                     case 3:
                         System.out.println("BFS Traversal - ");
 
-                        g.BFS(q);
+                        graph.BFS(queue);
                         System.out.println();
                         break;
 
                     case 4:
                         System.out.println("Adjency List Representation");
-                        g.display();
+                        int arr[][] = graph.graphDisplay();
+
+                        for (int i = 0; i < graph.numberofnodes; i++) {
+                            System.out.print(i + "->");
+                            for (int j = 0; j < graph.numberofnodes; j++) {
+                                if (arr[i][j] == 1) {
+                                    System.out.print(j + ",");
+                                }
+                            }
+                            System.out.print("\n");
+                        }
                         break;
 
                     case 5:
                         System.out.println();
-                        System.out.println("number of edges in Graph is - " + g.numberofedges);
+                        System.out.println("number of edges in Graph is - " + graph.numberofedges);
                         break;
 
                     case 6:
@@ -213,7 +217,7 @@ public class graph {
                         int s = input.nextInt();
                         System.out.println("Enter the destination node");
                         int d = input.nextInt();
-                        g.deletededge(s, d);
+                        graph.deletededge(s, d);
 
                         break;
 
@@ -227,6 +231,8 @@ public class graph {
 
                 }
             } while (choices != 7);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
         }
 
     }
