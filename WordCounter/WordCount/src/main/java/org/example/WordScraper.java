@@ -36,6 +36,7 @@ class WebContent {
     }
 
 
+
     // Function to count the frequency of the given word
     int countStoredWordOccurence(String word, String urlContent) {
         int wordCount = 0;
@@ -51,6 +52,7 @@ class WebContent {
         //return the number of occurences of the word
         return wordCount;
     }
+
 
 
     // Sort the Map by Value
@@ -81,6 +83,7 @@ class WebContent {
 }
 
 // Driver / main Class
+
 
 public class WordScraper {
 
@@ -121,11 +124,7 @@ public class WordScraper {
 
             else{
 
-
-
-            // Find words in URL
-
-            // Creating object of Class WebContent
+                
             WebContent webContentObj = new WebContent();
 
             // Map to store the word as key and its frequency as value
