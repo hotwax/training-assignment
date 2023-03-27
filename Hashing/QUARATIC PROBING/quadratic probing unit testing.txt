@@ -1,0 +1,31 @@
+1.Test case-Normal Input: Test the code with typical input values that it is expected to handle.
+Input: 5, Output: 120 (for factorial function)
+
+
+2.Test case-Boundary Input: Test the code with the minimum and maximum allowed values.
+Input: 0, Output: 1 (for factorial function)
+Input: 1000, Output: "Input value is too large" (for a function that only handles values up to 999)
+
+
+3.Test case-Invalid Input: Test the code with invalid or unexpected input values.
+Input: -5, Output: "Invalid input value" (for a function that only handles positive integers)
+Input: "Hello", Output: "Invalid input type" (for a function that only handles numeric input)
+
+
+4.Empty Input: Test the code with no input or empty input values.
+Input: None, Output: "Please provide an input value" (for a function that requires input)
+
+
+5.Performance Test: Test the code with a large number of inputs to check its performance and speed.
+Input: 10000, Output: "Time taken: 10 seconds" (for a function that calculates the sum of all prime numbers up to a given value)
+
+
+6.Test case-Output Test: Test the code with different output scenarios.
+Input: 5, Output: 120 (for factorial function)
+Input: 0, Output: 1 (for factorial function)
+Input: -5, Output: "Invalid input value" (for a function that only handles positive integers)
+
+
+7.Test case-Exception Test: Test the code with exception scenarios.
+Input: None, Output: "Please provide an input value" (for a function that requires input)
+Input: "5", Output: "Invalid input type" (for a function that only handles numeric input)

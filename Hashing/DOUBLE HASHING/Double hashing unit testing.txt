@@ -1,0 +1,53 @@
+1.Insertion Test Cases
+
+Test Case 1: Insert a new key-value pair in the empty hash table
+Input: key = 5, value = 10
+Output: No output (successful insertion)
+
+
+Test Case 2: Insert a new key-value pair in the non-empty hash table
+Input: key = 15, value = 20
+Output: No output (successful insertion)
+
+
+Test Case 3: Insert a new key-value pair in the full hash table
+Input: key = 25, value = 30
+Output: "HashMap is Full"
+
+Test Case 4: Insert a duplicate key in the hash table
+Input: key = 5, value = 15
+Output: No output (value for existing key is updated)
+
+
+
+2.Deletion Test Cases
+
+Test Case 1: Delete a key that exists in the hash table
+Input: key = 15
+Output: "Operation Successful"
+
+Test Case 2: Delete a key that does not exist in the hash table
+Input: key = 35
+Output: "Key Not found"
+
+Test Case 3: Delete a key from an empty hash table
+Input: key = 10
+Output: "Key Not found"
+
+
+
+3.Search Test Cases
+
+Test Case 1: Search a key that exists in the hash table
+Input: key = 5
+Output: "Key Found and its Value is 15"
+
+Test Case 2: Search a key that does not exist in the hash table
+Input: key = 35
+Output: "Key Not found"
+
+Test Case 3: Search a key from an empty hash table
+Input: key = 10
+Output: "Key Not found"
+
+

@@ -1,0 +1,74 @@
+1.Test case for inserting a key-value pair:
+Input:
+Key: 1
+Value: 10
+Output:
+The key-value pair (1, 10) is inserted into the hash map.
+
+
+2.Test case for deleting a key-value pair:
+Input:
+Key: 2
+Output:
+The key-value pair with key 2 is deleted from the hash map.
+
+
+3.Test case for retrieving a value from the hash map:
+Input:
+Key: 3
+Output:
+The value for key 3 is retrieved from the hash map.
+
+
+4.Test case for retrieving the size of the hash map:
+Input:
+Output:
+The size of the hash map is returned.
+
+
+5.Test case for displaying the contents of the hash map:
+Input:
+Output:
+The contents of the hash map are displayed.
+
+
+6.Test case for inserting a key-value pair when the hash map is full:
+Input:
+Key: 4
+Value: 20
+Output:
+The message "HashMap is Full" is displayed, and the key-value pair is not inserted into the hash map.
+
+
+7.Test case for deleting a key-value pair that does not exist in the hash map:
+Input:
+Key: 5
+Output:
+The message "Key Not Found." is displayed, and no key-value pair is deleted from the hash map.
+
+
+8.Test case for retrieving a value for a key that does not exist in the hash map:
+Input:
+Key: 6
+Output:
+The message "Key Not found." is displayed, and the function returns -1.
+
+
+9.Test case for inserting multiple key-value pairs into the hash map:
+Input:
+Key: 7
+Value: 30
+Key: 8
+Value: 40
+Key: 9
+Value: 50
+Output:
+The key-value pairs (7, 30), (8, 40), and (9, 50) are inserted into the hash map.
+
+
+10.Test case for deleting multiple key-value pairs from the hash map:
+Input:
+Key: 7
+Key: 9
+Output:
+The key-value pairs with keys 7 and 9 are deleted from the hash map.
