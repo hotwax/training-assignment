@@ -1,0 +1,236 @@
+// menu
+Your binary search tree:
+5 <---- 10 ----> 15
+null <---- 5 ----> null
+null <---- 15 ----> null
+
+Enter 1 to add a node
+Enter 2 to remove a node
+Enter 3 to check whether data exsits
+Enter 4 to exit
+
+
+case 1: add, remove, check data-  entered invalid data (not a number)
+
+input- 1,2,3
+Enter the value of the node:
+jkl
+output- 
+Please give a valid number. java.util.InputMismatchException
+(End)
+
+
+
+case 2: remove, check data- entered non existing data
+
+binary search tree:
+5 <---- 10 ----> 15
+null <---- 5 ----> null
+null <---- 15 ----> null
+
+input- 2,3
+Enter the value of the node:
+22
+output- 
+22 doesn't exists
+menu
+
+
+
+case 3: add data- entered an existing node value
+
+binary search tree:
+5 <---- 10 ----> 15
+null <---- 5 ----> null
+null <---- 15 ----> null
+
+input- 
+1
+Enter the value of the node:
+5
+output- 
+node with data 5 already exists.
+-------------------------------------
+Your binary search tree:
+5 <---- 10 ----> 15
+null <---- 5 ----> null
+null <---- 15 ----> null
+menu
+
+
+
+
+--valid cases
+
+binary search tree:
+5 <---- 10 ----> 15
+null <---- 5 ----> null
+null <---- 15 ----> null
+
+case 4: add a new node- 
+
+input- 
+1
+Enter the value of the node:
+20
+output- 
+-------------------------------------
+Your binary search tree:
+5 <---- 10 ----> 15
+null <---- 5 ----> null
+null <---- 15 ----> 20
+null <---- 20 ----> null
+...menu
+
+
+
+case 5: remove a node with no child 
+
+binary search tree:
+5 <---- 10 ----> 15
+null <---- 5 ----> null
+null <---- 15 ----> 20
+null <---- 20 ----> null
+
+input- 
+2
+Enter the value of the node:
+20
+output-
+-------------------------------------
+Your binary search tree:
+5 <---- 10 ----> 15
+null <---- 5 ----> null
+null <---- 15 ----> null
+...menu
+
+
+
+case 6: remove a node with only left child
+
+5 <---- 10 ----> 20
+3 <---- 5 ----> null
+1 <---- 3 ----> null
+null <---- 1 ----> null
+null <---- 20 ----> null
+
+input- 
+2
+Enter the value of the node:
+5
+output- 
+-------------------------------------
+Your binary search tree:
+3 <---- 10 ----> 20
+1 <---- 3 ----> null
+null <---- 1 ----> null
+null <---- 20 ----> null
+...menu
+
+
+
+case 7: remove a node with only right child
+
+binary search tree:
+3 <---- 10 ----> 20
+1 <---- 3 ----> null
+null <---- 1 ----> null
+null <---- 20 ----> 30
+null <---- 30 ----> null
+
+input- 
+2
+Enter the value of the node:
+20
+-------------------------------------
+output- 
+Your binary search tree:
+3 <---- 10 ----> 30
+1 <---- 3 ----> null
+null <---- 1 ----> null
+null <---- 30 ----> null
+...menu
+
+
+
+case 8: remove a node with both left and right child
+
+binary search tree:
+3 <---- 10 ----> 30
+1 <---- 3 ----> null
+null <---- 1 ----> null
+null <---- 30 ----> null
+
+input- 
+2
+Enter the value of the node:
+10
+output- 
+-------------------------------------
+Your binary search tree:
+1 <---- 3 ----> 30
+null <---- 1 ----> null
+null <---- 30 ----> null
+...menu
+
+
+
+case 9: check whether a node exists (doesn't exists)
+
+binary search tree:
+1 <---- 3 ----> 30
+null <---- 1 ----> null
+null <---- 30 ----> null
+
+input- 
+3
+Enter the value of the node:
+23
+output- 
+23 doesn't exists
+menu
+
+
+
+case 10: check whether a node exists (exists)
+
+binary search tree:
+1 <---- 3 ----> 30
+null <---- 1 ----> null
+null <---- 30 ----> null
+
+input- 
+3
+Enter the value of the node:
+1
+output- 
+1 exists
+menu
+
+
+
+case 11: in order traversal
+
+binary search tree:
+9 <---- 11 ----> 12
+null <---- 9 ----> null
+null <---- 12 ----> null
+
+input- 4
+9 11 12
+-------------------------------------
+menu
+
+
+
+case 12: post order traversal
+
+binary search tree:
+9 <---- 11 ----> 12
+null <---- 9 ----> null
+null <---- 12 ----> null
+
+input- 4
+9 12 11
+-------------------------------------
+menu
