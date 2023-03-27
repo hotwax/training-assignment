@@ -1,0 +1,153 @@
+Case 1: Basic Functionality
+
+Input:
+
+words.txt
+urls.txt
+
+Expected Output: It should output top 3 frequently occuring words from each url and then overall count of all the words present in words.txt file.
+
+Output:
+
+
+
+Top 3 words for url- https://www.icc-cricket.com/homepage
+
+cricket 25
+india 13
+odi 10
+
+Top 3 words for url- https://proandroiddev.com/implementing-dark-theme-in-your-android-application-ec2b4fefb6e3
+
+android 20
+dark 19
+there 2
+
+Top 3 words for url- https://www.programiz.com/dsa/red-black-tree
+
+code 3
+balanced 1
+there 1
+
+
+Overall occurence of the given words across all the urls :
+cricket 25
+android 20
+dark 19
+india 13
+odi 10
+code 4
+there 3
+balanced 1
+mobile 0
+
+
+
+
+
+Case 2: Empty Input Files (both)
+
+Input:
+
+urls.txt: (empty)
+words.txt: (empty)
+
+Expected Output:
+
+
+Output:
+
+Urls file is empty
+Word file is empty
+
+
+
+
+
+Case 3: Empty Input File (Words)
+
+Input:
+
+urls.txt: 
+words.txt: (empty)
+
+Expected Output:
+
+
+Output:
+
+Word file is empty
+
+
+
+
+
+Case 4: Empty Input File (Urls)
+
+Input:
+
+urls.txt: (empty)
+words.txt: 
+
+Expected Output:
+
+
+Output:
+
+Urls file is empty
+
+
+
+
+Case 5: Invalid Url
+
+Input:
+
+urls.txt:
+words.txt: 
+
+Expected Output:  Invalid Output
+
+Output:
+
+Invalid Url: java.net.UnknownHostException: www.icc-crickkket.com
+
+
+
+
+
+Case 6: FileNotFound
+
+Inputs:
+
+urls.txt 
+words.txt 
+
+
+Expected Output:
+
+An error message is displayed stating that the file urls.txt could not be found.
+
+output:
+
+The system cannot find the file specified
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

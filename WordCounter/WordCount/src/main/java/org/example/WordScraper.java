@@ -29,7 +29,7 @@ class WebContent {
             // Regular Expression to remove any special character or unwanted spaces
             content = content.replaceAll("[^a-zA-Z\\w]", " ");
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Invalid Url: " + e);
         }
         // return the content
         return content;
@@ -93,7 +93,8 @@ public class WordScraper {
             // Get URLS from the text file
 
             ArrayList<String> urls = new ArrayList<>();
-            Scanner Reader = new Scanner(new File(homeDir+ "\\urls.txt"));
+            Scanner Reader = new Scanner(new File("C:\\Users\\apurva shukla\\urls.txt"));
+
             while (Reader.hasNext()) {
                 urls.add(Reader.next());
             }
@@ -101,10 +102,26 @@ public class WordScraper {
             // Get words from the text file
 
             ArrayList<String> words = new ArrayList<>();
-            Reader = new Scanner(new File(homeDir+ "\\words.txt"));
+            Reader = new Scanner(new File("C:\\Users\\apurva shukla\\Desktop\\words.txt"));
             while (Reader.hasNext()) {
                 words.add(Reader.next());
             }
+
+
+            if (urls.isEmpty() || words.isEmpty()){
+
+                if(urls.isEmpty())
+                    System.out.println("Urls file is empty");
+
+                if (words.isEmpty())
+                    System.out.println("Word file is empty");
+
+
+            }
+
+            else{
+
+
 
             // Find words in URL
 
@@ -137,17 +154,26 @@ public class WordScraper {
                 // Printing the top three words that occur the most
                 for (Map.Entry m : wordFrequencyMap.entrySet())
                 {
+                    String key = (String) m.getKey();
+                    int value = (int) m.getValue();
                     if (counter++ < 3) {
                         System.out.println(m.getKey() + " " + m.getValue());
-                        String key = (String) m.getKey();
-                        int value = (int) m.getValue();
+
                         if (AllwordsFrequencyMap.get(key) != null) {
                             // Adding the frequency of words that occur in multiple urls
                             value += AllwordsFrequencyMap.get(key);
                         }
+
                         AllwordsFrequencyMap.put(key, value);
-                    } else
-                        break;
+                    } else{
+
+                    if (AllwordsFrequencyMap.get(key) != null) {
+                        // Adding the frequency of words that occur in multiple urls
+                        value += AllwordsFrequencyMap.get(key);
+                    }
+                    AllwordsFrequencyMap.put(key, value);
+
+                    }
                 }
                 System.out.println();
             }
@@ -160,10 +186,10 @@ public class WordScraper {
                 System.out.println(m.getKey() + " " + m.getValue());
             }
 
-            System.out.println();
+            System.out.println(); }
         } catch (FileNotFoundException e) {
 
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }
