@@ -9,7 +9,7 @@ class AccountOverdrawDemo {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < 5; i++) {
                     try {
                         account.withdraw(100, "Rajesh");
                     } catch (InterruptedException e) {
