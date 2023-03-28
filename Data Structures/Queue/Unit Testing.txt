@@ -1,0 +1,248 @@
+TestCase 1: Checking the constructor and isEmpty method
+
+Code:
+Queue q;
+if(q.isEmpty())
+cout<<"Queue is Empty";
+
+Output:
+Queue is Empty
+
+
+TestCase 2: Checking the Enque method.
+
+Code:
+for(int i=1;i<=100;i++){
+        q.enqueue(i);
+    }
+
+Output:
+1 enqueued to queue.
+2 enqueued to queue.
+3 enqueued to queue.
+4 enqueued to queue.
+5 enqueued to queue.
+6 enqueued to queue.
+7 enqueued to queue.
+8 enqueued to queue.
+9 enqueued to queue.
+10 enqueued to queue.
+11 enqueued to queue.
+12 enqueued to queue.
+13 enqueued to queue.
+14 enqueued to queue.
+15 enqueued to queue.
+16 enqueued to queue.
+17 enqueued to queue.
+18 enqueued to queue.
+19 enqueued to queue.
+20 enqueued to queue.
+21 enqueued to queue.
+22 enqueued to queue.
+23 enqueued to queue.
+24 enqueued to queue.
+25 enqueued to queue.
+26 enqueued to queue.
+27 enqueued to queue.
+28 enqueued to queue.
+29 enqueued to queue.
+30 enqueued to queue.
+31 enqueued to queue.
+32 enqueued to queue.
+33 enqueued to queue.
+34 enqueued to queue.
+35 enqueued to queue.
+36 enqueued to queue.
+37 enqueued to queue.
+38 enqueued to queue.
+39 enqueued to queue.
+40 enqueued to queue.
+41 enqueued to queue.
+42 enqueued to queue.
+43 enqueued to queue.
+44 enqueued to queue.
+45 enqueued to queue.
+46 enqueued to queue.
+47 enqueued to queue.
+48 enqueued to queue.
+49 enqueued to queue.
+50 enqueued to queue.
+51 enqueued to queue.
+52 enqueued to queue.
+53 enqueued to queue.
+54 enqueued to queue.
+55 enqueued to queue.
+56 enqueued to queue.
+57 enqueued to queue.
+58 enqueued to queue.
+59 enqueued to queue.
+60 enqueued to queue.
+61 enqueued to queue.
+62 enqueued to queue.
+63 enqueued to queue.
+64 enqueued to queue.
+65 enqueued to queue.
+66 enqueued to queue.
+67 enqueued to queue.
+68 enqueued to queue.
+69 enqueued to queue.
+70 enqueued to queue.
+71 enqueued to queue.
+72 enqueued to queue.
+73 enqueued to queue.
+74 enqueued to queue.
+75 enqueued to queue.
+76 enqueued to queue.
+77 enqueued to queue.
+78 enqueued to queue.
+79 enqueued to queue.
+80 enqueued to queue.
+81 enqueued to queue.
+82 enqueued to queue.
+83 enqueued to queue.
+84 enqueued to queue.
+85 enqueued to queue.
+86 enqueued to queue.
+87 enqueued to queue.
+88 enqueued to queue.
+89 enqueued to queue.
+90 enqueued to queue.
+91 enqueued to queue.
+92 enqueued to queue.
+93 enqueued to queue.
+94 enqueued to queue.
+95 enqueued to queue.
+96 enqueued to queue.
+97 enqueued to queue.
+98 enqueued to queue.
+99 enqueued to queue.
+100 enqueued to queue.
+
+
+TestCase 3: Checking the isFull method.
+
+Code:
+if(q.isFull())
+cout<<"Queue is Full"<<endl;
+
+Output:
+Queue is Full.
+
+
+TestCase 4: Checking Deque method.
+
+Code:
+while(!q.isEmpty())q.dequeue()
+
+Output:
+1 dequeued from queue.
+2 dequeued from queue.
+3 dequeued from queue.
+4 dequeued from queue.
+5 dequeued from queue.
+6 dequeued from queue.
+7 dequeued from queue.
+8 dequeued from queue.
+9 dequeued from queue.
+10 dequeued from queue.
+11 dequeued from queue.
+12 dequeued from queue.
+13 dequeued from queue.
+14 dequeued from queue.
+15 dequeued from queue.
+16 dequeued from queue.
+17 dequeued from queue.
+18 dequeued from queue.
+19 dequeued from queue.
+20 dequeued from queue.
+21 dequeued from queue.
+22 dequeued from queue.
+23 dequeued from queue.
+24 dequeued from queue.
+25 dequeued from queue.
+26 dequeued from queue.
+27 dequeued from queue.
+28 dequeued from queue.
+29 dequeued from queue.
+30 dequeued from queue.
+31 dequeued from queue.
+32 dequeued from queue.
+33 dequeued from queue.
+34 dequeued from queue.
+35 dequeued from queue.
+36 dequeued from queue.
+37 dequeued from queue.
+38 dequeued from queue.
+39 dequeued from queue.
+40 dequeued from queue.
+41 dequeued from queue.
+42 dequeued from queue.
+43 dequeued from queue.
+44 dequeued from queue.
+45 dequeued from queue.
+46 dequeued from queue.
+47 dequeued from queue.
+48 dequeued from queue.
+49 dequeued from queue.
+50 dequeued from queue.
+51 dequeued from queue.
+52 dequeued from queue.
+53 dequeued from queue.
+54 dequeued from queue.
+55 dequeued from queue.
+56 dequeued from queue.
+57 dequeued from queue.
+58 dequeued from queue.
+59 dequeued from queue.
+60 dequeued from queue.
+61 dequeued from queue.
+62 dequeued from queue.
+63 dequeued from queue.
+64 dequeued from queue.
+65 dequeued from queue.
+66 dequeued from queue.
+67 dequeued from queue.
+68 dequeued from queue.
+69 dequeued from queue.
+70 dequeued from queue.
+71 dequeued from queue.
+72 dequeued from queue.
+73 dequeued from queue.
+74 dequeued from queue.
+75 dequeued from queue.
+76 dequeued from queue.
+77 dequeued from queue.
+78 dequeued from queue.
+79 dequeued from queue.
+80 dequeued from queue.
+81 dequeued from queue.
+82 dequeued from queue.
+83 dequeued from queue.
+84 dequeued from queue.
+85 dequeued from queue.
+86 dequeued from queue.
+87 dequeued from queue.
+88 dequeued from queue.
+89 dequeued from queue.
+90 dequeued from queue.
+91 dequeued from queue.
+92 dequeued from queue.
+93 dequeued from queue.
+94 dequeued from queue.
+95 dequeued from queue.
+96 dequeued from queue.
+97 dequeued from queue.
+98 dequeued from queue.
+99 dequeued from queue.
+100 dequeued from queue.
+
+
+TestCase 5: Checking the display method of the Queue class.
+
+Code:
+for(int i=0; i<=100; i+=10)
+q.enqueue(i);
+q.display();
+
+Output:
+Queue contents: 10 20 30 40 50 60 70 80 90 100 

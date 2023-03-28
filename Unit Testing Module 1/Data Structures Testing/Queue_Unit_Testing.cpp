@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cassert>
+
 using namespace std;
 
 const int MAX_SIZE = 10; // maximum size of queue
@@ -64,8 +66,6 @@ class Queue {
             cout << endl;
         }
 };
-#include <cassert>
-#include <iostream>
 
 int main() {
     Queue queue;

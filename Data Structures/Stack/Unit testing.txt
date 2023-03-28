@@ -1,0 +1,258 @@
+TestCase1 : Push Element in Stack (If stack not full) 
+
+Input:  
+int i=1;
+while(!st.isFull()){
+    st.push(i++);
+    }
+
+Output: 
+1 pushed to stack.
+2 pushed to stack.
+3 pushed to stack.
+4 pushed to stack.
+5 pushed to stack.
+6 pushed to stack.
+7 pushed to stack.
+8 pushed to stack.
+9 pushed to stack.
+10 pushed to stack.
+11 pushed to stack.
+12 pushed to stack.
+13 pushed to stack.
+14 pushed to stack.
+15 pushed to stack.
+16 pushed to stack.
+17 pushed to stack.
+18 pushed to stack.
+19 pushed to stack.
+20 pushed to stack.
+21 pushed to stack.
+22 pushed to stack.
+23 pushed to stack.
+24 pushed to stack.
+25 pushed to stack.
+26 pushed to stack.
+27 pushed to stack.
+28 pushed to stack.
+29 pushed to stack.
+30 pushed to stack.
+31 pushed to stack.
+32 pushed to stack.
+33 pushed to stack.
+34 pushed to stack.
+35 pushed to stack.
+36 pushed to stack.
+37 pushed to stack.
+38 pushed to stack.
+39 pushed to stack.
+40 pushed to stack.
+41 pushed to stack.
+42 pushed to stack.
+43 pushed to stack.
+44 pushed to stack.
+45 pushed to stack.
+46 pushed to stack.
+47 pushed to stack.
+48 pushed to stack.
+49 pushed to stack.
+50 pushed to stack.
+51 pushed to stack.
+52 pushed to stack.
+53 pushed to stack.
+54 pushed to stack.
+55 pushed to stack.
+56 pushed to stack.
+57 pushed to stack.
+58 pushed to stack.
+59 pushed to stack.
+60 pushed to stack.
+61 pushed to stack.
+62 pushed to stack.
+63 pushed to stack.
+64 pushed to stack.
+65 pushed to stack.
+66 pushed to stack.
+67 pushed to stack.
+68 pushed to stack.
+69 pushed to stack.
+70 pushed to stack.
+71 pushed to stack.
+72 pushed to stack.
+73 pushed to stack.
+74 pushed to stack.
+75 pushed to stack.
+76 pushed to stack.
+77 pushed to stack.
+78 pushed to stack.
+79 pushed to stack.
+80 pushed to stack.
+81 pushed to stack.
+82 pushed to stack.
+83 pushed to stack.
+84 pushed to stack.
+85 pushed to stack.
+86 pushed to stack.
+87 pushed to stack.
+88 pushed to stack.
+89 pushed to stack.
+90 pushed to stack.
+91 pushed to stack.
+92 pushed to stack.
+93 pushed to stack.
+94 pushed to stack.
+95 pushed to stack.
+96 pushed to stack.
+97 pushed to stack.
+98 pushed to stack.
+99 pushed to stack.
+100 pushed to stack.
+
+
+TestCase2 : Push Element in Stack (If stack full) 
+
+Input:
+st.push(i); // here the value of i is 101 from the last increment in the previous while loop
+
+Output:
+Stack is full. Cannot push element.
+
+
+TestCase3 : Pop Element from the stack (If stack not Empty) 
+
+Input:
+while (!st.isEmpty())st.pop();
+
+Output:
+100 popped from stack.
+99 popped from stack.
+98 popped from stack.
+97 popped from stack.
+96 popped from stack.
+95 popped from stack.
+94 popped from stack.
+93 popped from stack.
+92 popped from stack.
+91 popped from stack.
+90 popped from stack.
+89 popped from stack.
+88 popped from stack.
+87 popped from stack.
+86 popped from stack.
+85 popped from stack.
+84 popped from stack.
+83 popped from stack.
+82 popped from stack.
+81 popped from stack.
+80 popped from stack.
+79 popped from stack.
+78 popped from stack.
+77 popped from stack.
+76 popped from stack.
+75 popped from stack.
+74 popped from stack.
+73 popped from stack.
+72 popped from stack.
+71 popped from stack.
+70 popped from stack.
+69 popped from stack.
+68 popped from stack.
+67 popped from stack.
+66 popped from stack.
+65 popped from stack.
+64 popped from stack.
+63 popped from stack.
+62 popped from stack.
+61 popped from stack.
+60 popped from stack.
+59 popped from stack.
+58 popped from stack.
+57 popped from stack.
+56 popped from stack.
+55 popped from stack.
+54 popped from stack.
+53 popped from stack.
+52 popped from stack.
+51 popped from stack.
+50 popped from stack.
+49 popped from stack.
+48 popped from stack.
+47 popped from stack.
+46 popped from stack.
+45 popped from stack.
+44 popped from stack.
+43 popped from stack.
+42 popped from stack.
+41 popped from stack.
+40 popped from stack.
+39 popped from stack.
+38 popped from stack.
+37 popped from stack.
+36 popped from stack.
+35 popped from stack.
+34 popped from stack.
+33 popped from stack.
+32 popped from stack.
+31 popped from stack.
+30 popped from stack.
+29 popped from stack.
+28 popped from stack.
+27 popped from stack.
+26 popped from stack.
+25 popped from stack.
+24 popped from stack.
+23 popped from stack.
+22 popped from stack.
+21 popped from stack.
+20 popped from stack.
+19 popped from stack.
+18 popped from stack.
+17 popped from stack.
+16 popped from stack.
+15 popped from stack.
+14 popped from stack.
+13 popped from stack.
+12 popped from stack.
+11 popped from stack.
+10 popped from stack.
+9 popped from stack.
+8 popped from stack.
+7 popped from stack.
+6 popped from stack.
+5 popped from stack.
+4 popped from stack.
+3 popped from stack.
+2 popped from stack.
+1 popped from stack.
+
+TestCase4 : Pop Element from the  Stack (If stack Empty) 
+
+Input:
+st.pop();
+
+Output:
+Stack is empty. Cannot pop element.
+
+
+TestCase5 : get Top Element from the stack (If stack empty)
+
+Input:
+st.peek();
+
+Output:
+Stack is empty. No element to peek.
+
+
+TestCase6 : Display the stack 
+
+Input:
+for(int i=10;i<=100;i+=10){
+        st.push(i);
+}
+ st.display();
+
+Output:
+Stack contents: 100 90 80 70 60 50 40 30 20 10
+
+
+

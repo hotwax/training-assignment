@@ -1,0 +1,23 @@
+Test Case 1 - display function:
+Input: A linked list with elements {2, 4, 6, 8, 10}.
+Expected output: Linked List: 2 4 6 8 10
+
+Test Case 2 - insert function:
+Input: A linked list with elements {1, 3, 5, 7}, data = 9.
+Expected output: 9 inserted into the list.
+
+Test Case 3 - deleteNode function:
+Input: A linked list with elements {2, 4, 6, 8, 10}, key = 6.
+Expected output: 6 deleted from the list.
+
+Test Case 4 - search function:
+Input: A linked list with elements {2, 4, 6, 8, 10}, key = 8.
+Expected output: Node with value 8 found.
+
+Test Case 5 - update function:
+Input: A linked list with elements {2, 4, 6, 8, 10}, key = 6, newValue = 12.
+Expected output: 6 updated to 12 in the list.
+
+Test Case 6 - sort function:
+Input: A linked list with elements {4, 2, 7, 1, 8, 5}.
+Expected output: Linked List: 1 2 4 5 7 8
