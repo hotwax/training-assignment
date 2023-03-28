@@ -198,8 +198,34 @@ ID: 23, Name: Arun Shukla, Email: arunshukla91@gmail.com, Age: 23, DOB: 03-05-20
 
 
 
+Case 11: Sorting by age.
 
-Case 11: Exiting the prpgram
+Input:
+Search
+
+Enter search query: Arun
+Sort by:
+1. ID
+2. Name
+3. Age
+4. DOB
+
+3 (AGE)
+
+Sort direction:
+1. Ascending
+2. Descending
+
+1 (ASC)
+
+Output:
+
+ID: 23, Name: Arun Shukla, Email: arunshukla91@gmail.com, Age: 23, DOB: 03-05-2000
+ID: 22, Name: Arun Singh, Email: arunsingh91@gmail.com, Age: 25, DOB: 02-02-1998
+
+
+
+Case 12: Exiting the prpgram
 
 Input:
 
