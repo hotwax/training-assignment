@@ -13,11 +13,10 @@ class AVLTree {
             System.out.println("Press 0 : Create a New AVL Tree");
             System.out.println("Press 1 : Insert an element");
             System.out.println("Press 2 : Delete an element");
-            System.out.println("Press 3 : Update an element");
-            System.out.println("Press 4 : Traverse the AVL Tree");
-            System.out.println("Press 5 : Search an element");
-            System.out.println("Press 6 : Sort the AVL Tree");
-            System.out.println("Press 7 : Exit");
+            System.out.println("Press 3 : Traverse the AVL Tree");
+            System.out.println("Press 4 : Search an element");
+            System.out.println("Press 5 : Sort the AVL Tree");
+            System.out.println("Press 6 : Exit");
             System.out.println("Enter your choice : ");
             try {
                 // Creating a scanner object to take input from the user
@@ -44,11 +43,6 @@ class AVLTree {
                         System.out.println("Node Deleted");
                         break;
                     case 3:
-                        System.out.println("Please Enter the Node Value: ");
-                        System.out.print("Please Enter the new Node Value: ");
-                        root.updateElement(root, sc.nextInt(), sc.nextInt());
-                        break;
-                    case 4:
                         int choice2;
                         do {
                             System.out.println("Press 0 : Inorder Traversal");
@@ -80,7 +74,7 @@ class AVLTree {
                             }
                         } while (choice2 != 3);
                         break;
-                    case 5:
+                    case 4:
                         System.out.print("Please Enter the Node Value: ");
                         boolean isPresent = root.searchElement(root, sc.nextInt());
                         if (isPresent) {
@@ -89,14 +83,14 @@ class AVLTree {
                             System.out.println("The Node is not present in the Tree");
                         }
                         break;
-                    case 6:
+                    case 5:
                         System.out.print(" Sorted : ");
                         if (root != null) {
                             root.sortAVLTree(root);
                             System.out.println();
                         }
                         break;
-                    case 7:
+                    case 6:
                         System.out.println("Program Terminated Successfully");
                         break;
                     default:
@@ -180,13 +174,13 @@ class AVLTree {
             return minValue;
         }
 
-        // function to get height of a node in AVL Tree
+        // method to get height of a node in AVL Tree
         private int getHeight(TreeNode node) {
             if (node != null) return node.height;
             return -1;
         }
 
-        // function to get balance factor of a node
+        // method to get balance factor of a node
         private int getBalanceFactor(TreeNode node) {
             return getHeight(node.left) - getHeight(node.right);
         }
