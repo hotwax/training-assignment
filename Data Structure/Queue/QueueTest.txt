@@ -1,0 +1,103 @@
+Operations:
+
+1.Enqueue
+2.Dequeue
+3.Front
+4.Display
+5.isEmpty
+6.Size
+7.Exit
+
+
+Test case-1 (Test case for enqueue in Queue)
+
+Size of queue - 4
+
+choice- 1
+ input- 10
+choice- 1
+ input- 20
+choice- 1
+ input- 30
+choice- 4
+
+Output:- Elements in the queue are: 10 20 30 
+
+---------------------------------------------------------------------------------------------
+
+Test case-2 (Test case for dequeue from Queue)
+
+choice- 1
+ input- 10
+choice- 1
+ input- 20
+choice- 1 
+ input- 30
+choice- 2
+choice- 2
+choice- 4
+
+Output:- Elements in the queue are: 30 
+
+---------------------------------------------------------------------------------------------
+
+Test case-3 (Test case to get Front of Queue)
+
+choice- 1
+ input- 10
+choice- 1
+ input- 20
+choice- 1 
+ input- 30
+choice- 3
+
+Output:- Front element is 10
+
+---------------------------------------------------------------------------------------------
+
+Test case-4 (Test case for display Queue)
+
+choice- 1
+ input- 10
+choice- 1
+ input- 20
+choice- 1 
+ input- 30
+choice- 4
+
+Output:- Elements in the queue are: 10 20 30
+
+---------------------------------------------------------------------------------------------
+
+Test case-5 (Test case to check Empty Queue)
+
+choice- 5
+
+Output:- Queue is Empty
+
+choice- 1
+ input- 10
+choice- 1
+ input- 20
+choice- 1
+ input- 30
+choice - 5 
+
+Output:- Queue is not Empty
+
+---------------------------------------------------------------------------------------------
+
+Test case-6 (Test case for Invalid user choice from Menu)
+
+choice- 8
+
+Output:- Invalid choice
+
+---------------------------------------------------------------------------------------------
+
+Test case-7 (Test case for invalid input type)
+
+input- abc
+
+Output:- 
+java.util.InputMismatchException

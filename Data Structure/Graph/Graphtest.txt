@@ -1,0 +1,143 @@
+
+Operations:
+
+1.Add edge
+2.Remove edge
+3.Print graph
+4.DFS traversal
+5.BFS traversal
+6.Exit
+
+Number of Nodes - 5
+
+Test case-1 (Test case for Adding an Edges in Graph)
+
+Input:-
+ choice- 1
+  Source- 0
+  destination- 1
+ choice- 1
+  source- 0
+  destination- 2
+ choice- 1 
+  source- 1
+  destination- 3
+ choice - 3
+
+Output:-
+Adjency List Representation
+
+0->1 2 
+1->0 3 
+2->0 
+3->1 
+4->
+
+----------------------------------------------------------------------------
+
+Test case-2 (Test case for removing an Edge)
+
+Input:-
+ choice- 1
+  Source- 0
+  destination- 1
+ choice- 1
+  source- 0
+  destination- 2
+ choice- 1 
+  source- 1
+  destination- 3
+ choice - 2
+  source- 0
+  destination- 2
+ choice- 3
+ choice- 4
+ choice- 5
+
+Output:- 
+0->1 
+1->0 3 
+2->
+3->1 
+4->
+
+DFS traversal: 0 1 3 2 4 
+
+BFS traversal: 0 1 3 2 4
+
+----------------------------------------------------------------------------
+
+
+Test case-3 (Test case for BFS traversal)
+
+Input:-
+ choice- 1
+  Source- 0
+  destination- 1
+ choice- 1
+  source- 0
+  destination- 2
+ choice- 1 
+  source- 1
+  destination- 3
+ choice - 5
+
+Output:- BFS traversal: 0 1 2 3 4 
+
+----------------------------------------------------------------------------
+
+Test case-4 (Test case for DFS traversal)
+
+Input:-
+ choice- 1
+  Source- 0
+  destination- 1
+ choice- 1
+  source- 0
+  destination- 2
+ choice- 1 
+  source- 1
+  destination- 3
+ choice - 4
+
+Output:- DFS traversal: 0 1 3 2 4
+
+----------------------------------------------------------------------------
+
+Test case-5 (Test case for Print Graph)
+
+Input:-
+ choice- 1
+  Source- 0
+  destination- 1
+ choice- 1
+  source- 0
+  destination- 2
+ choice- 1 
+  source- 1
+  destination- 3
+ choice - 3
+
+Output:-
+Adjency List Representation
+0->1 2 
+1->0 3 
+2->0 
+3->1 
+4->
+
+----------------------------------------------------------------------------
+
+Test case-6 (Test case for Invalid user choice from Menu)
+
+input- 8
+
+Output:- Invalid choice
+
+----------------------------------------------------------------------------
+
+Test case-7 (Test case for invalid input type)
+
+input- ab
+
+Output:- java.util.InputMismatchException

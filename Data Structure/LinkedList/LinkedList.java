@@ -1,6 +1,7 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
-class LinkedList {
+public class LinkedList {
     Node head;
 
     static class Node {
@@ -79,18 +80,18 @@ class LinkedList {
             System.out.println("List is empty");
             return;
         }
-        System.out.print("LinkedList: ");
         while (currNode != null) {
-            System.out.print(currNode.data + " ");
+            System.out.print(currNode.data +" ");
             currNode = currNode.next;
         }
-        System.out.println();
     }
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        Scanner sc = new Scanner(System.in);
+        try(Scanner sc = new Scanner(System.in))
+        {
         int choice, data, oldData, newData;
         do{
+            System.out.println();
             System.out.println("1. Insert element");
             System.out.println("2. Delete element");
             System.out.println("3. Sort list");
@@ -131,4 +132,9 @@ class LinkedList {
             }
         }while(choice!=6);
     }
+    catch(InputMismatchException ex)
+    {
+        System.out.println(ex);
+    }
+}
 }

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 class Node {
     int data;
     Node left;
@@ -127,7 +128,8 @@ class BST{
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        try(Scanner sc = new Scanner(System.in);)
+        {
         BST bst = new BST();
         int choice;
         do{
@@ -190,5 +192,9 @@ class BST{
                     System.out.println("Invalid choice");
             }
         }while(choice!=7);
+    }catch(InputMismatchException ex)
+    {
+        System.out.println(ex);
     }
+}
 }

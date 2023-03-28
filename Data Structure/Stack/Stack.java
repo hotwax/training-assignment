@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 class Stack {
     private int top;
     private int maxSize;
@@ -13,52 +14,52 @@ class Stack {
     
     // adding element to stack 
     public void push(int element) {
-        if (top == maxSize-1) { // to check stack is full
-            System.out.println("Stack Overflow");
+        if (top == maxSize-1) 
+        { //to check stack is full
+            System.out.println("-1");
             return;
         }
         stack[++top] = element; // increasing the top and adding element
-        System.out.println("Pushed");
-    }
+       }
     //remvoing element from stack
     public void pop() { 
         if (top == -1) { // to check stack is empty
-            System.out.println("Stack Underflow");
+            System.out.println("-1");
             return;
         }
-        int element=stack[top--]; // decrement top and get element at top of stack
-        System.out.println("Popped" + " "+ element);
+          top--; // decrement top and get element at top of stack
     }
 
     // to get top of stack
-    public void peek() {
+    public int peek() {
         if (top == -1) { // to check stack is empty
-            System.out.println("Stack is empty");
-            return;
+            return -1;
         }
-        int element = stack[top]; // get top element of stack
-        System.out.println("Top element is: " + element);
+        return stack[top]; // get top element of stack
     }
 
     // method to check empty stack 
     public boolean isEmpty() {
         return top == -1;
     }
+    // method to check stack is Full 
+    public boolean isFull(){
+        return top == maxSize -1;
+    }
 
     // to display the stack
     public void display() { 
         if (top == -1) { //to check stack is empty
-            System.out.println("Stack is empty");
             return;
         }
-        System.out.print("Stack:");
         for (int i = top; i >= 0; i--) {
             System.out.print(stack[i] + " ");
         }
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        try(Scanner sc = new Scanner(System.in))
+        {
         System.out.println("Enter size of stack you want: ");
         int maxSize = sc.nextInt(); //user input for max size
         Stack stack = new Stack(maxSize);
@@ -76,13 +77,28 @@ class Stack {
                 case 1:
                     System.out.println("Enter element to push: ");
                     int element = sc.nextInt();
+
+                    if(stack.isFull()){
+                        System.out.println("stack is full");
+                        break;
+                    }
                     stack.push(element);
                     break;
                 case 2:
+                    if(stack.isEmpty()){
+                        System.out.println("Stack is empty");
+                        break;
+                    }
+                    int top=stack.peek();
                     stack.pop();
+                    System.out.println("Deleted element is "+ top);
                     break;
                 case 3:
-                    stack.peek();
+                    if(stack.isEmpty()){ 
+                        System.out.println("Stack is empty");
+                        break;
+                    }
+                   System.out.println("Top element is "+ stack.peek());
                     break;
                 case 4:
                     if (stack.isEmpty()) {
@@ -92,6 +108,11 @@ class Stack {
                     }
                     break;
                 case 5:
+                    if(stack.isEmpty()){
+                        System.out.println("stack is empty");
+                        break;
+                    }
+                  
                     stack.display();
                     break;
                 case 6:
@@ -101,6 +122,9 @@ class Stack {
                     System.out.println("Invalid choice");
             }
         } while (choice != 6);
-        sc.close();
+    }catch(InputMismatchException ex)
+    {
+        System.out.println(ex);
     }
+}
 }
