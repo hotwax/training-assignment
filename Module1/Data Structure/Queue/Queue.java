@@ -1,4 +1,3 @@
-package Module1.Queue;
 import java.util.Scanner;
 
 class Node{
@@ -105,6 +104,7 @@ public class Queue{
                 System.out.print("Enter an element. ");
                 int value = input.nextInt();
                 obj.add(value);
+                System.out.println("Element added");
             }
             else if(option == 2){
                 System.out.println("Enter a index value. ");
@@ -112,11 +112,13 @@ public class Queue{
                 System.out.println("Enter new value. ");
                 int newValue = input.nextInt();
                 obj.update(index, newValue);
+                System.out.println("Element updated.");
 
             }
 
             else if(option == 3){
                 obj.delete();
+                System.out.println("Your data deleted successfully.");
             }
 
             else if(option == 4){

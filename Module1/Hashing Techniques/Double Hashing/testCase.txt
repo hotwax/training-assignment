@@ -1,0 +1,71 @@
+Please Enter the size of the HashMap: 10
+Select an option from the menu given below.
+1 : Insert
+2 : Delete
+3 : Display the Hashmap
+4 : Number of Collisions
+5 : Get Value of Key
+6 : Exit
+
+Case 1: Insert value in the hash map.
+Input:
+1
+Enter key : 12
+Enter a value: 21
+
+Output:
+Time taken in insertion: 2535
+
+Case 2: Delete a node from the hash map.
+Input:
+2
+Enter the key:
+12
+
+Output:
+Time taken in deleting data is: 1027
+
+
+
+Case 3: Display hash map.
+Input:
+3
+
+Output:
+0 -->
+1 -->
+2 --> {12 : 25}
+3 -->
+4 -->
+5 -->
+6 -->
+7 -->
+8 -->
+9 -->
+
+Case 4: Show number of Collisions
+Input:
+4
+
+Output:
+Number of collision occurs: 0
+
+
+
+Case 5:Find data using key.
+Input:
+5
+Enter key: 12
+
+Output:
+
+{12:25}
+Time taken in searching: 14094
+
+
+case 6: Exit
+Input:
+6
+
+Output:
+//Program will terminate

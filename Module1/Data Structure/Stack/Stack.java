@@ -84,6 +84,7 @@ public class Stack {
                 System.out.print("Enter a value: ");
                 int value = input.nextInt();
                 obj.push(value);
+                System.out.println("Element added/pushed");
             }
             else if(option==2){
                 System.out.print("Enter old value: ");
@@ -91,9 +92,11 @@ public class Stack {
                 System.out.print("Enter new value: ");
                 int newData = input.nextInt();
                 obj.update(old, newData);
+                System.out.println("Element value updated.");
             }
             else if(option == 3){
                 obj.pop();
+                System.out.println("Element pop out successfully.");
             }
             else if(option == 4){
                 obj.showData();
