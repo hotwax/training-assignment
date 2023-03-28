@@ -1,0 +1,211 @@
+Case 1: Adding employee data.
+
+
+
+Input:
+
+Add 
+
+Enter name: Arun Singh
+Enter email address: arunsingh91@gmail.com
+Enter age: 25
+Enter date of birth (dd-mm-yyyy): 02-02-1998
+
+Output:
+Employee should be added to file and the addition succesfull message should be generated.
+
+Actual Output:
+Employee added successfully
+
+
+
+
+
+Case 2: User selects an invalid option.
+
+Input:
+xsaznk
+
+Expected Output:
+Invalid choice
+
+Output:
+Invalid choice
+
+
+
+
+Case 3: Invalid email
+
+Input:
+
+Enter name: Rohit Sharma
+Enter email address: rsharma
+
+Enter valid email
+
+Expected Output:
+Valid email is required
+
+Actual Output:
+Invalid Email
+
+
+
+
+Case 4: Invalid Date of birth
+
+Input:
+
+Enter name: Arvind Kejriwal
+Enter email address: aapkakejriwal@gmaol.com
+Enter age: 43
+Enter date of birth (dd-mm-yyyy): 03/1/1980
+Invalid date format
+
+Enter age
+
+Expected Output:
+Date of birth is invalid
+
+Output:
+Invalid date format
+
+
+
+
+Case 5: Invalid Age.
+
+Input:
+
+Enter name: Rahul Singh 
+Enter email address: rahul2004@gmail.com
+Enter age: 17
+
+Expected output
+Invalid age, age should be between 18-60
+
+Actual Output:
+Invalid Age
+
+
+
+
+Case 6: Deleting emp id which is not present.
+
+Input:
+
+Enter employee ID: 102
+Employee not found
+
+Expected Output:
+Employee not found
+
+Actual Output:
+Employee not found
+
+
+
+
+
+Case 7: Deleting an employee that exists.
+
+Input:
+
+Enter employee ID: 16
+Employee deleted successfully
+
+Expected Output:
+Employee deleted successfully
+
+Output:
+Employee deleted successfully
+
+
+
+
+
+Case 8: Displaying all employees.
+
+Expected Output: Should display the deatils of all employees of organisation
+
+Output: 
+
+ID: 3, Name:  Ramchandra Gupta, Email:  ramchandra1182@gmail.com , Age: 21, DOB: 24-01-1999
+ID: 13, Name:  Santosh Kumar , Email:  skkumar12@gmail.com , Age: 23, DOB: 24-01-1999
+ID: 15, Name:  Ramchandra Sharma, Email:  ramchandras@gmail.com , Age: 22, DOB: 24-01-1999
+ID: 18, Name: David Warner, Email: warnyyy@gmail.com, Age: 39, DOB: 24-01-1999
+ID: 21, Name: Krishna Dwivedi, Email: kd111@gmail.com, Age: 23, DOB: 02-02-2000
+
+
+
+
+
+Case 9: Searching name that does not exist.
+
+Input:
+
+Enter search query: Khushi
+
+Sort by:
+1. ID
+2. Name
+3. Age
+4. DOB
+
+2- Name
+
+Sort direction:
+1. Ascending
+2. Descending
+
+1- Ascending
+
+
+Expected output : It should display that the employee with name is not present in database
+
+Output: No results found.
+
+
+
+
+
+Case 10: Searhing an employee that exists.
+
+Input:
+Search
+
+Enter search query: Arun
+Sort by:
+1. ID
+2. Name
+3. Age
+4. DOB
+
+1 (ID)
+
+Sort direction:
+1. Ascending
+2. Descending
+
+1 (ASC)
+
+Output:
+
+ID: 22, Name: Arun Singh, Email: arunsingh91@gmail.com, Age: 25, DOB: 02-02-1998
+ID: 23, Name: Arun Shukla, Email: arunshukla91@gmail.com, Age: 23, DOB: 03-05-2000
+
+
+
+
+
+Case 11: Exiting the prpgram
+
+Input:
+
+5 (Exit)
+
+Actual & Expected output :
+
+Exiting
+

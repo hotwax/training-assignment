@@ -5,7 +5,7 @@ import java.util.Date;
 
 class Address implements Serializable {
 
-    private  static final long serialVersionUID = 10L;
+    // private  static final long serialVersionUID = 10L;
 
 
     private String city;
@@ -39,13 +39,13 @@ class Address implements Serializable {
 
 class Student implements Serializable {
     private String firstName;
-    private Object dateOfBirth;
+    private String dateOfBirth;
     private Address address;
 
     public Student(String firstName, String dateOfBirth, Address address) {
         this.firstName = firstName;
-        this.dateOfBirth = new Date(dateOfBirth);
-        // this.dateOfBirth = dateOfBirth;
+        // this.dateOfBirth = new Date(dateOfBirth);
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
     }
 
@@ -63,6 +63,10 @@ class Student implements Serializable {
 
     public Address getAddress() {
         return address;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("dksdj");;
     }
 
    

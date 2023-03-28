@@ -1,0 +1,135 @@
+Case 1: Serialization
+
+Input:
+
+javac SerializationTest.java
+java SerializationTest output1.ser
+
+Expected Output: Program should serialize data succesfully and print a message for the same. 
+
+Output: Serialisation successful.on file- o1.ser
+
+
+
+
+Case 2: Deserialization
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output1.ser 
+
+Expected Output: Program should deserialize the data succesfully from file and print the data. 
+
+Output:
+
+Name: Jayesh, DOB: Sat Jan 01 00:00:00 IST 2000, Address: Shahdol, MP, 123456, India
+Name: Arun, DOB: Fri Feb 02 00:00:00 IST 2001, Address: Indore, MP, 456789, India    
+Name: Ankit, DOB: Sun Mar 03 00:00:00 IST 2002, Address: Bhopal, MP, 789123, India   
+Name: Devendra, DOB: Fri Apr 04 00:00:00 IST 2003, Address: Gurugram, HR, 321654, India
+
+
+Case 3: File not found during deserialization
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output12.ser 
+
+Expected Output: Program should print message that file is not found
+
+Output:  
+
+Error: File not found.
+
+
+Name: Jayesh, DOB: Sat Jan 01 00:00:00 IST 2000, Address: Shahdol, MP, 123456, India
+Name: Arun, DOB: Fri Feb 02 00:00:00 IST 2001, Address: Indore, MP, 456789, India    
+Name: Ankit, DOB: Sun Mar 03 00:00:00 IST 2002, Address: Bhopal, MP, 789123, India   
+Name: Devendra, DOB: Fri Apr 04 00:00:00 IST 2003, Address: Gurugram, HR, 321654, India
+
+
+
+
+Case 4: Empty file to deserialize (output3.ser)
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output3.ser
+
+Output:  
+
+Error: Empty File
+
+
+Case 5: Deserializing after changing the datatype of dob from string to date
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output1.ser
+
+Output:  Runtime Exception
+
+Error: Serialized object is of an incompatible version.
+java.io.InvalidClassException:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Case 2: Synchronized Withdraw
+
+Expected Output: Withdrawals should be syncronized
+
+
+Output:
+
+Rajesh completes the withdrawal of 100 and now has 900
+Rajesh completes the withdrawal of 100 and now has 800
+Rajesh completes the withdrawal of 100 and now has 700
+Rajesh completes the withdrawal of 100 and now has 600
+Rajesh completes the withdrawal of 100 and now has 500
+Ranita completes the withdrawal of 100 and now has 400
+Ranita completes the withdrawal of 100 and now has 300
+Ranita completes the withdrawal of 100 and now has 200
+Ranita completes the withdrawal of 100 and now has 100
+Ranita completes the withdrawal of 100 and now has 0
+
+
+
+
+Case 3 : No withdrawals possible (Not  Synchronized)
+
+Expected Output: Withdrawal not possible
+
+Output: Rajesh does not have enough money to withdraw 100
+
+
