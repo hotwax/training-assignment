@@ -63,6 +63,7 @@ function writeEmployee(employees) {
     }
 }
 
+//function to take valid name it will run until valid name is not provided 
 function takeName() {
     return new Promise((resolve) => {
         read.question('\nEnter the employee name: ', (name) => {
@@ -74,6 +75,8 @@ function takeName() {
         });
     });
 }
+
+//function to take valid email it will run until valid email is not provided 
 
 function takeEmail() {
     return new Promise((resolve) => {
@@ -87,6 +90,8 @@ function takeEmail() {
     });
 }
 
+//function to take valid age it will run until valid age is not provided 
+
 function takeAge() {
     return new Promise((resolve) => {
         read.question('Enter the employee age: ', (age) => {
@@ -98,6 +103,8 @@ function takeAge() {
         });
     });
 }
+
+//function to take valid dob it will run until valid dob is not provided 
 
 function takeDOB() {
     return new Promise((resolve) => {
@@ -111,6 +118,7 @@ function takeDOB() {
     });
 }
 
+// function to add employee in the file 
 function addEmployee() {
     takeName().then((name) => {
         takeEmail().then((email) => {
@@ -131,7 +139,7 @@ function addEmployee() {
     });
 }
 
-// Delete employee
+// Delete employee from the file
 function deleteEmployee() {
     read.question("Enter employee ID: ", (id) => {
         const employees = readEmployee();
@@ -174,7 +182,7 @@ function searchEmployee() {
         });
     });
 }
-
+// function to get user's choice (menu driven program)
 
 async function enterChoice() {
     console.log('\nPlease choose an option:');
@@ -186,21 +194,21 @@ async function enterChoice() {
     read.question('\nEnter your choice: ', (option) => {
         switch (option) {
             case '1':
-                addEmployee();
+                addEmployee(); // calling add function 
                 break;
             case '2':
-                deleteEmployee();
+                deleteEmployee();// calling delete function to delete data 
                 break;
             case '3':
-                searchEmployee();
+                searchEmployee(); // calling search function  
                 break;
             case '4':
-                ShowAll();
+                ShowAll(); //function to print all data 
                 break;
             case '5':
                 read.close();
                 console.log("Thank you");
-                process.exit(1);
+                process.exit(1); //terminating the program
                 break;
             default:
                 console.log('\nInvalid choice.');
@@ -209,4 +217,6 @@ async function enterChoice() {
         }
     });
 }
+
+// calling the function for 1st time
 enterChoice();
