@@ -51,14 +51,14 @@ public class CountWords {
       // To sort the count in descending order we can either use treemap or an
       // arraylist to sort the counts of words, ,I have used arraylists.
 
-      HashSet<String> setToAvoidRepetitiveUrls = new HashSet<>();
+      ArrayList<String> listToAvoidRepetitiveUrls = new ArrayList<>();
 
       try {
         while ((urlString = bufferedReaderForUrls.readLine()) != null) {
 
           //to avoid repetition
-          if(setToAvoidRepetitiveUrls.contains(urlString)) continue;
-          else setToAvoidRepetitiveUrls.add(urlString);
+          if(listToAvoidRepetitiveUrls.contains(urlString)) continue;
+          else listToAvoidRepetitiveUrls.add(urlString);
 
 
           URL urlObject = new URL(urlString);
@@ -136,7 +136,7 @@ public class CountWords {
           return;
         }
       } catch (java.net.MalformedURLException e) {
-        // in case url has http instead of https
+        // in case url has http instead of https 
         // there is no need to handle it
       }
       
@@ -151,7 +151,7 @@ public class CountWords {
       bufferedReaderForUrls.close();
 
     } catch (FileNotFoundException e) {
-      System.out.println(e);
+      e.printStackTrace();
     } catch (UnknownHostException e) {
       System.out.println("Please add a valid url");
       System.out.println(e);
