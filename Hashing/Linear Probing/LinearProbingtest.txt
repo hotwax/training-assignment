@@ -1,0 +1,120 @@
+Operations:
+
+1. Put
+2. Get
+3. Traverse
+4. Number of Collisions
+5. Delete
+6. Exit
+
+Test case-1 (Test case for insertion values)
+
+Capacity of Hashtable - 4
+
+choice - 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 3
+
+Output:- Hashtable:(1,10) (2,20) (3,30) 
+
+---------------------------------------------------------------------------------
+
+Test case-2 (Test case for insertion values when table is full)
+
+Capacity of Hashtable - 3
+
+choice - 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 1
+ input- 4
+ input- 40
+
+
+Output:- HashTable is Full
+
+---------------------------------------------------------------------------------
+
+Test case-3 (Test case to get a value when key is present)
+
+choice - 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 2
+ input- 2
+
+Output:- Value: 20
+
+---------------------------------------------------------------------------------
+
+Test case-4 (Test case to get a value when key is not present)
+
+choice - 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 2
+ input- 11
+
+Output:- key not found!
+
+---------------------------------------------------------------------------------
+
+Test case-5 (Test case for Deletion when key is present)
+
+choice - 1
+ input- 1 
+ input- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 1
+ input- 11
+ input- 40
+choice- 4 
+Output:- Traverse: (1,10) (2,20) (3,30) (11,40)
+choice- 5
+ input- 11
+choice- 4
+Output:- Traverse: (1,10) (2,20) (3,30)
+
+---------------------------------------------------------------------------------
+
+Test case-6 (Test case for Invalid user choice from Menu)
+
+choice- 7
+Output:- Invalid input
+
+------------------------------------------------------------------------------------------------   
+
+Test case-7 (Test case for invalid input type)
+
+input - a
+Output:- java.util.InputMismatchException

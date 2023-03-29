@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LinearProbing{
@@ -65,72 +66,80 @@ public class LinearProbing{
         }
         System.out.println();
     }
-    // Funtion to search key with value
-    public void search() {
+    // Funtion to delete key with value
+    public void delete() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter key to search: ");
+        System.out.print("Enter key to delete: ");
         int key = scanner.nextInt();
         int ind = hash(key);
         while (keys[ind] != 0) {
             if (keys[ind] == key) {
-                System.out.println("Value: " + values[ind]);
-                return;
+                keys[ind] = 0;
+                break;
+            }
+            else {
+                System.out.println("Key not found");
             }
             ind= (ind + 1) % capacity;
         }
-        System.out.println("Key not found!");
+        // System.out.println("Key is not found");
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter capacity of hash table: ");
-        int capacity = scanner.nextInt();
-        LinearProbing hashTable = new LinearProbing(capacity);
-        int choice = 0;
-        do{
-            System.out.println("1. Put");
-            System.out.println("2. Get");
-            System.out.println("3. traverse");
-            System.out.println("4. Number of collisions");
-            System.out.println("5. Search");
-            System.out.println("6. Exit");
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Enter capacity of hash table: ");
+            int capacity = scanner.nextInt();
+            LinearProbing hashTable = new LinearProbing(capacity);
+            int choice = 0;
+            do{
+                System.out.println("1. Put");
+                System.out.println("2. Get");
+                System.out.println("3. traverse");
+                System.out.println("4. Number of collisions");
+                System.out.println("5. Delete");
+                System.out.println("6. Exit");
+                System.out.print("Enter your choice: ");
+                choice = scanner.nextInt();
 
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter key: ");
-                    int key = scanner.nextInt();
-                    System.out.print("Enter value: ");
-                    int value = scanner.nextInt();
-                    hashTable.put(key, value);
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter key: ");
+                        int key = scanner.nextInt();
+                        System.out.print("Enter value: ");
+                        int value = scanner.nextInt();
+                        hashTable.put(key, value);
+                        break;
+                    case 2:
+                        System.out.print("Enter key: ");
+                        key = scanner.nextInt();
+                        int result = hashTable.get(key);
+                        if (result == -1) {
+                           
+                        System.out.println("Key not found!");
+                    } else {
+                        System.out.println("Value: " + result);
+                    }
                     break;
-                case 2:
-                    System.out.print("Enter key: ");
-                    key = scanner.nextInt();
-                    int result = hashTable.get(key);
-                    if (result == -1) {
-                       
-                    System.out.println("Key not found!");
-                } else {
-                    System.out.println("Value: " + result);
-                }
-                break;
-            case 3:
-                hashTable.traverse();
-                break;
-            case 4:
-                System.out.println("Number of collisions: " + hashTable.collisionCount());
-            case 5:
-                hashTable.search();
-                break;
-            case 6:
-                System.out.println("Exit done");
-                break;
-            default:
-                System.out.println("Invalid choice!");
-                break;
+                case 3:
+                    hashTable.traverse();
+                    break;
+                case 4:
+                    System.out.println("Number of collisions: " + hashTable.collisionCount());
+                    break;
+                case 5:
+                    hashTable.delete();
+                    break;
+                case 6:
+                    System.out.println("Exit done");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+                    break;
+            }
+   }while (choice != 6);
+        }catch(InputMismatchException ex)
+        {
+            System.out.println("Input Mismatch");
         }
-    }while (choice != 6);
 }
 }

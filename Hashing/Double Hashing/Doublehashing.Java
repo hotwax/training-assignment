@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class DoubleHashing
 {
@@ -49,18 +50,16 @@ public class DoubleHashing
       }
     else
       {
-	keys[index] = key;
-	values[index] = value;
-	size++;
+        keys[index] = key;
+        values[index] = value;
+        size++;
       }
-    System.out.println ("Inserted key " + key + " with value " + value);
   }
   // get the value
   public int get (int key)
   {
     int index = hash1 (key);
     int offset = hash2 (key);
-    int numCollisions = 0;
 
     while (keys[index] != 0 && keys[index] != key)
       {
@@ -70,13 +69,12 @@ public class DoubleHashing
 
     if (keys[index] == key)
       {
-	System.out.println ("Found key " + key + " with value " +
-			    values[index]);
-	return values[index];
+	System.out.println ("value of " + key + " is " + values[index]);
+          return values[index];
       }
     else
       {
-	System.out.println ("Key " + key + " not found with");
+	System.out.println ("key not found");
 	return -1;		// return -1 if key is not found
       }
   }
@@ -95,7 +93,7 @@ public class DoubleHashing
 
   public static void main (String[]args)
   {
-    Scanner scanner = new Scanner (System.in);
+    try(Scanner scanner = new Scanner (System.in)){
     System.out.print ("Enter capacity of Hashmap: ");
     int capacity = scanner.nextInt ();
     DoubleHashing hashmap = new DoubleHashing (capacity);
@@ -113,7 +111,7 @@ public class DoubleHashing
 	  case 1:
 	    System.out.print ("Enter key:");
 	    int key = scanner.nextInt ();
-	    System.out.print ("Enter value: ");
+	    System.out.print ("Enter value:");
 	    int value = scanner.nextInt ();
 	    hashmap.put (key, value);
 	    break;
@@ -125,7 +123,6 @@ public class DoubleHashing
 	  case 3:
 	    hashmap.display ();
 	    break;
-
 	  case 4:
 	    System.out.println ("collision - " + hashmap.numCollisions);
 	    break;
@@ -137,5 +134,9 @@ public class DoubleHashing
 	    break;
 	  }
       }while (choice != 5);
+  }catch(InputMismatchException ex)
+  {
+    System.out.println(ex);
   }
+}
 }

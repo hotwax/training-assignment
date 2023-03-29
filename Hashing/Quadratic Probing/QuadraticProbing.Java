@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class QuadraticProbing{
     private String[] keys;
@@ -35,18 +36,19 @@ public class QuadraticProbing{
         values[i] = value;
         size++;
     }
-    // to get key and value
-    public int get(String key) {
+    // to delete key and value
+    public int delete(String key) {
         int i = hash(key);
         int j = 0;
         while (keys[i] != null) {
             if (keys[i].equals(key)) {
-                return values[i];
+                keys[i] = null;
+                values[i] = 0;
             }
-            j++;
             i = (i + j*j) % capacity;
         }
-        return -1;
+        System.out.println("Key not found");
+    return -1;
     }
 
     public int collisions() {
@@ -76,7 +78,7 @@ public class QuadraticProbing{
     }
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        try(Scanner input = new Scanner(System.in)){
         System.out.print("Enter the size of hash table: ");
         int capacity = input.nextInt();
         QuadraticProbing hashtable = new QuadraticProbing(capacity);
@@ -86,7 +88,8 @@ public class QuadraticProbing{
             System.out.println("2. Search");
             System.out.println("3. Traverse ");
             System.out.println("4. number of collisions");
-            System.out.println("5. Exit");
+            System.out.println("5. Delete");
+            System.out.println("6. Exit");
             System.out.print("\nEnter your choice: ");
             choice = input.nextInt();
             switch (choice) {
@@ -109,6 +112,11 @@ public class QuadraticProbing{
                     System.out.println("Number of collisions: " + hashtable.collisions());
                     break;
                 case 5:
+                    String key1=input.next();
+                    hashtable.delete(key1);
+                    System.out.println("Deleted");
+                    break;
+                case 6:
                     System.out.println("Exit done");
                     System.exit(0);
                     break;
@@ -116,7 +124,10 @@ public class QuadraticProbing{
                     System.out.println("Invalid choice");
                     break;
             }
-        }while (choice != 5);
-        input.close();
+        }while (choice != 6);
+    }catch(InputMismatchException ex)
+    {
+        System.out.println(ex);
     }
+}
 }

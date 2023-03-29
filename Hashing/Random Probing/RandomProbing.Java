@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 public class RandomProbing{
@@ -22,7 +23,7 @@ public class RandomProbing{
     public int probe() {
         return random.nextInt(capacity);
     }
-
+    //method to put Key And Value
     public void put(int key, int value) {
         if (size == capacity) {
             System.out.println("Hashmap is full");
@@ -30,7 +31,7 @@ public class RandomProbing{
         }
 
         int index = hash(key);
-        int numCollisions = 0;
+        int numCollisions=0;
 
         while (keys[index] != 0 && keys[index] != key) {
             index = (index + probe()) % capacity;
@@ -47,7 +48,7 @@ public class RandomProbing{
 
         System.out.println("Inserted key " + key + " with value " + value);
     }
-
+    //method to get Value
     public int get(int key) {
         int index = hash(key);
         int numCollisions = 0;
@@ -65,7 +66,7 @@ public class RandomProbing{
             return -1; // return -1 if key is not found
         }
     }
-
+    //method to display
     public void display() {
         System.out.println("Hashmap:");
         for (int i = 0; i < capacity; i++) {
@@ -74,45 +75,49 @@ public class RandomProbing{
             }
         }
     }
-
+    // Main method
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter capacity:");
-        int capacity = scanner.nextInt();
-        RandomProbing hashmap = new RandomProbing(capacity);
-        int choice;
-        do{
-            System.out.println("Menu:");
-            System.out.println("1. Insert element");
-            System.out.println("2. Get element");
-            System.out.println("3. Display Hashmap");
-            System.out.println("4. Exit");
-            System.out.print("Enter choice: ");
-            choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter key: ");
-                    int key = scanner.nextInt();
-                    System.out.print("Enter value: ");
-                    int value = scanner.nextInt();
-                    hashmap.put(key, value);
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Enter capacity:");
+            int capacity = scanner.nextInt();
+            RandomProbing hashmap = new RandomProbing(capacity);
+            int choice;
+            do{
+                System.out.println("Menu:");
+                System.out.println("1. Insert element");
+                System.out.println("2. Get element");
+                System.out.println("3. Display Hashmap");
+                System.out.println("4. Exit");
+                System.out.print("Enter choice:");
+                choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter key: ");
+                        int key = scanner.nextInt();
+                        System.out.print("Enter value: ");
+                        int value = scanner.nextInt();
+                        hashmap.put(key, value);
+                        break;
+                    case 2:
+                        System.out.print("Enter key: ");
+                        key = scanner.nextInt();
+                        hashmap.get(key);
+                        break;
+                    case 3:
+                        hashmap.display();
+                        break;
+                    case 4:
+                        System.out.println("Exit done");
+                        break;
+                default:
+                    System.out.println("Invalid choice");
                     break;
-                case 2:
-                    System.out.print("Enter key: ");
-                    key = scanner.nextInt();
-                    hashmap.get(key);
-                    break;
-                case 3:
-                    hashmap.display();
-                    break;
-                case 4:
-                    System.out.println("Exit done");
-                    break;
-            default:
-                System.out.println("Invalid choice");
-                break;
-        }
-    }while(choice!=4);
-    scanner.close();
+            }
+        }while(choice!=4);
+    }
+    catch(InputMismatchException ex)
+    {
+        System.out.println(ex);
+    }
 }
 }

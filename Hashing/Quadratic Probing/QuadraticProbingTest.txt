@@ -1,0 +1,133 @@
+Operations:
+
+1. Put
+2. Search
+3. Traverse
+4. Number of Collisions
+5. Delete
+6. Exit
+
+Test case-1 (Test case for insertion values)
+
+Size of Hash Table - 4
+
+choice- 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 3
+
+Output:- 
+(1,10) (2,20) (3,30) 
+
+---------------------------------------------------------------------------------
+
+Test case-2 (Test case to get a value when key is present)
+
+choice- 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 2
+ input- 3
+
+Output:- Value is: 30
+
+---------------------------------------------------------------------------------
+
+Test case-3 (Test case to get a value when key is not present)
+
+choice - 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 2
+ input- 11
+
+Output:- Key not found!
+
+---------------------------------------------------------------------------------
+
+Test case-4 (Test case for Inserting a value to test updation if key is present)
+
+choice - 1
+ input- 1 
+ input- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 3
+
+Output:-
+(1,10) 
+(2,20) 
+(3,30)
+
+choice- 1
+ input- 1
+ input- 30
+choice- 3
+
+Output:- 
+(1,30) 
+(2,20) 
+(3,30)
+
+
+---------------------------------------------------------------------------------
+
+Test case-5 (Test case for Deletion when key is present)
+
+choice - 1
+ input- 1 
+ input- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 3
+Output:-
+(1,10) 
+(2,20)
+(3,30)
+
+choice- 5
+ input- 2
+choice- 3
+Output:-
+(1,10) 
+(3,30) 
+
+--------------------------------------------------------------------------------
+
+Test case-6 (Test case for Invalid user choice from Menu)
+
+choice- 8
+Output:- Invalid choice
+
+--------------------------------------------------------------------------------  
+
+Test case-7 (Test case for invalid input type)
+
+input - a
+Output:- java.util.InputMismatchException
