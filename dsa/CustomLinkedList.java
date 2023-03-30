@@ -154,11 +154,11 @@ class LinkedList {
   int size;
 
   void display() {
-    Node temp = head; // temporary node
+    Node temporaryNode = head; // temporaryNodeorary node
 
-    while (temp != null) {
-      System.out.print(temp.data + " ");
-      temp = temp.next;
+    while (temporaryNode != null) {
+      System.out.print(temporaryNode.data + " ");
+      temporaryNode = temporaryNode.next;
     }
     System.out.println();
   }
@@ -178,14 +178,14 @@ class LinkedList {
   }
 
   void addFirst(int val) {
-    Node temp = new Node();
-    temp.data = val;
+    Node temporaryNode = new Node();
+    temporaryNode.data = val;
 
     if (size == 0) {
-      head = tail = temp;
+      head = tail = temporaryNode;
     } else {
-      temp.next = head;
-      head = temp;
+      temporaryNode.next = head;
+      head = temporaryNode;
     }
 
     size++;
@@ -206,12 +206,12 @@ class LinkedList {
       tail.next = node;
       tail = node;
     } else {
-      Node temp = head;
+      Node temporaryNode = head;
       for (int i = 1; i < idx; i++) {
-        temp = temp.next;
+        temporaryNode = temporaryNode.next;
       }
-      Node nnode = temp.next; // next node or idx node
-      temp.next = node;
+      Node nnode = temporaryNode.next; // next node or idx node
+      temporaryNode.next = node;
       node.next = nnode;
     }
     size++;
@@ -224,12 +224,12 @@ class LinkedList {
       head = tail = null;
       size = 0;
     } else {
-      Node temp = head;
-      while (temp.next != tail) {
-        temp = temp.next;
+      Node temporaryNode = head;
+      while (temporaryNode.next != tail) {
+        temporaryNode = temporaryNode.next;
       }
-      temp.next = null;
-      tail = temp;
+      temporaryNode.next = null;
+      tail = temporaryNode;
       size--;
     }
   }
@@ -257,12 +257,12 @@ class LinkedList {
       removeLast();
     } else {
 
-      Node temp = head;
+      Node temporaryNode = head;
       for (int i = 1; i < idx; i++) {
-        temp = temp.next;
+        temporaryNode = temporaryNode.next;
       }
-      Node nextnextnode = temp.next.next;
-      temp.next = nextnextnode;
+      Node nextnextnode = temporaryNode.next.next;
+      temporaryNode.next = nextnextnode;
       size--;
     }
   }
@@ -294,11 +294,11 @@ class LinkedList {
       return -1;
     }
 
-    Node temp = head;
+    Node temporaryNode = head;
     for (int i = 1; i <= idx; i++) {
-      temp = temp.next;
+      temporaryNode = temporaryNode.next;
     }
-    return temp.data;
+    return temporaryNode.data;
   }
 
   void reverseLL() {
@@ -313,9 +313,9 @@ class LinkedList {
       curr = cnext;
     }
 
-    Node temp = head;
+    Node temporaryNode = head;
     head = tail;
-    tail = temp;
+    tail = temporaryNode;
   }
 
   Node midNode(Node head, Node tail) {
@@ -345,12 +345,12 @@ class LinkedList {
     }
 
     else {
-      Node temp = head;
+      Node temporaryNode = head;
       for (int i = 0; i < idx; i++) {
-        temp = temp.next;
+        temporaryNode = temporaryNode.next;
       }
-      int oldVal = temp.data;
-      temp.data = val;
+      int oldVal = temporaryNode.data;
+      temporaryNode.data = val;
       return oldVal;
     }
   }

@@ -106,14 +106,14 @@ class Queue {
   }
 
   void add(int val) {
-    Node temp = new Node(); // a temporary node
-    temp.data = val;
+    Node temporaryNode = new Node(); // a temporaryNodeorary node
+    temporaryNode.data = val;
 
     if (size == 0) {
-      head = tail = temp;
+      head = tail = temporaryNode;
     } else {
-      tail.next = temp;
-      tail = temp;
+      tail.next = temporaryNode;
+      tail = temporaryNode;
     }
 
     size++;
@@ -146,13 +146,13 @@ class Queue {
   }
 
   int search(int val) {
-    Node temp = head;
+    Node temporaryNode = head;
 
     int idx = 0; // index
-    while (temp != null) {
-      if (temp.data == val)
+    while (temporaryNode != null) {
+      if (temporaryNode.data == val)
         return idx;
-      temp = temp.next;
+      temporaryNode = temporaryNode.next;
       idx++;
     }
 
@@ -176,12 +176,12 @@ class Queue {
       System.out.println("Please enter a valid index");
       return Integer.MAX_VALUE;
     }
-    Node temp = head;
+    Node temporaryNode = head;
     for (int i = 0; i < idx; i++) {
-      temp = temp.next;
+      temporaryNode = temporaryNode.next;
     }
-    int oldValue = temp.data;
-    temp.data = val;
+    int oldValue = temporaryNode.data;
+    temporaryNode.data = val;
     return oldValue;
   }
 
