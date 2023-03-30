@@ -96,10 +96,6 @@ class Node {
 
 class Queue {
 
-  Queue() {
-
-  }
-
   Node head, tail;
   int size;
 
