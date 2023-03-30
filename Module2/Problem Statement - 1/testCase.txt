@@ -1,0 +1,107 @@
+Case 1: All urls are correct and words present in the word.txt file.
+
+Expected Output:
+https://www.geeksforgeeks.org/java
+Java - 414
+Python - 18
+C++ - 14
+
+https://www.geeksforgeeks.org/python-programming-language
+Python - 611
+function - 26
+programming - 8
+
+https://www.hotwax.co/
+hotwax - 1
+Java - 0
+C++ - 0
+
+https://www.javatpoint.com/java-tutorial
+Java - 77
+programming - 8
+Python - 4
+
+Final Output....
+Python - 611
+Java - 414
+function - 26
+C++ - 14
+programming - 8
+hotwax - 1
+
+Actual Output:
+
+https://www.geeksforgeeks.org/java
+Java - 414
+Python - 18
+C++ - 14
+
+
+https://www.geeksforgeeks.org/python-programming-language
+Python - 611
+function - 26
+programming - 8
+
+
+https://www.hotwax.co/
+hotwax - 1
+Java - 0
+C++ - 0
+
+
+https://www.javatpoint.com/java-tutorial
+Java - 77
+programming - 8
+Python - 4
+
+
+
+Final Output....
+Python - 611
+Java - 414
+function - 26
+C++ - 14
+programming - 8
+hotwax - 1
+
+
+Case 2: words.txt file is missing.
+
+Expected Output:
+word file not found.
+
+Actual Output:
+word file not found.
+
+Case 3: If word.txt file is empty.
+
+Expected Output:
+Words are not present inside word.txt file
+
+Actual Output:
+Words are not present inside word.txt file
+
+Case 4: If Urls.txt file is missing.
+
+Expected Output:
+Url.txt file does not have any urls.
+
+Actual Output:
+Url.txt file does not have any urls.
+
+Case 5: Invalid urls
+
+Expected Output:
+Invalid url 
+
+Actual Output:
+Invalid url
+
+
+Case 6: If Url.txt file is missing
+
+Expected Output:
+Url file not found.
+
+Actual Output:
+Url file not found.
