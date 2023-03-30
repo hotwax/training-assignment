@@ -1,0 +1,282 @@
+
+Menu options
+   1. Add The Employee Detail
+   2.Delete the Empoyee Detail
+   3.Get all Employees Data
+   4.Search the Employee by id
+   5.Sort and Search the Employee By Text
+
+Test Case 1:(Test the add employee and get the employee by id in the file)
+  Input:
+   choice-3
+     
+   choice-1
+    Enter the employee id
+     1934
+    Enter the employee name
+     Gourav
+    Enter the employee email
+     Gr@gmail.com
+    Enter the age
+     21
+    Enter the dOB
+     11-Mar-2002 
+    
+   choice-1
+    Enter the employee id
+     1932
+    Enter the employee name
+     Yash
+    Enter the employee email
+     ys@gmail.com
+    Enter the age
+     21
+    Enter the dOB
+     17-Feb-2002 
+   
+   choice-1
+    Enter the employee id
+     1923
+    Enter the employee name
+     Saurabh
+    Enter the employee email
+     sr@gmail.com
+    Enter the age
+     35
+    Enter the dOB
+     01-Jan-1988 
+   
+   choice-3
+   
+   choice-1
+    Enter the employee id
+     1923
+    Enter the employee name
+     Sanjna
+    Enter the employee email
+     s@gmail.com
+    Enter the age
+     20
+    Enter the dOB
+     01-Jan-2003  
+   
+   choice-4
+    Enter the employee Id which you want to search
+     1934
+
+   choice-4
+    Enter the employee Id which you want to search
+     1931
+
+
+  Output:
+
+    No Employee is present
+    
+    Employee Added
+    
+    Employee Added
+    
+    Employee Added
+    
+    Employee Details
+
+    Employee - 1-----------------
+
+     EmployeeId : 1934
+     Employee Name : Gourav
+     Employee Email : Gr@gmail.com
+     Employee Age : 21
+     Employee Age : 2002-03-02
+
+
+    Employee - 2-----------------
+
+     EmployeeId : 1932
+     Employee Name : Yash
+     Employee Email : ys@gmail.com
+     Employee Age : 21
+     Employee Age : 2002-02-17
+
+
+    Employee - 3-----------------
+
+     EmployeeId : 1923
+     Employee Name : Saurabh
+     Employee Email : sr@gmail.com
+     Employee Age : 35
+     Employee Age : 1988-01-21
+
+     
+    Employee is already present
+
+    Employee ID - 1934
+    Employee Name - Gourav
+    Employee Email - Gr@gmail.com
+    Employee Age - 21
+    Date  - 2002-03-02
+
+    Employee is not Present
+
+--------------------------------------------------------------------------------------------------
+
+
+Test cases 2:(Test the deleted the employee by id from file)
+ Input:
+  choice-2
+   Enter the EmployId which you want to deleted
+    1931
+  
+  choice-2
+    Enter the EmployId which you want to deleted
+     1934
+  
+  choice-3
+      
+ Output:
+  Employee is not present
+
+  Employee Deleted Successfully 
+  
+  Employee Details
+   Employee - 1-----------------
+
+     EmployeeId : 1932
+     Employee Name : Yash
+     Employee Email : ys@gmail.com
+     Employee Age : 21
+     Employee Age : 2002-02-17
+
+
+    Employee - 2-----------------
+
+     EmployeeId : 1923
+     Employee Name : Saurabh
+     Employee Email : sr@gmail.com
+     Employee Age : 35
+     Employee Age : 1988-01-21
+ 
+ ------------------------------------------------------------------------------------------------------------
+
+ Test Case 3:(Search and Sort the employee By text)
+   Input:
+    choice-5
+     Enter Any text You want to search
+      19
+     Enter in which Order you want to sort the Employee
+      1.Asscending
+      2.Descending 
+      1
+     Enter the parameter Which you want to sort
+      1. Sort the Employee on the basis of Employee Id
+      2. Sort the Employee on the basis of employee Name
+      3. Sort the employee on the basis of Age
+      4. sort the employee on the basis of Date of Birth
+      2
+
+   Output:
+    EmployeeID      Name      Email      Age      Date
+
+    1934      Gourav      Gr@gmail.com      21      2002-03-02
+
+    1923      Saurabh      sr@gmail.com      35      1988-01-21
+
+    1932      Yash      ys@gmail.com      21      2002-02-17   
+
+---------------------------------------------------------------------------------------------
+
+Test Case 4:(Test the validation of email,name,age,dob)
+ Input:
+  choice-1
+    Enter the employee id
+     1934
+    Enter the employee name
+     Gourav
+    Enter the employee email
+     Gr@gmail.com
+    Enter the age
+     20
+    Enter the dOB
+     11-Mar-2002   
+  
+  Output:
+   Age or Dob is not valid
+
+  choice-1
+    Enter the employee id
+     1934
+    Enter the employee name
+     Gourav12
+    Enter the employee email
+     Gr@gmail.com
+    Enter the age
+     21
+    Enter the dOB
+     11-Mar-2002   
+  
+  Output:
+   Name is not valid 
+  
+  choice-1
+    Enter the employee id
+     1934
+    Enter the employee name
+     Gourav
+    Enter the employee email
+     Gr?gmail!com
+    Enter the age
+     21
+    Enter the dOB
+     11-Mar-2002 
+
+    Output:
+     Email is not valid 
+
+   choice-1
+    Enter the employee id
+     1934
+    Enter the employee name
+     Gourav
+    Enter the employee email
+     Gr@gmail.com
+    Enter the age
+     13
+    Enter the dOB
+     11-Mar-2010 
+
+    Output:
+     Age shoulb be greater then equal to 18. 
+
+   choice-1
+    Enter the employee id
+     1934
+    Enter the employee name
+     Gourav
+    Enter the employee email
+     Gr@gmail.com
+    Enter the age
+     13
+    Enter the dOB
+     11-M-2010 
+
+    Output:
+     Date Time Parse Exception(Correct date formate is (01-Mar-2002)). 
+   
+------------------------------------------------------------------------------------------------
+
+Test case 5:(Test Input Mismatch Exception )
+ Input:
+  choice-a
+ Output:
+  InputMismatchException
+
+----------------------------------------------------------------------------------------------
+
+Test case 6:(Invalid Choices)
+ Input:
+  Choice-10
+
+ Output:
+  Invalid Choice 
+
+---------------------------------------------------------------------------------------------

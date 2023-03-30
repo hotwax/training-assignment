@@ -13,11 +13,11 @@ public class Account {
     void Withdraw(int withdraw, String name) {
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getStackTrace();
+        } catch (InterruptedException exception) {
+            exception.getStackTrace();
         }
         if (balance < withdraw) {
-            System.out.println(name + "Account is Overdrawn");
+            System.out.println(name + " Account is not have enough balance to withdrawal");
             return;
         }
 

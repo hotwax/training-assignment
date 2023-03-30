@@ -1,0 +1,115 @@
+
+Test Cases 1:
+ 
+ Input: 
+  Words.txt
+   to and
+   HotWax thanks
+   OFBiz
+   the 
+  Url.txt
+   https://www.hotwaxsystems.com/
+   https://justinjackson.ca/words.html 
+
+  Output:
+    https://www.hotwaxsystems.com/
+    and->21
+
+    the->20
+
+    to->19
+
+    =======================================================
+
+    https://justinjackson.ca/words.html
+    to->37
+
+    thanks->29
+
+    the->14
+
+    =======================================================
+
+    ========
+    to ->56
+    the ->34
+    and ->32
+    thanks ->29
+    OFBiz ->17
+    HotWax ->10
+
+----------------------------------------------------------------------------------------------
+
+Test Cases 2:(Words.txt or Url.txt is not found)
+ Input:
+  Words.txt
+   to and
+   HotWax thanks
+   OFBiz
+   the 
+
+ Output:
+  FileNotFoundException  
+
+---------------------------------------------------------------------------------------------
+
+Test Cases 3:(Words.txt or Url.txt is empty)
+ Input:
+  Words.txt
+  Url.txt
+   https://www.hotwaxsystems.com/
+   https://justinjackson.ca/words.html 
+
+ Output:
+  Words.txt file is empty  
+
+--------------------------------------------------------------------------------------------
+
+Test Cases 4:(Url is correct in Url.txt)
+ Input:
+  Words.txt
+  Url.txt
+   https://www.hotwaxsys.com/
+   https://justinjackson.ca/words.html 
+
+ Output:
+   javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake 
+
+
+---------------------------------------------------------------------------------------------
+
+Test Cases 5:
+ Input:
+  Words.txt
+   asassas to the 
+   and
+  Url.txt
+   https://www.hotwaxsystems.com/
+   https://justinjackson.ca/words.html 
+
+  Output: 
+   https://www.hotwaxsystems.com/
+   and->21
+ 
+   the->20
+
+   to->19
+
+   =======================================================
+  
+   https://justinjackson.ca/words.html
+   to->37
+
+   the->14
+
+   and->11
+
+   =======================================================
+
+   ========
+   to ->56
+   the ->34
+   and ->32
+   asassas is not present       
+
+---------------------------------------------------------------------------------------------  

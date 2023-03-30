@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class DeserializationTest {
 
-    public static void main(String args[]) throws ClassNotFoundException {
-        ArrayList<Student> List = new ArrayList<Student>();
+    public static void main(String args[]) {
         try {
             FileInputStream file = new FileInputStream("Students/" + args[0]);
             ObjectInputStream obj = new ObjectInputStream(file);
-            List = (ArrayList) obj.readObject();
+            @SuppressWarnings("unchecked")
+            ArrayList<Student> List = (ArrayList) obj.readObject();
             System.out.println("Deserialize the file " + args[0]);
 
             for (Student student : List) {
@@ -26,10 +26,16 @@ public class DeserializationTest {
             }
             obj.close();
             file.close();
-        } catch (IOException e) {
-            System.out.println(e);
+        } catch (IOException exception) {
+            System.out.println(exception);
         }
-
+        catch(ClassCastException exception){
+            System.out.println(exception);
+        }
+        catch(ClassNotFoundException exception){
+            System.out.println(exception);
+        }
+        
     }
 
 }

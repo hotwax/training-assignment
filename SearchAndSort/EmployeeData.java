@@ -4,13 +4,18 @@ import java.util.PriorityQueue;
 import java.util.Map;
 import java.util.LinkedHashMap;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class EmployeeData {
 
@@ -42,9 +47,37 @@ public class EmployeeData {
 
     Employee employee;
 
-    EmployeeData() {
+    EmployeeData() throws DateTimeParseException {
         this.employee = new Employee();
         hashEmployeeDetail = new LinkedHashMap<>();
+        try {
+
+            File Obj = new File("SearchAndSort/Employee.txt");
+            if (Obj.exists()) {
+                Scanner Reader = new Scanner(Obj);
+                while (Reader.hasNextLine()) {
+                    String data = Reader.nextLine();
+                    String empData[] = data.split(",");
+
+                    int id = Integer.parseInt(empData[0]);
+                    String name = empData[1];
+                    String email = empData[2];
+                    int age = Integer.parseInt(empData[3]);
+                    String date = empData[4];
+
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-d");
+
+                    LocalDate date1 = LocalDate.parse(date, format);
+
+                    Employee e = new Employee(id, name, email, age, date1);
+                    hashEmployeeDetail.put(id, e);
+                }
+                Reader.close();
+            }
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
     }
 
     // Set the Employee Id
@@ -98,6 +131,45 @@ public class EmployeeData {
         return employee.dateOfBirth;
     }
 
+    // Validate the employee email address
+
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
+
+    // Validate the employee name
+    public static boolean isValidName(String name) {
+        String nemaeRegex = "[A-Za-z]*";
+
+        Pattern pat = Pattern.compile(nemaeRegex);
+        if (name == null)
+            return false;
+        return pat.matcher(name).matches();
+    }
+
+    // Validate the employee Age and Dob
+    public static boolean isValidAgeAndDob(int Age, LocalDate Dob) {
+
+        LocalDate Today = LocalDate.now(ZoneId.of("Asia/Kolkata"));
+        if (Dob.isAfter(Today)) {
+            return false;
+        } else {
+            int age = (int) ChronoUnit.YEARS.between(Dob, Today);
+            if (age == Age) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Add Employee in the File
     public void employeeAdd() {
 
@@ -106,7 +178,26 @@ public class EmployeeData {
             return;
         }
 
+        if (!isValidEmail(getEmail())) {
+            System.out.println("Email is not Valid");
+            return;
+        }
+        if (!isValidName(getName())) {
+            System.out.println("Name is not valid");
+            return;
+        }
+
+        if (getAge() < 18) {
+            System.out.println("Age should be greter then equal to 18 ");
+            return;
+        }
+        if (!isValidAgeAndDob(getAge(), getDate())) {
+            System.out.println("Age or Dob is not valid");
+            return;
+        }
+
         try {
+
             FileWriter fileWritter = new FileWriter("SearchAndSort/Employee.txt", true);
             BufferedWriter bw = new BufferedWriter(fileWritter);
             String empdetail = getId() + "," + getName() + "," + getEmail() + "," + getAge() + "," + getDate();
@@ -114,8 +205,9 @@ public class EmployeeData {
             bw.newLine();
             bw.close();
             hashEmployeeDetail.put(getId(), new Employee(getId(), getName(), getEmail(), getAge(), getDate()));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
 
     }
@@ -141,11 +233,9 @@ public class EmployeeData {
                     bw.newLine();
                     bw.close();
                 }
-                }
-             catch (IOException i) {
-                System.out.println(i);
+            } catch (IOException exception) {
+                System.out.println(exception);
             }
-           
 
         } else {
             System.out.println("Employee is not Present ");
@@ -155,7 +245,7 @@ public class EmployeeData {
     }
 
     // Search the Employee By Id
-    void searchById(int empId) {
+    public void searchById(int empId) {
         if (hashEmployeeDetail.containsKey(empId)) {
             Employee emp = hashEmployeeDetail.get(empId);
             System.out.println();
@@ -198,7 +288,7 @@ public class EmployeeData {
 
     // Comparator for Sort the Detail By Id
 
-    private Comparator<Employee> comparatorById(boolean order) {
+    public Comparator<Employee> comparatorById(boolean order) {
         if (order) {
             return (e1, e2) -> Integer.compare(e1.employeeId, e2.employeeId);
         } else {
@@ -208,7 +298,7 @@ public class EmployeeData {
 
     // Comparator for Sort the Detail By Name
 
-    private Comparator<Employee> comparatorByName(boolean order) {
+    public Comparator<Employee> comparatorByName(boolean order) {
         if (order) {
             return (e1, e2) -> e1.employeeName.compareTo(e2.employeeName);
         } else {
@@ -218,7 +308,7 @@ public class EmployeeData {
 
     // Comparator for Sort the Detail By Id
 
-    private Comparator<Employee> comparatorByAge(boolean order) {
+    public Comparator<Employee> comparatorByAge(boolean order) {
         if (order) {
             return (e1, e2) -> Integer.compare(e1.employeeAge, e2.employeeAge);
         } else {
@@ -228,7 +318,7 @@ public class EmployeeData {
 
     // Comparator for Sort the Detail By Id
 
-    private Comparator<Employee> comparatorByDate(boolean order) {
+    public Comparator<Employee> comparatorByDate(boolean order) {
         if (order) {
             return (e1, e2) -> e1.dateOfBirth.compareTo(e2.dateOfBirth);
         } else {
@@ -236,72 +326,11 @@ public class EmployeeData {
         }
     }
 
-    void searchByText(String text) {
+    void searchByText(String text, PriorityQueue<Employee> sortDetails) {
         if (hashEmployeeDetail.size() == 0) {
             System.out.println("No employee is present");
             return;
         }
-        // Use Priority Queue to store the Employee details in sorted(Assending or
-        // Descending) Order
-        PriorityQueue<Employee> sortDetails = new PriorityQueue<>();
-
-        Scanner input = new Scanner(System.in);
-        boolean Order = false;
-        int orderChoice;
-        do {
-            System.out.println("Enter in which Order you want to sort the Employee");
-            System.out.println("1.Asscending");
-            System.out.println("2.Descending");
-            orderChoice = input.nextInt();
-
-            switch (orderChoice) {
-                case 1:
-                    Order = true;// for Asscending
-                    break;
-                case 2:
-                    Order = false;// for Descending
-                    break;
-
-                default:
-                    System.out.println("Please Enter Valid order");
-
-            }
-        } while (orderChoice != 1 && orderChoice != 2);
-
-        int parameterChoice;
-        do {
-
-            System.out.println("Enter the parameter Which you want to sort");
-            System.out.println("1. Sort the Employee on the basis of Employee Id");
-            System.out.println("2. Sort the Employee on the basis of employee Name");
-            System.out.println("3. Sort the employee on the basis of Age");
-            System.out.println("4. sort the employee on the basis of Date of Birth");
-            parameterChoice = input.nextInt();
-            switch (parameterChoice) {
-                case 1:
-                    // for Sort the Searched data by Id
-                    sortDetails = new PriorityQueue<>(comparatorById(Order));
-                    break;
-                case 2:
-                    // for Sort the Searched data by Name
-                    sortDetails = new PriorityQueue<>(comparatorByName(Order));
-                    break;
-                case 3:
-                    // sort the data by Age
-                    sortDetails = new PriorityQueue<>(comparatorByAge(Order));
-                    break;
-                case 4:
-                    // sort the data by Date of Birth
-                    sortDetails = new PriorityQueue<>(comparatorByDate(Order));
-                    break;
-
-                default:
-                    System.out.println("Please Enter the valid Parameter ");
-                    break;
-
-            }
-        } while (parameterChoice != 1 && parameterChoice != 2 && parameterChoice != 3 && parameterChoice != 4);
-
         for (Map.Entry<Integer, Employee> map : hashEmployeeDetail.entrySet()) {
             Employee emp = map.getValue();
             String checkStr = emp.employeeId + "," + emp.employeeName + "," + emp.employeeEmail + "," + emp.employeeAge
@@ -326,37 +355,9 @@ public class EmployeeData {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DateTimeParseException {
 
         EmployeeData employee = new EmployeeData();
-        try {
-            File Obj = new File("SearchAndSort/Employee.txt");
-            Scanner Reader = new Scanner(Obj);
-            while (Reader.hasNextLine()) {
-                String data = Reader.nextLine();
-                String empData[] = data.split(",");
-
-                int id = Integer.parseInt(empData[0]);
-                String name = empData[1];
-                String email = empData[2];
-                int age = Integer.parseInt(empData[3]);
-                String date = empData[4];
-
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-d");
-
-                // Getting the Date from String
-                LocalDate date1 = LocalDate.parse(date, format);
-
-                Employee e = new Employee(id, name, email, age, date1);
-                employee.hashEmployeeDetail.put(id, e);
-
-            }
-            Reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         try (Scanner input = new Scanner(System.in)) {
             int choice = 0;
             do {
@@ -425,7 +426,69 @@ public class EmployeeData {
                         System.out.println("Enter Any text You want to search");
                         String text;
                         text = input.next();
-                        employee.searchByText(text);
+                        // Use Priority Queue to store the Employee details in sorted(Assending or
+                        // Descending) Order
+                        PriorityQueue<Employee> sortDetails = new PriorityQueue<>();
+
+                        boolean Order = false;
+                        int orderChoice;
+                        do {
+                            System.out.println("Enter in which Order you want to sort the Employee");
+                            System.out.println("1.Asscending");
+                            System.out.println("2.Descending");
+                            orderChoice = input.nextInt();
+
+                            switch (orderChoice) {
+                                case 1:
+                                    Order = true;// for Asscending
+                                    break;
+                                case 2:
+                                    Order = false;// for Descending
+                                    break;
+
+                                default:
+                                    System.out.println("Please Enter Valid order");
+
+                            }
+                        } while (orderChoice != 1 && orderChoice != 2);
+
+                        int parameterChoice;
+                        do {
+
+                            System.out.println("Enter the parameter Which you want to sort");
+                            System.out.println("1. Sort the Employee on the basis of Employee Id");
+                            System.out.println("2. Sort the Employee on the basis of employee Name");
+                            System.out.println("3. Sort the employee on the basis of Age");
+                            System.out.println("4. sort the employee on the basis of Date of Birth");
+                            parameterChoice = input.nextInt();
+                            switch (parameterChoice) {
+                                case 1:
+                                    // for Sort the Searched data by Id
+                                    sortDetails = new PriorityQueue<>(employee.comparatorById(Order));
+
+                                    break;
+                                case 2:
+                                    // for Sort the Searched data by Name
+                                    sortDetails = new PriorityQueue<>(employee.comparatorByName(Order));
+                                    break;
+                                case 3:
+                                    // sort the data by Age
+                                    sortDetails = new PriorityQueue<>(employee.comparatorByAge(Order));
+                                    break;
+                                case 4:
+                                    // sort the data by Date of Birth
+                                    sortDetails = new PriorityQueue<>(employee.comparatorByDate(Order));
+                                    break;
+
+                                default:
+                                    System.out.println("Please Enter the valid Parameter ");
+                                    break;
+
+                            }
+                        } while (parameterChoice != 1 && parameterChoice != 2 && parameterChoice != 3
+                                && parameterChoice != 4);
+
+                        employee.searchByText(text, sortDetails);
 
                         break;
 
@@ -439,7 +502,7 @@ public class EmployeeData {
                 }
 
             } while (choice != 6);
-        } catch (Exception exception) {
+        } catch (InputMismatchException exception) {
             System.out.println(exception);
         }
 

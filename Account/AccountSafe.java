@@ -6,29 +6,29 @@ public class AccountSafe {
         // initialize the account object
         Account account = new Account();
 
-        Thread t1 = new Thread(new Runnable() {
+        Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
 
-                for (int i = 0; i < 5; i++) {
+                for (int index = 0; index < 5; index++) {
                     // Synchronized make Withdraw safe
                     // It is used to lock a object for any shared resourse
                     synchronized (account) {
-                        account.Withdraw(200, "t1");
+                        account.Withdraw(200, "Gourav");
                     }
                 }
 
             }
 
         });
-        Thread t2 = new Thread(new Runnable() {
+        Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
 
-                for (int i = 0; i < 5; i++) {
+                for (int index = 0; index < 2; index++) {
 
                     synchronized (account) {
-                        account.Withdraw(200, "t2");
+                        account.Withdraw(200, "Yash");
                     }
 
                 }
@@ -37,8 +37,8 @@ public class AccountSafe {
 
         });
 
-        t2.start(); // begin the Execution of thread 1
-        t1.start(); // begin the Execution of thread2
+        thread2.start(); // begin the Execution of thread 1
+        thread1.start(); // begin the Execution of thread2
 
     }
 

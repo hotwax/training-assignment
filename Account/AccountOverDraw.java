@@ -6,13 +6,13 @@ public class AccountOverDraw {
     // Initialize the account Object;
     Account account = new Account();
     // thread t1 withdraw the amount
-    Thread t1 = new Thread(new Runnable() {
+    Thread thread1 = new Thread(new Runnable() {
       @Override
       public void run() {
 
-        for (int i = 0; i < 5; i++) {
+        for (int index = 0; index < 5; index++) {
           // thread1 try to withdraw amount 5 times
-          account.Withdraw(200, "t1");
+          account.Withdraw(200, "Gourav");
 
         }
 
@@ -21,13 +21,13 @@ public class AccountOverDraw {
     });
 
     // thread t2 withdraw the amount
-    Thread t2 = new Thread(new Runnable() {
+    Thread thread2 = new Thread(new Runnable() {
       @Override
       public void run() {
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
           // thread2 try to withdraw amount 5 times
-          account.Withdraw(200, "t2");
+          account.Withdraw(200, "Yash");
 
         }
 
@@ -35,8 +35,8 @@ public class AccountOverDraw {
 
     });
 
-    t2.start();// begin the execution of thread2
-    t1.start();// begin the execution of thread1
+    thread2.start();// begin the execution of thread2
+    thread1.start();// begin the execution of thread1
 
   }
 }
