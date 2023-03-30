@@ -4,12 +4,12 @@ import java.util.InputMismatchException;
 public class CustomHashMap {
 
   public static void main(String[] args) {
-
+    
+    System.out.println("Enter the size of map: ");
     try {
       Scanner sc = new Scanner(System.in);
-      System.out.println("Enter the size of map: ");
-      int mapSize = sc.nextInt();
 
+      int mapSize = enterTheSizeOfMap();
       if (mapSize == 0) {
         System.out.println("Please enter a valid (>0) size.");
         return;
@@ -30,74 +30,86 @@ public class CustomHashMap {
 
         System.out.println("Note- key is of 'int' data type and value is of 'String' data type.");
 
-        int choice = sc.nextInt();
-        int key;
-        String val;
+        try {
+          int choice = sc.nextInt();
+          int key;
+          String val;
 
-        switch (choice) {
-          case 1:
-            if (mapSize == map.size) {
-              System.out.println("map is full");
+          switch (choice) {
+            case 1:
+              if (mapSize == map.size) {
+                System.out.println("map is full");
+                return;
+              }
+              System.out.print("Enter the Key: ");
+              key = sc.nextInt();
+              System.out.print("Enter the value: ");
+              val = sc.next(); // value
+              map.put(key, val);
+              System.out.println("-------------------------------------");
+              break;
+
+            case 2:
+              System.out.print("Enter the Key: ");
+              key = sc.nextInt();
+              map.remove(key);
+              System.out.println("-------------------------------------");
+              break;
+
+            case 3:
+              System.out.print("Enter the Key: ");
+              key = sc.nextInt();
+              HashMap.HMNode node = map.get(key);
+              if (node == null)
+                System.out.println("Doesn't exists");
+              else
+                System.out.println(node.value);
+
+              System.out.println("-------------------------------------");
+              break;
+
+            case 4:
+              System.out.print("Enter the Key: ");
+              key = sc.nextInt();
+              if (map.containsKey(key))
+                System.out.println("exists");
+              else
+                System.out.println("Doesn't exists");
+              System.out.println("-------------------------------------");
+              break;
+
+            case 5:
+              System.out.println("Program terminated successfully.");
+              System.out.println("-------------------------------------");
               return;
-            }
-            System.out.print("Enter the Key: ");
-            key = sc.nextInt();
-            System.out.print("Enter the value: ");
-            val = sc.next(); // value
-            map.put(key, val);
-            System.out.println("-------------------------------------");
-            break;
 
-          case 2:
-            System.out.print("Enter the Key: ");
-            key = sc.nextInt();
-            map.remove(key);
-            System.out.println("-------------------------------------");
-            break;
-
-          case 3:
-            System.out.print("Enter the Key: ");
-            key = sc.nextInt();
-            HashMap.HMNode node = map.get(key);
-            if (node == null)
-              System.out.println("Doesn't exists");
-            else
-              System.out.println(node.value);
-
-            System.out.println("-------------------------------------");
-            break;
-
-          case 4:
-            System.out.print("Enter the Key: ");
-            key = sc.nextInt();
-            if (map.containsKey(key))
-              System.out.println("exists");
-            else
-              System.out.println("Doesn't exists");
-            System.out.println("-------------------------------------");
-            break;
-
-          case 5:
-            System.out.println("Program terminated successfully.");
-            System.out.println("-------------------------------------");
-            return;
-
-          default:
-            System.out.println("Please enter a valid choice (1,2,3,4,5).");
-            System.out.println("-------------------------------------");
-            break;
+            default:
+              System.out.println("Please enter a valid choice (1,2,3,4,5).");
+              System.out.println("-------------------------------------");
+              break;
+          }
+        } catch (InputMismatchException e) {
+          System.out.println("Please give a valid number. " + e);
         }
 
       }
 
-    } catch (InputMismatchException e) {
-      System.out.println("Please give a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
 
   }
 
+  static int enterTheSizeOfMap() {
+    try{
+    Scanner sc = new Scanner(System.in);
+    int mapSize = sc.nextInt();
+    return mapSize;
+    }catch(InputMismatchException e){
+      System.out.println("Invalid, Please enter a valid number");
+       return enterTheSizeOfMap();
+    }
+  }
 }
 
 class HashMap {

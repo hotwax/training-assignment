@@ -5,29 +5,29 @@ public class CustomLinkedList {
 
   public static void main(String[] args) {
 
-    try {
-      Scanner sc = new Scanner(System.in);
-      LinkedList ll = new LinkedList(); // ll- linkedlist
+    LinkedList ll = new LinkedList(); // ll- linkedlist
 
-      while (true) {
-        System.out.print("Your linked list: ");
-        ll.display();
+    while (true) {
+      System.out.print("Your linked list: ");
+      ll.display();
 
-        System.out.println("Enter 1 to add at last");
-        System.out.println("Enter 2 to add at First");
-        System.out.println("Enter 3 to add at a position");
-        System.out.println("Enter 4 to remove from last");
-        System.out.println("Enter 5 to remove from First");
-        System.out.println("Enter 6 to remove at a position");
-        System.out.println("Enter 7 to get from last");
-        System.out.println("Enter 8 to get from First");
-        System.out.println("Enter 9 to get at a position");
-        System.out.println("Enter 10 to reverse the list");
-        System.out.println("Enter 11 to get the middle node");
-        System.out.println("Enter 12 to update a value");
-        System.out.println("Enter 13 to merge sort the list");
-        System.out.println("Enter 14 to exit the program");
+      System.out.println("Enter 1 to add at last");
+      System.out.println("Enter 2 to add at First");
+      System.out.println("Enter 3 to add at a position");
+      System.out.println("Enter 4 to remove from last");
+      System.out.println("Enter 5 to remove from First");
+      System.out.println("Enter 6 to remove at a position");
+      System.out.println("Enter 7 to get from last");
+      System.out.println("Enter 8 to get from First");
+      System.out.println("Enter 9 to get at a position");
+      System.out.println("Enter 10 to reverse the list");
+      System.out.println("Enter 11 to get the middle node");
+      System.out.println("Enter 12 to update a value");
+      System.out.println("Enter 13 to merge sort the list");
+      System.out.println("Enter 14 to exit the program");
 
+      try {
+        Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
         int val, idx;
 
@@ -117,8 +117,8 @@ public class CustomLinkedList {
               LinkedList sortedList = ll.mergeSort(ll.head, ll.tail);
               ll.head = sortedList.head;
               ll.tail = sortedList.tail;
-            }
-            else System.out.println("List is empty");
+            } else
+              System.out.println("List is empty");
             System.out.println("-------------------------------------");
             break;
 
@@ -132,12 +132,11 @@ public class CustomLinkedList {
             System.out.println("-------------------------------------");
             break;
         }
-
+      } catch (InputMismatchException e) {
+        System.out.println("Please give a valid number. " + e);
+      } catch (Exception e) {
+        System.out.println(e);
       }
-    } catch (InputMismatchException e) {
-      System.out.println("Please give a valid number. " + e);
-    } catch (Exception e) {
-      System.out.println(e);
     }
 
   }

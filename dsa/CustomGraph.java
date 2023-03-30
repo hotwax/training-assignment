@@ -8,12 +8,7 @@ public class CustomGraph {
     try {
       Scanner sc = new Scanner(System.in);
       System.out.println("Enter the number of nodes: ");
-      int noofnodes = sc.nextInt();
-
-      if (noofnodes==0) {
-        System.out.println("Please enter a valid (>0) number of nodes");
-        return;
-      }
+      int noofnodes = enterTheNumberOfNodes();
 
       Graph graph = new Graph();
       graph.makeArray(noofnodes);
@@ -30,71 +25,86 @@ public class CustomGraph {
 
         System.out.println("\nNodes values should be between 1 and " + noofnodes + " both inclusive");
 
-        int choice = sc.nextInt();
-        int v1, v2;
+        try {
+          int choice = sc.nextInt();
+          int v1, v2;
 
-        switch (choice) {
-          case 1:
-            System.out.print("Nodes value: ");
-            v1 = sc.nextInt();
-            v2 = sc.nextInt();
+          switch (choice) {
+            case 1:
+              System.out.print("Nodes value: ");
+              v1 = sc.nextInt();
+              v2 = sc.nextInt();
 
-            graph.addEdge(v1, v2);
-            System.out.println("-------------------------------------");
-            break;
+              graph.addEdge(v1, v2);
+              System.out.println("-------------------------------------");
+              break;
 
-          case 2:
-            System.out.print("Nodes value: ");
-            v1 = sc.nextInt();
-            v2 = sc.nextInt();
+            case 2:
+              System.out.print("Nodes value: ");
+              v1 = sc.nextInt();
+              v2 = sc.nextInt();
 
-            graph.removeEdge(v1, v2);
-            System.out.println("-------------------------------------");
-            break;
+              graph.removeEdge(v1, v2);
+              System.out.println("-------------------------------------");
+              break;
 
-          case 3:
-            System.out.print("Starting point: ");
-            int src = sc.nextInt();
-            if (src <= 0 || src > noofnodes)
-              System.out.println("Invalid arguments");
-            else
-              graph.dfs(src - 1, new boolean[noofnodes], -1);
-            System.out.println("-------------------------------------");
-            break;
+            case 3:
+              System.out.print("Starting point: ");
+              int src = sc.nextInt();
+              if (src <= 0 || src > noofnodes)
+                System.out.println("Invalid arguments");
+              else
+                graph.dfs(src - 1, new boolean[noofnodes], -1);
+              System.out.println("-------------------------------------");
+              break;
 
-          case 4:
-            System.out.print("Starting point: ");
-            src = sc.nextInt();
-            if (src <= 0 || src > noofnodes)
-              System.out.println("Invalid arguments");
-            else
-              graph.bfs(src, noofnodes);
-            System.out.println("-------------------------------------");
-            break;
+            case 4:
+              System.out.print("Starting point: ");
+              src = sc.nextInt();
+              if (src <= 0 || src > noofnodes)
+                System.out.println("Invalid arguments");
+              else
+                graph.bfs(src, noofnodes);
+              System.out.println("-------------------------------------");
+              break;
 
-          case 5:
-            System.out.println("Program terminated successfully.");
-            System.out.println("-------------------------------------");
-            return;
+            case 5:
+              System.out.println("Program terminated successfully.");
+              System.out.println("-------------------------------------");
+              return;
 
-          default:
-            System.out.println("Please enter a valid choice (1,2,3,4,5).");
-            System.out.println("-------------------------------------");
-            break;  
-            
+            default:
+              System.out.println("Please enter a valid choice (1,2,3,4,5).");
+              System.out.println("-------------------------------------");
+              break;
+
+          }
+        } catch (InputMismatchException e) {
+          System.out.println("Please give a valid number. " + e);
         }
 
-        
       }
 
-    } catch (InputMismatchException e) {
-      System.out.println("Please give a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
 
   }
 
+  static int enterTheNumberOfNodes() {
+    try {
+      Scanner sc = new Scanner(System.in);
+      int noOfNodes = sc.nextInt();
+      if (noOfNodes <= 0) {
+        System.out.println("Invalid, Please enter a valid number");
+        return enterTheNumberOfNodes();
+      }
+      return noOfNodes;
+    } catch (InputMismatchException e) {
+      System.out.println("Invalid, Please enter a valid number");
+      return enterTheNumberOfNodes();
+    }
+  }
 }
 
 class Graph {
@@ -156,8 +166,8 @@ class Graph {
     }
   }
 
-  void bfs(int src, int noofnodes) {  
-    
+  void bfs(int src, int noofnodes) {
+
     Queue queue = new Queue();
     boolean[] visited = new boolean[noofnodes]; // if true- node is already visited, false- node is not visited yet
 
@@ -185,8 +195,7 @@ class Graph {
 
 class Queue {
 
-  Queue(){
-
+  Queue() {
 
   }
 
@@ -271,4 +280,3 @@ class Node {
   int data;
   Node next;
 }
- 

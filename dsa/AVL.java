@@ -19,7 +19,6 @@ public class AVL {
   public static void main(String[] args) {
 
     try {
-      Scanner sc = new Scanner(System.in);
       Node root = null;
 
       while (true) {
@@ -31,47 +30,50 @@ public class AVL {
         System.out.println("Enter 3 to check whether data exists");
         System.out.println("Enter 4 to exit");
 
-        int choice = sc.nextInt();
-        int val;
+        try {
+          Scanner sc = new Scanner(System.in);
+          int choice = sc.nextInt();
+          int val;
 
-        switch (choice) {
-          case 1:
-            System.out.println("Enter the value of the node: ");
-            val = sc.nextInt();
-            root = add(root, val);
-            System.out.println("-------------------------------------");
-            break;
+          switch (choice) {
+            case 1:
+              System.out.println("Enter the value of the node: ");
+              val = sc.nextInt();
+              root = add(root, val);
+              System.out.println("-------------------------------------");
+              break;
 
-          case 2:
-            System.out.println("Enter the value of the node: ");
-            val = sc.nextInt();
-            root = remove(root, val);
-            System.out.println("-------------------------------------");
-            break;
+            case 2:
+              System.out.println("Enter the value of the node: ");
+              val = sc.nextInt();
+              root = remove(root, val);
+              System.out.println("-------------------------------------");
+              break;
 
-          case 3:
-            System.out.println("Enter the value of the node: ");
-            val = sc.nextInt();
-            String result = whetherExists(root, val) ? (val + " exists") : (val + " doesn't exists");
-            System.out.println(result);
-            System.out.println("-----------------------------");
-            break;
+            case 3:
+              System.out.println("Enter the value of the node: ");
+              val = sc.nextInt();
+              String result = whetherExists(root, val) ? (val + " exists") : (val + " doesn't exists");
+              System.out.println(result);
+              System.out.println("-----------------------------");
+              break;
 
-          case 4:
-            System.out.println("Program terminated successfully.");
-            System.out.println("-------------------------------------");
-            return;
+            case 4:
+              System.out.println("Program terminated successfully.");
+              System.out.println("-------------------------------------");
+              return;
 
-          default:
-            System.out.println("Please enter a valid choice (1,2,3).");
-            System.out.println("-------------------------------------");
-            break;
+            default:
+              System.out.println("Please enter a valid choice (1,2,3).");
+              System.out.println("-------------------------------------");
+              break;
+          }
+
+        } catch (InputMismatchException e) {
+          System.out.println("Please give a valid number. " + e);
         }
-
       }
 
-    } catch (InputMismatchException e) {
-      System.out.println("Please give a valid number. " + e);
     } catch (Exception e) {
       System.out.println(e);
     }
@@ -115,10 +117,10 @@ public class AVL {
       node.left = add(node.left, val);
     } else if (val > node.data) {
       node.right = add(node.right, val);
-    } else{
-      System.out.println("node with data "+val+" already exists.");
+    } else {
+      System.out.println("node with data " + val + " already exists.");
       return node;
-    } 
+    }
 
     node.height = height(node);
     node.bal = balance(node);

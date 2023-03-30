@@ -5,23 +5,25 @@ public class CustomStack {
 
   public static void main(String[] args) {
 
-    try {
-      Stack stack = new Stack();
-      Scanner sc = new Scanner(System.in);
-
-      while (true) {
-        System.out.print("Your Stack: ");
-        stack.display(stack.head);
-        System.out.println();
-
-        System.out.println("Enter 1 to push");
-        System.out.println("Enter 2 to pop");
-        System.out.println("Enter 3 to peek");
-        System.out.println("Enter 4 to search");
-        System.out.println("Enter 5 to update");
-        System.out.println("Enter 6 to exit the program");
-
+    Stack stack = new Stack();
+    
+    while (true) {
+      
+      System.out.print("Your Stack: ");
+      stack.display(stack.head);
+      System.out.println();
+      
+      System.out.println("Enter 1 to push");
+      System.out.println("Enter 2 to pop");
+      System.out.println("Enter 3 to peek");
+      System.out.println("Enter 4 to search");
+      System.out.println("Enter 5 to update");
+      System.out.println("Enter 6 to exit the program");
+      
+      try {
         int val, idx;
+        Scanner sc = new Scanner(System.in);
+        
         int choice = sc.nextInt();
 
         switch (choice) {
@@ -67,8 +69,8 @@ public class CustomStack {
               System.out.print("Enter the new value: ");
               val = sc.nextInt();
               int oldValue = stack.update(idx, val);
-              if (oldValue!=Integer.MAX_VALUE) {
-                System.out.println("Old value: " +oldValue);
+              if (oldValue != Integer.MAX_VALUE) {
+                System.out.println("Old value: " + oldValue);
               }
             }
             System.out.println("-------------------------------------");
@@ -85,10 +87,9 @@ public class CustomStack {
             break;
         }
 
+      } catch (InputMismatchException e) {
+        System.out.println("Please give a valid number. " + e);
       }
-
-    } catch (InputMismatchException e) {
-      System.out.println("Please give a valid number. " + e);
     }
 
   }
@@ -162,17 +163,17 @@ class Stack {
     display(node.next);
   }
 
-  int update(int idx, int val){
-    if(idx<0 || idx>=size){
+  int update(int idx, int val) {
+    if (idx < 0 || idx >= size) {
       System.out.println("Please enter a valid index");
       return Integer.MAX_VALUE;
     }
-    Node temp=head;
+    Node temp = head;
     for (int i = 0; i < idx; i++) {
-      temp=temp.next;
+      temp = temp.next;
     }
     int oldValue = temp.data;
-    temp.data=val;
+    temp.data = val;
     return oldValue;
   }
 

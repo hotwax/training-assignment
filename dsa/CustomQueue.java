@@ -5,23 +5,22 @@ public class CustomQueue {
 
   public static void main(String[] args) {
 
-    try {
-      Scanner sc = new Scanner(System.in);
+    Queue queue = new Queue();
 
-      Queue queue = new Queue();
+    while (true) {
+      System.out.print("Your Queue: ");
+      queue.display(queue.head);
+      System.out.println();
 
-      while (true) {
-        System.out.print("Your Queue: ");
-        queue.display(queue.head);
-        System.out.println();
+      System.out.println("Enter 1 to add");
+      System.out.println("Enter 2 to remove");
+      System.out.println("Enter 3 to peek");
+      System.out.println("Enter 4 to search");
+      System.out.println("Enter 5 to update");
+      System.out.println("Enter 6 to exit the program");
 
-        System.out.println("Enter 1 to add");
-        System.out.println("Enter 2 to remove");
-        System.out.println("Enter 3 to peek");
-        System.out.println("Enter 4 to search");
-        System.out.println("Enter 5 to update");
-        System.out.println("Enter 6 to exit the program");
-
+      try {
+        Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
         int val, idx;
 
@@ -58,18 +57,18 @@ public class CustomQueue {
             break;
 
           case 5:
-          if (!queue.isEmpty()) {
-            System.out.print("Enter the index at which value needs to be updated: ");
-            idx = sc.nextInt();
-            System.out.print("Enter the new value: ");
-            val = sc.nextInt();
-            int oldValue = queue.update(idx, val);
-            if (oldValue!=Integer.MAX_VALUE) {
-              System.out.println("Old value: " +oldValue);
+            if (!queue.isEmpty()) {
+              System.out.print("Enter the index at which value needs to be updated: ");
+              idx = sc.nextInt();
+              System.out.print("Enter the new value: ");
+              val = sc.nextInt();
+              int oldValue = queue.update(idx, val);
+              if (oldValue != Integer.MAX_VALUE) {
+                System.out.println("Old value: " + oldValue);
+              }
             }
-          }
-          System.out.println("-------------------------------------");
-          break;
+            System.out.println("-------------------------------------");
+            break;
 
           case 6:
             System.out.println("Program terminated successfully.");
@@ -81,11 +80,9 @@ public class CustomQueue {
             System.out.println("-------------------------------------");
             break;
         }
-
+      } catch (InputMismatchException e) {
+        System.out.println("Please give a valid number. " + e);
       }
-
-    } catch (InputMismatchException e) {
-      System.out.println("Please give a valid number. " + e);
     }
 
   }
@@ -96,11 +93,10 @@ class Node {
   int data;
   Node next;
 }
- 
-public class Queue {
 
-  Queue(){
+class Queue {
 
+  Queue() {
 
   }
 
@@ -179,20 +175,18 @@ public class Queue {
     return size;
   }
 
-  int update(int idx, int val){
-    if(idx<0 || idx>=size){
+  int update(int idx, int val) {
+    if (idx < 0 || idx >= size) {
       System.out.println("Please enter a valid index");
       return Integer.MAX_VALUE;
     }
-    Node temp=head;
+    Node temp = head;
     for (int i = 0; i < idx; i++) {
-      temp=temp.next;
+      temp = temp.next;
     }
     int oldValue = temp.data;
-    temp.data=val;
+    temp.data = val;
     return oldValue;
   }
 
-
 }
-
