@@ -21,10 +21,10 @@ class SerializationTest {
 
     try {
       FileOutputStream fileOutputStream = new FileOutputStream(fileName);
-      ObjectOutputStream objoutputStream = new ObjectOutputStream(fileOutputStream);
+      ObjectOutputStream objOutputStream = new ObjectOutputStream(fileOutputStream);
 
-      objoutputStream.writeObject(students); // converting objects to bytes 
-      objoutputStream.close();
+      objOutputStream.writeObject(students); // converting objects to bytes 
+      objOutputStream.close();
       fileOutputStream.close();
 
       System.out.println("\nSerialized\n");
