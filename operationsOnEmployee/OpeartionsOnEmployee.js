@@ -1,3 +1,4 @@
+const { match } = require("assert");
 const fileHandler = require("fs");
 const read = require("readline").createInterface({
   input: process.stdin,
@@ -42,6 +43,14 @@ function enterName() {
 
   return new Promise((resolve) => {
     read.question("\nEnter name of the employee: ", (name) => {
+      if(name.length==0){
+      console.log("\nName is empty. Please enter a valid name.");
+      resolve(enterName()) // rerun enterName() function
+      }
+      if (!new RegExp('^[A-z ]+$').test(name)) { // invalid age
+        console.log("Please enter a valid name.");
+        resolve(enterName()) // rerun enterName() function
+      }
       resolve(name) // pass name to addAnEmployee() function 
     });
   });
@@ -70,7 +79,7 @@ function enterDateOfBirth() {
 
   return new Promise((resolve) => {
     read.question("\nEnter date of birth of the employee yyyy-mm-dd: ", (dateOfBirth) => { //invalid dateOfBirth
-      if (!new RegExp('^([1-9][0-9][0-9][0-9])-(0[1-9]||1[0-2])-([0-2][0-9]||3[0-1])$').test(dateOfBirth)) {
+      if (!new RegExp('^([1-9][0-9][0-9][0-9])-(0[1-9]||1[0-2])-([0-2][1-9]||([1-2]0)||3[0-1])$').test(dateOfBirth)) {
         console.log("Please enter a valid date.");
         resolve(enterDateOfBirth()) // rerun enterDateOfBirth() function
       }
@@ -144,8 +153,8 @@ function showAllEmployees() {
 }
 
 
-// search for an employee's data 
-function searchAnEmployee() {
+// search and sort employee's data 
+function searchAndSortEmployees() {
 
   // enter any value(name, age, email, date of birth) of any existing employee 
   read.question("Enter employee's data (name or age or email or date of birth): ", (query) => {
@@ -156,12 +165,33 @@ function searchAnEmployee() {
       return Object.keys(employee).some((val) => employee[val] == query);
     }) // search the query in 'employeesData' array
     
-    matchedData.forEach((employee) => console.log(employee.toString())) // print the matched entries of 'employeesData'
+    if (matchedData.length==0){
+      console.log("No employee exists."); // No match found
+      console.log("------------------------\n");
+      enterChoice()
+    } 
 
-    if (matchedData.length==0) console.log("No employee exists."); // No match found
-
-    console.log("------------------------\n");
-    enterChoice()
+    enterSortBy().then((sortBY) => {
+      enterOrder().then((order) => {
+  
+        console.log("Employee's data:");
+        matchedData.sort((e1, e2) => {
+          // for eg- if sortBy is 'name' then e1Field and e2Field will be two employee's name values
+          let e1Field = e1[sortBY];  
+          let e2Field = e2[sortBY];
+  
+          let i = (order == "ascending" ? 1 : -1); // 1 for ascending order and -1 for descending order(inversion)
+          if (e1Field < e2Field) return -1 * i;
+          else if (e1Field > e2Field) return 1 * i;
+          else return 0;
+        }).forEach((employee) => {
+          console.log(employee.toString());  // print the resulted data
+        })
+  
+        console.log("------------------------\n");
+        enterChoice()
+      })
+    })
   });
 }
 
@@ -199,27 +229,7 @@ function enterOrder() {
 
 function sortEmployees() {
 
-  enterSortBy().then((sortBY) => {
-    enterOrder().then((order) => {
-
-      console.log("Employee's data:");
-      [...employeesData].sort((e1, e2) => {
-        // for eg- if sortBy is 'name' then e1Field and e2Field will be two employee's name values
-        let e1Field = e1[sortBY];  
-        let e2Field = e2[sortBY];
-
-        let i = (order == "ascending" ? 1 : -1); // 1 for ascending order and -1 for descending order(inversion)
-        if (e1Field < e2Field) return -1 * i;
-        else if (e1Field > e2Field) return 1 * i;
-        else return 0;
-      }).forEach((employee) => {
-        console.log(employee.toString());  // print the resulted data
-      })
-
-      console.log("------------------------\n");
-      enterChoice()
-    })
-  })
+  
 }
 
 
@@ -229,9 +239,8 @@ function enterChoice() {
   console.log('1. Add an employee');
   console.log('2. Delete an employee');
   console.log("3. Show all employee's data");
-  console.log('4. Search for an employee');
-  console.log("5. Sort the employees");
-  console.log('6. Exit the program');
+  console.log('4. Search and sort employees');
+  console.log('5. Exit the program');
   read.question('\nEnter your choice: ', (choice) => {
     switch (choice) {
       case '1':
@@ -244,12 +253,9 @@ function enterChoice() {
         showAllEmployees();
         break;
       case '4':
-        searchAnEmployee();
+        searchAndSortEmployees();
         break;
       case '5':
-        sortEmployees();
-        break;
-      case '6':
         read.close();
         process.exit(1);
       default:
