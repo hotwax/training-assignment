@@ -284,7 +284,7 @@ output:
 
 11) Find all the customers in SanJose who have a rating above 200.
 
-select * from customers where city = "sanjose" and rating>200 ;
+select cnum , cname from customers where city = "sanjose" and rating>200 ;
 
 output:
 +------+----------+---------+--------+------+
@@ -331,6 +331,7 @@ output:
 
 14) Find all customers who booked orders on October 3.
 
+// without Join
 SELECT * FROM customers WHERE cnum in (SELECT distinct(cnum) FROM orders WHERE odate = "10/03/90" );
 output:
 +------+----------+---------+--------+------+
@@ -341,6 +342,18 @@ output:
 | 2001 | Hoffman  | London  |    100 | 1001 |
 | 2003 | Liu      | Sanjose |    200 | 1002 |
 +------+----------+---------+--------+------+
+
+// With Join
+SELECT DISTINCT o.cnum, c.cname FROM customers c INNER JOIN orders o ON o.cnum = c.cnum WHERE o.odate = "1990-10-03";
+
++------+----------+
+| cnum | cname    |
++------+----------+
+| 2001 | Hoffman  |
+| 2003 | Liu      |
+| 2008 | Cisneros |
+| 2007 | Pereira  |
++------+----------+
 
 15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
 SELECT onum, SUM(amt) AS totalAmount ,odate FROM orders GROUP BY odate HAVING totalAmount - 2000 >= ( SELECT MAX(amt) From orders );
@@ -438,6 +451,7 @@ output:
 
 22) Find all customers located in cities where Serres has customers. 
 
+// without Join
 SELECT cnum , cname , city FROM customers WHERE city IN (SELECT city FROM customers WHERE snum = (SELECT snum FROM salespeople WHERE sname = "serres")) ;
 output: 
 +------+----------+---------+
@@ -447,6 +461,18 @@ output:
 | 2004 | Grass    | Berlin  |
 | 2008 | Cisneros | Sanjose |
 +------+----------+---------+
+
+// With Join
+SELECT cnum, cname FROM customers c INNER JOIN (SELECT  c.city FROM customers c INNER JOIN salespeople s ON s.snum = c.snum WHERE sname = 'Serres') t ON t.city = c.city;
+
++------+----------+
+| cnum | cname    |
++------+----------+
+| 2003 | Liu      |
+| 2004 | Grass    |
+| 2008 | Cisneros |
++------+----------+
+ 
 
 23) Select all customers with a rating above 200.
 
@@ -486,7 +512,7 @@ output:
 
 SELECT s.snum , s.sname , COUNT(c.snum) AS count FROM salespeople AS s
 INNER JOIN
-customers AS c WHERE c.snum = s.snum GROUP BY c.snum HAVING count>1 ;
+customers AS c ON c.snum = s.snum GROUP BY c.snum HAVING count>1 ;
 output:
 +------+--------+-------+
 | snum | sname  | count |
@@ -499,7 +525,7 @@ output:
 
 SELECT s.sname , c.cname , s.city FROM salespeople AS s
 INNER JOIN
-customers AS c WHERE c.city = s.city AND c.snum = s.snum ;
+customers AS c ON c.city = s.city AND c.snum = s.snum ;
 output:
 +--------+---------+---------+
 | sname  | cname   | city    |
@@ -531,6 +557,10 @@ output:
 SELECT s.sname , MAX(o.amt) FROM salespeople AS s
 INNER JOIN
 orders AS o WHERE o.snum=s.snum GROUP BY o.snum HAVING o.snum IN (SELECT snum FROM salespeople WHERE sname = "serres" OR sname="rifkin") ;
+
+SELECT s.sname , MAX(o.amt) FROM salespeople AS s
+INNER JOIN
+orders AS o WHERE o.snum=s.snum AND s.sname IN ("serres","rifkin") GROUP BY o.snum ;
 
 output:
 +--------+------------+
@@ -591,6 +621,16 @@ output:
 | Clemens | Hoffman |
 +---------+---------+
 
+SELECT c1.cname "customer 1", c2.cname "custsomer 2" FROM customers c1 INNER JOIN customers c2 ON c1.snum = c2.snum WHERE c1.cnum <> c2.cnum AND c1.cname < c2.cname;
+
++------------+------------+
+| customer 1 | customer 2 |
++------------+------------+
+| Clemens    | Hoffman    |
+| Grass      | Liu        |
++------------+------------+
+
+
 34) Select all orders that are greater than the average for October 4. 
 
  select * from orders where amt > (select avg(amt) from orders group by odate having odate="10/04/90") order by amt ;
@@ -609,7 +649,7 @@ output:
 
 35) Write a select command using correlated subquery that selects the names and numbers of all customers with ratings equal to the maximum for their city. 
 
-SELECT * FROM customers c1 WHERE rating = (SELECT MAX(rating) FROM customers c2 WHERE c1.city = c2.city);
+SELECT cnum , cname FROM customers c1 WHERE rating = (SELECT MAX(rating) FROM customers c2 WHERE c1.city = c2.city);
 output:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
@@ -664,6 +704,20 @@ SELECT * FROM orders WHERE amt < ( SELECT MAX(amt) FROM orders WHERE cnum IN (SE
 | 3010 | 1309.95 | 10/06/90 | 2004 | 1002 |
 +------+---------+----------+------+------+
 
+SELECT onum, amt FROM orders WHERE amt < (SELECT MAX(o.amt) FROM orders o INNER JOIN customers c ON c.cnum = o.cnum  WHERE c.city = 'SanJose');
++------+---------+
+| onum | amt     |
++------+---------+
+| 3001 |   18.69 |
+| 3003 |  767.19 |
+| 3002 | 1900.10 |
+| 3006 | 1098.16 |
+| 3009 | 1713.23 |
+| 3007 |   75.75 |
+| 3008 | 4723.00 |
+| 3010 | 1309.95 |
++------+---------+
+
 39) Find all orders with above average amounts for their customers. 
 
 SELECT * FROM orders o1 WHERE amt > (SELECT AVG(o2.amt) FROM orders o2 WHERE o1.cnum=o2.cnum GROUP BY o2.cnum);
@@ -702,6 +756,19 @@ output:
 | 1007 | RifKin  | Barcelona |   15 | 3001 |   18.69 | 10/03/90 | 2008 | 1007 |   2.803500 |
 | 1007 | RifKin  | Barcelona |   15 | 3006 | 1098.16 | 10/03/90 | 2008 | 1007 | 164.724000 |
 +------+---------+-----------+------+------+---------+----------+------+------+------------+
+
+With Join
+SELECT (o.amt * s.comm)/ 100 commission, s.sname,o.onumFROM orders o INNER JOIN SALESPEOPLE s ON s.snum = o.snum INNER JOIN customers c ON o.cnum = c.cnum WHERE rating > 100;
++------------+---------+------+
+| commission | sname   | onum |
++------------+---------+------+
+|   2.803500 | Rifkin  | 3001 |
+| 670.858500 | Serres  | 3005 |
+| 164.724000 | Rifkin  | 3006 |
+| 171.323000 | AxelRod | 3009 |
+|   9.847500 | Serres  | 3007 |
+| 170.293500 | Serres  | 3010 |
++------------+---------+------+
 
 42) Count the customers with ratings above SanJose’s average. 
 
@@ -763,6 +830,15 @@ output:
 | Liu       | Grass     |     1002 |
 | Hoffman   | Clemens   |     1001 |
 +-----------+-----------+----------+
+
+SELECT c1.cname "customer 1",  c2.cname "customer 2" FROM  customers c1 INNER JOIN customers c2 ON c1.snum = c2.snum WHERE c1.cnum <> c2.cnum AND c1.cname < c2.cname;
+
++------------+------------+
+| customer 1 | customer 2 |
++------------+------------+
+| Clemens    | Hoffman    |
+| Grass      | Liu        |
++------------+------------+
 
 46) Write a query that will give you all orders for more than $1000.00. 
 
@@ -910,11 +986,24 @@ SELECT Total,SNUM FROM (SELECT SUM(AMT) AS TOTAL,SNUM FROM orders GROUP BY SNUM)
 +--------------------+------+
 3 rows in set (0.05 sec)
 
-54) Write a query that selects all orders save those with zeroes or NULL in the amount file.
+54) Write a query that selects all orders except those with zero or null in the Amt field from table.
 
-SELECT * FROM orders WHERE AMT = 0 OR NULL;
-output: 
-Empty set (0.00 sec)
+SELECT onum, amt FROM orders WHERE  amt <> 0 AND amt IS NOT NULL;
+
++------+---------+
+| onum | amt     |
++------+---------+
+| 3001 |   18.69 |
+| 3003 |  767.19 |
+| 3002 | 1900.10 |
+| 3005 | 5160.45 |
+| 3006 | 1098.16 |
+| 3009 | 1713.23 |
+| 3007 |   75.75 |
+| 3008 | 4723.00 |
+| 3010 | 1309.95 |
+| 3011 | 9891.88 |
++------+---------+
 
 55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
 
@@ -966,7 +1055,9 @@ output:
 
 59) Write a query that produces the names and ratings of all customers who have average orders.
 
-SELECT c.cname, c.rating FROM customers c, orders o WHERE c.cnum = o.cnum AND o.amt >(SELECT AVG(amt) AS amt FROM orders) GROUP BY cname;
+SELECT c.cname, c.rating FROM customers c
+INNER JOIN
+orders o ON c.cnum = o.cnum AND o.amt >(SELECT AVG(amt) AS amt FROM orders) GROUP BY cname;
 output:
 +----------+--------+
 | cname    | rating |
@@ -1121,6 +1212,16 @@ output:
 | 2007 | Pereira |
 +------+---------+
 
+SELECT c.cnum, c.cname,  s.sname FROM customers c INNER JOIN salespeople s ON c.snum = s.snum WHERE s.sname = 'Peel' || s.sname = 'Motika';
+
++------+---------+--------+
+| cnum | cname   | sname  |
++------+---------+--------+
+| 2001 | Hoffman | Peel   |
+| 2006 | Clemens | Peel   |
+| 2007 | Pereira | Motika |
++------+---------+--------+
+
 68) Count the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.) 
 
 SELECT COUNT(DISTINCT snum) FROM orders GROUP BY odate ;
@@ -1260,6 +1361,18 @@ output:
 +------+---------+----------+------+------+
 3 rows in set (0.00 sec)
 
+SELECT o.onum,  o.snum, o.odate, o.amt FROM orders o 
+INNER JOIN 
+customers c ON o.snum = c.snum WHERE c.cname = 'Hoffman';
+
++------+------+------------+---------+
+| onum | snum | odate      | amt     |
++------+------+------------+---------+
+| 3003 | 1001 | 1990-10-03 |  767.19 |
+| 3008 | 1001 | 1990-10-05 | 4723.00 |
+| 3011 | 1001 | 1990-10-06 | 9891.88 |
++------+------+------------+---------+
+
 78) Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive). 
 
 SELECT * FROM salespeople WHERE comm/100 = 0.10 OR comm/100 = 0.12 OR comm/100 BETWEEN 0.10 AND 0.12 ;
@@ -1288,7 +1401,9 @@ output:
 
 80) Write a query that selects each customer’s smallest order
 
-SELECT c.cname , o.cnum , MIN(o.amt) AS SmallestOrder FROM orders o , customers c WHERE c.cnum = o.cnum GROUP BY o.cnum ;
+SELECT c.cname , o.cnum , MIN(o.amt) AS SmallestOrder FROM orders o
+INNER JOIN
+customers c ON c.cnum = o.cnum GROUP BY o.cnum ;
 
 output:
 +----------+------+---------------+
@@ -1366,7 +1481,8 @@ output:
 
 SELECT s.sname , s.city , c.cname , c.city FROM salespeople s
 INNER JOIN
-Customers c WHERE c.snum = s.snum AND s.city != c.city ;
+Customers c ON
+c.snum = s.snum AND s.city != c.city ;
 output:
 +---------+-----------+----------+---------+
 | sname   | city      | cname    | city    |
@@ -1381,7 +1497,8 @@ output:
 
 SELECT s.* , c.cname as Serving FROM salespeople s
 INNER JOIN
-Customers c WHERE c.snum = s.snum AND s.comm>11 AND c.rating < 250 ;
+Customers c ON
+c.snum = s.snum AND s.comm>11 AND c.rating < 250 ;
 
 output:
 +------+--------+---------+------+---------+
@@ -1405,7 +1522,10 @@ SELECT s1.* FROM salespeople s1 WHERE s1.city IN (SELECT s2.city FROM salespeopl
 
 89) Which salesperson has earned the maximum commission? 
 
-SELECT s.sname  , SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s , orders o WHERE s.snum = o.snum GROUP BY snum ORDER BY Commission DESC LIMIT 1;
+SELECT s.sname  , SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s 
+INNER JOIN
+orders o ON
+s.snum = o.snum GROUP BY snum ORDER BY Commission DESC LIMIT 1;
 output:
 
 +-------+-------------+------+
@@ -1416,7 +1536,11 @@ output:
 
 90) Does the customer who has placed the maximum number of orders have the maximum rating?
 
-SELECT cname , rating , No_of_orders FROM customers c1 , (SELECT cnum , count(cnum) as No_of_orders from orders group by cnum having count(cnum) > 1) AS c2 WHERE c1.cnum = c2.cnum;
+SELECT cname , rating , No_of_orders FROM customers c1 
+INNER JOIN
+(SELECT cnum , count(cnum) as No_of_orders from orders group by cnum having count(cnum) > 1) AS c2 
+ON
+c1.cnum = c2.cnum;
 output:
 +----------+--------+--------------+
 | cname    | rating | No_of_orders |
@@ -1489,7 +1613,8 @@ output:
 
 SELECT s.snum , s.sname , o.odate , max(o.amt) FROM orders o
 INNER JOIN
-Salespeople s WHERE s.snum = o.snum GROUP BY s.snum ;
+Salespeople s ON
+s.snum = o.snum GROUP BY s.snum ;
 
 output:
 +------+---------+----------+------------+
@@ -1504,7 +1629,11 @@ output:
 
 97) Who is the most successful salesperson?
 
-SELECT s.sname  , SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s , orders o WHERE s.snum = o.snum GROUP BY snum ORDER BY Commission DESC LIMIT 1;
+SELECT s.sname  , SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s
+INNER JOIN
+orders o ON
+s.snum = o.snum GROUP BY snum ORDER BY Commission DESC LIMIT 1;
+
 output:
 // Peel Got Maximum Commission Among all the Salespeople 
 +-------+-------------+------+
@@ -1545,6 +1674,19 @@ output:
 | Grass    | Cisneros |
 +----------+----------+
 
+SELECT c1.cname, c2.cname, c1.rating FROM customers c1
+INNER JOIN 
+customers c2 ON c1.rating = c2.rating  WHERE c1.cnum <> c2.cnum AND c1.cname < c2.cname;
+
++----------+---------+--------+
+| cname    | cname   | rating |
++----------+---------+--------+
+| Clemens  | Hoffman |    100 |
+| Giovanni | Liu     |    200 |
+| Cisneros | Grass   |    300 |
+| Clemens  | Pereira |    100 |
+| Hoffman  | Pereira |    100 |
++----------+---------+--------+
 
 99) Find all orders greater than the average for October 4th.
 
@@ -1591,7 +1733,11 @@ SELECT snum , total FROM (SELECT snum , SUM(amt) as total FROM orders GROUP BY s
 
 103) Give names and numbers of all salespersons that have more than one customer? 
 
-SELECT s.snum , s.sname FROM salespeople s, ( SELECT snum , COUNT(snum) AS Count FROM customers GROUP BY snum) AS t WHERE t.snum = s.snum AND t.count>1 ;
+SELECT s.snum , s.sname FROM salespeople s
+INNER JOIN
+( SELECT snum , COUNT(snum) AS Count FROM customers GROUP BY snum) t ON
+t.snum = s.snum AND t.count>1 ;
+
 output:
 +------+--------+
 | snum | sname  |
@@ -1604,7 +1750,8 @@ output:
 
 SELECT s.snum , s.sname , c.cname , s.city FROM salespeople s
 INNER JOIN
-customers c WHERE s.city = c.city AND s.snum != c.snum ;
+customers c ON
+s.city = c.city AND s.snum != c.snum ;
 output:
 +------+--------+----------+---------+
 | snum | sname  | cname    | city    |
@@ -1626,7 +1773,10 @@ SELECT SUM(amt) AS total from orders WHERE cnum in (SELECT cnum FROM customers W
 | 18995.40 |
 +----------+
 // Commission paid to salesperson in London, and New York
-SELECT SUM(o.amt)*s.comm/100 AS commission FROM salespeople s , orders o WHERE s.snum = o.snum AND s.city IN ("London" , "newyork") ;
+SELECT SUM(o.amt)*s.comm/100 AS commission FROM salespeople s
+INNER JOIN
+orders o ON
+s.snum = o.snum AND s.city IN ("London" , "newyork") ;
 +-------------+
 | commission  |
 +-------------+
@@ -1644,7 +1794,8 @@ SELECT SUM(o.amt)*s.comm/100 AS commission FROM salespeople s , orders o WHERE s
 
 SELECT s.sname ,s.city, o.onum , MAX(o.amt) , o.odate FROM salespeople s
 INNER JOIN
-orders o WHERE s.snum = o.snum GROUP BY s.sname;
+orders o ON
+s.snum = o.snum GROUP BY s.sname;
 output:
 +---------+-----------+------+------------+----------+
 | sname   | city      | onum | MAX(o.amt) | odate    |
@@ -1658,7 +1809,9 @@ output:
 
 107) Which salesperson is having lowest commission?
 
-SELECT s.sname,SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s ,orders o WHERE s.snum = o.snum GROUP BY snum ORDER BY Commission LIMIT 1;
+SELECT s.sname,SUM(o.amt)*s.comm/100 AS Commission, s.snum FROM salespeople s
+INNER JOIN
+orders o ON s.snum = o.snum GROUP BY snum ORDER BY Commission LIMIT 1;
 output:
 +--------+------------+------+
 | sname  | Commission | snum |
