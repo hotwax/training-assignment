@@ -1,0 +1,66 @@
+Test Case -1 (Test case when Word.txt has Url.txt are correct)
+
+Input:-
+
+  Url.txt
+  Word.txt
+
+Output:-
+
+https://justinjackson.ca/words.html
+to - 37
+ - 33
+thanks - 29
+
+https://www.hotwaxsystems.com/
+and - 21
+the - 20
+to - 19
+
+to-56
+-47
+the-34
+and-32
+thanks-29
+OFBiz-17
+HotWax-10
+
+--------------------------------------------------------------------------------------
+
+Test Case- 2 (Test case when Url.txt is empty)
+
+Input:-
+
+  Url.txt (empty)
+  Word.txt
+
+Output:- Url file is empty
+
+--------------------------------------------------------------------------------------
+
+Test case- 3 (Test case when Word.txt is empty)
+
+Input:-
+
+  Url.txt 
+  Word.txt (empty)
+
+Output:- Word file is empty
+
+--------------------------------------------------------------------------------------
+
+Test case- 4 (Test case when both file is empty)
+
+Input:-
+  Url.txt (empty)
+  Word.txt (empty)
+
+Output:- Word file is empty
+
+--------------------------------------------------------------------------------------
+Test case- 5 (Test case when Url is incorrect)
+
+Input:-
+  Url.txt (https://justinjack.ca)
+
+Output:- UnknownHostException: justinjack.ca

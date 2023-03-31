@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Date;
 
 //Student class Implements Serializable interface
 public class Student implements Serializable {
@@ -7,13 +8,13 @@ public class Student implements Serializable {
 
     // Instance variables for the class.
     private String firstName;
-    private String dateOfBirth;
+    private Object dateOfBirth;
     private Address address;
 
     //Constructor for Student class
     public Student(String firstName, String dateOfBirth, Address address) {
         this.firstName = firstName;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = new Date(dateOfBirth);
         this.address = address;
     }
     //getter methods
@@ -21,7 +22,7 @@ public class Student implements Serializable {
         return firstName;
     }
 
-    public String getDateOfBirth() {
+    public Object getDateOfBirth() {
         return dateOfBirth;
     }
 

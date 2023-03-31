@@ -6,7 +6,7 @@ public class DeserializationTest {
     public static void main(String[] args) {
         //ArrayList to store the deserialized objects
        ArrayList<Student> List=  new ArrayList<>();
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(args[0]))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("ProblemStatment-4/Output1.ser"))) {
             List = (ArrayList<Student>) ois.readObject();
             //print out the details of each student
             for (Student c :List)
@@ -19,7 +19,7 @@ public class DeserializationTest {
                 System.out.print(c.getAddress().getCountry());
                 System.out.println();
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | ClassCastException e) {
             e.printStackTrace();
         }
     }

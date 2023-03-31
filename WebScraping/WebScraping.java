@@ -11,7 +11,7 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.File;
-import java.io.FileNotFoundException;  
+import java.io.FileNotFoundException;
 
 //defining class Getdata
 class Getdata
@@ -80,7 +80,7 @@ public class WebScraping{
     ArrayList<String> Word = new ArrayList<String>();
     //reading Word.txt
     try {
-        File myObj1 = new File("Word.txt");
+        File myObj1 = new File("WebScraping/Word.txt");
         Scanner myReader = new Scanner(myObj1);
         while (myReader.hasNextLine()) {
           String data = myReader.nextLine();
@@ -95,12 +95,18 @@ public class WebScraping{
         System.out.println("File Word.txt not found.");
         e.printStackTrace();
     }
+        // checking if Word.txt is empty
+        if(Word.isEmpty()){
+            System.out.println("Word file is empty");
+            return;
+        }
+
     Getdata get=new Getdata(Word);
 
     ArrayList<String> Urls = new ArrayList<String>();
-    //reding file Url.txt
+    //reading file Url.txt
     try {
-        File myObj = new File("Url.txt");
+        File myObj = new File("WebScraping/Url.txt");
         Scanner myReader = new Scanner(myObj);
         while (myReader.hasNextLine()) {
           String data = myReader.nextLine();
@@ -111,7 +117,11 @@ public class WebScraping{
         System.out.println("File Url.txt not found.");
         e.printStackTrace();
     }
-
+    // checking if Url.txt is empty
+        if(Urls.isEmpty()){
+            System.out.println("Url file is empty");
+            return;
+        }
     System.out.println("========");
     System.out.println();
     //Iterate over the Urls ArrayList and process each URL
