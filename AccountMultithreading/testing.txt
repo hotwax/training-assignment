@@ -1,0 +1,43 @@
+case 1- Withdrawal with AccountOverdrawDemo 
+
+Current balance: 1000
+
+person2 Withdrawal amount: 100 ----- Current balance: 900
+person1 Withdrawal amount: 100 ----- Current balance: 900
+person1 Withdrawal amount: 100 ----- Current balance: 800
+person2 Withdrawal amount: 100 ----- Current balance: 800
+person1 Withdrawal amount: 100 ----- Current balance: 700
+person2 Withdrawal amount: 100 ----- Current balance: 600
+person1 Withdrawal amount: 100 ----- Current balance: 500
+person2 Withdrawal amount: 100 ----- Current balance: 500
+person1 Withdrawal amount: 100 ----- Current balance: 300
+person2 Withdrawal amount: 100 ----- Current balance: 400
+person1 Withdrawal amount: 100 ----- Current balance: 200
+person2 Withdrawal amount: 100 ----- Current balance: 200
+person2 Withdrawal amount: 100 ----- Current balance: 0
+person1 Withdrawal amount: 100 ----- Current balance: 100
+person2, you don't have sufficient balance.
+person2 total withdrawal amount: 700
+person1, you don't have sufficient balance.
+person1 total withdrawal amount: 700
+
+
+
+case 2- Withdrawal with AccountOverdrawSafeDemo 
+
+Current balance: 1000
+
+person1 Withdrawal amount: 100 ----- Current balance: 900
+person1 Withdrawal amount: 100 ----- Current balance: 800
+person1 Withdrawal amount: 100 ----- Current balance: 700
+person1 Withdrawal amount: 100 ----- Current balance: 600
+person1 Withdrawal amount: 100 ----- Current balance: 500
+person1 Withdrawal amount: 100 ----- Current balance: 400
+person2 Withdrawal amount: 100 ----- Current balance: 300
+person2 Withdrawal amount: 100 ----- Current balance: 200
+person2 Withdrawal amount: 100 ----- Current balance: 100
+person1 Withdrawal amount: 100 ----- Current balance: 0
+person1, you don't have sufficient balance.
+person1 total withdrawal amount: 700
+person2, you don't have sufficient balance.
+person2 total withdrawal amount: 300
