@@ -219,14 +219,14 @@ class HashMap {
 
   public void initbuckets(int n) {
     buckets = new LinkedList[n];
-    for (int bi = 0; bi < buckets.length; bi++) {
+    for (int bi = 0; bi < buckets.length; bi++) { //bi-bucket index
       buckets[bi] = new LinkedList();
     }
   }
 
   public void put(int key, String value) {
-    int bi = hash(key);
-    int di = getIndexWithinBucket(key, bi);
+    int bi = hash(key); //bi-bucket index
+    int di = getIndexWithinBucket(key, bi); //di-data index
     if (di == -1) {
       buckets[bi].add(new HMNode(key, value));
       size++;
@@ -244,7 +244,7 @@ class HashMap {
   }
 
   public int getIndexWithinBucket(int key, int bi) {
-    int di = 0;
+    int di = 0; //di-data index
     for (int i = 0; i < buckets[bi].size; i++) {
       if (buckets[bi].get(i).key == key)
         return di;
@@ -255,8 +255,8 @@ class HashMap {
   }
 
   public HMNode get(int key) {
-    int bi = hash(key);
-    int di = getIndexWithinBucket(key, bi);
+    int bi = hash(key);  //bi-bucket index
+    int di = getIndexWithinBucket(key, bi); //di-data index
     if (di == -1) {
       return null;
     } else {
@@ -265,8 +265,8 @@ class HashMap {
   }
 
   public boolean containsKey(int key) {
-    int bi = hash(key);
-    int di = getIndexWithinBucket(key, bi);
+    int bi = hash(key);  //bi-bucket index
+    int di = getIndexWithinBucket(key, bi); //di-data index
 
     if (di == -1) {
       return false;
@@ -276,8 +276,8 @@ class HashMap {
   }
 
   public void remove(int key) {
-    int bi = hash(key);
-    int di = getIndexWithinBucket(key, bi);
+    int bi = hash(key);  //bi-bucket index
+    int di = getIndexWithinBucket(key, bi); //di-data index
     if (di == -1) {
       System.out.println(key + " doesn't exists");
       return;
