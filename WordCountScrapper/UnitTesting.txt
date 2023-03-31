@@ -93,25 +93,3 @@ https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-
 gym 0
 kite 0
 orange 0
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 76a2263664316f88d7564589de5d43100fd751cb
