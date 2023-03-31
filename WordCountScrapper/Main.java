@@ -7,13 +7,13 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.TreeMap;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-
+import java.net.UnknownHostException;
 
 // to run this program you have to set Path for jsoup file 
 
@@ -28,6 +28,9 @@ class WebContent {
       content = document.body().text(); // get the text part of the html document
       content = content.replaceAll("[^a-zA-Z\\w]", " "); // Regex to get only text without any symbol or special
                                                          // character
+    } catch (UnknownHostException e) {
+      System.out.println("Please add a valid url");
+      System.out.println(e);
     } catch (IOException e) {
       System.out.println(e);
     }
@@ -64,15 +67,10 @@ class WebContent {
         });
 
     // put data from sorted list to hashmap
-<<<<<<< HEAD
-    Map<String, Integer> temp = new LinkedHashMap<String, Integer>();
-    for (Map.Entry<String, Integer> entry : lists) {
-      temp.put(entry.getKey(), entry.getValue());
-=======
+
     Map<String, Integer> maplist= new LinkedHashMap<String, Integer>();
     for (Map.Entry<String, Integer> entryy : lists) {
       maplist.put(entryy.getKey(), entryy.getValue());
->>>>>>> 76a2263664316f88d7564589de5d43100fd751cb
     }
     return maplist;
   }
@@ -87,11 +85,13 @@ public class Main {
     try {
       // Step 1 :- Fetch URLS from the text file => url.txt
 
-      ArrayList<String> urls = new ArrayList<>();
+      HashSet<String> urlsSet= new HashSet<>();
       Scanner Reader = new Scanner(new File("url.txt"));
       while (Reader.hasNext()) {
-        urls.add(Reader.next());
+        urlsSet.add(Reader.next());
       }
+      ArrayList<String> urls = new ArrayList<>(urlsSet);
+
       if(urls.size()==0)
       {
         System.out.println("No Url Found");
@@ -100,20 +100,17 @@ public class Main {
 
       // step 2 : - Fetch Words from the text file => words.txt
 
-      ArrayList<String> words = new ArrayList<>();
+      HashSet<String> wordsSet= new HashSet<>();
       Reader = new Scanner(new File("words.txt"));
       while (Reader.hasNext()) {
-        words.add(Reader.next());
+        wordsSet.add(Reader.next());
       }
+      ArrayList<String> words = new ArrayList<>(wordsSet);
       if(words.size()==0)
       {
         System.out.println("No Words Found");
         return ;
       }
-<<<<<<< HEAD
-
-=======
->>>>>>> 76a2263664316f88d7564589de5d43100fd751cb
       // Step 3 : - Found words in URL
 
       WebContent webContentObj = new WebContent(); // Create Object of WebContent Class

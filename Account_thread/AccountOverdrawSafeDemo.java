@@ -50,63 +50,64 @@ class Account
 class AccountOverdrawSafeDemo {
 
     // Main Method 
-    public static void main(String[] args) {
+    public void Operations()
+    {
         Account account = new Account("SBI Account");
-
-    //  Overide and Define the run() method of Runnable Interface 
-        Runnable person1 = new Runnable() {
-            public void run()
-            {
-                for(int i=0 ; i<10 ; i++)  
+        //  Overide and Define the run() method of Runnable Interface 
+            Runnable person1 = new Runnable() {
+                public void run()
                 {
-                    int isAccountNull = account.withdraw(100, "person1"); // Withdraw 100 rupees by person 1
-                    if(isAccountNull==1)
+                    for(int i=0 ; i<10 ; i++)  
                     {
-                        return ;
+                        int isAccountNull = account.withdraw(100, "person1"); // Withdraw 100 rupees by person 1
+                        if(isAccountNull==1)
+                        {
+                            return ;
+                        }
                     }
                 }
-            }
-        };
+            };
 
-        // Overide and Define the run() method of Runnable Interface 
-        Runnable person2 = new Runnable() {
-            public void run()
-            {
-                for(int i=0 ; i<10 ; i++)
+            // Overide and Define the run() method of Runnable Interface 
+            Runnable person2 = new Runnable() {
+                public void run()
                 {
-                    int isAccountNull = account.withdraw(100, "person2"); // Withdraw 100 rupees by person 1
-                    if(isAccountNull==1)
+                    for(int i=0 ; i<10 ; i++)
                     {
-                        return ;
+                        int isAccountNull = account.withdraw(100, "person2"); // Withdraw 100 rupees by person 1
+                        if(isAccountNull==1)
+                        {
+                            return ;
+                        }
                     }
                 }
+            };
+
+            // Create Two Threads  which takes runnable object as Argument 
+            Thread thread1 = new Thread(person1);  
+            Thread thread2 = new Thread(person2);
+
+            thread1.start(); // call start method of thread class
+            thread2.start(); 
+
+
+            // .join() = after the complete excution of both the thread , Main resume its Execution
+            try {
+                thread1.join();
+                thread2.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        };
 
-        // Create Two Threads  which takes runnable object as Argument 
-        Thread thread1 = new Thread(person1);  
-        Thread thread2 = new Thread(person2);
+            // Total Amount withdraw by the person1 and person2 
+            int total_Withdrawl = (int)account.person1_Total_Withdrawl + (int)account.person2_Total_Withdrawl ;
 
-        thread1.start(); // call start method of thread class
-        thread2.start(); 
+            System.out.println("Total Amount was 1000 initially "); 
+            System.out.println("Total Amount Withdrawl by Person 1 "+ account.person1_Total_Withdrawl);
+            System.out.println("Total Amount Withdrawl by Person 2 "+ account.person2_Total_Withdrawl);
+            System.out.println("Total Amount Withdraw is "+ total_Withdrawl  );
 
-
-        // .join() = after the complete excution of both the thread , Main resume its Execution
-        try {
-            thread1.join();
-            thread2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Total Amount withdraw by the person1 and person2 
-        int total_Withdrawl = (int)account.person1_Total_Withdrawl + (int)account.person2_Total_Withdrawl ;
-
-        System.out.println("Total Amount was 1000 initially "); 
-        System.out.println("Total Amount Withdrawl by Person 1 "+ account.person1_Total_Withdrawl);
-        System.out.println("Total Amount Withdrawl by Person 2 "+ account.person2_Total_Withdrawl);
-        System.out.println("Total Amount Withdraw is "+ total_Withdrawl  );
-
-        
+            
     }
+        
 }

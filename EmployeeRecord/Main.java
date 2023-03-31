@@ -1,7 +1,4 @@
 
-// Import the File class
-import java.io.File;
-import java.io.FileNotFoundException;
 // FileWriter Class
 import java.io.FileWriter;
 // Import the IOException class to handle errors
@@ -9,243 +6,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
-
-// Create a Employee Class
-class Employee {
-
-  static int no_Of_Employees = 1; // Store the count of employees
-  private int employee_id;
-  private String name;
-  private String email;
-  private int age;
-  private String date_of_birth;
-
-  // Constructor to initialise all the members of the Class
-  public Employee(String name, String email, int age, String date_of_birth) {
-    this.name = name;
-    this.email = email;
-    this.age = age;
-    this.date_of_birth = date_of_birth;
-    this.employee_id = no_Of_Employees++;
-  }
-
-  // Overload a Constructor for InsertFileContent Method of Class FileOperation
-  public Employee(int id, String name, String email, int age, String date_of_birth) {
-    this.employee_id = id;
-    this.name = name;
-    this.email = email;
-    this.age = age;
-    this.date_of_birth = date_of_birth;
-    this.employee_id = no_Of_Employees++;
-  }
-
-  // Getters for all the Class Members
-  public Integer getId() {
-    return employee_id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public Integer getAge() {
-    return age;
-  }
-
-  public String getDOB() {
-    return date_of_birth;
-  }
-
-  @Override
-  public String toString() { // to print the Object of the class
-    return (getId() + "," + getName() + "," + getEmail() + "," + getAge() + "," + getDOB()+"\n");
-  }
-
-  public static class OrderByID implements Comparator<Employee> // class to sort by id
-  {
-    public int compare(Employee obj1, Employee obj2) {
-      return obj1.employee_id - obj2.employee_id;
-    }
-  }
-
-  public static class OrderByName implements Comparator<Employee> // inner class to sort by name
-  {
-    public int compare(Employee obj1, Employee obj2) {
-      return obj1.name.compareTo(obj2.name);
-    }
-  }
-
-  public static class OrderByEmail implements Comparator<Employee> // inner class to sort by email
-  {
-    public int compare(Employee obj1, Employee obj2) {
-      return obj1.email.compareTo(obj2.email);
-    }
-  }
-
-  public static class OrderByDOB implements Comparator<Employee> // inner class to sort by DOB
-  {
-    public int compare(Employee obj1, Employee obj2) {
-      return obj1.date_of_birth.compareTo(obj2.date_of_birth);
-    }
-  }
-
-  public static class OrderByAge implements Comparator<Employee> // inner class to sort by Age
-  {
-    public int compare(Employee obj1, Employee obj2) {
-      return obj1.age - obj2.age;
-    }
-  }
-}
-
-// Create a Class For Doing all the File Related Operations
-class FileOperations {
-
-  // insertIntoArrayList() Method Used to Insert All the content of File into a
-  // ArrayList of Type Employee
-  public ArrayList<Employee> insertIntoArrayList() {
-    ArrayList<Employee> temporary_List = new ArrayList<Employee>(); // Create a Temporary List for storing Data of File
-
-    try {
-      Scanner Reader = new Scanner(new File("Employee.txt"));
-      while (Reader.hasNext()) {
-        String records = Reader.nextLine();
-        String record_array[] = records.split(",");
-        // System.out.println(record_array) ;
-        Employee employee_object = new Employee(Integer.parseInt(record_array[0]), record_array[1], record_array[2],
-            Integer.parseInt(record_array[3]), record_array[4]);
-        temporary_List.add(employee_object);
-      }
-    } catch (IOException e) {
-      System.out.println("Employee.txt File Not found\nCreating Employee.txt File...");
-    } catch (InputMismatchException e) {
-      System.out.println(e);
-    }
-    return temporary_List;
-  }
-
-  // insertIntoFile() Method Used to Insert All the content of ArrayList into a
-  // file
-  public void insertIntoFile(ArrayList<Employee> list) {
-    try {
-      FileWriter Writer = new FileWriter("Employee.txt");
-
-      for (Employee employee : list) {
-        Writer.write("" + employee + "\n"); // Put all the content of ArrayList into file
-      }
-
-      Writer.close();
-    } catch (IOException e) {
-      System.out.println(e);
-    } catch (InputMismatchException e) {
-      System.out.println(e);
-    }
-  }
-
-  // Method to Delete the Employee Record From the Array List
-  public void deleteFromArrayList(ArrayList<Employee> list, Integer id) {
-    // Record is Exist or not
-    int isExist = 0;
-    // Find the Record Corresponding to the given id
-    for (int index = 0; index < list.size(); index++) {
-
-      // Compare the given id is present or not in the list , if present delete it
-      if (list.get(index).getId().equals(id)) {
-        // Found id in the file
-        isExist = 1;
-        list.remove(index); // remove the record
-        break;
-      }
-    }
-    // if Exist
-    if (isExist == 1) {
-      insertIntoFile(list);
-      System.out.println("Operation Done");
-    } else {
-      System.out.println("Id not Found");
-    }
-  }
-
-  // Method to Search the record in the List
-  ArrayList<Employee> searchRecord(ArrayList<Employee> list, int response, String key) {
-    ArrayList<Employee> foundRecords = new ArrayList<Employee>(); // Store all the Records Corresponding to the key
-    try {
-      switch (response) // Switch Case
-      {
-        case 1: // Search by Id
-          for (Employee employee : list) {
-            if (employee.getId().equals(Integer.parseInt(key)))
-              foundRecords.add(employee);
-
-          }
-          break;
-        case 2: // Search By Name
-          for (Employee employee : list) {
-            if (employee.getName().equalsIgnoreCase(key))
-              foundRecords.add(employee);
-          }
-          break;
-
-        case 3: // Search By Email
-          for (Employee employee : list) {
-            if (employee.getEmail().equalsIgnoreCase(key))
-              foundRecords.add(employee);
-          }
-          break;
-        case 4: // Search By date of Birth
-          for (Employee employee : list) {
-            if (employee.getDOB().equalsIgnoreCase(key))
-              foundRecords.add(employee);
-          }
-          break;
-
-        case 5: // Search by Age
-          for (Employee employee : list) {
-            if (employee.getAge().equals(Integer.parseInt(key)))
-              foundRecords.add(employee);
-          }
-          break;
-
-      }
-    } catch (NumberFormatException e) {
-      System.out.println("Value should be numeric");
-    }
-    return foundRecords; // Return the list Which Contain all the Records Corresponding to the Key
-  }
-
-  ArrayList<Employee> sortRecords(ArrayList<Employee> list, int response) {
-    // Sort the List which found after the Search in List by Key
-
-    switch (response) {
-      case 1: // Sort by Id
-        Collections.sort(list, new Employee.OrderByID());
-        break;
-
-      case 2: // Sort By Name
-        Collections.sort(list, new Employee.OrderByName());
-        break;
-
-      case 3: // Sort by Email
-        Collections.sort(list, new Employee.OrderByEmail());
-        break;
-
-      case 4: // Sort By Date Of Birth
-        Collections.sort(list, new Employee.OrderByDOB());
-        break;
-
-      case 5: // Sort By age
-        Collections.sort(list, new Employee.OrderByAge());
-        break;
-
-    }
-    return list;
-  }
-}
 
 // Driver Class / Main Class
 public class Main {
@@ -305,15 +66,11 @@ public class Main {
               ageValid = Reader.next();
             }
             age = Integer.parseInt(ageValid);
-<<<<<<< HEAD
-=======
-
->>>>>>> 76a2263664316f88d7564589de5d43100fd751cb
             // Enter your Date of Birth
             System.out.println("Enter your Date of Birth in (dd/mm/yyyy) format ");
             Reader.nextLine();
             date_of_birth = Reader.nextLine();
-            String dob_validation = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/([0-2][0-9])?[0-9][0-9]$"; // Put
+            String dob_validation = "^([0-2][1-9]||[1-2][0-9]||3[0-1])/(0[1-9]||1[0-2])/([0-2][0-9])?[0-9][0-9]$"; // Put
                                                                                                        // validations on
                                                                                                        // DOB
             while (!date_of_birth.matches(dob_validation)) {
@@ -326,8 +83,11 @@ public class Main {
             // Create a Employee class Object
             Employee employee_object = new Employee(name, email, age, date_of_birth);
             list.add(employee_object); // Add the Object into the ArrayList
-            fileOperations_object.insertIntoFile(list); // Insert the list into File
+            // fileOperations_object.insertIntoFile(list); // Insert the list into File
+            FileWriter Writer = new FileWriter("Employee.txt",true);
+            Writer.write("" + employee_object+ "\n");
             System.out.println(name + " Added Successfully ");
+            Writer.close();
             break;
           }
 
@@ -399,6 +159,10 @@ public class Main {
 
       } catch (InputMismatchException e) {
         System.out.println("Invalid Choice");
+      }
+      catch (IOException e)
+      {
+        System.out.println("Unable to Read File , Try again");
       }
 
     }

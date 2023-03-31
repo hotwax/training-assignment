@@ -56,9 +56,10 @@ class Account
 class AccountOverdrawDemo {
 
     // Main Method 
-    public static void main(String[] args) {
+    public void Operations()
+    {
         Account account = new Account("SBI Account");
-
+        System.out.println("Hello");
     //  Overide and Define the run() method of Runnable Interface 
         Runnable person1 = new Runnable() {
             public void run()

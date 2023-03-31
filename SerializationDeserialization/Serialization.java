@@ -7,10 +7,11 @@
 //          This will Serialise the Object 
 // Step2 : to deserialize the file , Run Deserialization.java
 //          While running the file , it will which file you want to deserialize Enter output1.ser or output2.ser ........
-
+import java.io.FileNotFoundException;
+import java.io.EOFException;
+import java.util.ArrayList;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 // Class Serialization for Serialize the file 
@@ -48,11 +49,19 @@ class Serialization
             ObjectOutputStream objectOutputStreamObject = new ObjectOutputStream(fileOutputStreamObject);
             objectOutputStreamObject.writeObject(objectList); //writting objects in file
             System.out.println("Serialization Done");
+            fileOutputStreamObject.close();
             objectOutputStreamObject.close();
 
-        } catch (Exception e) {
+        }catch (FileNotFoundException e) {
             System.out.println(e);
-        }
+          } catch (EOFException e){
+            System.out.println("File is empty");
+            System.out.println(e);
+          } catch (ClassCastException e){
+            System.out.println(e);
+          } catch (Exception e){
+            System.out.println(e);
+          }
     }
 
     public static void main(String[] args) 

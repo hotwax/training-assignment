@@ -2,28 +2,6 @@
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
-class Address implements Serializable
-{
-    String city ;
-    String state ;
-    Integer pinCode ;
-    String country  ;
-
-    // private static final long serialVersionUID = 1l; // Provide a unique Id for sender and Recieve/
-
-    public Address(String city , String state , Integer pinCode , String country )
-    {
-        this.city = city ;
-        this.state = state ;
-        this.pinCode = pinCode ;
-        this.country = country ;
-    }
-
-    public String toString() //to print a meaningfull output
-    {
-        return "City = " + city + ", State = " + state + ", PinCode = " + pinCode + ", Country = " + country ;
-    }
-}
 public class Student implements Serializable
 {
     public String firstName ;
@@ -40,6 +18,12 @@ public class Student implements Serializable
         this.dateOfBirth = simpleDate.parse(dateOfBirth);
         this.address = address;
     }
+    
+    // Student(String firstName, String dateOfBirth, Address address) { //before changing the data type of date of birth from string to date
+        // this.firstName = firstName;
+        // this.dateOfBirth = dateOfBirth;
+        // this.address = address;
+    // }
 
     public String toString() // to print a meaningful output
     {
