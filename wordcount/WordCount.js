@@ -67,6 +67,10 @@ async function wordCount(urlsArray, wordsArray) {
       wordsFromUrl = cheerio.load(response.data)("body").text().toLowerCase().split(/\W+/);
     
     }).catch(function (err) {
+      if(err.code == "ENOTFOUND"){
+        console.log("No internet Connection");
+          process.exit(1);
+      }
       console.log("Invalid url- ", url + "\n");
       invalidUrl = true;
     });
