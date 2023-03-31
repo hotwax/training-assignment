@@ -18,9 +18,16 @@ class SerializationTest {
   performSerialization() {
     const studentsString = JSON.stringify(students) // object -> string to store students data  in some file
     read.question("Enter file name for serialization: ", (fileName) => {
-      fileHandler.writeFileSync(fileName, studentsString) // write data in file 
-      console.log("Data serialized successfully.\n----------------------\n");
-      enterChoice()
+
+      if (fileName.split(".")[1] == "ser") {
+        fileHandler.writeFileSync(fileName, studentsString) // write data in file 
+        console.log("Data serialized successfully.\n----------------------\n");
+        enterChoice()
+      } else {
+        console.log("Please enter a valid file name (only '.ser' allowed).\n");
+      }
+
+      enterChoice();
     })
   }
 }
@@ -28,18 +35,21 @@ class SerializationTest {
 class DeserializationTest {
   performDeserialization() {
     read.question("Enter file name for deserialization: ", (fileName) => {
-      if (!fileHandler.existsSync(fileName)) {  // entered file doesn't exists
-        console.log(fileName + " file doesn't exists\n");
-      }
-      else if (fileName.split(".")[1] == "ser" || fileName.split(".")[1] == "txt" || fileName.split(".")[1] == "json") {
-        const data = fileHandler.readFileSync(fileName, "utf-8")
-        JSON.parse(data).forEach((student) => console.log(student)) // string to object and then looping to print data
-        console.log("Data deserialized successfully.\n----------------------\n");
-         
+
+      if (fileName.split(".")[1] == "ser") {
+
+        if (!fileHandler.existsSync(fileName)) {  // entered file doesn't exists
+          const data = fileHandler.readFileSync(fileName, "utf-8")
+          JSON.parse(data).forEach((student) => console.log(student)) // string to object and then looping to print data
+          console.log("Data deserialized successfully.\n----------------------\n");
+        } else {
+          console.log(fileName + " file doesn't exists\n");
+        }
       }
       else {
-        console.log("Please enter a valid file name. (only '.ser', '.txt', '.json' files can be deserialized.)\n");
+        console.log("Please enter a valid file name (only '.ser' allowed).\n");
       }
+
       enterChoice()
     })
 
