@@ -1,5 +1,5 @@
-
-import java.util.*;
+import java.util.Scanner;
+import java.util.HashMap;
 import java.util.Random;
 
 public class HashmapWithRandomProbing {
@@ -214,8 +214,8 @@ public boolean searchKey(int key) {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the size of the hash table: ");
-        int size = scanner.nextInt();
-        HashmapWithRandomProbing map = new HashmapWithRandomProbing(size);
+        int cap = scanner.nextInt();
+        HashmapWithRandomProbing map = new HashmapWithRandomProbing(cap);
         int choice;
 
         do {

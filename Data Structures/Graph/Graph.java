@@ -1,4 +1,8 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class Graph {
 
@@ -13,12 +17,15 @@ public class Graph {
         this.n= v;
     }
 
+    // Add edge between two vertices
     void addEdge(int to, int from)
     {  
         adj[to][from]= 1;
         adj[from][to]= 1;
     }
 
+
+    // Remove edge between two vertices
     void removeEdge(int to, int from) {
 
         if (adj[to][from]==0 || adj[from][to]==0)
@@ -30,7 +37,7 @@ public class Graph {
     }
 
     
-
+    // Display adjacency matrix
     void display(){
 
         for(int i=0;i<n;i++) {
@@ -46,7 +53,7 @@ public class Graph {
         }
     }
 
-
+    // Perform DFS
     void dfs(int start, boolean visited[])
     {
 
@@ -65,7 +72,7 @@ public class Graph {
 
     }
 
-
+    // Perform BFS
     void bfs(int start)
     {
 
