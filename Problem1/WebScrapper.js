@@ -49,7 +49,7 @@ async function readUrl() {
         files.readFile("url.txt", "utf8", async (error, urlsData) => {
             if (error) {
                 console.log("Somthing wrong happened with url");
-                return;
+                process.exit(1);
             }
             // Splitting the URLs by line
             const urls = urlsData.split(/\r?\n/);
@@ -59,11 +59,12 @@ async function readUrl() {
                     const response = await axios.get(url);
                     await readWord(response);
                 } catch (err) {
-                    console.error(`Error processing URL ${url}: ${err.message}`);
+                    console.error(`Issue in processing URL ${url}: ${err.message}\n`);
                     number++;
                 }
             }
       await new Promise((resolve) => setTimeout(resolve, 10));
+      if(result.length>0)
       console.log('Total result map :');
       show(result, 8);
     });
@@ -89,18 +90,23 @@ async function readWord(response) {
                 return;
             }
         // Splitting the words by line
-            const words = wordsData.split(/\r?\n/);
-    
+            const words= wordsData.split(/\r?\n/);
+            if(words.length>1)
+            {
             // Counting the occurrences of each word
             words.forEach((word) => { countWord(textData, word, storedValues) });
             // Sorting the results and displaying the top 3
             console.log("URL : " + number);
             show(storedValues, 3);
             // Displaying the overall results and the top 8 words
-            console.log('\nTotal result map :');
-            show(result, 3);
             console.log('=====================');
             number++;
+            }
+            else
+            {
+                console.log("Word file is empty");
+                process.exit(1);
+            }            
         });
     }catch(exception)
     {
