@@ -177,7 +177,7 @@ function searchEmployeeFromFile() {
                 sortBy = prompt("Enter Sort By criteria Again\nId \nName \nEmail\nDOB\nAge\n"); 
             }
             readline.question('Sort Order:\nAscending\nDescending\n', (sortDirection) => {
-                let order = ["desc", "asc" , "ascending" , "descending","Asc","Desc"];
+                let order = ["desc", "asc" , "ascending" , "descending","Asc","Desc","Ascending" , "Descending"];
                 while(!order.includes(sortDirection)) {
                     console.log("\nInvalid Order Input");
                     sortDirection = prompt("Enter Sorted Order Again:\nAsc or Ascending\nDesc or Descending\n"); 
@@ -194,7 +194,12 @@ function searchEmployeeFromFile() {
                 const results = employeeData.filter((employeeData) => {
                     return Object.keys(employeeData).some((val) => employeeData[val].toLowerCase() === query.toLowerCase());
                 }).sort((first, second) => {
-                    let sortOrder = sortDirection === 'asc' ? 1 : -1;
+                    let sortOrder ;
+                    if(sortDirection==='asc' || sortDirection==='Asc' || sortDirection==='ascending' || sortDirection==='Ascending')
+                        sortOrder = 1;
+                    else
+                        sortOrder = -1 ;
+                    
                     if (first[sortBy] < second[sortBy]) {
                         return -1 * sortOrder;
                     } else if (first[sortBy] > second[sortBy]) {
