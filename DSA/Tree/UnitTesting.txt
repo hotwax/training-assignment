@@ -1,0 +1,94 @@
+   Main Menu
+
+1. Insert Node
+2. Delete Node
+3. Search Element
+4. Traverse the Tree
+5. Exit
+
+Enter Your Choice 
+
+Testcase 1 Enter Your Choice 1 : Insert values into tree
+
+Enter the value of Node to insert
+10
+
+Expected output:
+10 Inserted Successfully 
+
+Element Added in tree and Add elements to tree one by one
+
+TestCase 2 Enter Your Choice 2 Delete values from the tree Which exists in Tree
+
+Enter the value of Node to delete
+1
+
+Expected Output:
+Operation Successful (It will delete the particular given number)
+
+TestCase 3 Enter Your Choice 2 Delete values from the tree which doesnot exists
+
+Enter the value of Node to delete
+89
+
+Expected Output 
+Element Not present
+
+Test Case 4 Enter Your Choice 4 Traversal and Select 1 2 or 3 
+Imput 
+Enter Your Choice
+2
+Output
+Traversal Techniques :- 
+1. PreOrder
+2. PostOrder
+3. Inorder
+Enter Your Choice
+1
+
+Tree = 2 1 12 3 
+
+Test Case 5 Enter Your Choice 4 Traversal And give other than 1 2 or 3
+Imput 
+Enter Your Choice
+2
+Output
+Traversal Techniques :- 
+1. PreOrder
+2. PostOrder
+3. Inorder
+Enter Your Choice
+5
+
+Invalid Choice
+
+TestCase 6 Enter Choice 3 and Search for a value which is present in the tree
+
+Input 
+Enter the value of Node to Search
+2
+Expected Output
+Element Found
+
+TestCase 7 Enter Choice 3 and Search for a value which is not present in the tree
+
+Input 
+Enter the value of Node to Search
+87
+Expected Output
+Element Not Found
+
+Testcase 8 Enter Choice 5 Exit the program
+
+Input 
+5
+Expected Output
+EXIT
+
+
+Testcase 9 If User enter Invalid Number
+
+Input 
+10
+Expected Output
+invalid Choice

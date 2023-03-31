@@ -1,0 +1,83 @@
+(Firstly , Program will Ask For Number Of Vertices) 
+Enter Number of vertices
+20
+
+Main Menu 
+1. Add a Edge
+2. Traverse the Graph
+3. Delete the Edge
+4. Display
+5. Exit
+
+Testcase 1 : Enter Choice 1 Add Edge (valid Edge Value) 
+
+Enter the Value of Vertex1
+10
+Enter the Value of Vertex2
+5
+
+Expected Output.
+Edge Added
+
+
+Test case 2 Enter Choice 1 Add Edge (Invalid Edge Value)  
+
+Input 
+Enter the Value of Vertex1
+11
+Enter the Value of Vertex2
+9 
+
+Output
+Vertex1 Value is Inavlid , Vertex value should be Between 0 to 10(number of Vertices) 
+
+Test case 3 Enter Choice 2 Traverse the Graph DFS
+Traversal Techniques
+1. DFS
+2. BFS
+1
+1 2 4 5 3
+2
+1 2 3 4 5
+
+
+Test case 4 Enter Choice 2 Traverse the Graph BFS
+Traversal Techniques
+1. DFS
+2. BFS
+2
+1 2 3 4 5
+
+TestCase 5 Enter Choice 4 Display 
+Enter Your Choice
+4
+Your List is 
+0->
+1->2 3
+2->1 4 5
+3->1
+4->2
+5->2 
+6->2 3
+
+Test case 6 Enter Choice 3 Delete the Edge Which Exists
+
+Enter Node1 and Node2 whose edge between them is to be deleted
+4 2
+Operation Successful
+
+Testcase 7 Enter Choice 3 Delete the Edge Which doesnot Exists
+
+Enter Node1 and Node2 whose edge between them is to be deleted
+27 89
+Invalid Node Values
+
+TestCase 8 Enter Choice 5 To exit program
+
+Enter Choice 5
+Exit
+
+TestCase 9 Enter Invalid Choice 
+
+Enter Choice 10
+Invalid Choice

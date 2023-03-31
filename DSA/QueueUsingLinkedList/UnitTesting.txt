@@ -1,0 +1,84 @@
+Firstly , Program asks Size of the Queue
+
+Enter the Size of the Queue
+5
+Main Menu
+1. enqueue 
+2. dequeue
+3. Front
+4. Display
+5. exit
+
+TestCase1 : Add Element in QUEUE (If queue not full) 
+
+Enter the Choice
+1
+
+Enter the element to be inserted
+10
+
+output:
+10 Inserted Sucessfully 
+
+TestCase2 : Add Element in QUEUE (If queue full) 
+
+Enter the Choice
+1
+
+Enter the element to be inserted
+10
+
+output:
+Queue is Full
+
+TestCase3 : Pop Element from the QUEUE (If queue not Empty) 
+Enter the Choice
+2
+output:
+Operation Successful
+
+TestCase4 : Pop Element from the QUEUE (If queue Empty) 
+Enter the Choice
+2
+output:
+Queue is Empty
+
+TestCase5 : get Front Element from the QUEUE (If queue not empty) 
+Enter the Choice
+3
+output
+Element at Front is 10
+
+TestCase6 : get Front Element from the QUEUE (If queue empty) 
+Enter the Choice
+3
+output
+Queue is Empty 
+
+TestCase7 : Display the Queue (If queue not empty) 
+Enter the Choice
+4
+output:
+10 20 30 40 50
+
+TestCase8 : Display the Queue (If queue empty) 
+Enter the Choice
+4
+output:
+Queue is Empty
+
+Test case9  to Exit
+
+Enter Your Choice
+6
+
+Ouput:
+Exit
+
+Test case10  Invalid Choice
+
+Enter Your Choice
+10
+
+Ouput:
+Invalid Choice

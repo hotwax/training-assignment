@@ -1,0 +1,148 @@
+Main Menu
+
+Linked List
+Select Option
+1. Add Element
+2. Delete Element
+3. Update List
+4. Sort the List
+5. Print List
+6. Exit
+
+Test Case 1 Insert Node in Linked List
+
+input
+Enter Your Choice
+1 
+Output
+Enter the value to be inserted
+12
+
+Test Case 2 Delete Node from List by position (position Exists)
+
+input
+Enter Your Choice
+2
+Delete Element by
+1. position
+2. Value
+1
+Enter the Positon of the Element to be deleted
+1
+
+Output
+Operation Successful
+
+Test Case 3 Delete Node from List by position (position do not Exists) 
+
+input
+Enter Your Choice
+2
+Delete Element by
+1. position
+2. Value
+1
+Enter the Positon of the Element to be deleted
+10
+
+Output
+"Invalid Position"
+
+Test Case 4 Delete Node from List by Value (Value exists) 
+
+Enter Your Choice
+2
+Delete Element by
+1. position
+2. Value
+2
+Enter the Value of the Element to be deleted
+10
+
+output:
+"Operation Successful"
+
+Test Case 5 Delete Node from List by Value (Value Not exists) 
+
+Enter Your Choice
+2
+Delete Element by
+1. position
+2. Value
+2
+Enter the Value of the Element to be deleted
+10
+
+output:
+Node Not present 
+
+Test Case 6  Update Node Value ( if Value Exists) 
+
+Enter Your Choice
+3
+
+output:
+Enter previous Value and New value to update the list ( Note : values should be separated by space ) 
+10 90
+Operation Successful
+
+Test Case 7 Update Node Value ( if Value not Exists) 
+
+Enter Your Choice
+3
+
+output:
+Enter previous Value and New value to update the list ( Note : values should be separated by space ) 
+67 89
+Node not Found
+
+Test Case 8 Sort the Linked List (if not empty)
+
+Enter Your Choice
+4
+
+output:
+Sort the List
+Listed Sorted SuccessFully
+1->6->10->20
+
+Test Case 9 Sort the Linked List (if list is Empty)
+
+Enter Your Choice
+4
+
+output:
+Sort the List
+List Is Empty
+
+Test Case 10 Print the List (if not empty)
+
+Enter Your Choice
+5
+
+output:
+1->20->10->6
+
+Test Case 11 Print the List (if empty)
+
+Enter Your Choice
+5
+
+output:
+List is Empty
+
+Test case 12  to Exit
+
+Enter Your Choice
+6
+
+Ouput:
+Exit
+
+Test case 13  Invalid Choice
+
+Enter Your Choice
+10
+
+Ouput:
+Invalid Choice
