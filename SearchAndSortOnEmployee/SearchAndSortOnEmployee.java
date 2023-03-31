@@ -38,7 +38,6 @@ public class SearchAndSortOnEmployee {
 
   static String enterName() {
     System.out.println("Enter name of employee: ");
-    sc.nextLine();
     String name = sc.nextLine();
     return name;
   }
@@ -58,7 +57,7 @@ public class SearchAndSortOnEmployee {
   static String enterDateOfBirth() {
     System.out.println("Enter date of birth of employee (format- yyyy-mm-dd):");
     String dateOfBirth = sc.next();
-    String regex = "^([0-9][0-9][0-9][0-9])-(0[1-9]||1[0-2])-([0-2][0-9]||3[0-1])$";
+    String regex = "^([1-9][0-9][0-9][0-9])-(0[1-9]||1[0-2])-([0-2][1-9]||3[0-1])$";
     boolean match = dateOfBirth.matches(regex);
     if (!match) {
       System.out.println("Invalid date. Please enter a different date.\n");
@@ -73,6 +72,34 @@ public class SearchAndSortOnEmployee {
         return true;
     }
     return false;
+  }
+
+  static ArrayList<Employee> whetherNameExists(String name) {
+    ArrayList<Employee> matchedNames = new ArrayList<>();
+    for (Employee employee : set) {
+      if (employee.getName().equals(name))
+      matchedNames.add(employee);
+    }
+    return matchedNames;
+  }
+
+  static ArrayList<Employee> whetherAgeExists(String age) {
+    ArrayList<Employee> matchedAges  = new ArrayList<>();
+    for (Employee employee : set) {
+      if (employee.getAge() == Integer.parseInt(age))
+      matchedAges.add(employee);
+    }
+    return matchedAges;
+  }
+
+  static ArrayList<Employee> whetherDateOfBirthExists(String dateOfBirth) {
+    ArrayList<Employee> matchedDates  = new ArrayList<>();
+    for (Employee employee : set) {
+      Date employeeDateOfBirth = employee.getDateOfBirth();
+      if (employeeDateOfBirth.toString().equals(dateOfBirth))
+      matchedDates.add(employee);
+    }
+    return matchedDates;
   }
 
   static void add() {
@@ -134,10 +161,14 @@ public class SearchAndSortOnEmployee {
     // here we will first remove the specified employee from set and rewrite the set
     // data to employee.txt file
 
-    String email = enterEmail();
-    if (!whetherEmailExists(email)) {
-      System.out.println("Email doesn't exists. Please enter a different email.");
-      enterEmail();
+    String email = "";
+    while (true) {
+      email = enterEmail();
+      if (!whetherEmailExists(email)) {
+        System.out.println("Email doesn't exists. Please enter a different email.");
+      } else {
+        break;
+      }
     }
 
     Iterator<Employee> iterator = set.iterator();
@@ -209,6 +240,7 @@ public class SearchAndSortOnEmployee {
         }
 
         bufferedReader.close();
+        fileReader.close();
       }
 
     } catch (IOException err) {
@@ -229,18 +261,66 @@ public class SearchAndSortOnEmployee {
     System.out.println();
   }
 
-  static void searchAnEmployee() {
-    String email = enterEmail();
-    for (Employee employee : set) {
-      if (employee.getEmail().equals(email)) {
-        System.out.println("Employees' data:");
-        System.out.println(employee.toSring()+"\n");
-        return;
-      }
-    }
+  static ArrayList<Employee> searchAnEmployee() throws InputMismatchException {
+    System.out.println("Choose which field to search:");
+    System.out.println("Enter 1 for name");
+    System.out.println("Enter 2 for age");
+    System.out.println("Enter 3 for email");
+    System.out.println("Enter 4 for date of birth");
+    
+    int fieldNameToSearch = sc.nextInt();
+    switch (fieldNameToSearch) {
+      case 1:
+        String name = enterName();
+        ArrayList<Employee> matchedNames = whetherNameExists(name);
+        if (matchedNames.size() == 0) {
+          System.out.println("Entered name doesn't exists.");
+        } else {
+          return matchedNames;
+        }
+        break;
 
-    System.out.println("Email doesn't exists. Please enter a diferent email.\n");
-    searchAnEmployee();
+        case 2:
+        String age = enterAge();
+        ArrayList<Employee> matchedAges = whetherAgeExists(age);
+        if (matchedAges.size() == 0) {
+          System.out.println("Entered age doesn't exists.");
+        } else {
+          return matchedAges;
+        }
+        break;
+
+        case 3:
+        String email = enterEmail();
+        if(!whetherEmailExists(email)){
+          System.out.println("Entered email doesn't exists.");
+        }
+        else{
+          ArrayList<Employee> matchedEmails = new ArrayList<>();
+          for(Employee employee: set){
+            if(employee.getEmail().equals(email)){
+              matchedEmails.add(employee);
+            }
+          }
+          return matchedEmails;
+        }
+        break;
+
+        case 4:
+        String dateOfBirth = enterDateOfBirth();
+        ArrayList<Employee> matchedDates = whetherDateOfBirthExists(dateOfBirth);
+        if (matchedDates.size() == 0) {
+          System.out.println("Entered date of birth doesn't exists.");
+        } else {
+          return matchedDates;
+        }
+        break;
+        
+
+      default:
+        System.out.println("Invalid input.");
+    }
+    return new ArrayList<>();
   }
 
   static String enterSortByField() {
@@ -267,23 +347,23 @@ public class SearchAndSortOnEmployee {
   }
 
   static void sortEmployees() {
+    ArrayList<Employee> matchedResults = searchAnEmployee();
+
     String sortBY = enterSortByField();
     String direction = enterDirection();
 
-    ArrayList<Employee> sortedList = new ArrayList<>(set);
-
     if (sortBY.equals("name")) {
-      sortedList.sort(Comparator.comparing(Employee::getName,
+      matchedResults.sort(Comparator.comparing(Employee::getName,
           direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
     } else if (sortBY.equals("age")) {
-      sortedList.sort(Comparator.comparing(Employee::getAge,
+      matchedResults.sort(Comparator.comparing(Employee::getAge,
           direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
     } else if (sortBY.equalsIgnoreCase("date Of Birth")) {
-      sortedList.sort(Comparator.comparing(Employee::getDateOfBirth,
+      matchedResults.sort(Comparator.comparing(Employee::getDateOfBirth,
           direction.equals("ascending") ? Comparator.naturalOrder() : Comparator.reverseOrder()));
     }
 
-    for (Employee employee : sortedList) {
+    for (Employee employee : matchedResults) {
       System.out.println(employee.toSring());
     }
     System.out.println();
@@ -296,44 +376,45 @@ public class SearchAndSortOnEmployee {
     while (true) {
       System.out.println("Enter 1 to add data");
       System.out.println("Enter 2 to delete data");
-      System.out.println("Enter 3 to search for an employee's data");
-      System.out.println("Enter 4 to sort employees");
-      System.out.println("Enter 5 to show all the employees");
-      System.out.println("Enter 6 to exit the program");
+      System.out.println("Enter 3 to search and sort employees");
+      System.out.println("Enter 4 to show all the employees");
+      System.out.println("Enter 5 to exit the program");
       System.out.println();
 
-      int choice = sc.nextInt();
+      try {
+        Scanner scn = new Scanner(System.in);
+        int choice = scn.nextInt();
 
-      switch (choice) {
-        case 1:
-          add(); // add an employee
-          break;
+        switch (choice) {
+          case 1:
+            add(); // add an employee
+            break;
 
-        case 2:
-          delete(); // delete an employee
-          break;
+          case 2:
+            delete(); // delete an employee
+            break;
 
-        case 3:
-          searchAnEmployee(); // search an employee
-          break;
+          case 3:
+            sortEmployees(); // search and sort an employee
+            break;
 
-        case 4:
-          sortEmployees(); // sort the employees
-          break;
+          case 4:
+            showAllEmployees(); // show all employees
+            break;
 
-        case 5:
-          showAllEmployees(); // show all employees
-          break;
+          case 5:
+            System.out.println("-------------------------------\n");
+            System.out.println("Program is terminated successfully");
+            return;
 
-        case 6:
-          System.out.println("-------------------------------\n");
-          System.out.println("Program is terminated successfully");
-          return;
+          default:
+            System.out.println("-------------------------------\n");
+            System.out.println("Please enter a valid number\n");
 
-        default:
-          System.out.println("-------------------------------\n");
-          System.out.println("Please enter a valid number\n");
+        }
 
+      } catch (InputMismatchException e) {
+        System.out.println("Please enter a valid number.");
       }
 
     }

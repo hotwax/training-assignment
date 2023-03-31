@@ -6,10 +6,6 @@ class Employee {
   private String email;
   private Date dateOfBirth;
 
-  Employee() {
-
-  }
-
   // setters
 
   public void setName(String name) {

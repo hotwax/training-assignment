@@ -1,5 +1,5 @@
-Name: kiana, age: 21, email: kiana99@gmail.com, date of birth: 1999-01-03
-Name: nidhi, age: 12, email: nidhi12@gmail.com, date of birth: 2009-01-01
-Name: palak, age: 12, email: palakk99@gmail.com, date of birth: 1990-01-02
-Name: nidhi, age: 20, email: nidhi09@gmail.com, date of birth: 1999-02-02
+Name: ankita soni, age: 19, email: ankita99@gmail.com, date of birth: 1990-01-01
 Name: prachi, age: 20, email: prachi99@gmail.com, date of birth: 1990-01-01
+Name: shruti jhanwar, age: 20, email: shruti99@gmail.com, date of birth: 1999-10-01
+Name: kiana, age: 21, email: kiana99@gmail.com, date of birth: 1999-01-03
+Name: ankita gupta, age: 19, email: ankita1890@gmail.com, date of birth: 1999-01-01
