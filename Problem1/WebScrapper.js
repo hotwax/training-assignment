@@ -63,7 +63,10 @@ async function readUrl() {
                     number++;
                 }
             }
-        });
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      console.log('Total result map :');
+      show(result, 8);
+    });
     }catch(exception){
         console.log("File not found");
     }
@@ -95,7 +98,7 @@ async function readWord(response) {
             show(storedValues, 3);
             // Displaying the overall results and the top 8 words
             console.log('\nTotal result map :');
-            show(result, 8);
+            show(result, 3);
             console.log('=====================');
             number++;
         });
