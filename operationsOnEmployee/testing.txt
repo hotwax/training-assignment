@@ -1,0 +1,138 @@
+case 1- Add an employee- entered invalid email
+
+Enter email id of the employee: nnnnn 
+Please enter a valid email.
+
+Enter email id of the employee:
+
+
+
+case 2- Add an employee- entered an already existing email
+
+employees.txt- name: nidhi, age: 20, email: nidhi@gmail.com, date of birth: 2002-01-01
+
+Enter email id of the employee: nidhi@gmail.com
+Email already exists. Please enter a different email.
+
+Enter email id of the employee:
+
+
+
+case 3- Add an employee- entered invalid age
+
+Enter email id of the employee: nnnnn 
+Please enter a valid email.
+
+Enter email id of the employee:
+
+
+
+case 4- Add an employee- entered invalid date
+
+//1990-00-01, 22-02-2002, 22/02/2002
+Enter date of birth of the employee yyyy-mm-dd: 1990-00-01
+Please enter a valid date.
+
+Enter date of birth of the employee yyyy-mm-dd:
+
+
+
+case 5- Delete an employee- entered a non existing email
+
+employees.txt- name: nidhi, age: 20, email: nidhi@gmail.com, date of birth: 2002-01-01
+
+Enter email of the employee: nidhipal@gmail.com
+This email doesn't exists. Please enter a different email.
+
+Enter email of the employee:
+
+
+
+case 6- Show all employees- no "employees.txt" file exists yet
+
+Employee's data:
+No data exists
+
+
+
+case 7- Search an employee- entered a wrong query
+
+employees.txt- name: nidhi, age: 20, email: nidhi@gmail.com, date of birth: 2002-01-01
+
+Enter employee's data (name or age or email or date of birth): palakJain@gmail.com
+
+No employee exists.
+
+
+
+case 8- Sort employees- entered a wrong field
+
+Enter the field to sort by (name or age or dateOfBirth): email
+Please enter a valid field.
+
+Enter the field to sort by (name or age or dateOfBirth):
+
+
+
+case 9- Sort employees- entered a wrong order value
+
+Enter the order of sorting (ascending or descending): nnnn
+Please enter a valid order.
+
+Enter the order of sorting (ascending or descending):
+
+
+------- valid test cases 
+case 10- add an employee
+
+Enter email id of the employee: palak009@gmail.com
+
+Enter name of the employee: palak jhanwar
+
+Enter age of the employee: 23
+
+Enter date of birth of the employee yyyy-mm-dd: 1999-04-02
+
+Employee's data added successfully.
+
+
+
+case 11- delete an employee
+
+Enter email of the employee: palak009@gmail.com
+
+Employee's data deleted successfully.
+
+
+
+case 12- show all employees
+
+Employee's data:
+name: payal, age: 20, email: payalJain@gmail.com, date of birth: 2002-02-02
+name: nidhi, age: 20, email: nidhiPal@gmail.com, date of birth: 2001-01-02
+name: ankita, age: 22, email: ankitaJain@gmail.com, date of birth: 2000-07-02
+
+
+
+case 13- search for an employee
+
+Enter employee's data (name or age or email or date of birth): 20
+
+name: payal, age: 20, email: payalJain@gmail.com, date of birth: 2002-02-02
+name: nidhi, age: 20, email: nidhiPal@gmail.com, date of birth: 2001-01-02
+
+
+
+case 14- sort all employees
+
+Enter the field to sort by (name or age or dateOfBirth): dateOfBirth
+
+Enter the order of sorting (ascending or descending): descending
+Employee's data:
+name: payal, age: 20, email: payalJain@gmail.com, date of birth: 2002-02-02
+name: nidhi, age: 20, email: nidhiPal@gmail.com, date of birth: 2001-01-02
+name: ankita, age: 22, email: ankitaJain@gmail.com, date of birth: 2000-07-02
+
+
+
+

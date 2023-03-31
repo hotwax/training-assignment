@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "object-byte-converter": "^0.0.6"
+  }
+}
