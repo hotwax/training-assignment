@@ -95,14 +95,14 @@ public:
         cout << "Enter the Value of Vertex2" << endl;
         cin >> node2;
 
-        if(node1>vertices)
+        if(node1>vertices || node1 < 0)
         {
             cout<<"Vertex1 Value is Inavlid , Vertex value should be Between 0 to "<<vertices<<endl;
             return ;
         }
-        if(node2>vertices)
+        if(node2>vertices || node2 < 0)
         {
-            cout<<"Value2 Value is Inavlid , Vertex value should be Between 0 to "<<vertices<<endl;
+            cout<<"Vertex2 Value is Inavlid , Vertex value should be Between 0 to "<<vertices<<endl;
             return ;
         }
 
@@ -182,7 +182,7 @@ public:
         cout << "Enter Node1 and Node2 whose edge between them is to be deleted" << endl;
         cin >> node1 >> node2;
 
-        if (node1 > vertices || node2 > vertices)
+        if (node1 > vertices || node2 > vertices || node1 < 0 || node2 < 0)
         {
             cout << "Invalid Node Values" << endl;
             return;
