@@ -1,0 +1,234 @@
+// menu
+Your linked list:
+Enter 1 to add at last
+Enter 2 to add at First
+Enter 3 to add at a position
+Enter 4 to remove from last
+Enter 5 to remove from First
+Enter 6 to remove at a position
+Enter 7 to get from last
+Enter 8 to get from First
+Enter 9 to get at a position
+Enter 10 to reverse the list
+Enter 11 to get the mid node
+Enter 12 to exit the program
+
+case 1: remove last, remove first, remove at, get last, get first, get at, get mid node  when linkedlist is empty
+
+inputs- 4,5,6,7,8,9,11
+output- List is empty.
+-------------------------------------
+menu
+
+
+
+case 2: Entered invalid inputs (non-numbers) - in add first, add last, add at, get at
+
+inputs- 1,2,3,9
+1
+Enter the value: ksjll
+
+output- Please give a valid input. java.util.InputMismatchException
+(End)
+
+
+--valid cases
+list- 11 22 
+case 3: add a number at last
+
+input- 1
+Enter the value: 33
+
+output- 
+-------------------------------------
+Your linked list: 11 22 33
+...menu
+
+
+
+case 4: add a number at first
+
+input- 2
+Enter the value: 44
+
+output- 
+-------------------------------------
+Your linked list: 44 11 22 33
+...menu
+
+
+
+case 5: add a number at a position
+
+input- 3
+Enter the index: 1
+Enter the value: 55
+
+output- 
+-------------------------------------
+Your linked list: 44 55 11 22 33
+...menu
+
+
+
+case 6: remove a number from last
+
+input- 4
+
+output- 
+-------------------------------------
+Your linked list: 44 55 11 22 
+...menu
+
+
+
+case 7: remove a number from first
+
+input- 5
+output- 
+-------------------------------------
+Your linked list: 55 11 22
+...menu
+
+
+
+case 8: remove a number from a position
+
+input- 6
+Enter the index: 0
+
+output- 
+-------------------------------------
+Your linked list: 11 22
+...menu
+
+
+
+case 9: get a number from last
+
+input- 7
+
+output- 22
+-------------------------------------
+Your linked list: 11 22
+...menu
+
+
+
+case 10: get a number from first
+
+input- 8
+
+output- 11
+-------------------------------------
+Your linked list: 11 22
+...menu
+
+
+
+case 11: get a number from a position (invalid)
+
+input- 9
+Enter the index: 4
+
+output- 
+Invalid arguments
+-------------------------------------
+Your linked list: 11 22
+...menu
+
+
+
+case 12: get a number from a position (valid)
+
+input- 10
+Enter the index: 1
+
+output- 
+22
+-------------------------------------
+Your linked list: 11 22
+...menu
+
+
+
+case 13: reverse the list
+
+input- 10
+-------------------------------------
+output- 
+22 11
+-------------------------------------
+Your linked list: 22 11
+...menu
+
+
+
+case 14: get the middle node
+
+input- 11
+output- 
+22
+-------------------------------------
+Your linked list: 22 11
+...menu
+
+
+
+case 15: end the program
+
+input- 12
+
+output- 
+Program terminated successfully.
+(End)
+
+
+
+case 16: invalid choice
+
+input- 20
+
+output- Please enter a valid choice.
+menu
+
+
+
+case 17: update a value (invalid, incorrect index(<0 or >=size))
+list- 11, 12
+
+input- 12
+Enter the index at which value needs to be updated:
+111
+Enter the new value:
+123
+output- Please enter a valid index
+-------------------------------------
+...menu
+
+
+
+case 18: update a value (valid)
+list- 11, 12
+
+input- 12
+Enter the index at which value needs to be updated:
+1
+Enter the new value:
+1111
+output- Old value: 12
+-------------------------------------
+Your linked list: 11 1111
+...menu
+
+
+
+case 19: sort the list (merge sort)
+list- 90 12 45
+
+input- 13
+
+output-
+-------------------------------------
+Your linked list: 12 45 90
+...menu

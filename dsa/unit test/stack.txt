@@ -1,0 +1,130 @@
+// menu
+Your Stack:
+Enter 1 to push
+Enter 2 to pop
+Enter 3 to peek
+Enter 4 to search
+Enter 5 to exit the program
+
+
+case 1: peek, pop, search when stack is empty
+
+inputs- 2,3,4
+output- Stack is empty. Please enter 1 to add a number to stack.
+-------------------------------------
+menu
+
+
+
+case 2: Entered invalid inputs (non-numbers) - in push, pop, peek, search
+
+inputs- 1,2,3,4
+1
+Enter the value: ksjll
+
+output- Please give a valid input. java.util.InputMismatchException
+(End)
+
+
+--valid cases
+stack- 11 22
+case 3: push a number
+
+input- 1
+Enter the value: 33
+
+output- 
+-------------------------------------
+Your Stack: 33 11 22
+...menu
+
+
+
+case 4: peek the number
+
+input- 3
+output- Peeked value: 33
+-------------------------------------
+Your Stack: 33 11 22
+...menu
+
+
+
+case 5: pop the number
+
+input- 2
+output- Popped out value: 33
+-------------------------------------
+Your Stack: 11 22
+...menu
+
+
+
+case 6: search a number (doesn't exists)
+
+input- 4
+Enter the value to search: 45
+
+output- 
+45 Doesn't exists.
+-------------------------------------
+...menu
+
+
+
+case 7: search a number (exists)
+
+input- 4
+Enter the value to search: 22
+
+output- 
+Searched value is present at index: 1
+-------------------------------------
+Your Stack: 11 22
+...menu
+
+
+
+case 8: terminate the program
+
+input- 5
+output- Program terminated successfully.
+-------------------------------------
+(End)
+
+
+
+case 9: enter an invalid choice
+
+input- 6
+output-  Please enter a valid choice (1,2,3,4,5).
+-------------------------------------
+menu
+
+
+
+case 10: update a value (invalid index)
+Stack- 1 2
+
+input- 5
+Enter the index at which value needs to be updated: 12
+Enter the new value: 20
+Please enter a valid index
+-------------------------------------
+menu
+
+
+
+case 11: update a value (valid index)
+Stack- 1 2
+
+input- 5
+Enter the index at which value needs to be updated: 1
+Enter the new value: 11
+Old value: 1
+-------------------------------------
+Your Stack: 2 11
+...menu
+
+
+
