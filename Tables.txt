@@ -1,0 +1,151 @@
+mysql> CREATE DATABASE module_3;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |a
+| module_3           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> CREATE TABLE salespeople(snum INT, sname VARCHAR(30), city VARCHAR(30), comm INT);
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> CREATE TABLE customers(cnum INT, cname VARCHAR(30), city VARCHAR(30), rating INT, snum INT);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE orders(onum INT, amt DOUBLE(10, 2), odate DATE, cnum INT, snum INT);
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+
+
+mysql> INSERT INTO salespeople VALUES('1001', 'Peel', 'London', '12');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO salespeople VALUES('1002', 'Serres', 'SanJose', '13');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO salespeople VALUES('1004', 'Motika', 'London', '11');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO salespeople VALUES('1007', 'Rifkin', 'Barcelona', '15');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO salespeople VALUES('1003', 'AxelRod', 'New York', '10');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO salespeople VALUES('1008', 'Fran', 'London', '25');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * from salespeople;
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1003 | AxelRod | New York  |   10 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+
+
+mysql> INSERT INTO customers VALUES('2001', 'Hoffman', 'London', '100', '1001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customers VALUES('2002', 'Giovanni', 'Rome', '200', '1003');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO customers VALUES('2003', 'Liu', 'SanJose', '200', '1002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customers VALUES('2004', 'Grass', 'Berlin', '300', '1002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customers VALUES('2006', 'Clemens', 'London', '100', '1001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customers VALUES('2008', 'Cisneros', 'SanJose', '300', '1007');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customers VALUES('2007', 'Pereira', 'Rome', '100', '1004');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM customers;
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | Liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+7 rows in set (0.00 sec)
+
+
+
+mysql> INSERT INTO orders VALUES('3001', '18.69', '1990-10-03', '2008', '1007');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO orders VALUES('3003', '767.19', '1990-10-03', '2001', '1001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO orders VALUES('3002', '1900.10', '1990-10-03', '2007', '1004');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO orders VALUES('3005', '5160.45', '1990-10-03', '2003', '1002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO orders VALUES('3006', '1098.16', '1990-10-03', '2008', '1007');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO orders VALUES('3009', '1713.23', '1990-10-04', '2002', '1003');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO orders VALUES('3007', '75.75', '1990-10-04', '2004', '1002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO orders VALUES('3008', '4723.00', '1990-10-05', '2006', '1001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO orders VALUES('3010', '1309.95', '1990-10-06', '2004', '1002');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO orders VALUES('3011', '9891.88', '1990-10-06', '2006', '1001');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM orders;
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+
+
+
+
+
+
