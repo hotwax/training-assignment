@@ -47,7 +47,7 @@ public class webScrapper {
      * This function is used for connecting to the website and scrap the data.
      * The function accepts two argument link of tghe website and linked list of words.
      */
-    static private void Scrapper(String link, LinkedList<String> listOfWords) throws IOException{
+    static private void Scrapper(String link, LinkedList<String> listOfWords) throws IOException {
         Document ds = Jsoup.connect(link).get();
         String text = ds.body().text();
         String [] arr = text.split(" ");
