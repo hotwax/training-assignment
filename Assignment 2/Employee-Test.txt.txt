@@ -1,0 +1,118 @@
+Test Case 1: Adding a new employee to the system
+
+Input:
+Employee ID: 1234
+Employee Name: Prakhar
+Employee Email: Prakhar@gmail.com
+Employee Age: 22
+Employee Date of Birth: 2001-09-18
+
+Output:
+Employee added successfully.
+
+Test Case 2: Adding an employee with an existing ID
+
+Input:
+Employee ID: 1234
+Employee Name: Prakhar Yadav 2
+Employee Email: prakhar@gmail.com
+Employee Age: 30
+Employee Date of Birth: 1993-01-01
+
+Output:
+Employee is already present.
+
+Test Case 3: Deleting an existing employee from the system
+
+Input:
+Employee ID: 1234
+
+Output:
+Employee deleted successfully.
+
+Test Case 4: Deleting a non-existing employee from the system
+
+Input:
+Employee ID: 1002
+
+Output:
+Employee is not present.
+
+Test Case 5: Searching for an existing employee by ID
+
+Input:
+Employee ID: 1234
+
+Output:
+Employee ID - 1234
+Employee Name - Prakhar 
+Employee Email - prakhar@gmail.com
+Employee Age - 22
+Date - 2001-09-18
+
+Test Case 6: Searching for a non-existing employee by ID
+
+Input:
+Employee ID: 1002
+
+Output:
+Employee is not present.
+
+Test Case 7: Sorting employees by ID in ascending order
+
+Input:
+Employee 1: 1234,Prakhar,prakhar@gmail.com,22,2001-09-18
+Employee 2: 1236,Kunal,kunal@gmail.com,22,2001-11-15
+Employee 3: 1235,Gourav,gr@gmail.com,21,2002-03-11
+Output:
+Sorted Employees:
+Employee - 1================
+EmployeeId : 1234
+Employee Name : Prakhar 
+Employee Email : prakhar@gmail.com
+Employee Age : 22
+Employee Age : 2001-09-18
+
+Employee - 2================
+EmployeeId : 1236
+Employee Name : Kunal
+Employee Email : Kunal@gmail.com
+Employee Age : 22
+Employee Age : 2001-11-15
+
+Employee - 3================
+EmployeeId : 1235
+Employee Name : Gourav
+Employee Email : gr@gmail.com
+Employee Age : 21
+Employee Age : 2002-03-11
+
+Test Case 8: Sorting employees by ID in descending order
+
+Input:
+Employee 1: 1234,Prakhar,prakhar@gmail.com,22,2001-09-18
+Employee 2: 1236,Kunal,kunal@gmail.com,22,2001-11-15
+Employee 3: 1235,Gourav,gr@gmail.com,21,2002-03-11
+
+Output:
+Sorted Employees:
+Employee - 1================
+EmployeeId : 1234
+Employee Name : Prakhar 
+Employee Email : prakhar@gmail.com
+Employee Age : 22
+Employee Age : 2001-09-18
+
+Employee - 2================
+EmployeeId : 1235
+Employee Name : Gourav
+Employee Email : gr@gmail.com
+Employee Age : 21
+Employee Age : 2002-03-11
+
+Employee - 3================
+EmployeeId : 1236
+Employee Name : Kunal
+Employee Email : Kunal@gmail.com
+Employee Age : 22
+Employee Age : 2001-11-15
