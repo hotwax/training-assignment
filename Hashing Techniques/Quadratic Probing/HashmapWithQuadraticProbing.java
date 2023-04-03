@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HashmapWithQuadraticProbing {
@@ -63,7 +64,6 @@ public class HashmapWithQuadraticProbing {
 
                 
                 int t = (hash + i * i) % capacity;
-                System.out.println("t: " + t + " hash: " + hash + " i: " + i+ " key: " + key + " value: " + value);
 
                 // If the key already exists, update the value
                 if (table[t] != null && table[t].key == key) {
@@ -184,7 +184,9 @@ boolean search(int key) {
 
 
 
-        try (Scanner scanner = new Scanner(System.in)) {
+        try {
+
+            Scanner scanner = new Scanner(System.in);
             System.out.println("Enter capacity");
             int cap= scanner.nextInt();
 
@@ -268,6 +270,15 @@ boolean search(int key) {
                         break;
                 }
             } while (choice != 8);
+
+            scanner.close();
+        }
+        catch(InputMismatchException e){
+            System.out.println("Invalid input, Please enter a integer value");
+            System.out.println("Exception: " + e + "");
+        }
+        catch(Exception e){
+            System.out.println("Exception: " + e + "");
         }
         
     }

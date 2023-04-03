@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HashmapWithChaining {
@@ -37,7 +38,6 @@ HashmapWithChaining(int cap) {
 // Method to insert a new key-value pair into the hash map
 void insert(int key, int value) {
 
-    // Check if the hash map is already at full capacity
     
 
     long s,e;
@@ -277,7 +277,7 @@ long getTimetaken(){
 
     public static void main(String[] args) {
 
-
+        try{
         Scanner sc = new Scanner(System.in);
         int choice, key, value;
         boolean result;
@@ -289,6 +289,8 @@ long getTimetaken(){
 
 
         do {
+            
+            
             System.out.println("1. Insert");
             System.out.println("2. Remove");
             System.out.println("3. Search");
@@ -299,7 +301,10 @@ long getTimetaken(){
             System.out.println("8. Exit");
 
             System.out.print("Enter your choice: ");
+
+            
             choice = sc.nextInt();
+
 
             switch (choice) {
                 case 1:
@@ -360,7 +365,7 @@ long getTimetaken(){
                     break;
 
 
-                default:
+            default:
                     System.out.println("Invalid choice");
                     break;
 
@@ -373,7 +378,16 @@ long getTimetaken(){
 
         sc.close();
         
-    }
+        }
+
+        catch(InputMismatchException e){
+            System.out.println("Invalid input, Please Enter a valid input. " );
+            System.out.println("Exception: " + e + "");
+        }
+
+        catch(Exception e){
+            System.out.println("Exception: " + e + "");
+        }
 
     
-}
+}}

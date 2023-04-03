@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -192,6 +193,8 @@ public class HashmapWithLinearProbing {
 
     public static void main(String[] args) {
 
+
+        try{
         Scanner sc = new Scanner(System.in);
         int choice, key, value;
         int k;
@@ -279,11 +282,18 @@ public class HashmapWithLinearProbing {
 
         sc.close();
         
-        
+    }
+
+    catch(InputMismatchException e){
+        System.out.println("Invalid input, Please enter a integer value");
+        System.out.println("Exception: " + e);
+    }
+    catch(Exception e){
+        System.out.println("Exception: " + e);
     }
 
 
 
-    
+}
 }
 

@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LinkedList {
@@ -223,7 +224,9 @@ public class LinkedList {
 
     public static void main(String[] args) 
     {
-    try (Scanner sc = new Scanner(System.in)) {
+    try {
+        
+        Scanner sc = new Scanner(System.in);
         LinkedList linkedList = new LinkedList();
         int choice = 0;
 
@@ -309,8 +312,13 @@ public class LinkedList {
                         break;
                 }
             } while (choice != 9);
-    } catch (Exception e) {
-        System.out.println("Error: " + e.getMessage());}
+    } catch (InputMismatchException e) {
+        System.out.println("Error: Please enter a integer input" );
+        System.out.println("Exception: "+ e + "" );}
+
+    
+        catch (Error e) {
+            System.out.println("Error"  + e.getMessage());}
 
 }
     

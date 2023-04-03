@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CustomHashmap {
@@ -215,7 +216,9 @@ public class CustomHashmap {
 
     public static void main(String[] args) {
 
-        try (Scanner input = new Scanner(System.in)) {
+        try  {
+
+            Scanner input = new Scanner(System.in);
             System.out.println("Enter Size");
 
             int cap = input.nextInt();
@@ -285,6 +288,15 @@ public class CustomHashmap {
                         break;
                 }
             }
+
+        }
+        catch(InputMismatchException e){
+            System.out.println("Invalid input, Please Enter a integer input. " );
+            System.out.println("Exception: " + e + "");
+        }
+    
+        catch(Exception e){
+            System.out.println("Exception: " + e + "");
         }
     }
 }

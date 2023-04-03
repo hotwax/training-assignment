@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Queue {
@@ -72,11 +73,29 @@ class Queue {
         }
     }
 
+
+    void update(int index, int value) {
+        if (index < 0 || index >= len) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        Node ptr = head;
+        for (int i = 0; i < index; i++) {
+            ptr = ptr.next;
+        }
+
+        ptr.data = value;
+
+    }
+
     boolean isEmpty() {
         return head == null;
     }
 
     public static void main(String[] args) {
+
+        try{
         Scanner sc = new Scanner(System.in);
         Queue queue = new Queue();
 
@@ -88,6 +107,7 @@ class Queue {
             System.out.println("3. Peek");
             System.out.println("4. Search");
             System.out.println("5. Display");
+            System.out.println("6. Update");
             System.out.println("6. Check if empty");
             System.out.println("7. Exit");
 
@@ -134,7 +154,18 @@ class Queue {
                     queue.display();
                     break;
 
-                case 6:
+                    case 6:
+                    if (queue.isEmpty()) {
+                        System.out.println("Queue is empty");
+                    } else {
+                        System.out.println("Enter index to update: ");
+                        int index = sc.nextInt();
+                        System.out.println("Enter value to update: ");
+                        int value = sc.nextInt();
+                        queue.update(index, value);                    }
+                    break;
+
+                case 7:
                     if (queue.isEmpty()) {
                         System.out.println("Queue is empty");
                     } else {
@@ -142,13 +173,20 @@ class Queue {
                     }
                     break;
 
-                case 7:
+                case 8:
                     System.out.println("Exiting...");
                     System.exit(0);
 
                 default:
                     System.out.println("Invalid choice");
             }
+        }}catch(InputMismatchException e){
+            System.out.println("Invalid input, Please Enter a valid input. " );
+            System.out.println("Exception: " + e + "");
+        }
+
+        catch(Exception e){
+            System.out.println("Exception: " + e + "");
         }
     }
 }

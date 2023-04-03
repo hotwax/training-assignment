@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 
 
@@ -20,20 +21,27 @@ public class Graph {
     // Add edge between two vertices
     void addEdge(int to, int from)
     {  
+        if (to>=n || from>=n || to<0 || from<0)
+            System.out.println("Invalid vertices");
+        else{
         adj[to][from]= 1;
-        adj[from][to]= 1;
+        adj[from][to]= 1;}
     }
 
 
     // Remove edge between two vertices
     void removeEdge(int to, int from) {
 
-        if (adj[to][from]==0 || adj[from][to]==0)
+        if (to>=n || from>=n|| to<0 || from<0)
+            System.out.println("Invalid vertices");
+
+        else if (adj[to][from]==0 || adj[from][to]==0)
             System.out.println("Edge does not exist");
+        else{
         
 
         adj[to][from] = 0;
-        adj[from][to] = 0;
+        adj[from][to] = 0;}
     }
 
     
@@ -117,10 +125,15 @@ public class Graph {
 
     public static void main(String[] args) {
 
+
+        try{
+
         Scanner sc= new Scanner(System.in);
 
         System.out.println("Enter the number of vertices: ");
         int v= sc.nextInt();
+        if (v<0)
+            throw new Exception("Number of vertices cannot be negative");
 
         Graph g= new Graph(v);
 
@@ -172,4 +185,12 @@ public class Graph {
             }
         }
     }
-}
+    catch(InputMismatchException e){
+        System.out.println("Invalid input, Please Enter a integer input. " );
+        System.out.println("Exception: " + e + "");
+    }
+
+    catch(Exception e){
+        System.out.println("Exception: " + e + "");
+    }
+}}

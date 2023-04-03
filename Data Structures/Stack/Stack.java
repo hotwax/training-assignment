@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Stack {
@@ -76,11 +77,12 @@ public class Stack {
     }
 
     public static void main(String[] args) {
+        try{
+
         Scanner scanner = new Scanner(System.in);
         Stack stack = new Stack();
         int choice = 0;
 
-        try{
         do {
             System.out.println("Stack Operations:");
             System.out.println("1. Push");
@@ -133,9 +135,14 @@ public class Stack {
                     break;
             }
         } while (choice != 6);
-        scanner.close();
-    }catch(Exception e){
-        System.out.println("Invalid input");
+        
+    } catch(InputMismatchException e){
+        System.out.println("Invalid input, Please Enter a integer input. " );
+        System.out.println("Exception: " + e + "");
+    }
+
+    catch(Exception e){
+        System.out.println("Exception: " + e + "");
     }
     }
 

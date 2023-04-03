@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HashmapWithDoubleHashing {
@@ -193,8 +194,8 @@ public class HashmapWithDoubleHashing {
 
 
     public static void main(String[] args) {
-        try (// Sample usage
-        Scanner scanner = new Scanner(System.in)) {
+        try {
+        Scanner scanner = new Scanner(System.in) ;
             System.out.println("Enter capacity of HashMap:");
             int capacity = scanner.nextInt();
             HashmapWithDoubleHashing map = new HashmapWithDoubleHashing(capacity);
@@ -271,6 +272,14 @@ public class HashmapWithDoubleHashing {
                 }
             }
         }
+        catch(InputMismatchException e){
+            System.out.println("Invalid input, Please enter a integer value");
+            System.out.println("Exception: " + e);
+        }
+        catch(Exception e){
+            System.out.println("Exception: " + e);
+        }
+    
     }
 }
 

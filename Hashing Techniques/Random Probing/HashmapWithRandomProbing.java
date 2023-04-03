@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Random;
 
 public class HashmapWithRandomProbing {
@@ -212,6 +212,9 @@ public boolean searchKey(int key) {
 
 
     public static void main(String[] args) {
+
+
+        try{
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the size of the hash table: ");
         int cap = scanner.nextInt();
@@ -295,7 +298,14 @@ public boolean searchKey(int key) {
             System.out.println();
         } while (choice != 9);
 
-        scanner.close();
+        scanner.close(); }
+        catch(InputMismatchException e){
+            System.out.println("Invalid input, Please enter a integer value");
+            System.out.println("Exception: " + e + "");
+        }
+        catch(Exception e){
+            System.out.println("Exception: " + e + "");
+        }
     }
 }
 
