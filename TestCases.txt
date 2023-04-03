@@ -1,0 +1,1824 @@
+1) List all the columns of the Salespeople table. 
+
+=> we have to display only columns of salespeople table
+=> we can use SHOW or DESC command for that
+=> it will give us 4 columns details with column names as 
+=> snum, sname, city, comm
+
+Actual output :
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| snum  | int          | YES  |     | NULL    |       |
+| sname | varchar(100) | YES  |     | NULL    |       |
+| city  | varchar(100) | YES  |     | NULL    |       |
+| comm  | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+
+We can also use information schema like -
+SELECT 
+  column_name 
+FROM 
+  information_schema.columns 
+WHERE 
+  table_name = 'Salespeople';
+
++-------------+
+| COLUMN_NAME |
++-------------+
+| snum        |
+| sname       |
+| city        |
+| comm        |
++-------------+
+
+2) List all customers with a rating of 100. 
+
+=> we have to display those customers how have 100 rating
+=> we will use where clause here
+=> It will give us three rows for cnum 2001, 2006, 2007
+
+Actual output :
++------+---------+--------+--------+------+
+| cnum | cname   | city   | rating | snum |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
+| 2007 | Pereira | Rome   |    100 | 1004 |
++------+---------+--------+--------+------+
+
+3) Find the largest order taken by each salesperson on each date. 
+
+=> On each day we have to find out largest order corresponding to each salespeople
+=> We will need multiple group by clause here.
+=> We will have 9 rows here, because order made by salespeople on each date are counted as 9.
+=> here we will use left join to increase effectiveness. 
+
+Actual output :
++------+---------+---------+------------+
+| snum | sname   | max     | odate      |
++------+---------+---------+------------+
+| 1001 | Peel    |  767.19 | 1990-10-03 |
+| 1001 | Peel    |    4723 | 1990-10-05 |
+| 1001 | Peel    | 9891.88 | 1990-10-06 |
+| 1002 | Serres  | 5160.45 | 1990-10-03 |
+| 1002 | Serres  |   75.75 | 1990-10-04 |
+| 1002 | Serres  | 1309.95 | 1990-10-06 |
+| 1003 | AxelRod | 1713.23 | 1990-10-04 |
+| 1004 | Motika  |  1900.1 | 1990-10-03 |
+| 1007 | Rifkin  | 1098.16 | 1990-10-03 |
++------+---------+---------+------------+
+
+4) Arrange the Order table by descending customer number. 
+=> We have to display orders table in descending order of cnum
+=> We will use ORDER BY clause here on cnum.
+=> All order table data in descending order of cnum will be displayed
+
+Actual output :
++-------------+------+---------+------------+------+
+| customer_no | onum | amt     | odate      | snum |
++-------------+------+---------+------------+------+
+|        2008 | 3001 |   18.69 | 1990-10-03 | 1007 |
+|        2008 | 3006 | 1098.16 | 1990-10-03 | 1007 |
+|        2007 | 3002 |  1900.1 | 1990-10-03 | 1004 |
+|        2006 | 3008 |    4723 | 1990-10-05 | 1001 |
+|        2006 | 3011 | 9891.88 | 1990-10-06 | 1001 |
+|        2004 | 3007 |   75.75 | 1990-10-04 | 1002 |
+|        2004 | 3010 | 1309.95 | 1990-10-06 | 1002 |
+|        2003 | 3005 | 5160.45 | 1990-10-03 | 1002 |
+|        2002 | 3009 | 1713.23 | 1990-10-04 | 1003 |
+|        2001 | 3003 |  767.19 | 1990-10-03 | 1001 |
++-------------+------+---------+------------+------+
+
+5) Find which salespeople currently have orders in the order table. 
+
+=> We have find those salespeople who have orders
+=> Because frank is only one how have not received any order.
+=> here all salespeople except Frank will be displayed.
+=> Here we will use inner join because we want data(snum) which is present in orders & salespeople
+=> We can show all the orders or we can use group by to group by snum or sname.
+
+Actual output
++------+---------+------+------------+---------+
+| snum | sname   | onum | odate      | amt     |
++------+---------+------+------------+---------+
+| 1001 | Peel    | 3003 | 1990-10-03 |  767.19 |
+| 1002 | Serres  | 3005 | 1990-10-03 | 5160.45 |
+| 1003 | AxelRod | 3009 | 1990-10-04 | 1713.23 |
+| 1004 | Motika  | 3002 | 1990-10-03 |  1900.1 |
+| 1007 | Rifkin  | 3001 | 1990-10-03 |   18.69 |
++------+---------+------+------------+---------+
+
+6) List names of all customers matched with the salespeople serving them. 
+
+=> Here we want all customers with salespeople names which are associated to them
+=> We can use inner join here because we want the common data between the tables.
+=> Here will will have 7 rows because we have 7 customers in total.
+
+Actual output :
++------+----------+---------+
+| cnum | cname    | sname   |
++------+----------+---------+
+| 2001 | Hoffman  | Peel    |
+| 2002 | Giovanni | AxelRod |
+| 2003 | liu      | Serres  |
+| 2004 | Grass    | Serres  |
+| 2008 | Cisneros | Rifkin  |
+| 2006 | Clemens  | Peel    |
+| 2007 | Pereira  | Motika  |
++------+----------+---------+
+
+7) Find the names and numbers of all salespeople who have more than one customer. 
+
+=> We have to give sname & snum of all salespeople who is having more than one customer
+=> We can use here left join & aggregate function is needed to count
+=> Here we will have 2 rows because only Peel and Serres are servering more than one customers.
+
+Actual output
++--------+------+-----------+
+| sname  | snum | no_orders |
++--------+------+-----------+
+| Peel   | 1001 |         2 |
+| Serres | 1002 |         2 |
++--------+------+-----------+
+
+8) Count the orders of each of the salespeople and output the results in descending order. 
+
+=> Here we have to count orders of each salespeople and order it in descending
+=> We will use left join and ORDER BY clause
+=> Here we will use left join because we want all data of left side table which is salespeople. 
+=> Here we will have 6 rows in output because there are 6 salespeople.
+=> peel have 3 orders, serres have 3, rifkin have 2, motika and axelrod have 1 & fran don't have anything.
+
+Actual output :
++------+---------+------------+
+| snum | sname   | num_orders |
++------+---------+------------+
+| 1001 | Peel    |          3 |
+| 1002 | Serres  |          3 |
+| 1007 | Rifkin  |          2 |
+| 1004 | Motika  |          1 |
+| 1003 | AxelRod |          1 |
+| 1008 | Fran    |          0 |
++------+---------+------------+
+
+9) List the customer table if and only if one or more of the customers in the Customer table are located in SanJose. 
+
+=> We have to display customer table if least one customer is located in SanJose
+=> We can use nested query here, 1stly find out number of customers located in SanJose if they are more than one display them
+=> It will display entire customers table because there are two people Liu and Cisneros living in SanJose
+
+Actual output :
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+
+10) Match salespeople to customers according to what city they live in. 
+
+=> We have to match salespeople according to there cities 
+=> We will use inner join here.
+=> Here 8 rows will come as Peel, Fran, Motika lives in London.
+=> Also from customers table Hoffman & Clemens lives in london, so 6 rows from here
+=> Serres lives in SanJose & from customers table Liu & Clemens lives in SanJose
+=> so we will have 2 rows from here.
+=> other than here no city is common.
+
+Actual output :
++------+--------+------+----------+---------+
+| snum | sname  | cnum | cname    | city    |
++------+--------+------+----------+---------+
+| 1001 | Peel   | 2001 | Hoffman  | London  |
+| 1001 | Peel   | 2006 | Clemens  | London  |
+| 1002 | Serres | 2003 | liu      | SanJose |
+| 1002 | Serres | 2008 | Cisneros | SanJose |
+| 1004 | Motika | 2001 | Hoffman  | London  |
+| 1004 | Motika | 2006 | Clemens  | London  |
+| 1008 | Fran   | 2001 | Hoffman  | London  |
+| 1008 | Fran   | 2006 | Clemens  | London  |
++------+--------+------+----------+---------+
+
+11) Find all the customers in SanJose who have a rating above 200. 
+
+=> We have to list all the customers who live in SanJose & there rating is above 200
+=> we can use simply write it by using two condition with AND operator
+=> There two customers who live in SanJose but only one is having rating more than 200
+=> So 1 row will be displayed.
+
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+
+12) List the names and commissions of all salespeople in London. 
+
+=> We have to list names and their commissions of salespeople who lives in london.
+=> We will simply use where clause to check city is london or not.
+=> We have three salespeople living in london those are peel, fran, motika
+=> So we will have 3 rows in output.
+
+Actual output :
++--------+------+
+| sname  | comm |
++--------+------+
+| Peel   |   12 |
+| Motika |   11 |
+| Fran   |   25 |
++--------+------+
+
+13) List all the orders of Salespeople Motika from the orders table.
+
+=> Here we have to display all orders taken by Motika
+=> We will use inner join over here with one more condition as sname should be equal to motika
+=> Motika has taken only one order on all dates.
+=> So only one row will be displayed.
+
+Actual output-
++------+--------+------------+------+------+--------+
+| onum | amt    | odate      | cnum | snum | sname  |
++------+--------+------------+------+------+--------+
+| 3002 | 1900.1 | 1990-10-03 | 2007 | 1004 | Motika |
++------+--------+------------+------+------+--------+
+
+14) Find all customers who booked orders on October 3. 
+
+=> We have to find all customers who have booked orders on october 3.
+=> Here we need to Inner join orders and customers tables
+=> There are 5 orders on october 3rd.
+=> But cnum 2008 have made 2 orders and I am printing unique results.
+=> So we will have 4 rows.
+
+Output:
++------+----------+------------+
+| cnum | cname    | odate      |
++------+----------+------------+
+| 2001 | Hoffman  | 1990-10-03 |
+| 2003 | liu      | 1990-10-03 |
+| 2008 | Cisneros | 1990-10-03 |
+| 2007 | Pereira  | 1990-10-03 |
++------+----------+------------+
+
+15) Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
+
+=> we have to find sum of orders corresponding to each date.
+=> And if that sum is not least 2000 above the maximum Amount of orders table
+=> Then eliminate that tuple.
+=> We can first find the maximum amount for each date in the Orders table using a subquery. 
+=> We can then use this subquery to filter the dates where the sum of the amounts is at least 2000 above the maximum amount
+=> Here maximum amt is on 6 october which is 9891.88 
+=> 9891.88 + 2000 = 11891.88 
+=> sum of amounts on each day is not greater than 11891.88 hence empty set
+
+output :
+Empty set
+
+16) Select all orders that had amounts that were greater than at least one of the orders from October 6. 
+
+=> We will select minimum amount from 6th october 
+=> And we will select all order that have amt greater than the amt formed in previous step.
+=> Minimum amount on 6th october is 1309.95
+=> Tuples which have higher amount than 1309.95 are 5.
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+17) Write a query that uses the EXISTS operator to extract all salespeople who have customers with a rating of 300.
+
+=> We have to use exists operator to get salespeople
+=> Who have customers with a rating of 300
+=> We will use co-related subquery over here.
+=> If there is at least one row in the subquery result, the EXISTS operator returns true
+=> And the corresponding row from the salespeople table is included in the query result.
+=> There are two customers who have rating 300, snum are 1002, 1007.
+=> And salespeople related to these snums are Grass & Cisneros.
+
++------+--------+-----------+------+
+| snum | sname  | city      | comm |
++------+--------+-----------+------+
+| 1002 | Serres | SanJose   |   13 |
+| 1007 | Rifkin | Barcelona |   15 |
++------+--------+-----------+------+
+
+18) Find all customers whose cnum is 1000 above the snum of Serres. 
+
+=> We want all those customers whose cnum is 1000 + snum of serres
+=> snum of serres is 1002 
+=> so 1000 + 1002 = 2002
+=> customer with 2002 cnum.
+=> only one row will be printed.
+
++------+----------+------+--------+------+
+| cnum | cname    | city | rating | snum |
++------+----------+------+--------+------+
+| 2002 | Giovanni | Rome |    200 | 1003 |
++------+----------+------+--------+------+
+
+19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
+
+=> We have to give commissions in percentages instead of decimal
+=> As given commission is not given in percentage, we will calcalute 
+=> (given commission * 100) / sum( o.amt ) (corresponding to each salesperson)
+=> here we should use left join in order to get all salespeople in resulting table
+=> Fran having received any order hence it will give output as null
+
++------+---------+------------+
+| snum | sname   | commission |
++------+---------+------------+
+| 1001 | Peel    |       0.08 |
+| 1002 | Serres  |        0.2 |
+| 1003 | AxelRod |       0.58 |
+| 1004 | Motika  |       0.58 |
+| 1007 | Rifkin  |       1.34 |
+| 1008 | Fran    |       NULL |
++------+---------+------------+
+
+20) Find the largest order taken by each salesperson on each date, eliminating those Maximum orders, which are less than 3000. 
+
+=> Here we have to first find maximum order of each salespeople on each date.
+=> Then eliminating those who don't have even 3000 as maximum.
+=> We will use left join over here 
+=> There are 9 records corresponding to each date & each salesperson 
+=> Having amt greater than 3000 are only 3
+ 
++------+------------+---------------+
+| snum | odate      | largest_order |
++------+------------+---------------+
+| 1002 | 1990-10-03 |       5160.45 |
+| 1001 | 1990-10-05 |          4723 |
+| 1001 | 1990-10-06 |       9891.88 |
++------+------------+---------------+
+
+21) List all the largest orders for October 3, for each salesperson.  
+
+=> Here we have to give largest order for each salespeople on 3rd october
+=> There are some salespeople who haven't received any order on 3rd october
+=> We will use left join over here with AND operators for multiple condition like checking for dates.
+=> There are 6 records in salespeople hence 6 records will be displayed.
+
++------+---------+------------+---------------+
+| snum | sname   | odate      | largest_order |
++------+---------+------------+---------------+
+| 1001 | Peel    | 1990-10-03 |        767.19 |
+| 1002 | Serres  | 1990-10-03 |       5160.45 |
+| 1004 | Motika  | 1990-10-03 |        1900.1 |
+| 1007 | Rifkin  | 1990-10-03 |       1098.16 |
+| 1003 | AxelRod | NULL       |          NULL |
+| 1008 | Fran    | NULL       |          NULL |
++------+---------+------------+---------------+
+
+22) Find all customers located in cities where Serres has customers. 
+
+=> We will find out where are serres customer
+=> And display all customer of that city
+=> We will use inner join in nested subquery here along with IN operator
+=> Serres has customers in SanJose & Berlin 
+=> Customers living there are 2003, 2004, 2008
+
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2003 | liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+
+23) Select all customers with a rating above 200. 
+
+=> We have to select customers who have rating more than 200
+=> We will write where condition over here.
+=> There are two customers with rating 300
+=> So total tuples shown will be 2
+
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+
+24) Count the number of salespeople currently having orders in the orders table. 
+
+=> We have to count number of salespeople which have orders in order table
+=> All salespeople are having order in table except Fran 
+=> that why only one row will be displayed
+=> It will display 5 there.
+
++-----------------+
+| num_salespeople |
++-----------------+
+|               5 |
++-----------------+
+
+25) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, salesperson’s name and the salesperson’s rate of commission. 
+
+=> We have to find out customers with salespeople corresponding them 
+=> Having commission above 12%
+=> Display order is given cname, sname, comm
+=> here we will find salespeople with comm above 12% 
+=> assumed that given comm is in percentage
+=> There are 4 people comm greater than 12%
+=> Serres have 13%, Grass have 13, Rifkin have 15 & Fran have 25
+=> But Fran does not have any customers hence 3 rows are displayed 
+
++----------+--------+------+
+| cname    | sname  | comm |
++----------+--------+------+
+| liu      | Serres |   13 |
+| Grass    | Serres |   13 |
+| Cisneros | Rifkin |   15 |
++----------+--------+------+
+
+26) Find salespeople who have multiple customers. 
+
+=> We have to find out salespeople who are serving more than one customers
+=> We will use inner join over here & having operator with count function
+=>  It will give us 2 rows because serres and peel are the one who are servering multiple customers.
+
++------+--------+
+| snum | sname  |
++------+--------+
+| 1001 | Peel   |
+| 1002 | Serres |
++------+--------+
+
+27) Find salespeople with customers located in their own cities. 
+
+=> We have to find out salespeople & customers which lives in same city
+=> We will use inner join over here
+=> 3 salespeople who are serving the customers are in same city are peel, serres & peel
+
++--------+----------+---------+
+| sname  | cname    | city    |
++--------+----------+---------+
+| Peel   | Hoffman  | London  |
+| Serres | liu      | SanJose |
+| Peel   | Cisneros | London  |
++--------+----------+---------+
+
+28) Find all salespeople whose name starts with ‘P’ and fourth character is ‘I’. 
+
+=> Here we have to give salespeople name with ‘P’ and fourth character is ‘I'
+=> we will use like operator here.
+=> it will give us empty set because starting form p and fourth character is i 
+=> There is no record availble like that
+
+Empty set
+
+29) Write a query that uses a subquery to obtain all orders for the customer named ‘Cisneros’. Assume you do not know his customer number. 
+
+=> We want all order of customer 'Cisneros'
+=> We will write subquery to find cnum of 'cisneros'
+=> Then we will write query to select everything where cnum is same as cisneros.
+=> There are two order by cisneros.
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
++------+---------+------------+------+------+
+
+30) Find the largest orders for Serres and Rifkin. 
+
+=> We have to find largest order for serres & rifkin
+=> We will use inner join with or condition for naming serres & rifkin
+=> There will be two records corresponding to each salespeople
+
++------+--------+------------+
+| snum | sname  | MAX(o.amt) |
++------+--------+------------+
+| 1007 | Rifkin |    1098.16 |
+| 1002 | Serres |    5160.45 |
++------+--------+------------+
+
+31) Sort the salespeople table in the following order: snum, sname, commission, city. 
+
+=> We will use order by clause here
+=> As salespeople is having 6 rows output will have all of them
+
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1003 | AxelRod | New York  |   10 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+
+32) Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range. 
+
+=> We will use here between keyword
+=> We have to give all customers who starts with A or G
+=> There will be four rows as there are four record according to condition
+
+1st approch
+=> Used between operator with A and G but it didn't fetch the names started with g.
+=> But if we enter G only in the table then it, will print it
+=> So the here it is not taking words which have anything after G 
+
+2nd approch 
+=> If we write the between with A to H then we can have the needed answer.
+=> We will have to write H over there for upper limit it is being treated as inclusive.
+=> But if we want to include all alphabets from A to Z then how can we do this.
+
+3rd approch 
+=> Using substring method 
+=> Signature substr(column_name,start index, length)
+=> We can use it to get accurate result in all conditions.
+
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2006 | Clemens  | London  |    100 | 1001 |
++------+----------+---------+--------+------+
+
+33) Select all the possible combinations of customers you can assign. 
+
+=> Here we have to create combinations of customers to customers
+=> I have matched if snum or customers are same it means they belong to same salespeople
+=> And they don't have same cnum or cnames 
+
++------+---------+---------+--------+------+------+---------+---------+--------+------+
+| cnum | cname   | city    | rating | snum | cnum | cname   | city    | rating | snum |
++------+---------+---------+--------+------+------+---------+---------+--------+------+
+| 2006 | Clemens | London  |    100 | 1001 | 2001 | Hoffman | London  |    100 | 1001 |
+| 2004 | Grass   | Berlin  |    300 | 1002 | 2003 | liu     | SanJose |    200 | 1002 |
+| 2003 | liu     | SanJose |    200 | 1002 | 2004 | Grass   | Berlin  |    300 | 1002 |
+| 2001 | Hoffman | London  |    100 | 1001 | 2006 | Clemens | London  |    100 | 1001 |
++------+---------+---------+--------+------+------+---------+---------+--------+------+
+
+34) Select all orders that are greater than the average for October 4. 
+
+=> We have to average orders of october 4
+=> And then print all those orders which have amt greater than produced amt
+=> We will use nested query for it.
+=> The avg amt generated will be 894.49
+=> There are 7 tuples how have amt greater than it
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+35) Write a select command using correlated subquery that selects the names and numbers of all customers with ratings equal to the maximum for their city. 
+
+=> We have use co-related subquery that selects cname & cnum 
+=> where rating is max(300) and city of both subqueries are equal
+=> There are 5 records that follows the condition
+=> With cnum 2001, 2002, 2004, 2008, 2006
+
++----------+------+
+| cname    | cnum |
++----------+------+
+| Hoffman  | 2001 |
+| Giovanni | 2002 |
+| Grass    | 2004 |
+| Cisneros | 2008 |
+| Clemens  | 2006 |
++----------+------+
+
+36) Write a query that totals the orders for each day and places the results in descending order. 
+
+=> We have to sum order tables amt and show them in descending order.
+=> Here we will use aggregate functions along with where group by clause
+=> We should display odate and total sum of amt over here
+=> There will be four rows because there are 4 dates in order tables.
+
++----------+------------+
+| total    | odate      |
++----------+------------+
+| 11201.83 | 1990-10-06 |
+|  8944.59 | 1990-10-03 |
+|     4723 | 1990-10-05 |
+|  1788.98 | 1990-10-04 |
++----------+------------+
+
+37) Write a select command that produces the rating followed by the name of each customer in SanJose. 
+
+=> We have to print rating & cname of customer who live in SanJose
+=> There are two customers living in SanJose
+=>  So there will be two tuples in resulting tables 
+=> Having cname as Cisneros & Liu
+
++--------+----------+
+| rating | cname    |
++--------+----------+
+|    200 | liu      |
+|    300 | Cisneros |
++--------+----------+
+
+38) Find all orders with amounts smaller than any amount for a customer in SanJose. 
+
+=> We have to give orders which are smaller 
+=> than any amount of customer living in SanJose
+=> Here i have picked max amount because we want all smaller amounts
+=> Here we will use joins in nested query and then print the results by another query
+=> The max amount of customer living in SanJose is 5160.45
+=> There will be 8 rows who have less amt than this max_amt
+=> Or we can use any operator here with subqueries
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+39) Find all orders with above average amounts for their customers. 
+
+=> Here we have to print orders, above average amt for their respective customer
+=> We will display those data which have amount greater than average
+=> With customers details in the resulting table
+=> Each customer will have its avg amt as -
+
++------+-------------------+
+| cnum | avg_amt           |
++------+-------------------+
+| 2008 | 558.4250000000001 |
+| 2001 |            767.19 |
+| 2007 |            1900.1 |
+| 2003 |           5160.45 |
+| 2002 |           1713.23 |
+| 2004 |            692.85 |
+| 2006 |           7307.44 |
++------+-------------------+
+ 
+=> Those orders which have amt greater than these avg_amt should be shown
+
++------+------------+----------+---------+
+| onum | odate      | cname    | amt     |
++------+------------+----------+---------+
+| 3006 | 1990-10-03 | Cisneros | 1098.16 |
+| 3010 | 1990-10-06 | Grass    | 1309.95 |
+| 3011 | 1990-10-06 | Clemens  | 9891.88 |
++------+------------+----------+---------+
+
+40) Write a query that selects the highest rating in each city. 
+
+=> We have to select highest rating in each city
+=> There are 4 distinct cities avalible in customer table
+=> So there will be 4 rows and we will use group by clause
+=> with aggregate function in the query
+
++-------------+---------+
+| max(rating) | city    |
++-------------+---------+
+|         100 | London  |
+|         200 | Rome    |
+|         300 | SanJose |
+|         300 | Berlin  |
++-------------+---------+
+
+41) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100.00. 
+
+=> Here we have to figure out salespeople's commission on each order 
+=> which they get by customer on order
+=> Here salespeople fran cannot be considered 
+=> because we want rating more than 100 and fran is not associated with any customer
+=> So he does'nt have any rating as well
+=> cnum with rating more than 100 are 2002, 2004, 2008
+=> These customers have total 6 orders hence 6 rows will come
+
++------+------+---------+----------+--------+--------------------+
+| onum | snum | sname   | cname    | rating | commission         |
++------+------+---------+----------+--------+--------------------+
+| 3001 | 1007 | Rifkin  | Cisneros |    300 |             2.8035 |
+| 3005 | 1002 | Serres  | liu      |    200 |  670.8584999999999 |
+| 3006 | 1007 | Rifkin  | Cisneros |    300 | 164.72400000000002 |
+| 3007 | 1002 | Serres  | Grass    |    300 |             9.8475 |
+| 3009 | 1003 | AxelRod | Giovanni |    200 | 171.32299999999998 |
+| 3010 | 1002 | Serres  | Grass    |    300 | 170.29350000000002 |
++------+------+---------+----------+--------+--------------------+
+
+42) Count the customers with ratings above SanJose’s average. 
+
+=> We have to find SanJose's rating average
+=> And display those customers who have rating greater than the generated result
+=> There are two customers from SanJose with rating 200 & 300
+=> AVG(rating) will be 250, so it will display customer with rating 300
+=> And there are 2 such results
+
++------------+
+| avg_rating |
++------------+
+|          2 |
++------------+
+
+43) Find all salespeople that are located in either Barcelona or London. 
+
+=> We have to select salespeople that are located in either Barcelona or London
+=> There are three salespeople in london & one in barcelona
+=> We will use where clause with AND operator
+=> There will be total 4 rows
+
++------+--------+-----------+------+
+| snum | sname  | city      | comm |
++------+--------+-----------+------+
+| 1001 | Peel   | London    |   12 |
+| 1004 | Motika | London    |   11 |
+| 1007 | RifkIN | Barcelona |   15 |
+| 1008 | Fran   | London    |   25 |
++------+--------+-----------+------+
+
+44) Find all salespeople with only one customer. 
+
+=> We want salespeople who is serving only one customer
+=> There are 3 salespeople such as 1003, 1004, 1007
+=> We will use joins in nested query and then use IN operator
+=> There will be three tuples
+
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1003 | AxelRod | New York  |   10 |
++------+---------+-----------+------+
+
+45) Write a query that joins the Customer table to itself to find all pairs or customers served by a single salesperson.
+
+=> We have to join customer table to itself
+=> And find all pairs customers who are served by single salesperson
+=> There are salespeople with snum 1001 & 1002 which are servering same customer
+=> So we can pair each one of them in two ways 
+=> There will be 4 records in resulting table
+
++---------+---------+--------+
+| cname   | cname   | sname  |
++---------+---------+--------+
+| Clemens | Hoffman | Peel   |
+| Grass   | liu     | Serres |
+| liu     | Grass   | Serres |
+| Hoffman | Clemens | Peel   |
++---------+---------+--------+
+
+46) Write a query that will give you all orders for more than $1000.00. 
+
+=> We have get those order which are greater than $1000.00
+=> We will use where clause here
+=> There will be 7 tuples having amt greater than 1000
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+47) Write a query that lists each order number followed by the name of the customer who made that order. 
+
+=> We want order number and name of customer who made order
+=> We will use left joins here because we want all onum
+=> There will be 10 rows because there are 10 records in table
+
++------+----------+
+| onum | cname    |
++------+----------+
+| 3001 | Cisneros |
+| 3002 | Pereira  |
+| 3003 | Hoffman  |
+| 3005 | liu      |
+| 3006 | Cisneros |
+| 3007 | Grass    |
+| 3008 | Clemens  |
+| 3009 | Giovanni |
+| 3010 | Grass    |
+| 3011 | Clemens  |
++------+----------+
+
+48) Write a query that selects all the customers whose ratings are equal to or greater than ANY(in the SQL sense) of ‘Serres’. 
+
+=> Serres who has snum 1002 have rating 200 & 300 
+=> Customers having rating greater or equal to that need to be displayed
+=> There will be four rows in resulting table
+
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+
+49) Write two queries that will produce all orders taken on October 3 or October 4. 
+
+=> Here we have to display all orders which were taken on 3rd & 4th october
+=> There are two ways to do it using where clause
+=> Also we can do it using IN operator
+=> There will be 7 rows in the resulting table
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
++------+---------+------------+------+------+
+
+50) Find only those customers whose ratings are higher than every customer in Rome. 
+
+=> We have to show customers whose ratings are higher than customer in Rome
+=> Rating of customers in rome are 100 & 200
+=> We will get the maximum one and display all customers with rating 300
+=> There will be 2 tuples with cnum 2004 & 2008
+
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
++------+----------+---------+--------+------+
+
+51) Write a query on the Customers table whose output will exclude all customers with a rating&lt;= 100.00, unless they are located in Rome. 
+
+=> We have to print customer table by excluding customers with rating <=100 
+=> only if they are located in Rome otherwise we have to print the greater ratings
+=> We will use here where clause with two conditions with and operator
+=> There are two customer from Rome having rating 100 & 200
+=> And 3 customers with rating more than 100 which are not in rome
+=> So there will be 5 tuples in total
+
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | liu      | SanJose |    200 | 1002 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+
+52) Find all rows from the customer’s table for which the salesperson number is 1001. 
+
+=> We have to display all customers which have snum 1001
+=> We can simply use where clause on customers table
+=> There will be two records over there
+=> Because Peel is serving two customers Hoffman & Clemens
+
++------+---------+--------+--------+------+
+| cnum | cname   | city   | rating | snum |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
++------+---------+--------+--------+------+
+
+53) Find the total amount in orders for each salesperson where their total of amounts are greater than the amount of the largest order in the table.  
+
+=> We have to find out total amount for each salespeople
+=> And this total amount should be greater than largest amount in order table
+=> Largest order in table is 9891.88
+=> total amount for each salesperson is -
+
++------+---------+--------------------+
+| snum | sname   | SUM                |
++------+---------+--------------------+
+| 1001 | Peel    |           15382.07 |
+| 1002 | Serres  |            6546.15 |
+| 1004 | Motika  |             1900.1 |
+| 1007 | Rifkin  | 1116.8500000000001 |
+| 1003 | AxelRod |            1713.23 |
+| 1008 | Fran    |               NULL |
++------+---------+--------------------+
+
+=> Those who are greater than 9891.88 is only one Peel -
+
++------+-------+----------+
+| snum | sname | sum      |
++------+-------+----------+
+| 1001 | Peel  | 15382.07 |
++------+-------+----------+
+
+54) Write a query that selects all orders save those with zeroes or NULL in the amount file.
+
+=> We have to select all zero and NULL from orders
+=> We can simply do that by using where clause
+=> We will have empty set because there is no data in order which have null or zero in amt.
+
+55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
+
+=> Here we have to pair customer and salespeople if rating is less than 200
+=> Irrespective of if these salespeople are serving those customers or not
+=> We will need cross join over here
+=> And it will give us these 7 records 
+
++---------+---------+--------+
+| sname   | cname   | rating |
++---------+---------+--------+
+| Peel    | Pereira |    100 |
+| Motika  | Pereira |    100 |
+| AxelRod | Pereira |    100 |
+| AxelRod | Clemens |    100 |
+| AxelRod | Hoffman |    100 |
+| Fran    | Pereira |    100 |
+| Fran    | Hoffman |    100 |
++---------+---------+--------+
+
+=> If we make these combinations on the basis of
+=> if they are serving those customers or not
+=> Then there will be only one record
+
++--------+---------+--------+
+| sname  | cname   | rating |
++--------+---------+--------+
+| Motika | Pereira |    100 |
++--------+---------+--------+
+
+56) Find all salespeople name and commission. 
+
+=> We have to give all salespeople and there respective commissions
+=> We will simply write select query over here
+=> It will display 6 rows because there are 7 salespeople in table
+
++---------+------+
+| sname   | comm |
++---------+------+
+| Peel    |   12 |
+| Serres  |   13 |
+| Motika  |   11 |
+| Rifkin  |   15 |
+| AxelRod |   10 |
+| Fran    |   25 |
++---------+------+
+
+57) Write a query that produces the names and cities of all customers with the same rating as Hoffman. Write the query using Hoffman’s cnum rather than his rating, so that it would still be usable if his rating is changed. 
+
+=> We have to give cname & city of customers which has same rating as hoffman
+=> We have to do it using hoffman cnum which is 2001
+=> Here we will use nested query 1stly for finding hoffman's rating 
+=> And then selecting all others which is equal to that
+=> There are 3 records such that
+
++---------+--------+
+| cname   | city   |
++---------+--------+
+| Hoffman | London |
+| Clemens | London |
+| Pereira | Rome   |
++---------+--------+
+
+58) Find all salespeople for whom there are customers that follow them in alphabetical order. 
+
+=> We have to select those customers how have customer names in alphabetical order
+=> We will use left join here and use where clause for checking alphabetical order
+=> there are only two rows such as this
+
++------+---------+----------+
+| snum | sname   | cname    |
++------+---------+----------+
+| 1003 | AxelRod | Giovanni |
+| 1004 | Motika  | Pereira  |
++------+---------+----------+
+
+59) Write a query that produces the names and ratings of all customers who have average orders. 
+
+=> Select name & rating of all customers whho have average orders
+=> We will find out average of all orders from order table
+=> We will print who's order is same as avg order
+=> The avg amount of orders table is 2665.84
+=> And there is no order same as this amount 
+=> So result will be empty set
+
+Empty set (0.00 sec)
+
+60) Find the SUM of all Amounts from the orders table. 
+
+=> We have to find sum of all amounts from order table
+=> We will simply use aggregate function over here
+=> It will give us ouput in one row & column itself
+
++---------+
+| SUM_amt |
++---------+
+| 26658.4 |
++---------+
+
+61) Write a SELECT command that produces the order number, amount, and the date from rows in the order table. 
+
+=> Select onum, amt, odate from order tables
+=> We can simply write the query with select statement
+=> It will give us 10 rows because there are 10 rows in our order table
+
++------+---------+------------+
+| onum | amt     | odate      |
++------+---------+------------+
+| 3001 |   18.69 | 1990-10-03 |
+| 3003 |  767.19 | 1990-10-03 |
+| 3002 |  1900.1 | 1990-10-03 |
+| 3005 | 5160.45 | 1990-10-03 |
+| 3006 | 1098.16 | 1990-10-03 |
+| 3009 | 1713.23 | 1990-10-04 |
+| 3007 |   75.75 | 1990-10-04 |
+| 3008 |    4723 | 1990-10-05 |
+| 3010 | 1309.95 | 1990-10-06 |
+| 3011 | 9891.88 | 1990-10-06 |
++------+---------+------------+
+
+62) Count the number of non NULL rating fields in the Customers table (including repeats). 
+
+=> We have to count all rating in customer table
+=> Including repeating rating which is not null, in our table we don't have any null rating
+=> So there will be count equal to the count of number of rows in customer table
+=> Which is 7, there are 7 rows in customer table and count also be 7
+
++--------------+
+| count_rating |
++--------------+
+|            7 |
++--------------+
+
+63) Write a query that gives the names of both the salesperson and the customer for each order after the order number. 
+
+=> We have to give onum, sname, cname for each table
+=> We will use Inner Join here to get data which in present in all three tables
+=> There will be 10 records in resulting table because there are 10 rows in orders table
+=> If we order by onum for better readablity then this is output
+
++------+---------+----------+
+| onum | sname   | cname    |
++------+---------+----------+
+| 3001 | Rifkin  | Cisneros |
+| 3002 | Motika  | Pereira  |
+| 3003 | Peel    | Hoffman  |
+| 3005 | Serres  | liu      |
+| 3006 | Rifkin  | Cisneros |
+| 3007 | Serres  | Grass    |
+| 3008 | Peel    | Clemens  |
+| 3009 | AxelRod | Giovanni |
+| 3010 | Serres  | Grass    |
+| 3011 | Peel    | Clemens  |
++------+---------+----------+
+
+64) List the commissions of all salespeople servicing customers in London. 
+
+=> We want commission of all salespeople serving customers in london
+=> We will use Inner join here with condition city = london
+=> This city should be form customer table not from salespeople table
+=> There are two customers in London who is being served by Peel
+=> So there will be only one salesperson as Peel with his comm 12%
+
++-------+------+
+| sname | comm |
++-------+------+
+| Peel  |   12 |
++-------+------+
+
+65) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city. 
+
+=> We want all those salespeople who no customers in there respective cities
+=> We have to use ANY or ALL in this query
+=> There are four salespeople live this 
+=> We will use inner join over here because we want comman data of tables
+=> There will be 4 rows wtih snum 1003, 1002, 1007, 1004
+
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1003 | AxelRod | New York  |   10 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1004 | Motika  | London    |   11 |
++------+---------+-----------+------+
+
+66) Write a query using the EXISTS operator that selects all salespeople with customers located in their cities who are not assigned to them. 
+
+=> We have to get those salespeople with customer who live in same city
+=> But they are not associated to each other
+=> We have to use EXISTS operator here so we need to use nested query
+=> There will be three distinct rows over here with snum 1002, 1004, 1008 
+
++------+--------+
+| snum | sname  |
++------+--------+
+| 1002 | Serres |
+| 1004 | Motika |
+| 1008 | Fran   |
++------+--------+
+
+67) Write a query that selects all customers serviced by Peel or Motika. (Hint: The snum field relates the 2 tables to one another.) 
+
+=> We have to get all customers serviced by Peel or Motika
+=> Peel is serving 2 customers with cnum 2001 & 2006
+=> Motika is serving 1 customer with cnum 2007
+=> We will use inner join here
+=> So there will be total 3 rows in resulting table
+
++------+---------+--------+--------+------+--------+
+| cnum | cname   | city   | rating | snum | sname  |
++------+---------+--------+--------+------+--------+
+| 2001 | Hoffman | London |    100 | 1001 | Peel   |
+| 2006 | Clemens | London |    100 | 1001 | Peel   |
+| 2007 | Pereira | Rome   |    100 | 1004 | Motika |
++------+---------+--------+--------+------+--------+
+
+68) Count the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.) 
+
+=> We have to count number of salespeople taking order on each date
+=> On 3rd october we have 5 orders but snum 1007 is placing 2 orders on that day 
+=> So counted as 4, on 4th october we have 2 orders by 2 different salespeople
+=> And on 5th oct also we have 1 orders only
+=> On 6th october we have 2 orders by 2 salespeople so -
+3 oct == 4
+4 oct == 2
+5 oct == 1
+6 oct == 2 
+=> We will have 4 rows in output table because we have 4 dates over here
+
++------------+-----------+
+| odate      | num_order |
++------------+-----------+
+| 1990-10-03 |         4 |
+| 1990-10-04 |         2 |
+| 1990-10-05 |         1 |
+| 1990-10-06 |         2 |
++------------+-----------+
+
+69) Find all orders attributed to salespeople who live in London. 
+
+=> We want all order table with each column for salespeople who live in london
+=> Here we can use left join and we will pass the city condition in where clause
+=> There are 3 salespeople living in london as Peel(1001), Motika(1004) & Fran(1008)
+=> Peel have 3 orders, Motika have 1 and Fran does not have any
+=> We should print sname and city of salespeople here but question is saying to print order attributed clearly so
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+70) Find all orders by customers not located in the same cities as their salespeople. 
+
+=> We have to find orders by customers not located in same cities as salespeople
+=> Here we will need to join all three tables
+=> There will be 6 records such that 
+=> With onum 3009, 3010, 3007, 3006, 3001, 3002.
+
++------+---------+------------+------+------+------------------+---------------+
+| onum | amt     | odate      | cnum | snum | salespeople_city | customer_city |
++------+---------+------------+------+------+------------------+---------------+
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 | New York         | Rome          |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 | SanJose          | Berlin        |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 | SanJose          | Berlin        |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 | Barcelona        | SanJose       |
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 | Barcelona        | SanJose       |
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 | London           | Rome          |
++------+---------+------------+------+------+------------------+---------------+
+
+71) Find all salespeople who have customers with more than one current order.
+
+=> We have to get all those salespeople who have multiple customers
+=> Only Peel & Serres are serving more than one customers
+=> Peel has 3 orders in order table by cnum
+=> Serres also have 3 orders in order table
+=> But Rifkin have multiple orders from single customer
+
++------+--------+-----------+------+------------------+
+| snum | sname  | city      | comm | number_of_orders |
++------+--------+-----------+------+------------------+
+| 1007 | Rifkin | Barcelona |   15 |                2 |
+| 1001 | Peel   | London    |   12 |                3 |
+| 1002 | Serres | SanJose   |   13 |                3 |
++------+--------+-----------+------+------------------+
+
+72) Write a query that extracts from the customer’s table every customer assigned to a salesperson, who is currently having at least one another customer with orders in the Orders Table.(besides the customer being selected)  
+
+=> We have to select those customers along with orders from orders table
+=> Whose salespeople is having some other customer as well 
+=> Peel and Serres are having multiple customers 
+=> There are 6 orders corresponding to these two salespeople in orders table
+
++------+---------+------+------+
+| cnum | cname   | onum | snum |
++------+---------+------+------+
+| 2001 | Hoffman | 3003 | 1001 |
+| 2003 | liu     | 3005 | 1002 |
+| 2004 | Grass   | 3007 | 1002 |
+| 2006 | Clemens | 3008 | 1001 |
+| 2004 | Grass   | 3010 | 1002 |
+| 2006 | Clemens | 3011 | 1001 |
++------+---------+------+------+
+
+=> If we want distinct customers data then 
+
++------+---------+---------+--------+------+------+---------+
+| cnum | cname   | city    | rating | snum | onum | amt     |
++------+---------+---------+--------+------+------+---------+
+| 2001 | Hoffman | London  |    100 | 1001 | 3003 |  767.19 |
+| 2003 | liu     | SanJose |    200 | 1002 | 3005 | 5160.45 |
+| 2004 | Grass   | Berlin  |    300 | 1002 | 3007 |   75.75 |
+| 2006 | Clemens | London  |    100 | 1001 | 3008 |    4723 |
++------+---------+---------+--------+------+------+---------+
+
+73) Write a query on the customer’s table that will find the highest rating in each city. Put the output in this form: for the city (city), the highest rating is (rating). 
+
+=> Find largest rating in each city from customer table
+=> Here we will use group by clause and aggregate function 
+=> We want only two columns such as city and rating 
+=> There are 4 distinct cities so the output will have 4 rows in table
+=> cities with maximum rating is - London 100, Berlin 300, SanJose 300, Rome 200
+
++---------+------------+
+| city    | rating |
++---------+------------+
+| London  |        100 |
+| Rome    |        200 |
+| SanJose |        300 |
+| Berlin  |        300 |
++---------+------------+
+
+74) Write a query that will produce the snum values of all salespeople with orders, having amt greater than 1000 in the Orders Table(without repeats). 
+
+=> Here we want all orders with amount greater than 1000 without repeats.
+=> There are 7 orders in order table which are greater than 1000
+=> But snum 1001 & 1002 is having multiple orders in these 7 orders
+=> We can group by snum or we can select distinct snums for avoid repeation
+=> There will be 5 records in resulting table
+
++------+---------+------+---------+
+| snum | sname   | onum | amt     |
++------+---------+------+---------+
+| 1001 | Peel    | 3011 | 9891.88 |
+| 1002 | Serres  | 3010 | 1309.95 |
+| 1004 | Motika  | 3002 |  1900.1 |
+| 1007 | Rifkin  | 3006 | 1098.16 |
+| 1003 | AxelRod | 3009 | 1713.23 |
++------+---------+------+---------+
+
+75) Write a query that lists customers in a descending order of rating. Output the rating field first, followed by the customer’s names and numbers. 
+
+=> We have to display customer in descending of rating
+=> The column names should be as rating then cname and then cnum
+=> There are total 7 records in customers tables all will be displayed over here
+=> We will use order by clause here
+
++--------+----------+------+
+| rating | cname    | cnum |
++--------+----------+------+
+|    300 | Grass    | 2004 |
+|    300 | Cisneros | 2008 |
+|    200 | Giovanni | 2002 |
+|    200 | liu      | 2003 |
+|    100 | Hoffman  | 2001 |
+|    100 | Clemens  | 2006 |
+|    100 | Pereira  | 2007 |
++--------+----------+------+
+
+76) Find the average commission for salespeople in London. 
+
+=> We have to find average commission for salespeople who live in london
+=> We will use aggregate function over here
+=> There are three salespeople living in london Peel, Motika and Fran
+=> Commissions of salespeople  Peel have 12, Motika have 11 and Fran have 25
+=> Sum will be 48 and number of salesperson 3 so 48/3= 16 
+
++----------+--------+
+| avg_comm | city   |
++----------+--------+
+|  16.0000 | London |
++----------+--------+
+
+77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001). 
+
+=> We have to find all orders taken by salespeople who serves hoffman 
+=> Salespeople servicing hoffman is Peel snum 1001
+=> So we will be printing all orders taken by peel in order table 
+=> There will be three records in the resulting table
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+78) Find all salespeople whose commission is in between 0.10 and 0.12(both inclusive). 
+
+=> We can use between keyword over here 
+=> the people who have commission between 0.10 & 0.12 inclusively should be displayed 
+=> Between is inclusive in sql 
+=> here we can considered this 0.10 as percentage or we can consider it to be comm/100
+=> if we consider 0.10 as percentage then empty set will be printed otherwise
+
++---------+------+
+| sname   | comm |
++---------+------+
+| Peel    |   12 |
+| Motika  |   11 |
+| AxelRod |   10 |
++---------+------+
+
+79) Write a query that will give you the names and cities of all salespeople in London with a commission above 0.10.
+
+=> We have to give all names and cities of salespeople who live in london with comm > 10
+=> we can simply use where clause here with AND operator 
+=> for condition of city and comm 
+=> There are three salespeople living in london Peel, Motika and Fran
+=> And all of them are having comm > 10 so there will be 3 rows in output
+
++--------+--------+
+| sname  | city   |
++--------+--------+
+| Peel   | London |
+| Motika | London |
+| Fran   | London |
++--------+--------+
+
+80) Write a query that selects each customer’s smallest order. 
+
+=> We have to select each customer's smallest order
+=> We will have to use left join because we want every customer's data
+=> Also we will use aggregate function to find minimum order
+=> There are 7 enteries in customer tables to 7 tuples will be in resulting table
+
++------+----------+---------+
+| cnum | cname    | min_amt |
++------+----------+---------+
+| 2001 | Hoffman  |  767.19 |
+| 2002 | Giovanni | 1713.23 |
+| 2003 | liu      |   75.75 |
+| 2004 | Grass    |   75.75 |
+| 2008 | Cisneros |   18.69 |
+| 2006 | Clemens  |  767.19 |
+| 2007 | Pereira  |  1900.1 |
++------+----------+---------+
+
+81) Write a query that selects the first customer in alphabetical order whose name begins with ‘G’. 
+
+=> We want only one customer whose name is in alphabetical order
+=> There might be more than one customer in such way 
+=> but we want the one which comes 1st 
+=> Although there are 2 customers which starts from G
+=> But there will be only one row in output 
+
++------+----------+--------+--------+------+
+| cnum | cname    | city   | rating | snum |
++------+----------+--------+--------+------+
+| 2002 | Giovanni | Rome   |    200 | 1003 |
+| 2004 | Grass    | Berlin |    300 | 1002 |
++------+----------+--------+--------+------+
+
++------+----------+------+--------+------+
+| cnum | cname    | city | rating | snum |
++------+----------+------+--------+------+
+| 2002 | Giovanni | Rome |    200 | 1003 |
++------+----------+------+--------+------+
+
+82) Write a query that counts the number of different non NULL city values in the customers table. 
+
+=> We have to query number of non null city from customer tables
+=> There are 4 distinct cities in 7 rows of customer table
+=> So the count will be four 
+
++-------+
+| COUNT |
++-------+
+|     4 |
++-------+
+
+83) Find the average amount from the Orders Table. 
+
+=> We have to calcalute average amount from orders table
+=> There are 10 rows in orders table
+=> Sum of these 10 row's amount is 26658.4
+=> To find average 26658.4 / 10 = 2665.84
+
++---------+
+| avg_amt |
++---------+
+| 2665.84 |
++---------+
+
+84) Find all customers who are not located in SanJose and whose rating is above 200. 
+
+=> We have to find customers who are not located in SanJose 
+=> And have rating greater than 200
+=> There are two customers with rating greater than 200, Grass and Cisneros
+=> Cisneros is living in SanJose so we will print only Grass
+
++------+-------+--------+--------+------+
+| cnum | cname | city   | rating | snum |
++------+-------+--------+--------+------+
+| 2004 | Grass | Berlin |    300 | 1002 |
++------+-------+--------+--------+------+
+
+85) Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm &lt; 0.14); 
+
+=> Here we can use * instead of individual column name
+=> also we can use between keyword because it works as inclusive
+=> If we consider the 0.12 OR 0.14 as percentage then it will give empty set
+=> If we consider the given data is comm/100 then we will have 
+=> Two rows because Peel have comm as 12 and Serres have 13 
+=> All other does not satisfy the condition
+
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    |   12 |
+| 1002 | Serres  | SanJose   |   13 |
+| 1004 | Motika  | London    |   11 |
+| 1007 | Rifkin  | Barcelona |   15 |
+| 1003 | AxelRod | New York  |   10 |
+| 1008 | Fran    | London    |   25 |
++------+---------+-----------+------+
+
+
+86) Which salespersons attend to customers not in the city they have been assigned to? 
+
+=> We have to list those salespeople who are not in same city as customer
+=> But they are assigned to some customer
+=> We will apply left join here because we want 
+=> all salespeople should be paired with customer table
+=> There are 4 rows with snum 1002, 1003, 1004, 1007
+
++------+---------+-----------+------+------+----------+---------+
+| snum | sname   | city      | comm | cnum | cname    | city    |
++------+---------+-----------+------+------+----------+---------+
+| 1003 | AxelRod | New York  |   10 | 2002 | Giovanni | Rome    |
+| 1002 | Serres  | SanJose   |   13 | 2004 | Grass    | Berlin  |
+| 1007 | Rifkin  | Barcelona |   15 | 2008 | Cisneros | SanJose |
+| 1004 | Motika  | London    |   11 | 2007 | Pereira  | Rome    |
++------+---------+-----------+------+------+----------+---------+
+
+87) Which salespeople get commission greater than 0.11 are serving customers rated less than 250? 
+
+=> We want those salespeople who have comm greater than 0.11
+=> But that salesperson is serving customer who is giving less than 200 rating
+=> There are 4 salespeople with comm greater than 0.11 if we consider it as comm/100
+=> Which are 1001, 1002, 1007, 1008
+=> Customers with less than 250 rating with cnum 2001, 2002, 2003, 2006, 2007 
+=> We want salespeople so there will be 4 rows in resulting table if we apply group by snum
+
++------+--------+---------+------+--------+
+| snum | sname  | city    | comm | rating |
++------+--------+---------+------+--------+
+| 1001 | Peel   | London  |   12 |    100 |
+| 1002 | Serres | SanJose |   13 |    200 |
++------+--------+---------+------+--------+
+
+=> Otherwise if we consider the given 0.11 as whole percentage then
+
++------+---------+----------+------+--------+
+| snum | sname   | city     | comm | rating |
++------+---------+----------+------+--------+
+| 1001 | Peel    | London   |   12 |    100 |
+| 1003 | AxelRod | New York |   10 |    200 |
+| 1002 | Serres  | SanJose  |   13 |    200 |
+| 1004 | Motika  | London   |   11 |    100 |
++------+---------+----------+------+--------+
+
+88) Which salespeople have been assigned to the same city but get different commission percentages? 
+
+=> Here we will assign salespeople to salespeople if the city is same 
+=> but haves different commission percentage
+=> Here we will use co-related subquery
+=> There will be 3 records in output table with snum 1001, 1004, 1008
+
++------+--------+--------+------+
+| snum | sname  | city   | comm |
++------+--------+--------+------+
+| 1001 | Peel   | London |   12 |
+| 1004 | Motika | London |   11 |
+| 1008 | Fran   | London |   25 |
++------+--------+--------+------+
+
+89) Which salesperson has earned the maximum commission? 
+
+=> We have to find out maximum comm for salespeople
+=> Fran is having maximum commission as 25 
+=> We will select it only
+
++------+-------+--------+------+
+| snum | sname | city   | comm |
++------+-------+--------+------+
+| 1008 | Fran  | London |   25 |
++------+-------+--------+------+
+
+90) Does the customer who has placed the maximum number of orders have the maximum rating? 
+
+=> We have to find out customer who have placed maximum orders are 
+=> Giving maximum ratings, the answer is no.
+=> Maximum number of orders are 2 and customers 
+=> Who are giving maximum orders are giving rating as 100 also and 300 also
+
++------+--------+------+--------------+
+| cnum | rating | onum | orders_count |
++------+--------+------+--------------+
+| 2008 |    300 | 3001 |            2 |
+| 2004 |    300 | 3007 |            2 |
+| 2006 |    100 | 3008 |            2 |
++------+--------+------+--------------+
+
+91) List all customers in descending order of customer rating. 
+
+=> We have to just display customer in descending order of customer rating
+=> There are 7 records in customer table so we will have 7 records here as well
+=> We will use order by clause
+
++------+----------+---------+--------+------+
+| cnum | cname    | city    | rating | snum |
++------+----------+---------+--------+------+
+| 2004 | Grass    | Berlin  |    300 | 1002 |
+| 2008 | Cisneros | SanJose |    300 | 1007 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2003 | liu      | SanJose |    200 | 1002 |
+| 2001 | Hoffman  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
++------+----------+---------+--------+------+
+
+92) On which days has Hoffman placed orders? 
+
+=> We have a customer hoffman we have to find out date when he placed order
+=> We will use nested query  over customer and order table
+=> It will give us output as 3rd oct 1990
+
++------------+
+| odate      |
++------------+
+| 1990-10-03 |
++------------+
+
+=> if we want day on that date 
+
++-----------+
+| DAY       |
++-----------+
+| Wednesday |
++-----------+
+
+93) Which salesmen have no orders between 10/03/1990 and 10/05/1990? 
+
+=> We have to find which salespeople havn't received any order between 3rd & 5th oct
+=> We have 2 orders on 6th oct which will be displayed over here
+=> We should apply left join here to get data corresponding to each salesmen
+
++------+--------+
+| snum | sname  |
++------+--------+
+| 1002 | Serres |
+| 1001 | Peel   |
++------+--------+
+
+94) How many salespersons have succeeded in getting orders? 
+
+=> We have to list salespeople who have received orders from customers
+=> We will INNER JOIN salespeople and orders table
+=> Only except fran everyone has orders so there will be count 5 in result
+
++-------+
+| count |
++-------+
+|     5 |
++-------+
+
+95) How many customers have placed orders? 
+
+=> We have to count how many customer have placed orders
+=> There are seven customers and all are having orders in order table
+=> We will use aggregate function over here along with IN operator
+
++---------------------+
+| number_of_customers |
++---------------------+
+|                   7 |
++---------------------+
+
+96) On which date has each salesman booked an order of maximum value? 
+
+=> We have to get each salesman's highest order date
+=> We will use group by here, along with left join over salespeople and order table
+=> There will be 6 rows in the resulting table
+
++------+---------+-----------+---------+------------+
+| snum | sname   | city      | max_amt | odate      |
++------+---------+-----------+---------+------------+
+| 1001 | Peel    | London    | 9891.88 | 1990-10-06 |
+| 1002 | Serres  | SanJose   | 5160.45 | 1990-10-03 |
+| 1003 | AxelRod | New York  | 1713.23 | 1990-10-04 |
+| 1004 | Motika  | London    |  1900.1 | 1990-10-03 |
+| 1007 | Rifkin  | Barcelona | 1098.16 | 1990-10-03 |
+| 1008 | Fran    | London    |    NULL | NULL       |
++------+---------+-----------+---------+------------+
+
+97) Who is the most successful salesperson? 
+
+=> The salespeople who has earned more is successful according to me
+=> Rifkin has earned the most compared to other salesmen so we will choose him
+=> We will apply inner join on tables salepeople and orders 
+=> We will use aggregate function along with group by, order by clause
+
++-------+------+----------+
+| sname | snum | max_amt  |
++-------+------+----------+
+| Peel  | 1001 | 15382.07 |
++-------+------+----------+
+
+98) Which customers have the same rating? 
+
+=> To check which customer have same ratings we will join 
+=> customer table to customer table where the cnum are not equal
+=> But the rating should be same there will be 10 records like that
+
++-----------+-----------+--------+
+| customer1 | customer1 | rating |
++-----------+-----------+--------+
+| Pereira   | Hoffman   |    100 |
+| Clemens   | Hoffman   |    100 |
+| liu       | Giovanni  |    200 |
+| Giovanni  | liu       |    200 |
+| Cisneros  | Grass     |    300 |
+| Grass     | Cisneros  |    300 |
+| Pereira   | Clemens   |    100 |
+| Hoffman   | Clemens   |    100 |
+| Clemens   | Pereira   |    100 |
+| Hoffman   | Pereira   |    100 |
++-----------+-----------+--------+
+
+99) Find all orders greater than the average for October 4th. 
+
+=> We will find average amt for 4th october
+=> All the orders having amt greater than that will be displayed
+=> The avg amount on 4th october is 894.49
+=> orders having amt greater than 894.49 are seven so resulting table will have 7 rows
+
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3002 |  1900.1 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 |    4723 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+
+100) List all customers with ratings above Grass’s average. 
+
+=> There is only one customer grass whose rating is 300 
+=> Average will also be 300 and we want customer whose rating is above 300 
+=> There is no such customer hence empty set will be output
+
+Empty set (0.00 sec)
+
+101) Which customers have above average orders? 
+
+=> Here we will find average of orders's amt 
+=> Those customer who have orders above average amt will be displayed
+=> Average of amouts is 2665.84 customers having amt greater than these 
+=> Are two in count with cnum 2006, 2003 
+=> But 2006 have two orders which are greater than average amt 
+
++------+---------+---------+--------+------+
+| cnum | cname   | city    | rating | snum |
++------+---------+---------+--------+------+
+| 2003 | liu     | SanJose |    200 | 1002 |
+| 2006 | Clemens | London  |    100 | 1001 |
++------+---------+---------+--------+------+
+
+102) Select the total amount in orders for each salesperson for which the total is greater than the amount of the largest order in the table. 
+
+=> We have to sum amount for each salepeople
+=> if the sum amount is greater than the largest order of the table
+=> We have to print it, we will use left join over here 
+=> Along with aggregate function 
+=> These are sum for each salepeople 
+
++---------+------+--------------------+
+| sname   | snum | max_amt            |
++---------+------+--------------------+
+| Peel    | 1001 |           15382.07 |
+| Serres  | 1002 |            6546.15 |
+| Motika  | 1004 |             1900.1 |
+| Rifkin  | 1007 | 1116.8500000000001 |
+| AxelRod | 1003 |            1713.23 |
+| Fran    | 1008 |               NULL |
++---------+------+--------------------+
+
+=> those salesman having amount greater than largest amt of table
+=> Which is 9891.88 there is only Peel 
+
++-------+------+----------+
+| sname | snum | max_amt  |
++-------+------+----------+
+| Peel  | 1001 | 15382.07 |
++-------+------+----------+
+
+103) Give names and numbers of all salespersons that have more than one customer? 
+
+=> We have to give sname & snum that have more than one customer
+=> There are two salepeople peel and serres who are serving multiple customers 
+=> There will be two records in it
+
++--------+------+
+| sname  | snum |
++--------+------+
+| Peel   | 1001 |
+| Serres | 1002 |
++--------+------+
+
+104) Select all salespeople by name and number who have customers in their city whom they don’t service. 
+
+=> We want sname & snum who have customers in their city but not associated to them
+=> We will apply Inner join over here and check is the snum are not equal
+=> But the cities are equal, there are 3 rows such that with snum 1002, 1004, 1008
+
++--------+------+
+| sname  | snum |
++--------+------+
+| Serres | 1002 |
+| Motika | 1004 |
+| Fran   | 1008 |
++--------+------+
+
+105) Does the total amount in orders by customer in Rome and London, exceed the commission paid to salesperson in London, and New York by more than 5 times? 
+
+=> Does total amount in orders by customer in rome & london is greater than
+=> commission paid to salepeople in london & new york * 5
+=> The answer is yes, the total of amount in rome & london is 18995.4
+=> The comm of salepeople in london and new york 2226.18
+=> Then 5 times will be 2226.18 * 5 = 11130.9
+
++-----------+----------+
+| max_order | max_comm |
++-----------+----------+
+|   18995.4 |  11130.9 |
++-----------+----------+
+
+106) Which are the date, order number, amt and city for each salesperson (by name) for the maximum order he has obtained? 
+
+=> We have to get maximum order for each salepeople
+=> The order of display sname, odate, onum, amt, city
+=> We will use INNER JOIN on salepeople and order table
+=> It will give us 5 records every salepeople except fran 
+
++---------+------------+------+---------+-----------+
+| sname   | odate      | onum | max_amt | city      |
++---------+------------+------+---------+-----------+
+| Rifkin  | 1990-10-03 | 3001 | 1098.16 | Barcelona |
+| Peel    | 1990-10-03 | 3003 | 9891.88 | London    |
+| Motika  | 1990-10-03 | 3002 |  1900.1 | London    |
+| Serres  | 1990-10-03 | 3005 | 5160.45 | SanJose   |
+| AxelRod | 1990-10-04 | 3009 | 1713.23 | New York  |
++---------+------------+------+---------+-----------+
+
+107) Which salesperson is having lowest commission? 
+
+=> We can use nested query to find minimum comm
+=> And then display the details for that 
+=> There is one AxelRod who has minimum comm
+
++------+---------+----------+------+
+| snum | sname   | city     | comm |
++------+---------+----------+------+
+| 1003 | AxelRod | New York |   10 |
++------+---------+----------+------+
