@@ -2,6 +2,7 @@ package org.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.LinkedHashMap;
@@ -28,9 +29,15 @@ class WebContent {
             content = document.body().text();
             // Regular Expression to remove any special character or unwanted spaces
             content = content.replaceAll("[^a-zA-Z\\w]", " ");
-        } catch (IOException e) {
+        }
+
+        catch (IOException e) {
             System.out.println("Invalid Url: " + e);
         }
+        catch (Exception e){
+            System.out.print("Error occurred: " + e );
+        }
+
         // return the content
         return content;
     }
@@ -83,8 +90,6 @@ class WebContent {
 }
 
 // Driver / main Class
-
-
 public class WordScraper {
 
     public static void main(String[] args) {
@@ -96,16 +101,17 @@ public class WordScraper {
             // Get URLS from the text file
 
             ArrayList<String> urls = new ArrayList<>();
-            Scanner Reader = new Scanner(new File("C:\\Users\\apurva shukla\\urls.txt"));
+            Scanner Reader = new Scanner(new File(homeDir+ "\\urls.txt"));
 
             while (Reader.hasNext()) {
                 urls.add(Reader.next());
             }
 
+
             // Get words from the text file
 
             ArrayList<String> words = new ArrayList<>();
-            Reader = new Scanner(new File("C:\\Users\\apurva shukla\\Desktop\\words.txt"));
+            Reader = new Scanner(new File(homeDir+ "\\words.txt"));
             while (Reader.hasNext()) {
                 words.add(Reader.next());
             }
@@ -124,7 +130,7 @@ public class WordScraper {
 
             else{
 
-                
+
             WebContent webContentObj = new WebContent();
 
             // Map to store the word as key and its frequency as value
