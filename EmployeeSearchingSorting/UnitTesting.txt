@@ -1,0 +1,289 @@
+Test Case 1 : Option 1 from Main Menu (Add Employee)
+Input:
+Main Menu  
+Please choose an option:
+1. Add employee to file
+2. Delete employee from the file
+3. Search employee from the file
+4. Display all the data of employee
+5. Exit
+
+Enter Choice 1 (Add Employee) 
+
+1
+Nathan 
+nathan@gmail.com
+30
+15/10/2001
+
+Output:
+Nathan added Successfully
+
+Test Case 2 : Left name field empty
+Input:
+1
+{ empty field }
+name@gmail.com
+12
+14/09/2002
+
+Output:
+Name field shouldn't be empty
+Enter Name Again
+
+Test Case 3.1 : Left Id Field Empty
+Input:
+
+{ empty field }
+Nathan
+nathan@gmail.com
+30
+07/09/2001
+
+Output:
+Employee id Shouldn't be empty
+Enter another Id
+
+Test Case 3.2 : If entered id will be string
+Input:
+
+twenty
+Nathan
+nathan@gmail.com
+30
+07/09/2001
+
+Output:
+Employee id Should be a Numeric Value
+Enter another Id
+
+
+Test Case 3.3 : If entered id already exist
+Input:
+
+10
+Nathan
+nathan@gmail.com
+30
+07/09/2001
+
+Output:
+Employee id 10 Already Exists
+Enter another Id 
+
+Test Case 4.1 : Left age Field Empty
+Input:
+
+10
+Nathan
+nathan@gmail.com
+{ Empty field}
+07/09/2001
+
+Output:
+Age Shouldn't be empty 
+Enter age
+
+Test Case 4.2 : Enter Invalid age
+Input:
+
+10
+Nathan
+nathan@gmail.com
+fiftyFive
+07/09/2001
+
+Output:
+Age should be Numeric 
+Enter Age Again
+
+Test Case 5 : Enter Invalid Email.
+Input:
+10
+Nathan
+nathangmail.com
+55
+07/09/2001
+
+Output:
+Invalid Email Format , Sample Email : abc@gmail.com
+Enter Email Again
+
+Test Case 6: User chooses an invalid option.
+Please choose an option:
+1. Add employee
+2. Delete employee
+3. Search employee
+4. ShowAll employee
+5. Exit
+Enter your choice:
+6 
+
+Output:
+Invalid option. Kindly choose from the given options
+
+Test Case 7 : Enter Invalid Date of Birth
+
+10
+Nathan
+nathan@gmail.com
+55
+31/13/23
+
+Output:
+"Invalid Date of Birth Format"
+"Sample Date of Birth : 01/01/2023 "
+"Enter Date of Birth again "
+
+Test Case 8 : Delete an employee that does not exist.
+    Main Menu
+Please choose an option:
+1. Add employee to file
+2. Delete employee from the file
+3. Search employee from the file
+4. Display all the data of employee
+5. Exit
+Enter your choice: 2
+Enter the id of the employee: 34
+"Employee data does not exist."
+
+Test Case 9 : Search for an employee that exists in the employees.txt file.
+    Main Menu
+Please choose an option:
+1. Add employee to file
+2. Delete employee from the file
+3. Search employee from the file
+4. Display all the data of employee
+5. Exit
+Enter your choice: 3
+Enter the text to search: chirag
+Sort By :
+Id
+Name
+Email
+Date of Birth
+Age
+id
+Sort Order:
+1. Ascending
+2. Descending
+asc
+============================================================================
+┌─────────┬─────┬──────────┬────────────────────────┬───────┬────────────────┐
+│ (index) │ id  │   name   │          age           │ email │      dob       │
+├─────────┼─────┼──────────┼────────────────────────┼───────┼────────────────┤
+│    0    │ '1' │ 'chirag' │ 'cjain3631@gmail.com'  │ '21'  │ '21/01/2001\r' │
+│    1    │ '3' │ 'chirag' │ 'cjain3631@gmail.com'  │ '34'  │ '20/01/2001\r' │
+│    2    │ '9' │ 'Chirag' │ 'chiragjain@hotwax.co' │ '31'  │ '10/10/2001\r' │
+└─────────┴─────┴──────────┴────────────────────────┴───────┴────────────────┘
+============================================================================
+
+Test Case 10 : Search for an employee that does not exist in the employees.txt file.
+Please choose an option:
+1. Add employee to file
+2. Delete employee from the file
+3. Search employee from the file
+4. Display all the data of employee
+5. Exit
+Enter your choice: 3
+Enter the text to search: monster
+Sort By :
+Id
+Name
+Email
+Date of Birth
+Age
+id
+Sort Order:
+1. Ascending
+2. Descending
+asc
+Output:
+Employee Not Found
+
+Test Case 11 :Display all employees in the employees.txt file.
+Please choose an option:
+1. Add employee to file
+2. Delete employee from the file
+3. Search employee from the file
+4. Display all the data of employee
+5. Exit
+Enter your choice: 4
+
+display all the records
+
+TestCase12- Add an employee- entered an already existing email
+Input:
+10
+Nathan
+nathangmail.com
+55
+07/09/2001
+
+Output:
+Email Id Already Exists
+Enter Email Again
+
+TestCase13- Show all employees- no "employees.txt" file exists yet
+
+    Main Menu
+Please choose an option:
+1. Add employee to file
+2. Delete employee from the file
+3. Search employee from the file
+4. Display all the data of employee
+5. Exit
+
+Enter your choice: 4
+============================================================================
+There is No data in the File
+============================================================================
+
+TestCase14- Sort employees- entered a wrong Criteria to Sort By
+
+Sort By :
+Id
+Name
+Email
+DOB
+Age
+gender
+
+Output
+Invalid Criteria To sort the Records
+Enter Sort By criteria Again
+Id
+Name
+Email
+DOB
+Age
+
+TestCase15- Sort employees- entered a wrong Order to Sort
+
+Sort Order:
+Ascending
+Descending
+nnnnnn
+
+output
+Invalid Order Input
+Enter Sorted Order Again:
+Asc or Ascending
+Desc or Descending
+
+TestCase16 - User chooses option 1 and enters invalid employee name
+Enter the name of the employee: Chirag1234
+
+Enter a valid name!
+Enter the Name :
+
+
+
+
+
+
+
+
+
+
+

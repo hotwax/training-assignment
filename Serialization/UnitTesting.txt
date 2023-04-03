@@ -1,0 +1,180 @@
+Testcase 1- Choose option 1 Serialization
+Choose an Option :
+1. Serialization 
+2. Deserialization
+3. Exit
+
+Enter your choice: 1
+
+Enter the file name: output3.ser
+Operation Done
+
+Testcase 2-  Choose option 2 Deserialization
+
+Choose an Option :
+1. Serialization
+2. Deserialization
+3. Exit
+
+Enter your choice: 2
+
+Enter the file name: output3.ser
+Operation Done
+[
+  Student {
+    firstName: 'Harry',
+    dateOfBirth: 2002-12-10T00:00:00.000Z,
+    address: Address {
+      city: 'Newyork',
+      state: 'Newyork',
+      pinCode: 452002,
+      country: 'US'
+    }
+  },
+  Student {
+    firstName: 'Robin',
+    dateOfBirth: 1990-10-20T00:00:00.000Z,
+    address: Address {
+      city: 'Hongkong',
+      state: 'Hongkong',
+      pinCode: 452045,
+      country: 'China'
+    }
+  },
+  Student {
+    firstName: 'Tim',
+    dateOfBirth: 2001-01-01T00:00:00.000Z,
+    address: Address {
+      city: 'paris',
+      state: 'paris',
+      pinCode: 452076,
+      country: 'france'
+    }
+  },
+  Student {
+    firstName: 'Jensen',
+    dateOfBirth: 2005-06-21T00:00:00.000Z,
+    address: Address {
+      city: 'Berlin',
+      state: 'berlin',
+      pinCode: 452087,
+      country: 'Germany'
+    }
+  }
+]
+
+Testcase 3 - Deserialization the File which not exist 
+
+Choose an Option :
+1. Serialization 
+2. Deserialization
+3. Exit
+
+Enter your choice: 2
+
+Enter the file name: output4.ser
+File not found
+<<<<<<< HEAD
+
+
+TestCase4 deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "new.ser" which does not contains any data
+
+Expected Output::
+The program displays an error message "SyntaxError: Unexpected token < in JSON at position 0"(catch block code)
+The program displays the menu again
+
+TestCase5 deserialization:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "new.ser" which contains serialized data according to old class now class is updated
+
+Expected Output:
+it will deserialize the older version of class according to newer version
+The program displays the menu again
+
+TestCase6 invalid file name:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "invalid.ser" which does not exist
+
+Expected Output:
+The program displays an message "File not found"
+The program displays the menu again
+
+TestCase7 invalid JSON format:
+
+Input:
+User chooses option 2 (deserialize file)
+User enters a file name "invalid.json" which contains invalid JSON data
+
+Expected Output:
+The program displays an error message "SyntaxError: Unexpected token < in JSON at position 0"
+terminates the program
+
+TestCase8 invalid menu choice:
+Input:
+User enters an invalid menu choice "4"
+
+Expected Output:
+The program displays an error message "Invalid choice"
+The program displays the menu again
+
+testcase9 : changing date of birth to date type and deserialize again but with new file output2.ser.
+Enter the file name: output3.ser
+Operation Done
+[
+  Student {
+    firstName: 'Harry',
+    dateOfBirth: 2002-12-10T00:00:00.000Z,
+    address: Address {
+      city: 'Newyork',
+      state: 'Newyork',
+      pinCode: 452002,
+      country: 'US'
+    }
+  },
+  Student {
+    firstName: 'Robin',
+    dateOfBirth: 1990-10-20T00:00:00.000Z,
+    address: Address {
+      city: 'Hongkong',
+      state: 'Hongkong',
+      pinCode: 452045,
+      country: 'China'
+    }
+  },
+  Student {
+    firstName: 'Tim',
+    dateOfBirth: 2001-01-01T00:00:00.000Z,
+    address: Address {
+      city: 'paris',
+      state: 'paris',
+      pinCode: 452076,
+      country: 'france'
+    }
+  },
+  Student {
+    firstName: 'Jensen',
+    dateOfBirth: 2005-06-21T00:00:00.000Z,
+    address: Address {
+      city: 'Berlin',
+      state: 'berlin',
+      pinCode: 452087,
+      country: 'Germany'
+    }
+  }
+]
+TestCase10 exit:
+Input:
+User chooses option 3 (exit)
+
+Expected Output:
+The program closes the read interface and terminates.
+=======
+>>>>>>> 3dd7953c246ae27e17afc229f90a3a65c8df6f6a
