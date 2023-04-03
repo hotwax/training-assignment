@@ -2,9 +2,8 @@
 13, Santosh Kumar , skkumar12@gmail.com ,23,24-01-1999
 15, Ramchandra Sharma, ramchandras@gmail.com ,22,24-01-2002
 18,David Warner,warnyyy@gmail.com,39,24-01-1999
-19,Narendra Kumar,nkumar@gmail.com,32,24-01-1999
 20,gajel david,gdavid@gmail.com,32,21-03-1982
 21,Krishna Dwivedi,kd111@gmail.com,23,02-02-2000
 22,Arun Singh,arunsingh91@gmail.com,25,02-02-1998
 23,Arun Shukla,arunshukla91@gmail.com,23,03-05-2000
-
+24,Sourav Ganguly,sauravgg@gmail.com,40,12-02-1990
