@@ -108,8 +108,8 @@ class Queue {
             System.out.println("4. Search");
             System.out.println("5. Display");
             System.out.println("6. Update");
-            System.out.println("6. Check if empty");
-            System.out.println("7. Exit");
+            System.out.println("7. Check if empty");
+            System.out.println("8. Exit");
 
             int choice = sc.nextInt();
 
