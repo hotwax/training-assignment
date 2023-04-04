@@ -1,113 +1,141 @@
-#include<iostream>
-#include<cstdlib>
-#include<string>
-#include<cstdio>
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <cstdio>
+
 using namespace std;
-const int T_S = 200;
+
+const int TABLE_SIZE = 200;
+
 class HashTableEntry {
-   public:
-      int k;
-      int v;
-      HashTableEntry(int k, int v) {
-         this->k= k;
-         this->v = v;
-      }
+public:
+    int key;
+    int value;
+    HashTableEntry(int key, int value) {
+        this->key = key;
+        this->value = value;
+    }
 };
+
 class HashMapTable {
-   private:
-      HashTableEntry **t;
-   public:
-      HashMapTable() {
-         t = new HashTableEntry * [T_S];
-         for (int i = 0; i< T_S; i++) {
-            t[i] = NULL;
-         }
-      }
-      int HashFunc(int k) {
-         return k % T_S;
-      }
-      void Insert(int k, int v) {
-         int h = HashFunc(k);
-         while (t[h] != NULL && t[h]->k != k) {
-            h = HashFunc(h + 1);
-         }
-         if (t[h] != NULL)
-            delete t[h];
-         t[h] = new HashTableEntry(k, v);
-      }
-      int SearchKey(int k) {
-         int h = HashFunc(k);
-         while (t[h] != NULL && t[h]->k != k) {
-            h = HashFunc(h + 1);
-         }
-         if (t[h] == NULL)
+private:
+    HashTableEntry **table;
+public:
+    HashMapTable() {
+        table = new HashTableEntry*[TABLE_SIZE];
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            table[i] = NULL;
+        }
+    }
+
+    int hashFunc(int key) {
+        return key % TABLE_SIZE;
+    }
+
+    void insert(int key, int value) {
+        int hash = hashFunc(key);
+        while (table[hash] != NULL && table[hash]->key != key) {
+            hash = hashFunc(hash + 1);
+        }
+        if (table[hash] != NULL)
+            delete table[hash];
+        table[hash] = new HashTableEntry(key, value);
+    }
+
+    int getValue(int key) {
+        int hash = hashFunc(key);
+        while (table[hash] != NULL && table[hash]->key != key) {
+            hash = hashFunc(hash + 1);
+        }
+        if (table[hash] == NULL)
             return -1;
-         else
-            return t[h]->v;
-      }
-      void Remove(int k) {
-         int h = HashFunc(k);
-         while (t[h] != NULL) {
-            if (t[h]->k == k)
-               break;
-            h = HashFunc(h + 1);
-         }
-         if (t[h] == NULL) {
-            cout<<"No Element found at key "<<k<<endl;
+        else
+            return table[hash]->value;
+    }
+
+    void remove(int key) {
+        int hash = hashFunc(key);
+        while (table[hash] != NULL) {
+            if (table[hash]->key == key)
+                break;
+            hash = hashFunc(hash + 1);
+        }
+        if (table[hash] == NULL) {
+            cout << "No element found at key " << key << endl;
             return;
-         } else {
-            delete t[h];
-         }
-         cout<<"Element Deleted"<<endl;
-      }
-      ~HashMapTable() {
-         for (int i = 0; i < T_S; i++) {
-            if (t[i] != NULL)
-               delete t[i];
-               delete[] t;
-         }
-      }
+        } else {
+            delete table[hash];
+        }
+        cout << "Element Deleted" << endl;
+    }
+
+    ~HashMapTable() {
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            if (table[i] != NULL)
+                delete table[i];
+        }
+        delete[] table;
+    }
 };
+
 int main() {
-   HashMapTable hash;
-   int k, v;
-   int c;
-   while (1) {
-      cout<<"1.Insert element into the table"<<endl;
-      cout<<"2.Search element from the key"<<endl;
-      cout<<"3.Delete element at a key"<<endl;
-      cout<<"4.Exit"<<endl;
-      cout<<"Enter your choice: ";
-      cin>>c;
-      switch(c) {
-         case 1:
-            cout<<"Enter element to be inserted: ";
-            cin>>v;
-            cout<<"Enter key at which element to be inserted: ";
-            cin>>k;
-            hash.Insert(k, v);
-         break;
-         case 2:
-            cout<<"Enter key of the element to be searched: ";
-            cin>>k;
-            if (hash.SearchKey(k) == -1) {
-               cout<<"No element found at key "<<k<<endl;
-               continue;
+    HashMapTable hashMap;
+
+    int key, value, choice;
+    while (1) {
+        cout << "1.Insert element into the table" << endl;
+        cout << "2.Search element from the key" << endl;
+        cout << "3.Delete element at a key" << endl;
+        cout << "4.Get value at a key" << endl;
+        cout << "5.Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            cout << "Enter element to be inserted: ";
+            cin >> value;
+            cout << "Enter key at which element to be inserted: ";
+            cin >> key;
+            hashMap.insert(key, value);
+            break;
+
+        case 2:
+            cout << "Enter key of the element to be searched: ";
+            cin >> key;
+            value = hashMap.getValue(key);
+            if (value == -1) {
+                cout << "No element found at key " << key << endl;
             } else {
-               cout<<"Element at key "<<k<<" : ";
-               cout<<hash.SearchKey(k)<<endl;
+                cout << "Value at key " << key << " : " << value << endl;
             }
-         break;
-         case 3:
-            cout<<"Enter key of the element to be deleted: ";
-            cin>>k;
-            hash.Remove(k);
-         break;
-         case 4:
+            break;
+
+        case 3:
+            cout << "Enter key of the element to be deleted: ";
+            cin >> key;
+            hashMap.remove(key);
+            break;
+
+        case 4:
+            cout << "Enter key of the element to get value: ";
+            cin >> key;
+            value = hashMap.getValue(key);
+            if (value == -1) {
+                cout << "No element found at key " << key << endl;
+            } else {
+                cout << "Value at key " << key << " : " << value << endl;
+            }
+            break;
+
+        case 5:
             exit(1);
-         default:
-            cout<<"\nEnter correct option\n";
-      }
-   }
-   return 0;
-} 
+
+        default:
+            cout << "\nEnter correct option\n";
+        }
+    }
+
+    return 0;
+}
+
