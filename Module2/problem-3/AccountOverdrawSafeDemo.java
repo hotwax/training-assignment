@@ -1,28 +1,49 @@
-public class AccountOverdrawSafeDemo {
+package Threading;
+
+class AccountOverdrawSafeDemo {
+
     public static void main(String[] args) {
-        Account account = new Account("John Smith", 1000);
-
-        Runnable withdrawal1 = () -> {
-            synchronized(account) {
-                for (int i = 0; i < 5; i++) {
-                    account.withdraw(200);
+        // created a joint account for threads (thread1, thread2)
+        Account account = new Account("Account");
+        System.out.println("Not Synchronized");
+        System.out.println("Total amount in the account =" + account.getBalance());
+        //creating thread 1
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                double totalWithdraw = 0;
+                //making transaction of 1 rs 1000 times
+                for (int transaction = 0; transaction < 1000; transaction++) {
+                    //I have added Synchronized block to the places where withdraw method is called.
+                    //this will protect thread1 to access balance variable of class Account when thread2 is using that variable.
+                    synchronized (account) {
+                        totalWithdraw += account.withdraw(1);
+                    }
                 }
+                System.out.println("Amount withdraw by person 1 =" + totalWithdraw);
             }
-        };
+        });
 
-        Runnable withdrawal2 = () -> {
-            synchronized(account) {
-                for (int i = 0; i < 5; i++) {
-                    account.withdraw(200);
+        //creating thread 1
+        Thread thread2 = new Thread(new Runnable() {
+            double totalWithdraw = 0;
+
+            @Override
+            public void run() {
+                double totalWithdraw = 0;
+                //making transaction of 1 rs 1000 times
+                for (int transaction = 0; transaction < 1000; transaction++) {
+                    //I have added Synchronized block to the places where withdraw method is called.
+                    //this will protect thread2 to access balance variable of class Account when thread1 is using that variable.
+                    synchronized (account) {
+                        totalWithdraw += account.withdraw(1);
+                    }
                 }
+                System.out.println("Amount withdraw by person 2 =" + totalWithdraw);
             }
-        };
-
-        Thread thread1 = new Thread(withdrawal1);
-        Thread thread2 = new Thread(withdrawal2);
-
+        });
+        //starting both threads.
         thread1.start();
         thread2.start();
     }
 }
- 

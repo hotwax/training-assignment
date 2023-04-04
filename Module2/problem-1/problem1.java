@@ -1,4 +1,3 @@
-package org.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,154 +7,143 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.TreeMap;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
+import java.net.UnknownHostException;
 
 
 class WebContent {
 
-    // getting the text from website using the url
-    String parseUrl(String url) {
-        String content = "";
-        try {
-            // Get the complete document
-            Document document = Jsoup.connect(url).get();
-            // Get all the text from text tags
-            content = document.body().text();
-            // Regular Expression to remove any special character or unwanted spaces
-            content = content.replaceAll("[^a-zA-Z\\w]", " ");
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        // return the content
-        return content;
+   // Function to fetch the content of a given URL and return its text content
+  String parseUrl(String url) {
+    String content = "";
+    try {
+      Document document = Jsoup.connect(url).get(); 
+      content = document.body().text(); 
+      content = content.replaceAll("[^a-zA-Z\\w]", " "); 
+    } catch (UnknownHostException e) {
+      System.out.println("Please add a valid url");
+      System.out.println(e);
+    } catch (IOException e) {
+      System.out.println(e);
     }
+    return content;
+  }
 
-    // Function to count the frequency of the given word
-    int countWordOccurence(String word, String urlContent) {
-        int wordCount = 0;
-        // Using the .split method to remove space and store the content into array of string
-        String contentList[] = urlContent.split(" ");
-        for (String str : contentList) {
-            // find the word in the text
-            if (str.equalsIgnoreCase(word)) {
-                // if the word is found then increment the counter for words
-                wordCount++;
-            }
-        }
-        //return the number of occurences of the word
-        return wordCount;
+  // Function to count the number of occurrences of a given word in a given text
+  int countWordOccurence(String word, String urlContent) {
+    int wordCount = 0;
+    String contentList[] = urlContent.split(" "); 
+    for (String str : contentList) { 
+      if (str.equalsIgnoreCase(word)) { 
+        wordCount++; 
+      }
     }
+    return wordCount;
+  }
 
-    // Sort the Map by Value
-    public static Map<String, Integer> sortByValue(Map<String, Integer> hm) {
-        // Create a list from elements of HashMap
-        List<Map.Entry<String, Integer>> lists = new LinkedList<Map.Entry<String, Integer>>(
-                hm.entrySet());
+   // Function to sort a given hashmap by its values in descending order and return the sorted map
+  public static Map<String, Integer> sortByValue(Map<String, Integer> hashmap) {
+    
+    List<Map.Entry<String, Integer>> lists = new LinkedList<Map.Entry<String, Integer>>(
+        hashmap.entrySet());
 
-        // Sort the lists
-        Collections.sort(
-                lists,
-                new Comparator<Map.Entry<String, Integer>>() {
-                    public int compare(
-                            Map.Entry<String, Integer> o1,
-                            Map.Entry<String, Integer> o2) {
-                        return (o2.getValue()).compareTo(o1.getValue());
-                    }
-                });
+    Collections.sort(
+        lists,
+        new Comparator<Map.Entry<String, Integer>>() {
+          public int compare(
+              Map.Entry<String, Integer> o1,
+              Map.Entry<String, Integer> o2) {
+            return (o2.getValue()).compareTo(o1.getValue());
+          }
+        });
 
-        // put data from sorted list to hashmap
-        Map<String, Integer> temp = new LinkedHashMap<String, Integer>();
-        for (Map.Entry<String, Integer> aa : lists) {
-            temp.put(aa.getKey(), aa.getValue());
-        }
-        return temp;
+    Map<String, Integer> maplist= new LinkedHashMap<String, Integer>();
+    for (Map.Entry<String, Integer> entryy : lists) {
+      maplist.put(entryy.getKey(), entryy.getValue());
     }
+    return maplist;
+  }
 
 }
 
-// Driver / main Class
+// main Class
 
 public class Main {
 
-    public static void main(String[] args) {
-        try {
-            // Get URLS from the text file
+  public static void main(String[] args) {
+    try {
+      // Fetch URLS from the text file => url.txt
 
-            ArrayList<String> urls = new ArrayList<>();
-            Scanner Reader = new Scanner(new File("//home//rishabh//Desktop//url.txt"));
+      HashSet<String> urlsSet= new HashSet<>();
+      Scanner Reader = new Scanner(new File("url.txt"));
+      while (Reader.hasNext()) {
+        urlsSet.add(Reader.next());
+      }
+      ArrayList<String> urls = new ArrayList<>(urlsSet);
+      if(urls.size()==0)
+      {
+        System.out.println("No Url Found");
+        return ;
+      }
 
-            while (Reader.hasNext()) {
-                urls.add(Reader.next());
-            }
+      // Fetch Words from the text file => words.txt
 
-            // Get words from the text file
+      HashSet<String> wordsSet= new HashSet<>();
+      Reader = new Scanner(new File("words.txt"));
+      while (Reader.hasNext()) {
+        wordsSet.add(Reader.next());
+      }
+      ArrayList<String> words = new ArrayList<>(wordsSet);
+      if(words.size()==0)
+      {
+        System.out.println("No Words Found");
+        return ;
+      }
+      //Found words in URL
 
-            ArrayList<String> words = new ArrayList<>();
-            Reader = new Scanner(new File("home//rishabh//Desktop//words.txt"));
-            while (Reader.hasNext()) {
-                words.add(Reader.next());
-            }
+      WebContent webContentObj = new WebContent(); 
+      Map<String, Integer> AllwordsFrequencyMap = new TreeMap<String, Integer>(); 
+      System.out.println("===========================================");
+      for (String url : urls) {
+        Map<String, Integer> wordFrequencyMap = new TreeMap<String, Integer>(); 
+        System.out.println(url); 
+        System.out.println();
 
-            // Find words in URL
-
-            // Creating object of Class WebContent
-            WebContent webContentObj = new WebContent();
-
-            // Map to store the word as key and its frequency as value
-            Map<String, Integer> AllwordsFrequencyMap = new TreeMap<String, Integer>();
-
-            System.out.println("===========================================");
-            for (String url : urls) {
-                // Storing words for each url
-                Map<String, Integer> wordFrequencyMap = new TreeMap<String, Integer>();
-
-                System.out.println(url);
-                System.out.println();
-                // Calling the pass url method
-                String urlContent = webContentObj.parseUrl(url);
-
-                for (String word : words) {
-                    // Getting the frequency of the word in the url
-                    int wordOccurence = webContentObj.countWordOccurence(word, urlContent);
-
-                    // Adding the word as key and frequency as value
-                    wordFrequencyMap.put(word, wordOccurence);
-                }
-                // Sort map in non-ascending order
-                wordFrequencyMap = WebContent.sortByValue(wordFrequencyMap);
-                int counter = 0;
-                // Printing the top three words that occur the most
-                for (Map.Entry m : wordFrequencyMap.entrySet())
-                {
-                    if (counter++ < 3) {
-                        System.out.println(m.getKey() + " " + m.getValue());
-                        String key = (String) m.getKey();
-                        int value = (int) m.getValue();
-                        if (AllwordsFrequencyMap.get(key) != null) {
-                            // Adding the frequency of words that occur in multiple urls
-                            value += AllwordsFrequencyMap.get(key);
-                        }
-                        AllwordsFrequencyMap.put(key, value);
-                    } else
-                        break;
-                }
-                System.out.println();
-            }
-            System.out.println("===========================================");
-            AllwordsFrequencyMap = WebContent.sortByValue(AllwordsFrequencyMap);
-            for (Map.Entry m : AllwordsFrequencyMap.entrySet()) {
-
-                System.out.println(m.getKey() + " " + m.getValue());
-            }
-            System.out.println("===========================================");
-        } catch (FileNotFoundException e) {
-
-            System.out.println(e);
+        for (String word : words) {
+          String urlContent = webContentObj.parseUrl(url); 
+          int wordOccurence = webContentObj.countWordOccurence(word, urlContent); 
+          wordFrequencyMap.put(word, wordOccurence); 
         }
+        wordFrequencyMap = WebContent.sortByValue(wordFrequencyMap); 
+        int counter = 0;
+        for (Map.Entry m : wordFrequencyMap.entrySet()) 
+        {
+          if (counter++ < 3) {
+            System.out.println(m.getKey() + " " + m.getValue());
+            String key = (String) m.getKey();
+            int value = (int) m.getValue();
+            if (AllwordsFrequencyMap.get(key) != null) {
+              value += AllwordsFrequencyMap.get(key); 
+            }
+            AllwordsFrequencyMap.put(key, value);
+          } else
+            break;
+        }
+        System.out.println();
+      }
+      System.out.println("===========================================");
+      AllwordsFrequencyMap = WebContent.sortByValue(AllwordsFrequencyMap);
+      for (Map.Entry m : AllwordsFrequencyMap.entrySet()) {
+        System.out.println(m.getKey() + " " + m.getValue());
+      }
+      System.out.println("===========================================");
+    } catch (FileNotFoundException e) {
+      System.out.println("File Not Found");
     }
-} 
+  }
+}
