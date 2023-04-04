@@ -125,6 +125,21 @@ public:
             }
         }
     }
+
+    // Display front
+
+    void getFront()
+    {
+        if (front)
+        {
+            cout << endl
+                 << front->data;
+        }
+        else
+        {
+            cout << "Queue is Empty!";
+        }
+    }
 };
 
 int main()
@@ -144,9 +159,10 @@ int main()
 
         print("Enter 1 for enqueue operation");
         print("Enter 2 for dequeue operation");
-        print("Enter 3 for search operation");
+        print("Enter 3 for get front operation");
+        print("Enter 4 for search operation");
 
-        print("Enter 4 to exit");
+        print("Enter 5 to exit");
         cout << endl;
         int input;
         cin >> input;
@@ -160,8 +176,11 @@ int main()
         case 2:
             q.dequeue();
             break;
-
         case 3:
+            q.getFront();
+            break;
+
+        case 4:
             q.search();
             break;
 
