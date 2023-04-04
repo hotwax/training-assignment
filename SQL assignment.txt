@@ -803,7 +803,18 @@ mysql> SELECT * FROM Orders WHERE AMT = 0 OR NULL;
 
 Empty set (0.00 sec)
 
+55) Produce all combinations of salespeople and customer names such that the former precedes the latter alphabetically, and the latter has a rating of less than 200. 
 
+mysql>  SELECT s.sname AS salesperson, c.cname AS customer, c.rating
+    ->  FROM Salespeople s
+    -> JOIN Customers c ON s.snum = c.snum
+    -> WHERE c.rating < 200 AND s.sname < c.cname
+    -> ORDER BY salesperson, customer;
++-------------+----------+--------+
+| salesperson | customer | rating |
++-------------+----------+--------+
+| Motika      | Pererira |    100 |
++-------------+----------+--------+
 
 
 56) Find all salespeople name and commission. 
@@ -907,6 +918,27 @@ mysql> SELECT COUNT(*) AS count_of_fields
 +-----------------+
 |               7 |
 +-----------------+
+
+63) Write a query that gives the names of both the salesperson and the customer for each order after the order number. 
+
+mysql> SELECT o.onum, s.sname, c.cname
+    -> FROM orders o
+    -> JOIN salespeople s ON o.snum = s.snum
+    -> JOIN customers c ON o.cnum = c.cnum;
++------+---------+----------+
+| onum | sname   | cname    |
++------+---------+----------+
+| 3001 | Rifkin  | Cisneros |
+| 3002 | Motika  | Pererira |
+| 3003 | Peel    | Hoffman  |
+| 3005 | Serres  | Liu      |
+| 3006 | Rifkin  | Cisneros |
+| 3007 | Serres  | Grass    |
+| 3008 | Peel    | NULL     |
+| 3009 | AxelRod | Giovanni |
+| 3010 | Serres  | Grass    |
+| 3011 | Peel    | Clemens  |
++------+---------+----------+
 
 
 64) List the commissions of all salespeople servicing customers in London.
