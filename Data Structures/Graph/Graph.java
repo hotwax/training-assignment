@@ -21,11 +21,11 @@ class GraphMatrix {
 
     // Method to add an edge
     public void addEdge(int vertex, int vertex1) {
-        if(vertex >= this.vertex || vertex1 >= this.vertex || vertex < 0 || vertex1 < 0) {
+        if (vertex >= this.vertex || vertex1 >= this.vertex || vertex < 0 || vertex1 < 0) {
             System.out.println("The vertices does not exists");
             return;
         }
-        if(matrix[vertex][vertex1] == 1 || matrix[vertex1][vertex] == 1) {
+        if (matrix[vertex][vertex1] == 1 || matrix[vertex1][vertex] == 1) {
             System.out.println("The edge between " + vertex + " and " + vertex1 + " already exists");
             return;
         }
@@ -35,11 +35,11 @@ class GraphMatrix {
 
     // Method to delete an edge
     public void deleteEdge(int vertex, int vertex1) {
-        if(vertex >= this.vertex || vertex1 >= this.vertex || vertex < 0 || vertex1 < 0) {
+        if (vertex >= this.vertex || vertex1 >= this.vertex || vertex < 0 || vertex1 < 0) {
             System.out.println("The vertices does not exists");
             return;
         }
-        if(matrix[vertex][vertex1] == 0 || matrix[vertex1][vertex] == 0) {
+        if (matrix[vertex][vertex1] == 0 || matrix[vertex1][vertex] == 0) {
             System.out.println("The edge between " + vertex + " and " + vertex1 + " does not exists");
             return;
         }
@@ -67,7 +67,7 @@ class GraphMatrix {
             int node = queue.poll();
             System.out.print(node + " ");
             for (int neighbour : matrix[node]) {
-                if ( neighbour == 1 && !visited[neighbour]) {
+                if (neighbour == 1 && !visited[neighbour]) {
                     queue.add(neighbour);
                     visited[neighbour] = true;
                 }
@@ -97,59 +97,73 @@ class GraphMatrix {
             }
         }
     }
-}
-public class Graph{
-        public static void main (String[]args){
-            //creating choice variable to store the user choice
-        int choice=0;
-        // creating default graph with 1 vertex
-        GraphMatrix graphTest= new GraphMatrix(1);
-        do{
-        // Printing the menu for the user
-        System.out.println("--------- MENU ---------");
-        System.out.println("Press 0 : Create a New Graph");
-        System.out.println("Press 1 : Add a new Edge");
-        System.out.println("Press 2 : Delete a Node");
-        System.out.println("Press 3 : Print the BFS Traversal");
-        System.out.println("Press 4 : Print the DFS Traversal");
-        System.out.println("Press 5 : Exit");
-        System.out.println("Enter your choice : ");
-        try{
-        Scanner sc=new Scanner(System.in);
 
-        choice=sc.nextInt();
-        // Taking the choice from the user and performing the corresponding operation
-        switch(choice){
-        case 0:
-            System.out.print("Please Enter the size of the Graph: ");
-            graphTest.createGraph(sc.nextInt());
-            break;
-        case 1:
-            System.out.print("Please Enter the Edge Values: ");
-            graphTest.addEdge(sc.nextInt(),sc.nextInt());
-            break;
-        case 2:
-            System.out.print("Please Enter the Edge Values: ");
-            graphTest.deleteEdge(sc.nextInt(),sc.nextInt());
-            break;
-        case 3:
-            System.out.println("BFS Traversal: ");
-            graphTest.breadthFirstSearch();
-            break;
-        case 4:
-            System.out.println("DFS Traversal: ");
-            graphTest.depthFirstSearch();
-            break;
-        case 5:
-            System.out.println("Program Terminated Successfully");
-            break;
-        default:
-            System.out.println("Invalid Input");
+    public void show() {
+        for (int i = 0; i < vertex; i++) {
+            for (int j = 0; j < vertex; j++) {
+                System.out.print(matrix[i][j] + " ");
             }
-        } catch(InputMismatchException e){
-                System.out.println("Please Enter Integer Only!!");
-                }
-            } while(choice!=5);
+            System.out.println();
         }
+    }
 }
 
+public class Graph {
+    public static void main(String[] args) {
+        // creating choice variable to store the user choice
+        int choice = 0;
+        // creating default graph with 1 vertex
+        GraphMatrix graphTest = new GraphMatrix(1);
+        do {
+            // Printing the menu for the user
+            System.out.println("--------- MENU ---------");
+            System.out.println("Press 0 : Create a New Graph");
+            System.out.println("Press 1 : Add a new Edge");
+            System.out.println("Press 2 : Delete a Node");
+            System.out.println("Press 3 : Print the BFS Traversal");
+            System.out.println("Press 4 : Print the DFS Traversal");
+            System.out.println("Press 5 : Show Graph");
+            System.out.println("Press 6 : Exit");
+            System.out.println("Enter your choice : ");
+            try {
+                Scanner sc = new Scanner(System.in);
+
+                choice = sc.nextInt();
+                // Taking the choice from the user and performing the corresponding operation
+                switch (choice) {
+                    case 0:
+                        System.out.print("Please Enter the size of the Graph: ");
+                        graphTest.createGraph(sc.nextInt());
+                        break;
+                    case 1:
+                        System.out.print("Please Enter the Edge Values: ");
+                        graphTest.addEdge(sc.nextInt(), sc.nextInt());
+                        break;
+                    case 2:
+                        System.out.print("Please Enter the Edge Values: ");
+                        graphTest.deleteEdge(sc.nextInt(), sc.nextInt());
+                        break;
+                    case 3:
+                        System.out.println("BFS Traversal: ");
+                        graphTest.breadthFirstSearch();
+                        break;
+                    case 4:
+                        System.out.println("DFS Traversal: ");
+                        graphTest.depthFirstSearch();
+                        break;
+                    case 5:
+                        graphTest.show();
+                        break;
+                    case 6:
+                        System.out.println("Program Terminated Successfully");
+                        break;
+
+                    default:
+                        System.out.println("Invalid Input");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Please Enter Integer Only!!");
+            }
+        } while (choice != 5);
+    }
+}
