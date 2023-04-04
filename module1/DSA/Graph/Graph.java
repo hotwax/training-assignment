@@ -1,10 +1,5 @@
-package com.java.demo;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Graph {
@@ -38,23 +33,28 @@ public class Graph {
 
     // method to traverse a graph in breadth first search manner
     void bfs(int start) {
-        boolean visit[] = new boolean[vertices];
-        Arrays.fill(visit, false);
-        List<Integer> q = new ArrayList<Integer>();
-        q.add(start);
-        visit[start] = true;
-        int queue_val;
-        while (!q.isEmpty()) {
-            queue_val = q.get(0);
-            q.remove(0);
-            System.out.print(queue_val + " ");
-            for (int i = 0; i < vertices; i++) {
-                if (matrix[queue_val][i] == 1 && visit[i] == false) {
-                    q.add(i);
-                    visit[i] = true;
+        try {
+            boolean visit[] = new boolean[vertices];
+            Arrays.fill(visit, false);
+            // List<Integer> q = new ArrayList<Integer>();
+            queue q = new queue(vertices + 1);
+            q.enqueue(start);
+            visit[start] = true;
+            int queue_val;
+            while (!q.empty()) {
+                queue_val = q.peak();
+                q.dequeue();
+                System.out.print(queue_val + " ");
+                for (int i = 0; i < vertices; i++) {
+                    if (matrix[queue_val][i] == 1 && visit[i] == false) {
+                        q.enqueue(i);
+                        visit[i] = true;
+                    }
                 }
-            }
 
+            }
+        } catch (Exception e) {
+            System.out.println("Enter correct node value   " + e);
         }
 
     }
@@ -69,19 +69,27 @@ public class Graph {
 
     // method to recursively visit to each node and mark it as visit
     void dfs_helper(int start, boolean visit[]) {
-        System.out.print(start + " ");
-        visit[start] = true;
-        for (int i = 0; i < vertices; i++) {
-            if (visit[i] == false) {
-                dfs_helper(i, visit);
+        try {
+            System.out.print(start + " ");
+            visit[start] = true;
+            for (int i = 0; i < matrix[start].length; i++) {
+                if (matrix[start][i] == 1 && visit[i] == false) {
+                    dfs_helper(i, visit);
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Enter correct node value   " + e);
         }
     }
 
     // to delete the edge in a graph
     void delete_edge(int position_1, int position_2) {
-        matrix[position_1][position_2] = 0;
-        matrix[position_2][position_1] = 0;
+        try {
+            matrix[position_1][position_2] = 0;
+            matrix[position_2][position_1] = 0;
+        } catch (Exception e) {
+            System.out.println("Kindly entered the correct value of edge");
+        }
     }
 
     public static void main(String[] args) {
