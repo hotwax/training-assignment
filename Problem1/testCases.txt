@@ -1,0 +1,89 @@
+1) Test case : File containing url is not present 
+
+Expected output 
+Somthing wrong happened with url
+
+Actual output
+Somthing wrong happened with url
+
+2) Test case : File containing words is not present (missed test case)
+
+Expected output 
+Somthing wrong happened with words file(terminates)
+
+Actual output
+Somthing wrong happened with url (terminates)
+
+3) Test case : If url file and word file have data accurate  
+
+Expected output 
+values with frequency for 3 urls and then final output
+
+Actual output
+
+URL : 1
+javascript => 14
+date => 4
+array => 4
+=====================
+URL : 2
+explore => 4
+array => 1
+javascript => 0
+=====================
+URL : 3
+date => 23
+array => 4
+solution => 1
+=====================
+Total result map :
+date => 27
+javascript => 14
+array => 9
+explore => 4
+tutorial => 3
+solution => 1
+teach => 1
+introduction => 0
+
+5) Test cases : if url does not have any url 
+
+Expected output
+error
+
+Actual output
+Issue in processing URL : connect ECONNREFUSED ::1:80(catch block)
+
+6) Test cases : if words does not have anything 
+
+Expected output
+error
+
+Actual output
+Word file is empty
+
+7) Test case : if we have wrong url at second line of url.txt
+
+Expected output & Actual output
+
+URL : 1
+javascript => 14
+date => 4
+array => 4
+=====================
+Issue in processing URL https://www.geeksforgeeks.orgsdsd: getaddrinfo ENOTFOUND www.geeksforgeeks.orgsdsd
+
+URL : 3
+date => 23
+array => 4
+solution => 1
+=====================
+Total result map :
+date => 27
+javascript => 14
+array => 8
+tutorial => 3
+solution => 1
+teach => 1
+introduction => 0
+hello => 0
