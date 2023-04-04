@@ -17,6 +17,28 @@ Output -
 | COMM  | int         | YES  |     | NULL    |       |
 +-------+-------------+------+-----+---------+-------+
 
+Another Approach -
+
+Query - 
+
+SELECT 
+    COLUMN_NAME
+FROM
+    INFORMATION_SCHEMA.COLUMNS
+WHERE
+    TABLE_NAME = 'salespeople';
+
+Output - 
+
++-------------+
+| COLUMN_NAME |
++-------------+
+| SNUM        |
+| SNAME       |
+| CITY        |
+| COMM        |
++-------------+
+
 -- 2) List all customers with a rating of 100.
 
 Query - 
@@ -503,6 +525,17 @@ Output -
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
+Another approach using joins - 
+
+SELECT 
+    c.cname, c.cnum, s.sname, s.snum
+FROM
+    customers c
+        INNER JOIN
+    salespeople s ON c.snum = s.snum
+WHERE
+    cnum > 1002 + 1000;
+
 -- 19) Give the salespeople’s commissions as percentages instead of decimal numbers. 
 
 Query -
@@ -740,6 +773,17 @@ Output -
 | 1001 | Peel   | London  |   12 |
 | 1002 | Serres | SanJose |   13 |
 +------+--------+---------+------+
+
+Another approach using joins - 
+
+SELECT 
+    s.*
+FROM
+    salespeople s
+        INNER JOIN
+    customers c ON s.snum = c.snum
+GROUP BY s.snum
+HAVING COUNT(c.cnum) > 1;
 
 -- 27) Find salespeople with customers located in their own cities. 
 
@@ -2699,6 +2743,13 @@ FROM
     salespeople s ON o.snum = s.snum
 GROUP BY s.snum;
 
+Another approach just counting the number - 
+
+SELECT 
+    COUNT(DISTINCT snum) AS salespersons_count
+FROM
+    orders;
+
 Output - 
 
 +------+---------+-----------+------+
@@ -2746,6 +2797,23 @@ GROUP BY c.snum;
 | 2007 | Pereira  | Rome    |    100 | 1004 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
+
+Another Approach Just counting the number of customers - 
+
+Query -
+
+SELECT 
+    COUNT(DISTINCT cnum) AS no_of_customer
+FROM
+    orders;
+
+Output - 
+
++----------------+
+| no_of_customer |
++----------------+
+|              7 |
++----------------+
 
 -- 96) On which date has each salesman booked an order of maximum value? 
 
@@ -2997,6 +3065,15 @@ Output -
 | Motika | 1004 |
 | Fran   | 1008 |
 +--------+------+
+
+Annother approach - 
+
+SELECT DISTINCT
+    s.sname, s.snum
+FROM
+    salespeople s
+        INNER JOIN
+    customers c ON s.snum != c.snum AND s.city = c.city;
 
 -- 105) Does the total amount in orders by customer in Rome and London, exceed the
 -- commission paid to salesperson in London, and New York by more than 5 times?
