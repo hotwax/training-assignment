@@ -328,16 +328,16 @@ HAVING MAX(amt) >= 3000;
 
 SELECT snum, MAX(amt),odate
 FROM  orders
-GROUP BY snum HAVING
+GROUP BY snum,odate HAVING
 odate = '1990-03-10';
 
 +------+----------+------------+
 | snum | MAX(amt) | odate      |
 +------+----------+------------+
-| 1001 |  9891.88 | 1990-03-10 |
-| 1002 |  5160.45 | 1990-03-10 |
-| 1004 |  1900.10 | 1990-03-10 |
 | 1007 |  1098.16 | 1990-03-10 |
+| 1004 |  1900.10 | 1990-03-10 |
+| 1001 |   767.69 | 1990-03-10 |
+| 1002 |  5160.45 | 1990-03-10 |
 +------+----------+------------+
 
 22) Find all customers located in cities where Serres has customers.
@@ -424,11 +424,23 @@ mysql> SELECT s.snum,sname,s.city as salespeple_city, c.cnum, c.cname, c.city as
 mysql> SELECT * FROM salespeople WHERE sname LIKE "P__I%";
 Empty set (0.00 sec)
 
-29) Write a query that uses a subquery to obtain all orders for the customer named ‘Cisneros’. Assume you do not know his customer number.  
+29) Write a query that uses a subquery to obtain all orders for the customer named ‘Cisneros’. Assume you do not know his customer number. 
+Using SubQuery:
 mysql>SELECT * FROM orders
          WHERE cnum IN (
              SELECT cnum FROM customers WHERE cname = "Cisneros"
              );
+
+Using Joins:
+SELECT 
+    orders.*
+FROM
+    orders
+        INNER JOIN
+    customers ON orders.cnum = customers.cnum
+WHERE
+    customers.cname = 'Cisneros';
+
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
@@ -985,6 +997,7 @@ GROUP BY o.snum;
 
 57) Write a query that produces the names and cities of all customers with the same rating as Hoffman. Write the query using Hoffman’s cnum rather than his rating, so that it would still be usable if his rating is changed.
 
+Using SubQuery:
 SELECT cnum
 FROM customers
 WHERE cname = "Hoffman";
@@ -993,6 +1006,14 @@ FROM customers
 WHERE rating = (SELECT rating
               FROM customers
               WHERE cnum = 2001);
+
+Using Joins
+SELECT c1.cname,
+       c1.city
+FROM   customers AS c1
+       JOIN customers AS c2
+               ON c1.rating = c2.rating
+WHERE  c2.cnum = 2001;
 
 +---------+--------+
 | cname   | city   |
@@ -1222,13 +1243,21 @@ WHERE s.city != c.city;
 
 
 71) Find all salespeople who have customers with more than one current order.
-
+Using SubQuery :
 SELECT *
 FROM salespeople
 WHERE snum IN (SELECT snum
                FROM orders
                GROUP BY snum HAVING COUNT(snum) > 1);
 
+Using Joins :
+SELECT DISTINCT s.*
+FROM
+    salespeople s
+    JOIN
+    orders o ON s.snum = o.snum
+GROUP BY o.cnum
+HAVING COUNT(*) > 1;
 +------+--------+-----------+------+
 | SNUM | SNAME  | CITY      | COMM |
 +------+--------+-----------+------+
@@ -1321,11 +1350,20 @@ HAVING city = "London";
 +--------+-----------+
 
 77) Find all orders credited to the same salesperson who services Hoffman.(cnum 2001).
-
-SELECT *
+Using SubQuery:
+SELECT 
 FROM orders
 WHERE snum IN (SELECT snum FROM orders WHERE cnum = 2001);
 
+Using Joins:
+SELECT 
+    o.*
+FROM
+    orders o
+JOIN
+    customers c ON o.snum = c.snum
+WHERE
+    c.cnum = 2001;
 +------+---------+------------+------+------+
 | ONUM | AMT     | ODATE      | CNUM | SNUM |
 +------+---------+------------+------+------+
