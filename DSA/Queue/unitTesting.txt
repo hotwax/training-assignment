@@ -1,0 +1,62 @@
+Menu looks likes this:
+
+===========================
+Your Queue --
+Queue is empty
+
+
+Enter 1 for enqueue operation
+Enter 2 for dequeue operation
+Enter 3 for search operation
+Enter 4 to exit
+===========================
+
+1) Test Case for Enqueue Operation:
+Input: 
+1
+
+Enter the data: 55
+
+Output: 
+Your Queue --
+55
+Display menu again
+
+2) Test Case for Dequeue Operation:
+Input:
+2
+Output:
+Your Queue --
+Queue is empty
+Display menu again
+
+3) Test Case for showAll Operation:
+
+Queue is alredy Displyed in Menu
+Your Queue --
+55
+
+4) Test Case for Search Operation:
+Input: 
+3
+
+Enter the data to search: 55
+Output:
+Present
+Your Queue --
+55
+Display menu again
+
+5) Test Case for Invalid Option:
+Input: 
+7
+Output: 
+Program terminates
+
+6) Test Case for Empty Queue:
+Input: 
+(Perform Dequeue operation on an empty queue)
+Output: 
+Your Queue --
+Queue is empty
+Display menu again

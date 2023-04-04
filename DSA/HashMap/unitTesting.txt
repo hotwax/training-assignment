@@ -1,0 +1,100 @@
+Menu looks like this-
+
+===========================
+Collisions - 0
+Your Hash Map --
+
+
+Enter 1 for Add Key Value operation
+Enter 2 for Delete with key operation
+Enter 3 for Size of Map operation
+Enter 4 for Get value From Map operation
+Enter 5 to exit
+===========================
+
+1) Test case for adding a new key-value pair
+
+Input:
+1
+
+Enter the Key: 1
+
+Enter the value: 20
+
+Output:
+Collisions - 0
+Your Hash Map --
+1 -> 20
+Display menu here
+
+2) Test case for removing an existing key-value pair
+
+Input:
+2
+
+Enter the Key: 1
+
+Output:
+The key deleted with value : 20
+Collisions - 0
+Your Hash Map --
+Display menu here
+
+3) Test case for showing all key-value pairs in the CustomHashMap
+
+Already shows in menu.
+
+Your Hash Map --
+5 -> 33
+88 -> 55
+
+4) Test case for getting a value for an existing key
+
+Input:
+4
+
+Enter the key to find the value: 88
+
+Output:
+Value is : 55
+Display menu here
+
+5) Test case for getting a value for a non-existing key
+
+Input:
+4
+
+Enter the key to find the value: 33
+
+Output:
+Key Not found.
+
+6) Test case for exiting the program
+
+Input:
+5
+
+Output:
+Program Terminates
+
+7) Test Case: Invalid input
+
+Input:
+9
+
+Output:
+Program Terminates
+
+8) Test Case for updating the key.
+
+Input and Output:
+
+Automatically updates the key if exists on add operation.
+
+9) Test Case to show size of map.
+
+Input:
+3
+
+Output:
+The size of Map is : 2

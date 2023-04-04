@@ -1,0 +1,133 @@
+===========================
+Enter the capacity for which the key will be moded to and array will crested on this - 5
+
+Collisions - 0
+Your Hash Map --
+0 --
+1 --
+2 --
+3 --
+4 --
+
+
+Enter 1 for Add Key Value operation
+Enter 2 for Delete with key operation
+Enter 3 for Size of Map operation
+Enter 4 for Get Value From Map operation
+Enter 5 to exit
+===========================
+
+1) Test Case: Insert a new key-value pair into the hash table
+
+Input:
+1
+
+Enter the Key: 5
+
+Enter the value: 5
+
+Actual & Expected Output:
+Collisions - 0
+Your Hash Map --
+0 -- 5 -> 5
+1 --
+2 --
+3 --
+4 --
+Display menu here
+
+2) Test Case: Remove an existing key-value pair from the hash table
+
+Input:
+2
+
+Enter the Key: 5
+
+The key deleted with value : 5
+
+Actual & Expected Output:
+Collisions - 0
+Your Hash Map --
+0 --
+1 --
+2 --
+3 --
+4 --
+Display menu here
+
+3) Test Case: Try to remove a non-existing key-value pair from the hash table
+
+Input:
+2
+
+Enter the Key: 55
+
+Actual & Expected Output:
+Key Not Found.
+Display menu here
+
+4) Test Case: Show all the key-value pairs in the hash table
+
+Already displayed in the menu.
+Collisions - 0
+Your Hash Map --
+0 -- 5 -> 5
+1 --
+2 --
+3 --
+4 --
+
+5) Test Case: Get the number of collisions in the hash table
+
+Already Displayed in the menu.
+
+In menu:
+
+Collisions - 0
+Your Hash Map --
+0 -- 5 -> 5
+1 --
+2 --
+3 --
+4 --
+
+6) Test Case: Get the time taken to perform operations on the hash table
+
+Input Taken– 
+•	The Capacity Taken is – 100
+•	80 Values are added to the HashMap in this Comparison.
+100 1 41 1 1 18467 2 1 6334 3 1 26500 4 1 19169 5 1 15724 6 1 11478 7 1 29358 8 1 26962 9 1 24464 10 1 5705 11 1 28145 12 1 23281 13 1 16827 14 1 9961 15 1 491 16 1 2995 17 1 11942 18 1 4827 19 1 5436 20 1 32391 21 1 14604 22 1 3902 23 1 153 24 1 292 25 1 12382 26 1 17421 27 1 18716 28 1 19718 29 1 19895 30 1 5447 31 1 21726 32 1 14771 33 1 11538 34 1 1869 35 1 19912 36 1 25667 37 1 26299 38 1 17035 39 1 9894 40 1 28703 41 1 23811 42 1 31322 43 1 30333 44 1 17673 45 1 4664 46 1 15141 47 1 7711 48 1 28253 49 1 6868 50 1 25547 51 1 27644 52 1 32662 53 1 32757 54 1 20037 55 1 12859 56 1 8723 57 1 9741 58 1 27529 59 1 778 60 1 12316 61 1 3035 62 1 22190 63 1 1842 64 1 288 65 1 30106 66 1 9040 67 1 8942 68 1 19264 69 1 22648 70 1 27446 71 1 23805 72 1 15890 73 1 6729 74 1 24370 75 1 15350 76 1 15006 77 1 31101 78 1 24393 79 1 3548 80 1 19629 81 99
+
+Output:
+Time taken by function: 7731950 microseconds
+
+7) Test Case: Invalid input
+
+Input:
+Enter your choice
+9
+
+Actual & Expected Output:
+Terminates the program.
+
+8) Test Case: Get Size of the map
+
+Input:
+3
+
+Output:
+The size of Map is : 1
+Display menu here
+ 
+9) Test Case: Get value from the map
+
+Input:
+4
+
+Enter the key to find the value: 55
+
+Output:
+Value is : 2
+Display menu here
+ 
+
