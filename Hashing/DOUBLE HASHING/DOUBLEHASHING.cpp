@@ -351,7 +351,8 @@ int main()
             break;
 
         default:
-            menu = false;
+            print("invalid choice");
+            break;
         }
     }
 
