@@ -1,0 +1,34 @@
+Test Case 1:
+Create a linked list with a single node, display it, and then exit.
+Input: 1, 5, 9, 2, 7, 3, 6, 8, 0 (enter one value at a time)
+Expected Output: 5 9 2 7 3 6 8
+
+Test Case 2: 
+Create a linked list with three nodes, insert a node at the beginning, and display it.
+Input: 1, 2, 3, 4 (enter one value at a time)
+Expected Output: 4 1 2 3
+
+Test Case 3: 
+Create a linked list with three nodes, insert a node at the end, and display it.
+Input: 1, 2, 3, 4 (enter one value at a time)
+Expected Output: 1 2 3 4
+
+Test Case 4: 
+Create a linked list with three nodes, insert a node at a specified position, and display it.
+Input: 1, 2, 3, 4 (enter one value at a time), 2, 5
+Expected Output: 1 2 5 3 4
+
+Test Case 5: 
+Create a linked list with three nodes, delete a node from the beginning, and display it.
+Input: 1, 2, 3, 6 (enter one value at a time), 6
+Expected Output: 2 3
+
+Test Case 6: 
+Create a linked list with three nodes, delete a node from the end, and display it.
+Input: 1, 2, 3, 7 (enter one value at a time), 7
+Expected Output: 1 2
+
+Test Case 7: 
+Create a linked list with three nodes, delete a node from a specified position, and display it.
+Input: 1, 2, 3, 2, 6 (enter one value at a time), 2
+Expected Output: 1 3
