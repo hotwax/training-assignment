@@ -1,0 +1,29 @@
+Case 1 : (Invalid Choice)
+Input : sd
+Output : Enter Integer Only
+
+Case 2 : (Out of Range input choice)
+Input : 232
+Output : Invalid Choice
+
+Case 3 : (Operation without Creating a HashMap)
+Input : 1
+Output : Create a HashMap first
+
+Case 4 : (Deleting a Value which is not present in hashmap)
+Input : Enter your choice : 2
+        Please Enter the key: 10
+Output : Key not found
+
+Case 5 : (Searching a Value which is not present in Hashmap)
+Input : Enter your choice :5
+       Please Enter the key: 200
+Output : -1 (Key not found)
+
+Case 6 : (User trying to delete from empty Hashmap)
+Input : Enter your choice : 2
+Output : Hashmap is empty
+
+Case 7 : (User trying to get all collisions from empty Hashmap)
+Input : Enter your choice : 4
+Output : Collisions: 0 (Hashmap is empty)

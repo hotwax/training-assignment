@@ -1,0 +1,22 @@
+Case 1 : (Invalid Choice)
+Input : sd
+Output : Enter Integer Only
+
+Case 2 : (Out of Range input choice)
+Input : 232
+Output : Invalid Choice
+
+Case 3 : (Operation without Creating Binary Search Tree)
+Input : 1
+Output : Create a Binary Search Tree First
+
+Case 4 : (Deleting a Node which is not present in Tree)
+Input : Enter your choice : 2
+        Please Enter the Node Value: 10
+Output : Node not found in Tree
+
+Case 5 : (Searching a Node which is not present in Tree)
+Input : Enter your choice :5
+        Please Enter the Node Value: 200
+Output : The not is not present in Tree
+

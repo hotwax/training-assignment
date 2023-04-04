@@ -1,0 +1,38 @@
+Case 1 : (Invalid Choice)
+Input : sd
+Output : Enter Integer Only
+
+Case 2 : (Out of Range input choice)
+Input : 232
+Output : Invalid Choice
+
+Case 3 : (Operation without Creating a Graph)
+Input : 1
+Output : Create a Graph First
+
+Case 4 : (Adding a invalid edge)
+Input : Enter your choice : 1
+        Please Enter the Node Value: dgw
+Output : Please Enter Integer Only!!
+
+Case 5 : (Inserting out of range value)
+Input : Enter your choice :1
+        Please Enter the Edge Values:200 300
+Output : Please Enter Values in Range of 0 to 100
+
+Case 6 : (Updating the value of a Node which is not present in Graph)
+Input : Enter your choice : 3
+        Please Enter the Node Value: 70
+        Please Enter the new value of the node: 100
+        Output : The Node does not exist in Graph
+
+Case 7 : (Deleting a Node which is not present in Graph)
+Input : Enter your choice : 2
+        Please Enter the Node Value: 100
+        Output : The vertex does not exist in Graph
+
+Case 8 : (Inserting an Edge which is already present in Graph)
+Input : Enter your choice : 2
+        Please Enter the Node Value: 10
+        Please Enter the Node Value: 20
+        Output : The Edge already exists in Graph

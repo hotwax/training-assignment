@@ -1,0 +1,54 @@
+--------- MENU ---------
+Press 0 : Create a new HashMap
+Press 1 : Insert an element
+Press 2 : Delete an element
+Press 3 : Get an element
+Press 4 : Display/Traversal the LinkedList
+Press 5 : Search an element
+Press 6 : Exit
+
+Case 1 : (Invalid Choice)
+Input : sd
+Output : Enter Integer Only
+
+Case 2 : (Out of Range input choice)
+Input : 232
+Output : Invalid Choice
+
+Case 3 : (Inserting a Invalid Key or Value)
+Input : Enter your choice : 1
+        Please Enter the key: 10
+        Please Enter the value: wrf
+Output : Enter Integer Only Exception : java.util.InputMismatchException
+
+
+Case 4 : (Operation without Creating a HashMap)
+Input : Enter your choice : 1
+Output : Create a HashMap first
+
+Case 5 : (Deleting a Value which is not present)
+Input : Enter your choice : 2
+        Please Enter the key: 10
+Output : Key not found
+
+Case 6 : (Searching a Value which is not present)
+Input : Enter your choice :5
+       Please Enter the key: 200
+Output : -1 (Key not found)
+
+Case 7 : (User trying to delete from empty Hashmap)
+Input : Enter your choice : 2
+Output : Hashmap is empty
+
+Case 8 : (User trying to insert in full Hashmap)
+Input : Enter your choice : 1
+Output : Hashmap is full
+
+Case 9 : (User trying to get all collisions from empty Hashmap)
+Input : Enter your choice : 4
+Output : Collisions: 0 (Hashmap is empty)
+
+Case 10 : (User trying to get Value which does not exist)
+Input : Enter your choice : 5
+        Please Enter the key: 10
+Output : -1 (Key not found)
