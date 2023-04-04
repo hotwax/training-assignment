@@ -1,0 +1,46 @@
+Test Case 1: OverdrawDemo
+
+
+Expected Output: Both the accound holder may end up overdrawing the account
+
+Output:
+
+John withdraw 100 and now has 800
+John withdraw 100 and now has 700
+David withdraw 100 and now has 900
+David withdraw 100 and now has 500
+David withdraw 100 and now has 400
+David withdraw 100 and now has 300
+David withdraw 100 and now has 200
+John withdraw 100 and now has 600
+John withdraw 100 and now has 100
+John withdraw 100 and now has 0
+
+
+
+Test Case 2: Synchronized Withdraw
+
+Expected Output: Withdrawals should be syncronized
+
+
+Output:
+
+David completes the withdrawal of 100 and now has 900
+David completes the withdrawal of 100 and now has 800
+David  completes the withdrawal of 100 and now has 700
+David completes the withdrawal of 100 and now has 600
+David completes the withdrawal of 100 and now has 500
+John completes the withdrawal of 100 and now has 400
+John completes the withdrawal of 100 and now has 300
+John completes the withdrawal of 100 and now has 200
+John completes the withdrawal of 100 and now has 100
+John completes the withdrawal of 100 and now has 0
+
+
+
+
+Test Case 3 : No withdrawals possible (Not  Synchronized)
+
+Expected Output: Withdrawal not possible
+
+Output: David does not have enough money to withdraw 100

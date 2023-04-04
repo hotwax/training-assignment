@@ -1,0 +1,82 @@
+1.Test Case to add an employee:
+Input:
+1. add
+2. 105
+3. John Doe
+4. johndoe@example.com
+5. 25
+6. 11/05/1996
+Output:
+Employee Added Successfully!!
+
+2.Test Case to delete an existing employee:
+Input:
+1. delete
+2. 103
+Output:
+Employee Deleted Successfully
+
+3.Test Case to delete a non-existing employee:
+Input:
+1. delete
+2. 110
+Output:
+Employee Not Found
+
+4.Test Case to search for an existing employee:
+Input:
+1. search
+2. 102
+Output:
+Employee{empID=102, name='Jenny Doe', email='jennydoe@example.com', age=27, dateOfBirth='23/07/1994'}
+
+5.Test Case to search for a non-existing employee:
+Input:
+1. search
+2. 110
+Output:
+Employee Not Found
+
+6.Test Case to display all employees sorted by ID:
+Input:
+1. display
+Output:
+Employee{empID=101, name='Tom Hanks', email='tomhanks@example.com', age=35, dateOfBirth='12/05/1986'}
+Employee{empID=102, name='Jenny Doe', email='jennydoe@example.com', age=27, dateOfBirth='23/07/1994'}
+Employee{empID=103, name='John Smith', email='johnsmith@example.com', age=30, dateOfBirth='05/11/1991'}
+Employee{empID=104, name='Alex Rodriguez', email='alexrodriguez@example.com', age=24, dateOfBirth='21/02/1997'}
+Employee{empID=105, name='John Doe', email='johndoe@example.com', age=25, dateOfBirth='11/05/1996'}
+
+7.Test Case to display all employees sorted by Name:
+Input:
+1. display by name
+Output:
+Employee{empID=104, name='Alex Rodriguez', email='alexrodriguez@example.com', age=24, dateOfBirth='21/02/1997'}
+Employee{empID=102, name='Jenny Doe', email='jennydoe@example.com', age=27, dateOfBirth='23/07/1994'}
+Employee{empID=103, name='John Smith', email='johnsmith@example.com', age=30, dateOfBirth='05/11/1991'}
+Employee{empID=105, name='John Doe', email='johndoe@example.com', age=25, dateOfBirth='11/05/1996'}
+Employee{empID=101, name='Tom Hanks', email='tomhanks@example.com', age=35, dateOfBirth='12/05/1986'}
+
+8.Test Case to handle incorrect choice:
+Input:
+1. delete123
+Output:
+Please Enter Mentioned Command Only 👆
+
+9.Test Case to handle incorrect input while adding employee:
+Input:
+1. add
+2. 110
+3. 23/05/1987
+Output:
+Something went wrong
+
+10.Test Case to handle incorrect input while searching employee:
+Input:
+1. search
+2. 110
+Output:
+
+
+
+
