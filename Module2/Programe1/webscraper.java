@@ -17,8 +17,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 //Defining a public class named "websraper"
-
-public class webscraper {
+public class test {
     // Defining a static function named "printword" with three parameters and an
     // exception so that we can find the top 3 words in a particular url
     static void printword(String st, Map<String, Integer> wordmap, Map<String, Integer> wordmaplocal) throws Exception {
@@ -62,6 +61,9 @@ public class webscraper {
         for (Map.Entry<String, Integer> entry : wordmaplocal.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
             valueprint--;
+            if (valueprint == 0) {
+                break;
+            }
         }
         // If there are less than 3 words in the local map, print 0 for the remaining
         // positions
@@ -124,19 +126,7 @@ public class webscraper {
                 numberofword++;
             }
 
-        } catch (FileNotFoundException e1) {
-            // If words.txt file is not found, print the stack trace
-            e1.printStackTrace();
-        } catch (IOException e) {
-            // If there's an error reading the file, print the stack trace
-            e.printStackTrace();
-        }
-
-        // Read urls.txt file and print the word count for each URL
-
-        BufferedReader br;
-        try {
-
+            BufferedReader br;
             br = new BufferedReader(new FileReader(urls));
 
             String st;
@@ -145,37 +135,41 @@ public class webscraper {
                 // Create a TreeMap to store the word count for each word in the current URL
                 Map<String, Integer> wordmaplocal = new TreeMap<>();
                 // Print the word count for each word in the current URL
-                printword(st, wordmap, wordmaplocal);
+                try {
+                    printword(st, wordmap, wordmaplocal);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    System.out.println("Somethings went wrong in print the words");
+                }
+            }
+
+            // Sort wordmap by value and print the top 3 words
+            wordmap = sortByValue(wordmap);
+            // Print the top 3 words in wordmap
+            System.out.println();
+            System.out.println("Total top 3 words are :");
+
+            int decreasevalue = 3;
+            for (Map.Entry<String, Integer> entry : wordmap.entrySet()) {
+                System.out.println(entry.getKey() + " -> " + entry.getValue());
+                decreasevalue--;
+
+                // Break out of the loop after printing the top 3 words
+                if (decreasevalue == 0) {
+                    break;
+                }
+
             }
 
         } catch (FileNotFoundException e1) {
-            // If urls.txt file is not found, print the stack trace
-            e1.printStackTrace();
+            // If words.txt file is not found, print the stack trace
+            System.out.println("File not found");
         } catch (IOException e) {
             // If there's an error reading the file, print the stack trace
             e.printStackTrace();
-        } catch (Exception e) {
-            // If there's any other error, print the stack trace
-            e.printStackTrace();
         }
 
-        // Sort wordmap by value and print the top 3 words
-        wordmap = sortByValue(wordmap);
-        // Print the top 3 words in wordmap
-        System.out.println();
-        System.out.println("Total top 3 words are :");
-
-        int decreasevalue = 3;
-        for (Map.Entry<String, Integer> entry : wordmap.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-            decreasevalue--;
-
-            // Break out of the loop after printing the top 3 words
-            if (decreasevalue == 0) {
-                break;
-            }
-
-        }
+        // Read urls.txt file and print the word count for each URL
 
     }
 
