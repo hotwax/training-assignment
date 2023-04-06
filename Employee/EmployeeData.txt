@@ -7,3 +7,9 @@
 22,Arun Singh,arunsingh91@gmail.com,25,02-02-1998
 23,Arun Shukla,arunshukla91@gmail.com,23,03-05-2000
 24,Sourav Ganguly,sauravgg@gmail.com,40,12-02-1990
+25,Mark Wood,markwood@gmail.com,35,02-01-1989
+25,Dinesh Ramdin,dinoramdin@hotmail.com,45,01-02-188526,Dinesh Chandimal,dineshchandimal@yahoomail.com,46,03-12-1980
+27,Joe root,joeroot@hotmail.com,46,25-10-1985
+28,Hardik Pandya,hpandya@gmail.com,35,02-12-1990
+29,Krunal Pandya,kpandya@gmail.com,56,02-02-1980
+30,Rishabh Pant,spideey@gmail.com,28,02-02-1998

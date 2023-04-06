@@ -4,13 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
-import java.io.PrintWriter;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.io.FileWriter;
@@ -90,12 +90,16 @@ public class EmployeeManagement {
 
     private static final String FILE_NAME = "EmployeeData.txt";
     private static List<Employee> employees;
-
-
+    private static HashSet<String> emailSet = new HashSet<String>();
+    // static integer to hold max id so far
+    private static int maxId = 0;
 
 
     public static void main(String[] args) {
         employees = loadEmployeesFromFile();
+
+        // Find max id so far, so that we can generate new unique ids
+        getMaxIdFromFile();
         
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
@@ -165,23 +169,55 @@ public class EmployeeManagement {
                 }
             }
         } catch (FileNotFoundException e) {
-            // If the file is not found, just return an empty list
+            System.out.println("File not found");
         }
+
+        // Extract emails into emailSet
+        for (Employee employee : employees) {
+            emailSet.add(employee.getEmail());
+        }
+
         return employees;
     }
 
-    private static void saveEmployeesToFile(List<Employee> employees) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    private static void getMaxIdFromFile() {
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME))) {
-            for (Employee employee : employees) {
-                writer.println(employee.getId() + "," + employee.getName() + "," + employee.getEmail() + "," + employee.getAge() + "," + dateFormat.format(employee.getDob()));
+        try{
+        for (Employee employee : employees) {
+            if (employee.getId() > maxId) {
+                maxId = employee.getId();
             }
-        } catch (IOException e) {
+        }}
+        catch(NullPointerException e){
+            System.out.println("No employees in the file");
+        }
+        catch (Exception e){
+            System.out.println("Error");
+            System.out.println(e);
+        }
+
+    }
+
+    
+
+
+    private static void saveEmployeeToFile(Employee employee) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy" );
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            
+                writer.write(employee.getId() + "," + employee.getName() + "," + employee.getEmail() + "," + employee.getAge() + "," + dateFormat.format(employee.getDob()));
+                writer.newLine(); // add a new line after each employee record
+        }
+             catch (IOException e) {
             System.out.println("Error saving employees to file");
         }
     }
+
+
+    
 
     private static void addEmployee(Scanner scanner) {
 
@@ -199,24 +235,39 @@ public class EmployeeManagement {
         }
     
 
-
         System.out.print("Enter email address: ");
         String email = scanner.nextLine();
         if(isValidEmail(email))
-        employee.setEmail(email);
+        {
+            employee.setEmail(email);
+
+            if (emailSet.contains(email)) {
+                System.out.println("Email already exists, Please Try again");
+                return;
+            }
+            else{
+                emailSet.add(email);
+            }
+        }
         else{
             System.out.println("Invalid Email");
-            System.exit(0);
+            return;
         }
 
 
         System.out.print("Enter age: ");
+        
+        try{
         int age = scanner.nextInt();
         scanner.nextLine();
         if (age >= 18 && age <= 60) {
             employee.setAge(age);
         } else {
-            System.out.println("Invalid age");
+            System.out.println("Invalid age,enter in range (18-60)");
+            return;
+        }}
+        catch(InputMismatchException e){
+            System.out.println("Invalid age, Enter a number");
             return;
         }
 
@@ -229,18 +280,12 @@ public class EmployeeManagement {
         }
         employee.setId(generateEmployeeId());
         employees.add(employee);
-        saveEmployeesToFile(employees);
+        saveEmployeeToFile(employee);
 
         System.out.println("Employee added successfully");
     }
 
     private static int generateEmployeeId() {
-        int maxId = 0;
-        for (Employee employee : employees) {
-            if (employee.getId() > maxId) {
-                maxId = employee.getId();
-            }
-        }
         return maxId + 1;
     }
 
@@ -327,7 +372,7 @@ public class EmployeeManagement {
         }
     }
     if (deleted) {
-        saveEmployeesToFile(employees);
+        getMaxIdFromFile();
         System.out.println("Employee deleted successfully");
     } else {
         System.out.println("Employee not found");
