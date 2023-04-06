@@ -1,0 +1,105 @@
+Testcase 1: Without using synchronus keyword.
+
+
+Output : 
+
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :900.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :900.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :800.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :800.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :700.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :700.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :600.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :600.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :400.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :400.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :300.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :300.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :200.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :200.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :100.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :0.0
+Sorry Insufficient Balance
+Sorry Insufficient Balance
+Sorry Insufficient Balance
+Sorry Insufficient Balance
+
+
+
+
+
+
+
+
+Testcase 2: Using synchronus keyword.
+
+Output : 
+
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :900.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :800.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :700.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :600.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :500.0
+Amount Withdraw from Account Holder : Pushpraj
+Amount Withdraw is :100.0
+Current Amount is :400.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :300.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :200.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :100.0
+Amount Withdraw from Account Holder : Lakshyaraj
+Amount Withdraw is :100.0
+Current Amount is :0.0
+Sorry Insufficient Balance
+Sorry Insufficient Balance
+
+
+
+

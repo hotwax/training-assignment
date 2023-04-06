@@ -1,0 +1,105 @@
+1. If user selected invalid choice 
+
+Input : 12
+
+output : Invalid selection
+
+
+
+
+2. Inserting data in a file
+
+Input :
+
+Enter your selection 
+add
+Enter a Name :
+vikas
+Enter a Email :
+vikas@gmail.com
+Enter the Date of Birth
+10/03/2001
+Enter the Age
+21
+
+Output :
+data entered 
+Employee Added Successfully!!
+
+
+3. If user entered a wrong datatype
+
+Input :
+Enter a Name :
+123456
+Enter a Email :
+1323456
+Enter the Date of Birth
+123456
+Enter the Age
+sdjsd
+
+
+output: ""
+
+
+
+
+4. deletion in a file
+
+Input : Enter Employee ID: 
+6
+
+Output : data deleted
+
+
+
+5. deletion if user entered invaild id
+
+Input : Enter Employee ID: 
+100
+
+Output : Invaild id
+
+
+
+6. search in file
+
+Input : 
+Enter the text to Search 
+vishal
+Enter the option how you want to sort the records: 
+Type id : To Sort the records by ID
+Type name : To Sort the records  by Name
+Type emailAddress : To Sort the records  by emailAddress
+Type age : To Sort the records  by Age
+Type dob : To Sort the records  by Date of Birth
+name
+Kindly select from the given options.
+Enter whether you want the data in increasing or decreasing order: 
+Type asc : For Ascending
+Type desc : For Descending
+asc
+
+
+
+Output : Employee { empid=5, name='vishal', Email :vishal@gms.com, age=21, dateofbirth='21/03/2001'}
+
+
+7. Display functionality
+
+Input : "No input needed"
+
+Output : Employee { empid=0, name='Pushpraj Singh Jadoun', Email : pushpraj@gmail.com, age=21, dateofbirth='10/03/2001'}
+Employee { empid=1, name='Emily Chaudhary', Email :emilychaudhary@email.com, age=29, dateofbirth='12/05/1994'}
+Employee { empid=2, name='James Singh', Email :jamessingh@email.com, age=23, dateofbirth='15/02/2000'}
+Employee { empid=3, name='Krishnapal Singh', Email : krishnapal@gmail.com, age=23, dateofbirth='16/02/2023'}
+Employee { empid=4, name='Ashutosh Dodiya', Email : dodiya@gmail.com, age=24, dateofbirth='06/01/1999'}
+Employee { empid=5, name='vishal', Email :vishal@gms.com, age=21, dateofbirth='21/03/2001'}
+
+
+
+
+
+
+
