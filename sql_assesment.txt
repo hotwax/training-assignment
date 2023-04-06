@@ -229,7 +229,7 @@ WHERE
         FROM
             customers
         WHERE
-            city = 'SANJOSE') > 1;
+            city = 'SANJOSE') > =1;
             
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
