@@ -2,15 +2,10 @@ package org.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.net.MalformedURLException;
+import java.util.*;
+
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -79,11 +74,11 @@ class WebContent {
                 });
 
         // put data from sorted list to hashmap
-        Map<String, Integer> temp = new LinkedHashMap<String, Integer>();
+        Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> aa : lists) {
-            temp.put(aa.getKey(), aa.getValue());
+            sortedMap.put(aa.getKey(), aa.getValue());
         }
-        return temp;
+        return sortedMap;
     }
 
 }
@@ -99,7 +94,9 @@ public class WordScraper {
         try {
             // Get URLS from the text file
 
-            ArrayList<String> urls = new ArrayList<>();
+
+            // Using hashset to deal with duplicate urls
+            HashSet<String> urls = new HashSet<String>();
             Scanner Reader = new Scanner(new File(homeDir+ "\\urls.txt"));
 
             while (Reader.hasNext()) {
@@ -109,7 +106,8 @@ public class WordScraper {
 
             // Get words from the text file
 
-            ArrayList<String> words = new ArrayList<>();
+            HashSet<String> words = new HashSet<String>();
+
             Reader = new Scanner(new File(homeDir+ "\\words.txt"));
             while (Reader.hasNext()) {
                 words.add(Reader.next());
