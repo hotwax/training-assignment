@@ -19,11 +19,17 @@ Output : null
 
 3. Insertion in a chaining hashmap 
 
-Input : Enter the key and value
-0 15
+Input : 
+Enter the key and value
+87 4894
 
-Output : Hashmap :
-0->15
+
+Output :
+Hashmap :
+87->4894
+8->84
+4->598
+484->48
 
 
 

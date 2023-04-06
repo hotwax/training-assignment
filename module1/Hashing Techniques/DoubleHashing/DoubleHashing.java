@@ -5,27 +5,32 @@ import java.util.Scanner;
 
 public class DoubleHashing {
     int size;
-    int numberofelement = 0;
+    int numberOfElement = 0;
     int collision;
-    int arr[];
+    node arr[];
 
     // Constructor for initializing hash table with a given size
     DoubleHashing(int size) {
         this.size = size;
-        arr = new int[size];
-        this.numberofelement = 0;
-
-        // Initialize all elements in the hash table as -1
-        for (int i = 0; i < size; i++) {
-            arr[i] = -1;
-        }
+        arr = new node[size];
+        this.numberOfElement = 0;
         this.collision = 0;
     }
 
+    static class node {
+        int key;
+        int value;
+
+        public node(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
     // Function to find the largest prime number smaller than size
-    int smallprime() {
+    int smallPrime() {
         for (int i = size - 1; i >= 1; i--) {
-            if (isprime(i)) {
+            if (isPrime(i)) {
                 return i;
             }
         }
@@ -33,7 +38,7 @@ public class DoubleHashing {
     }
 
     // Function to check if a number is prime or not
-    boolean isprime(int n) {
+    boolean isPrime(int n) {
         for (int i = 2; i * i <= n; i++) {
             if (n % i == 0) {
                 return false;
@@ -43,49 +48,88 @@ public class DoubleHashing {
     }
 
     // Function to insert a value into the hash table
-    void insert(int value) {
-        if (size == numberofelement) {
+    void insert(int key, int value) {
+        if (size == numberOfElement) {
             // If the hash table is full, print an error message
             System.out.println("Hash map is full");
+            return;
         }
-        int hash = hashcode(value);
-        int hashsecond = hashcode2(value);
+        int hash = hashCode(key);
+        int hashsecond = hashCode2(key);
+        node to_insert = new node(key, value);
+        int counter = 0;
+        boolean flag = true;
 
+        if (arr[hash] == null) {
+            arr[hash] = to_insert;
+            numberOfElement++;
+            return;
+        }
+        if (arr[hash] != null && arr[hash].key == key) {
+            arr[hash].value = value;
+            return;
+        }
+        collision++;
         // Handle collisions using double hashing
-        while (arr[hash] != -1) {
-            if (arr[hash] == value) {
-                // If the value is already present in the hash table, return
+        while (arr[hash] != null) {
+            if (arr[hash].key == key) {
+                // If the value is already present in the hash table, update the value
+                arr[hash].value = value;
                 return;
             }
-            collision++;
+
             hash = (hash + hashsecond) % size;
+            counter++;
+            if (counter >= 10000) {
+                System.out.println("Unable to insert the data");
+
+                return;
+            }
         }
         // Insert the value into the hash table
-        arr[hash] = value;
-        numberofelement++;
+        arr[hash] = to_insert;
+        numberOfElement++;
     }
 
     // Function to delete a value from the hash table
-    void delete(int value) {
-        int hash = hashcode(value);
-        int hashsecond = hashcode2(value);
-        while (arr[hash] != -1 && (!(arr[hash] == value))) {
+    void delete(int key) {
+        int hash = hashCode(key);
+        int hashsecond = hashCode2(key);
+        int counter = 0;
+        while (arr[hash] != null && (!(arr[hash].key == key))) {
             // Search for the value to be deleted using double hashing
             hash = hash + hashsecond;
+            counter++;
             hash = hash % size;
+
+            if (counter >= 10000) {
+                System.out.println("Unable to delete the data");
+                return;
+            }
         }
         // Delete the value from the hash table
-        arr[hash] = -1;
-        numberofelement--;
+        arr[hash] = null;
+        numberOfElement--;
     }
 
     // Function to get the key of a value in the hash table
     int getValueofKey(int value) {
-        int hash = hashcode(value);
-        int hashsecond = hashcode2(value);
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null && arr[i].value == value) {
+                return arr[i].key;
+            }
+        }
+        return -1;
+
+    }
+
+    // Function to get the key of a value in the hash table
+    int getValuebyKey(int key) {
+        int hash = hashCode(key);
+        int hashsecond = hashCode2(key);
         boolean issafe = true;
         int counter = 0;
-        while (arr[hash] != -1 && (!(arr[hash] == value) && issafe)) {
+        while (arr[hash] != null && (!(arr[hash].key == key) && issafe)) {
             // Search for the key of the given value using double hashing
             counter++;
             hash = hash + hashsecond;
@@ -94,28 +138,30 @@ public class DoubleHashing {
                 // If the maximum number of iterations is reached, break the loop
                 issafe = false;
             }
+
+            if (arr[hash] != null && arr[hash].key == key) {
+                return arr[hash].value;
+            }
         }
         if (issafe == false) {
             // If the value is not found within the maximum number of iterations, return -1
             return -1;
         } else {
             // Return the key of the given value
-            return hash;
+            if (arr[hash] != null) {
+                return arr[hash].value;
+            } else {
+                return -1;
+            }
         }
-
-    }
-
-    // Function to get the value of a key in the hash table
-    int getKeybyValue(int key) {
-        return arr[key];
     }
 
     // Function to display the contents of the
     void display() {
         System.out.println("Hashmap : ");
         for (int i = 0; i < size; i++) {
-            if (arr[i] != -1) {
-                System.out.println(i + "->" + arr[i]);
+            if (arr[i] != null) {
+                System.out.println(arr[i].key + "->" + arr[i].value);
             }
         }
     }
@@ -123,101 +169,104 @@ public class DoubleHashing {
     // Computes the second hash code for the given value using double hashing
     // technique.
 
-    int hashcode2(int value) {
-        int primenum = smallprime();
-        return primenum - (value % primenum);
+    int hashCode2(int key) {
+        int primeNum = smallPrime();
+        return primeNum - (key % primeNum);
     }
 
     // Computes the first hash code for the given value using modulo operator.
-    int hashcode(int value) {
-        return Math.abs(value) % size;
+    int hashCode(int key) {
+        return Math.abs(key) % size;
     }
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the size of the map");
-        int sizeofmap = sc.nextInt();
-        DoubleHashing dh = new DoubleHashing(sizeofmap);
-        long t1 = System.currentTimeMillis(); // Variable To calculate the time taken at the start.
-        boolean flag = true;
-        // running the while loop till flag is false
-        while (flag) {
-            System.out.println("Choose an option from the Dashboard given below:\n");
-            System.out.println("1. Insert a value in Hashmap");
-            System.out.println("2. Delete a key value in Hashmap");
-            System.out.println("3. Get value of the key");
-            System.out.println("4. Display the Hashmap ");
-            System.out.println("5. Search the value in a Hashmap");
-            System.out.println("6. Total collision ");
-            System.out.println("7. Total time taken");
-            System.out.println("8. EXIT");
-            System.out.println();
-            int ch = sc.nextInt();
-            if (ch < 1 || ch > 8) {
-                System.out.println("Kindly enter the correct option.");
-            } else {
-                // Taking the choice from the user and performing the corresponding operation
-                try {
-                    switch (ch) {
-                        case 1:
+        try {
+            int sizeofmap = sc.nextInt();
+            DoubleHashing dh = new DoubleHashing(sizeofmap);
+            long t1 = System.currentTimeMillis(); // Variable To calculate the time taken at the start.
+            boolean flag = true;
+            // running the while loop till flag is false
+            while (flag) {
+                System.out.println("Choose an option from the Dashboard given below:\n");
+                System.out.println("1. Insert a value in Hashmap");
+                System.out.println("2. Delete a key value in Hashmap");
+                System.out.println("3. Get value of the key");
+                System.out.println("4. Display the Hashmap ");
+                System.out.println("5. Search the value in a Hashmap");
+                System.out.println("6. Total collision ");
+                System.out.println("7. Total time taken");
+                System.out.println("8. EXIT");
+                System.out.println();
+                int ch = sc.nextInt();
+                if (ch < 1 || ch > 8) {
+                    System.out.println("Kindly enter the correct option.");
+                } else {
+                    // Taking the choice from the user and performing the corresponding operation
+                    try {
+                        switch (ch) {
+                            case 1:
 
-                            System.out.println("Enter the value to be inserted");
-                            int value = sc.nextInt();
-                            dh.insert(value);
-                            dh.display();
-                            break;
+                                System.out.println("Enter the key and value to be inserted");
+                                int key = sc.nextInt();
+                                int value = sc.nextInt();
+                                dh.insert(key, value);
+                                dh.display();
+                                break;
 
-                        case 2:
-                            System.out.println("Enter value to delete from the hashmap");
-                            int key_delete = sc.nextInt();
-                            dh.delete(key_delete);
-                            ;
-                            dh.display();
-                            break;
+                            case 2:
+                                System.out.println("Enter value to delete from the hashmap");
+                                int key_delete = sc.nextInt();
+                                dh.delete(key_delete);
+                                dh.display();
+                                break;
 
-                        case 3:
-                            System.out.println("Enter the key whose value you want");
-                            int key_value = sc.nextInt();
-                            System.out.println(dh.getKeybyValue(key_value));
-                            break;
+                            case 3:
+                                System.out.println("Enter the key whose value you want");
+                                int key_value = sc.nextInt();
+                                System.out.println(dh.getValuebyKey(key_value));
+                                break;
 
-                        case 4:
-                            dh.display();
-                            break;
+                            case 4:
+                                dh.display();
+                                break;
 
-                        case 5:
-                            System.out.println("Enter the value");
-                            int search_value = sc.nextInt();
+                            case 5:
+                                System.out.println("Enter the value");
+                                int search_value = sc.nextInt();
 
-                            System.out.println(dh.getValueofKey(search_value));
-                            break;
+                                System.out.println(dh.getValueofKey(search_value));
+                                break;
 
-                        case 6:
-                            System.out.println(dh.collision);
-                            break;
+                            case 6:
+                                System.out.println(dh.collision);
+                                break;
 
-                        case 7:
-                            long t2 = System.currentTimeMillis();
-                            System.out.println("Time in milli seconds is " + (t2 - t1));
-                            break;
+                            case 7:
+                                long t2 = System.currentTimeMillis();
+                                System.out.println("Time in milli seconds is " + (t2 - t1));
+                                break;
 
-                        case 8:
-                            flag = false;
-                            break;
+                            case 8:
+                                flag = false;
+                                break;
 
+                        }
+
+                        if (flag == false) {
+                            System.out.println("Exiting program");
+                        }
+                    } catch (InputMismatchException ex) {
+                        System.out.println(ex.getMessage());
                     }
 
-                    if (flag == false) {
-                        System.out.println("Exiting program");
-                    }
-                } catch (InputMismatchException ex) {
-                    System.out.println(ex.getMessage());
                 }
-
             }
+
+        } catch (InputMismatchException ex) {
+            System.out.println("Please re-run the program and enter the correct value");
         }
-
     }
-
 }

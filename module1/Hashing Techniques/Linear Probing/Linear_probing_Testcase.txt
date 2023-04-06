@@ -19,21 +19,21 @@ Output : null
 
 3. Inserting a value in a hashmap
 
-Input : Enter the value to be inserted
-56
+Input : Enter the key and value to be inserted
+1 1
 
 Output : Hashmap :
-6 ->56
+1 ->1
 
 
 
-4. If user entered duplicate value during insertion
+4. If user entered duplicate key during insertion
 
 Input : Enter the value to be inserted
-56
+1 10
 
 Output : Hashmap :
-6 ->56
+1 ->10
 
 
 
@@ -41,16 +41,16 @@ Output : Hashmap :
 
 5. Deletion in a hashmap
 
-Input : Enter value to delete from the hashmap
-56
+Input : Enter key to delete from the hashmap
+1
 
 Output : Hashmap :
-8 ->58
 
 
-6. if user entered invalid value during deletion
 
-Input : Enter value to delete from the hashmap
+6. if user entered invalid key during deletion
+
+Input : Enter key to delete from the hashmap
 100
 
 Output : Hashmap :
@@ -88,7 +88,7 @@ Output : value present at 8 index
 Input : Enter the value to be searched
 60
 
-Output : "No output"
+Output : "Value not found"
 
 
 11. Total no. of collision
@@ -103,5 +103,10 @@ Output : 0
 Input : "no input needed"
 
 Output : Time in milli seconds is 1221207
+
+
+13. if hashmap is full
+
+output : "Hashmap Full"
 
 

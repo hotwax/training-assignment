@@ -4,120 +4,142 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.java.demo.QuadraticProbing.node;
+
 public class RandomProbing {
     int size;
-    int arr[];
+    node arr[];
     int collision = 0;
     int randomnumber;
-    int numberofdatapresent = 0;
+    int numberOfDatapresent = 0;
 
     // Constructor to initialize the hash map
     RandomProbing(int size) {
         this.size = size;
-        this.arr = new int[size];
-        // Initialize all elements in the array to -1 (empty)
-        for (int i = 0; i < size; i++) {
-            arr[i] = -1;
+        this.arr = new node[size];
+
+    }
+
+    static class node {
+        int key;
+        int value;
+
+        public node(int key, int value) {
+            this.key = key;
+            this.value = value;
         }
-        // Generate a random number to be used for probing
-        Random random = new Random();
-        randomnumber = random.nextInt(size);
-    }
-
-    // Check if the hash map is empty
-    boolean isempty() {
-        return numberofdatapresent != size;
-    }
-
-    // Get the size of the hash map
-    int getsizeofhashmap() {
-        return size;
     }
 
     // Display the contents of the hash map
     void display() {
+        System.out.println("HashMap : ");
         for (int i = 0; i < size; i++) {
-            if (arr[i] != -1) {
-                System.out.println(i + "->" + arr[i]);
+            if (arr[i] != null) {
+                System.out.println(arr[i].key + "->" + arr[i].value);
             }
         }
     }
 
-    // Insert a value into the hash map
-    void insert(int value) {
-        // If the hash map is full, return an error message
-        if (numberofdatapresent == size) {
-            System.out.println("Hashmap is full");
+    void insert(int key, int value) {
+        Random random = new Random();
+        node to_insert = new node(key, value);
+        int hash = hashcode(key);
+        if (numberOfDatapresent >= size) {
+            System.out.println("Hashmap is Full");
             return;
         }
-        // Calculate the hash code for the value
-        int hash = hashcode(value);
-        int start = hash;
-        while (true) {
-            // If the current slot in the array is empty, insert the value
-            if (arr[hash] == -1) {
-                arr[hash] = value;
-                numberofdatapresent++;
-                break;
-            }
-            // If the current slot is not empty, use linear probing to find the next
-            // available slot
-            hash = (hash + randomnumber * collision) % size;
-            collision++;
-            // If we have wrapped around and returned to the starting point, exit the loop
-            if (start == hash) {
+        if (arr[hash] != null && arr[hash].key == key) {
+            arr[hash].value = value;
+        }
+        while (arr[hash] != null) {
+            if (arr[hash] != null && arr[hash].key == key) {
+                arr[hash].value = value;
                 return;
             }
+            hash = (hash + random.nextInt(arr.length - 1) + 1) % arr.length;
+            collision++;
         }
+        if (arr[hash] == null) {
+            arr[hash] = to_insert;
+            numberOfDatapresent++;
+            return;
+        }
+
     }
 
     // Delete a value from the hash map
-    void delete(int value) {
+    void delete(int key) {
         // Calculate the hash code for the value
-        int hash = hashcode(value);
-        int start = hash;
-        while (true) {
-            // If we find the value in the hash map, delete it
-            if (arr[hash] == value) {
-                arr[hash] = -1;
-                numberofdatapresent--;
-                break;
+        int hash = hashcode(key);
+        Random random = new Random();
+        int counter = 0;
+        if (arr[hash] != null && arr[hash].key == key) {
+            arr[hash] = null;
+            numberOfDatapresent--;
+            System.out.println("Data removed");
+            return;
+        }
+        boolean flag = true;
+        while (flag) {
+            hash = (hash + random.nextInt(arr.length - 1) + 1) % arr.length;
+            counter++;
+            if (arr[hash] != null && arr[hash].key == key) {
+                arr[hash] = null;
+                numberOfDatapresent--;
+                System.out.println("Data removed");
+                flag = true;
+                return;
             }
-            // If the current slot in the array is not the value we're looking for, use
-            // linear probing to find the next slot to check
-            hash = (hash + randomnumber * collision) % size;
-            // If we have wrapped around and returned to the starting point, exit the loop
-            if (start == hash) {
-                System.out.println("Key not found");
+
+            if (counter >= 10000) {
+                flag = false;
+                System.out.println("Unable to delete the data");
                 return;
             }
         }
+
+        // Key not found
+        System.out.println("Key not found");
     }
 
-    int getValueofKey(int value) {
-        // Get the hash code for the given value
-        int hash = hashcode(value);
-        int start = hash;
-        while (true) {
-            // If the value is found at the current hash index, return the index
-            if (arr[hash] == value) {
-                return hash;
+    // method to return value by using it's key
+    int getValueofKey(int key) {
+
+        Random random = new Random();
+        int hash = hashcode(key);
+        if (arr[hash] != null && arr[hash].key == key) // if key is already present then update the data
+        {
+            return arr[hash].value;
+        }
+        boolean flag = true;
+        int counter = 0;
+        while (flag) {
+            hash = (hash + random.nextInt(arr.length - 1) + 1) % arr.length;
+            counter++;
+            if (arr[hash] != null && arr[hash].key == key) {
+                flag = false;
+                return arr[hash].value;
             }
-            // If there is a collision, rehash the value
-            hash = (hash + randomnumber * collision) % size;
-            // If we've looped through the entire array and haven't found the key, it's not
-            // present in the hash map
-            if (start == hash) {
-                System.out.println("Key not found");
+
+            if (counter > 10000) {
+                flag = false;
                 return -1;
             }
+
         }
+
+        return -1;
+
     }
 
     // method to get key by it's value
-    int getKeybyValue(int key) {
-        // Return the value stored at the given key
-        return arr[key];
+    int getKeybyValue(int value) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null && arr[i].value == value) {
+                return arr[i].key;
+            }
+        }
+        return -1;
     }
 
     // method to get hash value
@@ -131,85 +153,91 @@ public class RandomProbing {
         // TODO Auto-generated method stub
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the size of the map");
-        int sizeofmap = sc.nextInt();
-        RandomProbing rp = new RandomProbing(5);
-        long t1 = System.currentTimeMillis(); // Variable To calculate the time taken at the start.
-        boolean flag = true;
-        // running the while loop till flag is false
-        while (flag) {
-            System.out.println("Choose an option from the Dashboard given below:\n");
-            System.out.println("1. Insert a value in Hashmap");
-            System.out.println("2. Delete a key value in Hashmap");
-            System.out.println("3. Get value from key");
-            System.out.println("4. Display the Hashmap ");
-            System.out.println("5. Search the value in a Hashmap");
-            System.out.println("6. Total collision ");
-            System.out.println("7. Total time taken");
-            System.out.println("8. EXIT");
-            System.out.println();
-            int ch = sc.nextInt();
-            if (ch < 1 || ch > 8) {
-                System.out.println("Kindly enter the correct option.");
-            } else {
-                // Taking the choice from the user and performing the corresponding operation
-                try {
-                    switch (ch) {
-                        case 1:
+        try {
+            int sizeofmap = sc.nextInt();
 
-                            System.out.println("Enter the value to be inserted");
-                            int value = sc.nextInt();
-                            rp.insert(value);
-                            rp.display();
-                            break;
+            RandomProbing rp = new RandomProbing(sizeofmap);
+            long t1 = System.currentTimeMillis(); // Variable To calculate the time taken at the start.
+            boolean flag = true;
+            // running the while loop till flag is false
+            while (flag) {
+                System.out.println("Choose an option from the Dashboard given below:\n");
+                System.out.println("1. Insert a value in Hashmap");
+                System.out.println("2. Delete a key value in Hashmap");
+                System.out.println("3. Get key from value");
+                System.out.println("4. Display the Hashmap ");
+                System.out.println("5. Get value from key in a Hashmap");
+                System.out.println("6. Total collision ");
+                System.out.println("7. Total time taken");
+                System.out.println("8. EXIT");
+                System.out.println();
+                int ch = sc.nextInt();
+                if (ch < 1 || ch > 8) {
+                    System.out.println("Kindly enter the correct option.");
+                } else {
+                    // Taking the choice from the user and performing the corresponding operation
+                    try {
+                        switch (ch) {
+                            case 1:
 
-                        case 2:
-                            System.out.println("Enter value to delete from the hashmap");
-                            int key_delete = sc.nextInt();
-                            rp.delete(key_delete);
-                            ;
-                            rp.display();
-                            break;
+                                System.out.println("Enter the key and value to be inserted");
+                                int key = sc.nextInt();
+                                int value = sc.nextInt();
+                                rp.insert(key, value);
+                                rp.display();
+                                break;
 
-                        case 3:
-                            System.out.println("Enter the value whose key you want");
-                            int key_value = sc.nextInt();
-                            System.out.println(rp.getKeybyValue(key_value));
-                            break;
+                            case 2:
+                                System.out.println("Enter key to delete from the hashmap");
+                                int key_delete = sc.nextInt();
+                                rp.delete(key_delete);
+                                ;
+                                rp.display();
+                                break;
 
-                        case 4:
-                            rp.display();
-                            break;
+                            case 3:
+                                System.out.println("Enter the value whose key you want");
+                                int key_value = sc.nextInt();
+                                System.out.println(rp.getKeybyValue(key_value));
+                                break;
 
-                        case 5:
-                            System.out.println("Enter the value");
-                            int search_value = sc.nextInt();
+                            case 4:
+                                rp.display();
+                                break;
 
-                            System.out.println(rp.getValueofKey(search_value));
-                            break;
+                            case 5:
+                                System.out.println("Enter the key");
+                                int search_value = sc.nextInt();
 
-                        case 6:
-                            System.out.println(rp.collision);
-                            break;
+                                System.out.println(rp.getValueofKey(search_value));
+                                break;
 
-                        case 7:
-                            long t2 = System.currentTimeMillis();
-                            System.out.println("Time in milli seconds is " + (t2 - t1));
-                            break;
+                            case 6:
+                                System.out.println(rp.collision);
+                                break;
 
-                        case 8:
-                            flag = false;
-                            break;
+                            case 7:
+                                long t2 = System.currentTimeMillis();
+                                System.out.println("Time in milli seconds is " + (t2 - t1));
+                                break;
 
+                            case 8:
+                                flag = false;
+                                break;
+
+                        }
+
+                        if (flag == false) {
+                            System.out.println("Exiting program");
+                        }
+                    } catch (InputMismatchException ex) {
+                        System.out.println(ex.getMessage());
                     }
 
-                    if (flag == false) {
-                        System.out.println("Exiting program");
-                    }
-                } catch (InputMismatchException ex) {
-                    System.out.println(ex.getMessage());
                 }
-
             }
+        } catch (InputMismatchException ex) {
+            System.out.println("Please re-run the program and enter the correct value");
         }
     }
 

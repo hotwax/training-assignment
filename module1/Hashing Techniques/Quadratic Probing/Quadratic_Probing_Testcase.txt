@@ -8,34 +8,35 @@ Output : Kindly enter the correct option
 
 2.Inserting a value in hashmap
 
-Input : Enter the value to be inserted
-5
+Input : 
+Enter the key and value to be inserted
+1 1
 
 Output : Hashmap :
-5->5
+1->1
 
 
-3. if user enter duplicate value 
+3. if user enter duplicate key 
 
 Input : Enter the value to be inserted
-5
+1 6
 
 Output : Hashmap :
-5->5
+1->6
 
 
 4. Deletion in a hashmap 
 
-Input : Enter value to delete from the hashmap
-5
+Input : Enter key to delete from the hashmap
+1
 
 Output : Hashmap :
 
 
 
-5. If user entered invalid value during deletion 
+5. If user entered invalid key during deletion 
 
-Input : Enter value to delete from the hashmap
+Input : Enter key to delete from the hashmap
 56
 
 Output : Hashmap :

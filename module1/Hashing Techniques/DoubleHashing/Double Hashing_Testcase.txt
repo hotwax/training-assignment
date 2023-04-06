@@ -16,8 +16,9 @@ Output : null
 
 3. Inserting a value in a hashmap
 
-Input : Enter the value to be inserted
-40
+Input : 
+Enter the key and value to be inserted
+1 1
 
 Output : Hashmap : 
 0->40
@@ -25,7 +26,7 @@ Output : Hashmap :
 
 
 
-4. If user enter the duplicate value
+4. If user enter the duplicate key
 
 Input : Enter the value to be inserted
 45
@@ -39,7 +40,7 @@ Output : Hashmap :
 
 5. Deletion in a hashmap
 
-Input : Enter value to delete from the hashmap
+Input : Enter key to delete from the hashmap
 40
 
 Output : Hashmap : 
@@ -47,7 +48,7 @@ Output : Hashmap :
 
 
 
-6. If user enter invaild value during deletion
+6. If user enter invaild key during deletion
 
 Input : 100
 
