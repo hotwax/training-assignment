@@ -5,8 +5,6 @@ import java.util.Date;
 
 class Address implements Serializable {
 
-
-
     private String city;
     private String state;
     private Integer pinCode;
@@ -40,11 +38,10 @@ class Student implements Serializable {
 
 
 
-
     /* In the Student class, a serialVersionID can be added as a private static final long variable,
      which is used to identify the version of the class during serialization and deserialization. 
      Whenever a change is made to the class, this ID should be updated. By doing so we are able to deserialize both the version of ouptput
-     file output1.ser (serialized using String type of DOB) and output2.ser(serialized using Date type as objec) */
+     file output1.ser (serialized using String type of DOB) and output2.ser(serialized using data type Data) */
 
 
     private  static final long serialVersionUID = 1L;
