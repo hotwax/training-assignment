@@ -1,20 +1,18 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 
 
 public class Graph {
 
 
-    int adj[][];
+    int adjacencyMatrix[][];
     int n;
 
 
     Graph(int v)
     {
-        adj= new int[v][v];
+        adjacencyMatrix= new int[v][v];
         this.n= v;
     }
 
@@ -24,8 +22,8 @@ public class Graph {
         if (to>=n || from>=n || to<0 || from<0)
             System.out.println("Invalid vertices");
         else{
-        adj[to][from]= 1;
-        adj[from][to]= 1;}
+        adjacencyMatrix[to][from]= 1;
+        adjacencyMatrix[from][to]= 1;}
     }
 
 
@@ -35,13 +33,13 @@ public class Graph {
         if (to>=n || from>=n|| to<0 || from<0)
             System.out.println("Invalid vertices");
 
-        else if (adj[to][from]==0 || adj[from][to]==0)
+        else if (adjacencyMatrix[to][from]==0 || adjacencyMatrix[from][to]==0)
             System.out.println("Edge does not exist");
         else{
         
 
-        adj[to][from] = 0;
-        adj[from][to] = 0;}
+        adjacencyMatrix[to][from] = 0;
+        adjacencyMatrix[from][to] = 0;}
     }
 
     
@@ -52,7 +50,7 @@ public class Graph {
 
             for (int j=0;j<n;j++)
             {
-                System.out.print(adj[i][j]+ " ");
+                System.out.print(adjacencyMatrix[i][j]+ " ");
                 
 
             }
@@ -68,10 +66,10 @@ public class Graph {
         System.out.print(start + " ");
         visited[start]=true;
 
-        for (int i=0;i<adj[start].length;i++)
+        for (int i=0;i<adjacencyMatrix[start].length;i++)
         {
 
-            if (adj[start][i]==1 && !visited[i]){
+            if (adjacencyMatrix[start][i]==1 && !visited[i]){
                 dfs(i,visited);
             }
 
@@ -84,12 +82,14 @@ public class Graph {
     void bfs(int start)
     {
 
-        List<Integer> q= new ArrayList<>();
+        // List<Integer> q= new ArrayList<>();
+        Queue q= new Queue();
 
         boolean visited[]= new boolean [n];
         Arrays.fill(visited,false );
 
-        q.add(start);
+        // q.add(start);
+        q.enqueue(start);
 
         visited[start]=true;
 
@@ -97,17 +97,17 @@ public class Graph {
 
         while( !q.isEmpty())
         {
-            vis= q.get(0);
+            vis= q.peek();
 
             System.out.print(vis +" ");
 
-            q.remove(q.get(0));
+            q.dequeue();
 
             for(int i=0;i<n;i++){
 
-                if (adj[vis][i]==1 && !visited[i]){
+                if (adjacencyMatrix[vis][i]==1 && !visited[i]){
 
-                    q.add(i);
+                    q.enqueue(i);
                     visited[i]= true;
 
                 }

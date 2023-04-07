@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class LinkedList {
 
-    Node head;
+    Node head;  
     int len;
-    Node sorted;
+    Node sorted;  // head of sorted list
 
     class Node{
 
@@ -156,18 +156,18 @@ public class LinkedList {
 
     void sort()
     {
-        sorted= null;
+        sorted= null;   //set sorted list head as null
         Node current= head;
 
         while (current!= null )
         {
             Node next;
             next= current.next;
-            sortedInsert(current);
+            sortedInsert(current);   //insert current node in sorted list
             current= next;
         }
 
-        head= sorted;
+        head= sorted;   //assign sorted list as main list
     }
 
 

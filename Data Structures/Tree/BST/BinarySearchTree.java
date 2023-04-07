@@ -23,11 +23,12 @@ public class BinarySearchTree
     // Method to search for a given value in the BST
         void search(int data)
         {
-            searchRec(root,data);
+            searchNode(root,data);
         }
 
 
-        void searchRec(Node root,int key)
+        // Recursive Function to Search for a given value in the BST
+        void searchNode(Node root,int key)
         {
             if (root==null)
             {
@@ -42,12 +43,12 @@ public class BinarySearchTree
 
             else if (key<root.data)
             {
-                searchRec(root.left,key);
+                searchNode(root.left,key);
             }
 
             else if (key>root.data)
             {
-                searchRec(root.right,key);
+                searchNode(root.right,key);
             }
         }
 
@@ -55,11 +56,11 @@ public class BinarySearchTree
     // Method to update a given value in the BST
         void update(int data,int newdata)
         {
-            updateRec(root,data,newdata);
+            updateNode(root,data,newdata);
         }
 
-
-        void updateRec(Node root, int data, int newdata)
+    //Helper function to update a given value in the BST
+        void updateNode(Node root, int data, int newdata)
         {
             if (root==null)
             {
@@ -74,7 +75,7 @@ public class BinarySearchTree
     // Method to insert a new value in the BST
         void insert(int data)
         {
-            root= insertRec(root,data);
+            root= insertNode(root,data);
         }
 
 
@@ -84,7 +85,7 @@ public class BinarySearchTree
             boolean[] found = new boolean[1]; // using an array to pass found as reference
 
             found[0]= false;
-            root= deleteRec(root,data, found);
+            root= deleteNode(root,data, found);
 
             
 
@@ -103,7 +104,7 @@ public class BinarySearchTree
         }
 
 
-        Node deleteRec( Node root,int key,boolean [] found)
+        Node deleteNode( Node root,int key,boolean [] found)
         {
             if (root==null)
             {
@@ -113,12 +114,12 @@ public class BinarySearchTree
 
             if (key< root.data)
             {
-                root.left= deleteRec(root.left,key,found);
+                root.left= deleteNode(root.left,key,found);
             }
 
             else if (root.data <key)
             {
-                root.right= deleteRec(root.right,key,found);
+                root.right= deleteNode(root.right,key,found);
             }
 
             else
@@ -137,7 +138,7 @@ public class BinarySearchTree
                 else{
 
                     root.data = getInorderSuccessor( root.right);
-                    root.right= deleteRec(root.right,root.data,found);
+                    root.right= deleteNode(root.right,root.data,found);
 
                 }
 
@@ -172,23 +173,24 @@ public class BinarySearchTree
     // Method to perform inorder traversal of the BST
         void inOrder()
         {
-            inOrderRec(root);
+            inOrderTraversal(root);
         }
 
-        void inOrderRec(Node root)
+    // Recursive function to perform inorder traversal of the BST
+        void inOrderTraversal(Node root)
     
         {
             if (root!= null)
             {
-                inOrderRec(root.left);
+                inOrderTraversal(root.left);
                 System.out.print(root.data + " ");
-                inOrderRec(root.right);
+                inOrderTraversal(root.right);
 
             }
 
         }
 
-        Node insertRec(Node root,int key)
+        Node insertNode(Node root,int key)
         {
             if (root==null)
             {
@@ -198,14 +200,14 @@ public class BinarySearchTree
 
             else if (key<root.data)
             {
-                root.left= insertRec(root.left,key);
+                root.left= insertNode(root.left,key);
                 
             }
 
             else if (key>root.data)
             {
 
-                root.right= insertRec(root.right,key);
+                root.right= insertNode(root.right,key);
             }
 
             return root;
