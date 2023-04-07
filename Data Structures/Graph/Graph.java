@@ -7,19 +7,19 @@ public class Graph {
 
 
     int adjacencyMatrix[][];
-    int n;
+    int size;
 
 
     Graph(int v)
     {
         adjacencyMatrix= new int[v][v];
-        this.n= v;
+        this.size= v;
     }
 
     // Add edge between two vertices
     void addEdge(int to, int from)
     {  
-        if (to>=n || from>=n || to<0 || from<0)
+        if (to>=size|| from>=size || to<0 || from<0)
             System.out.println("Invalid vertices");
         else{
         adjacencyMatrix[to][from]= 1;
@@ -30,7 +30,7 @@ public class Graph {
     // Remove edge between two vertices
     void removeEdge(int to, int from) {
 
-        if (to>=n || from>=n|| to<0 || from<0)
+        if (to>=size || from>=size|| to<0 || from<0)
             System.out.println("Invalid vertices");
 
         else if (adjacencyMatrix[to][from]==0 || adjacencyMatrix[from][to]==0)
@@ -46,9 +46,9 @@ public class Graph {
     // Display adjacency matrix
     void display(){
 
-        for(int i=0;i<n;i++) {
+        for(int i=0;i<size;i++) {
 
-            for (int j=0;j<n;j++)
+            for (int j=0;j<size;j++)
             {
                 System.out.print(adjacencyMatrix[i][j]+ " ");
                 
@@ -85,7 +85,7 @@ public class Graph {
         // List<Integer> q= new ArrayList<>();
         Queue q= new Queue();
 
-        boolean visited[]= new boolean [n];
+        boolean visited[]= new boolean [size];
         Arrays.fill(visited,false );
 
         // q.add(start);
@@ -103,7 +103,7 @@ public class Graph {
 
             q.dequeue();
 
-            for(int i=0;i<n;i++){
+            for(int i=0;i<size;i++){
 
                 if (adjacencyMatrix[vis][i]==1 && !visited[i]){
 
