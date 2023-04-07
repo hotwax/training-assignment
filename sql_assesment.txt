@@ -28,6 +28,24 @@ show columns from salespeople;
 +-------+--------------+------+-----+---------+-------+
 
 
+-----------or-----------
+
+SELECT 
+  COLUMN_NAME 
+FROM 
+  INFORMATION_SCHEMA.COLUMNS 
+WHERE 
+  TABLE_NAME = 'salespeople';
+
++-------------+
+| COLUMN_NAME |
++-------------+
+| CITY        |
+| COMM        |
+| SNAME       |
+| SNUM        |
++-------------+
+
 
 2) List all customers with a rating of 100. 
 
