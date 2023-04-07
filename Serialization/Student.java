@@ -44,6 +44,12 @@ class Student implements Serializable {
      file output1.ser (serialized using String type of DOB) and output2.ser(serialized using data type Data) */
 
 
+    /*   Object type in dateOfBirth in the Student class is to allow for flexibility in the type of date format that can be used,
+    In Java, the Object class is a root class for all classes, meaning that every class in Java is either directly or indirectly
+      derived from the Object class. As a result, any data type in Java can be cast to an Object type. */
+
+    
+
     private  static final long serialVersionUID = 1L;
 
     private String firstName;

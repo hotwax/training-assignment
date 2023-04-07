@@ -80,8 +80,8 @@ class WebContent {
 
         // put data from sorted list to hashmap
         Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
-        for (Map.Entry<String, Integer> aa : lists) {
-            sortedMap.put(aa.getKey(), aa.getValue());
+        for (Map.Entry<String, Integer> entry : lists) {
+            sortedMap.put(entry.getKey(), entry.getValue());
         }
         return sortedMap;
     }
@@ -104,7 +104,7 @@ public class WordScraper {
             HashSet<String> urls = new HashSet<String>();
             Scanner Reader = new Scanner(new File(homeDir+ "\\urls.txt"));
 
-            while (Reader.hasNext()) {
+           while (Reader.hasNext()) {
                 urls.add(Reader.next());
             }
 
@@ -115,7 +115,9 @@ public class WordScraper {
 
             Reader = new Scanner(new File(homeDir+ "\\words.txt"));
             while (Reader.hasNext()) {
-                words.add(Reader.next());
+                String word = Reader.next().toLowerCase();
+                words.add(word);
+    
             }
 
 
