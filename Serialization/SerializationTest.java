@@ -23,6 +23,14 @@ public class SerializationTest {
         studentList.add(student3);
         studentList.add(student4);
 
+
+        if (!args[0].endsWith(".ser")) {
+            System.out.println("Error: The file must have a .ser extension.");
+            return;
+        }
+
+        else{
+
         try {
             FileOutputStream fileOutputStream1 = new FileOutputStream(args[0]);
             ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream1);
@@ -32,7 +40,7 @@ public class SerializationTest {
             fileOutputStream1.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }}
 
         
     }
