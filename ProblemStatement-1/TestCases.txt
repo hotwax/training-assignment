@@ -1,0 +1,75 @@
+Test case 1:
+
+ Input:
+  Words.txt
+   to the
+   the of 
+   HotWax
+   and
+
+  Urls.txt
+   https://www.hotwaxsystems.com/    
+   https://www.gammastack.com/ 
+
+ Output:
+   ==============================
+   https://www.hotwaxsystems.com/
+   and->21
+   the->20
+   to->19
+
+   https://www.gammastack.com/
+   and->34
+   to->26
+   the->12
+
+   ==========================================================
+   and->55
+   to->45
+   the->32
+   of->23
+   HotWax->9
+
+---------------------------------------------------------------------------------------------
+Test Case 2:(Words file or Urls file is not found in module)
+ 
+  Input:
+   Words.txt is not present
+
+   Urls.txt
+    https://www.hotwaxsystems.com/    
+    https://www.gammastack.com/ 
+
+  Output:
+   words file ie not found 
+
+----------------------------------------------------------------------------------------------    
+Test Case 3:(Urls file is Empty)
+
+ Input:
+  Words.txt
+   of the
+   to
+
+  Urls.txt
+
+ Output:
+  Urls.txt file is empty   
+
+----------------------------------------------------------------------------------------------
+Test Case 4:(url of Urls file is incorrect)
+
+ Input:
+  Words.txt 
+   of the
+   to
+   and
+
+  Urls.txt
+    https://www.hotwaxsys.com/
+ 
+ Output:
+  getaddrinfo ENOTFOUND www.hotwaxsys.com
+  incorrect url
+
+----------------------------------------------------------------------------------------------
