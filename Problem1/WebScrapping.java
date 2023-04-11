@@ -76,7 +76,7 @@ class Main {
 	try{
     BufferedReader br = new BufferedReader(new FileReader("url.txt"));
     String stringURL = br.readLine();
-    ArrayList < String > url = new ArrayList <> ();
+    HashSet < String > url = new HashSet <> ();
     while (stringURL != null) {
       try {
         url.add(stringURL);
@@ -90,7 +90,7 @@ class Main {
     //storing all words to an arraylist
     BufferedReader br1 = new BufferedReader(new FileReader("word.txt"));
     String stringWORD = br1.readLine();
-    ArrayList < String > words = new ArrayList < > ();
+    HashSet < String > words = new HashSet < > ();
     while (stringWORD != null) {
       try {
         words.add(stringWORD);
