@@ -1,0 +1,72 @@
+Test Case 1: (Account overdrawn)
+
+Input:
+totalBalance = 800
+Account Holders - Gourav, Yash, Kunal
+
+Output:
+
+Total balance is - 800
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is 700
+Transaction completed by Yash and transaction amount is - 100
+Remaining balance is 600
+Transaction completed by Kunal and transaction amount is - 100
+Remaining balance is 500
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is 400
+Transaction completed by Yash and transaction amount is - 100
+Remaining balance is 300
+Transaction completed by Kunal and transaction amount is - 100
+Remaining balance is 200
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is 100
+Transaction completed by Yash and transaction amount is - 100
+Remaining balance is 0
+Transaction completed by Yash and transaction amount is - 100
+Remaining balance is 0
+Transaction completed by Kunal and transaction amount is - 100
+Remaining balance is -100
+Transaction completed by Kunal and transaction amount is - 100
+Remaining balance is -100
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is -200
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is -200
+Total withdrawal amount of both persons is - 1000
+
+---------------------------------------------------------------------------------------------
+Test Case 2:(Account Safe from overdrawn)
+
+Input:
+totalBalance = 800
+Account Holders - Gourav, Yash, Kunal
+
+Output:
+
+Total balance is - 800
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is 700
+Transaction completed by Yash and transaction amount is - 100
+Remaining balance is 600
+Transaction completed by Kunal and transaction amount is - 100
+Remaining balance is 500
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is 400
+Transaction completed by Yash and transaction amount is - 100
+Remaining balance is 300
+Transaction completed by Kunal and transaction amount is - 100
+Remaining balance is 200
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is 100
+Transaction completed by Yash and transaction amount is - 100
+Remaining balance is 0
+Transaction completed by Kunal and transaction amount is - 100
+Remaining balance is 0
+Transaction completed by Gourav and transaction amount is - 100
+Remaining balance is 0
+Transaction completed by Yash and transaction amount is - 100
+Remaining balance is 0
+Total withdrawal amount of both persons is - 800
+
+-----------------------------------------------------------------------------------------------
