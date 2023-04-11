@@ -1,0 +1,3 @@
+https://leetcode.com/
+https://www.w3schools.com/git/git_intro.asp?remote=github
+https://github.com/hotwax/training-assignment/wiki/Module---2-Theory
