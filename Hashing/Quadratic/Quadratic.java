@@ -24,12 +24,11 @@ class Quadratic {
     return key.hashCode() % max;
   }
 
-  void insert(Integer key, Integer val) //insertion of an key value
+  void put(Integer key, Integer val) //pution of an key value
   {
     int tmp = hash(key);
     int index = tmp, height = 1;
     do {
-      if (keys[index] != null) collision++; //if that index is already filled then c++
       if (keys[index] == null) //if it is empty we will simply initialize it
       {
         keys[index] = key;
@@ -42,6 +41,7 @@ class Quadratic {
         value[index] = val;
         return;
       }
+      if (keys[index] != null) collision++; //if that index is already filled then c++
       index = (index + height * height++) % max;
     } while (index != tmp);
   }
@@ -111,7 +111,7 @@ class Main {
           value1 = sc.nextInt();
           System.out.println("Enter value ");
           value2 = sc.nextInt();
-          quad.insert(value1, value2);
+          quad.put(value1, value2);
           System.out.println("Done ");
           break;
 

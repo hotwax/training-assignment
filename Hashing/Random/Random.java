@@ -26,12 +26,11 @@ class RandomPro {
     return key.hashCode() % max;
   }
 
-  void insert(Integer key, Integer val) //insertion of an key value
+  void put(Integer key, Integer val) //pution of an key value
   {
     int tmp = hash(key);
     int index = tmp;
     do {
-      if (keys[index] != null) collision++; //if that index is already filled then c++
       if (keys[index] == null) //if it is empty we will simply initialize it
       {
         keys[index] = key;
@@ -44,6 +43,7 @@ class RandomPro {
         value[index] = val;
         return;
       }
+      if (keys[index] != null) collision++; //if that index is already filled then c++
       index = (index + (random_var * collision)) % max;
     } while (index != tmp);
   }
@@ -113,7 +113,7 @@ class Main {
           value1 = sc.nextInt();
           System.out.println("Enter value ");
           value2 = sc.nextInt();
-          rand.insert(value1, value2);
+          rand.put(value1, value2);
           System.out.println("Done ");
           break;
 

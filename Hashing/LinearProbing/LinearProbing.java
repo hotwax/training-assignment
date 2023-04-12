@@ -24,12 +24,11 @@ class LinearProbing {
     return key.hashCode() % max;
   }
 
-  void insert(Integer key, Integer val) // function to insert
+  void put(Integer key, Integer val) // function to put
   {
     int tmp = hash(key);
     int index = tmp;
     do {
-      if (keys[index] != null) collision++;
       if (keys[index] == null) {
         keys[index] = key;
         vals[index] = val;
@@ -40,6 +39,7 @@ class LinearProbing {
         vals[index] = val;
         return;
       }
+      if (keys[index] != null) collision++;
       index = (index + 1) % max;
     } while (index != tmp);
 
@@ -109,7 +109,7 @@ class Main {
           value1 = sc.nextInt();
           System.out.println("Enter value ");
           value2 = sc.nextInt();
-          linear.insert(value1, value2);
+          linear.put(value1, value2);
           System.out.println("Done ");
           break;
 

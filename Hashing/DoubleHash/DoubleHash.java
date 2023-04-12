@@ -61,22 +61,27 @@ class DoubleHash {
     return null;
   }
 
-  /* Method to insert a key value pair */
-  public void insert(int key, int value) {
-    if (size == table.length) {
-      System.out.println("Table full");
+  /* Method to put a key value pair */
+  public void put(int key, int value) {
+  if (size == table.length) {
+    System.out.println("Table full");
+    return;
+  }
+  int hash1 = myhash1(key);
+  int hash2 = myhash2(key);
+  while (table[hash1] != null) {
+    if (table[hash1].key.equals(key)) {
+      // Update value if key already exists
+      table[hash1].value = value;
       return;
     }
-    int hash1 = myhash1(key);
-    int hash2 = myhash2(key);
-    while (table[hash1] != null) {
-      collision++;
-      hash1 += hash2;
-      hash1 %= table.length;
-    }
-    table[hash1] = new Node(key, value);
-    size++;
+    collision++;
+    hash1 += hash2;
+    hash1 %= table.length;
   }
+  table[hash1] = new Node(key, value);
+  size++;
+}
 
   /* Method to remove a key */
   public void remove(int key) {
@@ -144,7 +149,7 @@ class Main {
           value1 = sc.nextInt();
           System.out.println("Enter value ");
           value2 = sc.nextInt();
-          c.insert(value1, value2);
+          c.put(value1, value2);
           System.out.println("Done ");
           break;
 

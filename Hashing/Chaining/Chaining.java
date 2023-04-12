@@ -14,7 +14,7 @@ class Node {
   }
 }
 
-class Chaining {
+public class Chaining {
   int collision = 0;
   private Node[] table;
   private int size;
@@ -36,18 +36,26 @@ class Chaining {
   }
 
   // Method to insert an element 
-  public void put(int key, int val) {
+    public void put(int key, int val) {
     size++;
     int pos = hash(key);
     Node nptr = new Node(key, val);
     if (table[pos] == null)
       table[pos] = nptr;
     else {
-      nptr.next = table[pos];
+	  if(key==table[pos].key)
+	  {  
+		table[pos].value=val;
+	  }
+	  else
+	  {
+	  nptr.next = table[pos];
       table[pos] = nptr;
-      collision++;
+	  collision++;
+	  }
     }
   }
+
 
   // Method to remove an element 
   public void remove(int val) {
@@ -94,7 +102,7 @@ class Chaining {
         System.out.print("{ Key = " + start.key + ", Value = " + start.value + "} ");
         start = start.next;
       }
-      System.out.println();
+	  System.out.println();
     }
   }
 
@@ -126,7 +134,7 @@ class Chaining {
 class Main {
   public static void main(String[] args) {
     int value1, value2;
-    Chaining chain = new Chaining(5);
+    Chaining chain = new Chaining(7);
     long time1 = System.currentTimeMillis();
     while (true) {
       System.out.println("===========================");
