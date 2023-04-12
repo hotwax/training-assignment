@@ -1,0 +1,139 @@
+Test case 1:(Serialize the Output1.ser)
+
+Input:
+Student Dob in string form
+
+Output:
+Students data before Serialization
+[
+  Student {
+    firstName: 'Gourav Rana',
+    dateOfBirth: '03/11/2002',
+    address: Address {
+      city: 'Indore',
+      state: 'Madhya Pradesh',
+      pinCode: '452010',
+      country: 'India'
+    }
+  },
+  Student {
+    firstName: 'Yash Singhal',
+    dateOfBirth: '02/17/2001',
+    address: Address {
+      city: 'Indore',
+      state: 'Madhya Pradesh',
+      pinCode: '452001',
+      country: 'India'
+    }
+  }
+]
+Serialize the Output1.ser
+
+---------------------------------------------------------------------------------------------------
+Test Case 2:(Deserialize the Output1.ser)
+
+Input:
+Output1.ser
+
+Output:
+Deserialize the Output1.ser file
+[
+  {
+    firstName: 'Gourav Rana',
+    dateOfBirth: '03/11/2002',
+    address: {
+      city: 'Indore',
+      state: 'Madhya Pradesh',
+      pinCode: '452010',
+      country: 'India'
+    }
+  },
+  {
+    firstName: 'Yash Singhal',
+    dateOfBirth: '02/17/2001',
+    address: {
+      city: 'Indore',
+      state: 'Madhya Pradesh',
+      pinCode: '452001',
+      country: 'India'
+    }
+  }
+]
+
+-------------------------------------------------------------------------------------------
+Test case 3:(Serialize the Output2.ser )
+
+Input:
+Student Dob in Date type;
+
+Output:
+Students data before Serialization
+[
+  Student {
+    firstName: 'Gourav Rana',
+    dateOfBirth: 2002-03-10T18:30:00.000Z,
+    address: Address {
+      city: 'Indore',
+      state: 'Madhya Pradesh',
+      pinCode: '452010',
+      country: 'India'
+    }
+  },
+  Student {
+    firstName: 'Yash Singhal',
+    dateOfBirth: 2001-02-16T18:30:00.000Z,
+    address: Address {
+      city: 'Indore',
+      state: 'Madhya Pradesh',
+      pinCode: '452001',
+      country: 'India'
+    }
+  }
+]
+Serialize the Output2.ser
+
+---------------------------------------------------------------------------------------------
+Test Case 4:(Deserialze the Output2.ser)
+
+Input:
+Output2.ser
+
+Output:
+Deserialize the Output2.ser file
+[
+  {
+    firstName: 'Gourav Rana',
+    dateOfBirth: '2002-03-10T18:30:00.000Z',
+    address: {
+      city: 'Indore',
+      state: 'Madhya Pradesh',
+      pinCode: '452010',
+      country: 'India'
+    }
+  },
+  {
+    firstName: 'Yash Singhal',
+    dateOfBirth: '2001-02-16T18:30:00.000Z',
+    address: {
+      city: 'Indore',
+      state: 'Madhya Pradesh',
+      pinCode: '452001',
+      country: 'India'
+    }
+  }
+]
+
+--------------------------------------------------------------------------------------------
+Test Case 5:(Deserialize the Output3.ser)
+
+Input:
+Output3.ser
+
+Output:
+ENOENT: no such file or directory, open 'Output3.ser'
+
+
+
+
+
+

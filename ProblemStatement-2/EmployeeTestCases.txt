@@ -1,0 +1,293 @@
+Test Case 1:(Add the employee in employeeData.txt file)
+
+Input:  
+
+Menu Options
+1.Add Employee
+2.Delete Employee By Id
+3.Show All Employee
+4. Search and Sort Employee By Text
+5.Exit
+
+enter choice 1
+Enter the Employee id(only digits) -> 101
+Enter the Employee name -> Gourav
+Enter the Employee email -> G@gmail.com
+Enter the Employee age -> 21
+Enter the Employee Dob(MM/DD/YYYY) -> 03/11/2002
+
+enter choice 1
+Enter the Employee id(only digits) -> 105
+Enter the Employee name -> Yash
+Enter the Employee email -> ys@gmail.com
+Enter the Employee age -> 22
+Enter the Employee Dob(MM/DD/YYYY) -> 02/17/2001
+
+enter choice 1
+Enter the Employee id(only digits) -> 103
+Enter the Employee name -> Niharika
+Enter the Employee email -> ni@gmail.com
+Enter the Employee age -> 21
+Enter the Employee Dob(MM/DD/YYYY) -> 09/04/2001
+
+enter choice 1
+Enter the Employee id(only digits) -> 101
+Enter the Employee name -> Vishudhi
+Enter the Employee email -> v@gmail.com
+Enter the Employee age -> 21
+Enter the Employee Dob(MM/DD/YYYY) -> 09/23/2001
+
+enter choice 1
+Enter the Employee id(only digits) -> 102
+Enter the Employee name -> Vishudhi
+Enter the Employee email -> v@gmail.com
+Enter the Employee age -> 21
+Enter the Employee Dob(MM/DD/YYYY) -> 09/23/2001
+
+enter choice 1
+Enter the Employee id(only digits) -> 107
+Enter the Employee name -> ds
+Enter the Employee email -> v@gmail.com
+Enter the Employee age -> 20
+Enter the Employee Dob(MM/DD/YYYY) -> 11/03/2000
+
+
+Output:
+Employee Data is added
+Employee Data is added
+Employee Data is added
+employee Id is already present
+Employee Data is added
+Employee Email is already present
+
+----------------------------------------------------------------------------------------------
+Test case 2: (Show the all employee Data)
+
+Input:
+
+Menu Options
+1.Add Employee
+2.Delete Employee By Id
+3.Show All Employee
+4. Search and Sort Employee By Text
+5.Exit
+
+enter choice 3
+
+Output:
+
+┌─────────┬────────────┬──────────────┬─────────────┬────────────────┬──────────────┐
+│ (index) │ employeeId │ employeeName │ employeeAge │ employeeEmail  │ employeeDob  │
+├─────────┼────────────┼──────────────┼─────────────┼────────────────┼──────────────┤
+│    0    │    101     │   'Gourav'   │     21      │ 'G@gmail.com'  │ '03/11/2002' │
+│    1    │    105     │    'Yash'    │     22      │ 'ys@gmail.com' │ '02/17/2001' │
+│    2    │    103     │  'Niharika'  │     21      │ 'ni@gmail.com' │ '09/04/2001' │
+│    3    │    102     │  'Vishudhi'  │     21      │ 'v@gmail.com'  │ '09/23/2001' │
+└─────────┴────────────┴──────────────┴─────────────┴────────────────┴──────────────┘
+
+----------------------------------------------------------------------------------------------
+Test Case 3: (Search Employee by text and sort them in Descending order by EmployeeId)
+
+Input:
+
+Menu Options
+1.Add Employee
+2.Delete Employee By Id
+3.Show All Employee
+4. Search and Sort Employee By Text
+5.Exit
+
+enter choice 4
+Enter the text which you want search -> gmai
+
+Enter any parameter (1, 2, 3, 4) for sorting 
+1.Sort By Employee Id
+2.Sort By Employee Name
+3.Sort By Employee Age
+4.Sort By Employee DOB
+Enter the Parameter 1
+
+Enter any Order (1, 2) for sorting
+1.Ascending Order
+2.Descending Order
+Enter the Order 2
+
+Output:
+
+┌─────────┬────────────┬──────────────┬─────────────┬────────────────┬──────────────┐
+│ (index) │ employeeId │ employeeName │ employeeAge │ employeeEmail  │ employeeDob  │
+├─────────┼────────────┼──────────────┼─────────────┼────────────────┼──────────────┤
+│    0    │    105     │    'Yash'    │     22      │ 'ys@gmail.com' │ '02/17/2001' │
+│    1    │    103     │  'Niharika'  │     21      │ 'ni@gmail.com' │ '09/04/2001' │
+│    2    │    102     │  'Vishudhi'  │     21      │ 'v@gmail.com'  │ '09/23/2001' │
+│    3    │    101     │   'Gourav'   │     21      │ 'G@gmail.com'  │ '03/11/2002' │
+└─────────┴────────────┴──────────────┴─────────────┴────────────────┴──────────────┘
+
+---------------------------------------------------------------------------------------------
+Test Case 4: (Search Employee by text and Sort them in Ascending order by EmployeeDob)
+
+Input:
+
+Menu Options
+1.Add Employee
+2.Delete Employee By Id
+3.Show All Employee
+4. Search and Sort Employee By Text
+5.Exit
+
+enter choice 4
+Enter the text which you want search -> 09
+
+Enter any parameter (1, 2, 3, 4) for sorting 
+1.Sort By Employee Id
+2.Sort By Employee Name
+3.Sort By Employee Age
+4.Sort By Employee DOB
+Enter the Parameter 4
+
+Enter any Order (1, 2) for sorting
+1.Ascending Order
+2.Descending Order
+Enter the Order 1
+
+┌─────────┬────────────┬──────────────┬─────────────┬────────────────┬──────────────┐
+│ (index) │ employeeId │ employeeName │ employeeAge │ employeeEmail  │ employeeDob  │
+├─────────┼────────────┼──────────────┼─────────────┼────────────────┼──────────────┤
+│    0    │    103     │  'Niharika'  │     21      │ 'ni@gmail.com' │ '09/04/2001' │
+│    1    │    102     │  'Vishudhi'  │     21      │ 'v@gmail.com'  │ '09/23/2001' │
+└─────────┴────────────┴──────────────┴─────────────┴────────────────┴──────────────┘
+
+----------------------------------------------------------------------------------------------
+Test Case 5: (Delete the employee by Id from employeeData.txt)
+
+Input:
+
+Menu Options
+1.Add Employee
+2.Delete Employee By Id
+3.Show All Employee
+4. Search and Sort Employee By Text
+5.Exit
+
+enter choice 2
+Enter the employee id -> 109
+
+enter choice 2
+Enter the employee id ->a
+Enter the Employee id(only digits) -> 101
+
+enter choice 3
+
+Output:
+
+employee Id is not present
+enter valid employee id
+employee data is deleted
+┌─────────┬────────────┬──────────────┬─────────────┬────────────────┬──────────────┐
+│ (index) │ employeeId │ employeeName │ employeeAge │ employeeEmail  │ employeeDob  │
+├─────────┼────────────┼──────────────┼─────────────┼────────────────┼──────────────┤
+│    0    │    105     │    'Yash'    │     22      │ 'ys@gmail.com' │ '02/17/2001' │
+│    1    │    103     │  'Niharika'  │     21      │ 'ni@gmail.com' │ '09/04/2001' │
+│    2    │    102     │  'Vishudhi'  │     21      │ 'v@gmail.com'  │ '09/23/2001' │
+└─────────┴────────────┴──────────────┴─────────────┴────────────────┴──────────────┘
+
+----------------------------------------------------------------------------------------------
+Test Case 6:(Employee Email is valid or not)
+
+Input:
+
+Menu Options
+1.Add Employee
+2.Delete Employee By Id
+3.Show All Employee
+4. Search and Sort Employee By Text
+5.Exit
+
+
+enter choice 1
+Enter the Employee email -> fgds
+output: -> enter valid employee email
+
+Enter the Employee email ->
+output: - enter valid employee email
+
+Enter the Employee email -> 1213sddf
+output: - enter valid employee email
+
+Enter the Employee email -> gr@gmail
+output: - enter valid employee email
+
+Enter the Employee email -> gr@@gmail.com
+output: - enter valid employee email
+
+Enter the Employee email -> gr@gmail.com
+output: - valid Email
+
+----------------------------------------------------------------------------------------------
+Test Case 7:(check the Employee Age is valid or not)
+
+Input:
+
+Menu Options
+1.Add Employee
+2.Delete Employee By Id
+3.Show All Employee
+4. Search and Sort Employee By Text
+5.Exit
+
+
+enter choice 1
+Enter the Employee id(only digits) -> 108
+Enter the Employee name -> Harish
+Enter the Employee email -> f@gmail.com
+Enter the Employee age -> as
+output: - enter valid employee age
+
+Enter the Employee age ->
+output: - enter valid employee age
+
+Enter the Employee age -> 102
+output: - enter valid employee age(18 < Age < 100)
+
+Enter the Employee age -> 20
+output: - Valid Age
+
+----------------------------------------------------------------------------------------------
+Test Case 8:(check valid employee Dob)
+
+Input:
+
+Menu Options
+1.Add Employee
+2.Delete Employee By Id
+3.Show All Employee
+4. Search and Sort Employee By Text
+5.Exit
+
+
+enter choice 1
+Enter the Employee id(only digits) -> 123
+Enter the Employee name -> Harish
+Enter the Employee email -> h@gmail.com
+Enter the Employee age -> 23
+
+Enter the Employee Dob(MM/DD/YYYY) -> 14/09/2000
+output: - enter valid employee Dob(MM/DD/YYYY)
+
+Enter the Employee Dob(MM/DD/YYYY) -> 
+output: - enter valid employee Dob(MM/DD/YYYY)
+
+Enter the Employee Dob(MM/DD/YYYY) -> 12/34/2000
+output: - enter valid employee Dob(MM/DD/YYYY)
+
+Enter the Employee Dob(MM/DD/YYYY) -> 12/21/2023
+output: - enter valid employee Dob(MM/DD/YYYY
+
+Enter the Employee Dob(MM/DD/YYYY) -> 12/21/2005
+output: - Valid Dob
+
+
+Output:
+Employee Data is added
+
+-----------------------------------------------------------------------------------------------
