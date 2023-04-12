@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class DeserializationTest {
 
     public static void main(String[] args) {
-        ArrayList<Student> studentdata = new ArrayList();
+        ArrayList<Student> studentdata = new ArrayList<>();
         String dir = System.getProperty("user.dir");
 
         try {
             // getting serialized file in current directory
-            FileInputStream inFile = new FileInputStream(dir + "/" + "Output1.ser");
+            FileInputStream inFile = new FileInputStream(dir + "/" + "Output2.ser");
             // Creating a ObjectInputStream to get Objects
             ObjectInputStream inObject = new ObjectInputStream(inFile);
             // storing object list to students
@@ -19,10 +19,12 @@ public class DeserializationTest {
             inFile.close();
             // closing objectInputStream
             inObject.close();
-        } catch (Exception e) {
+        } catch (ClassCastException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+
         } finally {
-            studentdata.forEach(student -> System.out.println(student.tostring()));
+            studentdata.forEach(student -> System.out.println(student.toString()));
         }
 
     }

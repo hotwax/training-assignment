@@ -1,4 +1,3 @@
-
 // Account Class
 class Account {
 
@@ -15,7 +14,7 @@ class Account {
 
     // withdraw method to withdraw money from the account
 
-    public void withdraw(float amount, String person) {
+    public void withDraw(float amount, String person) {
         // thread sleep for a moment so that new thread start running
         try {
             Thread.sleep(100);
@@ -41,19 +40,19 @@ public class AccountOverdrawDemo extends Thread {
     // account of person
     Account account;
     // account holder name
-    String accountholder;
+    String accountHolder;
 
     // Constructor
-    public AccountOverdrawDemo(Account account, String accountholder) {
+    public AccountOverdrawDemo(Account account, String accountHolder) {
         this.account = account;
-        this.accountholder = accountholder;
+        this.accountHolder = accountHolder;
     }
 
     // run method run automatically then new thread is created and call the withdraw
     // method to withdraw the money
     public void run() {
         for (int i = 0; i < 10; i++) {
-            account.withdraw(100, accountholder);
+            account.withDraw(100, accountHolder);
         }
     }
 
@@ -65,7 +64,7 @@ public class AccountOverdrawDemo extends Thread {
         // creating two threads
         AccountOverdrawDemo acc1 = new AccountOverdrawDemo(acc, "Pushpraj");
         AccountOverdrawDemo acc2 = new AccountOverdrawDemo(acc, "Lakshyaraj");
-
+        // Start the thread
         acc1.start();
         acc2.start();
 

@@ -1,24 +1,33 @@
+
+// Importing the required package
 import java.util.Date;
 
+// Defining a public class called Student which implements the java.io.Serializable interface
 public class Student implements java.io.Serializable {
-    /**
-     * 
-     */
+
+    // Declaring a static final variable serialVersionUID
     private static final long serialVersionUID = 1L;
-    public String firstname;
-    // public Object dateofbirth;
-    public String dateofbirth;
+
+    // Declaring instance variables
+    public String firstName;
+    public Object dateofBirth;
+    // public String dateofbirth;
+    // public Date dateofbirth;
     Address address;
 
-    public Student(String firstname, String dateofbirth, Address address) {
-        this.firstname = firstname;
+    // Defining a constructor
+    public Student(String firstname, String dateOfBirth, Address address) {
+        // Initializing instance variables
+        this.firstName = firstname;
         // this.dateofbirth = new Date(dateofbirth);
-        this.dateofbirth = dateofbirth;
+        this.dateofBirth = dateOfBirth;
         this.address = address;
     }
 
-    public String tostring() {
-        return firstname + " " + dateofbirth + " " + address.tostring();
+    // Overriding the toString() method to return the string representation of the
+    // Student object
+    public String toString() {
+        return firstName + " " + dateofBirth + " " + address.toString();
     }
 
 }

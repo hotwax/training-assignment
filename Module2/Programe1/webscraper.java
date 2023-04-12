@@ -17,14 +17,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 //Defining a public class named "websraper"
-public class test {
+public class WebScraping {
     // Defining a static function named "printword" with three parameters and an
     // exception so that we can find the top 3 words in a particular url
-    static void printword(String st, Map<String, Integer> wordmap, Map<String, Integer> wordmaplocal) throws Exception {
+    static void printWord(String url, Map<String, Integer> wordMap, Map<String, Integer> wordMapLocal)
+            throws Exception {
         // Initializing "doc" variable with null
         Document doc = null;
         // Parsing the URL and getting the HTML content of the page
-        doc = Jsoup.connect(st).get();
+        doc = Jsoup.connect(url).get();
         String text = doc.body().text();
 
         // Splitting the HTML content into an array of words
@@ -33,18 +34,18 @@ public class test {
         // Looping through the array of words
         for (int i = 0; i < a.length; i++) {
             // // If the word is present in the main map, increase its count by 1
-            if (wordmap.get(a[i]) != null) {
+            if (wordMap.get(a[i]) != null) {
 
-                int temp = wordmap.get(a[i]) + 1;
+                int temp = wordMap.get(a[i]) + 1;
 
-                wordmap.replace(a[i], temp);
+                wordMap.replace(a[i], temp);
                 // If the word is present in the local map, increase its count by 1
-                if (wordmaplocal.get(a[i]) != null) {
-                    int localtemp = wordmaplocal.get(a[i]) + 1;
-                    wordmaplocal.replace(a[i], localtemp);
+                if (wordMapLocal.get(a[i]) != null) {
+                    int localtemp = wordMapLocal.get(a[i]) + 1;
+                    wordMapLocal.replace(a[i], localtemp);
 
                 } else {
-                    wordmaplocal.put(a[i], 1);
+                    wordMapLocal.put(a[i], 1);
                 }
             }
 
@@ -53,24 +54,24 @@ public class test {
         // printing the empty line
         System.out.println();
         // Sorting the local map by value in descending order
-        wordmaplocal = sortByValue(wordmaplocal);
+        wordMapLocal = sortByValue(wordMapLocal);
         // Printing the top 3 words from the local map
-        System.out.println("Top 3 words are on website url : " + st + " are -");
-        int valueprint = 3;
+        System.out.println("Top 3 words are on website url : " + url + " are -");
+        int valuePrint = 3;
 
-        for (Map.Entry<String, Integer> entry : wordmaplocal.entrySet()) {
+        for (Map.Entry<String, Integer> entry : wordMapLocal.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
-            valueprint--;
-            if (valueprint == 0) {
+            valuePrint--;
+            if (valuePrint == 0) {
                 break;
             }
         }
         // If there are less than 3 words in the local map, print 0 for the remaining
         // positions
-        if (valueprint != 0) {
-            while (valueprint > 0) {
+        if (valuePrint != 0) {
+            while (valuePrint > 0) {
                 System.out.println(0);
-                valueprint--;
+                valuePrint--;
             }
         }
 
@@ -107,36 +108,36 @@ public class test {
         File words = new File(dir + "/src/words.txt");
 
         // Create a TreeMap to store the word count for each word in words.txt
-        Map<String, Integer> wordmap = new TreeMap<>();
-        int numberofword = 0;
+        Map<String, Integer> wordMap = new TreeMap<>();
+        int numberOfWord = 0;
 
         // Read words.txt file and store the word count in wordmap
 
-        BufferedReader brword;
+        BufferedReader brWord;
         try {
 
-            brword = new BufferedReader(new FileReader(words));
+            brWord = new BufferedReader(new FileReader(words));
 
-            String wordsextract;
+            String wordsExtract;
 
             // Loop through each line of words.txt and store the word count in wordmap
-            while ((wordsextract = brword.readLine()) != null) {
+            while ((wordsExtract = brWord.readLine()) != null) {
                 // Store the word count for each word in wordmap
-                wordmap.put(wordsextract, 0);
-                numberofword++;
+                wordMap.put(wordsExtract, 0);
+                numberOfWord++;
             }
 
-            BufferedReader br;
-            br = new BufferedReader(new FileReader(urls));
+            BufferedReader brUrl;
+            brUrl = new BufferedReader(new FileReader(urls));
 
-            String st;
+            String url;
             // Loop through each line of urls.txt
-            while ((st = br.readLine()) != null) {
+            while ((url = brUrl.readLine()) != null) {
                 // Create a TreeMap to store the word count for each word in the current URL
-                Map<String, Integer> wordmaplocal = new TreeMap<>();
+                Map<String, Integer> wordMapLocal = new TreeMap<>();
                 // Print the word count for each word in the current URL
                 try {
-                    printword(st, wordmap, wordmaplocal);
+                    printWord(url, wordMap, wordMapLocal);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     System.out.println("Somethings went wrong in print the words");
@@ -144,18 +145,18 @@ public class test {
             }
 
             // Sort wordmap by value and print the top 3 words
-            wordmap = sortByValue(wordmap);
+            wordMap = sortByValue(wordMap);
             // Print the top 3 words in wordmap
             System.out.println();
             System.out.println("Total top 3 words are :");
 
-            int decreasevalue = 3;
-            for (Map.Entry<String, Integer> entry : wordmap.entrySet()) {
+            int decreaseValue = 3;
+            for (Map.Entry<String, Integer> entry : wordMap.entrySet()) {
                 System.out.println(entry.getKey() + " -> " + entry.getValue());
-                decreasevalue--;
+                decreaseValue--;
 
                 // Break out of the loop after printing the top 3 words
-                if (decreasevalue == 0) {
+                if (decreaseValue == 0) {
                     break;
                 }
 

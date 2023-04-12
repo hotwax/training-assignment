@@ -3,7 +3,7 @@ class AccountSafe {
 
     // name of the customer
     public String name;
-    // starting Bank Balance
+    // starting Bank Balance with 1000
     public float balance = 1000;
 
     // Constructor
@@ -14,7 +14,7 @@ class AccountSafe {
 
     // withdraw method to withdraw money from the account
 
-    synchronized public void withdraw(float amount, String person) {
+    synchronized public void withDraw(float amount, String person) {
         // thread sleep for a moment so that new thread start running
         try {
             Thread.sleep(100);
@@ -37,12 +37,12 @@ public class AccountOverdrawSafeDemo extends Thread {
     // account of person
     AccountSafe account;
     // account holder name
-    String accountholder;
+    String accountHolder;
 
     // Constructor
-    public AccountOverdrawSafeDemo(AccountSafe acc, String accountholder) {
+    public AccountOverdrawSafeDemo(AccountSafe acc, String accountHolder) {
         this.account = acc;
-        this.accountholder = accountholder;
+        this.accountHolder = accountHolder;
     }
 
     // run method run automatically then new thread is created and call the withdraw
@@ -50,8 +50,8 @@ public class AccountOverdrawSafeDemo extends Thread {
     public void run() {
         for (int i = 0; i < 6; i++) {
             synchronized (account) {
-                // Withdrawing 200 from the account
-                account.withdraw(100, accountholder);
+                // Withdrawing 100 from the account
+                account.withDraw(100, accountHolder);
             }
         }
     }
