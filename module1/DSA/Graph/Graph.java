@@ -16,13 +16,13 @@ public class Graph {
     }
 
     // method to add edge in a graph
-    void addedge(int source, int destination) {
+    void addEdge(int source, int destination) {
         matrix[source][destination] = 1;
         matrix[destination][source] = 1;
     }
 
     // method to print graph matrix
-    void printgraphmaxtrix() {
+    void printGraphMaxtrix() {
         for (int i = 0; i < vertices; i++) {
             for (int j = 0; j < vertices; j++) {
                 System.out.print(matrix[i][j] + " ");
@@ -37,17 +37,17 @@ public class Graph {
             boolean visit[] = new boolean[vertices];
             Arrays.fill(visit, false);
             // List<Integer> q = new ArrayList<Integer>();
-            queue q = new queue(vertices + 1);
-            q.enqueue(start);
+            Queue q = new Queue(vertices + 1);
+            q.enQueue(start);
             visit[start] = true;
             int queue_val;
             while (!q.empty()) {
                 queue_val = q.peak();
-                q.dequeue();
+                q.deQueue();
                 System.out.print(queue_val + " ");
                 for (int i = 0; i < vertices; i++) {
                     if (matrix[queue_val][i] == 1 && visit[i] == false) {
-                        q.enqueue(i);
+                        q.enQueue(i);
                         visit[i] = true;
                     }
                 }
@@ -63,18 +63,18 @@ public class Graph {
     void dfs(int start) {
         boolean visit[] = new boolean[vertices];
         Arrays.fill(visit, false);
-        dfs_helper(start, visit);
+        dfsHelper(start, visit);
 
     }
 
     // method to recursively visit to each node and mark it as visit
-    void dfs_helper(int start, boolean visit[]) {
+    void dfsHelper(int start, boolean visit[]) {
         try {
             System.out.print(start + " ");
             visit[start] = true;
             for (int i = 0; i < matrix[start].length; i++) {
                 if (matrix[start][i] == 1 && visit[i] == false) {
-                    dfs_helper(i, visit);
+                    dfsHelper(i, visit);
                 }
             }
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class Graph {
     }
 
     // to delete the edge in a graph
-    void delete_edge(int position_1, int position_2) {
+    void deleteEdge(int position_1, int position_2) {
         try {
             matrix[position_1][position_2] = 0;
             matrix[position_2][position_1] = 0;
@@ -132,7 +132,7 @@ public class Graph {
                                 System.out.println("Enter the destination vertex");
                                 int b = sc.nextInt();
 
-                                gp.addedge(a, b);
+                                gp.addEdge(a, b);
 
                             }
 
@@ -158,7 +158,7 @@ public class Graph {
                             System.out.println("Enter the two nodes which you want to delete the edge between");
                             int node_1 = sc.nextInt();
                             int node_2 = sc.nextInt();
-                            gp.delete_edge(node_1, node_2);
+                            gp.deleteEdge(node_1, node_2);
                             System.out.println("Node edge deleted");
                             break;
 

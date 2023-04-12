@@ -1,16 +1,18 @@
+package com.java.demo;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // The AVL class contains an inner class node, which represents a node in the AVL tree. Each node has a data value, left and right child nodes, and a height field used to balance the tree.
 public class AVL {
 
-    class node {
+    class Node {
         int data;
-        node left;
-        node right;
+        Node left;
+        Node right;
         int height;
 
-        node(int val) {
+        Node(int val) {
             this.data = val;
             this.left = null;
             this.right = null;
@@ -19,7 +21,7 @@ public class AVL {
     }
 
     @SuppressWarnings("unused")
-    private node root;
+    private Node root;
 
     AVL() {
         root = null;
@@ -33,7 +35,7 @@ public class AVL {
 
     // to calculate height of a node
     @SuppressWarnings("unused")
-    private int height(node n) {
+    private int height(Node n) {
         if (n == null) {
             return 0;
         }
@@ -42,9 +44,9 @@ public class AVL {
 
     // The rightRotate methods are used to balance the tree by performing rotations
     // on nodes.
-    private node rightRotate(node y) {
-        node x = y.left;
-        node z = x.right;
+    private Node rightRotate(Node y) {
+        Node x = y.left;
+        Node z = x.right;
 
         x.right = y;
         y.left = z;
@@ -57,9 +59,9 @@ public class AVL {
 
     // The leftRotate methods are used to balance the tree by performing rotations
     // on nodes.
-    private node leftRotate(node x) {
-        node y = x.right;
-        node z = y.left;
+    private Node leftRotate(Node x) {
+        Node y = x.right;
+        Node z = y.left;
 
         y.left = x;
         x.right = z;
@@ -71,7 +73,7 @@ public class AVL {
     }
 
     // The getBalance method is used to calculate the balance factor of a node.
-    int getBalance(node n) {
+    int getBalance(Node n) {
         if (n == null)
             return 0;
         return height(n.left) - height(n.right);
@@ -93,9 +95,9 @@ public class AVL {
     }
 
     // insertionRecursively method to insert the data recursively
-    private node insertionRecursively(node n, int data) {
+    private Node insertionRecursively(Node n, int data) {
         if (n == null) {
-            node newnode = new node(data);
+            Node newnode = new Node(data);
             n = newnode;
             return n;
 
@@ -141,7 +143,7 @@ public class AVL {
     }
 
     // inorderRecursively method to display or traverse a data recursively
-    private void inorderRecursively(node n) {
+    private void inorderRecursively(Node n) {
         if (n == null)
             return;
 
@@ -187,7 +189,7 @@ public class AVL {
 
     // This function deletes the node with the given key from the AVL tree rooted at
     // n
-    private node deleteValue(node n, int key) {
+    private Node deleteValue(Node n, int key) {
         if (n == null) {
             return n;
         }
@@ -199,7 +201,7 @@ public class AVL {
             } else if (n.left == null && n.right != null) {
                 return n.right;
             } else if (n.left != null && n.right != null) {
-                node newnode = n.right;
+                Node newnode = n.right;
                 while (newnode.left != null) {
                     newnode = newnode.left;
                 }
@@ -231,7 +233,7 @@ public class AVL {
     }
 
     // Search_Recursively to search the key recursively
-    Boolean Search_Recursively(node n, int key) {
+    Boolean Search_Recursively(Node n, int key) {
         if (n == null)
             return false;
         if (n.data == key) {
@@ -258,7 +260,7 @@ public class AVL {
             System.out.println();
             Scanner sc = new Scanner(System.in);
 
-            {
+            { // Menu driven
                 try {
                     int ch = sc.nextInt();
                     if (ch < 1 || ch > 6) {

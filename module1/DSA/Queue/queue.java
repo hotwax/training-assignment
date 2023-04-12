@@ -3,7 +3,7 @@ package com.java.demo;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class queue {
+public class Queue {
     // creating data member like arr to store the data , back data member to store
     // the back index of queue and front to store the front index
     int arr[];
@@ -12,7 +12,7 @@ public class queue {
     int capacity;
 
     // constructor to Initialize Stack of size size
-    public queue(int size) {
+    public Queue(int size) {
         arr = new int[size];
         back = -1;
         front = -1;
@@ -20,7 +20,7 @@ public class queue {
     }
 
     // creating a enqueue method to insert the data into the queue
-    void enqueue(int x) {
+    void enQueue(int x) {
         // checking if the queue is overflow
         if (back == capacity - 1) {
             System.out.println("Overflow");
@@ -47,7 +47,7 @@ public class queue {
     }
 
     // creating dequeue method to delete the element from the queue
-    void dequeue() {
+    void deQueue() {
         // checking if the queue is empty
         if (front == -1 || back < front) {
             System.out.println("No element in a Queue");
@@ -73,7 +73,7 @@ public class queue {
 
     public static void main(String[] args) {
         // creating q named object of queue class
-        queue q = new queue(10);
+        Queue q = new Queue(10);
 
         boolean flag = true;
         // running the while loop till flag is false
@@ -96,12 +96,12 @@ public class queue {
                         case 1:
                             System.out.println("Enter the value to be inserted");
                             int input_value = sc.nextInt();
-                            q.enqueue(input_value);
+                            q.enQueue(input_value);
                             q.print();
                             break;
 
                         case 2:
-                            q.dequeue();
+                            q.deQueue();
                             q.print();
                             break;
 

@@ -5,24 +5,24 @@ import java.util.Scanner;
 
 public class LinearProbing {
 
-    node arr[]; // array to hold the hash map
+    Node arr[]; // array to hold the hash map
     int size; // size of the hash table
     int collision = 0; // variable to keep track of the number of collisions occurred during insertion
     int noOfDataPresent = 0;
 
     // constructor
     LinearProbing(int size) {
-        arr = new node[size];
+        arr = new Node[size];
         this.size = size;
 
     }
 
     // creating node class to store key and value
-    static class node {
+    static class Node {
         int key;
         int value;
 
-        public node(int key, int value) {
+        public Node(int key, int value) {
             this.key = key;
             this.value = value;
         }
@@ -35,7 +35,7 @@ public class LinearProbing {
 
     // method to insert a value in the hash table
     void insert(int key, int value) {
-        node to_insert_value = new node(key, value);
+        Node to_insert_value = new Node(key, value);
         int hash = hashCode(key);
         if (arr.length <= noOfDataPresent) // if hashmap is full
         {

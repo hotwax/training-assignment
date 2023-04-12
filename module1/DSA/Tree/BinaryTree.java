@@ -6,16 +6,16 @@ import java.util.Scanner;
 public class BinaryTree {
 
 	// Initializing the root of the tree
-	node root;
+	Node root;
 
 	// creating the node class to store all the information of tree node
-	class node {
+	class Node {
 		int data;
-		node left;
-		node right;
+		Node left;
+		Node right;
 
 		// constructor to Initialize new node of a tree
-		public node(int value) {
+		public Node(int value) {
 			data = value;
 			left = null;
 			right = null;
@@ -27,26 +27,26 @@ public class BinaryTree {
 	void insert(int value) {
 		// passing value insertrec method and storing the data in root, we also pass
 		// root along with value
-		root = insertrec(root, value);
+		root = insertRecursively(root, value);
 	}
 
 	// creating the insertrec method to recursively insert data to it's correct
 	// position
-	node insertrec(node root, int value) {
+	Node insertRecursively(Node root, int value) {
 		// if root is node return new node
 		if (root == null) {
-			root = new node(value);
+			root = new Node(value);
 			return root;
 		}
 		// if value is small as comapre to root.data then call insertrec method with
 		// root.left and value as a arguments
 		else if (value < root.data) {
-			root.left = insertrec(root.left, value);
+			root.left = insertRecursively(root.left, value);
 		}
 		// if value is large as comapre to root.data then call insertrec method with
 		// root.right and value as a arguments
 		else if (value > root.data) {
-			root.right = insertrec(root.right, value);
+			root.right = insertRecursively(root.right, value);
 		}
 
 		return root;
@@ -55,25 +55,25 @@ public class BinaryTree {
 
 	// creating deletion method to pass root and value to deletionrec method
 	void deletion(int value) {
-		root = deletionrec(root, value);
+		root = deletionRecursively(root, value);
 	}
 
 	// creating deletionrec method to recursively delete the data from the tree and
 	// rearrange the tree with correct manner to find the correct element from the
 	// tree
-	node deletionrec(node root, int key) {
+	Node deletionRecursively(Node root, int key) {
 		// checking if the root is null
 		if (root == null)
 			return root;
 		// // if key is large as compare to root.data then call deletionrec method with
 		// root.right and value as a arguments to find the correct element from the tree
 		if (root.data < key) {
-			root.right = deletionrec(root.right, key);
+			root.right = deletionRecursively(root.right, key);
 		}
 		// if key is smaller as compare to root.data then call deletionrec method with
 		// root.left and value as a arguments to find the correct element from the tree
 		else if (root.data > key) {
-			root.left = deletionrec(root.left, key);
+			root.left = deletionRecursively(root.left, key);
 		}
 		// else we are at the correct position where our key and root.data is matched
 		else {
@@ -85,17 +85,17 @@ public class BinaryTree {
 			// rearrange the BST and delete the node from the BST
 			else if (root.right != null) {
 				root.data = successor(root);
-				root.right = deletionrec(root.right, root.data);
+				root.right = deletionRecursively(root.right, root.data);
 			} else {
 				root.data = predecessor(root);
-				root.left = deletionrec(root.left, root.data);
+				root.left = deletionRecursively(root.left, root.data);
 			}
 		}
 		return root;
 	}
 
 	// successor method return the lowest value from the right tree of root
-	int successor(node root) {
+	int successor(Node root) {
 		root = root.right;
 		while (root.left != null) {
 			root = root.left;
@@ -104,7 +104,7 @@ public class BinaryTree {
 	}
 
 	// predecessor method return the highest value from left tree of root
-	int predecessor(node root) {
+	int predecessor(Node root) {
 		root = root.left;
 		while (root.right != null) {
 			root = root.right;
@@ -112,35 +112,34 @@ public class BinaryTree {
 		return root.data;
 	}
 
-	// creating preorder method to print the data of in preorder manner
-	void preorder() {
-		preorderrec(root);
+	// creating inorder method to print the data of in inorder manner
+	void inorder() {
+		inorderrec(root);
 	}
 
-	// creating preorderrec method to print the data of in preorder manner with
+	// creating inorderrec method to print the data of in inorder manner with
 	// recursively
-	void preorderrec(node root) {
+	void inorderrec(Node root) {
 
 		if (root == null) {
 			return;
 		}
-
+		inorderrec(root.left);
 		System.out.print(root.data + " ");
-		preorderrec(root.left);
-		preorderrec(root.right);
+		inorderrec(root.right);
 	}
 
 	// search method to search the element in a BST and return true or false
 	boolean search(int value) {
-		boolean isfound;
-		isfound = searchrec(root, value);
-		return isfound;
+		boolean isFound;
+		isFound = searchrec(root, value);
+		return isFound;
 
 	}
 
 	// searchrec method to search the element in a BST and return true or false
 	// recursively
-	boolean searchrec(node root, int value) {
+	boolean searchrec(Node root, int value) {
 		if (root == null) {
 			return false;
 		}
@@ -190,7 +189,7 @@ public class BinaryTree {
 							int input_val = sc.nextInt();
 							tree.insert(input_val);
 							System.out.print("Binary Tree : ");
-							tree.preorder();
+							tree.inorder();
 							System.out.println("");
 							break;
 
@@ -199,7 +198,7 @@ public class BinaryTree {
 							int input_value1 = sc.nextInt();
 							tree.deletion(input_value1);
 							System.out.print("Binary Tree : ");
-							tree.preorder();
+							tree.inorder();
 							System.out.println("");
 							break;
 
@@ -210,13 +209,13 @@ public class BinaryTree {
 							int update_current = sc.nextInt();
 							tree.update(update_new, update_current);
 							System.out.print("Binary Tree : ");
-							tree.preorder();
+							tree.inorder();
 							System.out.println("");
 							break;
 
 						case 4:
 							System.out.print("Binary Tree : ");
-							tree.preorder();
+							tree.inorder();
 							System.out.println("");
 							break;
 

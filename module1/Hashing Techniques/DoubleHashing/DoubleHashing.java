@@ -7,21 +7,21 @@ public class DoubleHashing {
     int size;
     int numberOfElement = 0;
     int collision;
-    node arr[];
+    Node arr[];
 
-    // Constructor for initializing hash table with a given size
+    // Constructor for initializing hash map with a given size
     DoubleHashing(int size) {
         this.size = size;
-        arr = new node[size];
+        arr = new Node[size];
         this.numberOfElement = 0;
         this.collision = 0;
     }
 
-    static class node {
+    static class Node {
         int key;
         int value;
 
-        public node(int key, int value) {
+        public Node(int key, int value) {
             this.key = key;
             this.value = value;
         }
@@ -55,8 +55,8 @@ public class DoubleHashing {
             return;
         }
         int hash = hashCode(key);
-        int hashsecond = hashCode2(key);
-        node to_insert = new node(key, value);
+        int hashSecond = hashCode2(key);
+        Node to_insert = new Node(key, value);
         int counter = 0;
         boolean flag = true;
 
@@ -78,7 +78,7 @@ public class DoubleHashing {
                 return;
             }
 
-            hash = (hash + hashsecond) % size;
+            hash = (hash + hashSecond) % size;
             counter++;
             if (counter >= 10000) {
                 System.out.println("Unable to insert the data");
@@ -94,11 +94,11 @@ public class DoubleHashing {
     // Function to delete a value from the hash table
     void delete(int key) {
         int hash = hashCode(key);
-        int hashsecond = hashCode2(key);
+        int hashSecond = hashCode2(key);
         int counter = 0;
         while (arr[hash] != null && (!(arr[hash].key == key))) {
             // Search for the value to be deleted using double hashing
-            hash = hash + hashsecond;
+            hash = hash + hashSecond;
             counter++;
             hash = hash % size;
 
@@ -126,13 +126,13 @@ public class DoubleHashing {
     // Function to get the key of a value in the hash table
     int getValuebyKey(int key) {
         int hash = hashCode(key);
-        int hashsecond = hashCode2(key);
+        int hashSecond = hashCode2(key);
         boolean issafe = true;
         int counter = 0;
         while (arr[hash] != null && (!(arr[hash].key == key) && issafe)) {
             // Search for the key of the given value using double hashing
             counter++;
-            hash = hash + hashsecond;
+            hash = hash + hashSecond;
             hash = hash % size;
             if (counter >= 1000) {
                 // If the maximum number of iterations is reached, break the loop

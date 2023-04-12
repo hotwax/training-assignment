@@ -136,21 +136,21 @@ public class chaining {
     // Method to Search the value in a HashMap
 
     public void search(int value) {
-        boolean isfound = false;
+        boolean isFound = false;
         for (int i = 0; i < capacity; i++) {
             if (table[i] != null) {
                 Entry entry = table[i];
                 while (entry != null) {
                     if (value == entry.value) {
                         System.out.println(entry.key + "->" + entry.value + " is present in the hash map");
-                        isfound = true;
+                        isFound = true;
                     }
                     entry = entry.next;
                 }
             }
         }
 
-        if (!isfound) {
+        if (!isFound) {
             System.out.println("value is not found in a hashmap");
         }
 

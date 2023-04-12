@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class QuadraticProbing {
     // Declare array to store hash table
-    node arr[];
+    Node arr[];
 
     // Declare size of hash table
     int size;
@@ -17,16 +17,17 @@ public class QuadraticProbing {
 
     // Constructor
     QuadraticProbing(int size) {
-        arr = new node[size];
+        arr = new Node[size];
         this.size = size;
 
     }
 
-    static class node {
+    // Node class to store key value
+    static class Node {
         int key;
         int value;
 
-        public node(int key, int value) {
+        public Node(int key, int value) {
             this.key = key;
             this.value = value;
         }
@@ -40,7 +41,7 @@ public class QuadraticProbing {
     // Method to insert a value into hash table
 
     void insert(int key, int value) {
-        node valueToInsert = new node(key, value);
+        Node valueToInsert = new Node(key, value);
         int hash = hashCode(key);
         if (arr.length <= noOfDataPresent) // if hashmap is full
         {
@@ -130,7 +131,7 @@ public class QuadraticProbing {
     }
 
     // method to search the value in the hashmap and print it's index
-    void search_by_value(int value) {
+    void searchByValue(int value) {
         for (int i = 0; i < size; i++) {
             if (arr[i] != null && arr[i].value == value) {
                 System.out.println(arr[i].key);
@@ -198,7 +199,7 @@ public class QuadraticProbing {
                                 System.out.println("Enter the value to be searched");
                                 int search_value = sc.nextInt();
 
-                                qp.search_by_value(search_value);
+                                qp.searchByValue(search_value);
                                 break;
 
                             case 6:

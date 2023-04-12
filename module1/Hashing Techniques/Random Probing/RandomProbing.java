@@ -4,11 +4,9 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.java.demo.QuadraticProbing.node;
-
 public class RandomProbing {
     int size;
-    node arr[];
+    Node arr[];
     int collision = 0;
     int randomnumber;
     int numberOfDatapresent = 0;
@@ -16,15 +14,16 @@ public class RandomProbing {
     // Constructor to initialize the hash map
     RandomProbing(int size) {
         this.size = size;
-        this.arr = new node[size];
+        this.arr = new Node[size];
 
     }
 
-    static class node {
+    // Node class to store key value
+    static class Node {
         int key;
         int value;
 
-        public node(int key, int value) {
+        public Node(int key, int value) {
             this.key = key;
             this.value = value;
         }
@@ -40,26 +39,39 @@ public class RandomProbing {
         }
     }
 
+    // Insert the key value in hashmap
     void insert(int key, int value) {
         Random random = new Random();
-        node to_insert = new node(key, value);
+        Node to_insert = new Node(key, value);
         int hash = hashcode(key);
-        if (numberOfDatapresent >= size) {
+        if (numberOfDatapresent >= size) // if the hashmap is full
+        {
             System.out.println("Hashmap is Full");
             return;
         }
-        if (arr[hash] != null && arr[hash].key == key) {
-            arr[hash].value = value;
+        if (arr[hash] == null) // if array is empty at that hash index then insert the value
+        {
+            arr[hash] = to_insert;
+            return;
         }
-        while (arr[hash] != null) {
+        if (arr[hash] != null && arr[hash].key == key) // if key is duplicate then update the value
+        {
+            arr[hash].value = value;
+            return;
+        }
+        while (arr[hash] != null) // iterate till last node
+        {
             if (arr[hash] != null && arr[hash].key == key) {
+                collision++;
                 arr[hash].value = value;
                 return;
             }
-            hash = (hash + random.nextInt(arr.length - 1) + 1) % arr.length;
-            collision++;
+            hash = (hash + random.nextInt(arr.length - 1) + 1) % arr.length; // re calculate the hash
+
         }
-        if (arr[hash] == null) {
+        if (arr[hash] == null) // if the array is empty at that index then store the value
+        {
+            collision++;
             arr[hash] = to_insert;
             numberOfDatapresent++;
             return;
@@ -73,7 +85,8 @@ public class RandomProbing {
         int hash = hashcode(key);
         Random random = new Random();
         int counter = 0;
-        if (arr[hash] != null && arr[hash].key == key) {
+        if (arr[hash] != null && arr[hash].key == key) // if duplicate key then update the value
+        {
             arr[hash] = null;
             numberOfDatapresent--;
             System.out.println("Data removed");
@@ -91,7 +104,9 @@ public class RandomProbing {
                 return;
             }
 
-            if (counter >= 10000) {
+            if (counter >= 10000) // if loop is run around 10000 and not find empty index in an array then stop
+                                  // the loop
+            {
                 flag = false;
                 System.out.println("Unable to delete the data");
                 return;
@@ -116,12 +131,15 @@ public class RandomProbing {
         while (flag) {
             hash = (hash + random.nextInt(arr.length - 1) + 1) % arr.length;
             counter++;
-            if (arr[hash] != null && arr[hash].key == key) {
+            if (arr[hash] != null && arr[hash].key == key) // if key is already present then update the data
+            {
                 flag = false;
                 return arr[hash].value;
             }
 
-            if (counter > 10000) {
+            if (counter > 10000) // if loop is run around 10000 and not find empty index in an array then stop
+                                 // the loop
+            {
                 flag = false;
                 return -1;
             }
