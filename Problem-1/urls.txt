@@ -1,6 +1,3 @@
-https://education.nationalgeographic.org/resource/pollution
-https://www.sciencedirect.com/topics/earth-and-planetary-sciences/human-health
-https://en.wikipedia.org/wiki/Computer_programming
-https://www.techtarget.com/whatis/definition/gaming
-https://en.wikipedia.org/wiki/Music
-https://en.wikipedia.org/wiki/Music
+ https://github.com/hotwax/training-assignment/wiki/Module---2-Implementation
+ https://www.espncricinfo.com/
+ https://www.google.com/search?q=football&oq=football&aqs=chrome..69i57j0i67i433l4j46i67i433j0i67i433l3j0i67.2762j0j4&sourceid=chrome&ie=UTF-8
