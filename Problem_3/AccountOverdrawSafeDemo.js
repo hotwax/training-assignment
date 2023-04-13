@@ -1,36 +1,62 @@
-// This is a class named "Account" that has a constructor and a method named "withdraw".
-class Account {
-  // The constructor takes a default parameter "balance" which is set to 1000 if no value is provided.
-  constructor(balance = 1000) {
+ // Creating Account class
+ class Account {
+  constructor(name1, name2, balance) {
+    this.name1 = name1;
+    this.name2 = name2;
     this.balance = balance;
   }
-  // The "withdraw" method takes two parameters: "name" and "amount".
-  withdraw(name, amount) {
-    // If the "balance" is greater than or equal to the "amount" provided, it subtracts the "amount" from the "balance", logs the withdrawal details, and updates the current balance. Otherwise,
-    // it logs a message indicating that there are insufficient funds.
-    if (this.balance >= amount) {
-      this.balance = this.balance - amount;
-      console.log();
-      console.log("Amount  Withdraw by : " + name);
-      console.log("Withdraw Amount is : " + amount);
-      console.log("Current Bank Balance is : " + this.balance);
+  // async method to withDraw money
+  async withDraw(amount, name) {
+    // check if the balance is sufficient
+    if (this.balance < amount) {
+      return false;
     } else {
-      console.log("");
-      console.log("Sorry Insufficient Balance");
+
+      // Making a delay to simulate the time taken to withdraw money
+      console.log(`${name} is withdrawing ${amount}`);
+      await new Promise(resolve => {
+        this.balance -= amount;
+        console.log(`${name} withdrew ${amount}`);
+        console.log(`balance Left ${this.balance}`);
+        setTimeout(resolve, 1000);
+      }
+      );
+      return true;
     }
   }
 }
 
-// The code creates an object of the "Account" class named "accountholder"
-let accountholder = new Account();
+//running the run method multiple threads
+const run = async () => {
+  // creating  object of class Account for two users
+  const account = new Account('User1', 'User2', 1000);
 
-//it calls the "withdraw" method five times with a withdrawal amount of 100 and the account holder's name as "Pushpraj".
-for (let i = 0; i < 5; i++) {
-  accountholder.withdraw("Pushpraj", 100);
-}
+  let amtWithdrawal = 0; // keep record of total amount withdrawn
 
-// Similarly, it calls the "withdraw" method five times with a withdrawal amount of 100 and the account holder's name as "Lakshyaraj".
+  // Withdrawal 1
+  const thread1 = async (name , amt) => {
+      while (true) {
+          if (await account.withDraw(amt, name)) amtWithdrawal += amt;
+          else break;
+      }
+  };
 
-for (let i = 0; i < 5; i++) {
-  accountholder.withdraw("Lakshyaraj", 100);
-}
+  // Withdrawal 2 
+  const thread2 = async (name , amt ) => {
+      while (true) {
+          // calling withDraw method
+          if (await account.withDraw(amt, name)) amtWithdrawal += amt;
+          else break;
+      }
+  };
+  
+  // Promise.all() method to run multiple promise, rejects if any of the promise is rejected
+  await Promise.all([
+    thread1('User1', 100),
+    thread2('User2', 100),
+  ]);
+  console.log(`Total Amount Withdrawn: ${amtWithdrawal}`);
+};
+
+// calling run function
+run();
