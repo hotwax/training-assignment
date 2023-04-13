@@ -69,7 +69,6 @@ public class DoubleHashing {
             arr[hash].value = value;
             return;
         }
-        collision++;
         // Handle collisions using double hashing
         while (arr[hash] != null) {
             if (arr[hash].key == key) {
@@ -77,6 +76,7 @@ public class DoubleHashing {
                 arr[hash].value = value;
                 return;
             }
+            collision++;
 
             hash = (hash + hashSecond) % size;
             counter++;

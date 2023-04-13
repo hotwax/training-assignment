@@ -60,14 +60,20 @@ public class QuadraticProbing {
         } else // find next available slot
         {
             int i = 1;
-            collision++;
+            int counter = 0; // to count the how many time counter running
             while (arr[hash] != null) {
-                hash = (hash + i * i) % size;
+                collision++;
+                hash = (hash + i * i) % size; // re calculating hash
                 if (arr[hash] != null && arr[hash].key == key) {
                     arr[hash].value = value;
                     return;
                 }
                 i++;
+                counter++;
+                if (counter > 10000) {
+                    System.out.println("Unable to insert the value");
+                    return;
+                }
             }
             arr[hash] = valueToInsert;
             noOfDataPresent++;
@@ -86,9 +92,15 @@ public class QuadraticProbing {
             noOfDataPresent--;
             return;
         }
+        int counter = 0; // to count the how many time counter running
         while (arr[hash] != null && arr[hash].key != key) {
             hash = (hash + i * i) % size;
             i++;
+            counter++;
+            if (counter > 10000) {
+                System.out.println("Unable to insert the value");
+                return;
+            }
         }
         if (arr[hash] != null && arr[hash].key == key) {
             arr[hash] = null;
@@ -119,9 +131,15 @@ public class QuadraticProbing {
             return;
         }
         int i = 1;
+        int counter = 0; // to count the how many time counter running
         while (arr[hash] != null && arr[hash].key != key) {
             hash = (hash + i * i) % size;
             i++;
+            counter++;
+            if (counter > 10000) {
+                System.out.println("Unable to insert the value");
+                return;
+            }
         }
         if (arr[hash] != null) {
             System.out.println(arr[hash].key + " -> " + arr[hash].value);

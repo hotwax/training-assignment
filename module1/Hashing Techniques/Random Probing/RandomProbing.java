@@ -59,19 +59,24 @@ public class RandomProbing {
             arr[hash].value = value;
             return;
         }
-        while (arr[hash] != null) // iterate till last node
+        int counter = 0; // to count the how many time counter running
+        while (arr[hash] != null) // iterate till empty array found
         {
             if (arr[hash] != null && arr[hash].key == key) {
-                collision++;
+
                 arr[hash].value = value;
                 return;
             }
             hash = (hash + random.nextInt(arr.length - 1) + 1) % arr.length; // re calculate the hash
-
+            counter++;
+            collision++;
+            if (counter > 10000) {
+                System.out.println("Unable to insert the value");
+                return;
+            }
         }
         if (arr[hash] == null) // if the array is empty at that index then store the value
         {
-            collision++;
             arr[hash] = to_insert;
             numberOfDatapresent++;
             return;
