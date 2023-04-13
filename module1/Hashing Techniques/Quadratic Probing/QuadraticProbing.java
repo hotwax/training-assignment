@@ -98,7 +98,7 @@ public class QuadraticProbing {
             i++;
             counter++;
             if (counter > 10000) {
-                System.out.println("Unable to insert the value");
+                System.out.println("Unable to delete the value");
                 return;
             }
         }
@@ -137,7 +137,7 @@ public class QuadraticProbing {
             i++;
             counter++;
             if (counter > 10000) {
-                System.out.println("Unable to insert the value");
+                System.out.println("Unable to find the value");
                 return;
             }
         }
