@@ -1,0 +1,59 @@
+Test Case 1:
+Initial balance: 1000
+Withdraw amount: 500
+Account holder name: Rohit
+Expected outcome: "Rohit withdrew 500 from the account. The remaining balance is 500."
+
+Test Case 2:
+Initial balance: 500
+Withdraw amount: 1000
+Account holder name: Rhea
+Expected outcome: 0
+
+Test Case 3:
+Initial balance: 2000
+Withdraw amount: 500
+Account holder name: Rohit
+Expected outcome: "Rohit withdrew 500 from the account. The remaining balance is 1500."
+
+Test Case 4:
+Initial balance: 0
+Withdraw amount: 100
+Account holder name: Rhea
+Expected outcome: 0
+
+Test Case 5:
+Initial balance: 1000
+Withdraw amount: 0
+Account holder name: Rohit
+Expected outcome: 0
+
+Test Case 6:
+Initial balance: 1000
+Withdraw amount: -500
+Account holder name: Rhea
+Expected outcome: 0
+
+Test Case 7:
+Initial balance: 1000
+Withdraw amount: 500
+Account holder name: Rohit
+Expected outcome: "Rohit withdrew 500 from the account. The remaining balance is 500."
+
+Test Case 8:
+Initial balance: 500
+Withdraw amount: 0
+Account holder name: Rhea
+Expected outcome: 0
+
+Test Case 9:
+Initial balance: 2000
+Withdraw amount: 500
+Account holder name: Rohit
+Expected outcome: "Rohit withdrew 500 from the account. The remaining balance is 1500."
+
+Test Case 10:
+Initial balance: 0
+Withdraw amount: 0
+Account holder name: Rhea
+Expected outcome: 0

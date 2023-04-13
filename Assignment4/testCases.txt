@@ -1,0 +1,83 @@
+Test Case 1:
+Description: Serializing and saving a single student to a file
+Input:
+filename: 'output.ser'
+students: [new Student('Aarav', '1995-09-10', new Address('Mumbai', 'Maharashtra', 400001, 'India'))]
+Expected Output:
+A file named 'output.ser' should be created with the following content:
+[
+{
+"firstName": "Aarav",
+"dateOfBirth": "1995-09-09T18:30:00.000Z",
+"address": {
+"city": "Mumbai",
+"state": "Maharashtra",
+"pinCode": 400001,
+"country": "India"
+}
+}
+]
+
+Test Case 2:
+Description: Serializing and saving multiple students to a file
+Input:
+filename: 'output.ser'
+students: [new Student('Aarav', '1995-09-10', new Address('Mumbai', 'Maharashtra', 400001, 'India')),
+new Student('Sneha', '1990-10-18', new Address('Kolkata', 'West Bengal', 700001, 'India')),
+new Student('Rohan', '1988-07-05', new Address('Bangalore', 'Karnataka', 560001, 'India'))]
+Expected Output:
+A file named 'output.ser' should be created with the following content:
+[
+{
+"firstName": "Aarav",
+"dateOfBirth": "1995-09-09T18:30:00.000Z",
+"address": {
+"city": "Mumbai",
+"state": "Maharashtra",
+"pinCode": 400001,
+"country": "India"
+}
+},
+{
+"firstName": "Sneha",
+"dateOfBirth": "1990-10-17T18:30:00.000Z",
+"address": {
+"city": "Kolkata",
+"state": "West Bengal",
+"pinCode": 700001,
+"country": "India"
+}
+},
+{
+"firstName": "Rohan",
+"dateOfBirth": "1988-07-04T18:30:00.000Z",
+"address": {
+"city": "Bangalore",
+"state": "Karnataka",
+"pinCode": 560001,
+"country": "India"
+}
+}
+]
+
+Test Case 3: Deserialize from empty file
+Input:
+
+filename: 'empty.ser'
+Expected Output:
+
+[]
+Test Case 4: Deserialize from file with incorrect data format
+Input:
+
+filename: 'invalid.ser'
+Expected Output:
+
+Error: Invalid data format in file
+Test Case 5: Deserialize from non-existent file
+Input:
+
+filename: 'nonexistent.ser'
+Expected Output:
+
+Error: File not found.
