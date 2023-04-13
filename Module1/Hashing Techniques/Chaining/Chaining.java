@@ -1,4 +1,5 @@
 import java.nio.file.SecureDirectoryStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Chaining {
@@ -51,11 +52,18 @@ public class Chaining {
             }
             else{
                 keyValuePair curr = container[indexValue];
+                if(curr.key==key){
+                    curr.value = value;
+                    return ;
+                }
                 while(curr.next !=null){
+                    if(curr.next.key==key){
+                        curr.next.value=value;
+                        return ;
+                    }
                     curr = curr.next;
                 }
                 curr.next = newNode;
-                this.collision+=1;
             }
         }
 
@@ -87,31 +95,33 @@ public class Chaining {
          * function accepts a key and search for the same in the hash map 
          * and then delete that key value pair.
          */
-        public void delete(int key){
+        public boolean delete(int key){
             int indexValue = hashFunction(key);
             keyValuePair data = container[indexValue];
+            if(data==null){
+                return true;
+            }
             if(data.next == null && data.key == key){
                 container[indexValue] = null;
-                return;
+                return true;
             }
             else if(data.next == null){
                 System.out.println("Unable to find the value for provided key");
-                return ;
+                return false;
             }
             else if(data.key == key){
-                container[indexValue] = data.next;
-                this.collision -=1;
-                return ;
+                data.key=data.next.key;
+                data.value = data.next.value;
+                data.next = data.next.next;
+                return true;
             }
-            while(data!=null){
-                if(data.next.key == key){
-                    data.next = data.next.next;
-                    this.collision -=1;
-                    return;
-                }
-
+            keyValuePair prev=data;
+            while(data!=null && data.key!=key){
+                prev = data;
+                data = data.next;
             }
-            
+            prev.next = data.next;
+            return true;
         }
 
         // This function is used for displaying the complete hash map
@@ -152,7 +162,8 @@ public class Chaining {
         System.out.println("Enter the size of hash map.");
         int size = input.nextInt();
 	    newHashMap obj = new newHashMap(size);
-        int option;
+        int option,key,value;
+        long t1,t2;
         // Menu option for the user.
         System.out.println("1 : Insert ");
         System.out.println("2 : Delete ");
@@ -162,55 +173,58 @@ public class Chaining {
         System.out.println("6 : Collisions.");
         System.out.println("7 : Exit");
         System.out.println("Enter your choice : ");
-        while(true){
-            option = input.nextInt();
-            if(option == 1){
-                long t1 = System.currentTimeMillis();
-                System.out.print("Enter key : ");
-                int key = input.nextInt();
-                System.out.print("Enter a value: ");
-                int value = input.nextInt();
-                obj.insert(key, value);
-                long t2 = System.currentTimeMillis();
-                System.out.println("Time taken in insertion: "+ (t2-t1));
+        loop:while(true){
+            try{
+                option = input.nextInt();
+                switch (option){
+                    case 1:
+                         t1 = System.currentTimeMillis();
+                        System.out.print("Enter key : ");
+                        key = input.nextInt();
+                        System.out.print("Enter a value: ");
+                        value = input.nextInt();
+                        obj.insert(key, value);
+                         t2 = System.currentTimeMillis();
+                        System.out.println("Time taken in insertion: "+ (t2-t1));
+
+                    case 2:
+                         t1 = System.currentTimeMillis();
+                        System.out.println("Enter the key: ");
+                        key = input.nextInt();
+                        obj.delete(key);
+                         t2 = System.currentTimeMillis();
+                        System.out.println("Time taken in deleting data is: "+(t2-t1));
+                    
+                    case 3:
+                         t1 = System.currentTimeMillis();
+                        System.out.println("Enter a key: ");
+                        key = input.nextInt();
+                        obj.getData(key);
+                         t2 = System.currentTimeMillis();
+                        System.out.println("Time taken in getting data is: "+(t2-t1));
+                    
+                    case 4:
+                        obj.displayHashMap();
+                    
+                    case 5:
+                         t1 = System.currentTimeMillis();
+                        System.out.print("Enter the value: ");
+                        value = input.nextInt();
+                        obj.searchByValue(value);
+                         t2 = System.currentTimeMillis();
+                        System.out.println("Time taken in searching is: "+ (t2-t1));
+                    
+                    case 6:
+                        System.out.println("Number of collision : "+obj.collision);
+                    case 7:
+                        break loop;
+                    default:
+                        System.out.println("Please enter a valid option. ");
+                    
+                }
+            }catch(InputMismatchException ex){
+                System.out.println("Invalid input. Please enter an integer(number).");
             }
-            else if(option == 2){
-                long t1 = System.currentTimeMillis();
-                System.out.println("Enter the key: ");
-                int key = input.nextInt();
-                obj.delete(key);
-                long t2 = System.currentTimeMillis();
-                System.out.println("Time taken in deleting data is: "+(t2-t1));
-            }
-            else if (option == 3){
-                long t1 = System.currentTimeMillis();
-                System.out.println("Enter a key: ");
-                int key = input.nextInt();
-                obj.getData(key);
-                long t2 = System.currentTimeMillis();
-                System.out.println("Time taken in getting data is: "+(t2-t1));
-            }
-            else if(option == 4){
-                obj.displayHashMap();
-            }
-            else if(option == 5){
-                long t1 = System.currentTimeMillis();
-                System.out.print("Enter the value: ");
-                int value = input.nextInt();
-                obj.searchByValue(value);
-                long t2 = System.currentTimeMillis();
-                System.out.println("Time taken in searching is: "+ (t2-t1));
-            }
-            else if(option == 6){
-                System.out.println("Number of collision : "+obj.collision);
-            }
-            else if(option == 7){
-                break;
-            }
-            else{
-                System.out.println("Please enter a valid option. ");
-            }
-            System.out.print("choose an option again: ");
         }
     }
 }

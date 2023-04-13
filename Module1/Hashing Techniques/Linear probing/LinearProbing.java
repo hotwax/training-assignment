@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LinearProbing {
@@ -133,52 +134,59 @@ public class LinearProbing {
         System.out.println("5 : Get Value of Key");
         System.out.println("6 : Exit");
         int option;
-        while(true){
-            option = input.nextInt();
-            if(option == 1){
-                long t1 = System.currentTimeMillis();
-                System.out.print("Enter key: ");
-                int key = input.nextInt();
-                System.out.print("Enter value: ");
-                int value = input.nextInt();
-                obj.insert(key, value);
-                long t2 = System.currentTimeMillis();
-                System.out.println("Time taken in insertion is: "+ (t2-t1));
-            }
+        long t1,t2;
+        int key,value;
+        loop:while(true){
+            try{
+                option = input.nextInt();
+                switch(option){
+                    case 1:
+                        t1 = System.currentTimeMillis();
+                        System.out.print("Enter key: ");
+                        key = input.nextInt();
+                        System.out.print("Enter value: ");
+                        value = input.nextInt();
+                        obj.insert(key, value);
+                        t2 = System.currentTimeMillis();
+                        System.out.println("Time taken in insertion is: "+ (t2-t1));
+                        break;
 
-            else if(option == 2){
-                long t1 = System.currentTimeMillis();
-                System.out.print("Enter key: ");
-                int key = input.nextInt();
-                obj.delete(key);
-                long t2 = System.currentTimeMillis();
-                System.out.println("Time taken in deletion: "+ (t2-t1));
-            }
+                    case 2:
+                        t1 = System.currentTimeMillis();
+                        System.out.print("Enter key: ");
+                        key = input.nextInt();
+                        obj.delete(key);
+                        t2 = System.currentTimeMillis();
+                        System.out.println("Time taken in deletion: "+ (t2-t1));
+                        break;
 
-            else if(option == 3){
-                // long t1 = System.currentTimeMillis();
-                obj.showData();
-                // long t2 = System.currentTimeMillis();
-                // System.out.println("Time taken in insertion is: "+ (t2-t1));
-            }
-            else if(option ==4){
-                System.out.println("Number of collision occurs: "+obj.collision);
-            }
+                    case 3:
+                        // t1 = System.currentTimeMillis();
+                        obj.showData();
+                        break;
+                        // t2 = System.currentTimeMillis();
+                        // System.out.println("Time taken in insertion is: "+ (t2-t1));
+                
+                    case 4:
+                        System.out.println("Number of collision occurs: "+obj.collision);
+                        break;
+                    case 5:
+                        t1 = System.currentTimeMillis();
+                        System.out.print("Enter key: ");
+                        key = input.nextInt();
+                        obj.getValue(key);
+                        t2 = System.currentTimeMillis();
+                        System.out.println("Time taken in searching: "+ (t2-t1));
+                        break;
 
-            else if(option == 5){
-                long t1 = System.currentTimeMillis();
-                System.out.print("Enter key: ");
-                int key = input.nextInt();
-                obj.getValue(key);
-                long t2 = System.currentTimeMillis();
-                System.out.println("Time taken in searching: "+ (t2-t1));
-            }
-
-            else if(option == 6){
-                break;
-            }
-            else{
-                System.out.println("please choose a valid option.");
+                    case 6:
+                        break loop;
+                    default:
+                        System.out.println("please choose a valid option.");
+                }
+            }catch(InputMismatchException ex){
+                System.out.println("Invalid input type. Please enter integer(number)");
+                input = new Scanner(System.in);
             }
         }
     }
