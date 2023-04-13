@@ -1,0 +1,9 @@
+{
+    "name": "word-counter",
+    "version": "1.0.0",
+    "dependencies": {
+      "request-promise-native": "^1.0.9",
+      "cheerio": "^1.0.0-rc.3"
+    }
+  }
+  
