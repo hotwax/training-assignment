@@ -1,0 +1,34 @@
+Case 1: Output1.ser does not exists while Deserialization
+
+Input:
+Need to run the program by giving file name. i.e, java DeserializerTest hello.ser
+
+Expected and Actual Output: 
+output1.ser not found.
+
+Case 2: Output1.ser is empty
+
+Input: 
+Need to run the program by giving file name. i.e, java DeserializerTest hello.ser
+
+Expected & Actual Output: 
+File is empty!!!!
+
+Case 3: Serialization done successfully.
+
+Input: 
+Need to run the program by giving file name. i.e, java SerializationTest hello.ser
+
+Expected & Actual Output: 
+Serialization Successful. Output File Name: hello.ser
+
+Case 4: Deserialization student objects from Output1.ser
+
+Input: 
+Null or run the program
+
+Output: 
+Name: John, DOB: Mon Apr 03 16:46:10 IST 2023, Address: New York, NY, 10001, USA
+Name: Jane, DOB: Mon Apr 03 16:46:10 IST 2023, Address: Los Angeles, CA, 90001, USA
+Name: Bob, DOB: Mon Apr 03 16:46:10 IST 2023, Address: Chicago, IL, 60601, USA
+Name: Alice, DOB: Mon Apr 03 16:46:10 IST 2023, Address: Houston, TX, 77001, USA

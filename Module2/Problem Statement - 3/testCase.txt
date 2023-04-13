@@ -1,0 +1,63 @@
+
+Test Cases 1:(test Account OverDraw demo (not synchronized) )
+Input:
+total balance:1000
+
+Output:
+John is trying to withdraw $200.0
+John has withdrawn $200.0
+John's remaining balance is $800.0
+smith is trying to withdraw $200.0
+smith has withdrawn $200.0
+smith's remaining balance is $600.0
+John is trying to withdraw $200.0
+John has withdrawn $200.0
+John's remaining balance is $400.0
+smith is trying to withdraw $200.0
+smith has withdrawn $200.0
+smith's remaining balance is $200.0
+John is trying to withdraw $200.0
+John has withdrawn $200.0
+John's remaining balance is $0.0
+smith is trying to withdraw $200.0
+smith does not have sufficient balance to withdraw $200.0
+smith is trying to withdraw $200.0
+smith does not have sufficient balance to withdraw $200.0
+smith is trying to withdraw $200.0
+smith does not have sufficient balance to withdraw $200.0
+John is trying to withdraw $200.0
+John does not have sufficient balance to withdraw $200.0
+John is trying to withdraw $200.0
+John does not have sufficient balance to withdraw $200.0
+ 
+
+
+Test Case 2:(Test Account is Safe to Overdrawn (Synchronized) )
+Input:
+total balance:1000
+  
+
+Output:
+John is trying to withdraw $200.0
+John has withdrawn $200.0
+John's remaining balance is $800.0
+John is trying to withdraw $200.0
+John has withdrawn $200.0
+John's remaining balance is $600.0
+John is trying to withdraw $200.0
+John has withdrawn $200.0
+John's remaining balance is $400.0
+John is trying to withdraw $200.0
+John has withdrawn $200.0
+John's remaining balance is $200.0
+John is trying to withdraw $200.0
+John has withdrawn $200.0
+John's remaining balance is $0.0
+Smith is trying to withdraw $200.0
+Smith does not have sufficient balance to withdraw $200.0
+Smith is trying to withdraw $200.0
+Smith does not have sufficient balance to withdraw $200.0
+Smith is trying to withdraw $200.0
+Smith does not have sufficient balance to withdraw $200.0
+Smith is trying to withdraw $200.0
+Smith does not have sufficient balance to withdraw $200.0
