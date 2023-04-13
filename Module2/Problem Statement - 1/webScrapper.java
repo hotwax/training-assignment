@@ -71,8 +71,8 @@ public class webScrapper {
 
 
             try{
-                int a =  allWords.get(value.getKey());
-                if(a < value.getValue() ){
+                int words =  allWords.get(value.getKey());
+                if(words < value.getValue() ){
                     allWords.put(value.getKey(), value.getValue());
                 }
             }catch(Exception e){
