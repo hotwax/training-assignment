@@ -103,12 +103,22 @@ function searchEmployees(query, orderBy, direction) {
 function loadEmployeesFromFile(){
   let employees = [];
 
+  try{
   const data = fs.readFileSync(fileName, 'utf8');
   employees = data.split('\n').map((line) => {
     const [name, email, age, dob] = line.split(',');
     return new Employee(name, email, parseInt(age), dob);
   });
-  return employees;
+  return employees;}
+  catch(err){
+    if (err.code === 'ENOENT') {
+      console.log('File not found.');
+      return [];
+    }
+    else{
+    console.log("Error in reading file", err);
+    return [];}
+  }
 }
     
 // Write employees to the file
