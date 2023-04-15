@@ -1,0 +1,118 @@
+CASE 1 : General Case
+
+    Inputs:
+        URLs : [https://www.icc-cricket.com/homepage,https://proandroiddev.com/implementing-dark-theme-in-your-android-application-ec2b4fefb6e3,https://www.programiz.com/dsa/red-black-tree]
+        Words : [cricket,india,odi,android,dark,mobile,code,balanced,there]
+
+    Output:
+        
+    Processing https://www.icc-cricket.com/homepage...
+    Top 3 words for https://www.icc-cricket.com/homepage:
+    cricket: 18
+    india: 12
+    odi: 10
+    -------------------
+
+    Processing https://proandroiddev.com/implementing-dark-theme-in-your-android-application-ec2b4fefb6e3...
+    Top 3 words for https://proandroiddev.com/implementing-dark-theme-in-your-android-application-ec2b4fefb6e3:
+    android: 60
+    dark: 44
+    code: 8
+    -------------------
+
+    Processing https://www.programiz.com/dsa/red-black-tree...
+    Top 3 words for https://www.programiz.com/dsa/red-black-tree:
+    mobile: 8
+    code: 3
+    india: 2
+    -------------------
+
+    Total occurrence of each word:
+    android: 60
+    dark: 44
+    cricket: 18
+    india: 14
+    code: 11
+    odi: 10
+    mobile: 8
+    there: 5
+    balanced: 1
+
+CASE 2 : NO URL Provided
+
+    Inputs:
+        URLs : []
+        Words : [cricket,india,odi,android,dark,mobile,code,balanced,there]
+    Output:
+        No URLs found in urls.txt
+
+
+CASE 3 : No Words provided
+    Inputs:
+        URLs : [https://www.icc-cricket.com/homepage,https://proandroiddev.com/implementing-dark-theme-in-your-android-application-ec2b4fefb6e3,https://www.programiz.com/dsa/red-black-tree]
+        Words : [] 
+    Output :
+        No words found in words.txt
+
+
+CASE 4 : Invalid URL Provided
+    Inputs:
+        URLs : [https://www.icc-crickkket.com/homepage]
+        Words : [cricket,india,odi,android,dark,mobile,code,balanced,there]
+    Output :
+
+         Invalid url: https://www.icc-crickkket.com/homepage: Error: getaddrinfo ENOTFOUND www.icc-crickkket.com
+        
+
+CASE 5 : No Internet
+    Inputs:
+        URLs : [https://www.icc-crickkket.com/homepage]
+
+        Words : [cricket,india,odi,android,dark,mobile,code,balanced,there]
+
+    Output :
+        Processing https://www.icc-cricket.com/homepage...
+        No internet connection: 
+        -------------------
+
+
+CASE 6 : Repeated URL
+
+    Inputs:
+        URLs : [https://www.icc-cricket.com/homepage,
+                https://www.icc-cricket.com/homepage]
+        Words : [cricket,india,odi,android,dark,mobile,code,balanced,there]
+    Outputs:
+            Processing https://www.icc-cricket.com/homepage...
+            Top 3 words for https://www.icc-cricket.com/homepage:
+            cricket: 18
+            india: 12
+            odi: 10
+            -------------------
+
+CASE 7: Repeated Words
+    Inputs:
+            URLs : [https://www.icc-cricket.com/homepage]
+            Words : [cricket,cricket,cricket,india,odi,android,dark,mobile,code,balanced,there]
+        Outputs:
+            Top 3 words for https://www.icc-cricket.com/homepage:
+            cricket: 18
+            india: 12
+            odi: 10
+            -------------------
+
+CASE 8: urls.txt does not Exist
+    Inputs:
+            URLs : [] - (Missing)
+            Words : [cricket,cricket,cricket,india,odi,android,dark,mobile,code,balanced,there]
+    Outputs:
+            File not found: urls.txt
+
+
+CASE 9: words.txt does not Exist
+    Inputs:
+            URLs : [https://www.icc-cricket.com/homepage,https://proandroiddev.com/implementing-dark-theme-in-your-android-application-ec2b4fefb6e3,]
+            Words : [] - (Missing)
+        Outputs:
+            File not found: urls.txt
+
