@@ -1,0 +1,47 @@
+case 1- Deserializing invalid file
+
+Input :  DeserializationTest.js output10.zer
+Output:
+
+Invalid file extension. File must have .ser extension.
+
+
+
+case 2-  Deserialing File does not exixt
+
+Input :  DeserializationTest.js output34.ser
+
+Output:
+file does not exist:Output34.ser
+
+
+case 3- Serialization
+
+Enter file name for serialization: output1.ser
+Data serialized successfully.
+
+
+case 4- Deserialization
+
+Input: DeserializationTest.js Output2.ser
+
+Output: 
+
+PS C:\Users\apurva shukla\Desktop\M4P4> node DeserializationTest.js Output2.ser
+      city: 'Los Angeles',
+      state: 'CA',
+      pinCode: 90001,
+      country: 'USA'
+    }
+  },
+  {
+    firstName: 'Bob',
+    dateOfBirth: '2001-03-03T00:00:00.000Z',
+    address: { city: 'Chicago', state: 'IL', pinCode: 60007, country: 'USA' }
+  },
+  {
+    firstName: 'Alice',
+    dateOfBirth: '2002-04-04T00:00:00.000Z',
+    address: { city: 'Houston', state: 'TX', pinCode: 77001, country: 'USA' }
+  }
+]

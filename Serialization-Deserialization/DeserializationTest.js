@@ -11,10 +11,19 @@ if (!filename.endsWith('.ser')) {
 }
 
 // Read the contents of the file with the specified filename.
+try{
+// Read the contents of the file with the specified filename.
 const data = fs.readFileSync(filename);
-
-// Parse the contents of the file as a JSON string and convert it back to an array of objects.
 const students = JSON.parse(data);
-
-// Display the array of objects to the console.
+// Display the contents of the file.
 console.log(students);
+
+}
+catch(err){
+  if (err.code === 'ENOENT') {
+    console.error('file does not exist:' + filename);
+  }
+  else{
+    console.error('error reading file:' + filename + ","  + err);
+  }}
+

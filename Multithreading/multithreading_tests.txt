@@ -1,0 +1,88 @@
+CASE 1: Overdraw Demo
+
+Expected: The amount should go in negative, Demostrating overdraw 
+
+Output:
+
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 900
+Joint Account: Withdrawal of 100 successful, new balance is 800
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 800
+Joint Account: Withdrawal of 100 successful, new balance is 700
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 700
+Joint Account: Withdrawal of 100 successful, new balance is 600
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 600
+Joint Account: Withdrawal of 100 successful, new balance is 500
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 500
+Joint Account: Withdrawal of 100 successful, new balance is 400
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 400
+Joint Account: Withdrawal of 100 successful, new balance is 300
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 300
+Joint Account: Withdrawal of 100 successful, new balance is 200
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 200
+Joint Account: Withdrawal of 100 successful, new balance is 100
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 100
+Joint Account: Withdrawal of 100 successful, new balance is 0
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 0
+Joint Account: Withdrawal amount 100 exceeds balance 0
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 0
+Joint Account: Withdrawal of 100 successful, new balance is -100
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: -100
+
+
+
+CASE 1: Overdraw  Safe Demo
+
+Expected: The amount should not go in negative, Demostrating safe overdraw 
+
+Output:
+
+PS C:\Users\apurva shukla\Desktop\M4P3> node "c:\Users\apurva shukla\Desktop\M4P3\AccountOverdrawSafeDemo.js"
+Joint Account: Withdrawal of 100 successful, new balance is 900
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 900
+Joint Account: Withdrawal of 100 successful, new balance is 800
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 800
+Joint Account: Withdrawal of 100 successful, new balance is 700
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 700
+Joint Account: Withdrawal of 100 successful, new balance is 600
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 600
+Joint Account: Withdrawal of 100 successful, new balance is 500
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 500
+Joint Account: Withdrawal of 100 successful, new balance is 400
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 400
+Joint Account: Withdrawal of 100 successful, new balance is 300
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 300
+Joint Account: Withdrawal of 100 successful, new balance is 200
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 200
+Joint Account: Withdrawal of 100 successful, new balance is 100
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 100
+Joint Account: Withdrawal of 100 successful, new balance is 0
+Joint Account: Withdrawal amount 100 exceeds balance 0
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 0
+Joint Account: Withdrawal amount 100 exceeds balance 0
+Tejasvi: Attempting to withdraw 100
+Remaining Balance: 0
+TejPratap: Attempting to withdraw 100
+Remaining Balance: 0
+
