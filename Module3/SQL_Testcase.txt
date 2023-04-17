@@ -333,7 +333,7 @@ ORDERS
 15. Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
 
 
-Approach : Here we have to select the max amount from orders tables and group the result by date which has sum amount >=200.
+Approach : Here we have to select the max amount from orders tables and group the result by date having sum of amount - maximum amount is greater than 2000.
 
 
 Expected outcome :
@@ -342,8 +342,6 @@ Expected outcome :
 | SUM(AMT) |
 +----------+
 |  8944.59 |
-|  4723.00 |
-| 11201.83 |
 +----------+
 
 Tables involved :
@@ -697,30 +695,52 @@ CUSTOMERS
 Approach : We have to use self join on customers tables by customers id is less than second customers id
 
 Expected outcome :
-+----------+----------+
-| CNAME    | CNAME    |
-+----------+----------+
-| Hoffman  | Giovanni |
-| Hoffman  | Liu      |
-| Giovanni | Liu      |
-| Hoffman  | Grass    |
-| Giovanni | Grass    |
-| Liu      | Grass    |
-| Hoffman  | Ciemens  |
-| Giovanni | Ciemens  |
-| Liu      | Ciemens  |
-| Grass    | Ciemens  |
-| Hoffman  | Cisneros |
-| Giovanni | Cisneros |
-| Liu      | Cisneros |
-| Grass    | Cisneros |
-| Hoffman  | Pereira  |
-| Giovanni | Pereira  |
-| Liu      | Pereira  |
-| Grass    | Pereira  |
-| Ciemens  | Pereira  |
-| Cisneros | Pereira  |
-+----------+----------+
++----------+---------+
+| cname    | sname   |
++----------+---------+
+| Hoffman  | Fran    |
+| Hoffman  | Rofkin  |
+| Hoffman  | Motika  |
+| Hoffman  | AxelRod |
+| Hoffman  | Serres  |
+| Hoffman  | Peel    |
+| Giovanni | Fran    |
+| Giovanni | Rofkin  |
+| Giovanni | Motika  |
+| Giovanni | AxelRod |
+| Giovanni | Serres  |
+| Giovanni | Peel    |
+| Liu      | Fran    |
+| Liu      | Rofkin  |
+| Liu      | Motika  |
+| Liu      | AxelRod |
+| Liu      | Serres  |
+| Liu      | Peel    |
+| Grass    | Fran    |
+| Grass    | Rofkin  |
+| Grass    | Motika  |
+| Grass    | AxelRod |
+| Grass    | Serres  |
+| Grass    | Peel    |
+| Ciemens  | Fran    |
+| Ciemens  | Rofkin  |
+| Ciemens  | Motika  |
+| Ciemens  | AxelRod |
+| Ciemens  | Serres  |
+| Ciemens  | Peel    |
+| Cisneros | Fran    |
+| Cisneros | Rofkin  |
+| Cisneros | Motika  |
+| Cisneros | AxelRod |
+| Cisneros | Serres  |
+| Cisneros | Peel    |
+| Periera  | Fran    |
+| Periera  | Rofkin  |
+| Periera  | Motika  |
+| Periera  | AxelRod |
+| Periera  | Serres  |
+| Periera  | Peel    |
++----------+---------+
 
 Tables involved :
 CUSTOMERS
@@ -829,21 +849,16 @@ ORDERS , CUSTOMERS
 39. Find all orders with above average amounts for their customers. 
 
 
-Approach : selecting all the records from orders table where amount is greater than ANY subquery selecting average amount from orders tables group by customers id
+Approach : selecting all the records from orders table where amount is greater than subquery selecting average amount from orders tables group by customers id
 
 Expected outcome :
-+------+---------+----------+------+------+
-| ONUM | AMT     | ODATE    | CNUM | SNUM |
-+------+---------+----------+------+------+
-| 3003 |  767.19 | 10/03/90 | 2001 | 1001 |
-| 3002 | 1900.10 | 10/03/90 | 2007 | 1004 |
-| 3005 | 5160.45 | 10/03/90 | 2003 | 1002 |
-| 3006 | 1098.16 | 10/03/90 | 2008 | 1007 |
-| 3009 | 1713.23 | 10/04/90 | 2002 | 1003 |
-| 3008 | 4723.00 | 10/05/90 | 2006 | 1001 |
-| 3010 | 1309.95 | 10/06/90 | 2004 | 1002 |
-| 3011 | 9891.88 | 10/06/90 | 2006 | 1001 |
-+------+---------+----------+------+------+
++------+---------+------------+------+------+
+| ONUM | AMT     | ODATE      | CNUM | SNUM |
++------+---------+------------+------+------+
+| 3006 | 1098.16 | 1990-03-10 | 2008 | 1007 |
+| 3010 | 1309.95 | 1990-06-10 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-06-10 | 2006 | 1001 |
++------+---------+------------+------+------+
 
 Tables involved :
 ORDERS
@@ -890,13 +905,13 @@ SALESPEOPLE,CUSTOMERS,ORDERS
 
 42. Count the customers with ratings above SanJose’s average. 
 
-Approach : Counting customers id from customers table where rating in selecting rating from customers tables where cityis equal to SanJose
+Approach : Counting customers id from customers table where rating in selecting average rating from customers tables where cityis equal to SanJose
 
 Expected outcome : 
 +-------------+
 | COUNT(CNUM) |
 +-------------+
-|           4 |
+|           2 |
 +-------------+
 
 Tables involved :
@@ -1120,10 +1135,23 @@ ORDERS
 
 54.Write a query that selects all orders save those with zeroes or NULL in the amount file. 
 
-Approach : Query should give data from Orders table if any row contains 0 or null in AMT column.
+Approach : Query should give data from Orders table exact any row contains 0 or null in AMT column.
 
 Expected outcome :
-Empty set
++------+---------+
+| ONUM | AMT     |
++------+---------+
+| 3001 |   18.69 |
+| 3003 |  767.19 |
+| 3002 |  1900.1 |
+| 3005 | 5160.45 |
+| 3006 | 1098.16 |
+| 3009 | 1713.23 |
+| 3007 |   75.75 |
+| 3008 |    4723 |
+| 3010 | 1309.95 |
+| 3011 | 9891.88 |
++------+---------+
 
 Tables involved :
 
@@ -1635,14 +1663,13 @@ ORDERS
 
 81. Write a query that selects the first customer in alphabetical order whose name begins with ‘G’.
 
-Approach : selecting all the attributes from customers tables where customers name is LIKE G.
+Approach : selecting all the attributes from customers tables where customers name is LIKE G and limit the result to 1, so that we get first customer in alphabetical order.
 
 Expected outcome :
 +------+----------+--------+--------+------+
 | CNUM | CNAME    | CITY   | RATING | SNUM |
 +------+----------+--------+--------+------+
 | 2002 | Giovanni | Rome   |    200 | 1003 |
-| 2004 | Grass    | Berlin |    300 | 1002 |
 +------+----------+--------+--------+------+
 
 Tables involved :
@@ -1702,16 +1729,20 @@ Tables involved
 
 85.Give a simpler way to write this query.SELECT snum, sname, city, comm FROM salespeople WHERE (comm > + 0.12 OR comm &lt; 0.14);
 
-Approach :selecting all the attributes from salespeople where commission is between 12 and 14
+Approach :selecting all the attributes from salespeople where commission is > 12  OR  commission < 14
 
 
 Expected outcome :
-+------+--------+---------+------+
-| SNUM | SNAME  | CITY    | COMM |
-+------+--------+---------+------+
-| 1001 | Peel   | London  |   12 |
-| 1002 | Serres | SanJose |   13 |
-+------+--------+---------+------+
++------+---------+------------+------+
+| SNUM | SNAME   | CITY       | COMM |
++------+---------+------------+------+
+| 1001 | Peel    | London     |   12 |
+| 1002 | Serres  | SanJose    |   13 |
+| 1003 | AxelRod | New York   |   10 |
+| 1004 | Motika  | London     |   11 |
+| 1007 | Rofkin  | Barcenlona |   15 |
+| 1008 | Fran    | London     |   25 |
++------+---------+------------+------+
 
 
 Tables involved
