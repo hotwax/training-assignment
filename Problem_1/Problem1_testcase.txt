@@ -1,0 +1,51 @@
+Test case 1. If words.txt file is not present
+
+Output:  words.txt file not found.
+
+
+Test case 2. If urls.txt file is not present
+
+Output: urls.txt file not found
+
+
+Test case3: Both file words.txt file found and urls.txt file is present
+
+Input: words.txt
+
+to
+the 
+and
+a
+PAY
+US
+BLOG
+OFBiz
+Tutorials
+
+Input :urls.txt
+
+https://www.hotwaxsystems.com/
+https://www.geeksforgeeks.org/
+
+
+Output:
+
+=================================================
+https://www.hotwaxsystems.com/
+and->21
+to->19
+OFBiz->15
+https://www.geeksforgeeks.org/
+and->15
+to->7
+a->1
+=================================================
+and->36
+to->26
+OFBiz->15
+a->9
+US->6
+BLOG->3
+Tutorials->3
+PAY->2
+the ->0
