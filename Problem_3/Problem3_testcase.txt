@@ -1,0 +1,71 @@
+Test case 1: (AccountOverdrawn)
+
+Input:
+ balance = 1000
+ Account holders: Kunal, Akhil
+
+Output:
+
+Kunal withdraw 100
+Remaining Balance is: 900
+Akhil withdraw 100       
+Remaining Balance is: 800
+Kunal withdraw 100
+Remaining Balance is: 700
+Akhil withdraw 100       
+Remaining Balance is: 600
+Kunal withdraw 100
+Remaining Balance is: 500
+Akhil withdraw 100
+Remaining Balance is: 400
+Kunal withdraw 100
+Remaining Balance is: 300
+Akhil withdraw 100
+Remaining Balance is: 200
+Kunal withdraw 100
+Remaining Balance is: 100
+Akhil withdraw 100
+Remaining Balance is: 0
+Akhil withdraw 100
+Remaining Balance is: 0
+Kunal withdraw 100
+Remaining Balance is: -100
+Kunal withdraw 100
+Remaining Balance is: -100
+
+--------------------------------------------------------------------------
+
+Test case 2: (AccountOverdrawn Safe )
+
+Input:
+ balance = 1000
+ Account holders: Kunal, Akhil
+
+Output:
+
+Kunal withdraw 100
+Remaining Balance is: 900
+Akhil withdraw 100
+Remaining Balance is: 800
+Kunal withdraw 100
+Remaining Balance is: 700
+Akhil withdraw 100
+Remaining Balance is: 600
+Kunal withdraw 100
+Remaining Balance is: 500
+Akhil withdraw 100
+Remaining Balance is: 400
+Kunal withdraw 100
+Remaining Balance is: 300
+Akhil withdraw 100
+Remaining Balance is: 200
+Kunal withdraw 100
+Remaining Balance is: 100
+Akhil withdraw 100
+Remaining Balance is: 0
+Kunal withdraw 100
+Remaining Balance is: 0
+Akhil withdraw 100
+Remaining Balance is: 0
+
+--------------------------------------------------------------------------
