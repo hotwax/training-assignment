@@ -1,0 +1,127 @@
+Test case1 : Adding Employee
+    
+Input:
+    Enter your choice:1
+    Enter name: Raj
+    Enter email: raj2@gmail.com
+    Enter age:22
+    Enter date of birth (YYYY-MM-DD):2001-12-15
+
+Output:
+    Employee added successfully.
+
+---------------------------------------------------------------------------------------
+
+Test case 2 :Deleting Employee
+    
+Input:
+        Enter your choice:2
+        Enter employee email to delete: vaibhav100@gmail.com
+Output:
+        Employee Deleted Successfully
+
+---------------------------------------------------------------------------------------
+
+Test case 3: Display all the employee
+
+Input:
+    Enter your choice:4
+    
+Output:        
+
+┌─────────┬───────────┬─────────────────────────┬─────┬──────────────┐
+│ (index) │   name    │          email          │ age │     dob      │
+├─────────┼───────────┼─────────────────────────┼─────┼──────────────┤
+│    0    │  'kunal'  │ 'kunalbhade2@gmail.com' │ 23  │ '2001-11-15' │
+│    1    │   'Raj'   │    'raj2@gmail.com'     │ 22  │ '2001-12-15' │
+│    2    │ 'Pranav'  │  'pranav11@gmail.com'   │ 18  │ '2004-01-01' │
+│    3    │ 'Vaibhav' │ 'vaibhav100@gmail.com'  │ 24  │ '2000-03-13' │
+└─────────┴───────────┴─────────────────────────┴─────┴──────────────┘
+
+---------------------------------------------------------------------------------------
+
+Test case 4: Search Employee with sorting
+
+Input:
+        Enter your choice:3
+        Enter search query:Raj
+        Enter sort order (name,age,email,dob):name
+        Enter sort direction (asc/desc):asc
+
+Output:
+
+┌─────────┬───────┬──────────────────┬─────┬──────────────┐
+│ (index) │ name  │      email       │ age │     dob      │
+├─────────┼───────┼──────────────────┼─────┼──────────────┤
+│    0    │ 'Raj' │ 'raj2@gmail.com' │ 22  │ '2001-12-15' │
+│    1    │ 'Raj' │ 'raj1@gmail.com' │ 24  │ '1999-12-12' │
+└─────────┴───────┴──────────────────┴─────┴──────────────┘
+
+---------------------------------------------------------------------------------------
+    
+Test case 5: Employee File Not Available
+
+Input:
+Output:
+  File not found
+
+---------------------------------------------------------------------------------------
+    
+Test case 6: Invalid name 
+
+Inputs:
+        Enter your choice:1
+        Enter name: 21
+        Enter email:raj2@gmail.com
+        Enter age:21
+        Enter date of birth (YYYY-MM-DD):2000-12-12
+Output:
+        Invalid Name
+
+---------------------------------------------------------------------------------------
+
+Test case 7 : No Email or Invalid Email
+
+Input:
+        Enter your choice:1
+        Enter name: Jeetesh
+        Enter email: Jeet1121@gmailcom
+        Enter age:25
+        Enter date of birth (YYYY-MM-DD):1998-12-12
+Output:
+        Invalid Email
+
+---------------------------------------------------------------------------------------
+
+Test case 8 : No Age or Invalid age
+    Inputs:
+        Enter your choice:1
+        Enter name: raj
+        Enter email:raj2@gmail.com
+        Enter age: abc
+        Enter date of birth (YYYY-MM-DD):2000-12-12
+Output:
+        Invalid Age
+
+---------------------------------------------------------------------------------------
+
+Test case 9 : Invalid DOB
+
+Input:
+       Enter your choice:1
+       Enter name: Vaibhav
+       Enter email:Vaibhav1@gmail.com
+       Enter age:22
+       Enter date of birth (YYYY-MM-DD):20
+Output:
+     Invalid date of birth.
+     
+--------------------------------------------------------------------------------------
+
+CASE 10 : Wrong Choice
+    Inputs:
+        Choice : 8        
+    Outputs:
+        Invalid Choice
+
+---------------------------------------------------------------------------------------
