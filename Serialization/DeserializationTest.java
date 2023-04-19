@@ -59,6 +59,9 @@ public class DeserializationTest {
             System.out.println("Error: File not found.");
             e.printStackTrace();
         }
+         catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
         

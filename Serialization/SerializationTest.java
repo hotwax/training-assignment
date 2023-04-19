@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -23,6 +24,11 @@ public class SerializationTest {
         studentList.add(student3);
         studentList.add(student4);
 
+        if (args.length < 1) {
+            System.out.println("Please provide file name as command line arguments.");
+            return;
+        }
+
 
         if (!args[0].endsWith(".ser")) {
             System.out.println("Error: The file must have a .ser extension.");
@@ -35,12 +41,23 @@ public class SerializationTest {
             FileOutputStream fileOutputStream1 = new FileOutputStream(args[0]);
             ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream1);
             objectOutputStream1.writeObject(studentList);
-            System.out.println("Serialisation successful." + "on file- "+ args[0]);
+            System.out.println("Serialization successful." + "on file- "+ args[0]);
             objectOutputStream1.close();
             fileOutputStream1.close();
-        } catch (IOException e) {
+        } catch(FileNotFoundException e)
+        { 
+            System.out.println("Error: File not found.");
+
+        }
+        catch (IOException e) {
             e.printStackTrace();
-        }}
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+    }
 
         
     }
