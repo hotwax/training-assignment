@@ -1,0 +1,74 @@
+Case 1 : Invalid Choice
+
+Input : Enter your choice: dsds
+
+Output : Invalid input. Please enter a number.
+                
+
+
+Case 2: Insertion 
+
+Input: 8,6,4
+Output: 
+Postorder Traversal- 4,8,6
+
+
+
+Case 3: Wrong Input during insertion
+
+Input: Enter the key to insert: sds
+Output:  Invalid input. Please enter a number.
+
+
+
+Case 4 :Deleting a Node when Tree is empty
+Input : Enter your choice : 2
+Enter the key to delete: 45
+Output : Tree is empty
+
+
+
+Case 5 : Searching a Node which is not present in Tree
+Input : Enter the key to search: 5
+Output : Key not found in the tree.
+
+
+
+Case 6 : Searching a Node which is present in Tree
+Input : Enter the key to search: 7
+Output : Key found in the tree.
+
+
+
+Case 7 : Updating the value of a Node which is not present in Tree
+Input : Enter the key to update: 7
+        Enter the new key: 
+
+Output :Old Value and new value are same
+
+
+
+Case 8 : (Updating the value of a Node with same value as previous)
+Input : Enter the key to update: 5
+        Enter the new key: 55
+
+Output : Value Updated
+Postorder traversal of the tree: 3 55 7
+
+
+
+
+Case 9 : Updating the value of a Node which is not present
+Input : Enter your choice: 7
+        Enter the key to update: 77
+        Enter the new key: 89
+Output : The Node does not exist
+
+
+
+
+Case 10: Sorting (Inorder Traversal)
+Input: Enter your choice: 4
+Output:
+Inorder traversal of the tree: 3 7 55
+

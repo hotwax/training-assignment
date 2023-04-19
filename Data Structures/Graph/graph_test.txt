@@ -1,0 +1,90 @@
+
+Case 1: Inserting edges in graph (no of vertices = 4)
+
+Input : 
+I : (0,1),(0, 2),(1,2),(2,0),(2,3)
+
+Output : 
+Graph with vertices (0,1,2,3)
+
+0 1 1 0
+1 0 1 0
+1 1 0 1
+0 0 1 0
+
+
+
+
+Case 2: Deleting a Edge
+
+Input : 
+Deleting: (1,3)
+
+Output : Edge deleted succesfully.
+Hashmap- 
+
+Adjacency Matrix:
+0 1 1 0
+1 0 1 0
+1 1 0 0
+0 0 0 0
+
+
+
+Case 3: Deleting a Edge (that does'nt exist)
+
+Input : 
+Deleting: (11,40)
+
+Output : Edge does'nt exist
+Hashmap- 
+
+Adjacency Matrix:
+0 1 1 0
+1 0 1 0
+1 1 0 0
+0 0 0 0
+
+
+
+
+
+Case 4: BFS test
+
+Input : Inserting (3,1)
+calling bfs()
+
+Enter the starting vertex for BFS:
+1
+
+Output : 
+
+1 0 2 3
+
+
+
+
+Case 5: DFS test
+
+Input : calling dfs()
+
+
+Enter the starting vertex for BFS:
+2
+
+Output : 
+
+2 0 1 3
+
+
+
+
+
+
+Case 6: Invalid Input in menu
+
+Input: asjx
+
+Output: Invalid choice
+
+

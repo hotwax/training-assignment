@@ -1,0 +1,138 @@
+
+Case 1: Inserting values in hashmap
+
+Input : 
+Inserting : (1, 10),(2, 20) (3, 30)
+
+Output : 
+Hashmap- 
+
+0:
+1:(1,10)
+2:(2,20)
+3:(3,30) 
+4:
+
+
+
+Case 2: Inserting a value to test collision
+
+Input : 
+Inserting : (11,40)
+
+Output : Key-value pair inserted.
+Hashmap- 
+
+0:
+1:(1,10) (11,40)
+2:(2,20)
+3:(3,30)
+4:
+
+
+Case 3: Inserting a value to test updation if key is present
+
+Input : 
+Inserting : (1,50)
+
+Output : Key-value pair updated.
+Hashmap- 
+
+0:
+1:(1,50) (11,40)
+2:(2,20)
+3:(3,30)
+4:
+
+
+
+Case 4: Inserting after the capacity is full,when size = capacity (load factor =1)
+
+Input : 
+Inserting : (5,70)
+
+Output : Capacity is full
+
+Hashmap- 
+0:
+1:(1,50) (11,40)
+2:(2,20)
+3:(3,30)
+4:
+
+
+
+Case 5: Deletion when key is not present
+
+Input : 
+Deleting : 4
+
+Output : Key not found.
+
+
+
+Case 6: Deletion when key present
+
+Input : 
+Deleting : 11
+
+Output : Element Deleted
+
+0:
+1:(1,10)
+2:(2,20)
+3:(3,30)
+4:
+
+
+
+Case 7: Getting the value of key passed (key not present)
+
+Input : 
+getValue : 4
+
+Output : Element not found
+
+
+
+Case 8: Getting the value of key passed (key is present)
+
+Input : 
+getValue : 3
+
+Output : Value for key 3:30
+
+
+
+Case 9: Searching the key passed (key is present).
+
+Input : 2
+
+Output : Key Found
+
+
+
+Case 10: Searching the key passed (key is not present).
+
+Input : 8
+
+Output : Key not Found
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,160 @@
+
+Case 1: Insertion at Start when li
+
+Input:
+
+Enter your choice: 1
+Enter data to insert at start: 5
+
+Expected Output:
+The linked list should have one node with value 5 at the start.
+
+Output:
+Data Inserted
+
+LinkedList: 5
+
+
+
+
+Case 2: Insertion at End
+Input:
+
+Enter your choice: 2
+Enter data to insert at start: 9
+
+Expected Output:
+The linked list should have two nodes with value 5 at the start followed by 9.
+
+Output:
+Data Inserted
+
+LinkedList: 5->9
+
+
+
+Case 3: Deleting at the start
+Input:
+
+Enter your choice: 1
+Enter data to insert at start: 3
+
+Enter your choice: 2
+Enter data to insert at end: 6
+
+Enter your choice: 3
+
+Expected Output: data 3 should be deleted from start
+
+Outout:
+Data deleted from start
+Linked list: 5->9->6
+
+
+
+
+Case 4: Deletion at end
+Input:
+
+Enter your choice: 4
+
+Expected Output: 6 should be deleted from end
+
+
+Output:
+Data deleted from end
+Linked list: 5->9
+
+
+
+
+Case 5: Test display() method
+Input:
+5
+
+Expected Output:
+The display should show "5->9\n".
+
+Output:
+5->9
+
+
+
+
+Case 6: Test updateByPos() method
+Input:
+
+Enter position to update: 1  //(updation)
+Enter new data: 11
+
+Enter your choice: 1
+Enter data to insert at start: 6
+
+Enter your choice: 2
+Enter data to insert at end: 3
+
+Enter your choice: 2
+Enter data to insert at end: 7
+
+Enter position to update: 3  //(updation)
+Enter new data: 15
+
+
+Expected Output:
+Linked list will be: 6->11->15->3->7
+
+Output:
+
+6->11->15->3->7
+
+
+
+
+Case 7: Sorting the list
+Input:
+
+Enter your choice: 5
+
+Expected Output:
+The linked list should sort the existing list (6->11->15->3->7).
+
+Output:
+
+3->6->7->11->15
+
+
+case 8: Searching
+
+Input:
+
+Enter your choice: 8  
+Enter data to search: 7 (Element is present)
+
+Enter your choice: 8
+Enter data to search: 5 (Element is not present)
+
+Expected Output:
+"Found" for 7
+"Not Found for 5"
+
+Output:
+Found
+Not Found
+
+
+
+case 9: Invalid Input
+
+Input:
+
+Enter your choice: dshbdsd 
+
+Expected Output: Invalid Input
+
+Output:
+Invalid Input
+
+
+
+
+
