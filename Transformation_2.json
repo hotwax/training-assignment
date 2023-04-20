@@ -1,0 +1,30 @@
+// Input Json
+
+{
+  "name": "John",
+  "age": 35,
+  "city": "New York"
+}
+
+// Output
+
+{
+  "Name": "John",
+  "Age": 35,
+  "City": "New York"
+}
+
+// Jolt Spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "city": "City"
+    }
+  }
+]
+
+// Used Shift Operation for this transformation
