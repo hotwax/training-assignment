@@ -1,0 +1,30 @@
+Input:
+{
+    "name": "John",
+    "age": 35,
+    "city": "New York",
+    "phone": "+1-555-123-4567"
+}
+
+Output:
+{
+    "Name": "John",
+    "Age": 35,
+    "Contact": {
+        "City": "New York",
+        "Phone": "+1-555-123-4567"
+    }
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "name": "Name",
+            "age": "Age",
+            "city": "Contact.City",
+            "phone": "Contact.Phone"
+        }
+    }
+]
