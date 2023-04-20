@@ -60,8 +60,8 @@ WHERE
 | CNAME   |
 +---------+
 | Hoffman |
-| Ciemens |
-| Periera |
+| Clemens |
+| Pereira |
 +---------+
 
 
@@ -79,9 +79,9 @@ GROUP BY o.odate , s.sname;
 +------------+---------+------------+
 | odate      | sname   | max(o.amt) |
 +------------+---------+------------+
-| 1990-03-10 | Rofkin  |    1098.16 |
+| 1990-03-10 | Rifkin  |    1098.16 |
 | 1990-03-10 | Peel    |     767.19 |
-| 1990-03-10 | Mobika  |     1990.1 |
+| 1990-03-10 | Motika  |     1990.1 |
 | 1990-03-10 | Serres  |    5160.45 |
 | 1990-04-10 | AxelRod |    1713.23 |
 | 1990-04-10 | Serres  |      75.75 |
@@ -137,8 +137,8 @@ WHERE
 | 1001 | Peel    |
 | 1002 | Serres  |
 | 1003 | AxelRod |
-| 1004 | Mobika  |
-| 1007 | Rofkin  |
+| 1004 | Motika  |
+| 1007 | Rifkin  |
 +------+---------+
 
 
@@ -161,9 +161,9 @@ FROM
 | Giovanni | AxelRod |
 | Liu      | Serres  |
 | Grass    | Serres  |
-| Ciemens  | Peel    |
-| Cisneros | Rofkin  |
-| Periera  | Mobika  |
+| Clemens  | Peel    |
+| Cisneros | Rifkin  |
+| Pereira  | Motika  |
 +----------+---------+
 
 
@@ -227,7 +227,7 @@ ORDER BY COUNT(o.snum) DESC;
 +------+---------+---------------+
 | 1001 | Peel    |             3 |
 | 1002 | Serres  |             3 |
-| 1007 | Rofkin  |             2 |
+| 1007 | Rifkin  |             2 |
 | 1004 | Motika  |             1 |
 | 1003 | AxelRod |             1 |
 +------+---------+---------------+
@@ -256,9 +256,9 @@ WHERE
 | 2002 | Giovanni | Rome    |    200 | 1003 |
 | 2003 | Liu      | Sanjose |    200 | 1002 |
 | 2004 | Grass    | Berlin  |    300 | 1002 |
-| 2006 | Ciemens  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
-| 2007 | Periera  | Rome    |    100 | 1004 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
 +------+----------+---------+--------+------+
 
 
@@ -280,9 +280,9 @@ FROM
 | Motika | Hoffman  | London  |
 | Peel   | Hoffman  | London  |
 | Serres | Liu      | SanJose |
-| Fran   | Ciemens  | London  |
-| Motika | Ciemens  | London  |
-| Peel   | Ciemens  | London  |
+| Fran   | Clemens  | London  |
+| Motika | Clemens  | London  |
+| Peel   | Clemens  | London  |
 | Serres | Cisneros | SanJose |
 +--------+----------+---------+
 
@@ -367,7 +367,7 @@ FROM
 | Hoffman  |
 | Liu      |
 | Cisneros |
-| Periera  |
+| Pereira  |
 +----------+
 
 
@@ -484,7 +484,7 @@ WHERE
 | sname  | snum |
 +--------+------+
 | Serres | 1002 |
-| Rofkin | 1007 |
+| Rifkin | 1007 |
 +--------+------+
 
 
@@ -511,9 +511,9 @@ WHERE
 +----------+------+
 | Liu      | 2003 |
 | Grass    | 2004 |
-| Ciemens  | 2006 |
+| Clemens  | 2006 |
 | Cisneros | 2008 |
-| Periera  | 2007 |
+| Pereira  | 2007 |
 +----------+------+
 
 
@@ -533,7 +533,7 @@ FROM
 | Serres  | 13%       |
 | AxelRod | 10%       |
 | Motika  | 11%       |
-| Rofkin  | 15%       |
+| Rifkin  | 15%       |
 | Fran    | 25%       |
 +---------+-----------+
 
@@ -578,7 +578,7 @@ GROUP BY s.sname;
 +--------+------------+
 | sname  | max(o.amt) |
 +--------+------------+
-| Rofkin |    1098.16 |
+| Rifkin |    1098.16 |
 | Peel   |     767.19 |
 | Motika |     1900.1 |
 | Serres |    5160.45 |
@@ -701,7 +701,7 @@ WHERE
 +----------+--------+------+
 | Liu      | Serres |   13 |
 | Grass    | Serres |   13 |
-| Cisneros | Rofkin |   15 |
+| Cisneros | Rifkin |   15 |
 +----------+--------+------+
 
 
@@ -797,14 +797,14 @@ FROM
         INNER JOIN
     orders o ON s.snum = o.snum
 GROUP BY sname
-HAVING (s.sname = 'Serres' OR s.sname = 'Rofkin');
+HAVING (s.sname = 'Serres' OR s.sname = 'Rifkin');
 
 
 
 +--------+------------+
 | sname  | max(o.amt) |
 +--------+------------+
-| Rofkin |    1098.16 |
+| Rifkin |    1098.16 |
 | Serres |    5160.45 |
 +--------+------------+
 
@@ -820,14 +820,14 @@ FROM
     orders o
 WHERE
     s.snum = o.snum AND s.sname = 'Serres'
-        OR s.sname = 'Rofkin'
+        OR s.sname = 'Rifkin'
 GROUP BY sname;
 
 
 +--------+----------+
 | sname  | max(amt) |
 +--------+----------+
-| Rofkin |  9891.88 |
+| Rifkin |  9891.88 |
 | Serres |  5160.45 |
 +--------+----------+
 
@@ -849,7 +849,7 @@ ORDER BY snum , sname , comm , city;
 | 1002 | Serres  | SanJose    |   13 |
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 | 1008 | Fran    | London     |   25 |
 +------+---------+------------+------+
 
@@ -869,7 +869,7 @@ WHERE
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
-| 2006 | Ciemens  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
@@ -887,7 +887,7 @@ WHERE
 +------+----------+---------+--------+------+
 | 2002 | Giovanni | Rome    |    200 | 1003 |
 | 2004 | Grass    | Berlin  |    300 | 1002 |
-| 2006 | Ciemens  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
@@ -907,47 +907,47 @@ FROM
 | cname    | sname   |
 +----------+---------+
 | Hoffman  | Fran    |
-| Hoffman  | Rofkin  |
+| Hoffman  | Rifkin  |
 | Hoffman  | Motika  |
 | Hoffman  | AxelRod |
 | Hoffman  | Serres  |
 | Hoffman  | Peel    |
 | Giovanni | Fran    |
-| Giovanni | Rofkin  |
+| Giovanni | Rifkin  |
 | Giovanni | Motika  |
 | Giovanni | AxelRod |
 | Giovanni | Serres  |
 | Giovanni | Peel    |
 | Liu      | Fran    |
-| Liu      | Rofkin  |
+| Liu      | Rifkin  |
 | Liu      | Motika  |
 | Liu      | AxelRod |
 | Liu      | Serres  |
 | Liu      | Peel    |
 | Grass    | Fran    |
-| Grass    | Rofkin  |
+| Grass    | Rifkin  |
 | Grass    | Motika  |
 | Grass    | AxelRod |
 | Grass    | Serres  |
 | Grass    | Peel    |
-| Ciemens  | Fran    |
-| Ciemens  | Rofkin  |
-| Ciemens  | Motika  |
-| Ciemens  | AxelRod |
-| Ciemens  | Serres  |
-| Ciemens  | Peel    |
+| Clemens  | Fran    |
+| Clemens  | Rifkin  |
+| Clemens  | Motika  |
+| Clemens  | AxelRod |
+| Clemens  | Serres  |
+| Clemens  | Peel    |
 | Cisneros | Fran    |
-| Cisneros | Rofkin  |
+| Cisneros | Rifkin  |
 | Cisneros | Motika  |
 | Cisneros | AxelRod |
 | Cisneros | Serres  |
 | Cisneros | Peel    |
-| Periera  | Fran    |
-| Periera  | Rofkin  |
-| Periera  | Motika  |
-| Periera  | AxelRod |
-| Periera  | Serres  |
-| Periera  | Peel    |
+| Pereira  | Fran    |
+| Pereira  | Rifkin  |
+| Pereira  | Motika  |
+| Pereira  | AxelRod |
+| Pereira  | Serres  |
+| Pereira  | Peel    |
 +----------+---------+
 
 
@@ -1004,7 +1004,7 @@ WHERE
 | Hoffman  | 2001 |
 | Giovanni | 2002 |
 | Grass    | 2004 |
-| Ciemens  | 2006 |
+| Clemens  | 2006 |
 | Cisneros | 2008 |
 +----------+------+
 
@@ -1218,9 +1218,9 @@ WHERE
 +---------+----------+--------+--------------------+
 | sname   | cname    | rating | (comm* amt)/100    |
 +---------+----------+--------+--------------------+
-| Rofkin  | Cisneros |    300 |             2.8035 |
+| Rifkin  | Cisneros |    300 |             2.8035 |
 | Serres  | Liu      |    200 |  670.8584999999999 |
-| Rofkin  | Cisneros |    300 | 164.72400000000002 |
+| Rifkin  | Cisneros |    300 | 164.72400000000002 |
 | AxelRod | Giovanni |    200 | 171.32299999999998 |
 | Serres  | Grass    |    300 |             9.8475 |
 | Serres  | Grass    |    300 | 170.29350000000002 |
@@ -1246,9 +1246,9 @@ WHERE
 +---------+----------+--------+--------------------+
 | sname   | cname    | rating | (comm * amt) / 100 |
 +---------+----------+--------+--------------------+
-| Rofkin  | Cisneros |    300 |             2.8035 |
+| Rifkin  | Cisneros |    300 |             2.8035 |
 | Serres  | Liu      |    200 |  670.8584999999999 |
-| Rofkin  | Cisneros |    300 | 164.72400000000002 |
+| Rifkin  | Cisneros |    300 | 164.72400000000002 |
 | AxelRod | Giovanni |    200 | 171.32299999999998 |
 | Serres  | Grass    |    300 |             9.8475 |
 | Serres  | Grass    |    300 | 170.29350000000002 |
@@ -1296,7 +1296,7 @@ WHERE
 +------+--------+------------+------+
 | 1001 | Peel   | London     |   12 |
 | 1004 | Motika | London     |   11 |
-| 1007 | Rofkin | Barcenlona |   15 |
+| 1007 | Rifkin | Barcenlona |   15 |
 | 1008 | Fran   | London     |   25 |
 +------+--------+------------+------+
 
@@ -1324,7 +1324,7 @@ WHERE
 +------+---------+
 | 1003 | AxelRod |
 | 1004 | Motika  |
-| 1007 | Rofkin  |
+| 1007 | Rifkin  |
 +------+---------+
 
 
@@ -1344,7 +1344,7 @@ HAVING (COUNT(cnum) = 1);
 | snum | sname   |
 +------+---------+
 | 1003 | AxelRod |
-| 1007 | Rofkin  |
+| 1007 | Rifkin  |
 | 1004 | Motika  |
 +------+---------+
 
@@ -1369,7 +1369,7 @@ WHERE
 +---------+---------+--------+
 | cname   | cname   | sname  |
 +---------+---------+--------+
-| Hoffman | Ciemens | Peel   |
+| Hoffman | Clemens | Peel   |
 | Liu     | Grass   | Serres |
 +---------+---------+--------+
 
@@ -1417,14 +1417,14 @@ FROM
 +----------+------+
 | Cisneros | 3001 |
 | Hoffman  | 3003 |
-| Periera  | 3002 |
+| Pereira  | 3002 |
 | Liu      | 3005 |
 | Cisneros | 3006 |
 | Giovanni | 3009 |
 | Grass    | 3007 |
-| Ciemens  | 3008 |
+| Clemens  | 3008 |
 | Grass    | 3010 |
-| Ciemens  | 3011 |
+| Clemens  | 3011 |
 +----------+------+
 
 
@@ -1574,7 +1574,7 @@ WHERE
 | 2003 | Liu      | Sanjose |    200 | 1002 |
 | 2004 | Grass    | Berlin  |    300 | 1002 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
-| 2007 | Periera  | Rome    |    100 | 1004 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
 +------+----------+---------+--------+------+
 
 
@@ -1594,7 +1594,7 @@ WHERE
 | CNUM | CNAME   | CITY   | RATING | SNUM |
 +------+---------+--------+--------+------+
 | 2001 | Hoffman | London |    100 | 1001 |
-| 2006 | Ciemens | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
 +------+---------+--------+--------+------+
 
 
@@ -1666,7 +1666,7 @@ FROM
 +--------+---------+
 | sname  | cname   |
 +--------+---------+
-| Motika | Periera |
+| Motika | Pereira |
 +--------+---------+
 
 
@@ -1686,7 +1686,7 @@ FROM
 | Serres  |   13 |
 | AxelRod |   10 |
 | Motika  |   11 |
-| Rofkin  |   15 |
+| Rifkin  |   15 |
 | Fran    |   25 |
 +---------+------+
 
@@ -1717,8 +1717,8 @@ WHERE
 +------+---------+--------+
 | cnum | cname   | city   |
 +------+---------+--------+
-| 2006 | Ciemens | London |
-| 2007 | Periera | Rome   |
+| 2006 | Clemens | London |
+| 2007 | Pereira | Rome   |
 +------+---------+--------+
 
 
@@ -1740,7 +1740,7 @@ WHERE
 | sname   | cname    |
 +---------+----------+
 | AxelRod | Giovanni |
-| Motika  | Periera  |
+| Motika  | Pereira  |
 +---------+----------+
 
 
@@ -1767,7 +1767,7 @@ HAVING COUNT(O.CNUM) = (SELECT
 | CNUM | CNAME    | RATING | AVERAGE_ORDERS |
 +------+----------+--------+----------------+
 | 2001 | Hoffman  |    100 |              1 |
-| 2007 | Periera  |    100 |              1 |
+| 2007 | Pereira  |    100 |              1 |
 | 2003 | Liu      |    200 |              1 |
 | 2002 | Giovanni |    200 |              1 |
 +------+----------+--------+----------------+
@@ -1852,15 +1852,15 @@ WHERE
 | onum | sname   | cname    |
 +------+---------+----------+
 | 3003 | Peel    | Hoffman  |
-| 3011 | Peel    | Ciemens  |
-| 3008 | Peel    | Ciemens  |
+| 3011 | Peel    | Clemens  |
+| 3008 | Peel    | Clemens  |
 | 3005 | Serres  | Liu      |
 | 3010 | Serres  | Grass    |
 | 3007 | Serres  | Grass    |
 | 3009 | AxelRod | Giovanni |
-| 3002 | Motika  | Periera  |
-| 3006 | Rofkin  | Cisneros |
-| 3001 | Rofkin  | Cisneros |
+| 3002 | Motika  | Pereira  |
+| 3006 | Rifkin  | Cisneros |
+| 3001 | Rifkin  | Cisneros |
 +------+---------+----------+
 
 
@@ -1909,7 +1909,7 @@ WHERE
 | Serres  |
 | AxelRod |
 | Motika  |
-| Rofkin  |
+| Rifkin  |
 +---------+
 
 
@@ -1961,8 +1961,8 @@ WHERE
 | CNUM | CNAME   | CITY   | RATING | SNUM |
 +------+---------+--------+--------+------+
 | 2001 | Hoffman | London |    100 | 1001 |
-| 2006 | Ciemens | London |    100 | 1001 |
-| 2007 | Periera | Rome   |    100 | 1004 |
+| 2006 | Clemens | London |    100 | 1001 |
+| 2007 | Pereira | Rome   |    100 | 1004 |
 +------+---------+--------+--------+------+
 
 
@@ -2069,7 +2069,7 @@ HAVING (COUNT(onum) > 1);
 +------+--------+
 | 1001 | Peel   |
 | 1002 | Serres |
-| 1007 | Rofkin |
+| 1007 | Rifkin |
 +------+--------+
 
 
@@ -2098,7 +2098,7 @@ WHERE
 | 2001 | Hoffman | London  |    100 | 1001 |
 | 2003 | Liu     | Sanjose |    200 | 1002 |
 | 2004 | Grass   | Berlin  |    300 | 1002 |
-| 2006 | Ciemens | London  |    100 | 1001 |
+| 2006 | Clemens | London  |    100 | 1001 |
 +------+---------+---------+--------+------+
 
 
@@ -2166,8 +2166,8 @@ ORDER BY rating DESC;
 |    200 | Giovanni | 2002 |
 |    200 | Liu      | 2003 |
 |    100 | Hoffman  | 2001 |
-|    100 | Ciemens  | 2006 |
-|    100 | Periera  | 2007 |
+|    100 | Clemens  | 2006 |
+|    100 | Pereira  | 2007 |
 +--------+----------+------+
 
 
@@ -2274,11 +2274,11 @@ GROUP BY cnum , cname;
 +------+----------+----------+
 | 2008 | Cisneros |    18.69 |
 | 2001 | Hoffman  |   767.19 |
-| 2007 | Periera  |   1900.1 |
+| 2007 | Pereira  |   1900.1 |
 | 2003 | Liu      |  5160.45 |
 | 2002 | Giovanni |  1713.23 |
 | 2004 | Grass    |    75.75 |
-| 2006 | Ciemens  |     4723 |
+| 2006 | Clemens  |     4723 |
 +------+----------+----------+
 
 
@@ -2374,7 +2374,7 @@ WHERE
 | 1002 | Serres  | SanJose    |   13 |
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 | 1008 | Fran    | London     |   25 |
 +------+---------+------------+------+
 
@@ -2401,7 +2401,7 @@ WHERE
 | 1002 | Serres  | SanJose    |   13 |
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 +------+---------+------------+------+
 
 
@@ -2531,7 +2531,7 @@ HAVING COUNT(orders.cnum) = (SELECT
 +----------+------+--------+--------------------+---------+
 | Cisneros | 2008 |    300 |                  2 | YES     |
 | Grass    | 2004 |    300 |                  2 | YES     |
-| Ciemens  | 2006 |    100 |                  2 | NO      |
+| Clemens  | 2006 |    100 |                  2 | NO      |
 +----------+------+--------+--------------------+---------+
 
 
@@ -2555,8 +2555,8 @@ ORDER BY rating DESC;
 | Giovanni |
 | Liu      |
 | Hoffman  |
-| Ciemens  |
-| Periera  |
+| Clemens  |
+| Pereira  |
 +----------+
 
 
@@ -2656,7 +2656,7 @@ GROUP BY orders.snum;
 +---------+------------+----------+
 | sname   | odate      | max(amt) |
 +---------+------------+----------+
-| Rofkin  | 1990-03-10 |  1098.16 |
+| Rifkin  | 1990-03-10 |  1098.16 |
 | Peel    | 1990-03-10 |  9891.88 |
 | Motika  | 1990-03-10 |   1900.1 |
 | Serres  | 1990-03-10 |  5160.45 |
@@ -2705,10 +2705,10 @@ WHERE
 | cname    | cname    |
 +----------+----------+
 | Giovanni | Liu      |
-| Hoffman  | Ciemens  |
+| Hoffman  | Clemens  |
 | Grass    | Cisneros |
-| Ciemens  | Periera  |
-| Hoffman  | Periera  |
+| Clemens  | Pereira  |
+| Hoffman  | Pereira  |
 +----------+----------+
 
 
@@ -2789,7 +2789,7 @@ WHERE
 | cname   |
 +---------+
 | Liu     |
-| Ciemens |
+| Clemens |
 +---------+
 
 
@@ -2855,8 +2855,8 @@ WHERE
 +--------+----------+---------+
 | Fran   | Hoffman  | London  |
 | Motika | Hoffman  | London  |
-| Fran   | Ciemens  | London  |
-| Motika | Ciemens  | London  |
+| Fran   | Clemens  | London  |
+| Motika | Clemens  | London  |
 | Serres | Cisneros | SanJose |
 +--------+----------+---------+
 
@@ -2909,7 +2909,7 @@ WHERE
 +---------+------+------------+---------+
 | Motika  | 3002 | 1990-03-10 |  1900.1 |
 | Serres  | 3005 | 1990-03-10 | 5160.45 |
-| Rofkin  | 3006 | 1990-03-10 | 1098.16 |
+| Rifkin  | 3006 | 1990-03-10 | 1098.16 |
 | AxelRod | 3009 | 1990-04-10 | 1713.23 |
 | Peel    | 3011 | 1990-06-10 | 9891.88 |
 +---------+------+------------+---------+
