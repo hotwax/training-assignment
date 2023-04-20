@@ -3,24 +3,12 @@ const fs = require('fs');
 const readline = require('readline'); 
 const fileName = 'employees.txt';
 
+const allEmails= new Set();
+
 
 // Define the Employee class
 class Employee {
   constructor(name, email, age, dob) {
-
-    // Validate the input parameters
-    if (!/^[a-zA-Z ]+$/.test(name)) {
-      throw new Error('Name should only contain letters.');
-    }
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      throw new Error('Email is not valid.');
-    }
-    if (!Number.isInteger(age) ||age < 18 || age > 65) {
-      throw new Error('Age should be and between 18 and 65.');
-    }
-    if (!isValidDOB(dob)) {
-      throw new Error('Invalid date of birth.');
-    }
 
     // Set the instance variables
     this.name = name;
@@ -31,7 +19,7 @@ class Employee {
 }
 
 // Create a readline interface to read user input
-const rl = readline.createInterface({
+const inputOutputReader = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
@@ -39,6 +27,38 @@ const rl = readline.createInterface({
 
 // Add an employee to the file
 function addEmployee(employee) {
+
+
+  // Validate the input parameters
+  const { name, email, age, dob } = employee;
+
+    if (!/^[a-zA-Z ]+$/.test(name)) {
+      console.log('Name should only contain letters.');
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      console.log('Email is not valid.');
+      return;
+    }
+
+    // Check if email already exists
+    if (allEmails.has(email)) {
+      console.log('Email already exists.');
+      return;
+    }
+
+    // Add email to the array
+    allEmails.push(email);
+
+    if (!Number.isInteger(age) ||age < 18 || age > 65) {
+      console.log('Age should be and between 18 and 65.');
+      return;
+    }
+    if (!isValidDOB(dob)) {
+      console.log('Invalid date of birth.');
+      return;
+    }
+
   const employeeData = `${employee.name},${employee.email},${employee.age},${employee.dob}`;
 
   fs.appendFileSync(fileName, `\n${employeeData}`, (err) => {
@@ -103,12 +123,18 @@ function searchEmployees(query, orderBy, direction) {
 function loadEmployeesFromFile(){
   let employees = [];
 
+  
   try{
   const data = fs.readFileSync(fileName, 'utf8');
   employees = data.split('\n').map((line) => {
     const [name, email, age, dob] = line.split(',');
     return new Employee(name, email, parseInt(age), dob);
   });
+
+
+  // load emails into the set
+  employees.forEach((employee) => allEmails.add(employee.email));
+
   return employees;}
   catch(err){
     if (err.code === 'ENOENT') {
@@ -180,22 +206,21 @@ function menu(){
 // Define the main program
 loadEmployeesFromFile();
 
-rl.setPrompt('Menu:\n1. Add employee\n2. Delete employee\n3. Search employees\n4. Display \n5.Exit\nEnter your choice:');
-rl.prompt();
+inputOutputReader.setPrompt('Menu:\n1. Add employee\n2. Delete employee\n3. Search employees\n4. Display \n5.Exit\nEnter your choice:');
+inputOutputReader.prompt();
 
-rl.on('line', (choice) => {
+inputOutputReader.on('line', (choice) => {
   switch (choice.trim()) {
     case '1':
-      rl.question('Enter name:', (name) => {
-        rl.question('Enter email:', (email) => {
-          rl.question('Enter age:', (age) => {
+      inputOutputReader.question('Enter name:', (name) => {
+        inputOutputReader.question('Enter email:', (email) => {
+          inputOutputReader.question('Enter age:', (age) => {
             age = parseInt(age);
-            rl.question('Enter date of birth (YYYY-MM-DD):', (dobStr) => {
+            inputOutputReader.question('Enter date of birth (YYYY-MM-DD):', (dobStr) => {
               // const dob = new Date(dobStr);
               const employee = new Employee(name, email, age, dobStr);
               addEmployee(employee);
-              console.log('Employee added successfully.');
-              rl.prompt();
+              inputOutputReader.prompt();
             });
           });
         });
@@ -203,38 +228,38 @@ rl.on('line', (choice) => {
       break;
 
       case '2':
-        rl.question('Enter employee email to delete:', (emailToDelete) => {
+        inputOutputReader.question('Enter employee email to delete:', (emailToDelete) => {
           deleteEmployee(emailToDelete);
-          rl.prompt();
+          inputOutputReader.prompt();
         });
         break;
 
     case '3':
-      rl.question('Enter search query:', (query) => {
-        rl.question('Enter sort order (name,age,email,dob):', (orderBy) => {
-          rl.question('Enter sort direction (asc/desc):', (direction) => {
+      inputOutputReader.question('Enter search query:', (query) => {
+        inputOutputReader.question('Enter sort order (name,age,email,dob):', (orderBy) => {
+          inputOutputReader.question('Enter sort direction (asc/desc):', (direction) => {
             const results = searchEmployees(query, orderBy, direction);
             console.log('Search results:');
             console.table(results);
-            rl.prompt();
+            inputOutputReader.prompt();
           });
         });
       });
       break;
 
-    case '5':
-      console.log('Exiting program.');
-      rl.close();
+    case '4':
+      displayEmployees();
+      inputOutputReader.prompt();
       break;
 
-      case '4':
-        displayEmployees();
-        rl.prompt();
-        break;
+    case '5':
+      console.log('Exiting program.');
+      inputOutputReader.close();
+      process.exit(0);
 
     default:
       console.log('Invalid choice.');
-      rl.prompt();
+      inputOutputReader.prompt();
       break;
   }
 });
