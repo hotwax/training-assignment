@@ -8,7 +8,7 @@ Salespeople Table
 | 1002 | Serres  | SanJose    |   13 |
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 | 1008 | Fran    | London     |   25 |
 +------+---------+------------+------+
 
@@ -22,9 +22,9 @@ Customers Table
 | 2002 | Giovanni | Rome    |    200 | 1003 |
 | 2003 | Liu      | Sanjose |    200 | 1002 |
 | 2004 | Grass    | Berlin  |    300 | 1002 |
-| 2006 | Ciemens  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
-| 2007 | Periera  | Rome    |    100 | 1004 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
 +------+----------+---------+--------+------+
 
 
@@ -82,8 +82,8 @@ Expected Output:
 | CNAME   |
 +---------+
 | Hoffman |
-| Ciemens |
-| Periera |
+| Clemens |
+| Pereira |
 +---------+
 
 Table involved: Customers
@@ -102,9 +102,9 @@ Expected Output:
 +------------+---------+------------+
 | odate      | sname   | max(o.amt) |
 +------------+---------+------------+
-| 1990-03-10 | Rofkin  |    1098.16 |
+| 1990-03-10 | Rifkin  |    1098.16 |
 | 1990-03-10 | Peel    |     767.19 |
-| 1990-03-10 | Mobika  |     1990.1 |
+| 1990-03-10 | Motika  |     1990.1 |
 | 1990-03-10 | Serres  |    5160.45 |
 | 1990-04-10 | AxelRod |    1713.23 |
 | 1990-04-10 | Serres  |      75.75 |
@@ -168,8 +168,8 @@ Expected Output:
 | 1001 | Peel    |
 | 1002 | Serres  |
 | 1003 | AxelRod |
-| 1004 | Mobika  |
-| 1007 | Rofkin  |
+| 1004 | Motika  |
+| 1007 | Rifkin  |
 +------+---------+
 
 Tables involved: Salespeople
@@ -193,8 +193,8 @@ Expected Output:
 | 1001 | Peel    |
 | 1002 | Serres  |
 | 1003 | AxelRod |
-| 1004 | Mobika  |
-| 1007 | Rofkin  |
+| 1004 | Motika  |
+| 1007 | Rifkin  |
 +------+---------+
 
 Tables involved: Salespeople
@@ -218,8 +218,8 @@ Expected Output:
 | 1001 | Peel    |
 | 1002 | Serres  |
 | 1003 | AxelRod |
-| 1004 | Mobika  |
-| 1007 | Rofkin  |
+| 1004 | Motika  |
+| 1007 | Rifkin  |
 +------+---------+
 
 Tables involved: Salespeople
@@ -242,7 +242,7 @@ Expected output:
 +------+---------+---------------+
 | 1001 | Peel    |             3 |
 | 1002 | Serres  |             3 |
-| 1007 | Rofkin  |             2 |
+| 1007 | Rifkin  |             2 |
 | 1004 | Motika  |             1 |
 | 1003 | AxelRod |             1 |
 +------+---------+---------------+
@@ -271,9 +271,9 @@ Expected Output:
 | 2002 | Giovanni | Rome    |    200 | 1003 |
 | 2003 | Liu      | Sanjose |    200 | 1002 |
 | 2004 | Grass    | Berlin  |    300 | 1002 |
-| 2006 | Ciemens  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
-| 2007 | Periera  | Rome    |    100 | 1004 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
 +------+----------+---------+--------+------+
 
 Tables involved: Customers
@@ -297,9 +297,9 @@ Expected Output:
 | Motika | Hoffman  | London  |
 | Peel   | Hoffman  | London  |
 | Serres | Liu      | SanJose |
-| Fran   | Ciemens  | London  |
-| Motika | Ciemens  | London  |
-| Peel   | Ciemens  | London  |
+| Fran   | Clemens  | London  |
+| Motika | Clemens  | London  |
+| Peel   | Clemens  | London  |
 | Serres | Cisneros | SanJose |
 +--------+----------+---------+
 
@@ -388,7 +388,7 @@ Expeced Output:
 | Hoffman  |
 | Liu      |
 | Cisneros |
-| Periera  |
+| Pereira  |
 +----------+
 
 Tables involved: Customers, Orders
@@ -460,7 +460,7 @@ Expected Result:
 | 1002 | Serres  | SanJose    |   13 |
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 | 1008 | Fran    | London     |   25 |
 +------+---------+------------+------+
 
@@ -482,9 +482,9 @@ Expected:
 +----------+------+
 | Liu      | 2003 |
 | Grass    | 2004 |
-| Ciemens  | 2006 |
+| Clemens  | 2006 |
 | Cisneros | 2008 |
-| Periera  | 2007 |
+| Pereira  | 2007 |
 +----------+------+
 
 Tables involved: Salespeople, Customers
@@ -509,7 +509,7 @@ Expected:
 | Serres  | 13%       |
 | AxelRod | 10%       |
 | Motika  | 11%       |
-| Rofkin  | 15%       |
+| Rifkin  | 15%       |
 | Fran    | 25%       |
 +---------+-----------+
 
@@ -556,7 +556,7 @@ Expected Output:
 +--------+------------+
 | sname  | max(o.amt) |
 +--------+------------+
-| Rofkin |    1098.16 |
+| Rifkin |    1098.16 |
 | Peel   |     767.19 |
 | Motika |     1900.1 |
 | Serres |    5160.45 |
@@ -649,7 +649,7 @@ select c.cname, s.sname, s.comm from salespeople s inner join customers c where 
 | cname   | sname | comm |
 +---------+-------+------+
 | Hoffman | Peel  |   12 |
-| Ciemens | Peel  |   12 |
+| Clemens | Peel  |   12 |
 +---------+-------+------+
 
 Tables involved: Salespeople,Customers
@@ -757,7 +757,7 @@ Tables involved: Salespeople, Orders, Customers
 
 Approach: Join the salespeople and orders tables on snum, group by sname, filter rows with sname as Serres or Rifkin, and use the MAX function to retrieve the largest order amount.
 
-select s.sname, max(o.amt) from salespeople s inner join orders o on s.snum= o.snum group by sname having(s.sname="Serres" or s.sname="Rofkin");
+select s.sname, max(o.amt) from salespeople s inner join orders o on s.snum= o.snum group by sname having(s.sname="Serres" or s.sname="Rifkin");
 
 
 Expected Output:
@@ -765,7 +765,7 @@ Expected Output:
 +--------+------------+
 | sname  | max(o.amt) |
 +--------+------------+
-| Rofkin |    1098.16 |
+| Rifkin |    1098.16 |
 | Serres |    5160.45 |
 +--------+------------+
 
@@ -792,7 +792,7 @@ Expected Output:
 | 1002 | Serres  | SanJose    |   13 |
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 | 1008 | Fran    | London     |   25 |
 +------+---------+------------+------+
 
@@ -812,7 +812,7 @@ Expected Outptut:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
-| 2006 | Ciemens  | London  |    100 | 1001 |
+| 2006 | Clemens  | London  |    100 | 1001 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
 +------+----------+---------+--------+------+
 
@@ -837,47 +837,47 @@ Expected Outptut:
 | cname    | sname   |
 +----------+---------+
 | Hoffman  | Fran    |
-| Hoffman  | Rofkin  |
+| Hoffman  | Rifkin  |
 | Hoffman  | Motika  |
 | Hoffman  | AxelRod |
 | Hoffman  | Serres  |
 | Hoffman  | Peel    |
 | Giovanni | Fran    |
-| Giovanni | Rofkin  |
+| Giovanni | Rifkin  |
 | Giovanni | Motika  |
 | Giovanni | AxelRod |
 | Giovanni | Serres  |
 | Giovanni | Peel    |
 | Liu      | Fran    |
-| Liu      | Rofkin  |
+| Liu      | Rifkin  |
 | Liu      | Motika  |
 | Liu      | AxelRod |
 | Liu      | Serres  |
 | Liu      | Peel    |
 | Grass    | Fran    |
-| Grass    | Rofkin  |
+| Grass    | Rifkin  |
 | Grass    | Motika  |
 | Grass    | AxelRod |
 | Grass    | Serres  |
 | Grass    | Peel    |
-| Ciemens  | Fran    |
-| Ciemens  | Rofkin  |
-| Ciemens  | Motika  |
-| Ciemens  | AxelRod |
-| Ciemens  | Serres  |
-| Ciemens  | Peel    |
+| Clemens  | Fran    |
+| Clemens  | Rifkin  |
+| Clemens  | Motika  |
+| Clemens  | AxelRod |
+| Clemens  | Serres  |
+| Clemens  | Peel    |
 | Cisneros | Fran    |
-| Cisneros | Rofkin  |
+| Cisneros | Rifkin  |
 | Cisneros | Motika  |
 | Cisneros | AxelRod |
 | Cisneros | Serres  |
 | Cisneros | Peel    |
-| Periera  | Fran    |
-| Periera  | Rofkin  |
-| Periera  | Motika  |
-| Periera  | AxelRod |
-| Periera  | Serres  |
-| Periera  | Peel    |
+| Pereira  | Fran    |
+| Pereira  | Rifkin  |
+| Pereira  | Motika  |
+| Pereira  | AxelRod |
+| Pereira  | Serres  |
+| Pereira  | Peel    |
 +----------+---------+
 
 
@@ -929,7 +929,7 @@ Expected Output:
 | Hoffman  | 2001 | London  |    100 |
 | Giovanni | 2002 | Rome    |    200 |
 | Grass    | 2004 | Berlin  |    300 |
-| Ciemens  | 2006 | London  |    100 |
+| Clemens  | 2006 | London  |    100 |
 | Cisneros | 2008 | SanJose |    300 |
 +----------+------+---------+--------+
 
@@ -1078,9 +1078,9 @@ Expected Output:
 +---------+----------+--------+--------------------+
 | sname   | cname    | rating | (comm* amt)/100    |
 +---------+----------+--------+--------------------+
-| Rofkin  | Cisneros |    300 |             2.8035 |
+| Rifkin  | Cisneros |    300 |             2.8035 |
 | Serres  | Liu      |    200 |  670.8584999999999 |
-| Rofkin  | Cisneros |    300 | 164.72400000000002 |
+| Rifkin  | Cisneros |    300 | 164.72400000000002 |
 | AxelRod | Giovanni |    200 | 171.32299999999998 |
 | Serres  | Grass    |    300 |             9.8475 |
 | Serres  | Grass    |    300 | 170.29350000000002 |
@@ -1127,7 +1127,7 @@ Expected Output:
 +------+--------+------------+------+
 | 1001 | Peel   | London     |   12 |
 | 1004 | Motika | London     |   11 |
-| 1007 | Rofkin | Barcenlona |   15 |
+| 1007 | Rifkin | Barcenlona |   15 |
 | 1008 | Fran   | London     |   25 |
 +------+--------+------------+------+
 
@@ -1152,7 +1152,7 @@ Expected Output:
 +------+---------+------------+------+
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 +------+---------+------------+------+
 
 Tables involved: Customers
@@ -1174,7 +1174,7 @@ Expected Output:
 +---------+---------+--------+
 | cname   | cname   | sname  |
 +---------+---------+--------+
-| Hoffman | Ciemens | Peel   |
+| Hoffman | Clemens | Peel   |
 | Liu     | Grass   | Serres |
 +---------+---------+--------+
 
@@ -1226,14 +1226,14 @@ Expected Output:
 +----------+------+
 | Cisneros | 3001 |
 | Hoffman  | 3003 |
-| Periera  | 3002 |
+| Pereira  | 3002 |
 | Liu      | 3005 |
 | Cisneros | 3006 |
 | Giovanni | 3009 |
 | Grass    | 3007 |
-| Ciemens  | 3008 |
+| Clemens  | 3008 |
 | Grass    | 3010 |
-| Ciemens  | 3011 |
+| Clemens  | 3011 |
 +----------+------+
 
 Tables involved: Orders, Customers
@@ -1336,7 +1336,7 @@ Expected Output:
 | 2003 | Liu      | Sanjose |    200 | 1002 |
 | 2004 | Grass    | Berlin  |    300 | 1002 |
 | 2008 | Cisneros | SanJose |    300 | 1007 |
-| 2007 | Periera  | Rome    |    100 | 1004 |
+| 2007 | Pereira  | Rome    |    100 | 1004 |
 +------+----------+---------+--------+------+
 
 Tables involved: Customers
@@ -1358,7 +1358,7 @@ Expected Output:
 | CNUM | CNAME   | CITY   | RATING | SNUM |
 +------+---------+--------+--------+------+
 | 2001 | Hoffman | London |    100 | 1001 |
-| 2006 | Ciemens | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
 +------+---------+--------+--------+------+
 
 Tables involved: Customers
@@ -1418,7 +1418,7 @@ Expected Output:
  +--------+---------+
 | sname  | cname   |
 +--------+---------+
-| Motika | Periera |
+| Motika | Pereira |
 +--------+---------+
 
 Tables involved: Salespeople, Customers
@@ -1442,7 +1442,7 @@ Expected Output:
 | Serres  |   13 |
 | AxelRod |   10 |
 | Motika  |   11 |
-| Rofkin  |   15 |
+| Rifkin  |   15 |
 | Fran    |   25 |
 +---------+------+
 
@@ -1464,8 +1464,8 @@ Expected Output:
 | cname   | city   |
 +---------+--------+
 | Hoffman | London |
-| Ciemens | London |
-| Periera | Rome   |
+| Clemens | London |
+| Pereira | Rome   |
 +---------+--------+
 
 Tables involved:Customers
@@ -1487,7 +1487,7 @@ Expected Result:
 | sname   | cname    |
 +---------+----------+
 | AxelRod | Giovanni |
-| Motika  | Periera  |
+| Motika  | Pereira  |
 +---------+----------+
 
 Tables involved: Salespeople, Customers
@@ -1506,7 +1506,7 @@ SELECT C.CNUM,CNAME, RATING, COUNT(O.CNUM) AS AVERAGE_ORDERS FROM CUSTOMERS C JO
 | CNUM | CNAME    | RATING | AVERAGE_ORDERS |
 +------+----------+--------+----------------+
 | 2001 | Hoffman  |    100 |              1 |
-| 2007 | Periera  |    100 |              1 |
+| 2007 | Pereira  |    100 |              1 |
 | 2003 | Liu      |    200 |              1 |
 | 2002 | Giovanni |    200 |              1 |
 +------+----------+--------+----------------+
@@ -1598,15 +1598,15 @@ Expected Result:
 | onum | sname   | cname    |
 +------+---------+----------+
 | 3003 | Peel    | Hoffman  |
-| 3011 | Peel    | Ciemens  |
-| 3008 | Peel    | Ciemens  |
+| 3011 | Peel    | Clemens  |
+| 3008 | Peel    | Clemens  |
 | 3005 | Serres  | Liu      |
 | 3010 | Serres  | Grass    |
 | 3007 | Serres  | Grass    |
 | 3009 | AxelRod | Giovanni |
-| 3002 | Motika  | Periera  |
-| 3006 | Rofkin  | Cisneros |
-| 3001 | Rofkin  | Cisneros |
+| 3002 | Motika  | Pereira  |
+| 3006 | Rifkin  | Cisneros |
+| 3001 | Rifkin  | Cisneros |
 +------+---------+----------+
 
 Tables involved: Salespeople, Customers, Orders
@@ -1651,7 +1651,7 @@ select sname from salespeople where snum = any ( select snum from customers wher
 | Serres  |
 | AxelRod |
 | Motika  |
-| Rofkin  |
+| Rifkin  |
 +---------+
 
 Tables involved: Salespeople, Customers
@@ -1699,8 +1699,8 @@ Expected Result:
 | CNUM | CNAME   | CITY   | RATING | SNUM |
 +------+---------+--------+--------+------+
 | 2001 | Hoffman | London |    100 | 1001 |
-| 2006 | Ciemens | London |    100 | 1001 |
-| 2007 | Periera | Rome   |    100 | 1004 |
+| 2006 | Clemens | London |    100 | 1001 |
+| 2007 | Pereira | Rome   |    100 | 1004 |
 +------+---------+--------+--------+------+
 
 Tables involved: Salespeople, Customers
@@ -1801,7 +1801,7 @@ Expected Output:
 +------+--------+------------+------+--------+-------------+
 | 1001 | Peel   | London     |   12 | Peel   |           3 |
 | 1002 | Serres | SanJose    |   13 | Serres |           3 |
-| 1007 | Rofkin | Barcenlona |   15 | Rofkin |           2 |
+| 1007 | Rifkin | Barcenlona |   15 | Rifkin |           2 |
 +------+--------+------------+------+--------+-------------+
 
 Tables involved: Salespeople, Customers, Orders
@@ -1827,7 +1827,7 @@ Expected Output:
 | 2001 | Hoffman | London  |    100 | 1001 |
 | 2003 | Liu     | Sanjose |    200 | 1002 |
 | 2004 | Grass   | Berlin  |    300 | 1002 |
-| 2006 | Ciemens | London  |    100 | 1001 |
+| 2006 | Clemens | London  |    100 | 1001 |
 +------+---------+---------+--------+------+
 
 Tables involved: Customers
@@ -1900,8 +1900,8 @@ Expected Output:
 | rating | cname    | cnum |
 +--------+----------+------+
 |    100 | Hoffman  | 2001 |
-|    100 | Ciemens  | 2006 |
-|    100 | Periera  | 2007 |
+|    100 | Clemens  | 2006 |
+|    100 | Pereira  | 2007 |
 |    200 | Giovanni | 2002 |
 |    200 | Liu      | 2003 |
 |    300 | Grass    | 2004 |
@@ -2018,11 +2018,11 @@ Expected Output:
 +------+----------+----------+
 | 2008 | Cisneros |    18.69 |
 | 2001 | Hoffman  |   767.19 |
-| 2007 | Periera  |   1900.1 |
+| 2007 | Pereira  |   1900.1 |
 | 2003 | Liu      |  5160.45 |
 | 2002 | Giovanni |  1713.23 |
 | 2004 | Grass    |    75.75 |
-| 2006 | Ciemens  |     4723 |
+| 2006 | Clemens  |     4723 |
 +------+----------+----------+
 
 Tables involved: Customers
@@ -2133,7 +2133,7 @@ Expected Output:
 | 1002 | Serres  | SanJose    |   13 |
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 | 1008 | Fran    | London     |   25 |
 +------+---------+------------+------+
 
@@ -2159,7 +2159,7 @@ Expected Output:
 | 1002 | Serres  | SanJose    |   13 |
 | 1003 | AxelRod | New York   |   10 |
 | 1004 | Motika  | London     |   11 |
-| 1007 | Rofkin  | Barcenlona |   15 |
+| 1007 | Rifkin  | Barcenlona |   15 |
 +------+---------+------------+------+
 
 Tables involved: Salespeople, Customers
@@ -2248,7 +2248,7 @@ select cname, customers.cnum, rating , count(orders.cnum) , (if(rating= (select 
 +----------+------+--------+--------------------+---------+
 | Cisneros | 2008 |    300 |                  2 | YES     |
 | Grass    | 2004 |    300 |                  2 | YES     |
-| Ciemens  | 2006 |    100 |                  2 | NO      |
+| Clemens  | 2006 |    100 |                  2 | NO      |
 +----------+------+--------+--------------------+---------+
 
 Tables involved: Customers, Orders
@@ -2275,8 +2275,8 @@ Expected Output:
 | Giovanni |
 | Liu      |
 | Hoffman  |
-| Ciemens  |
-| Periera  |
+| Clemens  |
+| Pereira  |
 +----------+
 
 Tables involved: Customers
@@ -2380,7 +2380,7 @@ Expected Output:
 +---------+------------+----------+
 | sname   | odate      | max(amt) |
 +---------+------------+----------+
-| Rofkin  | 1990-03-10 |  1098.16 |
+| Rifkin  | 1990-03-10 |  1098.16 |
 | Peel    | 1990-03-10 |  9891.88 |
 | Motika  | 1990-03-10 |   1900.1 |
 | Serres  | 1990-03-10 |  5160.45 |
@@ -2427,10 +2427,10 @@ Expected Output:
 | cname    | cname    |
 +----------+----------+
 | Giovanni | Liu      |
-| Hoffman  | Ciemens  |
+| Hoffman  | Clemens  |
 | Grass    | Cisneros |
-| Ciemens  | Periera  |
-| Hoffman  | Periera  |
+| Clemens  | Pereira  |
+| Hoffman  | Pereira  |
 +----------+----------+
 
 Tables involved: Customers
@@ -2493,7 +2493,7 @@ Expected Output:
 | cname   |
 +---------+
 | Liu     |
-| Ciemens |
+| Clemens |
 +---------+
 
 Tables involved: Customers, Orders
@@ -2556,8 +2556,8 @@ Expected Output:
 +--------+----------+---------+
 | Fran   | Hoffman  | London  |
 | Motika | Hoffman  | London  |
-| Fran   | Ciemens  | London  |
-| Motika | Ciemens  | London  |
+| Fran   | Clemens  | London  |
+| Motika | Clemens  | London  |
 | Serres | Cisneros | SanJose |
 +--------+----------+---------+
 
@@ -2603,7 +2603,7 @@ Expected Output:
 +---------+------+------------+---------+
 | Motika  | 3002 | 1990-03-10 |  1900.1 |
 | Serres  | 3005 | 1990-03-10 | 5160.45 |
-| Rofkin  | 3006 | 1990-03-10 | 1098.16 |
+| Rifkin  | 3006 | 1990-03-10 | 1098.16 |
 | AxelRod | 3009 | 1990-04-10 | 1713.23 |
 | Peel    | 3011 | 1990-06-10 | 9891.88 |
 +---------+------+------------+---------+
