@@ -1,0 +1,89 @@
+Test case 1-Valid URL and words file:
+Input:
+A valid URL text file that contains one URL per line.
+A valid words text file that contains one word per line.
+Output:
+The top three words with their frequency for each URL in the URL file.
+The total frequency of each word from all URLs combined.
+
+https: //github.con/hotwax/training-assignment/wiki/Module—2-Implementation
+is 4
+the 4
+cricket 0
+
+https: //um.espncricinfo.con/
+
+is 4
+cricket 25
+the 2
+
+https://www.google.com/search?q=football&oq=football&aqs=chrome..69i57j0i67i433l4j46i67i433j0i67i433l3j0i67.2762j0j4&sourceid=chrome&ie=UTF-8
+
+is 0
+the 12
+cricket 0
+
+
+cricket 25
+is 8
+the 18
+=====================================================================================================================================================================================
+
+
+Test case 2-Invalid URL file:
+Input:
+An invalid URL text file that does not exist or is empty.
+A valid words text file that contains one word per line.
+Output:the file cannot be read or is empty.
+
+
+Test case 3-Invalid words file:
+Input:
+A valid URL text file that contains one URL per line.
+An invalid words text file that does not exist or is empty.
+Output:
+the file cannot be read or is empty.
+
+
+Test case 4-Invalid URL:
+Input:
+A valid URL text file that contains one URL per line.
+A valid words text file that contains one word per line.
+One or more invalid URLs in the URL file.
+Output:
+The top three words with their frequency for each valid URL in the URL file.
+invalid URL indicating that it cannot be parsed.
+
+
+Test case 5-Invalid word:
+Input:
+A valid URL text file that contains one URL per line.
+A valid words text file that contains one or more invalid words.
+Output:
+The top three words with their frequency for each URL in the URL file, excluding the invalid words.
+The total frequency of each valid word from all URLs combined.
+
+
+Test case 6-Invalid input type:
+Input:
+A valid URL text file that contains one URL per line.
+A valid words text file that contains one word per line.
+One or both of the input files are not in the correct format (e.g. a PDF file instead of a text file).
+Output:
+the file format is incorrect.
+
+
+Test case 7-Edge case: Empty URL file:
+Input:
+An empty URL text file.
+A valid words text file that contains one word per line.
+Output:
+the URL file is empty.
+
+
+Test case 8-Edge case: Empty words file:
+Input:
+A valid URL text file that contains one URL per line.
+An empty words text file.
+Output:
+the words file is empty.

@@ -1,0 +1,92 @@
+-Test Case 1: Serialization
+Input:
+Option 1 (for Serialize file)
+test.json (file name)
+Output:
+Serialization done successfully.
+
+The 'test.json' file should contain the serialized data of the student objects in JSON format.
+
+
+
+-Test Case 2: Deserialization
+Input:
+Option 2 (for Deserialize file)
+test.json (file name)
+Output:
+Deserialization done successfully.
+[ Student {
+firstName: 'Rishabh',
+dateOfBirth: 1990-01-01T00:00:00.000Z,
+address: Address {
+city: 'Indore',
+state: 'MP',
+pinCode: 452001,
+country: 'India'
+}
+},
+Student {
+firstName: 'Sarthak',
+dateOfBirth: 1992-02-02T00:00:00.000Z,
+address: Address {
+city: 'Bhopal',
+state: 'MP',
+pinCode: 452045,
+country: 'India'
+}
+},
+Student {
+firstName: 'Vaibhav',
+dateOfBirth: 2001-01-01T00:00:00.000Z,
+address: Address {
+city: 'Ujjain',
+state: 'MP',
+pinCode: 452076,
+country: 'India'
+}
+},
+Student {
+firstName: 'Nayan',
+dateOfBirth: 2001-01-01T00:00:00.000Z,
+address: Address {
+city: 'Dewas',
+state: 'MP',
+pinCode: 452087,
+country: 'India'
+}
+} ]
+
+The output should contain the deserialized student objects with their properties.
+
+
+
+-Test Case 3: File not found
+Input:
+Option 2 (for Deserialize file)
+test1.json (non-existent file name)
+Output:
+File not found.
+
+The code should handle the error if the file specified for deserialization does not exist.
+
+
+
+-Test Case4: Invalid choice
+Input:
+Option 4 (an invalid choice)
+Output:
+Invalid choice.
+
+The code should handle the error if the user enters an invalid choice.
+
+
+
+-Test Case 5: Invalid date format
+Input:
+Option 1 (for Serialize file)
+test.json (file name)
+1990-01-01T00:00:00.000Z (invalid date format)
+Output:
+Serialization done successfully.
+
+The 'test.json' file should contain the serialized data of the student objects in JSON format, with the invalid date format handled by the code.
