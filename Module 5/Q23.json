@@ -1,0 +1,54 @@
+Input:
+[
+    {
+        "restaurant": {
+            "rating": {
+                "value": 9
+            },
+            "address": {
+                "value": "India"
+            }
+        }
+    },
+    {
+        "restaurant": {
+            "rating": {
+                "value": 7
+            },
+            "address": {
+                "value": "United States"
+            }
+        }
+    }
+]
+
+Output:
+[
+    {
+        "Restaurant Rating": 9,
+        "Restaurant Country": "India"
+    },
+    {
+        "Restaurant Rating": 7,
+        "Restaurant Country": "United States"
+    }
+]
+
+Transformation Spec:
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "*": {
+                "restaurant": {
+                    "rating": {
+                        "value": "[#4].Restaurant Rating"
+                    },
+                    "address": {
+                        "value": "[#4].Restaurant Country"
+                    }
+                }
+            }
+        }
+    }
+]
