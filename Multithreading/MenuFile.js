@@ -1,5 +1,5 @@
 import readline from 'readline';
-import { exec } from 'child_process';
+import { exec as execute } from 'child_process';
 
 const read = readline.createInterface({
   input: process.stdin,
@@ -15,7 +15,7 @@ function showMenu() {
   read.question("Choose: ", (choice) => {
     switch (choice) {
       case "1":
-        exec('node AccountOverDrawDemo.js', (err, stdout, stderr) => {
+        execute('node AccountOverDrawDemo.js', (err, stdout, stderr) => {
             if (err) {
               console.error(err);
               return;
@@ -27,7 +27,7 @@ function showMenu() {
         break;
 
       case "2":
-        exec('node AccountOverdrawSafeDemo.js', (err, stdout, stderr) => {
+        execute('node AccountOverdrawSafeDemo.js', (err, stdout, stderr) => {
             if (err) {
               console.error(err);
               return;
