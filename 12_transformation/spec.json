@@ -1,0 +1,29 @@
+[{
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employee": {
+        "name": "=concat(@(1,firstName),' ',@(1,lastName))",
+        "address": "=concat(@(0,street),', ',@(0,city),', ',@(0,state),' ',@(0,zip))"
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "employee": {
+        "firstName": "",
+        "lastName": ""
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employee": {
+        "name": "&",
+        "address": "&",
+        "phones": "phoneNumbers"
+      }
+    }
+  }
+ ]
