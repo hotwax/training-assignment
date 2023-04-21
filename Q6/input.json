@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "name": "John Doe",
+      "age": 35,
+      "address": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+      },
+      "hobbies": [
+        {
+          "name": "reading",
+          "type": "indoor"
+        },
+        {
+          "name": "hiking",
+          "type": "outdoor"
+        }
+      ]
+    },
+    {
+      "name": "Jane Doe",
+      "age": 30,
+      "address": {
+        "street": "456 First St",
+        "city": "Othertown",
+        "state": "NY",
+        "zip": "67890"
+      },
+      "hobbies": [
+        {
+          "name": "swimming",
+          "type": "outdoor"
+        },
+        {
+          "name": "painting",
+          "type": "indoor"
+        }
+      ]
+    }
+  ]
+}

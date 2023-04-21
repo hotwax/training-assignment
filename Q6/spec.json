@@ -1,0 +1,26 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "users": {
+        "*": {
+          "name": "[#2].Name",
+          "address": "[#2].Address",
+          "hobbies": {
+            "*": {
+              "name": "[#4].name"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "Address": "=concat(@(0,street),', ',@(0,city),', ',@(0,state),' ',@(0,zip))"
+      }
+    }
+  }
+]
