@@ -1,0 +1,104 @@
+CASE 1 : Adding Employee
+    
+Input:
+    Enter your choice:1
+    Enter name:Apurva Shukla
+    Enter email:apurvashukla@gmail.com
+    Enter age:22
+    Enter date of birth (YYYY-MM-DD):2001-01-24
+
+Output:
+    Employee added successfully.
+
+
+CASE 2 : For Deleting Employee
+    Inputs:
+        Enter your choice:2
+        Enter employee email to delete: arshupaaji@gmail.com
+    Output:
+        Employee Deleted Successfully
+
+
+CASE 3 : Display all the employee
+    Inputs:
+        Enter your choice:4
+    Output:        
+    ┌─────────┬────────────────────┬───────────────────────────┬─────┬──────────────┐
+    │ (index) │        name        │           email           │ age │     dob      │
+    ├─────────┼────────────────────┼───────────────────────────┼─────┼──────────────┤
+    │    0    │   'Rohit Sharma'   │  'rohitritika@gmail.com'  │ 36  │ '1989-10-14' │
+    │    1    │   'Virat Kohli'    │   'viratbhai@gmail.com'   │ 35  │ '1989-12-29' │
+    │    2    │ 'Suryakumar Yadav' │ 'suryatatasky@gmail.com'  │ 37  │ '1985-12-15' │
+    │    3    │ 'Suryakumar Zadav' │ 'suryatataskyz@gmail.com' │ 36  │ '1987-12-15' │
+    │    4    │  'Apurva Shukla'   │ 'apurvashukla@gmail.com'  │ 22  │ '2001-01-24' │
+    └─────────┴────────────────────┴───────────────────────────┴─────┴──────────────┘
+
+CASE 4 : Search Employee with sorting
+    Inputs:
+        Enter your choice:3
+        Enter search query:Surya
+        Enter sort order (name,age,email,dob):age
+        Enter sort direction (asc/desc):desc
+    Output:
+
+        Search results:
+        ┌─────────┬────────────────────┬───────────────────────────┬─────┬──────────────┐
+        │ (index) │        name        │           email           │ age │     dob      │
+        ├─────────┼────────────────────┼───────────────────────────┼─────┼──────────────┤
+        │    0    │ 'Suryakumar Yadav' │ 'suryatatasky@gmail.com'  │ 37  │ '1985-12-15' │
+        │    1    │ 'Suryakumar Zadav' │ 'suryatataskyz@gmail.com' │ 36  │ '1987-12-15' │
+        └─────────┴────────────────────┴───────────────────────────┴─────┴──────────────┘
+
+CASE 5 : Employee File Not Available
+    Inputs:
+    Output:
+    File not found: employeees.txt
+
+
+CASE 6 : Invalid name provided while adding employee
+    Inputs:
+        Enter your choice:1
+        Enter name:Apurva1121
+        Enter email:apurva1121@gmail.com
+        Enter age:21
+        Enter date of birth (YYYY-MM-DD):2000-12-12
+    Output:
+        Invalid Name
+
+
+CASE 7 : No Email or Invalid Email
+    Inputs:
+        Enter your choice:1
+        Enter name:Apurva Shukla
+        Enter email:apurva1121@gmailcom
+        Enter age:21
+        Enter date of birth (YYYY-MM-DD):2000-12-12
+    Outputs:
+        Invalid Email
+
+CASE 8 : No Age or Invalid age
+    Inputs:
+        Enter your choice:1
+        Enter name:Apurva Shukla
+        Enter email:apurva1121@gmail.com
+        Enter age:aksas
+        Enter date of birth (YYYY-MM-DD):2000-12-12
+    Outputs:
+        Invalid Age
+
+CASE 9 : No DOB or Invalid DOB
+    Inputs:
+        Enter your choice:1
+        Enter name:Apurva Shukla
+        Enter email:apurva1121@gmail.com
+        Enter age:aksas
+        Enter date of birth (YYYY-MM-DD):2000/12/12
+    Outputs:
+        Invalid DOB
+
+CASE 10 : Entering Wrong Choice
+    Inputs:
+        Choice : 6        
+    Outputs:
+        Invalid Choice
+    
