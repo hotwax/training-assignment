@@ -1,0 +1,47 @@
+Input:
+{
+    "name": "John",
+    "hobby_1": "reading",
+    "level_1": "advanced",
+    "hobby_2": "swimming",
+    "level_2": "beginner"
+}
+
+Output:
+{
+    "name": "John",
+    "hobbies": [
+        {
+            "name": "reading",
+            "level": "advanced"
+        },
+        {
+            "name": "swimming",
+            "level": "beginner"
+        }
+    ]
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "shift",
+        "spec": {
+            // copy the "name" field as is
+            "name": "name",
+            // group the "hobby_x" and "level_x" fields together and map them to a single "hobbies" array
+            "hobby_1": {
+                "@(2,level_1)": "hobbies[0].level",
+                "@(2,hobby_1)": "hobbies[0].name"
+            },
+            "hobby_2": {
+                "@(2,level_2)": "hobbies[1].level",
+                "@(2,hobby_2)": "hobbies[1].name"
+            }
+        }
+    }
+]
+
+
+
+
