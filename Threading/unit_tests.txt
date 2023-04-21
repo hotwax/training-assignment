@@ -1,0 +1,48 @@
+Case 1: OverdrawDemo
+
+
+Expected Output: Both the accound holder may end up overdrawing the account
+
+Output:
+
+Ranita withdrew 100 and now has 800
+Ranita withdrew 100 and now has 700
+Rajesh withdrew 100 and now has 900
+Rajesh withdrew 100 and now has 500
+Rajesh withdrew 100 and now has 400
+Rajesh withdrew 100 and now has 300
+Rajesh withdrew 100 and now has 200
+Ranita withdrew 100 and now has 600
+Ranita withdrew 100 and now has 100
+Ranita withdrew 100 and now has 0
+
+
+
+Case 2: Synchronized Withdraw
+
+Expected Output: Withdrawals should be syncronized
+
+
+Output:
+
+Rajesh completes the withdrawal of 100 and now has 900
+Rajesh completes the withdrawal of 100 and now has 800
+Rajesh completes the withdrawal of 100 and now has 700
+Rajesh completes the withdrawal of 100 and now has 600
+Rajesh completes the withdrawal of 100 and now has 500
+Ranita completes the withdrawal of 100 and now has 400
+Ranita completes the withdrawal of 100 and now has 300
+Ranita completes the withdrawal of 100 and now has 200
+Ranita completes the withdrawal of 100 and now has 100
+Ranita completes the withdrawal of 100 and now has 0
+
+
+
+
+Case 3 : No withdrawals possible (Not  Synchronized)
+
+Expected Output: Withdrawal not possible
+
+Output: Rajesh does not have enough money to withdraw 100
+
+
