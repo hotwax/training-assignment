@@ -1,0 +1,63 @@
+Input:
+{
+    "products": [
+        {
+            "id": "1001",
+            "name": "Product 1",
+            "price": 10.99
+        },
+        {
+            "id": "1002",
+            "name": "Product 2",
+            "price": 15.99,
+            "available": true
+        },
+        {
+            "id": "1003",
+            "name": "Product 3",
+            "price": 20.99,
+            "available": false
+        }
+    ]
+}
+
+Output:
+{
+    "products": [
+        {
+            "id": "1001",
+            "name": "Product 1",
+            "price": 10.99,
+            "available": false
+        },
+        {
+            "id": "1002",
+            "name": "Product 2",
+            "price": 15.99,
+            "available": true
+        },
+        {
+            "id": "1003",
+            "name": "Product 3",
+            "price": 20.99,
+            "available": false
+        }
+    ]
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "products": {
+                "*": {
+                    "available": "=default(false)"
+                }
+            }
+        }
+    }
+]
+
+
+
