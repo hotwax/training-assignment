@@ -121,10 +121,9 @@ function searchEmployees(query, orderBy, direction) {
   return results;
 }
 
-// Load employees from the file
+// funtion to load employees from the file
 function loadEmployeesFromFile(){
   let employees = [];
-
   
   try{
   const data = filesystem.readFileSync(fileName, 'utf8');
@@ -132,10 +131,6 @@ function loadEmployeesFromFile(){
     const [name, email, age, dob] = line.split(',');
     return new Employee(name, email, parseInt(age), dob);
   });
-
-
-  // load emails into the set
-  employees.forEach((employee) => allEmails.add(employee.email));
 
   return employees;}
   catch(err){
@@ -148,8 +143,36 @@ function loadEmployeesFromFile(){
     return [];}
   }
 }
+
+
+// function to load emails into the set
+function loadEmailsFromFile(){
+  let employees = [];
+
+  try{
+  const data = filesystem.readFileSync(fileName, 'utf8');
+  employees = data.split('\n').map((line) => {
+    const [name, email, age, dob] = line.split(',');
+    return new Employee(name, email, parseInt(age), dob);
+  });
+
+  // load emails into the set
+  employees.forEach((employee) => allEmails.add(employee.email));
+}
+  catch(err){
+    if (err.code === 'ENOENT') {
+      console.log('Error getting employees emails from file.');
+      return [];
+    }
+    else{
+    console.log("Error in reading file", err);
+    return [];}
+  }
+}
+
+
     
-// Write employees to the file
+// function to write employees to the file
 function writeEmployeesToFile(employees) {
   try{
   const data = employees
@@ -196,6 +219,7 @@ return true;
 }
       
 
+// Display all employees
 function displayEmployees() {
 
   console.log('Employees:');
@@ -203,10 +227,11 @@ function displayEmployees() {
 }
 
 
-  
-function menu(){
 // Define the main program
-loadEmployeesFromFile();
+function menu(){
+
+// loading emails into the  all emails set
+loadEmailsFromFile();
 
 inputOutputReader.setPrompt('Menu:\n1. Add employee\n2. Delete employee\n3. Search employees\n4. Display \n5.Exit\nEnter your choice:');
 inputOutputReader.prompt();
@@ -219,7 +244,6 @@ inputOutputReader.on('line', (choice) => {
           inputOutputReader.question('Enter age:', (age) => {
             age = parseInt(age);
             inputOutputReader.question('Enter date of birth (YYYY-MM-DD):', (dobStr) => {
-              // const dob = new Date(dobStr);
               const employee = new Employee(name, email, age, dobStr);
               addEmployee(employee);
               inputOutputReader.prompt();
@@ -270,5 +294,5 @@ inputOutputReader.on('line', (choice) => {
 }
 
 
-
+// Start the program
 menu();
