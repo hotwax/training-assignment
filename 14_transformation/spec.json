@@ -1,0 +1,34 @@
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "phone": {
+              "*": {
+                "type": "=concat(@(1,type),'Phone')"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "id": "[#2].&",
+            "name": "[#2].&",
+            "department": "[#2].&",
+            "phone": {
+              "*": {
+                "number": "[#4].@(1,type)"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+  
