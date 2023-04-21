@@ -1,0 +1,23 @@
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "salary": "=divideAndRound(2, @(1,salary), 0.90909091)"
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "salary": "=toLong"
+          }
+        }
+      }
+    }
+  ]
+  
