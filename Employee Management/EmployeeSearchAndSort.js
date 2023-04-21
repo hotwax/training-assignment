@@ -1,8 +1,9 @@
 // Import required modules
-const fs = require('fs'); 
+const filesystem = require('fs'); 
 const readline = require('readline'); 
 const fileName = 'employees.txt';
 
+// set to stored emails of registerd employees
 const allEmails= new Set();
 
 
@@ -48,7 +49,8 @@ function addEmployee(employee) {
     }
 
     // Add email to the array
-    allEmails.push(email);
+  
+    allEmails.add(email);
 
     if (!Number.isInteger(age) ||age < 18 || age > 65) {
       console.log('Age should be and between 18 and 65.');
@@ -61,7 +63,7 @@ function addEmployee(employee) {
 
   const employeeData = `${employee.name},${employee.email},${employee.age},${employee.dob}`;
 
-  fs.appendFileSync(fileName, `\n${employeeData}`, (err) => {
+  filesystem.appendFileSync(fileName, `\n${employeeData}`, (err) => {
     if (err) throw err;
     console.log(`\n${employee.name} added successfully.`);
   });
@@ -104,28 +106,28 @@ function searchEmployees(query, orderBy, direction) {
     JSON.stringify(employee).toLowerCase().includes(query.toLowerCase())
   );
   if (orderBy) {
-    results = results.sort((a, b) => {
-      const aProp = a[orderBy];
-      const bProp = b[orderBy];
-      if (typeof aProp === 'string') {
+    results = results.sort((firstEmployee, secondEmployee) => {
+      const firstPropertyValue = firstEmployee[orderBy];
+      const secondPropertyValue = secondEmployee[orderBy];
+      if (typeof firstPropertyValue === 'string') {
         return direction === 'asc'
-          ? aProp.localeCompare(bProp)
-          : bProp.localeCompare(aProp);
+          ? firstPropertyValue.localeCompare(secondPropertyValue)
+          : secondPropertyValue.localeCompare(firstPropertyValue);
       } else {
-        return direction === 'asc' ? aProp - bProp : bProp - aProp;
+        return direction === 'asc' ? firstPropertyValue - secondPropertyValue : secondPropertyValue - firstPropertyValue;
       }
     });
   }
   return results;
 }
 
-// Display all employees
+// Load employees from the file
 function loadEmployeesFromFile(){
   let employees = [];
 
   
   try{
-  const data = fs.readFileSync(fileName, 'utf8');
+  const data = filesystem.readFileSync(fileName, 'utf8');
   employees = data.split('\n').map((line) => {
     const [name, email, age, dob] = line.split(',');
     return new Employee(name, email, parseInt(age), dob);
@@ -157,7 +159,7 @@ function writeEmployeesToFile(employees) {
       return `${name},${email},${age},${dob}`;
     })
     .join('\n');
-  fs.writeFileSync(fileName, data);}
+  filesystem.writeFileSync(fileName, data);}
   catch(err){
 
     console.log("Error in writing file", err);
