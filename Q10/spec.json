@@ -1,0 +1,18 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "temp1": "=split(' ',@(1,name))",
+      "first_name": "=firstElement(@(1,temp1))",
+      "last_name": "=lastElement(@(1,temp1))",
+      "phone_number_count": "=size(@(1,phone_numbers))"
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "temp1": "",
+      "name": ""
+    }
+  }
+]
