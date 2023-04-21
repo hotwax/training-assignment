@@ -1,0 +1,35 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "customer": {
+            "fullName": "=concat(@(1,firstName),@(1,lastName))",
+            "address": "=concat(@(0,street),', ',@(0,city),', ',@(0,state),' ',@(0,zip))"
+          },
+          "items": {
+            "*": {
+              "inverse": "=divide(1,@(1,quantity))",
+              "itemTotal": "=divide(@(1,price),@(1,inverse))"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": {
+          "items": {
+            "*": {
+              "itemTotal": "hours[]"
+            }
+          }
+        }
+      }
+    }
+  }
+]
