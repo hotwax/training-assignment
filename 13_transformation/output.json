@@ -1,0 +1,15 @@
+{
+    "001" : {
+      "name" : "John",
+      "department" : "HR"
+    },
+    "002" : {
+      "name" : "Jane",
+      "department" : "Sales"
+    },
+    "003" : {
+      "name" : "Bob",
+      "department" : "IT"
+    }
+  }
+  
