@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fileSystem = require('fs');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
@@ -34,7 +34,7 @@ function readUrlAndWords(){
 
   try{
 
-    const urls = fs.readFileSync('urls.txt', 'utf-8').trim().replace(/\r/g, '').split('\n').filter((url) => url !== '');
+    const urls = fileSystem.readFileSync('urls.txt', 'utf-8').trim().replace(/\r/g, '').split('\n').filter((url) => url !== '');
 
     
     if (urls.length === 0) {
@@ -43,7 +43,7 @@ function readUrlAndWords(){
     }
 
     
-    const words= fs.readFileSync('words.txt', 'utf-8').trim().replace(/\r/g, '').split('\n').filter((word) => word !== '');
+    const words= fileSystem.readFileSync('words.txt', 'utf-8').trim().replace(/\r/g, '').split('\n').filter((word) => word !== '');
     if (words.length === 0) {
       console.error('No words found in words.txt');
       return;
@@ -91,16 +91,16 @@ for (const url of urls) {
   const textContent = await fetchTextContent(url);
   if (textContent) {
     const wordCount = countOccurrences(textContent, words);
-    const sortedWords = Object.keys(wordCount).sort((a, b) => wordCount[b] - wordCount[a]);
+    const sortedWords = Object.keys(wordCount).sort((word1, word2) => wordCount[word2] - wordCount[word1]);
     console.log(`Top 3 words for ${url}:`);
-    c=0;
+    count=0;
     sortedWords.forEach((word) => {
-      if (c<3)
+      if (count<3)
       // console.log(`${word}: ${wordCount[word]}`);
       console.log(word+": "+wordCount[word]);
 
       totalWordCount[word] = (totalWordCount[word]||0 ) + wordCount[word];
-      c+=1
+      count+=1
 
     });
   }
@@ -112,7 +112,7 @@ showOverallWords(totalWordCount);
 
 // Function to show overall word count
 function showOverallWords(totalWordCount){
-  const sortedWords = Object.keys(totalWordCount).sort((a, b) => totalWordCount[b] - totalWordCount[a]);
+  const sortedWords = Object.keys(totalWordCount).sort((word1, word2) => totalWordCount[word2] - totalWordCount[word1]);
   console.log('Total occurrence of each word:');
   sortedWords.forEach((word) => {
     console.log(`${word}: ${totalWordCount[word]}`);
