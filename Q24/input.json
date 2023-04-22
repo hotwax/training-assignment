@@ -1,0 +1,42 @@
+[
+  {
+    "restaurant": {
+      "rating": {
+        "value": 9
+      },
+      "address": {
+        "value": "India"
+      }
+    },
+    "itemsList": [
+      {
+        "itemName": "Example 11",
+        "itemPrice": 120
+      },
+      {
+        "itemName": "Example 12",
+        "itemPrice": 150
+      }
+    ]
+  },
+  {
+    "restaurant": {
+      "rating": {
+        "value": 7
+      },
+      "address": {
+        "value": "United States"
+      }
+    },
+    "itemsList": [
+      {
+        "itemName": "Example 21",
+        "itemPrice": 100
+      },
+      {
+        "itemName": "Example 22",
+        "itemPrice": 190
+      }
+    ]
+  }
+]
