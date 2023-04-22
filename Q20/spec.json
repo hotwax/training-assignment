@@ -1,0 +1,23 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "products": {
+        "*": {
+          "twice": "=divide(1,2)",
+          "price": "=divide(@(1,price),@(1,twice))"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "products": {
+        "*": {
+          "twice": ""
+        }
+      }
+    }
+  }
+]
