@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "itemName": "item1",
+      "itemValue": 10
+    },
+    {
+      "itemName": "item2",
+      "itemValue": 20
+    }
+  ]
+}
