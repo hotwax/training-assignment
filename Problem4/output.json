@@ -1,0 +1,11 @@
+{
+  "Name" : "John",
+  "Age" : 35,
+  "hobbies" : [ {
+    "Name" : "reading"
+  }, {
+    "Name" : "movies"
+  }, {
+    "Name" : "travel"
+  } ]
+}
