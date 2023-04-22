@@ -3,9 +3,8 @@
       "operation": "modify-overwrite-beta",
       "spec": {
         "*": {
-          "Return Id": "@(1,returnId)",
-          "returnQuantity": "=divide(1,@(1,returnQuantity))",
-          "Return Amount": "=divide(@(1,returnPrice),@(1,returnQuantity))",
+          "returnQuantity": "=divide(1, @(1,returnQuantity))",
+          "Return Amount": "=divide(@(1,returnPrice), @(1,returnQuantity))",
           "Return Total Amount": "=doubleSum(@(1,Return Amount), @(1,returnTax))"
         }
       }
@@ -14,8 +13,9 @@
       "operation": "remove",
       "spec": {
         "*": {
+          "returnPrice": "",
           "returnQuantity": "",
-          "returnPrice": ""
+          "returnTax": ""
         }
       }
     },
@@ -23,20 +23,9 @@
       "operation": "shift",
       "spec": {
         "*": {
-          "Return Id": "[#2].&",
+          "returnId": "[#2].Return Id",
           "Return Amount": "[#2].&",
-          "Return Total Amount": "[#2].&",
-          "country": {
-            "USA": {
-              "#United States of America": "[#4].Country"
-            },
-            "CA": {
-              "#Canada": "[#4].Country"
-            },
-            "": {
-              "#NA": "[#4].Country"
-            }
-          }
+          "Return Total Amount": "[#2].&"
         }
       }
     }
