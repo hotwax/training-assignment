@@ -1,0 +1,36 @@
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "hobbies": {
+          "*": {
+            "hobby_name": "@(1,name)",
+            "hobby_level": "@(1,level)",
+            "id": "@(3,id)",
+            "name": "@(3,name)"
+          }
+        }
+      }
+      },
+    {
+      "operation": "remove",
+      "spec": {
+        "id": "",
+        "name": "",
+        "hobbies": {
+          "*": {
+            "level": ""
+          }
+        }
+      }
+      },
+    {
+      "operation": "shift",
+      "spec": {
+        "hobbies": {
+          "*": "[&]"
+        }
+      }
+      }
+    ]
+  
