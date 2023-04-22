@@ -1,0 +1,27 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "students": {
+        "*": {
+          "Domain": "=split('\\@+', @(1,email))"
+        }
+      }
+    }
+  }
+  ,
+  {
+    "operation": "shift",
+    "spec": {
+      "students": {
+        "*": {
+          "name": "[&1].Name",
+          "age": "[&1].Age",
+          "Domain": {
+            "1": "[&2].Domain"
+          }
+        }
+      }
+    }
+  }
+]
