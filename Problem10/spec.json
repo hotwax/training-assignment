@@ -1,0 +1,21 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "fullName": "=split('\\s+', @(1,name))",
+      "phone_number_count": "=size(@(1,phone_numbers))"
+    }
+  }, {
+    "operation": "shift",
+    "spec": {
+      "fullName": {
+        "0": "first_name",
+        "1": "last_name"
+      },
+      "age": "&",
+      "address": "&",
+      "phone_numbers": "&",
+      "phone_number_count": "&"
+    }
+  }
+]
