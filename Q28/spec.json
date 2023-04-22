@@ -1,0 +1,31 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "returnId": "[&1].&",
+        "returnItemAdjustments": {
+          "*": {
+            "amount": "[&1].amount"
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "cardinality",
+    "spec": {
+      "*": {
+        "amount": "MANY"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "amount": "=doubleSum(@(1,amount))"
+      }
+    }
+  }
+]
