@@ -1,22 +1,30 @@
 [
   {
+    "operation": "shift",
+    "spec": {
+      "products": {
+        "*": "&1.&"
+      }
+    }
+  },
+  {
     "operation": "modify-overwrite-beta",
     "spec": {
       "products": {
+        "0": {
+          "price": "=divide(@(1,price),2)"
+        },
         "*": {
-          "twice": "=divide(1,2)",
-          "price": "=divide(@(1,price),@(1,twice))"
+          "price": "=divide(@(1,price),0.5)"
         }
       }
     }
   },
   {
-    "operation": "remove",
+    "operation": "shift",
     "spec": {
       "products": {
-        "*": {
-          "twice": ""
-        }
+        "*": "&1.[&]"
       }
     }
   }
