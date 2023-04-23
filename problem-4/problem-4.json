@@ -1,0 +1,12 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "hobbies": {
+        "*": "Hobbies[].Name"
+      }
+    }
+  }
+]
