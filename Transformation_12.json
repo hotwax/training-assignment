@@ -1,0 +1,71 @@
+Input JSON
+{
+  "employee": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zip": "12345"
+    },
+    "phones": [
+      {
+        "type": "home",
+        "number": "555-555-1234"
+      },
+      {
+        "type": "work",
+        "number": "555-555-5678"
+      }
+    ]
+  }
+}
+
+
+Output JSON
+{
+  "name": "John Doe",
+  "address": "123 Main St, Anytown, CA 12345",
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "555-555-1234"
+    },
+    {
+      "type": "work",
+      "number": "555-555-5678"
+    }
+  ]
+}
+
+Jolt Spec
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employee": {
+        "name": "=concat(@(1,firstName),' ',@(1,lastName))",
+        "address": "=concat(@(0,street),', ',@(0,city),', ',@(0,state),' ',@(0,zip))"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employee": {
+        "*": "&",
+        "phones": "phoneNumbers"
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "firstName": "",
+      "lastName": ""
+    }
+  }
+]
+
