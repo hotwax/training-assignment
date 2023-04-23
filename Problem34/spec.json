@@ -1,0 +1,16 @@
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "name": "name",
+            "hobby_1": {
+                "@(2,level_1)": "hobbies[0].level",
+                "@(2,hobby_1)": "hobbies[0].name"
+            },
+            "hobby_2": {
+                "@(2,level_2)": "hobbies[1].level",
+                "@(2,hobby_2)": "hobbies[1].name"
+            }
+        }
+    }
+]
