@@ -1,0 +1,99 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": "customers[#2].@(0,customerId)[]"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "customers": {
+        "*": {
+          "*": "customers[#1].orders"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "customers": {
+        "*": {
+          "id": "@(1,orders[0].customerId)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "customers": {
+        "*": {
+          "orders": {
+            "*": {
+              "customerId": ""
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "customers": {
+        "0": {
+          "#John Smith": "&2[#2].name",
+          "*": "&2[#2].&"
+        },
+        "1": {
+          "#Jane Doe": "&2[#2].name",
+          "*": "&2[#2].&"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "customers": {
+        "*": {
+          "orders": {
+            "*": {
+              "totalAmount": "@(1,totalPrice)"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "customers": {
+        "*": {
+          "orders": {
+            "*": {
+              "*": "&4[#4].&2[#2].&",
+              "totalAmount": "&4[#4].totalAmount"
+            }
+          },
+          "*": "&2[#2].&"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "customers": {
+        "*": {
+          "totalAmount": "=intSum(@(1,totalAmount))"
+        }
+      }
+    }
+  }
+]
