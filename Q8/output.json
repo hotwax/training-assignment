@@ -1,0 +1,23 @@
+{
+  "employees": [
+    {
+      "name": "John Doe",
+      "salary": 50000,
+      "department": "Sales",
+      "bonus": 1000
+    },
+    {
+      "name": "Jane Smith",
+      "salary": 60000,
+      "department": "Marketing",
+      "bonus": 1500
+    },
+    {
+      "name": "Bob Johnson",
+      "salary": 45000,
+      "department": "IT",
+      "bonus": 900
+    }
+  ],
+  "totalBonus": 3400
+}
