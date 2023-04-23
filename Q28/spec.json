@@ -3,20 +3,12 @@
     "operation": "shift",
     "spec": {
       "*": {
-        "returnId": "[&1].&",
         "returnItemAdjustments": {
           "*": {
-            "amount": "[&1].amount"
+            "@(0,amount)": "[&3].returnSalesTaxAmount[]"
           }
-        }
-      }
-    }
-  },
-  {
-    "operation": "cardinality",
-    "spec": {
-      "*": {
-        "amount": "MANY"
+        },
+        "@": "[&]"
       }
     }
   },
@@ -24,7 +16,16 @@
     "operation": "modify-overwrite-beta",
     "spec": {
       "*": {
-        "amount": "=doubleSum(@(1,amount))"
+        "returnSalesTaxAmount": "=doubleSum(@(1,returnSalesTaxAmount))"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "returnId": "[&1].returnId",
+        "returnSalesTaxAmount": "[&1].returnTax"
       }
     }
   }
