@@ -1,0 +1,80 @@
+Input:
+{
+    "employees": [
+        {
+            "name": "John Doe",
+            "salary": 50000,
+            "department": "Sales"
+        },
+        {
+            "name": "Jane Smith",
+            "salary": 60000
+        },
+        {
+            "name": "Bob Johnson",
+            "department": "IT"
+        }
+    ]
+}
+
+Output:
+{
+    "employees": [
+        {
+            "name": "John Doe",
+            "bonus": 1000,
+            "salary": 50000,
+            "department": "Sales"
+        },
+        {
+            "name": "Jane Smith",
+            "bonus": 1500,
+            "department": "Marketing",
+            "salary": 60000
+        },
+        {
+            "name": "Bob Johnson",
+            "bonus": 900,
+            "department": "IT"
+        }
+    ]
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "*": "employees[&1].&",
+                    "name": {
+                        "John Doe": {
+                            "@(2,name)": "employees[&3].name",
+                            "#1000": "employees[&3].bonus"
+                        },
+                        "Jane Smith": {
+                            "@(2,name)": "employees[&3].name",
+                            "#1500": "employees[&3].bonus",
+                            "#Marketing": "employees[&3].department"
+                        },
+                        "Bob Johnson": {
+                            "@(2,name)": "employees[&3].name",
+                            "#900": "employees[&3].bonus"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "employees": {
+                "*": {
+                    "bonus": "=toInteger"
+                }
+            }
+        }
+    }
+]

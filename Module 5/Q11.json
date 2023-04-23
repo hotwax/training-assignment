@@ -32,11 +32,8 @@ Transformation Spec:
         "operation": "shift",
         "spec": {
             "items": {
-                // for each "items" array element
                 "*": {
-                    // map the "name" field to "itemName"
                     "name": "items[&1].itemName",
-                    // map the "value" field to "itemValue"
                     "value": "items[&1].itemValue"
                 }
             }

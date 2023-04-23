@@ -46,7 +46,6 @@ Output:
 
 Transformation Spec:
 [
-    // Extract the first and last name from the "name" field
     {
         "operation": "modify-overwrite-beta",
         "spec": {
@@ -55,7 +54,6 @@ Transformation Spec:
             "last_name": "=lastElement(@(1,name))"
         }
     },
-    // Add a "phone_number_count" field with the count of the "phone_numbers" array
     {
         "operation": "modify-default-beta",
         "spec": {

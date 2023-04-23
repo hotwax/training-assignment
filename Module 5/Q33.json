@@ -1,0 +1,68 @@
+Input:
+{
+    "id": 1,
+    "name": "John",
+    "hobbies": [
+        {
+            "name": "reading",
+            "level": "advanced"
+        },
+        {
+            "name": "swimming",
+            "level": "beginner"
+        }
+    ]
+}
+
+Output:
+[
+    {
+        "name": "John",
+        "id": 1,
+        "hobby_name": "John",
+        "hobby_level": "advanced"
+    },
+    {
+        "name": "John",
+        "id": 1,
+        "hobby_name": "John",
+        "hobby_level": "beginner"
+    }
+]
+
+Transformation Spec:
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "hobbies": {
+                "*": {
+                    "name": "@(3,name)",
+                    "id": "@(3,id)",
+                    "hobby_name": "@(1,name)",
+                    "hobby_level": "@(1,level)"
+                }
+            }
+        }
+    },
+    {
+        "operation": "remove",
+        "spec": {
+            "id": "",
+            "name": "",
+            "hobbies": {
+                "*": {
+                    "level": ""
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "hobbies": {
+                "*": "[&]"
+            }
+        }
+    }
+]
