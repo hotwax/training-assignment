@@ -1,0 +1,43 @@
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "department": "Marketing",
+          "salary": 45000
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "0": {
+          "#1000": "&2[].bonus",
+          "*": "&2[#2].&"
+        },
+        "1": {
+          "#1500": "&2[].bonus",
+          "*": "&2[#2].&"
+        },
+        "2": {
+          "#900": "&2[].bonus",
+          "*": "&2[#2].&"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "bonus": "=toInteger"
+        }
+      },
+      "totalBonus": "=intSum(@(1,employees[0].bonus),@(1,employees[1].bonus),@(1,employees[2].bonus))"
+    }
+  }
+]

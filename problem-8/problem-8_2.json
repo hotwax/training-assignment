@@ -1,0 +1,60 @@
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "department": "Marketing",
+          "salary": 45000
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "0": {
+          "#1000": "&2[].bonus",
+          "*": "&2[#2].&"
+        },
+        "1": {
+          "#1500": "&2[].bonus",
+          "*": "&2[#2].&"
+        },
+        "2": {
+          "#900": "&2[].bonus",
+          "*": "&2[#2].&"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "bonus": "=toInteger",
+          "bonusDuplicate": "@(1,bonus)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "&2[#2].&",
+          "bonusDuplicate": "totalBonus"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "totalBonus": "=intSum(@(1,totalBonus))"
+    }
+  }
+]
