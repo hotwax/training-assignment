@@ -1,0 +1,11 @@
+[ {
+  "name" : "John",
+  "hobby_name" : "reading",
+  "hobby_level" : "advanced",
+  "id" : 1
+}, {
+  "name" : "John",
+  "hobby_name" : "swimming",
+  "hobby_level" : "beginner",
+  "id" : 1
+} ]
