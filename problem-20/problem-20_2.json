@@ -1,0 +1,60 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "department": "=concat(@(1,&.id), ' ', @(1,&.name))"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": "departments.@(0,department).&1[]"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "departments": {
+        "*": {
+          "@": "&2[]"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "departments": {
+        "*": {
+          "employees": {
+            "*": {
+              "department": "=split(' ',@(1,&))"
+            }
+          },
+          "id": "=toInteger(@(1,employees[0].department[0]))",
+          "name": "@(1,employees[0].department[1])"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "departments": {
+        "*": {
+          "employees": {
+            "*": {
+              "department": ""
+            }
+          }
+        }
+      }
+    }
+  }
+]
