@@ -1,0 +1,99 @@
+Input Json
+{
+  "employees": [
+    {
+      "name": "John Doe",
+      "salary": 50000,
+      "department": "Sales"
+    },
+    {
+      "name": "Jane Smith",
+      "salary": 60000
+    },
+    {
+      "name": "Bob Johnson",
+      "department": "IT"
+    }
+  ]
+}
+
+Output Json
+{
+  "employees": [
+    {
+      "name": "John Doe",
+      "salary": 50000,
+      "department": "Sales",
+      "bonus": 1000
+    },
+    {
+      "name": "Jane Smith",
+      "salary": 60000,
+      "department": "Marketing",
+      "bonus": 1500
+    },
+    {
+      "name": "Bob Johnson",
+      "salary": 45000,
+      "department": "IT",
+      "bonus": 900
+    }
+  ],
+  "totalBonus": 3400
+}
+
+Jolt Spec
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "[0]": {
+          "bonus": 1000
+        },
+        "[1]": {
+          "department": "Marketing",
+          "bonus": 1500
+        },
+        "[2]": {
+          "salary": 45000,
+          "bonus": 900
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "temp": "@(1,bonus)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees.[#2].&",
+          "temp": "array"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "totalBonus": "=intSum(@(1,array))"
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "array": ""
+    }
+  }
+]
