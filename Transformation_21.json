@@ -1,0 +1,45 @@
+Input Json
+{
+  "restaurant": {
+    "rating": {
+      "value": 3
+    },
+    "address": {
+      "value": "India"
+    }
+  }
+}
+Output Json
+{
+  "Restaurant Rating" : 3
+}
+
+Jolt Spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "restaurant": {
+        "rating": {
+          "value": "&2 &1"
+        }
+      }
+    }
+  }
+]
+
+Or
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "restaurant": {
+        "rating": {
+          "value": "Restaurant Rating"
+        }
+      }
+    }
+  }
+]
