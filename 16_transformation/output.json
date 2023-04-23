@@ -1,0 +1,31 @@
+// My Output: John is not expert in Java but actual output have it.
+
+{
+    "Java" : {
+      "Intermediate" : [ "John Doe" ],
+      "Expert" : [ "Jane Doe" ]
+    },
+    "Python" : {
+      "Expert" : [ "John Doe" ]
+    }
+  }
+  
+// Actual Output
+
+{
+    "Java": {
+      "Intermediate": [
+        "John Doe"
+      ],
+      "Expert": [
+        "Jane Doe",
+        "John Doe"
+      ]
+    },
+    "Python": {
+      "Expert": [
+        "John Doe"
+      ]
+    }
+  }
+  
