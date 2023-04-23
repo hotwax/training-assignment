@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "name": "John",
+  "hobbies": [
+    {
+      "name": "reading",
+      "level": "advanced"
+    },
+    {
+      "name": "swimming",
+      "level": "beginner"
+    }
+  ]
+}
