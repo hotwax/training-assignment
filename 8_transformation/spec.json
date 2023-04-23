@@ -1,0 +1,80 @@
+[
+    {
+      "operation": "modify-default-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "department": "Marketing",
+            "salary": 45000
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "name": "employees.@(1,department).&",
+            "salary": "employees.@(1,department).&",
+            "department": "employees.@(1,department).&"
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "employees": {
+          "Sales": {
+            "bonus": "=divideAndRound(2,@(1,salary), 50)"
+          },
+          "Marketing": {
+            "bonus": "=divideAndRound(2,@(1,salary), 40)"
+          },
+          "IT": {
+            "bonus": "=divideAndRound(2,@(1,salary), 50)"
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "Sales": {
+            "*": "employees.[#2].&"
+          },
+          "Marketing": {
+            "*": "employees.[#2].&"
+          },
+          "IT": {
+            "*": "employees.[#2].&"
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "@": "&",
+          "*": {
+            "bonus": "totalBonus[]"
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "totalBonus": "=doubleSum(@(1,totalBonus))",
+        "employees": {
+          "*": {
+            "bonus": "=toInteger"
+          }
+        }
+      }
+    }
+  ]
+  
