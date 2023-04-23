@@ -1,0 +1,52 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "products": {
+        "*": {
+          "*": "products[&1].&",
+          "id": ["products[&1].id", "products[&1].tempId"]
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "products": {
+        "*": {
+          "*": "products[&1].&",
+          "tempId": {
+            "1001": {
+              "#0": "products[&3].toAdd"
+            },
+            "*": {
+              "@(2,price)": "products[&3].toAdd"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "products": {
+        "*": {
+          "price": "=doubleSum(@(1,price),@(1,toAdd))"
+        }
+      }
+    }
+  }
+  ,
+  {
+    "operation": "remove",
+    "spec": {
+      "products": {
+        "*": {
+          "toAdd": ""
+        }
+      }
+    }
+  }
+]
