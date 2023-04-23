@@ -1,0 +1,32 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "items": {
+        "*": {
+          "prices": {
+            "*": {
+              "temp": "=concat(@(3,id),'_',@(1,currency))"
+            }
+          }
+        }
+      }
+    }
+  }
+  ,
+  {
+    "operation": "shift",
+    "spec": {
+      "items": {
+        "*": {
+          "prices": {
+            "*": {
+              "value": "@(1,temp)"
+            }
+          }
+        }
+      }
+    }
+  }
+
+]
