@@ -1,0 +1,40 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "temp": "=divide(1,@(1,returnQuantity))",
+        "temp1": "=divide(@(1,returnPrice),@(1,temp))",
+        "Return Amount": "=divide(@(1,returnPrice),@(1,temp))"
+      }
+    }
+  }
+ ,
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "temp1": "[&1].ans",
+        "returnTax": "[&1].ans",
+        "returnId": "[&1].Return Id",
+        "Return Amount": "[&1].&"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "Return Total Amount": "=doubleSum(@(1,ans))"
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "*": {
+        "ans": ""
+      }
+    }
+  }
+]
