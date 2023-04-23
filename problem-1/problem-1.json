@@ -1,0 +1,65 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "items": {
+            "*": {
+              "quantityInverse": "=divide(1,@(1,quantity))",
+              "totalPrice": "=divide(@(1,price), @(1,quantityInverse))"
+            }
+          },
+          "customer": {
+            "fullName": "=concat(@(1,firstName), ' ', @(1,lastName))",
+            "address": "=concat(@(0,street), ', ', @(0,city), ', ', @(0,state), ' ' , @(0,zip))"
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": {
+          "*": "&2[#2].&",
+          "items": {
+            "*": {
+              "*": "&4[#4].&2[#2].&",
+              "totalPrice": "&4[#4].total"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "total": "=doubleSum(@(1,total))"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "orders": {
+        "*": {
+          "customer": {
+            "firstName": "",
+            "lastName": ""
+          },
+          "items": {
+            "*": {
+              "quantityInverse": ""
+            }
+          }
+        }
+      }
+    }
+  }
+]
