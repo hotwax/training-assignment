@@ -1,0 +1,90 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "items": {
+            "*": {
+              "temp": "=divide(1,@(1,quantity))",
+              "totalSingleItem": "=divide(@(1,price),@(1,temp))"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": {
+          "*": "orders[&1].&",
+          "items": ["orders[&1].itemsTemp", "orders[&1].items"]
+        }
+      }
+    }
+  }
+
+  ,
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": {
+          "*": "orders[&1].&",
+          "itemsTemp": {
+            "*": {
+              "@(0,totalSingleItem)": "orders[&3].priceList[#2]"
+            }
+          }
+        }
+      }
+    }
+  }
+,
+
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "total": "=doubleSum(@(1,priceList))",
+          "customer": {
+            "fullName": "=concat(@(1,firstName),' ',@(1,lastName))",
+            "Address": "=concat(@(1,address.street),', ',@(1,address.city),', ',@(1,address.state),', ',@(1,address.zip))"
+          },
+          "items": {
+            "*": {
+              "price": ["=toDouble", null]
+            }
+          }
+        }
+      }
+    }
+  }
+,
+  {
+    "operation": "remove",
+    "spec": {
+      "orders": {
+        "*": {
+          "customer": {
+            "firstName": "",
+            "lastName": "",
+            "address": ""
+          },
+          "items": {
+            "*": {
+              "temp": "",
+              "totalSingleItem": ""
+            }
+          },
+          "priceList": ""
+        }
+      }
+    }
+  }
+
+
+]
