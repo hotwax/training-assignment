@@ -1,0 +1,30 @@
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "employeename": "@(3,name)"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "employeename": "@(1,name).@(1,level)[]"
+            }
+          }
+        }
+      }
+    }
+  }
+]
