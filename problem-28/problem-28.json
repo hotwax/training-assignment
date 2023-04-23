@@ -1,0 +1,23 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "returnItemAdjustments": {
+          "*": {
+            "amount": "[#4].returnTax"
+          }
+        },
+        "returnId": "[#2].&"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "returnTax": "=doubleSum(@(1,returnTax))"
+      }
+    }
+  }
+]
