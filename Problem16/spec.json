@@ -1,0 +1,50 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "": "@(1,name).@(1,level).[]",
+              "@(2,name)": "@(1,name).@(1,level).[]"
+            }
+          }
+        }
+      }
+    }
+  }
+]
+
+Another way
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "": "@(1,name).@(1,level).[]",
+              "@(2,name)": "@(1,name).@(1,level).[]"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "Java": {
+        "Intermediate": "Java.&",
+        "Expert": {
+          "#Jane Doe": "Java.Expert.[0]",
+          "#John Doe": "Java.Expert.[1]"
+        }
+      },
+      "*": "&"
+    }
+  }
+]
