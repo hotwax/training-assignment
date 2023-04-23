@@ -1,0 +1,46 @@
+Input Json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "johndoe@example.com",
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  }
+}
+Output Json
+{
+  "fullName": "John Doe",
+  "email": "johndoe@example.com",
+  "city": "Anytown",
+  "zip": "12345"
+}
+
+Jolt Spec
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "fullName": "=concat(@(1,firstName),' ',@(1,lastName))"
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "address": {
+        "city": "&",
+        "zip": "&"
+      },
+      "*": "&"
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "firstName": "",
+      "lastName": ""
+    }
+  }
+]
