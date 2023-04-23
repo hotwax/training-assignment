@@ -1,0 +1,24 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "products": {
+        "0": {
+          "#false": "&2[#2].available",
+          "*": "&2[#2].&"
+        },
+        "*": "products[]"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "products": {
+        "*": {
+          "available": "=toBoolean"
+        }
+      }
+    }
+  }
+]
