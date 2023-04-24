@@ -50,24 +50,17 @@ Jolt Spec
     "spec": {
       "employees": {
         "[0]": {
-          "bonus": 1000
+          "bonus": "=divide(@(1,salary),50)",
+          "temp": "@(1,bonus)"
         },
         "[1]": {
           "department": "Marketing",
-          "bonus": 1500
+          "bonus": "=divide(@(1,salary),40)",
+          "temp": "@(1,bonus)"
         },
         "[2]": {
           "salary": 45000,
-          "bonus": 900
-        }
-      }
-    }
-  },
-  {
-    "operation": "modify-overwrite-beta",
-    "spec": {
-      "employees": {
-        "*": {
+          "bonus": "=divide(@(1,salary),50)",
           "temp": "@(1,bonus)"
         }
       }
@@ -79,7 +72,7 @@ Jolt Spec
       "employees": {
         "*": {
           "*": "employees.[#2].&",
-          "temp": "array"
+          "temp": "totalBonus"
         }
       }
     }
@@ -87,13 +80,7 @@ Jolt Spec
   {
     "operation": "modify-overwrite-beta",
     "spec": {
-      "totalBonus": "=intSum(@(1,array))"
-    }
-  },
-  {
-    "operation": "remove",
-    "spec": {
-      "array": ""
+      "totalBonus": "=intSum(@(1,totalBonus))"
     }
   }
 ]
