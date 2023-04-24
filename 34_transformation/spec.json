@@ -1,3 +1,6 @@
+// We can use an optimized approch by usig idexing
+
+
 [
     {
       "operation": "shift",
