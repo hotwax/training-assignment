@@ -102,15 +102,15 @@ Approach : We have to join orders and salepeople table and select the distinct s
 
 Expected outcome :
 
-+---------+
-| SNAME   |
-+---------+
-| Rifkin  |
-| Peel    |
-| Motika  |
-| Serres  |
-| AxelRod |
-+---------+
++------+---------+
+| SNUM | SNAME   |
++------+---------+
+| 1001 | Peel    |
+| 1002 | Serries |
+| 1004 | Motika  |
+| 1007 | Rifkin  |
+| 1003 | AxelRod |
++------+---------+
 
 Tables involved :
 
@@ -127,17 +127,17 @@ Approach : we have to join salespeople and customers by snum
 
 Expected outcome :
 
-+----------+
-| CNAME    |
-+----------+
-| Hoffman  |
-| Giovanni |
-| Liu      |
-| Grass    |
-| Ciemens  |
-| Cisneros |
-| Pereira  |
-+----------+
++----------+---------+
+| CNAME    | SNAME   |
++----------+---------+
+| Hoffman  | Peel    |
+| Giovanni | AxelRod |
+| Liu      | Serries |
+| Grass    | Serries |
+| Ciemens  | Peel    |
+| Cisneros | Rifkin  |
+| Pereira  | Motika  |
++----------+---------+
 
 Tables involved :
 
@@ -333,16 +333,12 @@ ORDERS
 15. Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
 
 
-Approach : Here we have to select the max amount from orders tables and group the result by date having sum of amount - maximum amount is greater than 2000.
+Approach : Here we have to select the max amount from orders tables and group the result by date having sum of amount greater than 2000 +  maximum amount value in orders tables;
 
 
 Expected outcome :
 
-+----------+
-| SUM(AMT) |
-+----------+
-|  8944.59 |
-+----------+
+Empty set (0.0008 sec)
 
 Tables involved :
 ORDERS

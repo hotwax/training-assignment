@@ -105,50 +105,51 @@ mysql> SELECT DISTINCT(SALESPEOPLE.SNAME)
 FROM SALESPEOPLE 
 INNER JOIN ORDERS
 ON SALESPEOPLE.SNUM=ORDERS.SNUM;
-+---------+
-| SNAME   |
-+---------+
-| Rifkin  |
-| Peel    |
-| Motika  |
-| Serres  |
-| AxelRod |
-+---------+
++------+---------+
+| SNUM | SNAME   |
++------+---------+
+| 1001 | Peel    |
+| 1002 | Serries |
+| 1004 | Motika  |
+| 1007 | Rifkin  |
+| 1003 | AxelRod |
++------+---------+
 5 rows in set (0.00 sec)
 
 
 OR
 
-mysql> SELECT SNAME 
+mysql> SELECT SNUM,SNAME 
 FROM SALESPEOPLE 
 WHERE SNUM IN 
 (SELECT DISTINCT SNUM FROM ORDERS);
-+---------+
-| SNAME   |
-+---------+
-| Peel    |
-| Serres  |
-| Motika  |
-| Rifkin  |
-| AxelRod |
-+---------+
++------+---------+
+| SNUM | SNAME   |
++------+---------+
+| 1001 | Peel    |
+| 1002 | Serries |
+| 1004 | Motika  |
+| 1007 | Rifkin  |
+| 1003 | AxelRod |
++------+---------+
+5 rows in set (0.00 sec)
 
 6. List names of all customers matched with the salespeople serving them. 
 
-mysql> SELECT CUSTOMERS.CNAME 
+mysql> SELECT CUSTOMERS.CNAME, SALESEPOEPLE.SNAME 
 FROM CUSTOMERS 
 INNER JOIN SALESPEOPLE ON CUSTOMERS.SNUM=SALESPEOPLE.SNUM;
-+----------+
-| CNAME    |
-+----------+
-| Hoffman  |
-| Giovanni |
-| Liu      |
-| Grass    |
-| Ciemens  |
-| Cisneros |
-| Pereira  |
-+----------+
++----------+---------+
+| CNAME    | SNAME   |
++----------+---------+
+| Hoffman  | Peel    |
+| Giovanni | AxelRod |
+| Liu      | Serries |
+| Grass    | Serries |
+| Ciemens  | Peel    |
+| Cisneros | Rifkin  |
+| Pereira  | Motika  |
++----------+---------+
 7 rows in set (0.00 sec)
 
 7. Find the names and numbers of all salespeople who have more than one customer. 
@@ -293,19 +294,6 @@ WHERE ODATE LIKE '10/03%';
 
 
 15. Give the sums of the amounts from the Orders table, grouped by date, eliminating all those dates where the SUM was not at least 2000 above the maximum Amount. 
-
-Taking the maximum amount of the day from the orders table
-
-mysql> SELECT ODATE, MAX(AMT), SUM(AMT)
-FROM orders
-GROUP BY odate
-HAVING (SUM(AMT) - MAX(AMT)) > 2000;
-
-+------------+----------+----------+
-| ODATE      | max(AMT) | sum(AMT) |
-+------------+----------+----------+
-| 1990-03-10 |  5160.45 |  8944.59 |
-+------------+----------+----------+
 
 Taking the maximum value of the amt column in the orders table.
 
