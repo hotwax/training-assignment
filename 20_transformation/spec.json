@@ -1,0 +1,45 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "department": {
+              "id": "departments.@(1,id).id[]",
+              "name": "departments.@(1,id).name[]",
+              "@(1,name)": "departments.@(1,id).employees[&2].name",
+              "@(1,age)": "departments.@(1,id).employees[&2].age"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "departments": {
+          "*": {
+            "id": "=firstElement(@(1,id))",
+            "name": "=firstElement(@(1,name))"
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "departments": {
+          "*": {
+            "*": "departments.[#2].&"
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": "=recursivelySquashNulls"
+      }
+      }
+  ]
+  
