@@ -1,0 +1,91 @@
+Testcase 1 : If user entered a incorrect menu choice.
+
+Input: /1
+
+Output : Enter a correct choice
+
+Testcase 2 : if User entered wrong output in a input 
+
+Input : abc
+
+Output : Enter a correct choice
+
+Testcase 3 : insert a value in AVL tree
+
+Input : 
+1
+Enter the value
+80
+
+Output : 13 45 78 80 99 
+
+Testcase 4 : delete a value in AVL tree
+
+Input : 
+3
+Enter the value to be deleted
+80
+
+Output : 13 45 78 99
+
+
+Testcase 5 : to traverse a tree
+
+Input:
+2
+
+Output : 13 45 78 99 
+
+
+Testcase 6 : update a value in a AVL tree
+
+Input :
+4
+Enter the new value
+12
+Enter the old value
+45
+
+Output : 12 13 78 99 
+
+Testcase 7 : Search a value in a AVL tree
+
+Input : 
+5
+Enter a value to search
+13
+
+Output: Value present in a AVL Tree
+
+Testcase 8 : if your entered a value which is not present in a tree
+
+Input : 
+5
+Enter a value to search
+100
+
+Output : Value does not present in a AVL Tree
+
+
+Testcase 9 : if your entered a wrong old value during updation
+
+Input :
+4
+Enter the new value
+85
+Enter the old value
+1000
+
+
+Output : ""
+
+
+Testcase 10 : If user entered a wrong value during deletion.
+
+Input : 
+3
+Enter the value to be deleted
+1000
+
+
+Output : ""

@@ -1,0 +1,40 @@
+1. User entered wrong choice.
+
+Input : 12
+
+output: Kindly enter the correct option.
+
+
+2. Push function
+
+Input : Enter the value to be inserted
+2
+
+Output : Stack :2
+
+3. User entered a invalid datatype 
+
+Input : abc
+
+Output : null
+
+4. peek or top function
+
+Input : "No need for the input"
+
+Output : 2
+
+
+5. Is stack is empty functionality
+
+Input : "No need for the input"
+
+Output : false
+
+
+6. pop functionality
+
+Input : "No need for the input"
+
+Output : Stack :
+

@@ -1,0 +1,101 @@
+1. user entered the wrong choice
+
+input: 12
+
+output: Kindly enter the correct option.
+
+
+
+
+2. Inserting an element 
+
+Input : Enter the value to be inserted
+12
+
+Output : Binary Tree : 12
+
+
+
+3. Inserting wrong datatype value 
+
+Input : abc
+
+Output : null
+
+
+
+
+4. Deleting an element from the binary tree
+
+initial BST preorder : Binary Tree : 12 4 8 14 
+
+Input : Enter the value to be deleted
+4
+
+Output : Binary Tree : 12 8 14 
+
+
+
+
+5. User entered invalid value in deletion operation
+
+Input : Enter the value to be deleted
+xyz
+
+Output : null
+
+
+
+
+
+6. Updating an element
+
+Input : Enter the new value to be updated
+7
+Enter the current value present in a tree
+8
+
+Output : Binary Tree : 12 7 14 
+
+
+
+7. Updating with invalid value 
+
+Input: Enter the new value to be updated
+abc
+
+Output: null
+
+
+
+
+
+8. Display functionality
+
+Input : "No need for input"
+
+Output : Binary Tree : 12 7 14 
+
+
+
+
+
+9. Search functionality
+
+
+Input : Enter the value to be searched in a tree
+12
+
+Output : true
+
+
+
+
+10. if entered value is not present in a search functionality
+
+Input : Enter the value to be searched in a tree
+155
+
+Output : false
+
+

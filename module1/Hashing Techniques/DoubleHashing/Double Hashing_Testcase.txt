@@ -1,0 +1,113 @@
+1. User entered a wrong choice 
+
+Input : 12
+
+Output : Kindly enter the correct option
+
+
+2. If use enter the wrong datatype 
+
+Input : abc
+
+Output : null
+
+
+
+
+3. Inserting a value in a hashmap
+
+Input : 
+Enter the key and value to be inserted
+1 1
+
+Output : Hashmap : 
+0->40
+5->45
+
+
+
+4. If user enter the duplicate key
+
+Input : Enter the value to be inserted
+45
+
+Output : Hashmap : 
+0->40
+5->45
+
+
+
+
+5. Deletion in a hashmap
+
+Input : Enter key to delete from the hashmap
+40
+
+Output : Hashmap : 
+5->45
+
+
+
+6. If user enter invaild key during deletion
+
+Input : 100
+
+Output :HashMap : 
+5->45
+
+
+
+7.  get value by entering a key
+
+Input : 5
+
+Output : 45
+
+
+8. If user entered the wrong key
+
+Input : 100
+
+Output : Invaild entered key
+-1
+
+
+9. Display the hashmap 
+
+
+Input : "No input needed"
+
+Output : HashMap : 
+5->45
+
+
+
+10. Search a value in a hashmap 
+
+Input : Enter the value
+45
+
+Output : 5
+
+
+11. If user entered a wrong value 
+
+Input : 100
+
+Output : 0
+
+
+12 . total collision 
+
+Input : "No input neede"
+
+Output : 0
+
+
+13 . total time 
+
+Input : "No input needed"
+
+Output : Time in milli seconds is 345401
+
+

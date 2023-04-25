@@ -1,0 +1,92 @@
+1. User entered a wrong choice 
+
+Input : 12
+
+Output : Kindly enter the correct option.
+
+
+2. Entered a wrong datatype 
+
+Input : abc
+
+Output : null
+
+
+3. Inserting a value in a graph
+
+
+Input : 
+Enter the number of edges
+6
+Enter the source vertex
+0
+Enter the destination vertex
+1
+Enter the source vertex
+0
+Enter the destination vertex
+3
+Enter the source vertex
+1
+Enter the destination vertex
+3
+Enter the source vertex
+3
+Enter the destination vertex
+4
+Enter the source vertex
+4
+Enter the destination vertex
+2
+Enter the source vertex
+2
+Enter the destination vertex
+1
+
+Output : "No output , only value is inserted in a graph"
+
+
+
+4. BFS traversel functionality
+
+Input : Enter the starting node value
+0
+
+Output : BFS Traversal  0 1 3 2 4 
+
+
+
+5. DFS traversal functionality
+
+Input : Enter the starting node value
+0
+
+Output : DFS Traversal  0 1 2 3 4
+
+
+6. If user entered invalid starting node
+
+Input : Enter the starting node value
+6
+
+Output : BFS Traversal  Enter correct node value   java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 5
+
+
+7. Delete functiona;ity
+
+Input : Enter the two nodes which you want to delete the edge between
+0 1
+
+Output : Node edge deleted
+
+
+
+
+8. If user entered incorrect edge in delete functionality
+
+Input : 14 15
+
+Output : Node edge deleted
+
+
+

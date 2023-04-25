@@ -1,0 +1,109 @@
+1. User entered a wrong choice 
+
+Input : 12
+
+Output : Kindly enter the correct option
+
+
+
+2.Inserting a value in hashmap
+
+Input : 
+Enter the key and value to be inserted
+1 1
+
+Output : Hashmap :
+1->1
+
+
+3. if user enter duplicate key 
+
+Input : Enter the value to be inserted
+1 6
+
+Output : Hashmap :
+1->6
+
+
+4. Deletion in a hashmap 
+
+Input : Enter key to delete from the hashmap
+1
+
+Output : Hashmap :
+
+
+
+5. If user entered invalid key during deletion 
+
+Input : Enter key to delete from the hashmap
+56
+
+Output : Hashmap :
+5->5
+
+
+
+
+6. get the value by it's key
+ 
+Input : Enter the key whose value you want
+9
+
+Output : 59
+
+
+
+
+
+7. if user entered invalid key
+Input : Enter the key whose value you want
+9
+
+Output : Enter a valid key
+
+
+
+
+
+8. Display the hashmap
+
+Input : " No input needed "
+
+output : Hashmap :
+6 ->56
+9 ->59
+
+
+9. Search the value by it's value
+
+Input : Enter the value to be searched
+59
+
+Output : value present at 9 index
+
+
+10. if user entered incorrect value
+
+Input : Enter the value to be searched
+60
+
+Output : No value is present in a hashmap
+
+
+
+11. Total collison
+
+
+Input : "no inputs needed"
+
+Output : 0
+
+
+12 . Total collision
+
+Input : "No input need" 
+
+Output : Time in milli seconds is 544813
+
+
