@@ -1,0 +1,95 @@
+Test the Program WordCountScrapper by the Following Testcases:
+
+TestCase 1: (if there is Multiple URL) 
+
+input : 
+url.txt =  https://www.britannica.com/art/short-story
+           https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
+           https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
+words.txt =   [short story are population Students NCERT REMOVE LINE YOU]
+
+output: 
+https://www.britannica.com/art/short-story
+short 36
+story 28
+are 14
+https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
+are 11
+NCERT 4
+YOU 1
+https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
+YOU 4
+LINE 3
+are 2
+Total occurrences for each word:
+short 36
+story 28
+are 27
+YOU 5
+NCERT 4
+LINE 3
+
+TestCase 2: ( if One URL is Given) ;
+input : 
+url.txt =  https://www.britannica.com/art/short-story
+words.txt =  [ short story are population Students NCERT REMOVE LINE YOU ]
+
+output:
+https://www.britannica.com/art/short-story
+short 36
+story 28
+are 14
+Total occurrences for each word:
+short 36
+story 28
+are 14
+
+TestCase 3: (if No words given) 
+input : 
+url.txt =  https://www.britannica.com/art/short-story
+words.txt = [ ]
+output:
+No Words Found
+
+TestCase 4: (if No Url Given)
+input : 
+url.txt =  [ ]
+words.txt =  [ short story are population Students NCERT REMOVE LINE YOU ]
+output:
+No Url Found
+
+TestCase 5: (if url.txt file is missing) 
+input : 
+words.txt =  [ short story are population Students NCERT REMOVE LINE YOU ]
+output: File Not Found
+
+TestCase 6: (if words.txt file is missing) 
+input : 
+url.txt =  https://www.britannica.com/art/short-story
+output: File Not Found
+
+TestCase 7: (if Invalid Url is Given) 
+url.txt =  www.xyz.com
+words.txt =  [ short story are population Students NCERT REMOVE LINE YOU ]
+output: 
+Invalid Url www.xyz.com
+
+TestCase 8: (if No words are found in WebPage)
+input : 
+url.txt =  https://www.britannica.com/art/short-story
+              https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
+              https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
+words.txt =   [gym kite orange]
+output:
+https://www.britannica.com/art/short-story
+gym 0
+kite 0
+orange 0
+https://www.javatpoint.com/ncert-solutions-for-class-6-social-science-geography-chapter-7
+gym 0
+kite 0
+orange 0
+https://store.chipkin.com/articles/replacing-white-spaces-with-single-spaces-in-notepad
+gym 0
+kite 0
+orange 0

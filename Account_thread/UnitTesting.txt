@@ -1,0 +1,73 @@
+1) Test case : When we run AccountOverdrawDemo.java file 
+
+Initially We have 1000rs in bank account which have two users person1 and person2 And if they withdraw from bank parallely then there might chance that inconsistency occur ,  Here due to inconsistency 
+Total Amount Withdrawl by Person 1 600
+Total Amount Withdrawl by Person 2 600
+Total Amount Withdraw is 1200
+
+
+Output 1 :
+person1 has withdrawn 100 from SBI Account account
+person2 has withdrawn 100 from SBI Account account
+Balance Left in Account is 900
+Balance Left in Account is 900
+person2 has withdrawn 100 from SBI Account account
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 700
+Balance Left in Account is 700
+person2 has withdrawn 100 from SBI Account account
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 500
+Balance Left in Account is 500
+person1 has withdrawn 100 from SBI Account account
+person2 has withdrawn 100 from SBI Account account
+Balance Left in Account is 300
+Balance Left in Account is 300
+person2 has withdrawn 100 from SBI Account account
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 100
+Balance Left in Account is 100
+person1 has withdrawn 100 from SBI Account account
+person2 has withdrawn 100 from SBI Account account
+Balance Left in Account is 0
+Balance Left in Account is 0
+Hey person2 Your SBI Account does not have sufficient balance
+Hey person1 Your SBI Account does not have sufficient balance
+Total Amount was 1000 initially 
+Total Amount Withdrawl by Person 1 600
+Total Amount Withdrawl by Person 2 600
+Total Amount Withdraw is 1200
+
+2) Test case : When we run AccountOverdrawSafeDemo.java file 
+
+To cure this problem we have AccountOverdrawSafeDemo.java we have created synchronized methods over here. There is no chance of inconsistency.
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 900
+person2 has withdrawn 100 from SBI Account account
+Balance Left in Account is 800
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 700
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 600
+person2 has withdrawn 100 from SBI Account account
+Balance Left in Account is 500
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 400
+person2 has withdrawn 100 from SBI Account account
+Balance Left in Account is 300
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 200
+person2 has withdrawn 100 from SBI Account account
+Balance Left in Account is 100
+person1 has withdrawn 100 from SBI Account account
+Balance Left in Account is 0
+Hey person2 Your SBI Account does not have sufficient balance
+Hey person1 Your SBI Account does not have sufficient balance
+Total Amount was 1000 initially
+Total Amount Withdrawl by Person 1 600
+Total Amount Withdrawl by Person 2 400
+<<<<<<< HEAD
+Total Amount Withdraw is 1000
+=======
+Total Amount Withdraw is 1000
+>>>>>>> 76a2263664316f88d7564589de5d43100fd751cb
