@@ -1,13 +1,15 @@
 package Stack;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+//Stack class
 public class Stack<V> {
+	//Node class
 	class Node {
 		V data;
 		Node next;
 
+		// Node class constructor
 		Node(V val) {
 			this.data = val;
 			this.next = null;
@@ -17,42 +19,37 @@ public class Stack<V> {
 	private Node top;
 	private int size;
 
+	// Stack class constructor
 	Stack() {
 		top = null;
 		size = 0;
 	}
 
 	// insertion in Stack From Top
-
 	void push(V data) {
+		Node newnode = new Node(data);
 		if (top == null) {
-			Node newnode = new Node(data);
 			top = newnode;
 			size++;
 			return;
 		} else {
-			Node newnode = new Node(data);
 			newnode.next = top;
 			top = newnode;
 			size++;
 		}
-
 	}
 
 	// deletion in Stack From Top
-
 	void pop() {
 		if (top == null) {
 			return;
 		}
 		top = top.next;
 		size--;
-
 	}
 
 	// Top Element in Stack
-
-	V Top() {
+	V topElement() {
 		if (top == null) {
 			return null;
 		}
@@ -60,17 +57,16 @@ public class Stack<V> {
 	}
 
 	// Size of Stack
-	int Size() {
+	int stackSize() {
 		if (top == null) {
 			return 0;
 		} else {
 			return size;
 		}
-
 	}
 
 	// Check Stack is empty or not
-	boolean isempty() {
+	boolean isEmpty() {
 		if (top == null) {
 			return true;
 		} else {
@@ -79,16 +75,15 @@ public class Stack<V> {
 	}
 
 	// Display the elements in Stack
-
 	void display() {
 		if (top == null) {
 			System.out.println("-1");
 			return;
 		} else {
-			Node temp = top;
-			while (temp != null) {
-				System.out.print(temp.data + "  ");
-				temp = temp.next;
+			Node tempTopRef = top;
+			while (tempTopRef != null) {
+				System.out.print(tempTopRef.data + "  ");
+				tempTopRef = tempTopRef.next;
 			}
 		}
 	}
@@ -96,7 +91,7 @@ public class Stack<V> {
 	public static void main(String[] args) {
 		try (Scanner input = new Scanner(System.in)) {
 			Stack<Integer> stack = new Stack<Integer>();
-			int choices;
+			String choices;
 			do {
 				System.out.println();
 				System.out.println("Operations in Stack");
@@ -111,50 +106,49 @@ public class Stack<V> {
 				System.out.println();
 				System.out.println("Enter Your Choices");
 				System.out.println();
-				choices = input.nextInt();
+				choices = input.next();
 				System.out.println();
 				switch (choices) {
-					case 1:
+					case "1":
 						System.out.println("Enter the data");
-						int d = input.nextInt();
-						stack.push(d);
+						int data = input.nextInt();
+						stack.push(data);
 						break;
 
-					case 2:
-						if (stack.isempty()) {
+					case "2":
+						if (stack.isEmpty()) {
 							System.out.println("Stack is empty");
 						} else {
-							int top1 = stack.Top();
+							int prevTopElement = stack.topElement();
 							stack.pop();
-							System.out.println("Deleted element of Stack is - " + top1);
+							System.out.println("Deleted element of Stack is - " + prevTopElement);
 						}
 						break;
 
-					case 3:
-						if (stack.isempty()) {
+					case "3":
+						if (stack.isEmpty()) {
 							System.out.println("Stack is empty");
 						} else {
-							int top = stack.Top();
-							System.out.println("Top element of Stack is - " + top);
+							int topElementOfStack = stack.topElement();
+							System.out.println("Top element of Stack is - " + topElementOfStack);
 						}
 						break;
 
-					case 4:
-						int size = stack.Size();
+					case "4":
+						int size = stack.stackSize();
 						System.out.println("Size of Stack is - " + size);
 						break;
 
-					case 5:
-
-						if (stack.isempty()) {
+					case "5":
+						if (stack.isEmpty()) {
 							System.out.println("Stack is Empty");
 						} else {
 							System.out.println("Stack is not Empty");
 						}
 						break;
 
-					case 6:
-						if (stack.isempty()) {
+					case "6":
+						if (stack.isEmpty()) {
 							System.out.println("Stack is empty");
 							break;
 						}
@@ -163,7 +157,7 @@ public class Stack<V> {
 						System.out.println();
 						break;
 
-					case 7:
+					case "7":
 						System.out.println("Thank You");
 						break;
 
@@ -171,10 +165,11 @@ public class Stack<V> {
 						System.out.println("Invalid Choice");
 						break;
 				}
-			} while (choices != 7);
+			} while (!choices.equals("7"));
 		} catch (InputMismatchException exception) {
 			System.out.println(exception);
+		} catch (Exception exception) {
+			System.out.println(exception);
 		}
-
 	}
 }

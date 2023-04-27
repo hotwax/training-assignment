@@ -63,19 +63,8 @@ Test Case 2(Pop in Stack):
 Test Case 3(Invalid Input type):
   Input:
    choice-1
-    12
-   choice-1
-    A
-   choice-1
-    40
-   choice-2
-   choice-2
-   choice-2
-   choice-3
-   choice-4
-   choice-5
-   choice-6          
-
+    f
+            
   Output:
    Input Mismatch exception
 

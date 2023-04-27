@@ -1,17 +1,14 @@
 package Queue;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class QueueTest {
-
     Queue<String> queue = new Queue<String>();
-
+    final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
     @Test
     void queueEnqueueTest() {
-        final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputstream));
         queue.push("Gourav");
         queue.push("Yash");
@@ -25,14 +22,13 @@ public class QueueTest {
 
     @Test
     void queueDequeueTest() {
-        final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputstream));
         queue.push("Gourav");
         queue.push("Yash");
         queue.push("Vishudhi");
-        Assertions.assertEquals("Gourav", queue.Front());
+        Assertions.assertEquals("Gourav", queue.frontElement());
         queue.pop();
-        Assertions.assertEquals("Yash", queue.Front());
+        Assertions.assertEquals("Yash", queue.frontElement());
         queue.push("Niharika");
         queue.push("Kunal");
         queue.pop();
@@ -47,39 +43,36 @@ public class QueueTest {
         queue.push("Palak");
         queue.push("Kritika");
         queue.push("Harshita");
-        Assertions.assertEquals("Gourav", queue.Front());
+        Assertions.assertEquals("Gourav", queue.frontElement());
         queue.pop();
-        Assertions.assertEquals("Palak", queue.Front());
+        Assertions.assertEquals("Palak", queue.frontElement());
         queue.pop();
-        Assertions.assertEquals("Kritika", queue.Front());
+        Assertions.assertEquals("Kritika", queue.frontElement());
         queue.pop();
-        Assertions.assertEquals("Harshita", queue.Front());
+        Assertions.assertEquals("Harshita", queue.frontElement());
         queue.pop();
-        Assertions.assertEquals(null, queue.Front());
-
+        Assertions.assertEquals(null, queue.frontElement());
     }
 
     @Test
     void queueSizeTest() {
-        Assertions.assertEquals(0, queue.Size());
+        Assertions.assertEquals(0, queue.queueSize());
         queue.push("Gourav");
         queue.push("Mamta");
         queue.push("Sam");
-        Assertions.assertEquals(3, queue.Size());
+        Assertions.assertEquals(3, queue.queueSize());
         queue.pop();
-        Assertions.assertEquals(2, queue.Size());
-
+        Assertions.assertEquals(2, queue.queueSize());
     }
 
     @Test
     void queueIsEmptyTest1() {
-        Assertions.assertTrue(queue.isempty());
+        Assertions.assertTrue(queue.isEmpty());
     }
 
     @Test
     void queueIsEmptyTest2() {
         queue.push("Gourav");
-        Assertions.assertFalse(queue.isempty());
+        Assertions.assertFalse(queue.isEmpty());
     }
-
 }

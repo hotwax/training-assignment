@@ -62,18 +62,7 @@ Test Case 2(Pop in Queue):
 Test Case 3(Invalid Input type ):
   Input:
    choice-1
-    12
-   choice-A
-    23
-   choice-1
-    40
-   choice-2
-   choice-2
-   choice-2
-   choice-3
-   choice-4
-   choice-5
-   choice-6          
+    A        
 
   Output:
    Input Mismatch exception

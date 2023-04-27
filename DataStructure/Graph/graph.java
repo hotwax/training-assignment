@@ -1,157 +1,137 @@
 package Graph;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import Queue.Queue;
 
+//Graph class
 public class Graph {
-    int numberofnodes;
-    private boolean vis[];
+    int numberOfNodes;
+    private boolean visited[];
     private boolean directed;
-    private int arr[][];
-    int numberofedges;
+    private int graphMatrix[][];
+    int numberOfEdges;
 
-    Graph(int noofnodes, boolean dir) {
-        this.numberofnodes = noofnodes;
+    // constructor
+    Graph(int nodes, boolean dir) {
+        this.numberOfNodes = nodes;
         this.directed = dir;
-        arr = new int[numberofnodes][numberofnodes];
-        vis = new boolean[numberofnodes];
-        numberofedges = 0;
-
+        graphMatrix = new int[numberOfNodes][numberOfNodes];
+        visited = new boolean[numberOfNodes];
+        numberOfEdges = 0; // count of the edges
     }
 
-    void Addedge(int source, int destination) {
-        if (destination >= numberofnodes || source >= numberofnodes) {
+    // Added the edge between two nodes
+    void addEdge(int source, int destination) {
+        if (destination >= numberOfNodes || source >= numberOfNodes) {
             System.out.println("invalid Edges");
             return;
         }
-        if (source != destination && arr[source][destination] == 0) {
-            if (directed) {
-                arr[source][destination] = 1;
-                numberofedges++;
-            } else {
-
-                arr[source][destination] = 1;
-                arr[destination][source] = 1;
-                numberofedges++;
+        if (source != destination && graphMatrix[source][destination] == 0) {
+            graphMatrix[source][destination] = 1;
+            numberOfEdges++;
+            if (!directed) {
+                graphMatrix[destination][source] = 1;
             }
         }
     }
 
     int[][] graphDisplay() {
-        return arr;
+        return graphMatrix;
     }
 
-    void DFS() {
-
-        for (int i = 0; i < numberofnodes; i++) {
-            if (!vis[i]) {
-                dfsrec(i);
+    //dfs traversal of graph
+    void dFSTraversal() {
+        for (int index = 0; index < numberOfNodes; index++) {
+            if (!visited[index]) {
+                dfsRec(index);
             }
         }
-
-        for (int i = 0; i < numberofnodes; i++) {
-            vis[i] = false;
+        for (int index = 0; index < numberOfNodes; index++) {
+            visited[index] = false;
         }
-
     }
 
-    void dfsrec(int node) {
-
+    void dfsRec(int node) {
         System.out.print(node + " ");
-        vis[node] = true;
-
-        for (int j = 0; j < numberofnodes; j++) {
-
-            if (arr[node][j] == 1 && !vis[j]) {
-                dfsrec(j);
-            }
-
-        }
-
-    }
-
-    void BFS(Queue<Integer> q) {
-
-        for (int i = 0; i < numberofnodes; i++) {
-            if (!vis[i]) {
-                bfs(i, q);
+        visited[node] = true;
+        for (int index = 0; index < numberOfNodes; index++) {
+            if (graphMatrix[node][index] == 1 && !visited[index]) {
+                dfsRec(index);
             }
         }
-
-        for (int i = 0; i < numberofnodes; i++) {
-            vis[i] = false;
-        }
-
     }
 
-    void bfs(int node, Queue<Integer> q) {
+    //bfs traversal of graph
+    void bFSTraversal(Queue<Integer> queue) {
+        for (int index = 0; index < numberOfNodes; index++) {
+            if (!visited[index]) {
+                bfs(index, queue);
+            }
+        }
+        for (int index = 0; index < numberOfNodes; index++) {
+            visited[index] = false;
+        }
+    }
 
-        vis[node] = true;
-        q.push(node);
-
-        while (!q.isempty()) {
-            int top = q.Front();
-            q.pop();
+    void bfs(int node, Queue<Integer> queue) {
+        visited[node] = true;
+        queue.push(node);
+        while (!queue.isEmpty()) {
+            int top = queue.frontElement();
+            queue.pop();
             System.out.print(top + " ");
-            for (int j = 0; j < numberofnodes; j++) {
-                if (arr[top][j] == 1 && !vis[j]) {
-                    q.push(j);
-                    vis[j] = true;
+            for (int index = 0; index < numberOfNodes; index++) {
+                if (graphMatrix[top][index] == 1 && !visited[index]) {
+                    queue.push(index);
+                    visited[index] = true;
                 }
-
             }
-
         }
-
     }
 
-    void deletededge(int source, int destination) {
-        if (source >= numberofnodes || destination >= numberofnodes) {
+    //delete the edge 
+    void deleteEdge(int source, int destination) {
+        if (source >= numberOfNodes || destination >= numberOfNodes) {
             System.out.println("invalid Edges");
             return;
         }
-
-        if (arr[source][destination] == 1 && directed) {
-            arr[source][destination] = 0;
-            numberofedges--;
-        } else if (arr[source][destination] == 1 && !directed) {
-            arr[source][destination] = 0;
-            arr[destination][source] = 0;
-            numberofedges--;
+        if (graphMatrix[source][destination] == 1) {
+            graphMatrix[source][destination] = 0;
+            numberOfEdges--;
         }
-
+        if (graphMatrix[destination][source] == 1 && !directed) {
+            graphMatrix[destination][source] = 0;
+        }
     }
 
     public static void main(String[] args) {
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("Enter the number of node");
-            int numberofnode = input.nextInt();
-            int type;
-            boolean dir = false;
+            int numberOfNode = input.nextInt();
+            String type;
+            boolean directed = false;
             do {
                 System.out.println("Enter What type of Graph You want to design");
                 System.out.println("1. Directed Graph");
                 System.out.println("2. Undirected Graph");
-                type = input.nextInt();
+                type = input.next();
                 switch (type) {
-                    case 1:
-                        dir = true;
+                    case "1":
+                        directed = true;
                         break;
-                    case 2:
-                        dir = false;
+                    case "2":
+                        directed = false;
                         break;
                     default:
                         System.out.println("invalid Choice");
                         break;
                 }
-            } while (type != 1 && type != 2);
-            Graph graph = new Graph(numberofnode, dir);
+            } while (!type.equals("1") && !type.equals("2"));
+            
+            // object of Graph class
+            Graph graph = new Graph(numberOfNode, directed);
             Queue<Integer> queue = new Queue<Integer>();
-
-            int choices;
-
+            String choices;
             do {
                 System.out.println();
                 System.out.println("Operations in Graph");
@@ -165,76 +145,71 @@ public class Graph {
                 System.out.println("7. Exit ");
                 System.out.println();
                 System.out.println("Enter Your Choice");
-                choices = input.nextInt();
+                choices = input.next();
                 System.out.println();
                 switch (choices) {
-                    case 1:
+                    case "1":
                         System.out.println("Enter the node where you add edge Source to Destination");
                         System.out.println("Enter Source node");
                         int Source = input.nextInt();
                         System.out.println("Enter destination node");
                         int destination = input.nextInt();
-                        graph.Addedge(Source, destination);
+                        graph.addEdge(Source, destination);
                         break;
 
-                    case 2:
+                    case "2":
                         System.out.println("DFS Traversal - ");
-
-                        graph.DFS();
+                        graph.dFSTraversal();
                         System.out.println();
                         break;
 
-                    case 3:
+                    case "3":
                         System.out.println("BFS Traversal - ");
-
-                        graph.BFS(queue);
+                        graph.bFSTraversal(queue);
                         System.out.println();
                         break;
 
-                    case 4:
+                    case "4":
                         System.out.println("Adjency List Representation");
-                        int arr[][] = graph.graphDisplay();
-
-                        for (int i = 0; i < graph.numberofnodes; i++) {
-                            System.out.print(i + "->");
-                            for (int j = 0; j < graph.numberofnodes; j++) {
-                                if (arr[i][j] == 1) {
-                                    System.out.print(j + ",");
+                        int graphMatrix[][] = graph.graphDisplay();
+                        for (int index1 = 0; index1 < graph.numberOfNodes; index1++) {
+                            System.out.print(index1 + "->");
+                            for (int index2 = 0; index2 < graph.numberOfNodes; index2++) {
+                                if (graphMatrix[index1][index2] == 1) {
+                                    System.out.print(index2 + ",");
                                 }
                             }
                             System.out.print("\n");
                         }
                         break;
 
-                    case 5:
+                    case "5":
                         System.out.println();
-                        System.out.println("number of edges in Graph is - " + graph.numberofedges);
+                        System.out.println("number of edges in Graph is - " + graph.numberOfEdges);
                         break;
 
-                    case 6:
+                    case "6":
                         System.out.println("Enter the Source and destination node where you want to delete a edge");
                         System.out.println("Enter the source node");
-                        int s = input.nextInt();
+                        int source = input.nextInt();
                         System.out.println("Enter the destination node");
-                        int d = input.nextInt();
-                        graph.deletededge(s, d);
-
+                        int dest = input.nextInt();
+                        graph.deleteEdge(source, dest);
                         break;
 
-                    case 7:
+                    case "7":
                         System.out.println("Thank you");
                         break;
 
                     default:
                         System.out.println("Inavalid choice");
                         break;
-
                 }
-            } while (choices != 7);
+            } while (!choices.equals("7"));
         } catch (InputMismatchException exception) {
             System.out.println(exception);
+        } catch (Exception exception) {
+            System.out.println(exception);
         }
-
     }
-
 }

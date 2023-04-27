@@ -178,8 +178,8 @@ Operations in Graph
 
 Test Case 4(Invalid input type):
   Input:
-   choice-A
-    src-0
+   choice-1
+    src-A
     des-1
    choice-1 
     src-0
