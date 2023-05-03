@@ -1,0 +1,287 @@
+Directed Graph 
+Number of Nodes - 5
+
+Operations in Graph
+
+1. Add edges
+2. DFS Traversal
+3. BFS Traversal
+4. Display
+5. Get number of Edges in Graph
+6. Delete egdes
+7. Exit 
+
+Test Case 1(Add Edges in Graph):
+  Input:
+   choice-1
+    src-0
+    des-1
+   choice-1 
+    src-0
+    des-2
+   choice-1
+    src-1
+    des-3
+   choice-1
+    src-2
+    src-4
+   choice-1
+    src-4
+    des-1
+   choice-1
+    src-3
+    des-2
+   choice-4
+   choice-2
+   choice-3   
+  Output:
+   Adjency List Representation
+   0->1,2
+   1->3
+   2->4
+   3->2
+   4->1
+   Bfs Traversal-
+   0 1 2 3 4
+   Dfs Traversal-
+   0 1 3 2 4  
+------------------------------------------------------------------------------------------------   
+
+Operations in Graph
+
+1. Add edges
+2. DFS Traversal
+3. BFS Traversal
+4. Display
+5. Get number of Edges in Graph
+6. Delete egdes
+7. Exit 
+
+Test Case 2(Delete Edges in Graph):
+  Input:
+   choice-1
+    src-0
+    des-1
+   choice-1 
+    src-0
+    des-2
+   choice-1
+    src-1
+    des-3
+   choice-1
+    src-2
+    src-4
+   choice-1
+    src-4
+    des-1
+   choice-1
+    src-3
+    des-2
+   choice-4
+   choice-2
+   choice-3
+   choice-6
+    src-2
+    dest-4
+   choice-6
+    src-0
+    dest-1
+   choice-4  
+  
+  Output:
+   Adjency List Representation
+   0->1,2
+   1->3
+   2->4
+   3->2
+   4->1
+   Bfs Traversal-
+   0 1 2 3 4
+   Dfs Traversal-
+   0 1 3 2 4  
+   Deleted edge
+   Deleted edge
+   Adjency List Representation
+   0->2
+   1->3
+   2->
+   3->2
+   4->1 
+   Bfs Traversal-
+   0 2 1 3 4
+   Dfs Traversal-
+   0 1 3 2 4   
+
+---------------------------------------------------------------------------------------------------
+
+Operations in Graph
+
+1. Add edges
+2. DFS Traversal
+3. BFS Traversal
+4. Display
+5. Get number of Edges in Graph
+6. Delete egdes
+7. Exit 
+
+Test Case 3(Invalid Edges in Graph):
+  Input:
+   choice-1
+    src-0
+    des-1
+   choice-1 
+    src-0
+    des-2
+   choice-1
+    src-1
+    des-3
+   choice-1
+    src-2
+    src-4
+   choice-1
+    src-4
+    des-1
+   choice-1
+    src-5   
+    des-2
+   choice-4
+   choice-6
+    src-10
+    dest-11
+   choice-2
+   choice-3   
+  
+  Output:
+   Invalid edge
+   Adjency List Representation
+   0->1,2
+   1->3
+   2->4
+   3->
+   4->1
+   Invalid edge
+   Bfs Traversal-
+   0 1 2 3 4
+   Dfs Traversal-
+   0 1 3 2 4  
+-----------------------------------------------------------------------------------------------------------------   
+
+Operations in Graph
+
+1. Add edges
+2. DFS Traversal
+3. BFS Traversal
+4. Display
+5. Get number of Edges in Graph
+6. Delete egdes
+7. Exit 
+
+Test Case 4(Invalid input type):
+  Input:
+   choice-1
+    src-A
+    des-1
+   choice-1 
+    src-0
+    des-2
+   choice-1
+    src-3
+    des-2
+   choice-4
+   choice-2
+   choice-3   
+  
+  Output:
+   Input Mismatch exception 
+
+---------------------------------------------------------------------------------------------
+
+Operations in Graph
+
+1. Add edges
+2. DFS Traversal
+3. BFS Traversal
+4. Display
+5. Get number of Edges in Graph
+6. Delete egdes
+7. Exit 
+
+Test Case 1(Add Edges in Graph):
+  Input:
+   choice-9
+    src-0
+    des-1
+   choice-1 
+    src-0
+    des-2
+   choice-1
+    src-1
+    src-4
+   choice-4
+   choice-2
+   choice-3 
+   
+  Output:
+   Invalid Choice 
+   Adjency List Representation
+   0->1,2
+   1->4
+   2->
+   3->
+   4->
+   Bfs Traversal-
+   0 1 2 3 4
+   Dfs Traversal-
+   0 1 4 2 3  
+
+---------------------------------------------------------------------------------------------
+
+Operations in Graph
+
+1. Add edges
+2. DFS Traversal
+3. BFS Traversal
+4. Display
+5. Get number of Edges in Graph
+6. Delete egdes
+7. Exit 
+
+Test Case 6(Number Edges in Graph):
+  Input:
+   choice-1
+    src-0
+    des-1
+   choice-1 
+    src-0
+    des-2
+   choice-5
+   choice-1
+    src-1
+    des-3
+   choice-1
+    src-2
+    src-4
+   choice-1
+    src-4
+    des-1
+   choice-1
+    src-3
+    des-2
+   choice-4
+   choice-2
+   choice-3 
+   choice-5
+  Output:
+   No. of edges is - 2
+   Adjency List Representation
+   0->1,2
+   1->3
+   2->4
+   3->2
+   4->1
+   Bfs Traversal-
+   0 1 2 3 4
+   Dfs Traversal-
+   0 1 3 2 4  
+   No. of edges is - 6 
+----------------------------------------------------------------------------------------------   

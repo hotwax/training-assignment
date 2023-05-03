@@ -1,0 +1,232 @@
+
+Operations:
+  1.Insert From First
+  2.Insert From Last
+  3.Insert From Any Postion
+  4.Display
+  5.Delete From First
+  6.Delete From Last 
+  7.Delete From Any Position
+  8.Sort the List
+  9.Update List Any position
+  10.Search the element in List
+
+
+Test Case 1(Insertion in List):
+  Input:
+   Choice-1
+    30
+   choice-1 
+    60
+   choice-1
+    80
+   choice-2
+    90
+   choice-2
+    100
+   choice-2
+    50
+   choice-3
+    position-4
+    40
+   choice-4 
+
+  Output:
+    display-80 60 30 40 90 100 50 
+
+----------------------------------------------------------------------------------------------
+Operations:
+  1.Insert From First
+  2.Insert From Last
+  3.Insert From Any Postion
+  4.Display
+  5.Delete From First
+  6.Delete From Last 
+  7.Delete From Any Position
+  8.Sort the List
+  9.Update List Any position
+  10.Search the element in List
+
+Test Case 2(Deletion in List):
+  Input:
+   Choice-1
+    30
+   choice-1 
+    60
+   choice-1
+    80
+   choice-2
+    90
+   choice-2
+    100
+   choice-2
+    50
+   choice-4
+   choice-5 
+   choice-6
+   choice-7
+    position-3
+   choice-4
+  
+  Output:
+   display-80 60 30 90 100 50
+   Deleted element is- 80
+   Deleted element is- 50
+   Deleted element is- 90
+   display-60 30 100 
+
+---------------------------------------------------------------------------------------------------
+
+Operations:
+  1.Insert From First
+  2.Insert From Last
+  3.Insert From Any Postion
+  4.Display
+  5.Delete From First
+  6.Delete From Last 
+  7.Delete From Any Position
+  8.Sort the List
+  9.Update List Any position
+  10.Search the element in List
+
+Test Case 3(Updation in List):
+  Input:
+   choice-1
+    40
+   choice-2
+    50
+   choice-1
+    70
+   choice-2
+    60 
+   choice-4
+   choice-9
+    position-2
+    data-67
+   choice-4  
+   choice-9
+    position-8
+    data-78
+   choice-4  
+
+  Output:
+   display-70 40 50 60
+   display-70 67 50 60
+   invalid position
+
+--------------------------------------------------------------------------------------------------
+
+Operations:
+  1.Insert From First
+  2.Insert From Last
+  3.Insert From Any Postion
+  4.Display
+  5.Delete From First
+  6.Delete From Last 
+  7.Delete From Any Position
+  8.Sort the List
+  9.Update List Any position
+  10.Search the element in List
+
+Test Case 4(Search in List):
+  Input:
+   choice-1
+    60
+   choice-1
+    50
+   choice-1
+    30
+   choice-2
+    20
+   choice-2
+    10
+   choice-4    
+   choice-10
+    data-20
+   choice-10
+    data-100
+
+  Output:
+    display-30 50 60 20 10
+    Key is found
+    Key is not found    
+
+------------------------------------------------------------------------------------------------
+
+Operations:
+  1.Insert From First
+  2.Insert From Last
+  3.Insert From Any Postion
+  4.Display
+  5.Delete From First
+  6.Delete From Last 
+  7.Delete From Any Position
+  8.Sort the List
+  9.Update List Any position
+  10.Search the element in List
+
+Test Case 5(Sort in List):
+  Input:
+   choice-1
+    50
+   choice-1
+    60
+   choice-1
+    70
+   choice-1
+    80
+   choice-2
+    40
+   choice-2
+    10
+   choice-2
+    5
+   choice-4
+   choice-8     
+   choice-4
+
+  Output:-
+   display- 80 70 60 50 40 10 5 
+   After sorting
+   display- 5 10 40 50 60 70 80   
+
+----------------------------------------------------------------------------------------
+
+Operations:
+  1.Insert From First
+  2.Insert From Last
+  3.Insert From Any Postion
+  4.Display
+  5.Delete From First
+  6.Delete From Last 
+  7.Delete From Any Position
+  8.Sort the List
+  9.Update List Any position
+  10.Search the element in List
+
+Test Case 6(List is empty):
+  Input:
+   choice-1
+    30
+   choice-1
+    40
+   choice-1   
+    20
+   choice-2
+    50
+   choice-4
+   choice-5
+   choice-6
+   choice-5
+   choice-6
+   choice-5
+   choice-4
+
+  Output:-
+   display-20 40 30 50
+   deleted data is- 20
+   deleted data is- 50
+   deleted data is- 40
+   deleted data is- 30
+   List is empty
+   display-List is empty  

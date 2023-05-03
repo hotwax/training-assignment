@@ -1,0 +1,132 @@
+Operations:-
+1: Push
+2: Pop
+3: Top element of stack
+4: Size of Stack
+5: Stack is empty or not
+6: Display the data of Stack
+
+Tese Case 1(Push in Stack):
+  Input:-
+   choice-1
+    50
+   choice-1
+    60
+   choice-1
+    70
+   choice-1
+    80 
+   choice-3
+   choice-2
+   choice-3
+   choice-2
+   choice-3
+   choice-5
+   choice-4
+   choice-5
+  Output:-
+   Size of Stack is - 4
+   Top element of stack is - 80
+   Deleted element is -80 
+   Top element of stack is - 70
+   Deleted element is -70 
+   Top element of stack is - 60 
+   Stack is not empty
+   Size of Stack is - 2 
+   Elements of stack - 60 50 
+
+---------------------------------------------------------------------------------------------
+
+Test Case 2(Pop in Stack):
+  Input:
+   choice-1
+    100
+   choice-1
+    120
+   choice-2
+   choice-2
+   choice-2
+   choice-3
+   choice-4
+   choice-5
+   choice-6
+  Output:
+   Deleted element is - 120
+   Deleted element is - 100
+   Stack is empty
+   Stack is empty
+   Size of Stack is 0
+   Stack is empty 
+
+-------------------------------------------------------------------------------------------
+
+Test Case 3(Invalid Input type):
+  Input:
+   choice-1
+    f
+            
+  Output:
+   Input Mismatch exception
+
+----------------------------------------------------------------------------------------------  
+
+Test Case 4(Top element in Stack):
+  Input:
+   choice-1
+    30
+   choice-3
+   choice-4
+   choice-1
+    50
+   choice-3
+   choice-4
+   choice-1
+    60
+   choice-3
+   choice-4
+   choice-1
+    70
+   choice-3
+   choice-4
+   choice-1
+    80
+   choice-3
+   choice-4
+   choice-1
+    20
+   choice-3
+   choice-4  
+   choice-1
+    10
+   choice-3
+   choice-4
+
+  Output:
+   Top element of stack - 30
+   Size of stack is - 1      
+   Top element of stack - 50
+   Size of stack is - 2 
+   Top element of stack - 60
+   Size of stack is - 3 
+   Top element of stack - 70
+   Size of stack is - 4 
+   Top element of stack - 80
+   Size of stack is - 5 
+   Top element of stack - 20
+   Size of stack is - 6 
+   Top element of stack - 10
+   Size of stack is - 7 
+   Elements of Stack - 10 20 80 70 60 50 30
+
+   ------------------------------------------------------------------------------------------------
+
+Test case 5(Stack is empty or not):
+  Input:
+   choice-5
+   choice-1
+    23
+   choice-5       
+
+  Output:
+   Stack is Empty
+   Stack is not empty 
