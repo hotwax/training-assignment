@@ -1,0 +1,2 @@
+Want to do same thing that we did in previous problem but this we are provided a list of maps.
+I have used shift and then created a list and then sdded the value of value's key into 'Restaurant Rating' and then stored that into maps inside list.

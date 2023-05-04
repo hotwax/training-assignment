@@ -1,0 +1,2 @@
+firstly we want or convert employee from list to map with key as id.
+we need to change the key of index od employye list that's why I have used "@" on RHS to get value of above * (i.e keys are 0, 1, 2, 3.... and therir values are maps whgich we are fetching) and store it into value of id.

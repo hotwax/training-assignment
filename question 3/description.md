@@ -1,0 +1,1 @@
+using shift we are creating map with kwy Contact and storing city and phone key with their value into that map.

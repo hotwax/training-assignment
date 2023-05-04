@@ -1,0 +1,2 @@
+We have to create a list of maps that contains return id and returnTax which is sum of amounts inside returnItemsAdjustments list for every returnID.
+First of all I have create a list of amounts called amountList using shift then add the value of all the elements of that list using modify-overwrite-beta.

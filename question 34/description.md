@@ -1,0 +1,2 @@
+in first operation, i have createda hobbies list that contains map with key as number present after hobby_ and level_.
+then in second step, I have removed key and values i.e. maps are only persent inside hobbies list.

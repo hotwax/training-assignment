@@ -1,0 +1,2 @@
+we want to split name into firstName and lastName, as name are seperated by ' ', we have used "* *" where firstName contains all character before 1st * and lastName will contains all charcater after 2nd *.
+then in second operation, I have calculated the size of phone_numbers list.
