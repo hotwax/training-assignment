@@ -1,0 +1,33 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "returnId": "[#2].returnId",
+        "returnItemAdjustments": {
+          "*": {
+            "amount": "[#4].amountList[]"
+          }
+        }
+      }
+    }
+  }
+  ,
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "returnTax": "=doubleSum(@(1,amountList))"
+      }
+    }
+  }
+  ,
+  {
+    "operation": "remove",
+    "spec": {
+      "*": {
+        "amountList": ""
+      }
+    }
+  }
+]

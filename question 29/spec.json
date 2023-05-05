@@ -1,0 +1,14 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "person": {
+        "name": "person_name",
+        "age": "person_age",
+        "address": {
+          "*": "person_address_&"
+        }
+      }
+    }
+  }
+]

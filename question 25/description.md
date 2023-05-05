@@ -1,0 +1,2 @@
+We have to did same as we did in previus problem but this time we need list called Dishes and then that list stores map that contains Dish Name and Dish Price.
+we iterate in ListItems and then created a list called Dishes and then stored the itemName and itemPrice in Dish Name and Dish Price.

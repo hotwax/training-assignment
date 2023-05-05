@@ -1,0 +1,2 @@
+we want to create a list of maps and that maps will contains list of item names, list of item price, restaurant rating and restaurant country.
+I have created a list using [#4] and stored value of reating and address into provided fields. and then iterate in itemsList and created a new List named Dish Names and Dish Price and stored itemName and itemPrice in that. 

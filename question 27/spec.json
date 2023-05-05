@@ -1,0 +1,48 @@
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "*": {
+        "Country": "@(1,country)",
+        "return Id": "@(1,returnId)",
+        "temp": "=divide(1,@(1,returnQuantity))",
+        "return Amount": "=divide(@(1,returnPrice),@(1,temp))",
+        "return Total Amount": "=doubleSum(@(1,return Amount),@(1,returnTax))"
+      }
+    }
+  }
+  ,
+  {
+    "operation": "remove",
+    "spec": {
+      "*": {
+        "returnId": "",
+        "country": "",
+        "temp": "",
+        "returnPrice": "",
+        "returnTax": "",
+        "returnQuantity": ""
+      }
+    }
+  }
+,
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "*": "[#2].&",
+        "Country": {
+          "CA": {
+            "#Canada": "[#4].Country"
+          },
+          "USA": {
+            "#United States of America": "[#4].Country"
+          },
+          "": {
+            "#NA": "[#4].Country"
+          }
+        }
+      }
+    }
+  }
+]

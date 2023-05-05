@@ -1,0 +1,2 @@
+Firstly I have concatinated addresss and stored it into Address.
+then created a list of user using users[#1] and added name and address into that list and also added Hobbies list which contains name's value.

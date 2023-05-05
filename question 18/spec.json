@@ -1,0 +1,37 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees[&1].&",
+          "$": "employees[&1].temp"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "temp2": "=divide(1,@(1,temp))",
+          "temp3": "=divide(100,@(1,temp2))",
+          "salary": "=intSum(@(1,salary),@(1,temp3),500)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "temp": "",
+          "temp2": "",
+          "temp3": ""
+        }
+      }
+    }
+  }
+]

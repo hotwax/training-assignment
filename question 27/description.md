@@ -1,0 +1,2 @@
+we have to did same as we did in previous problum but here additionally we have to add full name of country instead of short forms and have to add NA where country is "".
+For that purpose I have write conditional spec using shift.

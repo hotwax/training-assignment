@@ -1,0 +1,11 @@
+{
+  "users" : [ {
+    "Name" : "John Doe",
+    "Address" : "123 Main St, Anytown, CA, 12345",
+    "Hobbies" : [ "reading", "hiking" ]
+  }, {
+    "Name" : "Jane Doe",
+    "Address" : "456 First St, Othertown, NY, 67890",
+    "Hobbies" : [ "swimming", "painting" ]
+  } ]
+}

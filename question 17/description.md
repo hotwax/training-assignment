@@ -1,0 +1,2 @@
+we want to add available field to maps present in products list if it is not present, and its value should be false.
+we have used modify-default-beta to add value of availablke to false if it is not present in the map.

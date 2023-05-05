@@ -1,0 +1,2 @@
+We want to double the price of every map present in the products list.
+I have stored the same value price to 'toAdd' then in next operation, I have added 'toAdd' value to price except map which have id = 1001.

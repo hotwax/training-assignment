@@ -1,0 +1,1 @@
+we have used shift to change the name and value key foe every element of items list.

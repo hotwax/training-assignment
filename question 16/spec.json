@@ -1,0 +1,47 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2)": "@(1,name)[#4]"
+            }
+          }
+        }
+      }
+    }
+  }
+  ,
+  {
+    "operation": "shift",
+    "spec": {
+      "Java": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2,name)": "Java.@(0,level)[#2]"
+            }
+          }
+        }
+      },
+      "Python": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2,name)": "Python.@(0,level)[#2]"
+            }
+          }
+        }
+      }
+    }
+  }
+,
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": "=recursivelySquashNulls"
+    }
+}
+]
