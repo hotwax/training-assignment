@@ -3,177 +3,232 @@ package Scrapping;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class Scrapping {
+   private static HashMap<String, Integer> allWordsCount = new HashMap<String, Integer>();;
+   private static ArrayList<LinkedHashMap<String, LinkedHashMap<String, Integer>>> allUrlsWordsCount = new ArrayList<LinkedHashMap<String, LinkedHashMap<String, Integer>>>();;
+   private static File currDir = new File("Scrapping");;
 
-   // List of words prsent in words.txt
-   private ArrayList<String> Words;
-   private HashMap<String, Integer> allWordWithCount;
-   private ArrayList<LinkedHashMap<String, LinkedHashMap<String, Integer>>> AllUrlWordsWithCount;
-
-   Scrapping(String wordsfile) {
-      allWordWithCount = new HashMap<String, Integer>();
-      Words = new ArrayList<>();
-      AllUrlWordsWithCount = new ArrayList<LinkedHashMap<String, LinkedHashMap<String, Integer>>>();
-      File wordFile = new File(wordsfile);
-      try (Scanner Reader = new Scanner(wordFile)) {
-         while (Reader.hasNextLine()) {
-            String word = Reader.nextLine();
-            String splitWord[] = word.split(" ");
-            for (String singleword : splitWord) {
-               Words.add(singleword);
-            }
-
-         }
-      } catch (FileNotFoundException exception) {
-         System.out.println(exception);
-      }
-
+   // get all the words with count
+   public HashMap<String, Integer> getAllWordsCount() {
+      return allWordsCount;
    }
 
-   public HashMap<String, Integer> getAllWordsWithCount() {
-      return this.allWordWithCount;
-   }
-
+   // get sorted words by count in descending order
    public PriorityQueue<Map.Entry<String, Integer>> sortOrderByCount(HashMap<String, Integer> map) {
       PriorityQueue<Map.Entry<String, Integer>> sortedWords = new PriorityQueue<>(valueComparator());
       sortedWords.addAll(map.entrySet());
       return sortedWords;
    }
 
-   // Comaparator is used to compare the values in Treeset
+   // Comaparator is used to compare the values in Priority queue
    public Comparator<Map.Entry<String, Integer>> valueComparator() {
-      return (e1, e2) -> e2.getValue().compareTo(e1.getValue());
+      return (firstValue, secondValue) -> secondValue.getValue() - firstValue.getValue();
    }
 
    // scrap the Data From Url and print top the word of words.txt file
    // which prsent in Url data with Count
-   private String[] scrappingword(String URL) throws IOException {
+   private List<String> scrappingWords(String url) {
+      List<String> wordsInWebPage = new ArrayList<>();
       // Connecting to the web page
-
-      Connection conn = Jsoup.connect(URL);
-      // executing the get request
-      Document doc = conn.get();
-      // Retrieving the contents (body) of the web page
-      String result = doc.body().text();
-
-      result = result.replaceAll("[^a-zA-Z' ']", "");
-      String[] WordsInUrl = result.split(" ");
-      return WordsInUrl;
-   }
-
-   ArrayList<LinkedHashMap<String, LinkedHashMap<String, Integer>>> CheckWordsCount(String UrlFile)
-         throws FileNotFoundException {
-      File file = new File(UrlFile);
-      try (Scanner inputUrl = new Scanner(file)) {
-         ArrayList<String> urlList = new ArrayList<>();
-
-         while (inputUrl.hasNextLine()) {
-            urlList.add(inputUrl.next());
-         }
-         if (urlList.isEmpty()) {
-            System.out.println("url.txt file is empty");
-            return null;
-         }
-         if (Words.isEmpty()) {
-            System.out.println("words.txt file is empty");
-            return null;
-         }
-         for (int index = 0; index < urlList.size(); index++) {
-            String URL = urlList.get(index);
-            HashMap<String, Integer> hm = new HashMap<String, Integer>();
-            // insertion of words in HashMap which you want to Check
-            for (String word : Words) {
-               hm.put(word, 0);
-            }
-
-            String[] WordsInUrl = scrappingword(URL);
-            for (String word : WordsInUrl) {
-               if (word.equals("")) {
-                  continue;
-               }
-               if (hm.containsKey(word)) {
-                  hm.put(word, hm.get(word) + 1);
-               }
-            }
-            // Extract the top three words with count in Descending Order
-            PriorityQueue<Map.Entry<String, Integer>> sortedSet = sortOrderByCount(hm);
-            int count = 0;
-            LinkedHashMap<String, Integer> wordsCount = new LinkedHashMap<String, Integer>();
-            for (Map.Entry<String, Integer> map : sortedSet) {
-               if (count < 3) {
-
-                  wordsCount.put(map.getKey(), map.getValue());
-                  count++;
-               }
-               if (allWordWithCount.containsKey(map.getKey())) {
-                  allWordWithCount.put(map.getKey(), allWordWithCount.get(map.getKey()) + map.getValue());
-               } else {
-                  allWordWithCount.put(map.getKey(), map.getValue());
-               }
-
-            }
-            LinkedHashMap<String, LinkedHashMap<String, Integer>> h = new LinkedHashMap<>();
-            h.put(URL, wordsCount);
-            AllUrlWordsWithCount.add(h);
-         }
+      try {
+         Connection conn = Jsoup.connect(url);
+         // executing the get request
+         Document doc = conn.get();
+         // Retrieving the contents (body) of the web page
+         String result = doc.body().text();
+         // replace all spaces to single space
+         result = result.replaceAll("[^a-zA-Z' ']", "");
+         // split the words by single space
+         String[] wordsInUrl = result.split(" ");
+         wordsInWebPage = Arrays.asList(wordsInUrl);
       } catch (IOException exception) {
          System.out.println(exception);
+         return null;
+      } catch (Exception exception) {
+         System.out.println(exception);
+         return null;
       }
-
-      return AllUrlWordsWithCount;
-
+      return wordsInWebPage;
    }
 
-   public static void main(String args[]) throws FileNotFoundException {
-      Scrapping scrapping = new Scrapping("Scrapping/Words.txt");
-
-      ArrayList<LinkedHashMap<String, LinkedHashMap<String, Integer>>> AllUrlWordsWithCount = scrapping
-            .CheckWordsCount("Scrapping/Url.txt");
-      if (AllUrlWordsWithCount != null) {
-         for (LinkedHashMap<String, LinkedHashMap<String, Integer>> AllUrl : AllUrlWordsWithCount) {
-            for (Map.Entry<String, LinkedHashMap<String, Integer>> UrlWordsWithCount : AllUrl.entrySet()) {
-               System.out.println(UrlWordsWithCount.getKey());
-               for (Map.Entry<String, Integer> WordWithCount : UrlWordsWithCount.getValue().entrySet()) {
-                  if (WordWithCount.getValue() == 0) {
-                     System.out.println(WordWithCount.getKey() + " words not present");
-                     System.out.println();
-                     break;
-                  } else {
-                     System.out.println(WordWithCount.getKey() + "->" + WordWithCount.getValue());
-                     System.out.println();
-                  }
-               }
-               System.out.println("=======================================================\n");
-
+   // fetch words counts of each url
+   ArrayList<LinkedHashMap<String, LinkedHashMap<String, Integer>>> fetchWordsCount(HashSet<String> urlList,
+         HashSet<String> wordsList) {
+      for (String url : urlList) {
+         HashMap<String, Integer> urlWordsCounts = new HashMap<String, Integer>();
+         // insertion of words in HashMap which you want to Check
+         for (String word : wordsList) {
+            urlWordsCounts.put(word, 0);
+         }
+         List<String> wordsInUrl = scrappingWords(url);
+         if (wordsInUrl == null) {
+            continue;
+         }
+         for (String word : wordsInUrl) {
+            if (word.equals("")) {
+               continue;
             }
+            if (urlWordsCounts.containsKey(word.toLowerCase())) {
+               urlWordsCounts.put(word.toLowerCase(), urlWordsCounts.get(word.toLowerCase()) + 1);
+            }
+         }
+         // Extract the top three words with count in Descending Order
+         PriorityQueue<Map.Entry<String, Integer>> sortedSet = sortOrderByCount(urlWordsCounts);
+         int count = 0;
+         LinkedHashMap<String, Integer> wordsCount = new LinkedHashMap<String, Integer>();
+         while (!sortedSet.isEmpty()) {
+            Map.Entry<String, Integer> map = sortedSet.poll();
+            if (count < 3) {
+               wordsCount.put(map.getKey(), map.getValue());
+               count++;
+            }
+            if (allWordsCount.containsKey(map.getKey())) {
+               allWordsCount.put(map.getKey(), allWordsCount.get(map.getKey()) + map.getValue());
+            } else {
+               allWordsCount.put(map.getKey(), map.getValue());
+            }
+         }
+         LinkedHashMap<String, LinkedHashMap<String, Integer>> h = new LinkedHashMap<>();
+         h.put(url, wordsCount);
+         allUrlsWordsCount.add(h);
+      }
+      return allUrlsWordsCount;
+   }
+
+   // get all the words from Words file
+   HashSet<String> getWords() {
+      HashSet<String> wordsList = new HashSet<>();
+      try {
+         // read the words file
+         File wordFile = new File(currDir.getAbsolutePath() + "/Words.txt");
+         Scanner inputWord = new Scanner(wordFile);
+         while (inputWord.hasNextLine()) {
+            String word = inputWord.nextLine();
+            if (word.trim().length() > 0) {
+               String words = word.trim().replaceAll("\\s{2,}", " ");
+               String splitWord[] = words.split(" ");
+               for (String singleword : splitWord) {
+                  // store the words in HashSet
+                  wordsList.add(singleword.toLowerCase());
+               }
+            }
+         }
+         inputWord.close();
+      } catch (FileNotFoundException exception) {
+         System.out.println(exception);
+         System.out.println("Words file is not found");
+         return null;
+      } catch (Exception exception) {
+         System.out.println(exception);
+         System.out.println("Some thing is wrong");
+         return null;
+      }
+      return wordsList;
+   }
+
+   // get all the urls from Urls file
+   HashSet<String> getUrls() {
+      HashSet<String> urlList = new HashSet<>();
+      try {
+         // read the Urls file
+         File urlsFile = new File(currDir.getAbsolutePath()+"/Urls.txt");
+         Scanner inputUrl = new Scanner(urlsFile);
+         while (inputUrl.hasNextLine()) {
+            String urls = inputUrl.nextLine();
+            if (urls.trim().length() > 0) {
+               String url = urls.trim().replaceAll("\\s{2,}", " ");
+               String splitUrl[] = url.split(" ");
+               for (String singleword : splitUrl) {
+                  // store the urls in HashSet
+                  urlList.add(singleword.toLowerCase());
+               }
+            }
+         }
+         inputUrl.close();
+      } catch (FileNotFoundException exception) {
+         System.out.println(exception);
+         System.out.println("Urls file is not found");
+         return null;
+      } catch (Exception exception) {
+         System.out.println(exception);
+         System.out.println("Some thing is wrong");
+         return null;
+      }
+      return urlList;
+   }
+
+   public static void main(String args[]) {
+      Scrapping scrapper = new Scrapping();
+      HashSet<String> wordsList = scrapper.getWords();// get the word List from Words file
+      HashSet<String> urlsList = scrapper.getUrls();// get the Url List from Urls file
+      if (wordsList == null) {
+         return;
+      }
+
+      if (urlsList == null) {
+         return;
+      }
+
+      // check the Urls file is empty
+      if (urlsList.isEmpty()) {
+         System.out.println("Urls file is empty");
+         return;
+      }
+
+      // check the Words file is empty
+      if (wordsList.isEmpty()) {
+         System.out.println("Words File is empty");
+         return;
+      }
+
+      // get all the Urls with top three sorted words by count
+      ArrayList<LinkedHashMap<String, LinkedHashMap<String, Integer>>> urlsWordsCount = scrapper
+            .fetchWordsCount(urlsList, wordsList);
+      if (urlsWordsCount.isEmpty()) {
+         return;
+      }
+      System.out.println("========");
+      for (LinkedHashMap<String, LinkedHashMap<String, Integer>> allUrl : urlsWordsCount) {
+         for (Map.Entry<String, LinkedHashMap<String, Integer>> urlWordsCount : allUrl.entrySet()) {
+            System.out.println(urlWordsCount.getKey());
+            for (Map.Entry<String, Integer> wordCount : urlWordsCount.getValue().entrySet()) {
+               if (wordCount.getValue() == 0) {
+                  System.out.println("All other words count is zero");
+                  break;
+               }
+               System.out.println(wordCount.getKey() + "->" + wordCount.getValue());
+               System.out.println();
+            }
+            System.out.println("=======================================================\n");
          }
       }
 
-      // Added the all the word in to treeset with count
+      // Added the all the word in to priority queue with count
       // Print the all in sorted order(Descending)
-      PriorityQueue<Map.Entry<String, Integer>> sortedWords = scrapping
-            .sortOrderByCount(scrapping.getAllWordsWithCount());
-      if (!sortedWords.isEmpty()) {
-         System.out.println("========");
+      PriorityQueue<Map.Entry<String, Integer>> sortedWords = scrapper
+            .sortOrderByCount(scrapper.getAllWordsCount());
+      System.out.println("========");
+      while (!sortedWords.isEmpty()) {
          // Print all the wors with count in sorted order
-         for (Map.Entry<String, Integer> word : sortedWords) {
-            if (word.getValue() == 0) {
-               System.out.println(word.getKey() + " is not present");
-            } else {
-               System.out.println(word.getKey() + " ->" + word.getValue());
-            }
+         Map.Entry<String, Integer> word = sortedWords.poll();
+         if (word.getValue() == 0) {
+            System.out.println(word.getKey() + " is not present");
+         } else {
+            System.out.println(word.getKey() + " ->" + word.getValue());
          }
       }
    }

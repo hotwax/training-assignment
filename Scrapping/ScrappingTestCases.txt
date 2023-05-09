@@ -12,32 +12,32 @@ Test Cases 1:
    https://justinjackson.ca/words.html 
 
   Output:
-    https://www.hotwaxsystems.com/
-    and->21
+   ========
+   https://www.hotwaxsystems.com/
+   the->29
 
-    the->20
+   ofbiz->26
 
-    to->19
+   to->25
 
-    =======================================================
+   =======================================================
 
-    https://justinjackson.ca/words.html
-    to->37
+   https://justinjackson.ca/words.html
+   to->37
 
-    thanks->29
+   thanks->29
 
-    the->14
+   the->15
 
-    =======================================================
+   =======================================================
 
-    ========
-    to ->56
-    the ->34
-    and ->32
-    thanks ->29
-    OFBiz ->17
-    HotWax ->10
-
+   ========
+   to ->62
+   the ->44
+   and ->35
+   thanks ->29
+   ofbiz ->26
+   hotwax ->11 
 ----------------------------------------------------------------------------------------------
 
 Test Cases 2:(Words.txt or Url.txt is not found)
@@ -47,10 +47,10 @@ Test Cases 2:(Words.txt or Url.txt is not found)
    HotWax thanks
    OFBiz
    the 
-
+   asassas
  Output:
   FileNotFoundException  
-
+  Urls file is not found 
 ---------------------------------------------------------------------------------------------
 
 Test Cases 3:(Words.txt or Url.txt is empty)
@@ -61,55 +61,84 @@ Test Cases 3:(Words.txt or Url.txt is empty)
    https://justinjackson.ca/words.html 
 
  Output:
-  Words.txt file is empty  
+  Words file is empty  
 
 --------------------------------------------------------------------------------------------
 
 Test Cases 4:(Url is correct in Url.txt)
  Input:
   Words.txt
+   to and
+   HotWax thanks
+   OFBiz
+   the 
+   asassas
   Url.txt
-   https://www.hotwaxsys.com/
+   https://www.hotwaxsystems.co/
    https://justinjackson.ca/words.html 
 
  Output:
-   javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake 
+  java.net.UnknownHostException: www.hotwaxsystems.co
+  ========
+  https://justinjackson.ca/words.html
+  to->37
 
+  thanks->29
+
+  the->15
+
+  =======================================================
+
+  ========
+  to ->37
+  thanks ->29
+  the ->15
+  and ->13
+  hotwax is not present
+  ofbiz is not present
+  assdefd is not present   
 
 ---------------------------------------------------------------------------------------------
 
 Test Cases 5:
  Input:
   Words.txt
-   asassas to the 
-   and
+   to and
+   HotWax thanks
+   OFBiz
+   the
+   asassas 
   Url.txt
    https://www.hotwaxsystems.com/
    https://justinjackson.ca/words.html 
 
-  Output: 
-   https://www.hotwaxsystems.com/
-   and->21
- 
-   the->20
 
-   to->19
+  Output: 
+   ========
+   https://www.hotwaxsystems.com/
+   the->29
+
+   ofbiz->26
+
+   to->25
 
    =======================================================
-  
+
    https://justinjackson.ca/words.html
    to->37
 
-   the->14
+   thanks->29
 
-   and->11
+   the->15
 
    =======================================================
 
    ========
-   to ->56
-   the ->34
-   and ->32
-   asassas is not present       
-
+   to ->62
+   the ->44
+   and ->35
+   thanks ->29
+   ofbiz ->26
+   hotwax ->11    
+   asassas is not present
 ---------------------------------------------------------------------------------------------  
