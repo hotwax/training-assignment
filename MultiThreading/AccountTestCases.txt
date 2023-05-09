@@ -1,0 +1,93 @@
+
+Test Cases 1:(Test Account OverDrawn demo (not synchronized) )
+ Input:
+  Enter the total balance -
+  1000
+  Enter the withdrawal amount -
+  200
+  Enter the number of withdrawal for each customers
+  5
+  
+  Menu options
+  1.Account is Overdrawn
+  2.Account is safe to Overdrawn
+  3.Exit
+  choice-1
+
+ Output: 
+  Gourav completed withdraw 200and Awailable Balance is 800
+  Yash completed withdraw 200and Awailable Balance is 800
+  Yash completed withdraw 200and Awailable Balance is 600
+  Gourav completed withdraw 200and Awailable Balance is 600
+  Gourav completed withdraw 200and Awailable Balance is 400
+  Yash completed withdraw 200and Awailable Balance is 400
+  Yash completed withdraw 200and Awailable Balance is 200
+  Gourav completed withdraw 200and Awailable Balance is 200
+  Yash completed withdraw 200and Awailable Balance is 0
+  Gourav Account is not have enough balance to withdrawal
+  Total Withdrawn - 1200
+
+----------------------------------------------------------------------------------------------
+
+Test Case 2:(Test Account is Safe to Overdrawn (Synchronized) )
+ Input:
+  Enter the total balance -
+  1000
+  Enter the withdrawal amount -
+
+  Menu options
+  1.Account is Overdrawn
+  2.Account is safe to Overdrawn
+  3.Exit
+  choice-2
+ 
+ Output:
+  Gourav completed withdraw 200and Awailable Balance is 800
+  Gourav completed withdraw 200and Awailable Balance is 600
+  Gourav completed withdraw 200and Awailable Balance is 400
+  Gourav completed withdraw 200and Awailable Balance is 200
+  Gourav completed withdraw 200and Awailable Balance is 0
+  Yash Account is not have enough balance to withdrawal
+  Yash Account is not have enough balance to withdrawal
+  Yash Account is not have enough balance to withdrawal
+  Yash Account is not have enough balance to withdrawal
+  Yash Account is not have enough balance to withdrawal
+  Total Withdrawn - 1000
+
+-------------------------------------------------------------------------------------------------
+
+Test Case 3:(invalid choice)
+
+ Input:
+  Enter the total balance -
+  1000
+  Enter the withdrawal amount -
+  200
+  Enter the number of withdrawal for each customers
+  5
+
+  Menu options
+  1.Account is Overdrawn
+  2.Account is safe to Overdrawn
+  3.Exit
+  choice-3
+
+ Output:
+  invalid choice 
+
+------------------------------------------------------------------------------------------------
+
+Test Case 4:(InputMismatchException)
+
+ Input:
+  Enter the total balance -
+  1000
+  Enter the withdrawal amount -
+  200
+  Enter the number of withdrawal for each customers
+  n 
+
+ Output:
+  InputMismatchException
+
+------------------------------------------------------------------------------------------------
