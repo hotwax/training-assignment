@@ -1,0 +1,257 @@
+
+Test Case 1:(Serialize and Deserialize the Output1.ser and Output2.ser)
+ Input:
+  dob in String(MM/DD/YYYY)
+  
+  -> Serialize the Student Object in to Output1.ser 
+  
+  Output:
+   Students List Before Serialization
+  
+   Student Name - Gourav
+   Student Date Of Birth - 12/20/2002
+   Student Adress - Indore,452010,Madhya Pradesh,India
+
+
+   Student Name - Kunal
+   Student Date Of Birth - 02/28/2003
+   Student Adress - Bhopal,452001,Madhya Pradesh,India
+
+
+   Student Name - Yash
+   Student Date Of Birth - 03/01/2000
+   Student Adress - Indore,452100,Madhya Pradesh,India
+
+
+   Student Name - Niharika
+   Student Date Of Birth - 01/02/2001
+   Student Adress - Ujjain,452000,Madhya Pradesh,India
+
+   Serialize Successfully
+   Generate output1.ser
+  
+  
+  -> Desrialize the Output1.ser
+  
+  Output: 
+   Deserialize the file output1.ser
+
+   Student Name - Gourav 
+   Student Date Of Birth - 12/20/2002
+   Student Adress - Indore,452010,Madhya Pradesh,India
+
+
+   Student Name - Kunal
+   Student Date Of Birth - 02/28/2003
+   Student Adress - Bhopal,452001,Madhya Pradesh,India
+
+
+   Student Name - Yash
+   Student Date Of Birth - 03/01/2000
+   Student Adress - Indore,452100,Madhya Pradesh,India
+
+
+   Student Name - Niharika
+   Student Date Of Birth - 01/02/2001
+   Student Adress - Ujjain,452000,Madhya Pradesh,India 
+
+
+  
+  -> Serialize the Student Object in to Output2.ser 
+  
+  Output:
+   Students List Before Serialization
+  
+   Student Name - Gourav
+   Student Date Of Birth - 12/20/2002
+   Student Adress - Indore,452010,Madhya Pradesh,India
+
+
+   Student Name - Kunal
+   Student Date Of Birth - 02/28/2003
+   Student Adress - Bhopal,452001,Madhya Pradesh,India
+
+
+   Student Name - Yash
+   Student Date Of Birth - 03/01/2000
+   Student Adress - Indore,452100,Madhya Pradesh,India
+
+
+   Student Name - Niharika
+   Student Date Of Birth - 01/02/2001
+   Student Adress - Ujjain,452000,Madhya Pradesh,India
+
+   Serialize Successfully
+   Generate output2.ser
+
+  
+  -> Desrialize the Output2.ser
+  
+  Output: 
+   Deserialize the file output2.ser
+
+   Student Name - Gourav 
+   Student Date Of Birth - 12/20/2002
+   Student Adress - Indore,452010,Madhya Pradesh,India
+
+
+   Student Name - Kunal
+   Student Date Of Birth - 02/28/2003
+   Student Adress - Bhopal,452001,Madhya Pradesh,India
+
+
+   Student Name - Yash
+   Student Date Of Birth - 03/01/2000
+   Student Adress - Indore,452100,Madhya Pradesh,India
+
+
+   Student Name - Niharika
+   Student Date Of Birth - 01/02/2001
+   Student Adress - Ujjain,452000,Madhya Pradesh,India 
+ 
+   
+--------------------------------------------------------------------------------------------
+
+Test Case 2:(Serialize the output2.ser again and Deserialize Output2.ser , Output1.ser)
+ Input:
+  dob in Date Type
+  
+ 
+  ->Serialize Output2.ser
+  
+  Output:
+   Students List Before Serialization
+
+   Student Name - Gourav
+   Student Date Of Birth - Fri Dec 20 00:00:00 IST 2002
+   Student Adress - Indore,452010,Madhya Pradesh,India
+
+
+   Student Name - Kunal
+   Student Date Of Birth - Fri Feb 28 00:00:00 IST 2003
+   Student Adress - Bhopal,452001,Madhya Pradesh,India
+
+
+   Student Name - Yash
+   Student Date Of Birth - Wed Mar 01 00:00:00 IST 2000
+   Student Adress - Indore,452100,Madhya Pradesh,India
+
+
+   Student Name - Niharika
+   Student Date Of Birth - Tue Jan 02 00:00:00 IST 2001
+   Student Adress - Ujjain,452000,Madhya Pradesh,India
+
+   Serialize Successfully
+   Generate output2.ser
+  
+ 
+ -> Deserialize the Output2.ser
+ 
+ Output:
+  Deserialize the file output2.ser
+
+  Student Name - Gourav
+  Student Date Of Birth - Fri Dec 20 00:00:00 IST 2002
+  Student Adress - Indore,452010,Madhya Pradesh,India
+
+
+  Student Name - Kunal
+  Student Date Of Birth - Fri Feb 28 00:00:00 IST 2003
+  Student Adress - Bhopal,452001,Madhya Pradesh,India
+
+
+  Student Name - Yash
+  Student Date Of Birth - Wed Mar 01 00:00:00 IST 2000
+  Student Adress - Indore,452100,Madhya Pradesh,India
+
+
+  Student Name - Niharika
+  Student Date Of Birth - Tue Jan 02 00:00:00 IST 2001
+  Student Adress - Ujjain,452000,Madhya Pradesh,India
+
+
+->Deserialize the Output1.ser
+
+Output:
+ java.lang.ClassCastException: cannot assign instance of java.lang.String to field 
+ Students.Student.dateOfBirth of type java.util.Date in instance of Students.Student
+  
+
+------------------------------------------------------------------------------------------------
+
+Test Case 3:(Deserialize the file which is not found)
+ 
+  Input:
+  
+  ->Deserialize the Output4.ser
+  
+  Output:
+   java.io.FileNotFoundException: 
+   Students\output5.ser (The system cannot find the file specified) 
+
+------------------------------------------------------------------------------------------------
+
+Test Case 4:(Deserialize the empty file)
+
+  Input:
+  ->Deserialize the Output3.ser
+
+  Output:
+   java.io.EOFException
+
+---------------------------------------------------------------------------------------------
+
+Test case 5:(Deserialize the Output1.ser(dob type is string) and output2.ser(dob type is Date ) )
+
+ Input:
+  
+ -> Deserialize the output1.ser
+  
+  Output:
+   Deserialize the file output1.ser
+
+   Student Name - Gourav
+   Student Date Of Birth - 12/20/2002
+   Student Adress - Indore,452010,Madhya Pradesh,India
+
+
+   Student Name - Kunal
+   Student Date Of Birth - 02/28/2003
+   Student Adress - Bhopal,452001,Madhya Pradesh,India
+
+
+   Student Name - Yash
+   Student Date Of Birth - 03/01/2000
+   Student Adress - Indore,452100,Madhya Pradesh,India
+
+
+   Student Name - Niharika
+   Student Date Of Birth - 01/02/2001
+   Student Adress - Ujjain,452000,Madhya Pradesh,India
+
+  
+ -> Deserialize the output2.ser
+   Output:
+
+    Deserialize the file output2.ser
+
+    Student Name - Gourav
+    Student Date Of Birth - Fri Dec 20 00:00:00 IST 2002
+    Student Adress - Indore,452010,Madhya Pradesh,India
+
+
+    Student Name - Kunal
+    Student Date Of Birth - Fri Feb 28 00:00:00 IST 2003
+    Student Adress - Bhopal,452001,Madhya Pradesh,India
+
+
+    Student Name - Yash
+    Student Date Of Birth - Wed Mar 01 00:00:00 IST 2000
+    Student Adress - Indore,452100,Madhya Pradesh,India
+
+
+    Student Name - Niharika
+    Student Date Of Birth - Tue Jan 02 00:00:00 IST 2001
+    Student Adress - Ujjain,452000,Madhya Pradesh,India   
+
+--------------------------------------------------------------------------------------------

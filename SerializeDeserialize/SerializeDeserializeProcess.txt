@@ -1,0 +1,28 @@
+Process to serialize and deserialize a Student object with different scenarios:
+
+1.Serialization:
+ - Create a Student object with DOB as a String type.
+ - And serialize the Student object in to output1.ser and output2.ser. 
+
+2.Deserialization:
+ - Deserialize output1.ser and output2.ser.
+
+3.Change DOB type to Date and serialize output2.ser:
+ - Modify the Student class to change the DOB field from a String to a Date type.
+ - Create a Student object with DOB as a Date type.
+ - And serialize the Student object in to output2.ser.
+
+4.Deserialization of output2.ser:
+ - Deserialize output2.ser.
+
+5.Handle invalidClass exception for output1.ser:
+ - When deserializing output1.ser, if it gives an invalidClass exception, add a serialVersionUID 
+   field to the Student class to maintain backward compatibility with previously serialized 
+   objects.
+
+6.Handle classcast exception for output1.ser:
+ - When deserializing output1.ser after handling the invalidClass exception, if it gives a classcast exception, 
+   change the type of the DOB field to Object to allow for different types to be stored in the same field.
+
+7.Successful deserialization:
+ - Verify that output1.ser and output2.ser can be deserialized successfully without exceptions.

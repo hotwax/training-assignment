@@ -1,0 +1,255 @@
+
+Menu options
+   1.Add The Employee Detail
+   2.Delete the Empoyee Detail
+   3.Get all Employees Data
+   4.Search the Employee by id
+   5.Sort and Search the Employee By Text
+
+Test Case 1:(Test the add employee and get the employee by id in the file)
+  Input:
+   choice-3
+   
+   choice-1
+   Enter the Employee Id
+   1933
+   Enter the Employee Name -
+   Gourav
+   Enter the Employee Email
+   gr@gmail.com
+   Enter the Employee Age
+   21
+   Enter the Date of birth(yyyy-mm-dd)
+   2002-02-11
+  
+   choice-1
+   Enter the Employee Id
+   1934
+   Enter the Employee Name -
+   Yash
+   Enter the Employee Email
+   ys@gmail.com
+   Enter the Employee Age
+   22
+   Enter the Date of birth(yyyy-mm-dd)
+   2001-01-12
+
+   choice-1
+   Enter the Employee Id
+   1923
+   Enter the Employee Name -
+   Niharika
+   Enter the Employee Email
+   nh@gmail.com
+   Enter the Employee Age
+   21
+   Enter the Date of birth(yyyy-mm-dd)
+   2001-10-13
+
+   choice-1
+   Enter the Employee Id
+   1927
+   Enter the Employee Name -
+   Vishudhi
+   Enter the Employee Email
+   vis@gmail.com
+   Enter the Employee Age
+   21
+   Enter the Date of birth(yyyy-mm-dd)
+   2001-10-09
+
+   choice-1
+   Enter the Employee Id
+   1945
+   Enter the Employee Name -
+   Rahul
+   Enter the Employee Email
+   rg@gmail.com
+   Enter the Employee Age
+   23
+   Enter the Date of birth(yyyy-mm-dd)
+   2000-04-23
+  
+   choice-3
+
+  Output:
+
+    No Employee is present
+    
+    Employee Added
+    
+    Employee Added
+    
+    Employee Added
+    
+    Employee Added
+
+    Employee Added
+   
+    Employee Details
+
+    --------------------------------------------------------------------------------------
+    | Index | EMPLOYEE ID |         NAME |                 EMAIL |     AGE |         DOB |
+    --------------------------------------------------------------------------------------
+    |      1|         1933|        Gourav|           gr@gmail.com|       21|   2002-02-11|
+    |      2|         1934|          Yash|           ys@gmail.com|       22|   2001-01-12|
+    |      3|         1923|      Niharika|           nh@gmail.com|       21|   2001-10-13|
+    |      4|         1927|      Vishudhi|          vis@gmail.com|       21|   2001-10-09|
+    |      5|         1945|         Rahul|           rg@gmail.com|       23|   2000-04-23|
+    --------------------------------------------------------------------------------------
+
+    
+
+--------------------------------------------------------------------------------------------------
+
+
+Test cases 2:(Test the deleted the employee by id from file)
+ Input:
+  choice-2
+   Enter the EmployId which you want to deleted
+    1931
+  
+  choice-2
+    Enter the EmployId which you want to deleted
+     1923
+  
+  choice-3
+      
+ Output:
+  Employee is not present
+
+  Employee Deleted Successfully 
+  
+  Employee Details
+
+  --------------------------------------------------------------------------------------
+  | Index | EMPLOYEE ID |         NAME |                 EMAIL |     AGE |         DOB |
+  --------------------------------------------------------------------------------------
+  |      1|         1933|        Gourav|           gr@gmail.com|       21|   2002-02-11|
+  |      2|         1934|          Yash|           ys@gmail.com|       22|   2001-01-12|
+  |      3|         1927|      Vishudhi|          vis@gmail.com|       21|   2001-10-09|
+  |      4|         1945|         Rahul|           rg@gmail.com|       23|   2000-04-23|
+  --------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------
+
+ Test Case 3:(Search and Sort the employee By text)
+   Input:
+    choice-5
+    Enter Any text You want to search
+    193
+    Enter in which Order you want to sort the Employee
+    1.Asscending
+    2.Descending
+    2
+    Enter the parameter Which you want to sort
+    1. Sort the Employee on the basis of Employee Id
+    2. Sort the Employee on the basis of employee Name
+    3. Sort the employee on the basis of Age
+    4. sort the employee on the basis of Date of Birth
+    2
+
+   Output:
+    --------------------------------------------------------------------------------------
+    | Index | EMPLOYEE ID |         NAME |                 EMAIL |     AGE |         DOB |
+    --------------------------------------------------------------------------------------
+    |      1|         1934|          Yash|           ys@gmail.com|       22|   2001-01-12|
+    |      2|         1933|        Gourav|           gr@gmail.com|       21|   2002-02-11|
+    --------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------
+
+Test Case 4:(Test the validation of employee Id)
+ Input:
+  choice-1
+  Enter the Employee Id
+  wed23313
+  Id is invalid
+->Enter valid Id
+  ews
+  Id is invalid
+->Enter valid Id
+  DSCS1
+  Id is invalid
+->Enter valid Id
+  14673  
+  Id is valid
+  
+------------------------------------------------------------------------------------------------
+
+Test case 5:(Test the validation of employee name)
+ Input:
+  choice-1
+  Enter the Employee Name -
+  df23
+  Name is invalid
+->Enter valid Name
+  213213
+  Name is invalid
+->Enter valid Name
+  Gourav
+  Name is Valid
+
+----------------------------------------------------------------------------------------------
+
+Test case 6:(Test the validation of employee email)
+ Input:
+  choice-1
+
+  Enter the Employee Email
+  sdsf
+  Email is invalid
+->Enter valid Email
+  gr1234@
+  Email is invalid
+->Enter valid Email
+  gsew@.com
+  Email is invalid
+->Enter valid Email
+  gr@gmail.
+  Email is invalid
+->Enter valid Email
+  gr@gmail.com
+  Email is Valid
+
+----------------------------------------------------------------------------------------------
+
+Test case 7:(Test Validation of employee age)
+ Input:
+  choice-1
+   Enter the Employee Age
+   ew
+   Age is invalid
+  >Enter the Valid age
+   34
+   Age is Valid
+
+-----------------------------------------------------------------------------------------------
+
+Test case 8:(Test Validation of employee Dob)
+ Input:
+  choice-1
+   
+   Enter the Date of birth(yyyy-mm-dd)
+   2000-34-21
+   Dob is invalid
+ ->Enter the Valid Date of birth(yyy-mm-dd)
+   200-12-30
+   Dob is invalid
+ ->Enter the Valid Date of birth(yyy-mm-dd)
+   2000-12-45
+   Dob is invalid
+ ->Enter the Valid Date of birth(yyy-mm-dd)
+   2000-10-23
+   Dob is Valid
+   
+-----------------------------------------------------------------------------------------------
+
+Test case 9:(Invalid Choices)
+ Input:
+  Choice-10
+
+ Output:
+  Invalid Choice 
+
+---------------------------------------------------------------------------------------------

@@ -1,0 +1,144 @@
+
+Test Cases 1:
+ 
+ Input: 
+  Words.txt
+   to and
+   HotWax thanks
+   OFBiz
+   the 
+  Url.txt
+   https://www.hotwaxsystems.com/
+   https://justinjackson.ca/words.html 
+
+  Output:
+   ========
+   https://www.hotwaxsystems.com/
+   the->29
+
+   ofbiz->26
+
+   to->25
+
+   =======================================================
+
+   https://justinjackson.ca/words.html
+   to->37
+
+   thanks->29
+
+   the->15
+
+   =======================================================
+
+   ========
+   to ->62
+   the ->44
+   and ->35
+   thanks ->29
+   ofbiz ->26
+   hotwax ->11 
+----------------------------------------------------------------------------------------------
+
+Test Cases 2:(Words.txt or Url.txt is not found)
+ Input:
+  Words.txt
+   to and
+   HotWax thanks
+   OFBiz
+   the 
+   asassas
+ Output:
+  FileNotFoundException  
+  Urls file is not found 
+---------------------------------------------------------------------------------------------
+
+Test Cases 3:(Words.txt or Url.txt is empty)
+ Input:
+  Words.txt
+  Url.txt
+   https://www.hotwaxsystems.com/
+   https://justinjackson.ca/words.html 
+
+ Output:
+  Words file is empty  
+
+--------------------------------------------------------------------------------------------
+
+Test Cases 4:(Url is correct in Url.txt)
+ Input:
+  Words.txt
+   to and
+   HotWax thanks
+   OFBiz
+   the 
+   asassas
+  Url.txt
+   https://www.hotwaxsystems.co/
+   https://justinjackson.ca/words.html 
+
+ Output:
+  java.net.UnknownHostException: www.hotwaxsystems.co
+  ========
+  https://justinjackson.ca/words.html
+  to->37
+
+  thanks->29
+
+  the->15
+
+  =======================================================
+
+  ========
+  to ->37
+  thanks ->29
+  the ->15
+  and ->13
+  hotwax is not present
+  ofbiz is not present
+  assdefd is not present   
+
+---------------------------------------------------------------------------------------------
+
+Test Cases 5:
+ Input:
+  Words.txt
+   to and
+   HotWax thanks
+   OFBiz
+   the
+   asassas 
+  Url.txt
+   https://www.hotwaxsystems.com/
+   https://justinjackson.ca/words.html 
+
+
+  Output: 
+   ========
+   https://www.hotwaxsystems.com/
+   the->29
+
+   ofbiz->26
+
+   to->25
+
+   =======================================================
+
+   https://justinjackson.ca/words.html
+   to->37
+
+   thanks->29
+
+   the->15
+
+   =======================================================
+
+   ========
+   to ->62
+   the ->44
+   and ->35
+   thanks ->29
+   ofbiz ->26
+   hotwax ->11    
+   asassas is not present
+---------------------------------------------------------------------------------------------  
