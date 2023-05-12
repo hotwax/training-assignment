@@ -1,0 +1,60 @@
+Enter number of vertices
+10
+1 Insert Edge
+2 Delete Edge
+3 BFS Traversal
+4 DFS Traversal
+5 EXIT.
+
+Case 1: Insert edge for linking.
+Input:
+1
+Enter the nodes you want to insert.
+1 0
+
+Output:
+The Nodes are added.
+
+Case 2: Delete an edge.
+Input:
+2
+Enter the nodes which you want to delete
+3
+2
+
+Output:
+The Nodes are deleted.
+
+Case 3: BSF traversal.
+Input:
+3
+Output:
+BFS Traversal
+0--> 1-->
+1-->
+2-->
+3--> 1-->
+4-->
+5-->
+6-->
+7-->
+8-->
+9-->
+
+
+Case 4: DSF traversal
+
+Input:
+4
+
+Output:
+DFS Traversal
+0 --> 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7 --> 8 --> 9 -->
+
+
+Case 5:Exit
+Input:
+5
+
+Output:
+Exiting the program.
