@@ -1,0 +1,95 @@
+Menu looks live - 
+===========================
+*****Enter your choice*****
+1.Insert
+2.Deletion
+3.showAll
+4.Search
+5.Update
+6.Exit
+===========================
+
+1) Test Case : Insertion
+
+Input:
+1
+Enter a number
+40
+
+Output:
+Done
+Elements:
+10  20  30  40
+Display menu again
+
+2) Test Case : Deletion of element which is not present
+
+Input:
+2
+Enter a number
+20
+
+Output:
+Elements:
+10  30  40
+Display menu again
+
+3) Test Case : Deletion of element which is not present
+Input:
+2
+Enter a number
+10
+
+Output:
+Not present ( no element will be deleted )
+Display menu again
+
+4) Test Case : See all inserted elements 
+Input:
+3
+
+Output:
+20  30  40
+Display menu again
+
+5) Test Case : Seaching for element which is present
+
+Input:
+4
+Enter a number
+20
+
+Output:
+Element present : true
+Display menu again
+
+6) Test Case : Seaching for element which is not present
+
+Input:
+4
+Enter a number
+100
+
+Output
+Enter a number
+Element present : false
+Display menu again
+
+7) Test Case : Invalid Input
+
+Input:
+10
+
+Output:
+Enter your choice
+Invalid
+Display menu again
+
+8) Test Case : Teriminating the program
+
+Input:
+6
+
+Ouput:
+Thank you
+Terminates the program

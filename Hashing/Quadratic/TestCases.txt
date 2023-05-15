@@ -1,0 +1,83 @@
+Menu is
+===========================
+*****Enter your choice*****
+1.Put / Update
+2.Remove
+3.ShowAll
+4.Search
+5.Get collision
+6.Time
+7.Exit
+===========================
+
+Test case for inserting a key-value pair:
+
+Input:
+Choice: 1
+Key: 5
+Value: 100
+Expected & Actual Output:
+Done
+Display menu here
+
+Test case for updating an existing key-value pair:
+
+Input:
+Choice: 1
+Key: 5
+Value: 200
+Expected & Actual Output:
+Done
+Display menu here
+
+Test case for removing a key-value pair:
+
+Input:
+Choice: 2
+Key: 5
+Expected & Actual Output:
+Done
+Display menu here
+
+Test case for showing all key-value pairs:
+
+Input:
+Choice: 3
+Expected & Actual Output:
+(no output if no key-value pair has been added)
+Key = 5, Value = 200
+Display menu here
+
+Test case for searching a key-value pair:
+
+Input:
+Choice: 4
+Key: 5
+Expected & Actual Output:
+key=5 Value=200
+Display menu here
+
+Test case for searching a key which does not exist:
+
+Input:
+Choice: 4
+Key: 5
+Expected & Actual Output:
+key=5 Value=null
+Display menu here
+
+Test case for getting the number of collisions:
+
+Input:
+Choice: 5
+Expected & Actual Output:
+No of collision : 1
+Display menu here
+
+Test case for getting the running time of the program:
+
+Input:
+Choice: 6
+Expected & Actual Output:
+Time in mili seconds <time taken>
+Display menu here

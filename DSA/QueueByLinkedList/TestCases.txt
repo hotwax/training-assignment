@@ -1,0 +1,94 @@
+Menu looks likes this:
+
+===========================
+*****Enter your choice*****
+1.EnQueueByList
+2.DeQueueByList
+3.showAll
+4.Search
+5.Update
+6.Exit
+===========================
+
+1) Test Case for Enqueue Operation:
+Input: 
+1
+Enter a number
+40
+Output: 
+Done
+Elements are :
+10  20  30  40
+Display menu again
+
+2) Test Case for Dequeue Operation:
+Input:
+2
+Output:
+Element 10
+Queue :
+20  30  40
+Display menu again
+
+3) Test Case for showAll Operation:
+Input: 
+3
+Output: 
+20  30  40
+Display menu again
+
+4) Test Case for Search Operation:
+Input: 
+4
+Enter a number
+60
+Output:
+Element present : false
+Display menu again
+
+5) Test Case for Update Operation for value which is present
+5
+Enter no. to be replaced
+30
+Enter a number
+222
+Queue:
+20  222  40
+Display menu again
+
+6) Test Case for Update Operation for value which is not present
+5
+Enter no. to be replaced
+10
+Enter a number
+34
+Data not found
+Display menu again
+
+7) Test Case for Invalid Option:
+Input: 
+7
+Output: 
+Invalid
+Display menu again
+
+8) Test Case for InputMismatchException:
+Input: 
+a
+Output: 
+Enter valid option
+Display menu again
+
+9) Test Case for Empty Queue:
+Input: 
+(Perform Dequeue operation on an empty queue)
+Output: 
+queue is empty
+Display menu again
+
+10) Test Case for Full Queue:
+Input: 
+(Assuming queue contains 100 elements & memeory is not avaiable)
+Output: 
+Queue is full
+Display menu again

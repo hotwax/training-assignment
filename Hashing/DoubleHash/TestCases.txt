@@ -1,0 +1,101 @@
+Menu
+===========================
+*****Enter your choice*****
+1.Put / Update
+2.Remove
+3.ShowAll
+4.Search
+5.Get collision
+6.Time
+7.Exit
+===========================
+
+Test inserting a key-value pair:
+
+Test Case 1:
+Input:
+Insert key = 10 and value = 20
+
+Actual & Expected Output:
+Done
+Display menu here
+
+Test removing a key-value pair:
+
+Test Case :
+Input:
+2
+Enter key 
+10 
+
+Actual & Expected Output:
+Done
+Display menu here
+
+Test Case :
+Input:
+10
+
+Actual & Expected Output:
+No key found
+Display menu here
+
+Test showing all key-value pairs:
+
+Test Case :
+Input:
+3
+
+Actual & Expected Output:
+Key = 10, Value = 20
+Key = 20, Value = 30
+
+Test Case 2:
+Input:
+3
+
+Actual & Expected Output:
+blank screen 
+Display menu here
+
+Test getting the value of a key:
+
+Test Case:
+Input:
+4
+Enter key
+10
+
+Actual & Expected Output:
+key=10 Value=20
+Display menu here
+
+Test Case :
+Input:
+4
+Enter key
+40
+
+Actual & Expected Output:
+key=10     Value=null
+Display menu here
+
+Test getting the number of collisions:
+
+Test Case :
+Input:
+5
+
+Actual & Expected Output:
+No of collision : 3
+Display menu here
+
+Test getting the time taken to perform operations:
+
+Test Case :
+Input:
+6
+
+Actual & Expected Output:
+Time in mili seconds 623530
+Display menu here

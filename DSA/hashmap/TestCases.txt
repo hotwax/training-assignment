@@ -1,0 +1,122 @@
+Menu looks like this-
+
+===========================
+*****Enter your choice*****
+1.Put / Update
+2.Remove
+3.ShowAll
+4.Search
+5.Exit
+===========================
+
+1) Test case for adding a new key-value pair
+
+Input:
+1
+Key: 1
+Value: 10
+
+Expected & Actual Output:
+Done
+Elements are :
+Key = 1, Value = 10
+Display menu here
+
+2) Test case for removing an existing key-value pair
+
+Input:
+2
+Key: 1
+
+Expected & Actual Output:
+Done
+Elements are :
+Key = 2, Value = 20
+Key = 3, Value = 30
+Display menu here
+
+3) Test case for updating an existing key-value pair
+
+Input:
+1
+Key: 2
+Value: 22222
+
+Expected & Actual Output:
+Done
+Elements are :
+Key = 2, Value = 22222
+Key = 3, Value = 30
+Display menu here
+
+4) Test case for removing a non-existing key-value pair
+
+Input:
+1
+Enter key
+9
+
+Expected & Actual Output:
+Done
+Elements are :
+Key = 2, Value = 22222
+Key = 3, Value = 30
+Display menu here
+
+5) Test case for showing all key-value pairs in the CustomHashMap
+
+Input:
+3
+
+Expected & Actual Output:
+Key = 2, Value = 22222
+Key = 3, Value = 30
+Display menu here
+
+6) Test case for getting a value for an existing key
+
+Input:
+4
+Key: 2
+
+Expected & Actual Output:
+key=2     Value=22222
+Display menu here
+
+7) Test case for getting a value for a non-existing key
+
+Input:
+4
+Key: 11
+
+Expected & Actual Output:
+key=11     Value=null
+Display menu here
+
+8) Test case for exiting the program
+
+Input:
+5
+
+Output:
+Thank you
+
+9) Test Case: Invalid input
+
+Input:
+Enter your choice
+9
+
+Expected & Actual Output:
+Invalid
+Display menu here
+
+10) Test Case: Invalid input format
+
+Input:
+Enter your choice
+a
+
+Expected & Actual Output:
+Enter valid option
+Display menu here
