@@ -1,0 +1,13 @@
+[
+    {
+      "operation": "modify-default-beta",
+      "spec": {
+        "products": {
+          "*": {
+            "available": "false"
+          }
+        }
+      }
+      }
+  ]
+  
