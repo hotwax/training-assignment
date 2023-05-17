@@ -1,0 +1,20 @@
+{
+    "items": [
+      {
+        "id": "1",
+        "name": "Book",
+        "prices": [
+          {"currency": "USD", "value": 10},
+          {"currency": "EUR", "value": 8}
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Pen",
+        "prices": [
+          {"currency": "USD", "value": 2},
+          {"currency": "EUR", "value": 1.5}
+        ]
+      }
+    ]
+  }
