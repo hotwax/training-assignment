@@ -1,30 +1,31 @@
 [
   {
+    "operation": "shift",
+    "spec": {
+      "products": {
+        "*": "products.&"
+      }
+    }
+    },
+  {
     "operation": "modify-overwrite-beta",
     "spec": {
       "products": {
+        "0": {
+          "price": "=divide(@(1,price), 2)"
+        },
         "*": {
-          "multi": "=divide(1,2)",
-          "ans": "=divide(@(1,price),@(1,multi))"
+          "price": "=divide(@(1,price), 0.5)"
         }
       }
     }
- },
+    },
   {
     "operation": "shift",
     "spec": {
       "products": {
-        "0": {
-          "id": "products.[&1].&",
-          "name": "products.[&1].&",
-          "price": "products.[&1].&"
-        },
-        "*": {
-          "id": "products.[&1].&",
-          "name": "products.[&1].&",
-          "ans": "products.[&1].price"
-        }
+        "*": "products.[&]"
       }
     }
-  }
-]
+    }
+  ]

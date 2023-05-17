@@ -1,16 +1,25 @@
 [
-    {
-        "operation": "shift",
-        "spec": {
-            "name": "name",
-            "hobby_1": {
-                "@(2,level_1)": "hobbies[0].level",
-                "@(2,hobby_1)": "hobbies[0].name"
-            },
-            "hobby_2": {
-                "@(2,level_2)": "hobbies[1].level",
-                "@(2,hobby_2)": "hobbies[1].name"
-            }
-        }
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "name",
+      "hobby_*": "hobbies[#2].&(0,1).name",
+      "level_*": "hobbies[#2].&(0,1).level"
     }
+  }
+,
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "name",
+      "hobbies": {
+        "*": {
+          "*": {
+            "name": "hobbies[#2].name",
+            "level": "hobbies[#2].level"
+          }
+        }
+      }
+    }
+  }
 ]

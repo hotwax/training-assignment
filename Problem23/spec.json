@@ -15,3 +15,23 @@
     }
     }
 ]
+
+Another approch 
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[#4].Restaurant Rating"
+          },
+          "address": {
+            "value": "[#4].Restaurant Country"
+          }
+        }
+      }
+    }
+    }
+]

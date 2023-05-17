@@ -1,6 +1,31 @@
-{
-  "1_USD" : 10,
-  "1_EUR" : 8,
-  "2_USD" : 2,
-  "2_EUR" : 1.5
-}
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "items": {
+        "*": {
+          "prices": {
+            "*": {
+              "key": "=concat(@(3,id),'_',@(1,currency))"
+            }
+          }
+        }
+      }
+    }
+    }
+  ,
+  {
+    "operation": "shift",
+    "spec": {
+      "items": {
+        "*": {
+          "prices": {
+            "*": {
+              "value": "@(1,key)"
+            }
+          }
+        }
+      }
+    }
+    }
+  ]

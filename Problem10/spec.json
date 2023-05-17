@@ -19,3 +19,26 @@
     }
   }
 ]
+
+another approch
+
+[
+   {
+     "operation": "modify-overwrite-beta",
+     "spec": {
+       "phone_number_count": "=size(@(1,phone_numbers))"
+     }
+  },
+   {
+     "operation": "shift",
+     "spec": {
+       "*": "&",
+       "name": {
+         "* *": {
+           "$(0,1)": "first_name",
+           "$(0,2)": "last_name"
+         }
+       }
+     }
+  }
+]

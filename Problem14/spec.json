@@ -4,19 +4,28 @@
     "spec": {
       "employees": {
         "*": {
-          "id": "employees.[&1].&",
-          "name": "employees.[&1].&",
-          "department": "employees.[&1].&",
+          "*": "employees[&1].&",
           "phone": {
-            "0": {
-              "number": "employees.[&3].homePhone"
-            },
-            "1": {
-              "number": "employees.[&3].workPhone"
+            "*": {
+              "number": "employees[&3].Phone.@(1,type)"
             }
           }
         }
       }
     }
-}
+  }
+  ,
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees[&1].&",
+          "Phone": {
+            "*": "employees[&2].&Phone"
+          }
+        }
+      }
+    }
+    }
 ]

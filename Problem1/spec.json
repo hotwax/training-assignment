@@ -12,7 +12,7 @@
             "*": {
               "temp": "=divide(1,@(1,quantity))",
               "total": "=divide(@(1,price),@(1,temp))"
-            }
+            } 
           }
         }
       }
