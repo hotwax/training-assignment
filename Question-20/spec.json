@@ -1,0 +1,17 @@
+[
+    {
+        "opeartion": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "name": "department[].employees.name",
+                    "age": "department[].employees.age",
+                    "department": {
+                    "id": 1,
+                    "name": "Sales"
+                    }
+                }
+            }
+        }
+    }
+]
