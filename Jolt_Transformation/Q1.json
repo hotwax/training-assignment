@@ -1,0 +1,177 @@
+
+Input
+
+{
+    "orders": [
+      {
+        "orderId": 1,
+        "orderDate": "2022-02-20T12:34:56Z",
+        "customer": {
+          "customerId": 1,
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "johndoe@example.com",
+          "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+            "zip": "12345"
+          }
+        },
+        "items": [
+          {
+            "itemId": 1,
+            "name": "Product A",
+            "quantity": 2,
+            "price": 10
+          },
+          {
+            "itemId": 2,
+            "name": "Product B",
+            "quantity": 1,
+            "price": 20
+          }
+        ]
+      },
+      {
+        "orderId": 2,
+        "orderDate": "2022-02-21T09:12:34Z",
+        "customer": {
+          "customerId": 2,
+          "firstName": "Jane",
+          "lastName": "Smith",
+          "email": "janesmith@example.com",
+          "address": {
+            "street": "456 Oak St",
+            "city": "Somewhere",
+            "state": "NY",
+            "zip": "67890"
+          }
+        },
+        "items": [
+          {
+            "itemId": 3,
+            "name": "Product C",
+            "quantity": 3,
+            "price": 15
+          }
+        ]
+      }
+    ]
+  }
+
+
+Jolt Spec
+
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "orders": {
+          "*": {
+            "customer": {
+              "Fullname": "=concat(@(1,firstName),' ',@(1,lastName))",
+              "address": "=concat(@(1,address.street),', ',@(1,address.city),', ',@(1,address.state),', ', @(1,address.zip))"
+            },
+            "items": {
+              "*": {
+                "inverseValue": "=divide(1, @(1,quantity))",
+                "finalValue": "=divideAndRound(2, @(1,price), @(1,inverseValue))",
+                "price": ["=toDouble", null]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "orders": {
+          "*": {
+            "items": {
+              "*": {
+                "finalValue": "&4.[&3].total[]"
+              }
+            },
+            "@": "&2.[&]"
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "orders": {
+          "*": {
+            "total": "=intSum(@(1,total))"
+          }
+        }
+      }
+    },
+    {
+      "operation": "remove",
+      "spec": {
+        "orders": {
+          "*": {
+            "customer": {
+              "firstName": "",
+              "lastName": ""
+            },
+            "items": {
+              "*": {
+                "inverseValue": "",
+                "finalValue": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+  
+
+
+
+  output
+
+  {
+  "orders" : [ {
+    "orderId" : 1,
+    "orderDate" : "2022-02-20T12:34:56Z",
+    "customer" : {
+      "customerId" : 1,
+      "email" : "johndoe@example.com",
+      "address" : "123 Main St, Anytown, CA, 12345",
+      "Fullname" : "John Doe"
+    },
+    "items" : [ {
+      "itemId" : 1,
+      "name" : "Product A",
+      "quantity" : 2,
+      "price" : 10.0
+    }, {
+      "itemId" : 2,
+      "name" : "Product B",
+      "quantity" : 1,
+      "price" : 20.0
+    } ],
+    "total" : 40
+  }, {
+    "orderId" : 2,
+    "orderDate" : "2022-02-21T09:12:34Z",
+    "customer" : {
+      "customerId" : 2,
+      "email" : "janesmith@example.com",
+      "address" : "456 Oak St, Somewhere, NY, 67890",
+      "Fullname" : "Jane Smith"
+    },
+    "items" : [ {
+      "itemId" : 3,
+      "name" : "Product C",
+      "quantity" : 3,
+      "price" : 15.0
+    } ],
+    "total" : 45
+  } ]
+}

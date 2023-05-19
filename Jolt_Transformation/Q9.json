@@ -1,0 +1,41 @@
+Input
+
+{
+    "name": "John",
+    "age": 30,
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zip": "12345"
+    }
+  }
+
+  
+Jolt Spec
+
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "&",
+        "age": "&",
+        "address": {
+          "street": "&",
+          "city": "&",
+          "zip": "&"
+        }
+      }
+    }
+  ]
+
+
+Output
+
+{
+  "name" : "John",
+  "age" : 30,
+  "street" : "123 Main St",
+  "city" : "Anytown",
+  "zip" : "12345"
+}

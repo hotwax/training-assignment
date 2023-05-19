@@ -1,0 +1,97 @@
+Input
+
+{
+    "employees": [
+      {
+        "name": "John Doe",
+        "salary": 50000,
+        "department": "Sales"
+      },
+      {
+        "name": "Jane Smith",
+        "salary": 60000
+      },
+      {
+        "name": "Bob Johnson",
+        "department": "IT"
+      }
+    ]
+  }
+
+  
+
+  Jolt Spec
+
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "@": "@(1,name)"
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "John Doe": {
+          "bonus": 1000,
+          "bonus1": 1000
+        },
+        "Jane Smith": {
+          "bonus": 1500,
+          "bonus1": 1500,
+          "department": "Marketing"
+        },
+        "Bob Johnson": {
+          "salary": 45000,
+          "bonus": 900,
+          "bonus1": 900
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "name": "employee[#2].&",
+          "salary": "employee[#2].&",
+          "department": "employee[#2].&",
+          "bonus": "employee[#2].&",
+          "bonus1": "total[#2]"
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "total": "=intSum(@(1,total))"
+      }
+    }
+  ]
+
+
+  Output
+
+  {
+    "employee" : [ {
+      "name" : "John Doe",
+      "salary" : 50000,
+      "department" : "Sales",
+      "bonus" : 1000
+    }, {
+      "name" : "Jane Smith",
+      "salary" : 60000,
+      "department" : "Marketing",
+      "bonus" : 1500
+    }, {
+      "name" : "Bob Johnson",
+      "salary" : 45000,
+      "department" : "IT",
+      "bonus" : 900
+    } ],
+    "total" : 3400
+  }
+  

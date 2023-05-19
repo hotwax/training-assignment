@@ -1,0 +1,74 @@
+Input
+
+{
+    "products": [
+      {
+        "id": "1001",
+        "name": "Product 1",
+        "price": 10.99
+      },
+      {
+        "id": "1002",
+        "name": "Product 2",
+        "price": 15.99
+      },
+      {
+        "id": "1003",
+        "name": "Product 3",
+        "price": 20.99
+      }
+    ]
+  }
+
+  
+  Jolt Spec
+
+  [
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "products": {
+          "*": {
+            "newprice": "=doubleSum(@(1,price),@(1,price))"
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "products": {
+          "0": {
+            "id": "products[#2].&",
+            "name": "products[#2].&",
+            "price": "products[#2].&"
+          },
+          "*": {
+            "id": "products[#2].&",
+            "name": "products[#2].&",
+            "newprice": "products[#2].price"
+          }
+        }
+      }
+    }
+  ]
+
+
+  Output
+
+  {
+    "products" : [ {
+      "id" : "1001",
+      "name" : "Product 1",
+      "price" : 10.99
+    }, {
+      "id" : "1002",
+      "name" : "Product 2",
+      "price" : 31.98
+    }, {
+      "id" : "1003",
+      "name" : "Product 3",
+      "price" : 41.98
+    } ]
+  }
+  

@@ -1,0 +1,56 @@
+Input
+
+[
+    {
+      "returnId": "10051",
+      "returnQuantity": 2,
+      "returnPrice": 100,
+      "returnTax": 12.56
+    },
+    {
+      "returnId": "10052",
+      "returnQuantity": 25,
+      "returnPrice": 35,
+      "returnTax": 29.85
+    }
+  ]
+
+  Jolt Spec
+
+  [
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "inverseValue": "=divide(1, @(1,returnQuantity))",
+          "Return Amount": "=divideAndRound(2, @(1,returnPrice), @(1,inverseValue))",
+          "Return Total Amount": "=doubleSum(@(1,returnTax),@(1,Return Amount))"
+        }
+      }
+    },
+    {
+      "operation": "remove",
+      "spec": {
+        "*": {
+          "inverseValue": "",
+          "returnQuantity": "",
+          "returnPrice": "",
+          "returnTax": ""
+        }
+      }
+    }
+  ]
+
+
+  Output
+
+  [ {
+    "returnId" : "10051",
+    "Return Amount" : 200.0,
+    "Return Total Amount" : 212.56
+  }, {
+    "returnId" : "10052",
+    "Return Amount" : 875.0,
+    "Return Total Amount" : 904.85
+  } ]
+  
