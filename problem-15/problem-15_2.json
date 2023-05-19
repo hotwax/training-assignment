@@ -1,0 +1,56 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": "@(0,customerId)[]"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "*": "customers[#2].orders[]",
+        "$": "customers[#2].id"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "customers": {
+        "0": {
+          "*": "&2[#2].&",
+          "#John Smith": "&2[#2].name",
+          "orders": {
+            "@": "&3[#3].&",
+            "*": {
+              "totalPrice": "&4[#4].&[]"
+            }
+          }
+        },
+        "1": {
+          "*": "&2[#2].&",
+          "#Jane Doe": "&2[#2].name",
+          "orders": {
+            "@": "&3[#3].&",
+            "*": {
+              "totalPrice": "&4[#4].&[]"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "customers": {
+        "*": {
+          "totalPrice": "=intSum"
+        }
+      }
+    }
+  }
+]
