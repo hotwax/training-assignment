@@ -1,0 +1,22 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "salary": "=divide(@(1,salary),0.909090)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "salary": "=toInteger"
+        }
+      }
+    }
+  }
+]
