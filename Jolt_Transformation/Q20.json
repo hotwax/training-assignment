@@ -1,0 +1,82 @@
+Input
+
+{
+    "employees": [
+      {
+        "name": "John",
+        "age": 30,
+        "department": {
+          "id": 1,
+          "name": "Sales"
+        }
+      },
+      {
+        "name": "Jane",
+        "age": 35,
+        "department": {
+          "id": 2,
+          "name": "Marketing"
+        }
+      },
+      {
+        "name": "Bob",
+        "age": 40,
+        "department": {
+          "id": 1,
+          "name": "Sales"
+        }
+      }
+    ]
+  }
+
+  
+
+  Jolt Spec
+
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "department": {
+              "id": "departments[#3].id",
+              "name": "departments[#3].name"
+            },
+            "name": "departments[#2].employees[#0].name",
+            "age": "departments[#2].employees[#0].age"
+          }
+        }
+      }
+    }
+  ]
+
+  
+
+  Jolt Output
+
+  {
+    "departments" : [ {
+      "id" : 1,
+      "name" : "Sales",
+      "employees" : [ {
+        "name" : "John",
+        "age" : 30
+      } ]
+    }, {
+      "id" : 2,
+      "name" : "Marketing",
+      "employees" : [ {
+        "name" : "Jane",
+        "age" : 35
+      } ]
+    }, {
+      "id" : 1,
+      "name" : "Sales",
+      "employees" : [ {
+        "name" : "Bob",
+        "age" : 40
+      } ]
+    } ]
+  }
+  
