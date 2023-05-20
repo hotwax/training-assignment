@@ -5,16 +5,16 @@
       "*": {
         "restaurant": {
           "rating": {
-            "value": "[#4].Restaurant Rating"
+            "value": "[&3].Restaurant Rating"
           },
           "address": {
-            "value": "[#4].Restaurant Country"
+            "value": "[&3].Restaurant Country"
           }
         },
         "itemsList": {
           "*": {
-            "itemName": "[#4].Dishes[#2].Dish Name",
-            "itemPrice": "[#4].Dishes[#2].Dish Price"
+            "itemName": "[&3].Dishes[&1].Dish Name",
+            "itemPrice": "[&3].Dishes[&1].Dish Price"
           }
         }
       }
