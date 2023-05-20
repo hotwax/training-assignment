@@ -4,11 +4,11 @@
     "spec": {
       "students": {
         "*": {
-          "name": "[#2].Name",
-          "age": "[#2].Age",
+          "name": "[&1].Name",
+          "age": "[&1].Age",
           "email": {
             "*\\@*": {
-              "$(0,2)": "[#4].Domain"
+              "$(0,2)": "[&3].Domain"
             }
           }
         }
