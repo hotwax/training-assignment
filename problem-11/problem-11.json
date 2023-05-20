@@ -4,8 +4,8 @@
     "spec": {
       "items": {
         "*": {
-          "name": "&2[#2].itemName",
-          "value": "&2[#2].itemValue"
+          "name": "&2[&1].itemName",
+          "value": "&2[&1].itemValue"
         }
       }
     }
