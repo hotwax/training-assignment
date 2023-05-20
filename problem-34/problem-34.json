@@ -24,8 +24,8 @@
       "name": "&",
       "hobbies": {
         "*": {
-          "hobby_*": "hobbies[#2].name",
-          "level_*": "hobbies[#2].level"
+          "hobby_*": "hobbies[&1].name",
+          "level_*": "hobbies[&1].level"
         }
       }
     }
