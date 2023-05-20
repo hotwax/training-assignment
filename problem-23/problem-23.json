@@ -5,10 +5,10 @@
       "*": {
         "restaurant": {
           "rating": {
-            "value": "[#4].Restaurant Rating"
+            "value": "[&3].Restaurant Rating"
           },
           "address": {
-            "value": "[#4].Restaurant Country"
+            "value": "[&3].Restaurant Country"
           }
         }
       }
