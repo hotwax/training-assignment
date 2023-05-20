@@ -5,10 +5,10 @@
       "*": {
         "returnItemAdjustments": {
           "*": {
-            "amount": "[#4].returnTax"
+            "amount": "[&3].returnTax"
           }
         },
-        "returnId": "[#2].&"
+        "returnId": "[&1].&"
       }
     }
   },
