@@ -4,8 +4,8 @@
     "spec": {
       "hobbies": {
         "*": {
-          "name": "&2[#2].hobby_name",
-          "level": "&2[#2].hobby_level"
+          "name": "&2[&1].hobby_name",
+          "level": "&2[&1].hobby_level"
         }
       },
       "*": "&"
@@ -27,7 +27,7 @@
     "spec": {
       "hobbies": {
         "*": {
-          "*": "[#2].&"
+          "*": "[&1].&"
         }
       }
     }
