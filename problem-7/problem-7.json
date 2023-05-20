@@ -15,9 +15,9 @@
     "spec": {
       "students": {
         "*": {
-          "name": "[#2].Name",
-          "age": "[#2].Age",
-          "Domain": "[#2].&"
+          "name": "[&1].Name",
+          "age": "[&1].Age",
+          "Domain": "[&1].&"
         }
       }
     }
