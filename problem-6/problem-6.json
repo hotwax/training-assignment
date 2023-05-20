@@ -14,11 +14,11 @@
     "spec": {
       "users": {
         "*": {
-          "address": "[#2].Address",
-          "name": "[#2].Name",
+          "address": "[&1].Address",
+          "name": "[&1].Name",
           "hobbies": {
             "*": {
-              "name": "[#4].Hobbies"
+              "name": "[&3].Hobbies"
             }
           }
         }
