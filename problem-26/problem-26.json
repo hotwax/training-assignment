@@ -13,9 +13,10 @@
     "operation": "shift",
     "spec": {
       "*": {
-        "returnId": "[#2].Return Id",
-        "Return Amount|Return Total Amount": "[#2].&"
+        "returnId": "[&1].Return Id",
+        "Return Amount|Return Total Amount": "[&1].&"
       }
     }
   }
+
 ]
