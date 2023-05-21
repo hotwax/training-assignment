@@ -1,0 +1,7 @@
+In the corresponding transformation spec: 
+
+For each phone object, the "type" field is modified using the "concat" function to concatenate the value of the "type" field with the string "Phone". The result is assigned back to the "type" field.
+The second operation is "shift" to rearrange the transformed data.
+For each phone object, the "number" field is mapped to "[#4].@(1,type)".
+The "[#4]" represents the index of the current phone object being operated on, preserving the order of the phone numbers.
+The "@(1,type)" retrieves the modified "type" field value from the previous operation and assigns it to the "number" field.

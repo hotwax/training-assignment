@@ -1,0 +1,5 @@
+In the corresponding transformation spec: 
+
+I first used Modify-overwrite-beta to concat firstName and lastName into fullName.
+I used remove operation to remove the firstname and the lastname from the map.   
+I used the shift operation to put city and address outside the address map and get the answer.

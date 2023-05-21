@@ -1,0 +1,3 @@
+In the corresponding transformation spec: 
+I used the shift operation to rename the names of key present in the map i.e. capitalize the 
+first letter of the key.

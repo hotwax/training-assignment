@@ -1,0 +1,7 @@
+In the corresponding transformation spec: 
+
+I concatenated the firstname and the lastname to fullname and also concatenated the address 
+in one line i.e. flattened the map.
+Then multiplied the price and the quantity and converted it io double using the toDouble function
+Then used remove operation to remove the unnecessary fields in the map.
+The fourth operation is "modify-overwrite-beta" to calculate the total sum of the "total" values.

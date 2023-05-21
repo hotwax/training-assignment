@@ -1,0 +1,8 @@
+In the corresponding transformation spec: 
+
+The nested "address" field is further mapped to separate fields within the "address" object, including "street", "city", "state", and "zip".
+The second operation is "modify-overwrite-beta" to modify and overwrite certain fields.
+The "name" field is modified using the "concat" function to concatenate the "firstName" and "lastName" fields with a space in between.
+Similarly, the "Address" field is also modified.
+The third operation is "remove" to remove the "address" field from the JSON structure.
+The fourth operation is "shift" to rearrange the transformed data.

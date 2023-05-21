@@ -1,0 +1,5 @@
+In the corresponding transformation spec: 
+
+Within "students", the "*" wildcard matches each individual student within the array.
+The second operation is "shift" to rearrange and map the transformed data to a new structure.
+The third operation is "remove" to remove the "email" field from the JSON structure.
