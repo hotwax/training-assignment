@@ -1,0 +1,43 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "returnId": "[&1].Return Id",
+        "country": {
+          "USA": {
+            "#United States of America": "[0].country"
+          },
+          "CA": {
+            "#Canada": "[1].country"
+          },
+          "*": {
+            "#NA": "[2].country"
+          }
+        },
+        "*": "[&1].&"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "inverse": "=divide(1,@(1,returnQuantity))",
+        "Return Amount": "=divide(@(1,returnPrice),@(1,inverse))",
+        "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))"
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "*": {
+        "inverse": "",
+        "returnTax": "",
+        "returnPrice": "",
+        "returnQuantity": ""
+      }
+    }
+  }
+]
