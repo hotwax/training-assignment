@@ -1,0 +1,2383 @@
+// 1
+// Input JSON
+{
+  "orders": [
+    {
+      "orderId": 1,
+      "orderDate": "2022-02-20T12:34:56Z",
+      "customer": {
+        "customerId": 1,
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "johndoe@example.com",
+        "address": {
+          "street": "123 Main St",
+          "city": "Anytown",
+          "state": "CA",
+          "zip": "12345"
+        }
+      },
+      "items": [
+        {
+          "itemId": 1,
+          "name": "Product A",
+          "quantity": 2,
+          "price": 10.0
+        },
+        {
+          "itemId": 2,
+          "name": "Product B",
+          "quantity": 1,
+          "price": 20.0
+        }
+      ]
+    },
+    {
+      "orderId": 2,
+      "orderDate": "2022-02-21T09:12:34Z",
+      "customer": {
+        "customerId": 2,
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "email": "janesmith@example.com",
+        "address": {
+          "street": "456 Oak St",
+          "city": "Somewhere",
+          "state": "NY",
+          "zip": "67890"
+        }
+      },
+      "items": [
+        {
+          "itemId": 3,
+          "name": "Product C",
+          "quantity": 3,
+          "price": 15.0
+        }
+      ]
+    }
+  ]
+}
+//JSON Spec
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "customer": {
+            "address": "=concat(@(1,address.street),' ',@(1,address.city), ' ', @(1,address.state), ' ',@(1,address.zip))"
+          },
+          "itemTemp": "@(1,items)"
+        }
+      }
+    }
+  },
+
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "itemTemp": {
+            "*": {
+              "inverseValue": "=divide(1,@(1,price))",
+              "temp": "=divideAndRound(2, @(1,quantity), @(1,inverseValue))"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": {
+          "*": "orders[&1].&",
+          "itemTemp": {
+            "*": {
+              "temp": "orders[#4].total"
+            }
+          }
+        }
+      }
+    }
+    },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "total": "=doubleSum(@(1,total))"
+        }
+      }
+    }
+    },
+
+  {
+    "operation": "remove",
+    "spec": {
+      "orders": {
+        "*": {
+          "items": {
+            "*": {
+              "inverseValue": "",
+              "temp": ""
+            }
+          }
+        }
+      }
+    }
+    }
+]
+//Output JSON
+{
+  "orders": [
+    {
+      "orderId": 1,
+      "orderDate": "2022-02-20T12:34:56Z",
+      "customer": {
+        "customerId": 1,
+        "fullName": "John Doe",
+        "email": "johndoe@example.com",
+        "address": "123 Main St, Anytown, CA 12345"
+      },
+      "items": [
+        {
+          "itemId": 1,
+          "name": "Product A",
+          "quantity": 2,
+          "price": 10.0
+        },
+        {
+          "itemId": 2,
+          "name": "Product B",
+          "quantity": 1,
+          "price": 20.0
+        }
+      ],
+      "total": 40.0
+    },
+    {
+      "orderId": 2,
+      "orderDate": "2022-02-21T09:12:34Z",
+      "customer": {
+        "customerId": 2,
+        "fullName": "Jane Smith",
+        "email": "janesmith@example.com",
+        "address": "456 Oak St, Somewhere, NY 67890"
+      },
+      "items": [
+        {
+          "itemId": 3,
+          "name": "Product C",
+          "quantity": 3,
+          "price": 15.0
+        }
+      ],
+      "total": 45.0
+    }
+  ]
+}
+
+// 2. 
+// Input JSON
+{
+    "name": "John",
+    "age": 35,
+    "city": "New York"
+}
+
+// Transformation Jolt
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "Name",
+        "age": "Age",
+        "city": "City"
+      }
+    }
+]
+
+// Output JSON
+{
+    "Name": "John",
+    "Age": 35,
+    "City": "New York"
+}
+
+  
+// 3.
+// Input JSON
+{
+    "name": "John",
+    "age": 35,
+    "city": "New York",
+    "phone": "+1-555-123-4567"
+}
+
+// Transformation Jolt
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "Name",
+        "age": "Age",
+        "city": "City",
+        "phone": "Phone"
+      }
+    }
+]
+
+// Output JSON
+{
+    "Name": "John",
+    "Age": 35,
+    "Contact": {
+      "City": "New York",
+      "Phone": "+1-555-123-4567"
+    }
+}
+//4
+//Input JSON
+
+{
+  "name": "John",
+  "age": 35,
+  "hobbies": [
+    "reading",
+    "movies",
+    "travel"
+  ]
+}
+
+//Jolt Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "hobbies": {
+        "*": "Hobbies[&].Name"
+      }
+    }
+  }
+]
+
+//Output JSON
+{
+  "Name" : "John",
+  "Age" : 35,
+  "Hobbies" : [ {
+    "Name" : "reading"
+  }, {
+    "Name" : "movies"
+  }, {
+    "Name" : "travel"
+  } ]
+}
+
+//5
+//Input JSON
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@example.com",
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zip": "12345"
+    }
+}
+
+// Jolt spec
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "fullName": "=concat(@(1,firstName),' ',@(1,lastName))"
+      }
+    }
+  , {
+      "operation": "shift",
+      "spec": {
+        "fullName": "&",
+        "email": "&",
+        "address": {
+          "city": "&",
+          "zip": "&"
+        }
+      }
+    }
+]
+
+// Output JSON
+{
+    "fullName" : "John Doe",
+    "email" : "johndoe@example.com",
+    "city" : "Anytown",
+    "zip" : "12345"
+}
+
+//6
+// Input JSON
+{
+  "users": [
+    {
+      "name": "John Doe",
+      "age": 35,
+      "address": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+      },
+      "hobbies": [
+        {
+          "name": "reading",
+          "type": "indoor"
+        },
+        {
+          "name": "hiking",
+          "type": "outdoor"
+        }
+      ]
+    },
+    {
+      "name": "Jane Doe",
+      "age": 30,
+      "address": {
+        "street": "456 First St",
+        "city": "Othertown",
+        "state": "NY",
+        "zip": "67890"
+      },
+      "hobbies": [
+        {
+          "name": "swimming",
+          "type": "outdoor"
+        },
+        {
+          "name": "painting",
+          "type": "indoor"
+        }
+      ]
+    }
+  ]
+}
+
+// Jolt Spec
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "users": {
+        "*": {
+          "Address": "=concat(@(1,address.street),', ',@(1,address.city),', ',@(1,address.state),', ',@(1,address.zip))"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "users": {
+        "*": {
+          "name": "[#2].Name",
+          "Address": "[#2].Address",
+          "hobbies": {
+            "*": {
+              "name": "[#4].Hobbies"
+            }
+          }
+        }
+      }
+    }
+  }
+]
+
+//Output JSON
+[ {
+  "Name" : "John Doe",
+  "Address" : "123 Main St, Anytown, CA, 12345",
+  "Hobbies" : [ "reading", "hiking" ]
+}, {
+  "Name" : "Jane Doe",
+  "Address" : "456 First St, Othertown, NY, 67890",
+  "Hobbies" : [ "swimming", "painting" ]
+} ]
+
+
+//7
+//Input JSON
+{
+  "students": [
+    {
+      "name": "John Doe",
+      "age": 23,
+      "email": "john.doe@example.com"
+    },
+    {
+      "name": "Jane Smith",
+      "age": 25,
+      "email": "jane.smith@example.com"
+    }
+  ]
+}
+
+//Jolt Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "students": {
+        "*": "[#1]"
+      }
+    }
+  }
+  ,
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "Name": "name",
+        "Age": "age",
+        "domainTemp": "=split('@',@(1,email))",
+        "Domain": "=lastElement(@(1,domainTemp))"
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "*": {
+        "name": "",
+        "age": "",
+        "email": "",
+        "domainTemp": ""
+      }
+    }
+  }
+]
+
+//Output JSON
+[ {
+  "Name" : "name",
+  "Age" : "age",
+  "Domain" : "example.com"
+}, {
+  "Name" : "name",
+  "Age" : "age",
+  "Domain" : "example.com"
+} 
+]
+
+// 8
+// Input:
+{
+  "employees": [
+    {
+      "name": "John Doe",
+      "salary": 50000,
+      "department": "Sales"
+    },
+    {
+      "name": "Jane Smith",
+      "salary": 60000
+    },
+    {
+      "name": "Bob Johnson",
+      "department": "IT"
+    }
+  ]
+}
+
+
+// Transformation:
+
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "employees": {
+        "[0]": {
+          "bonus": 1000,
+          "tempBonus": 1000
+        },
+        "[1]": {
+          "bonus": 1500,
+          "tempBonus": 1500
+        },
+        "[2]": {
+          "salary":4500,
+          "bonus": 900,
+          "tempBonus": 900
+        }
+      }
+    }
+    },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees[&1].&",
+          "tempBonus": "totalBonus[]"
+        }
+      }
+    }
+    },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "totalBonus": "=intSum(@(1,totalBonus))"
+    }
+    }
+
+
+
+
+
+]
+
+
+// Output:
+
+{
+  "employees" : [ {
+    "name" : [ "John Doe", "Jane Smith", "Bob Johnson" ]
+  }, {
+    "salary" : [ 50000, 60000 ],
+    "department" : "IT"
+  }, {
+    "department" : "Sales",
+    "bonus" : [ 1500, 900 ]
+  }, {
+    "bonus" : 1000
+  } ],
+  "totalBonus" : 3400
+}
+
+//9
+// Input JSON
+{
+  "name": "John",
+  "age": 30,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  }
+}
+
+//Jolt Spec
+[
+  {
+    "operation": "remove",
+    "spec": {
+      "address": {
+        "state": ""
+      }
+    }
+    }
+]
+
+// Output JSON
+{
+  "name" : "John",
+  "age" : 30,
+  "address" : {
+    "street" : "123 Main St",
+    "city" : "Anytown",
+    "zip" : "12345"
+  }
+}
+
+//10
+// Input JSON
+{
+  "name": "John Smith",
+  "age": 35,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  },
+  "phone_numbers": [
+    {
+      "type": "home",
+      "number": "555-1234"
+    },
+    {
+      "type": "work",
+      "number": "555-5678"
+    }
+  ]
+}
+
+// Jolt Spec
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "fullName": "=split(' ',@(2,name))",
+      "first_name": "=firstElement(@(1,fullName))",
+      "last_name": "=lastElement(@(1,fullName))",
+      "phone_number_count": "=size(@(1,phone_numbers))"
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "first_name": "&",
+      "last_name": "&",
+      "age": "&",
+      "address": "&",
+      "phone_numbers": "&",
+      "phone_number_count": "&"
+    }
+  }
+
+]
+
+//Output JSON
+{
+  "first_name": "John",
+  "last_name": "Smith",
+  "age": 35,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  },
+  "phone_numbers": [
+    {
+      "type": "home",
+      "number": "555-1234"
+    },
+    {
+      "type": "work",
+      "number": "555-5678"
+    }
+  ],
+  "phone_number_count": 2
+}
+
+// 11
+// Input JSON
+{
+  "items": [
+    {
+      "name": "item1",
+      "value": 10
+    },
+    {
+      "name": "item2",
+      "value": 20
+    }
+  ]
+}
+
+// Jolt Spec
+[
+
+  {
+    "operation": "shift",
+    "spec": {
+      "items": {
+        "*": {
+          "name": "items[#2].itemName",
+          "value": "items[#2].itemValue"
+        }
+      }
+    }
+  }
+
+]
+
+// Output JSON
+{
+  "items" : [ {
+    "itemName" : "item1",
+    "itemValue" : 10
+  }, {
+    "itemName" : "item2",
+    "itemValue" : 20
+  } ]
+}
+
+// 12
+// Input JSON
+{
+  "employee": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zip": "12345"
+    },
+    "phones": [
+      {
+        "type": "home",
+        "number": "555-555-1234"
+      },
+      {
+        "type": "work",
+        "number": "555-555-5678"
+      }
+    ]
+  }
+}
+
+// Jolt Spec
+[
+
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employee": {
+        "name": "=concat(@(1,firstName),' ', @(1,lastName))",
+        "address": "=concat(@(1,address.street),' ', @(1,address.city),' ', @(1,address.state),' ', @(1,address.zip))"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employee": {
+        "name": "name",
+        "address": "&",
+        "phones": "phoneNumbers"
+      }
+    }
+  }
+]
+
+// Output JSON
+{
+  "name": "John Doe",
+  "address": "123 Main St, Anytown, CA 12345",
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "555-555-1234"
+    },
+    {
+      "type": "work",
+      "number": "555-555-5678"
+    }
+  ]
+}
+
+// 13
+// Input JSON
+{
+  "employees": [
+    {
+      "id": "001",
+      "name": "John",
+      "department": "HR"
+    },
+    {
+      "id": "002",
+      "name": "Jane",
+      "department": "Sales"
+    },
+    {
+      "id": "003",
+      "name": "Bob",
+      "department": "IT"
+    }
+  ]
+}
+ 
+// Jolt Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "@": "employees.@(1,id)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "id": ""
+        }
+      }
+    }
+  }
+]
+
+// Output JSON
+{
+  "employees" : {
+    "001" : {
+      "name" : "John",
+      "department" : "HR"
+    },
+    "002" : {
+      "name" : "Jane",
+      "department" : "Sales"
+    },
+    "003" : {
+      "name" : "Bob",
+      "department" : "IT"
+    }
+  }
+}
+
+//14
+// Input Json
+
+{
+    "employees": [
+        {
+            "id": "001",
+            "name": "John",
+            "department": "HR",
+            "phone": [
+                {
+                    "type": "home",
+                    "number": "555-555-1234"
+                },
+                {
+                    "type": "work",
+                    "number": "555-555-5678"
+                }
+            ]
+        },
+        {
+            "id": "002",
+            "name": "Jane",
+            "department": "Sales",
+            "phone": [
+                {
+                    "type": "home",
+                    "number": "555-555-4567"
+                },
+                {
+                    "type": "work",
+                    "number": "555-555-8901"
+                }
+            ]
+        }
+    ]
+}
+
+// Json Spec
+
+
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "id": "employees.[#2].&",
+                    "name": "employees.[#2].&",
+                    "phone": {
+                        "*": {
+                            "@number": "employees.[#4].@type"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "*": "[#2].&",
+                    "home": "[#2].homePhone",
+                    "work": "[#2].workPhone"
+                }
+            }
+        }
+    }
+]
+
+// Ouput Json
+
+[
+    {
+        "id": "001",
+        "name": "John",
+        "homePhone": "555-555-1234",
+        "workPhone": "555-555-5678"
+    },
+    {
+        "id": "002",
+        "name": "Jane",
+        "homePhone": "555-555-4567",
+        "workPhone": "555-555-8901"
+    }
+]
+
+// 15
+// Input:
+{
+  "orders": [
+    {
+      "id": "order1",
+      "date": "2022-01-01T00:00:00Z",
+      "customerId": "customer1",
+      "items": [
+        {
+          "id": "item1",
+          "name": "Product 1",
+          "price": 10,
+          "quantity": 2
+        },
+        {
+          "id": "item2",
+          "name": "Product 2",
+          "price": 20,
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 40
+    },
+    {
+      "id": "order2",
+      "date": "2022-02-01T00:00:00Z",
+      "customerId": "customer1",
+      "items": [
+        {
+          "id": "item3",
+          "name": "Product 3",
+          "price": 30,
+          "quantity": 3
+        }
+      ],
+      "totalPrice": 90
+    },
+    {
+      "id": "order3",
+      "date": "2022-03-01T00:00:00Z",
+      "customerId": "customer2",
+      "items": [
+        {
+          "id": "item4",
+          "name": "Product 4",
+          "price": 40,
+          "quantity": 4
+        }
+      ],
+      "totalPrice": 160
+    }
+  ]
+}
+
+
+
+
+// Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": {
+          "@": "@(1,customerId).orders[]"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": "customers"
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "customers": {
+        "*": {
+          "orders": {
+            "*": {
+              "*": "customers[#4].orders[#2].&",
+              "totalPrice": "customers[#4].totalAmount"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "customers": {
+        "*": {
+          "totalAmount": "=intSum(@(1,totalAmount))",
+          "id": "@(1,orders[0].customerId)"
+        },
+        "[0]": {
+          "name": "John Doe"
+        },
+        "[1]": {
+          "name": "Jane Doe"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "customers": {
+        "*": {
+          "orders": {
+            "*": {
+              "customerId": ""
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "sort"
+  }
+]
+
+
+
+// Output:
+
+{
+  "customers": [
+    {
+      "id": "customer1",
+      "name": "John Smith",
+      "totalAmount": 130,
+      "orders": [
+        {
+          "id": "order1",
+          "date": "2022-01-01T00:00:00Z",
+          "items": [
+            {
+              "id": "item1",
+              "name": "Product 1",
+              "price": 10,
+              "quantity": 2
+            },
+            {
+              "id": "item2",
+              "name": "Product 2",
+              "price": 20,
+              "quantity": 1
+            }
+          ],
+          "totalPrice": 40
+        },
+        {
+          "id": "order2",
+          "date": "2022-02-01T00:00:00Z",
+          "items": [
+            {
+              "id": "item3",
+              "name": "Product 3",
+              "price": 30,
+              "quantity": 3
+            }
+          ],
+          "totalPrice": 90
+        }
+      ]
+    },
+    {
+      "id": "customer2",
+      "name": "Jane Doe",
+      "totalAmount": 160,
+      "orders": [
+        {
+          "id": "order3",
+          "date": "2022-03-01T00:00:00Z",
+          "items": [
+            {
+              "id": "item4",
+              "name": "Product 4",
+              "price": 40,
+              "quantity": 4
+            }
+          ],
+          "totalPrice": 160
+        }
+      ]
+    }
+  ]
+}
+// 16
+// INput Json
+{
+  "employees": [
+    {
+      "id": "1001",
+      "name": "John Doe",
+      "age": 25,
+      "skills": [
+        {
+          "name": "Java",
+          "level": "Intermediate"
+        },
+        {
+          "name": "Python",
+          "level": "Expert"
+        }
+      ]
+    },
+    {
+      "id": "1002",
+      "name": "Jane Doe",
+      "age": 30,
+      "skills": [
+        {
+          "name": "Java",
+          "level": "Expert"
+        }
+      ]
+    }
+  ]
+}
+
+// JSON Spec
+{
+  "Java": {
+    "Intermediate": [
+      "John Doe"
+    ],
+    "Expert": [
+      "Jane Doe",
+      "John Doe"
+    ]
+  },
+  "Python": {
+    "Expert": [
+      "John Doe"
+    ]
+  }
+}
+
+// 17
+// Input JSON
+
+{
+  "products": [
+    {
+      "id": "1001",
+      "name": "Product 1",
+      "price": 10.99
+    },
+    {
+      "id": "1002",
+      "name": "Product 2",
+      "price": 15.99,
+      "available": true
+    },
+    {
+      "id": "1003",
+      "name": "Product 3",
+      "price": 20.99,
+      "available": false
+    }
+  ]
+}
+
+// Jolt Spec
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "products": {
+        "*": {
+          "available": "false"
+        }
+      }
+    }
+  }
+]
+
+// Output JSON
+{
+  "products": [
+    {
+      "id": "1001",
+      "name": "Product 1",
+      "price": 10.99,
+      "available": false
+    },
+    {
+      "id": "1002",
+      "name": "Product 2",
+      "price": 15.99,
+      "available": true
+    },
+    {
+      "id": "1003",
+      "name": "Product 3",
+      "price": 20.99,
+      "available": false
+    }
+  ]
+}
+
+// 18
+// Input JSON
+{
+  "employees": [
+    {
+      "name": "John",
+      "age": 30,
+      "salary": 5000
+    },
+    {
+      "name": "Jane",
+      "age": 35,
+      "salary": 6000
+    },
+    {
+      "name": "Bob",
+      "age": 40,
+      "salary": 7000
+    }
+  ]
+}
+
+// Jolt Spec
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "temp": "=divideAndRound(0,@(1,salary),10)",
+          "salary": "=doubleSum(@(1,salary),@(1,temp))"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "temp": ""
+    }
+  }
+] 
+
+// Output JSON
+{
+  "employees" : [ {
+    "name" : "John",
+    "age" : 30,
+    "salary" : 5500.0,
+    "temp" : 500.0
+  }, {
+    "name" : "Jane",
+    "age" : 35,
+    "salary" : 6600.0,
+    "temp" : 600.0
+  }, {
+    "name" : "Bob",
+    "age" : 40,
+    "salary" : 7700.0,
+    "temp" : 700.0
+  } ]
+}
+
+
+
+// 19
+// Input Json
+
+{
+    "products": [
+        {
+            "id": "1001",
+            "name": "Product 1",
+            "price": 10.99
+        },
+        {
+            "id": "1002",
+            "name": "Product 2",
+            "price": 15.99
+        },
+        {
+            "id": "1003",
+            "name": "Product 3",
+            "price": 20.99
+        }
+    ]
+}
+
+// Json Spec
+[
+  {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+          "products": {
+              "*": {
+                  "price": "=doubleSum(@(1,price),@(1,price))"
+              }
+          }
+      }
+  },
+  {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+          "products": {
+              "[0]": {
+                  "price": "=divide(@(1,price),2)"
+              }
+          }
+      }
+  }
+]
+// Output Json
+
+{
+    "products": [
+        {
+            "id": "1001",
+            "name": "Product 1",
+            "price": 21.98
+        },
+        {
+            "id": "1002",
+            "name": "Product 2",
+            "price": 31.98
+        },
+        {
+            "id": "1003",
+            "name": "Product 3",
+            "price": 41.98
+        }
+    ]
+}
+//20
+// Input:
+
+{
+  "employees": [
+    {
+      "name": "John",
+      "age": 30,
+      "department": {
+        "id": 1,
+        "name": "Sales"
+      }
+    },
+    {
+      "name": "Jane",
+      "age": 35,
+      "department": {
+        "id": 2,
+        "name": "Marketing"
+      }
+    },
+    {
+      "name": "Bob",
+      "age": 40,
+      "department": {
+        "id": 1,
+        "name": "Sales"
+      }
+    }
+  ]
+}
+
+// Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "department": {
+            "id": "departments[#3].id",
+            "name": "departments[#3].name"
+          },
+          "name": "departments[#2].employees.name",
+          "age": "departments[#2].employees.age"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "departments": {
+        "*": {
+          "@": "departments.@(1,id)[]"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "departments": {
+        "*": {
+          "*": {
+            "id": "departments.@(1,id).id",
+            "name": "departments.@(1,id).name",
+            "employees": "departments.@(1,id).employees[]"
+          }
+        }
+      }
+    }
+  },
+
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "departments": {
+        "*": {
+          "*": {
+            "employees": "&"
+          },
+          "id": "@(1,id[0])",
+          "name": "@(1,name[0])"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "departments": {
+        "*": "departments"
+      }
+    }
+  }
+]
+
+
+  
+// Output:
+
+  {
+  "departments" : [ {
+    "id" : 1,
+    "name" : "Sales",
+    "employees" : [ {
+      "name" : "John",
+      "age" : 30
+    }, {
+      "name" : "Bob",
+      "age" : 40
+    } ]
+  }, {
+    "id" : 2,
+    "name" : "Marketing",
+    "employees" : [ {
+      "name" : "Jane",
+      "age" : 35
+    } ]
+  } ]
+}
+// 21
+// Input JSON
+{
+  "restaurant": {
+    "rating": {
+      "value": 3
+    },
+    "address": {
+      "value": "India"
+    }
+  }
+}
+
+// Jolt Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "restaurant": {
+        "rating": {
+          "value": "Restaurant Rating"
+        }
+      }
+    }
+  }
+]
+
+// Output JSON
+{
+  "Restaurant Rating" : 3
+}
+
+
+//22
+// Input JSON
+[
+  {
+    "restaurant": {
+      "rating": {
+        "value": 9
+      },
+      "address": {
+        "value": "India"
+      }
+    }
+  },
+  {
+    "restaurant": {
+      "rating": {
+        "value": 7
+      },
+      "address": {
+        "value": "United States"
+      }
+    }
+  }
+]
+
+//Jolt Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[#4].Restaurant Rating"
+          }
+        }
+      }
+    }
+  }
+]
+
+// Output JSON
+[ {
+  "Restaurant Rating" : 9
+}, {
+  "Restaurant Rating" : 7
+} ]
+
+// 23
+// Input JSON
+[
+  {
+    "restaurant": {
+      "rating": {
+        "value": 9
+      },
+      "address": {
+        "value": "India"
+      }
+    }
+  },
+  {
+    "restaurant": {
+      "rating": {
+        "value": 7
+      },
+      "address": {
+        "value": "United States"
+      }
+    }
+  }
+]
+
+// Jolt spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[#4].Restaurant Rating"
+          },
+          "address": {
+            "value": "[#4].Restaurant Country"
+          }
+        }
+      }
+    }
+  }
+]
+
+//Output JSON
+[ {
+  "Restaurant Rating" : 9,
+  "Restaurant Country" : "India"
+}, {
+  "Restaurant Rating" : 7,
+  "Restaurant Country" : "United States"
+} ]
+
+//24
+// Input JSON
+[
+  {
+    "restaurant": {
+      "rating": {
+        "value": 9
+      },
+      "address": {
+        "value": "India"
+      }
+    },
+    "itemsList": [
+      {
+        "itemName": "Example 11",
+        "itemPrice": 120
+      },
+      {
+        "itemName": "Example 12",
+        "itemPrice": 150
+      }
+    ]
+  },
+  {
+    "restaurant": {
+      "rating": {
+        "value": 7
+      },
+      "address": {
+        "value": "United States"
+      }
+    },
+    "itemsList": [
+      {
+        "itemName": "Example 21",
+        "itemPrice": 100
+      },
+      {
+        "itemName": "Example 22",
+        "itemPrice": 190
+      }
+    ]
+  }
+]
+
+// Jolt Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[#4].Restaurant Rating"
+          },
+          "address": {
+            "value": "[#4].Restaurant Country"
+          }
+        },
+        "itemsList": {
+          "*": {
+            "itemName": "[#4].Dish Name",
+            "itemPrice": "[#4].Dish Price"
+          }
+        }
+      }
+    }
+    }
+
+]
+
+// Output Json
+[ {
+  "Restaurant Rating" : 9,
+  "Restaurant Country" : "India",
+  "Dish Name" : [ "Example 11", "Example 12" ],
+  "Dish Price" : [ 120, 150 ]
+}, {
+  "Restaurant Rating" : 7,
+  "Restaurant Country" : "United States",
+  "Dish Name" : [ "Example 21", "Example 22" ],
+  "Dish Price" : [ 100, 190 ]
+} ]
+
+// 25
+// Input JSON
+[
+  {
+    "restaurant": {
+      "rating": {
+        "value": 9
+      },
+      "address": {
+        "value": "India"
+      }
+    },
+    "itemsList": [
+      {
+        "itemName": "Example 11",
+        "itemPrice": 120
+      },
+      {
+        "itemName": "Example 12",
+        "itemPrice": 150
+      }
+    ]
+  },
+  {
+    "restaurant": {
+      "rating": {
+        "value": 7
+      },
+      "address": {
+        "value": "United States"
+      }
+    },
+    "itemsList": [
+      {
+        "itemName": "Example 21",
+        "itemPrice": 100
+      },
+      {
+        "itemName": "Example 22",
+        "itemPrice": 190
+      }
+    ]
+  }
+]
+
+// Jolt Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[#4].Restaurant Rating"
+          },
+          "address": {
+            "value": "[#4].Restaurant Country"
+          }
+        },
+        "itemsList": {
+          "*": {
+            "itemName": "[#4].Dishes.[#2].Dish Name",
+            "itemPrice": "[#4].Dishes.[#2].Dish Price"
+          }
+        }
+      }
+    }
+    }
+
+]
+
+// Output JSON
+[ {
+  "Restaurant Rating" : 9,
+  "Restaurant Country" : "India",
+  "Dishes" : [ {
+    "Dish Name" : "Example 11",
+    "Dish Price" : 120
+  }, {
+    "Dish Name" : "Example 12",
+    "Dish Price" : 150
+  } ]
+}, {
+  "Restaurant Rating" : 7,
+  "Restaurant Country" : "United States",
+  "Dishes" : [ {
+    "Dish Name" : "Example 21",
+    "Dish Price" : 100
+  }, {
+    "Dish Name" : "Example 22",
+    "Dish Price" : 190
+  } ]
+} ]
+
+
+// 26
+// Input Json
+
+[
+    {
+        "returnId": "10051",
+        "returnQuantity": 2,
+        "returnPrice": 100,
+        "returnTax": 12.56
+    },
+    {
+        "returnId": "10052",
+        "returnQuantity": 25,
+        "returnPrice": 35,
+        "returnTax": 29.85
+    }
+]
+
+// Json Spec
+
+[
+    {
+        "operation": "modify-default-beta",
+        "spec": {
+            "*": {
+                "Return Id": "@(1,returnId)",
+                "temp": "=divide(1,@(1,returnQuantity))",
+                "Return Amount": "=divideAndRound(2,@(1,returnPrice),@(1,temp))",
+                "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))"
+            }
+        }
+    },
+    {
+        "operation": "remove",
+        "spec": {
+            "*": {
+                "returnId": "",
+                "returnQuantity": "",
+                "returnPrice": "",
+                "returnTax": "",
+                "temp": ""
+            }
+        }
+    }
+]
+
+// Output Json
+
+[
+    {
+        "Return Id": "10051",
+        "Return Amount": 200.0,
+        "Return Total Amount": 212.56
+    },
+    {
+        "Return Id": "10052",
+        "Return Amount": 875.0,
+        "Return Total Amount": 904.85
+    }
+]
+
+
+// 27
+// Input J son
+[
+    {
+        "returnId": "10051",
+        "returnQuantity": 2,
+        "returnPrice": 100,
+        "returnTax": 12.56,
+        "country": "USA"
+    },
+    {
+        "returnId": "10052",
+        "returnQuantity": 25,
+        "returnPrice": 35,
+        "returnTax": 29.85,
+        "country": "CA"
+    },
+    {
+        "returnId": "10053",
+        "returnQuantity": 5,
+        "returnPrice": 55,
+        "returnTax": 9.85,
+        "country": ""
+    }
+]
+
+// Json Spec
+
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "*": {
+                "Return Id": "@(1, returnId)",
+                "temp": "=divide(1,@(1,returnQuantity))",
+                "Return Amount": "=divide(@(1,returnPrice),@(1,temp))",
+                "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))"
+            },
+            "[0]": {
+                "Country": "United States of America"
+            },
+            "[1]": {
+                "Country": "Canada"
+            },
+            "[2]": {
+                "Country": "NA"
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "*": {
+                "returnId": "[#2].Return Id",
+                "Return Amount": "[#2].Return Amount",
+                "Return Total Amount": "[#2].Return Total Amount",
+                "Country": "[#2].Country"
+            }
+        }
+    }
+]
+
+  // Output Json
+
+  [
+    {
+        "Return Id": "10051",
+        "Return Amount": 200.0,
+        "Return Total Amount": 212.56,
+        "Country": "United States of America"
+    },
+    {
+        "Return Id": "10052",
+        "Return Amount": 875.0,
+        "Return Total Amount": 904.85,
+        "Country": "Canada"
+    },
+    {
+        "Return Id": "10053",
+        "Return Amount": 275.0,
+        "Return Total Amount": 284.85,
+        "Country": "NA"
+    }
+]
+
+// 28
+// Input Json
+
+[
+    {
+        "returnId": "151",
+        "returnItemAdjustments": [
+            {
+                "returnItemSeqId": "00001",
+                "amount": 28.64,
+                "returnAdjustmentTypeId": "RET_SALES_TAX_ADJ",
+                "description": "Return Sales Tax",
+                "createdDate": null,
+                "returnId": "151",
+                "returnAdjustmentId": "",
+                "comments": "Return Sales Tax",
+                "shipGroupSeqId": null
+            },
+            {
+                "returnItemSeqId": "00001",
+                "amount": 58.64,
+                "returnAdjustmentTypeId": "RET_SALES_TAX_ADJ",
+                "description": "Return Sales Tax",
+                "createdDate": null,
+                "returnId": "151",
+                "returnAdjustmentId": "",
+                "comments": "Return Sales Tax",
+                "shipGroupSeqId": null
+            }
+        ]
+    },
+    {
+        "returnId": "152",
+        "returnItemAdjustments": [
+            {
+                "returnItemSeqId": "00002",
+                "amount": 38.64,
+                "returnAdjustmentTypeId": "RET_SALES_TAX_ADJ",
+                "description": "Return Sales Tax",
+                "createdDate": null,
+                "returnId": "152",
+                "returnAdjustmentId": "",
+                "comments": "Return Sales Tax",
+                "shipGroupSeqId": null
+            }
+        ]
+    }
+]
+
+// Json Spec
+
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "*": {
+                "returnId": "[#2].returnId",
+                "returnItemAdjustments": {
+                    "*": {
+                        "amount": "[#4].returnTax"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "*": {
+                "returnTax": "=doubleSum(@(1,returnTax))"
+            }
+        }
+    }
+]
+
+// Output Json
+
+[
+    {
+        "returnId": "151",
+        "returnTax": 87.28
+    },
+    {
+        "returnId": "152",
+        "returnTax": 38.64
+    }
+]
+// 29
+// Input Json
+
+{
+  "person": {
+      "name": "John Doe",
+      "age": 30,
+      "address": {
+          "city": "New York",
+          "state": "NY"
+      }
+  }
+}
+
+// Json Spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "person": {
+        "name": "person_name",
+        "age": "person_age",
+        "address": {
+          "city": "person_address_city",
+          "state": "person_address_state"
+        }
+      }
+    }
+    }
+    ]
+
+// Output Json
+
+{
+  "person_name": "John Doe",
+  "person_age": 30,
+  "person_address_city": "New York",
+  "person_address_state": "NY"
+}
+
+// 30
+// Input Json
+
+{
+    "person": {
+        "name": "John Doe",
+        "age": 30,
+        "address": {
+            "city": "New York",
+            "state": "NY"
+        }
+    },
+    "employee": {
+        "name": "Jane Doe",
+        "salary": 50000,
+        "office": {
+            "city": "San Francisco",
+            "state": "CA"
+        }
+    }
+}
+
+// Json Spec
+
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "person": {
+          "name": "&"
+        },
+        "employee": {
+          "office": {
+            "*": "office-&"
+          }
+        }
+      }
+      }
+  ]
+
+// Output Json
+
+{
+    "name": "John Doe",
+    "office-city": "San Francisco",
+    "office-state": "CA"
+}
+
+
+// 31
+// Input Json
+{
+    "items": [
+        {
+            "id": "1",
+            "name": "Book",
+            "prices": [
+                {
+                    "currency": "USD",
+                    "value": 10
+                },
+                {
+                    "currency": "EUR",
+                    "value": 8
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "Pen",
+            "prices": [
+                {
+                    "currency": "USD",
+                    "value": 2
+                },
+                {
+                    "currency": "EUR",
+                    "value": 1.5
+                }
+            ]
+        }
+    ]
+}
+
+// Json Spec
+[
+    {
+        "operation": "modify-default-beta",
+        "spec": {
+            "items": {
+                "*": {
+                    "prices": {
+                        "*": {
+                            "temp": "=concat(@(3,id),'_',@(1,currency))"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "items": {
+                "*": {
+                    "prices": {
+                        "*": {
+                            "@value": "@temp"
+                        }
+                    }
+                }
+            }
+        }
+    }
+]
+
+// Output Json
+{
+    "1_USD": 10,
+    "1_EUR": 8,
+    "2_USD": 2,
+    "2_EUR": 1.5
+}
+// 32
+// Input JSON
+{
+  "data": [
+    {
+      "x": "A",
+      "y": "1",
+      "value": 10
+    },
+    {
+      "x": "A",
+      "y": "2",
+      "value": 20
+    },
+    {
+      "x": "B",
+      "y": "1",
+      "value": 30
+    },
+    {
+      "x": "B",
+      "y": "2",
+      "value": 40
+    }
+  ]
+}
+
+// JSON spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "data": {
+        "*": {
+          "@value": "@x.@y"
+        }
+      }
+    }
+    }
+]
+
+// Output JSON
+{
+  "A" : {
+    "1" : 10,
+    "2" : 20
+  },
+  "B" : {
+    "1" : 30,
+    "2" : 40
+  }
+}
+// 33
+// Input Json
+
+{
+    "id": 1,
+    "name": "John",
+    "hobbies": [
+        {
+            "name": "reading",
+            "level": "advanced"
+        },
+        {
+            "name": "swimming",
+            "level": "beginner"
+        }
+    ]
+}
+
+
+// Json Spec
+
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "hobbies": {
+                "*": {
+                    "id": "@(3,id)",
+                    "name": "@(3,name)",
+                    "hobby_level": "@(1,level)",
+                    "hobby_name": "@(1,name)"
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "hobbies": {
+                "*": "[#1]"
+            }
+        }
+    },
+    {
+        "operation": "remove",
+        "spec": {
+            "*": {
+                "level": ""
+            }
+        }
+    }
+]
+
+// Output Json
+
+[
+    {
+        "name": "John",
+        "id": 1,
+        "hobby_level": "advanced",
+        "hobby_name": "John"
+    },
+    {
+        "name": "John",
+        "id": 1,
+        "hobby_level": "beginner",
+        "hobby_name": "John"
+    }
+]
+
+// 34
+// Input JSON
+{
+  "name": "John",
+  "hobby_1": "reading",
+  "level_1": "advanced",
+  "hobby_2": "swimming",
+  "level_2": "beginner"
+}
+
+// JSON spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "name",
+      "hobby_*": "hobbies[#2].&(0,1).name",
+      "level_*": "hobbies[#2].&(0,1).level"
+    }
+  }
+,
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "name",
+      "hobbies": {
+        "*": {
+          "*": {
+            "name": "hobbies[#2].name",
+            "level": "hobbies[#2].level"
+          }
+        }
+      }
+    }
+  }
+]
+
+// output json
+{
+  "name": "John",
+  "hobbies": [
+    {
+      "name": "reading",
+      "level": "advanced"
+    },
+    {
+      "name": "swimming",
+      "level": "beginner"
+    }
+  ]
+}
