@@ -8,7 +8,7 @@
           "address": "[#2].Address",
           "hobbies": {
             "*": {
-              "name": "[#4].name"
+              "name": "[#4].Hobbies"
             }
           }
         }
