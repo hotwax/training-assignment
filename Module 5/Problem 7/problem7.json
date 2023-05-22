@@ -1,0 +1,84 @@
+Input:
+
+{
+  "students": [
+    {
+      "name": "John Doe",
+      "age": 23,
+      "email": "john.doe@example.com"
+    },
+    {
+      "name": "Jane Smith",
+      "age": 25,
+      "email": "jane.smith@example.com"
+    }
+  ]
+}
+
+
+Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "students": {
+        "*": {
+          "@": "[#2]"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "unamedomain": "=split('@',@(1,email))",
+        "domain": "=lastElement(@(1,unamedomain))"
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "*": {
+        "unamedomain": "",
+        "email": ""
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "Name": "@(1,name)",
+        "Age": "@(1,age)",
+        "Domain": "@(1,domain)"
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "*": {
+        "name": "",
+        "age": "",
+        "domain": ""
+      }
+    }
+  }
+]
+
+
+
+Output:
+
+[ {
+  "Name" : "John Doe",
+  "Age" : 23,
+  "Domain" : "example.com"
+}, {
+  "Name" : "Jane Smith",
+  "Age" : 25,
+  "Domain" : "example.com"
+} ]

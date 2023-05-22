@@ -1,0 +1,52 @@
+Input:
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "johndoe@example.com",
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  }
+}
+
+
+Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "email": "email",
+      "address": {
+        "city": "city",
+        "zip": "zip"
+      }
+    }
+  },
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "fullname": "=concat(@(1,firstName),' ',@(1,lastName))"
+    }
+   },
+  {
+    "operation": "remove",
+    "spec": {
+      "firstName": "",
+      "lastName": ""
+    }
+    }
+]
+
+Output:
+
+{
+  "email" : "johndoe@example.com",
+  "city" : "Anytown",
+  "zip" : "12345",
+  "fullname" : "John Doe"
+}

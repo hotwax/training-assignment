@@ -1,0 +1,49 @@
+Input:
+
+{
+  "person": {
+    "name": "John Doe",
+    "age": 30,
+    "address": {
+      "city": "New York",
+      "state": "NY"
+    }
+  }
+}
+
+
+Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "person": {
+        "*": "person-&"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": "&",
+      "person-address": {
+        "*": "person-address-&"
+      }
+    }
+  }
+
+
+
+]	
+
+
+Output:
+
+{
+  "person-name" : "John Doe",
+  "person-age" : 30,
+  "person-address-city" : "New York",
+  "person-address-state" : "NY"
+}
+
