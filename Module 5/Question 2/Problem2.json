@@ -1,0 +1,29 @@
+Input JSON
+
+{
+    "name": "John",
+    "age": 35,
+    "city": "New York"
+}
+
+JSON Spec
+
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "name": "Name",
+            "age": "Age",
+            "city": "City"
+        }
+    }
+]
+
+  
+Output JSON
+
+{
+    "Name": "John",
+    "Age": 35,
+    "City": "New York"
+}

@@ -1,0 +1,45 @@
+Input JSON
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@example.com",
+    "address": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+    }
+}
+
+JSON Spec
+
+[
+    {
+        "operation": "modify-default-beta",
+        "spec": {
+            "fullName": "=concat(@(1,firstName),' ',@(1,lastName))",
+            "email": "email",
+            "city": "@(1,address.city)",
+            "zip": "@(1,address.zip)"
+        }
+    },
+    {
+        "operation": "remove",
+        "spec": {
+            "firstName": "",
+            "lastName": "",
+            "address": ""
+        }
+    }
+]
+
+  
+Output JSON
+
+{
+    "email": "johndoe@example.com",
+    "fullName": "John Doe",
+    "city": "Anytown",
+    "zip": "12345"
+}

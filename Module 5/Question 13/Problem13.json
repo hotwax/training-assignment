@@ -1,0 +1,64 @@
+Input Json
+{
+    "employees": [
+        {
+            "id": "001",
+            "name": "John",
+            "department": "HR"
+        },
+        {
+            "id": "002",
+            "name": "Jane",
+            "department": "Sales"
+        },
+        {
+            "id": "003",
+            "name": "Bob",
+            "department": "IT"
+        }
+    ]
+}
+
+Json spec
+
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "@": "employees.@(1,id)"
+                }
+            }
+        }
+    },
+    {
+        "operation": "remove",
+        "spec": {
+            "employees": {
+                "*": {
+                    "id": ""
+                }
+            }
+        }
+    }
+]
+
+Output Json
+
+{
+    "employees": {
+        "001": {
+            "name": "John",
+            "department": "HR"
+        },
+        "002": {
+            "name": "Jane",
+            "department": "Sales"
+        },
+        "003": {
+            "name": "Bob",
+            "department": "IT"
+        }
+    }
+}
