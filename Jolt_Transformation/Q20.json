@@ -34,22 +34,54 @@ Input
   Jolt Spec
 
   [
+
     {
       "operation": "shift",
       "spec": {
         "employees": {
           "*": {
             "department": {
-              "id": "departments[#3].id",
-              "name": "departments[#3].name"
-            },
-            "name": "departments[#2].employees[#0].name",
-            "age": "departments[#2].employees[#0].age"
+              "id": "@(1,id).id",
+              "name": "@(1,id).name",
+              "@(1,name)": "@(1,id).employee[#3].name",
+              "@(1,age)": "@(1,id).employee[#3].age"
+            }
           }
         }
       }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "id": "=firstElement(@(1,id))",
+          "name": "=firstElement(@(1,name))"
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "id": "departments[#2].id",
+          "name": "departments[#2].&",
+          "employee": {
+            "*": {
+              "name": "departments[#4].employee[#2].&",
+              "age": "departments[#4].employee[#2].&"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": "=recursivelySquashNulls"
+      }
     }
   ]
+  
 
   
 
@@ -59,23 +91,19 @@ Input
     "departments" : [ {
       "id" : 1,
       "name" : "Sales",
-      "employees" : [ {
+      "employee" : [ {
         "name" : "John",
         "age" : 30
+      }, {
+        "name" : "Bob",
+        "age" : 40
       } ]
     }, {
       "id" : 2,
       "name" : "Marketing",
-      "employees" : [ {
+      "employee" : [ {
         "name" : "Jane",
         "age" : 35
-      } ]
-    }, {
-      "id" : 1,
-      "name" : "Sales",
-      "employees" : [ {
-        "name" : "Bob",
-        "age" : 40
       } ]
     } ]
   }
