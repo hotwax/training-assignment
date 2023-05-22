@@ -1,0 +1,43 @@
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "quantity": "=divide(1,@(1,returnQuantity))",
+          "returnPrice": "=divide(@(1,returnPrice),@(1,quantity))",
+          "returnTotal": "@(1,returnPrice)"
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "returnId": "[&1].Return Id",
+          "returnPrice": "[&1].Return Amount",
+          "returnTax": "[&1].Return Total Amount[]",
+          "returnTotal": "[&1].Return Total Amount[]",
+          "country": {
+            "USA": {
+              "#United States of America": "[&3].Country"
+            },
+            "CA": {
+              "#Canada": "[&3].Country"
+            },
+            "*": {
+              "#NA": "[&3].Country"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "Return Total Amount": "=doubleSum(@(1,Return Total Amount))"
+        }
+      }
+    }
+  ]
+ 

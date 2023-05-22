@@ -1,0 +1,64 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "name",
+        "*": {
+          "@": "&1.val",
+          "$": "&1.key"
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "key": "=split('_',@(1,key))",
+          "name": "=firstElement(@(1,key))",
+          "keyId": "=lastElement(@(1,key))"
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "name",
+        "*": {
+          "@(val)": "hobbies[].@(1,keyId).@(1,name)"
+        }
+      }
+    }
+   ,
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "name",
+        "hobbies": {
+          "*": {
+            "*": {
+              "*": "&1.&"
+            }
+          }
+        }
+      }
+    }
+  , {
+      "operation": "shift",
+      "spec": {
+        "name": "name",
+        "*": "hobbies[]"
+      }
+  },
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "name",
+        "hobbies": {
+          "*": {
+            "hobby": "hobbies[&1].name",
+            "*": "hobbies[&1].&"
+          }
+        }
+      }
+    }
+  ]

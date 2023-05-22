@@ -1,0 +1,14 @@
+[
+    {
+      "returnId": "10051",
+      "returnQuantity": 2,
+      "returnPrice": 100,
+      "returnTax": 12.56
+    },
+    {
+      "returnId": "10052",
+      "returnQuantity": 25,
+      "returnPrice": 35,
+      "returnTax": 29.85
+    }
+  ]

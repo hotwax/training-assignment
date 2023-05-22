@@ -1,0 +1,32 @@
+[
+    {
+      "operation": "modify-default-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "increment": "=divide(@(1,salary),10)"
+          }
+        }
+      }
+    }, {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "*": "employees[#2].&",
+            "salary|increment": "employees[#2].salary[]"
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "salary": "=intSum(@(1,salary))"
+          }
+        }
+      }
+    }
+  ]

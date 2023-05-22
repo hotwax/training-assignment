@@ -1,0 +1,9 @@
+[ {
+    "Name" : "John Doe",
+    "Age" : 23,
+    "Domain" : "example.com"
+  }, {
+    "Name" : "Jane Smith",
+    "Age" : 25,
+    "Domain" : "example.com"
+  } ]

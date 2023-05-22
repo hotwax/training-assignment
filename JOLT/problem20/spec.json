@@ -1,0 +1,63 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "*": "department[&1].&",
+            "department": {
+              "name": "department[&2].depname",
+              "*": "department[&2].&"
+            }
+          }
+        }
+      }
+      },
+    {
+      "operation": "shift",
+      "spec": {
+        "department": {
+          "*": {
+            "name": "@(1,id)&1.&",
+            "age": "@(1,id)&1.&",
+            "depname": "@(1,id).&"
+          }
+        }
+      }
+      },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "$": "&1.id",
+          "depname": "&1.name",
+          "*": "&1.employees[]"
+        }
+      }
+      },
+  
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "name": "=firstElement(@(1,name))"
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "*": "@(1,name).&"
+        }
+      }
+      },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "@": "department[]"
+        }
+      }
+      }
+    ]

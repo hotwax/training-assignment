@@ -1,0 +1,39 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "person": {
+          "name": "name"
+        },
+        "employee": {
+          "office": {
+            "$": "officekey",
+            "*": {
+              "@": "&1.value",
+              "$": "&1.key"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "city": {
+          "key": "=concat(@(2,officekey),'_',@(1,key))"
+        },
+        "state": {
+          "key": "=concat(@(2,officekey),'_',@(1,key))"
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "&",
+        "*": {
+          "@(value)": "@(1,key)"
+        }
+      }
+    }
+  ]
