@@ -1,0 +1,13 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "items": {
+        "*": {
+          "name": "items.[#2].itemName",
+          "value": "items.[#2].itemValue"
+        }
+      }
+    }
+  }
+]

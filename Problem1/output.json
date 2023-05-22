@@ -1,0 +1,40 @@
+{
+  "orders" : [ {
+    "orderId" : 1,
+    "orderDate" : "2022-02-20T12:34:56Z",
+    "customer" : {
+      "customerId" : 1,
+      "email" : "johndoe@example.com",
+      "address" : "123 Main St, Anytown, CA 12345",
+      "fullName" : "John Doe"
+    },
+    "items" : [ {
+      "itemId" : 1,
+      "name" : "Product A",
+      "quantity" : 2,
+      "price" : 10
+    }, {
+      "itemId" : 2,
+      "name" : "Product B",
+      "quantity" : 1,
+      "price" : 20
+    } ],
+    "total" : 40.0
+  }, {
+    "orderId" : 2,
+    "orderDate" : "2022-02-21T09:12:34Z",
+    "customer" : {
+      "customerId" : 2,
+      "email" : "janesmith@example.com",
+      "address" : "456 Oak St, Somewhere, NY 67890",
+      "fullName" : "Jane Smith"
+    },
+    "items" : [ {
+      "itemId" : 3,
+      "name" : "Product C",
+      "quantity" : 3,
+      "price" : 15
+    } ],
+    "total" : 45.0
+  } ]
+}

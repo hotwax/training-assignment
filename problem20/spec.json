@@ -1,0 +1,64 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "department": {
+            "id": "departments[#3].id",
+            "name": "departments[#3].name"
+          },
+          "name": "departments[#2].employees.name",
+          "age": "departments[#2].employees.age"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "departments": {
+        "*": {
+          "@": "departments.@(1,id)[]"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "departments": {
+        "*": {
+          "*": {
+            "id": "departments.@(1,id).id",
+            "name": "departments.@(1,id).name",
+            "employees": "departments.@(1,id).employees[]"
+          }
+        }
+      }
+    }
+  },
+
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "departments": {
+        "*": {
+          "*": {
+            "employees": "&"
+          },
+          "id": "@(1,id[0])",
+          "name": "@(1,name[0])"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "departments": {
+        "*": "departments"
+      }
+    }
+  }
+]
