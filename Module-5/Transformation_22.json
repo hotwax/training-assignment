@@ -1,0 +1,47 @@
+//json input
+[
+    {
+      "restaurant": {
+        "rating": {
+          "value": 9
+        },
+        "address": {
+          "value": "India"
+        }
+      }
+    },
+    {
+      "restaurant": {
+        "rating": {
+          "value": 7
+        },
+        "address": {
+          "value": "United States"
+        }
+      }
+    }
+  ]
+
+  //json output
+  [ {
+    "Restaurant Rating" : 9
+  }, {
+    "Restaurant Rating" : 7
+  } ]
+
+
+  //json spec
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "restaurant": {
+            "rating": {
+              "value": "[#4].Restaurant Rating"
+            }
+          }
+        }
+      }
+     }
+  ]

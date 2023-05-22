@@ -1,0 +1,42 @@
+//json input 
+{
+    "items": [
+      {
+        "name": "item1",
+        "value": 10
+      },
+      {
+        "name": "item2",
+        "value": 20
+      }
+    ]
+  }
+
+  //json output
+  {
+    "items": [
+      {
+        "itemName": "item1",
+        "itemValue": 10
+      },
+      {
+        "itemName": "item2",
+        "itemValue": 20
+      }
+    ]
+  }
+  //json spec
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "items": {
+          "*": {
+            "name": "&2.[#2].itemName",
+            "value": "&2.[#2].itemValue"
+          }
+        }
+      }
+    }
+  ]
+  

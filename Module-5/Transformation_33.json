@@ -1,0 +1,66 @@
+//json input
+{
+  "id": 1,
+  "name": "John",
+  "hobbies": [
+    {
+      "name": "reading",
+      "level": "advanced"
+    },
+    {
+      "name": "swimming",
+      "level": "beginner"
+    }
+  ]
+}
+
+//json output
+[ {
+    "hobby_name" : "reading",
+    "hobby_level" : "advanced",
+    "id" : 1,
+    "name" : "John"
+  }, {
+    "hobby_name" : "swimming",
+    "hobby_level" : "beginner",
+    "id" : 1,
+    "name" : "John"
+  } ]
+
+
+  //json spec
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "*": "&",
+        "hobbies": {
+          "*": {
+            "*": "hobbies.[#2].hobby_&0"
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "hobbies": {
+          "*": {
+            "id": "@(3,id)",
+            "name": "@(3,name)"
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "hobbies": {
+          "*": {
+            "*": "[#2].&"
+          }
+        }
+      }
+    }
+  ]
+  

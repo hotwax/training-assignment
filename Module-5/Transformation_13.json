@@ -1,0 +1,63 @@
+//json input
+{
+  "employees": [
+    {
+      "id": "001",
+      "name": "John",
+      "department": "HR"
+    },
+    {
+      "id": "002",
+      "name": "Jane",
+      "department": "Sales"
+    },
+    {
+      "id": "003",
+      "name": "Bob",
+      "department": "IT"
+    }
+  ]
+}
+
+//json output
+{
+    "employees": {
+      "001": {
+        "name": "John",
+        "department": "HR"
+      },
+      "002": {
+        "name": "Jane",
+        "department": "Sales"
+      },
+      "003": {
+        "name": "Bob",
+        "department": "IT"
+      }
+    }
+  }
+
+  //json spec
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "@": "employees.@(1,id)"
+          }
+        }
+      }
+     },
+    {
+      "operation": "remove",
+      "spec": {
+        "employees": {
+          "*": {
+            "id": ""
+          }
+        }
+      }
+    }
+    ]
+    

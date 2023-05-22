@@ -1,0 +1,47 @@
+//json input
+{
+  "items": [
+    {
+      "id": "1",
+      "name": "Book",
+      "prices": [
+        {"currency": "USD", "value": 10},
+        {"currency": "EUR", "value": 8}
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Pen",
+      "prices": [
+        {"currency": "USD", "value": 2},
+        {"currency": "EUR", "value": 1.5}
+      ]
+    }
+  ]
+}
+
+
+//json output
+{
+    "name" : "John Doe",
+    "office_city" : "San Francisco",
+    "office_state" : "CA"
+  }
+  
+
+//json spec
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "person": {
+          "name": "&"
+        },
+        "employee": {
+          "office": {
+            "*": "&1_&0"
+          }
+        }
+      }
+     }
+   ]
