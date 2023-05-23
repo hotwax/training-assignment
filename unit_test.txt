@@ -445,14 +445,16 @@ Approach:
 To list the largest orders of each salesperson on October 3, I have used the GROUP BY statement and HAVING clause to select only those orders which were placed on October 3.
 
 Expected Outcome:
-+-----------+----------+------------+------+
-| MAX(ONUM) | MAX(AMT) | ODATE      | SNUM |
-+-----------+----------+------------+------+
-|      3006 |  1098.16 | 1990-10-03 | 1007 |
-|      3003 |   767.19 | 1990-10-03 | 1001 |
-|      3002 |   1900.1 | 1990-10-03 | 1004 |
-|      3005 |  5160.45 | 1990-10-03 | 1002 |
-+-----------+----------+------------+------+
++------+---------+------------+---------------+
+| snum | sname   | odate      | largest_order |
++------+---------+------------+---------------+
+| 1001 | Peel    | 1990-10-03 |        767.19 |
+| 1002 | Serres  | 1990-10-03 |       5160.45 |
+| 1003 | AxelRod | NULL       |          0.00 |
+| 1004 | Motika  | 1990-10-03 |       1900.10 |
+| 1007 | Rifkin  | 1990-10-03 |       1098.16 |
+| 1008 | Fran    | NULL       |          0.00 |
++------+---------+------------+---------------+
 
 Tables Involved:
 Orders
@@ -638,8 +640,10 @@ Expected Outcome:
 +------+----------+---------+--------+------+
 | CNUM | CNAME    | CITY    | RATING | SNUM |
 +------+----------+---------+--------+------+
-| 2005 | Clemens  | London  |    100 | 1001 |
 | 2006 | Cisneros | SanJose |    300 | 1007 |
+| 2005 | Clemens  | London  |    100 | 1001 |
+| 2002 | Giovanni | Rome    |    200 | 1003 |
+| 2004 | Grass    | Berlin  |    300 | 1002 |
 +------+----------+---------+--------+------+
 
 Tables Involved:
@@ -1124,17 +1128,17 @@ Approach:
 To get all the combinations of Salespeople and Customers a JOIN can be used on the condition Sname<Cname.
 
 Expected Outcome:
-+------+---------+------+---------+
-| SNUM | SNAME   | CNUM | CNAME   |
-+------+---------+------+---------+
-| 1001 | Peel    | 2007 | Pereira |
-| 1003 | AxelRod | 2007 | Pereira |
-| 1003 | AxelRod | 2006 | Clemens |
-| 1003 | AxelRod | 2001 | Hoffman |
-| 1004 | Motika  | 2007 | Pereira |
-| 1008 | Fran    | 2007 | Pereira |
-| 1008 | Fran    | 2001 | Hoffman |
-+------+---------+------+---------+
++------+---------+------+---------+--------+
+| SNUM | SNAME   | CNUM | CNAME   | RATING |
++------+---------+------+---------+--------+
+| 1001 | Peel    | 2007 | Pereira |    100 |
+| 1003 | AxelRod | 2007 | Pereira |    100 |
+| 1003 | AxelRod | 2006 | Clemens |    100 |
+| 1003 | AxelRod | 2001 | Hoffman |    100 |
+| 1004 | Motika  | 2007 | Pereira |    100 |
+| 1008 | Fran    | 2007 | Pereira |    100 |
+| 1008 | Fran    | 2001 | Hoffman |    100 |
++------+---------+------+---------+--------+
 
 Tables Involved:
 Customers and Salespeople
