@@ -13,7 +13,6 @@ Input
 
   Jolt Spec
 
-
   [
     {
       "operation": "shift",
@@ -22,12 +21,13 @@ Input
         "age": "Age",
         "hobbies": {
           "*": {
-            "@": "Hello.[&1].Name"
+            "@": "Hobbies.[&1].Name"
           }
         }
       }
-      }
-  ]
+       }
+   ]
+ 
 
 
   Output
@@ -35,7 +35,7 @@ Input
   {
     "Name" : "John",
     "Age" : 35,
-    "Hello" : [ {
+    "Hobbies" : [ {
       "Name" : "reading"
     }, {
       "Name" : "movies"
@@ -43,4 +43,5 @@ Input
       "Name" : "travel"
     } ]
   }
+  
   
