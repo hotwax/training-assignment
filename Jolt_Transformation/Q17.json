@@ -32,12 +32,13 @@ Input
       "spec": {
         "products": {
           "*": {
-            "avilable": "false"
+            "available": "false"
           }
         }
       }
     }
   ]
+
 
 
   Output
@@ -47,19 +48,19 @@ Input
       "id" : "1001",
       "name" : "Product 1",
       "price" : 10.99,
-      "avilable" : "false"
+      "available" : "false"
     }, {
       "id" : "1002",
       "name" : "Product 2",
       "price" : 15.99,
-      "available" : true,
-      "avilable" : "false"
+      "available" : true
     }, {
       "id" : "1003",
       "name" : "Product 3",
       "price" : 20.99,
-      "available" : false,
-      "avilable" : "false"
+      "available" : false
     } ]
+  }
+  
   }
   
