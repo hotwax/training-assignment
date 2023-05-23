@@ -1,0 +1,86 @@
+Input:
+{
+  "employees": [
+    {
+      "id": "001",
+      "name": "John",
+      "department": "HR",
+      "phone": [
+        {
+          "type": "home",
+          "number": "555-555-1234"
+        },
+        {
+          "type": "work",
+          "number": "555-555-5678"
+        }
+      ]
+    },
+    {
+      "id": "002",
+      "name": "Jane",
+      "department": "Sales",
+      "phone": [
+        {
+          "type": "home",
+          "number": "555-555-4567"
+        },
+        {
+          "type": "work",
+          "number": "555-555-8901"
+        }
+      ]
+    }
+  ]
+}
+
+Transformation:
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "phone": {
+            "*": {
+              "temp": "=concat(@(1,type),'',Phone)"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "id": "employees.[#2].&",
+          "name": "employees.[#2].&",
+          "phone": {
+            "*": {
+              "@number": "employees.[#4].@temp"
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+Output:
+
+{
+  "employees" : [ {
+    "id" : "001",
+    "name" : "John",
+    "home_phone" : "555-555-1234",
+    "work_phone" : "555-555-5678"
+  }, {
+    "id" : "002",
+    "name" : "Jane",
+    "home_phone" : "555-555-4567",
+    "work_phone" : "555-555-8901"
+  } ]
+}
