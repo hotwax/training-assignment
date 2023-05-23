@@ -1,13 +1,10 @@
-
-
 {
-    "Java" : {
-      "Intermediate" : [ "John Doe" ],
-      "Expert" : [ "Jane Doe" ]
-    },
-    "Python" : {
-      "Expert" : [ "John Doe" ]
-    }
+  "Java" : {
+    "Intermediate" : [ "John Doe" ],
+    "Expert" : [ "John Doe", "Jane Doe" ]
+  },
+  "Python" : {
+    "Intermediate" : [ "John Doe" ],
+    "Expert" : [ "John Doe" ]
   }
-  
-  
+}
