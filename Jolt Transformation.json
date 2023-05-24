@@ -600,7 +600,7 @@
 }
 
 //10
-// Input JSON
+// Input JSON 
 {
   "name": "John Smith",
   "age": 35,
@@ -1161,6 +1161,25 @@
 }
 
 // JSON Spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2,name)": "@(1,name).@(1,level)[]"
+            }
+          }
+        }
+      }
+    }
+  }
+]
+
+// Output
 {
   "Java": {
     "Intermediate": [
