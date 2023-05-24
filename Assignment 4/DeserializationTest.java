@@ -10,8 +10,8 @@ public class DeserializationTest {
         try {
             String filename=args[0];
             FileInputStream file = new FileInputStream(filename);
-            ObjectInputStream obj = new ObjectInputStream(file);
-            List = (ArrayList) obj.readObject();
+            ObjectInputStream objectInputStream = new ObjectInputStream(file);
+            List = (ArrayList) objectInputStream.readObject();
             System.out.println("Deserialize the file "+filename);
 
             for (Student student : List) {
@@ -25,8 +25,8 @@ public class DeserializationTest {
             }
             obj.close();
             file.close();
-        } catch (IOException e) {
-            System.out.println(e);
+        } catch (IOException exception) {
+            System.out.println(exception);
         }
 
     }

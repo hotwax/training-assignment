@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.PriorityQueue;
 import java.util.Map;
 import java.util.LinkedHashMap;
@@ -119,7 +120,7 @@ public class EmployeeData {
                     b.write("");
                 }
                 for (Map.Entry<Integer, Employee> map : hashEmployeeDetail.entrySet()) {
-                    FileWriter fileWritter = new FileWriter("SearchAndSort/Employee.txt", true);
+                    FileWriter fileWritter = new FileWriter("VS-RANDOM/Employee.txt", true);
                     BufferedWriter bw = new BufferedWriter(fileWritter);
                     Employee emp = map.getValue();
                     String value = emp.employeeId + "," + emp.employeeName + ","
@@ -328,7 +329,6 @@ public class EmployeeData {
                 String email = empData[2];
                 int age = Integer.parseInt(empData[3]);
                 String date = empData[4];
-                System.out.println(date);
 
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-d");
 
@@ -356,8 +356,10 @@ public class EmployeeData {
                 System.out.println("4.Search the Employee by id");
                 System.out.println("5.Sort and Search the Employee By Text");
                 System.out.println("6.Exit");
+                
                 choice = input.nextInt();
-
+                
+                
                 switch (choice) {
                     case 1:
                         System.out.println("Enter the Employee Id");
@@ -414,8 +416,13 @@ public class EmployeeData {
                         break;
                 }
             } while (choice != 6);
-        }catch(Exception e){
-            System.out.println(e);
+        }
+        catch(InputMismatchException e){
+            System.out.println("Please enter a numberic value");
+        }
+
+        catch(Exception exception){
+            System.out.println(exception);
         }
     }
 }

@@ -26,11 +26,11 @@ public class SerializeTest {
     try {
       String filename=args[0];
       FileOutputStream file = new FileOutputStream( filename);
-      ObjectOutputStream obj = new ObjectOutputStream(file);
+      ObjectOutputStream objectOutputStream = new ObjectOutputStream(file);
 
       obj.writeObject(serializationTest.studentList);
 
-      obj.close();
+      objectOutputStream.close();
       file.close();
 
       System.out.println("Students List Before Serialization");
@@ -46,8 +46,8 @@ public class SerializeTest {
       System.out.println("Serialize Successfully");
       System.out.println("Generate " + filename);
 
-    } catch (IOException e) {
-      System.out.println(e);
+    } catch (IOException exception) {
+      System.out.println(exception);
     }
 
   }
