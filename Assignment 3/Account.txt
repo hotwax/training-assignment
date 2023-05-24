@@ -1,0 +1,42 @@
+Test Cases 1:(test Account OverDraw demo (not synchronized) )
+ Input:
+  total balance:1000
+  Rohit withdrew 100 5 times
+  Rhea withdraw 100 5 times
+
+ Output:
+  Rohit has withdrawn 100 rupees, remaining balance is 800
+  Rhea has withdrawn 100 rupees, remaining balance is 800
+  Rhea has withdrawn 100 rupees, remaining balance is 600
+  Rhea has withdrawn 100 rupees, remaining balance is 500
+  Rhea has withdrawn 100 rupees, remaining balance is 400
+  Rohit has withdrawn 100 rupees, remaining balance is 700
+  Rhea has withdrawn 100 rupees, remaing balance is 300
+  Rohit has withdrawn 100 rupees, remaining balance is 200
+  Rohit has withdrawn 100 rupees, remaining balance is 100
+  Rohit has withdrawn 100 rupees, remaining balance is 0
+
+==========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+Test Case 2:(Test Account is Safe to Overdrawn (Synchronized) )
+ Input:
+  total balance:1000
+  Rohit withdrew 100 5 times
+  Rhea withdraw 100 5 times
+
+ Output:
+  Rhea has withdrawn 100 rupees, remaining balance is 900
+  Rhea has withdrawn 100 rupees, remaining balance is 800
+  Rhea has withdrawn 100 rupees, remaining balance is 700
+  Rhea has withdrawn 100 rupees, remaining balance is 600 
+  Rhea has withdrawn 100 rupees, remaining balance is 500 
+  Rohit has withdrawn 100 rupees, remaining balance is 400 
+  Rohit has withdrawn 100 rupees, remaing balance is 300
+  Rohit has withdrawn 100 rupees, remaining balance is 200
+  Rohit has withdrawn 100 rupees, remaining balance is 100
+  Rohit has withdrawn 100 rupees, remaining balance is 0
+
+
+
+
+

@@ -1,0 +1,75 @@
+Case 1: Basic Functionality
+
+Input:
+
+words.txt
+url.txt
+
+Expected Output: It should output top 3 frequently occuring words from each url and then overall count of all the words present in words.txt file.
+
+Output:
+
+
+
+Top 3 words for url- https://leetcode.com/
+
+
+to 11
+to 11
+and 9
+
+
+Top 3 words for url- https://www.w3schools.com/git/git_intro.asp?remote=github
+
+to 37
+to 37
+and 26
+
+
+Top 3 words for url- hhttps://github.com/hotwax/training-assignment/wiki/Module---2-Theory
+
+to 81
+to 81
+and 20
+
+
+
+Overall occurence of the given words across all the urls :
+to 129
+and 55
+the 20
+for 15
+
+
+Case 2: Empty Input Files (both)
+
+Input:
+
+urls.txt: (empty)
+words.txt: (empty)
+
+Expected Output:
+
+The URL file is empty
+Invalid Word file 
+
+
+
+Case 3: Invalid Url
+
+Input:
+
+urls.txt:
+words.txt: 
+
+Expected Output:  Invalid Output
+
+Output:
+
+Invalid Url
+
+
+
+
+
+

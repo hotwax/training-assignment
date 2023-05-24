@@ -1,0 +1,40 @@
+
+TestCase 1: Serialization
+
+Input:
+
+javac SerializationTest.java
+java SerializationTest output1.ser
+
+Expected Output: Program should serialize data succesfully and print a message for the same. 
+
+Output: Serialisation successful.on file- o1.ser
+
+
+
+
+TestCase 2: Deserialization
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output1.ser 
+
+Expected Output: Program should deserialize the data succesfully from file and print the data. 
+
+Output:
+Student Name - Gourav
+Student Date Of Birth - 20/12/2002
+Student Adress - Indore,452010,Madhya Pradesh,India
+
+Student Name - Kunal
+Student Date Of Birth - 28/02/2003
+Student Adress - Dewas,452100,United States,India
+
+Student Name - Yash
+Student Date Of Birth - 01/03/2000
+Student Adress - Toronto,452010,United States,India
+
+Student Name - Prakhar
+Student Date Of Birth - 1809/2001
+Student Adress - Switzerland,45200,Madhya Pradesh,India
