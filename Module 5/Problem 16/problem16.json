@@ -54,19 +54,18 @@ Transformation:
 
 "Output":
 
-[
-  {
-    "operation": "shift",
-    "spec": {
-      "employees": {
-        "*": {
-          "skills": {
-            "*": {
-              "@(2,name)": "@name.@level[]"
-            }
-          }
-        }
-      }
+{
+    "Java": {
+        "Intermediate": [
+            "John Doe"
+        ],
+        "Expert": [
+            "Jane Doe"
+        ]
+    },
+    "Python": {
+        "Expert": [
+            "John Doe"
+        ]
     }
-  }
-]
+}
