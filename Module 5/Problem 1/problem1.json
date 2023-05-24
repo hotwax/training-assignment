@@ -1,4 +1,3 @@
-
 Input:
 
 
@@ -62,7 +61,7 @@ Input:
 }
 
 
-
+  
 Transformation:
 
 [
@@ -72,7 +71,8 @@ Transformation:
       "orders": {
         "*": {
           "customer": {
-            "address": "=concat(@(1,address.street),' ',@(1,address.city), ' ', @(1,address.state), ' ',@(1,address.zip))"
+            "address": "=concat(@(1,address.street),' ',@(1,address.city), ' ', @(1,address.state), ' ',@(1,address.zip))",
+            "fullname": "=concat(@(1,firstName),' ',@(1,lastName))"
           },
           "itemTemp": "@(1,items)"
         }
@@ -131,6 +131,10 @@ Transformation:
               "inverseValue": "",
               "temp": ""
             }
+          },
+          "customer": {
+            "firstName": "",
+            "lastName": ""
           }
         }
       }
