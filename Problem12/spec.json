@@ -12,9 +12,9 @@
     "operation": "shift",
     "spec": {
       "employee": {
-        "name": "&",
-        "address": "&",
-        "phones": "&"
+        "name": "name",
+        "address": "address",
+        "phones": "PhoneNumbers"
       }
     }
   }
