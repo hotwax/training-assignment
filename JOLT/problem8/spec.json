@@ -1,85 +1,70 @@
 [
-    {
-      "operation": "shift",
-      "spec": {
-        "employees": {
-          "*": {
-            "name": {
-              "Jane Smith": {
-                "@2": "employees[&3].employee2[]"
-              },
-              "*": {
-                "@2": "employees[].employees1[]"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "operation": "modify-default-beta",
-      "spec": {
-        "employees": {
-          "*": {
-            "employees1": {
-              "*": {
-                "salary": 45000,
-                "percentage": "=divide(2,100)",
-                "calculateBonus": "=divide(1,@(1,percentage))",
-                "total": "=divide(@(1,salary),@(1,calculateBonus))",
-                "bonus": "=toInteger(@(1,total))"
-              }
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "name": {
+            "Jane Smith": {
+              "@2": "employees[&3].employee2[]"
             },
-            "employee2": {
-              "*": {
-                "department": "Marketing",
-                "percentage": "=divide(2.5,100)",
-                "calculateBonus": "=divide(1,@(1,percentage))",
-                "total": "=divide(@(1,salary),@(1,calculateBonus))",
-                "bonus": "=toInteger(@(1,total))"
-              }
+            "*": {
+              "@2": "employees[].employees1[]"
             }
           }
         }
       }
+    }
     },
-    {
-      "operation": "shift",
-      "spec": {
-        "employees": {
-          "*": {
-            "employees1": {
-              "*": {
-                "*": "employees[&3].&"
-              }
-            },
-            "employee2": {
-              "*": {
-                "*": "employees[&3].&"
-              }
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "employees1": {
+            "*": {
+              "salary": 45000,
+              "percentage": "=divide(2,100)",
+              "calculateBonus": "=divide(1,@(1,percentage))",
+              "total": "=divide(@(1,salary),@(1,calculateBonus))",
+              "bonus": "=toInteger(@(1,total))"
+            }
+          },
+          "employee2": {
+            "*": {
+              "department": "Marketing",
+              "percentage": "=divide(2.5,100)",
+              "calculateBonus": "=divide(1,@(1,percentage))",
+              "total": "=divide(@(1,salary),@(1,calculateBonus))",
+              "bonus": "=toInteger(@(1,total))"
             }
           }
         }
       }
+    }
     },
-    {
-      "operation": "shift",
-      "spec": {
-        "employees": {
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
           "*": {
-            "name": "employees[&1].&",
-            "salary": "employees[&1].&",
-            "department": "employees[&1].&",
-            "bonus": "employees[&1].&",
-            "total": "totalBonus[]"
+            "*": {
+              "name": "employees[&3].&",
+              "salary": "employees[&3].&",
+              "department": "employees[&3].&",
+              "bonus": "employees[&3].&",
+              "total": "totalBonus[]"
+            }
           }
         }
       }
+    }
     },
-    {
-      "operation": "modify-overwrite-beta",
-      "spec": {
-        "totalBonus": "=intSum(@(1,totalBonus))"
-      }
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "totalBonus": "=intSum(@(1,totalBonus))"
+    }
     }
 ]
