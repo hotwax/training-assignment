@@ -2,16 +2,21 @@
   {
     "operation": "modify-overwrite-beta",
     "spec": {
-      "name": "=split(' ',@(1,name))",
+      "name": "=split(' ', @(1,name))",
       "first_name": "=firstElement(@(1,name))",
       "last_name": "=lastElement(@(1,name))",
       "phone_number_count": "=size(@(1,phone_numbers))"
     }
  },
   {
-    "operation": "remove",
+    "operation": "shift",
     "spec": {
-      "name": ""
+      "first_name": "&",
+      "last_name": "&",
+      "age": "&",
+      "address": "&",
+      "phone_numbers": "&",
+      "phone_number_count": "&"
     }
   }
 ]
