@@ -2261,13 +2261,12 @@
     "spec": {
       "data": {
         "*": {
-          "@value": "@x.@y"
+          "value": "@(1,x).@(1,y)"
         }
       }
     }
-    }
+  }
 ]
-
 // Output JSON
 {
   "A" : {
@@ -2361,27 +2360,15 @@
 
 // JSON spec
 [
+
   {
     "operation": "shift",
     "spec": {
-      "name": "name",
-      "hobby_*": "hobbies[#2].&(0,1).name",
-      "level_*": "hobbies[#2].&(0,1).level"
-    }
-  }
-,
-  {
-    "operation": "shift",
-    "spec": {
-      "name": "name",
-      "hobbies": {
-        "*": {
-          "*": {
-            "name": "hobbies[#2].name",
-            "level": "hobbies[#2].level"
-          }
-        }
-      }
+      "name": "&",
+      "hobby_1": "hobbies[0].name",
+      "level_1": "hobbies[0].level",
+      "hobby_2": "hobbies[1].name",
+      "level_2": "hobbies[1].level"
     }
   }
 ]
