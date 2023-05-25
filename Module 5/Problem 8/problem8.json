@@ -35,7 +35,8 @@ Transformation:
         },
         "[2]": {
           "bonus": 900,
-          "tempBonus": 900
+          "tempBonus": 900,
+          "salary": 45000
         }
       }
     }
@@ -58,9 +59,7 @@ Transformation:
     }
     }
 
-
 ]
-
 
 
 Output:
@@ -79,7 +78,8 @@ Output:
   }, {
     "name" : "Bob Johnson",
     "department" : "IT",
-    "bonus" : 900
+    "bonus" : 900,
+    "salary" : 45000
   } ],
   "totalBonus" : 3400
 }
