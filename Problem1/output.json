@@ -12,14 +12,14 @@
       "itemId" : 1,
       "name" : "Product A",
       "quantity" : 2,
-      "price" : 10
+      "price" : 10.0
     }, {
       "itemId" : 2,
       "name" : "Product B",
       "quantity" : 1,
-      "price" : 20
+      "price" : 20.0
     } ],
-    "total" : 40.0
+    "newprice" : 40.0
   }, {
     "orderId" : 2,
     "orderDate" : "2022-02-21T09:12:34Z",
@@ -33,8 +33,8 @@
       "itemId" : 3,
       "name" : "Product C",
       "quantity" : 3,
-      "price" : 15
+      "price" : 15.0
     } ],
-    "total" : 45.0
+    "newprice" : 45.0
   } ]
 }
