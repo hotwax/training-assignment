@@ -1,0 +1,33 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "@name": "@(1,department.id).employees[&1].name",
+            "@age": "@(1,department.id).employees[&1].age",
+            "department": {
+              "@id": "@(1,id).id[]",
+              "@name": "@(1,id).dename[]"
+            }
+          }
+        }
+      }
+       }, 
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "@id[0]": "department[#2].id",
+          "@dename[0]": "department[#2].name",
+          "employees": "department[#2].&"
+        }
+      }
+      },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": "=recursivelySquashNulls"
+      }
+  }
+ ] 

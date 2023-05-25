@@ -61,3 +61,31 @@
       }
       }
     ]
+
+
+    [
+      {
+        "operation": "shift",
+        "spec": {
+          "employees": {
+            "*": {
+              "@name": "@(1,department.id).employees[&1].name",
+              "@age": "@(1,department.id).employees[&1].age",
+              "department": {
+                "@id": "@(1,id).id",
+                "@name": "@(1,id).dename"
+              }
+            }
+          }
+        }
+          }, {
+        "operation": "shift",
+        "spec": {
+          "*": {
+            "id": "department[#2].id",
+            "dename": "department[#2].name",
+            "employees": "department[#2].&"
+          }
+        }
+         }
+        ]
