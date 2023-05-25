@@ -1,80 +1,57 @@
 [
-    {
-      "operation": "shift",
-      "spec": {
-        "orders": {
-          "*": {
-            "@": "@(1,customerId)[]"
-          }
-        }
-      }
-      },
-    {
-      "operation": "modify-overwrite-beta",
-      "spec": {
-        "customer1": {
-          "*": {
-            "name": "John Smith"
-          }
-        },
-        "customer2": {
-          "*": {
-            "name": "Jane Doe"
-          }
-        }
-      }
-    },
-    {
-      "operation": "shift",
-      "spec": {
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
         "*": {
-          "@": "customers[].orders"
-        }
-      }
-      },
-    {
-      "operation": "shift",
-      "spec": {
-        "customers": {
-          "@": "customers",
-          "*": {
-            "orders": {
-              "*": {
-                "customerId": "customers[&3].id",
-                "name": "customers[&3].name",
-                "totalPrice": "customers[&3].totalAmount"
-              }
-            }
-          }
-        }
-      }
-      },
-    {
-      "operation": "modify-overwrite-beta",
-      "spec": {
-        "customers": {
-          "*": {
-            "id": "=firstElement(@(1,id))",
-            "name": "=firstElement(@(1,name))",
-            "totalAmount": "=intSum(@(1,totalAmount))"
-          }
-        }
-      }
-    },
-    {
-      "operation": "remove",
-      "spec": {
-        "customers": {
-          "*": {
-            "orders": {
-              "*": {
-                "name": "",
-                "customerId": ""
-              }
-            }
-          }
+          "@": "@(1,customerId)[]"
         }
       }
     }
-    ]
-  
+      },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "customer1": {
+        "*": {
+          "name": "John Smith",
+          "amount": "@(1,totalPrice)"
+        }
+      },
+      "customer2": {
+        "*": {
+          "name": "Jane Doe",
+          "amount": "@(1,totalPrice)"
+        }
+      }
+    }
+    },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "*": {
+          "customerId": "customers[#3].id",
+          "name": "customers[#3].name",
+          "id": "customers[#3].orders[&1].&",
+          "date": "customers[#3].orders[&1].&",
+          "items": "customers[#3].orders[&1].&",
+          "totalPrice": "customers[#3].orders[&1].&",
+          "amount": "customers[#3].totalAmount"
+        }
+      }
+    }
+      },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "customers": {
+        "*": {
+          "id": "=firstElement(@(1,id))",
+          "name": "=firstElement(@(1,name))",
+          "totalAmount": "=intSum(@(1,totalAmount))"
+        }
+      }
+    }
+    }
+ ]   
