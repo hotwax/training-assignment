@@ -25,7 +25,8 @@ Input
       "spec": {
         "students": {
           "*": {
-            "Domain": "example.com"
+            "email": "=split('@',@(1,email))",
+            "Domain": "=lastElement(@(1,email))"
           }
         }
       }
@@ -43,6 +44,7 @@ Input
       }
     }
   ]
+
   
   
 
