@@ -1,61 +1,67 @@
 Operations:
 
-1. Insert element
-2. Delete element
-3. Sort list     
-4. Update element
-5. Display list
-6. Exit
+1. Insert element at End
+2. Insert at Begining
+3. Insert at any Position
+4. Delete element at End
+5. Delete element at Begin
+6. Delete element at any position
+7. Sort list
+8. Update element
+9. Display list
+10. Exit
 
 
-Test case-1 (Test case for insertion in Linkedlist)
+Test case-1 (Test case for insertion at an End of Linkedlist)
 
 choice - 1
- input- 20
-choice- 1
  input- 10
 choice- 1
+ input- 20
+choice- 1
  input- 30
-choice- 5
+choice- 9
 
-Output:- 20 10 30
+Output:- 10 20 30 
 
 ---------------------------------------------------------------------------------------------
 
-Test case-2 (Test case for deletion from Linkedlist)
+Test case-2 (Test case for insertion at the Beginning of Linkedlist)
 
+choice - 1
+ input- 10
 choice- 1
  input- 20
 choice- 1
- input- 10
-choice- 1 
  input- 30
 choice- 2
- input- 30
-choice- 2
- input- 10
-choice- 5
+ input- 70
+choice- 9
 
-Output:- 20
+Output:- 70 10 20 30 
 
 ---------------------------------------------------------------------------------------------
 
-Test case-3 (Test case for Sorting elements in Linkedlist)
+Test case-3 (Test case for insertion at the any position of Linkedlist)
 
+choice - 1
+ input- 10
 choice- 1
  input- 20
 choice- 1
- input- 10
-choice- 1 
  input- 30
+choice- 2
+ input- 70
 choice- 3
-choice- 5
+ input- 3 
+ input- 50 
+choice- 9
 
-Output:- 10 20 30
+Output:- 70 10 50 20 30 
 
 ---------------------------------------------------------------------------------------------
 
-Test case-4 (Test case for updating elements in Linkedlist)
+Test case-4 (Test case for deletion from an End of Linkedlist)
 
 choice- 1
  input- 10
@@ -64,15 +70,14 @@ choice- 1
 choice- 1 
  input- 30
 choice- 4
- input- 20
- input-  50
-choice- 5
+choice- 4
+choice- 9
 
-Output:- 10 50 30
+Output:- 10
 
 ---------------------------------------------------------------------------------------------
 
-Test case-5 (Test case for display Linkedlist)
+Test case-5 (Test case for deletion from an Begining of Linkedlist)
 
 choice- 1
  input- 10
@@ -81,21 +86,87 @@ choice- 1
 choice- 1 
  input- 30
 choice- 5
+choice- 5
+choice- 9
+
+Output:- 30
+
+---------------------------------------------------------------------------------------------
+
+Test case-6 (Test case for deletion at any position of Linkedlist)
+
+choice- 1
+ input- 10
+choice- 1
+ input- 20
+choice- 1 
+ input- 30
+choice- 1 
+ input- 40
+choice- 6
+ input - 3
+choice- 9
+
+Output:- 10 20 40
+
+---------------------------------------------------------------------------------------------
+
+Test case-7 (Test case for Sorting elements in Linkedlist)
+
+choice- 1
+ input- 20
+choice- 1
+ input- 10
+choice- 1 
+ input- 30
+choice- 7
+choice- 9
 
 Output:- 10 20 30
 
 ---------------------------------------------------------------------------------------------
 
-Test case-6 (Test case for Invalid user choice from Menu)
+Test case-8 (Test case for updating elements in Linkedlist)
 
-choice- 7
+choice- 1
+ input- 10
+choice- 1
+ input- 20
+choice- 1 
+ input- 30
+choice- 8
+ input- 20
+ input- 50
+choice- 9
+
+Output:- 10 50 30
+
+---------------------------------------------------------------------------------------------
+
+Test case-9 (Test case for display Linkedlist)
+
+choice- 1
+ input- 10
+choice- 1
+ input- 20
+choice- 1 
+ input- 30
+choice- 9
+
+Output:- 10 20 30
+
+---------------------------------------------------------------------------------------------
+
+Test case-10 (Test case for Invalid user choice from Menu)
+
+choice- 11
 
 Output:- Invalid choice
 
 ---------------------------------------------------------------------------------------------
 
-Test case-7 (Test case for invalid input type)
+Test case-11 (Test case for invalid input type)
 
-input- aqw
+input- az
 
 Output:- java.util.InputMismatchException

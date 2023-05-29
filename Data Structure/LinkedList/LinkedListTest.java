@@ -8,42 +8,97 @@ public class LinkedListTest
 LinkedList list =  new LinkedList();
 
 @Test
-public void TestInsert(){
+public void testInsertBeginning(){
     final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
-    list.insert(10);
-    list.insert(20);
-    list.insert(30);
-    list.insert(40);
+    list.insertEnd(10);
+    list.insertBegin(20);
+    list.insertBegin(30);
+    list.insertBegin(40);
+    System.setOut(new PrintStream(outputstream));
+    list.display();
+    Assertions.assertEquals("40 30 20 10".replaceAll(" ",""), outputstream.toString().replaceAll(" ", ""));
+}
+
+@Test
+public void testInsertEnd(){
+    final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
+    list.insertEnd(10);
+    list.insertEnd(20);
+    list.insertEnd(30);
+    list.insertEnd(40);
     System.setOut(new PrintStream(outputstream));
     list.display();
     Assertions.assertEquals("10 20 30 40".replaceAll(" ",""), outputstream.toString().replaceAll(" ", ""));
 }
 
 @Test
-public void TestDelete(){
-    final ByteArrayOutputStream outputstream=new ByteArrayOutputStream();
-    list.insert(10);
-    list.insert(20);
-    list.insert(30);
-    list.insert(40);
+public void testInsertPosition(){
+    final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
+    list.insertEnd(10);
+    list.insertEnd(20);
+    list.insertEnd(30);
+    list.insertPosition(2,40);
     System.setOut(new PrintStream(outputstream));
-    list.delete(40);
+    list.display();
+    Assertions.assertEquals("10 40 20 30".replaceAll(" ",""), outputstream.toString().replaceAll(" ", ""));
+}
+
+@Test
+public void testDeleteAtBegin(){
+    final ByteArrayOutputStream outputstream=new ByteArrayOutputStream();
+    list.insertEnd(10);
+    list.insertEnd(20);
+    list.insertEnd(30);
+    list.insertEnd(40);
+    System.setOut(new PrintStream(outputstream));
+    list.deleteBegin();
+    list.display();
+    Assertions.assertEquals("20 30 40".replaceAll(" ",""),outputstream.toString().replaceAll(" ","")); 
+    outputstream.reset();
+    System.setOut(new PrintStream(outputstream));
+    list.deleteBegin();
+    list.display();    
+    Assertions.assertEquals("30 40".replaceAll(" ",""),outputstream.toString().replaceAll(" ","")); 
+}
+
+@Test
+public void testDeleteAtEnd(){
+    final ByteArrayOutputStream outputstream=new ByteArrayOutputStream();
+    list.insertEnd(10);
+    list.insertEnd(20);
+    list.insertEnd(30);
+    list.insertEnd(40);
+    System.setOut(new PrintStream(outputstream));
+    list.deleteEnd();
     list.display();
     Assertions.assertEquals("10 20 30".replaceAll(" ",""),outputstream.toString().replaceAll(" ","")); 
     outputstream.reset();
     System.setOut(new PrintStream(outputstream));
-    list.delete(20);
+    list.deleteEnd();
     list.display();    
-    Assertions.assertEquals("10 30".replaceAll(" ",""),outputstream.toString().replaceAll(" ","")); 
+    Assertions.assertEquals("10 20".replaceAll(" ",""),outputstream.toString().replaceAll(" ","")); 
 }
 
 @Test
-public void TestSort(){
+public void testDeleteAtPosition(){
     final ByteArrayOutputStream outputstream=new ByteArrayOutputStream();
-    list.insert(10);
-    list.insert(40);
-    list.insert(30);
-    list.insert(20);
+    list.insertEnd(10);
+    list.insertEnd(20);
+    list.insertEnd(30);
+    list.insertEnd(40);
+    System.setOut(new PrintStream(outputstream));
+    list.deletePosition(2);
+    list.display();
+    Assertions.assertEquals("10 30 40".replaceAll(" ",""),outputstream.toString().replaceAll(" ","")); 
+}
+
+@Test
+public void testSort(){
+    final ByteArrayOutputStream outputstream=new ByteArrayOutputStream();
+    list.insertEnd(10);
+    list.insertEnd(40);
+    list.insertEnd(30);
+    list.insertEnd(20);
     System.setOut(new PrintStream(outputstream));
     list.display();
     Assertions.assertEquals("10 40 30 20".replaceAll(" ",""),outputstream.toString().replaceAll(" ","")); 
@@ -55,13 +110,13 @@ public void TestSort(){
 }
 
 @Test
-public void Testupdate(){
+public void testUpdate(){
     final ByteArrayOutputStream outputstream=new ByteArrayOutputStream();
-    list.insert(10);
-    list.insert(20);
-    list.insert(30);
-    list.insert(40);
-    list.insert(50);
+    list.insertEnd(10);
+    list.insertEnd(20);
+    list.insertEnd(30);
+    list.insertEnd(40);
+    list.insertEnd(50);
     System.setOut(new PrintStream(outputstream));
     list.display(); 
     Assertions.assertEquals("10 20 30 40 50".replaceAll(" ", ""), outputstream.toString().trim().replaceAll(" ", ""));
@@ -73,17 +128,16 @@ public void Testupdate(){
 }
 
 @Test
-public void TestDisplay(){
+public void testDisplay(){
     final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
-    list.insert(10);
-    list.insert(20);
-    list.insert(30);
-    list.insert(40);
+    list.insertEnd(10);
+    list.insertEnd(20);
+    list.insertEnd(30);
+    list.insertEnd(40);
     System.setOut(new PrintStream(outputstream));
     list.display();
     Assertions.assertEquals("10 20 30 40".replaceAll(" ",""), outputstream.toString().replaceAll(" ", ""));
 }
-
 }
 
 

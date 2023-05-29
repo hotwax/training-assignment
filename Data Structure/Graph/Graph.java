@@ -1,86 +1,101 @@
+
+//Importing necessary Packages
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
+
+//Graph Class
 public class Graph {
-    private int Vertices;  //Vertices in graph
-    private int array[][]; // Adjacency Matrix represeting graph
-    //Constructor for intializing graph object
+    private int vertices; // Vertices in graph
+    private int adjacencyMatrix[][]; // Adjacency Matrix represeting graph
+    private boolean visited[];
+
+    // Constructor for intializing graph object
     public Graph(int vertices) {
-        Vertices = vertices;
-        array = new int[Vertices][Vertices];
+        this.vertices = vertices;
+        adjacencyMatrix = new int[vertices][vertices];
+        visited = new boolean[vertices];
     }
-    //method to get adjacency marix of a graph
-    public int[][] graphdis(){
-        return array;
+
+    // method to get adjacency marix of a graph
+    public int[][] graphdis() {
+        return adjacencyMatrix;
     }
-    //method to get adjacency marix of a graph
-    public void addEdge(int src, int dest) {
-        array[src][dest]=1; // adding an edge from source to destination 
-        array[dest][src]=1; // adding an edge from destination to source  
+
+    // method to get adjacency marix of a graph
+    public void addEdge(int source, int destination) {
+        adjacencyMatrix[source][destination] = 1; // adding an edge from source to destination
+        adjacencyMatrix[destination][source] = 1; // adding an edge from destination to source
     }
-    //method to remove an edge 
-    public void removeEdge(int src, int dest) {
-        array[src][dest]=0; // removing an edge from source to destination
-        array[dest][src]=0; // removing an edge from destination to source
+
+    // method to remove an edge
+    public void removeEdge(int source, int destination) {
+        adjacencyMatrix[source][destination] = 0; // removing an edge from source to destination
+        adjacencyMatrix[destination][source] = 0; // removing an edge from destination to source
     }
-    //method to print the graph
+
+    // method to print the graph
     public void printGraph() {
-        for (int index = 0; index < Vertices; index++) {
-            System.out.print(index+"->");
-            for(int j=0;j<Vertices;j++){
-                if( array[index][j]==1){
-                    System.out.print(j+" ");
+        for (int index1 = 0; index1 < vertices; index1++) {
+            System.out.print(index1 + "->");
+            for (int index2 = 0; index2 < vertices; index2++) {
+                if (adjacencyMatrix[index1][index2] == 1) {
+                    System.out.print(index2 + " ");
                 }
             }
             System.out.println();
         }
     }
-    //method to print DFS traversal of Graph
-    public void DFS(boolean[] visited){
-        
-        for(int index=0;index<Vertices;index++){
-            if(!visited[index]){
-                dfs(index,visited);
+
+    // method to print DFS traversal of Graph
+    public void DFS() {
+        for (int index1 = 0; index1 < vertices; index1++) {
+            if (!visited[index1]) {
+                dfs(index1);
             }
         }
-        
-    }
-
-    public void dfs(int vertices, boolean[] visited) {
-        visited[vertices] = true; // marking current vertice as visited
-        System.out.print(vertices + " ");
-            for(int j=0;j<Vertices;j++){
-                if(array[vertices][j]==1 && !visited[j]){
-                       visited[j]=true;   
-                       dfs(j,visited);     
-                }   
-        }   
-    }
-    //method to print BFS traversal of Graph
-    public void BFS(boolean[] vis){
-    for(int index=0;index <Vertices;index++){
-        if(!vis[index]){ //visiting unvisited vertices in Graph
-            bfs(index,vis);
+        for (int index = 0; index < vertices; index++) {
+            visited[index] = false;
         }
     }
-    
-}
-     
-    public void bfs(int vertices,boolean[] vis) {
-       
+
+    // recursive call for DFS
+    public void dfs(int vertice) {
+        visited[vertice] = true; // marking current vertice as visited
+        System.out.print(vertice + " ");
+        for (int index2 = 0; index2 < vertices; index2++) {
+            if (adjacencyMatrix[vertice][index2] == 1 && !visited[index2]) {
+                dfs(index2);
+            }
+        }
+    }
+
+    // method to print BFS traversal of Graph
+    public void BFS(boolean[] vis) {
+        for (int index1 = 0; index1 < vertices; index1++) {
+            if (!vis[index1]) { // visiting unvisited vertices in Graph
+                bfs(index1, vis);
+            }
+        }
+
+    }
+
+    // recursive call for BFS
+    public void bfs(int vertices, boolean[] vis) {
+
         LinkedList<Integer> queue = new LinkedList<Integer>();
-        vis[vertices] = true; // marking current vertex as visited 
+        vis[vertices] = true; // marking current vertex as visited
         queue.add(vertices); // adding current vertex in queue
 
-        while (!queue.isEmpty()) { 
+        while (!queue.isEmpty()) {
             vertices = queue.poll();
             System.out.print(vertices + " ");
 
-            for(int index=0;index<Vertices;index++){
-                for(int j=0;j<Vertices;j++){
-                    if(array[index][j]==1 && !vis[j]){
-                           vis[j]=true;
-                           queue.add(j);        
+            for (int index1 = 0; index1 < vertices; index1++) {
+                for (int index2 = 0; index2 < vertices; index2++) {
+                    if (adjacencyMatrix[index2][index2] == 1 && !vis[index2]) {
+                        vis[index2] = true;
+                        queue.add(index2);
                     }
                 }
             }
@@ -93,7 +108,7 @@ public class Graph {
             System.out.print("Enter number of vertices: ");
             int NumberVertices = scanner.nextInt();
             Graph graph = new Graph(NumberVertices);
-            do{
+            do {
                 System.out.println("\nMenu:");
                 System.out.println("1. Add edge");
                 System.out.println("2. Remove edge");
@@ -124,26 +139,24 @@ public class Graph {
                         graph.printGraph();
                         break;
                     case 4:
-                        boolean[] visited = new boolean[NumberVertices];
                         System.out.print("DFS traversal: ");
-                        graph.DFS( visited);
+                        graph.DFS();
                         break;
                     case 5:
-                         boolean[] vis= new boolean[NumberVertices];
+                        boolean[] vis = new boolean[NumberVertices];
                         System.out.print("BFS traversal: ");
                         graph.BFS(vis);
                         break;
                     case 6:
-                       System.exit(0);
+                        System.exit(0);
                     default:
                         System.out.println("Invalid choice.");
-                        break;
                 }
-            }while(choice!=6);
-        }
-        catch(InputMismatchException ex)
-        {
-        System.out.println(ex);
+            } while (choice != 6);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
+        } catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 }

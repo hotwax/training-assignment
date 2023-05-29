@@ -30,7 +30,6 @@ public void testAddEdge() {
 
         @Test
         public void testDFS() {
-            boolean[] vis=new boolean[5];
         ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
         
         graph.addEdge(0, 1);
@@ -38,7 +37,7 @@ public void testAddEdge() {
         graph.addEdge(1, 3);
 
         System.setOut(new PrintStream(outputstream));
-        graph.DFS(vis);
+        graph.DFS();
         Assertions.assertEquals("0 1 3 2 4".replaceAll(" ",""),outputstream.toString().replaceAll(" ",""));
         }  
 
