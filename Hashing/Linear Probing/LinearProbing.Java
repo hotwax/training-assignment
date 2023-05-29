@@ -1,7 +1,10 @@
+
+// import necessary Packages
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class LinearProbing{
+//Class LinearProbing
+public class LinearProbing {
     private int[] keys;
     private int[] values;
     private int size;
@@ -12,77 +15,77 @@ public class LinearProbing{
         this.keys = new int[capacity];
         this.values = new int[capacity];
     }
-    //  get function
+
+    // get function
     public int get(int key) {
-        int ind= hash(key);
-        while (keys[ind] != 0) {
-            if (keys[ind] == key) {
-                return values[ind];
+        int hashKey = hash(key);
+        while (keys[hashKey] != 0) {
+            if (keys[hashKey] == key) {
+                return values[hashKey];
             }
-            ind = (ind + 1) % capacity;
+            hashKey = (hashKey + 1) % capacity;
         }
         return -1;
     }
-    //put function
+
+    // put function
     public void put(int key, int value) {
-        if (size == capacity){
+        if (size == capacity) {
             System.out.println("Hash Table is Full");
             return;
         }
-        int ind = hash(key);
-        while (keys[ind] != 0 && keys[ind] != key) {
-            ind = (ind + 1) % capacity;
+        int hashKey = hash(key);
+        while (keys[hashKey] != 0 && keys[hashKey] != key) {
+            hashKey = (hashKey + 1) % capacity;
         }
-        keys[ind] = key;
-        values[ind] = value;
+        keys[hashKey] = key;
+        values[hashKey] = value;
         size++;
     }
 
     public int hash(int key) {
         return key % capacity;
     }
+
     // to count number of collisions
     public int collisionCount() {
         int collisionCount = 0;
-        for (int i = 0; i < capacity; i++) {
-            if (keys[i] != 0 && keys[i] != -1) {
-                int index = hash(keys[i]);
-                if (index != i) {
+        for (int index = 0; index < capacity; index++) {
+            if (keys[index] != 0 && keys[index] != -1) {
+                int hashKey = hash(keys[index]);
+                if (hashKey != index) {
                     collisionCount++;
                 }
             }
         }
         return collisionCount;
     }
-    //function to traverse
+
+    // function to traverse
     public void traverse() {
         System.out.print("Hash Table:");
-        for (int i = 0; i < capacity; i++) {
-            if (keys[i] != 0) {
-                System.out.print("(" + keys[i] + ", " + values[i] + ") ");
+        for (int index = 0; index < capacity; index++) {
+            if (keys[index] != 0) {
+                System.out.print("(" + keys[index] + ", " + values[index] + ") ");
             } else {
                 System.out.print(" ");
             }
         }
         System.out.println();
     }
-    // Funtion to delete key with value
-    public void delete() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter key to delete: ");
-        int key = scanner.nextInt();
-        int ind = hash(key);
-        while (keys[ind] != 0) {
-            if (keys[ind] == key) {
-                keys[ind] = 0;
+
+    // function to delete key with value
+    public void delete(int key) {
+        int index = hash(key);
+        while (keys[index] != 0) {
+            if (keys[index] == key) {
+                keys[index] = 0;
                 break;
-            }
-            else {
+            } else {
                 System.out.println("Key not found");
             }
-            ind= (ind + 1) % capacity;
+            index = (index + 1) % capacity;
         }
-        // System.out.println("Key is not found");
     }
 
     public static void main(String[] args) {
@@ -91,7 +94,7 @@ public class LinearProbing{
             int capacity = scanner.nextInt();
             LinearProbing hashTable = new LinearProbing(capacity);
             int choice = 0;
-            do{
+            do {
                 System.out.println("1. Put");
                 System.out.println("2. Get");
                 System.out.println("3. traverse");
@@ -114,32 +117,35 @@ public class LinearProbing{
                         key = scanner.nextInt();
                         int result = hashTable.get(key);
                         if (result == -1) {
-                           
-                        System.out.println("Key not found!");
-                    } else {
-                        System.out.println("Value: " + result);
-                    }
-                    break;
-                case 3:
-                    hashTable.traverse();
-                    break;
-                case 4:
-                    System.out.println("Number of collisions: " + hashTable.collisionCount());
-                    break;
-                case 5:
-                    hashTable.delete();
-                    break;
-                case 6:
-                    System.out.println("Exit done");
-                    break;
-                default:
-                    System.out.println("Invalid choice!");
-                    break;
-            }
-   }while (choice != 6);
-        }catch(InputMismatchException ex)
-        {
+
+                            System.out.println("Key not found!");
+                        } else {
+                            System.out.println("Value: " + result);
+                        }
+                        break;
+                    case 3:
+                        hashTable.traverse();
+                        break;
+                    case 4:
+                        System.out.println("Number of collisions: " + hashTable.collisionCount());
+                        break;
+                    case 5:
+                        System.out.print("Enter key to delete: ");
+                        int deletedKey = scanner.nextInt();
+                        hashTable.delete(deletedKey);
+                        break;
+                    case 6:
+                        System.out.println("Exit done");
+                        break;
+                    default:
+                        System.out.println("Invalid choice!");
+                        break;
+                }
+            } while (choice != 6);
+        } catch (InputMismatchException exception) {
             System.out.println("Input Mismatch");
+        } catch (Exception exception) {
+            System.out.println(exception);
         }
-}
+    }
 }

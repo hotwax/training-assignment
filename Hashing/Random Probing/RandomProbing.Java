@@ -1,7 +1,11 @@
+
+//import necessary Packages
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
-public class RandomProbing{
+
+//class RandomProbing
+public class RandomProbing {
     private int capacity;
     private int[] keys;
     private int[] values;
@@ -23,7 +27,8 @@ public class RandomProbing{
     public int probe() {
         return random.nextInt(capacity);
     }
-    //method to put Key And Value
+
+    // method to put Key And Value
     public void put(int key, int value) {
         if (size == capacity) {
             System.out.println("Hashmap is full");
@@ -31,7 +36,7 @@ public class RandomProbing{
         }
 
         int index = hash(key);
-        int numCollisions=0;
+        int numCollisions = 0;
 
         while (keys[index] != 0 && keys[index] != key) {
             index = (index + probe()) % capacity;
@@ -48,7 +53,8 @@ public class RandomProbing{
 
         System.out.println("Inserted key " + key + " with value " + value);
     }
-    //method to get Value
+
+    // method to get Value
     public int get(int key) {
         int index = hash(key);
         int numCollisions = 0;
@@ -66,15 +72,17 @@ public class RandomProbing{
             return -1; // return -1 if key is not found
         }
     }
-    //method to display
+
+    // method to display
     public void display() {
         System.out.println("Hashmap:");
-        for (int i = 0; i < capacity; i++) {
-            if (keys[i] != 0) {
-                System.out.println(keys[i] + " => " + values[i]);
+        for (int index = 0; index < capacity; index++) {
+            if (keys[index] != 0) {
+                System.out.println(keys[index] + " => " + values[index]);
             }
         }
     }
+
     // Main method
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -82,7 +90,7 @@ public class RandomProbing{
             int capacity = scanner.nextInt();
             RandomProbing hashmap = new RandomProbing(capacity);
             int choice;
-            do{
+            do {
                 System.out.println("Menu:");
                 System.out.println("1. Insert element");
                 System.out.println("2. Get element");
@@ -109,15 +117,15 @@ public class RandomProbing{
                     case 4:
                         System.out.println("Exit done");
                         break;
-                default:
-                    System.out.println("Invalid choice");
-                    break;
-            }
-        }while(choice!=4);
+                    default:
+                        System.out.println("Invalid choice");
+                        break;
+                }
+            } while (choice != 4);
+        } catch (InputMismatchException exception) {
+            System.out.println(exception);
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
     }
-    catch(InputMismatchException ex)
-    {
-        System.out.println(ex);
-    }
-}
 }
