@@ -1,24 +1,42 @@
 [
-    {
-      "operation": "shift",
-      "spec": {
-        "*": {
-          "restaurant": {
-            "rating": {
-              "value": "[&3].Restaurant Rating"
-            },
-            "address": {
-              "value": "[&3].Restaurant Country"
-            }
-          },
-          "itemsList": {
-            "*": {
-              "itemName": "[&3].Dish Name",
-              "itemPrice": "[&3].Dish Price"
-            }
-          }
-        }
+  {
+    "restaurant": {
+      "rating": {
+        "value": 9
+      },
+      "address": {
+        "value": "India"
       }
-    }
-  ]
-  
+    },
+    "itemsList": [
+      {
+        "itemName": "Example 11",
+        "itemPrice": 120
+      },
+      {
+        "itemName": "Example 12",
+        "itemPrice": 150
+      }
+    ]
+  },
+  {
+    "restaurant": {
+      "rating": {
+        "value": 7
+      },
+      "address": {
+        "value": "United States"
+      }
+    },
+    "itemsList": [
+      {
+        "itemName": "Example 21",
+        "itemPrice": 100
+      },
+      {
+        "itemName": "Example 22",
+        "itemPrice": 190
+      }
+    ]
+  }
+]

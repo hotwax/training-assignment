@@ -6,9 +6,7 @@
         "hobby_*": "hobbies[#2].&(0,1).name",
         "level_*": "hobbies[#2].&(0,1).level"
       }
-    }
-    
-    ,
+    },
     {
       "operation": "shift",
       "spec": {
