@@ -1,0 +1,152 @@
+Operations:
+
+1. Put
+2. Get
+3. Delete
+4. Traverse
+5. Get Collisions
+6. Exit
+
+Test case-1 (Test case for insertion values)
+
+Size of Bucket- 5
+
+choice - 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 4
+
+Output:- Traverse: [1,10] [2,20] [3,30] 
+
+---------------------------------------------------------------------------------
+
+Test case-2 (Test case to get a value when key is present)
+
+choice - 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 2
+ input- 2
+
+Output:- Value of key 2 is 20
+
+---------------------------------------------------------------------------------
+
+Test case-3 (Test case to get a value when key is not present)
+
+choice - 1
+ input- 1 
+ inout- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 2
+ input- 11
+
+Output:- key not found
+
+---------------------------------------------------------------------------------
+
+Test case-4 (Test case for Inserting a value to test updation if key is present)
+
+choice - 1
+ input- 1 
+ input- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 1
+ input- 11
+ input- 40
+choice- 4
+
+Output:- Traverse: [1,10] [2,20] [3,30] [11,40] 
+
+choice- 1
+ input- 11
+ input- 50
+choice- 4
+
+Output:- Traverse: [1,10] [2,20] [3,30] [11,50] 
+
+---------------------------------------------------------------------------------
+
+Test case-5 (Test case for Deletion when key is present)
+
+choice - 1
+ input- 1 
+ input- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 1
+ input- 11
+ input- 40
+choice- 4 
+Output:- Traverse: [1,10] [2,20] [3,30] [11,40] 
+choice- 3
+ input- 11
+Output:-Key 11 deleted
+
+choice- 4
+Output:- Traverse: [1,10] [2,20] [3,30] 
+
+---------------------------------------------------------------------------------
+
+Test case-6 (Test case for Deletion when key is not present)
+
+choice - 1
+ input- 1 
+ input- 10
+choice- 1
+ input- 2 
+ input- 20
+choice- 1
+ input- 3 
+ input- 30
+choice- 1
+ input- 11
+ input- 40
+choice- 4 
+Output:- Traverse: [1,10] [2,20] [3,30] [11,40] 
+choice- 3
+ input- 12
+Output:-Key not found
+
+choice- 4
+Output:- Traverse: [1,10] [2,20] [3,30] 
+
+---------------------------------------------------------------------------------
+
+Test case-7 (Test case for Invalid user choice from Menu)
+
+choice- 7
+Output:- Invalid input
+
+------------------------------------------------------------------------------------------------   
+
+Test case-8 (Test case for invalid input type)
+
+input - a
+Output:- java.util.InputMismatchException
