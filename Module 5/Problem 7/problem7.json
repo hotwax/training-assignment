@@ -20,53 +20,28 @@ Transformation:
 
 [
   {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "students": {
+        "*": {
+          "email-split": "=split('@',@(1,email))",
+          "domain": "@(1,email-split[1])"
+        }
+      }
+    }
+    },
+  {
     "operation": "shift",
     "spec": {
       "students": {
         "*": {
-          "@": "[#2]"
+          "name": "[#2].Name",
+          "age": "[#2].Age",
+          "domain": "[#2].Domain"
         }
       }
     }
-  },
-  {
-    "operation": "modify-overwrite-beta",
-    "spec": {
-      "*": {
-        "unamedomain": "=split('@',@(1,email))",
-        "domain": "=lastElement(@(1,unamedomain))"
-      }
     }
-  },
-  {
-    "operation": "remove",
-    "spec": {
-      "*": {
-        "unamedomain": "",
-        "email": ""
-      }
-    }
-  },
-  {
-    "operation": "modify-overwrite-beta",
-    "spec": {
-      "*": {
-        "Name": "@(1,name)",
-        "Age": "@(1,age)",
-        "Domain": "@(1,domain)"
-      }
-    }
-  },
-  {
-    "operation": "remove",
-    "spec": {
-      "*": {
-        "name": "",
-        "age": "",
-        "domain": ""
-      }
-    }
-  }
 ]
 
 
