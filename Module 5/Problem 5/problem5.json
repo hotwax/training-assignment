@@ -16,37 +16,29 @@ Transformation:
 
 [
   {
-    "operation": "shift",
-    "spec": {
-      "firstName": "firstName",
-      "lastName": "lastName",
-      "email": "email",
-      "address": {
-        "city": "city",
-        "zip": "zip"
-      }
-    }
-  },
-  {
     "operation": "modify-default-beta",
     "spec": {
       "fullname": "=concat(@(1,firstName),' ',@(1,lastName))"
     }
    },
   {
-    "operation": "remove",
+    "operation": "shift",
     "spec": {
-      "firstName": "",
-      "lastName": ""
+      "fullname": "fullname",
+      "email": "email",
+      "address": {
+        "city": "city",
+        "zip": "zip"
+      }
     }
-    }
+  }
 ]
 
 Output:
 
 {
+  "fullname" : "John Doe",
   "email" : "johndoe@example.com",
   "city" : "Anytown",
-  "zip" : "12345",
-  "fullname" : "John Doe"
+  "zip" : "12345"
 }
