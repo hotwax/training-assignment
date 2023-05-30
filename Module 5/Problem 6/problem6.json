@@ -47,36 +47,35 @@ Input:
 
 Transformation:
 
-[
-  {
-    "operation": "modify-overwrite-beta",
-    "spec": {
-      "users": {
-        "*": {
-          "address": "=concat(@(1,address.street),' ', @(1,address.city),' ', @(1,address.state),' ',@(1,address.zip))"
+  [
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "users": {
+          "*": {
+            "address": "=concat(@(1,address.street),' ', @(1,address.city),' ', @(1,address.state),' ',@(1,address.zip))"
+          }
         }
       }
-    }
-    },
-  {
-    "operation": "shift",
-    "spec": {
-      "users": {
-        "*": {
-          "address": "[#2].Address",
-          "name": "[#2].Name",
-          "hobbies": {
-            "*": {
-              "name": "[#4].Hobbies"
+      },
+    {
+      "operation": "shift",
+      "spec": {
+        "users": {
+          "*": {
+            "address": "[#2].Address",
+            "name": "[#2].Name",
+            "hobbies": {
+              "*": {
+                "name": "[#4].Hobbies"
+              }
             }
           }
         }
       }
-    }
-    }
+      }
 
-
-]
+  ]
 
 
 Output:
