@@ -1,0 +1,85 @@
+Input:
+{
+    "employee": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+            "zip": "12345"
+        },
+        "phones": [
+            {
+                "type": "home",
+                "number": "555-555-1234"
+            },
+            {
+                "type": "work",
+                "number": "555-555-5678"
+            }
+        ]
+    }
+}
+
+Output:
+{
+    "name": "John Doe",
+    "address": "123 Main St, Anytown, CA 12345",
+    "phoneNumbers": [
+        {
+            "type": "home",
+            "number": "555-555-1234"
+        },
+        {
+            "type": "work",
+            "number": "555-555-5678"
+        }
+    ]
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "employee": {
+                "firstName": "name.firstName",
+                "lastName": "name.lastName",
+                "address": {
+                    "street": "address.street",
+                    "city": "address.city",
+                    "state": "address.state",
+                    "zip": "address.zip"
+                },
+                "phones": {
+                    "*": {
+                        "type": "phoneNumbers[&1].type",
+                        "number": "phoneNumbers[&1].number"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "name": "=concat(@(1,name.firstName),' ',@(1,name.lastName))",
+            "Address": "=concat(@(1,address.street),', ',@(1,address.city),', ',@(1,address.state),' ',@(1,address.zip))"
+        }
+    },
+    {
+        "operation": "remove",
+        "spec": {
+            "address": ""
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "name": "name",
+            "Address": "address",
+            "phoneNumbers": "phoneNumbers"
+        }
+    }
+]

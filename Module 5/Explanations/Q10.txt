@@ -1,0 +1,7 @@
+In the corresponding transformation spec: 
+
+The "name" field is modified using the "split" function to split the value based on the space character (' ').
+The "first_name" field is modified using the "firstElement" function to extract the first element from the "name" array.
+The "last_name" field is modified using the "lastElement" function to extract the last element from the "name" array.
+The second operation is "modify-default-beta" to assign a default value to the "phone_number_count" field.
+The third operation is "remove" to remove the "name" field from the JSON structure.

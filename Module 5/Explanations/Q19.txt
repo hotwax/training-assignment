@@ -1,0 +1,10 @@
+In the corresponding transformation spec: 
+
+For each product, there are two modifications:
+
+The "number" field is modified using the "divide" function with arguments 1 and 2. It divides 1 by 2.
+The "final" field is modified using the "divide" function. It divides the value of the "price" field by the value of the "number" field in the same product.
+The second operation is "shift" with the "spec" section defining transformations on the "products" field.    
+Within "products", there are two mappings:
+"0" matches the product at index 0 in the array.
+"*" matches all other products in the array.

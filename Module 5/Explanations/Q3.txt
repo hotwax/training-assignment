@@ -1,0 +1,4 @@
+In the corresponding transformation spec: 
+I used the shift operation to change the name of the keys given in the map i.e. capitalize the 
+first letter of the keys and used the dot (.) operator to change the level of 'city' and 'level' 
+key.

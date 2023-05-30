@@ -1,0 +1,76 @@
+Input:
+{
+    "employees": [
+        {
+            "name": "John",
+            "age": 30,
+            "salary": 5000
+        },
+        {
+            "name": "Jane",
+            "age": 35,
+            "salary": 6000
+        },
+        {
+            "name": "Bob",
+            "age": 40,
+            "salary": 7000
+        }
+    ]
+}
+
+Output:
+{
+  "employees" : [ {
+    "name" : "John",
+    "age" : 30,
+    "salary" : 5500
+  }, {
+    "name" : "Jane",
+    "age" : 35,
+    "salary" : 6600
+  }, {
+    "name" : "Bob",
+    "age" : 40,
+    "salary" : 7700
+  } ]
+}
+{
+  "employees" : [ {
+    "name" : "John",
+    "age" : 30,
+    "salary" : 5500
+  }, {
+    "name" : "Jane",
+    "age" : 35,
+    "salary" : 6600
+  }, {
+    "name" : "Bob",
+    "age" : 40,
+    "salary" : 7700
+  } ]
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "employees": {
+                "*": {
+                    "salary": "=divideAndRound(2, @(1,salary), 0.90909091)"
+                }
+            }
+        }
+    },
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "employees": {
+                "*": {
+                    "salary": "=toLong"
+                }
+            }
+        }
+    }
+]

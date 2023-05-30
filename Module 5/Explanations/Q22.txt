@@ -1,0 +1,5 @@
+In the corresponding transformation spec: 
+
+The operation is "shift" with the "spec" section defining transformations on the input JSON.
+The "value" field under "rating" is mapped to "[#4].Restaurant Rating" in the output.
+The "[#4]" notation denotes an array index. It represents the index position in the output array where the value should be placed.

@@ -1,0 +1,14 @@
+In the corresponding transformation spec: 
+
+Within each matched field, there are several transformations:
+"returnId" field is mapped to "@(1,Return Id)" in the output.
+The "@(1)" notation refers to the first index position in the input array.
+"inverse" field is computed using the "divide" function with parameters 1 and the value of "returnQuantity".
+"Return Amount" field is computed using the "divide" function with parameters "returnPrice" and "inverse".
+"Return Total Amount" field is computed using the "doubleSum" function with parameters "Return Amount" and "returnTax".
+The second operation is "remove" with the "spec" section specifying fields to be removed from the input JSON.
+The third operation is "shift" with the "spec" section defining transformations on the input JSON.
+"returnId" field is mapped to the output field "[&1].Return Id".
+"Return Amount" field is mapped to the output field "[&1].Return Amount".
+"Return Total Amount" field is mapped to the output field "[&1].Return Total Amount".
+The "[&1]" notation refers to the current index position in the output array.

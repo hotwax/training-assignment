@@ -1,0 +1,6 @@
+In the corresponding transformation spec: 
+
+I used Modify-overwrite-beta to flatten the Address map into string using Concat function.
+I used Shift Operation to shift name and address outside the users map 
+(put Name and Address 2 level up) and make list of hobbies and put it 4 level up 
+i.e at the same level of name and address using [] and #.

@@ -1,0 +1,7 @@
+In the corresponding transformation spec: 
+The first operation is "modify-overwrite-beta".It modifies the structure of the "hobbies" array
+by adding new fields ("name", "id", "hobby_name", "hobby_level") to each object in the array.
+The second operation is "remove". It removes the "id", "name", and "level" fields from each 
+object in the "hobbies" array.
+The third operation is "shift". It restructures the output data to be an array of objects 
+with each object containing the data for a single hobby

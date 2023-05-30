@@ -1,0 +1,5 @@
+In the corresponding transformation spec: 
+
+The operation is "shift" with the "spec" section defining transformations on the "restaurant" field.
+Within "restaurant", there is a nested field "rating" with a subfield "value".
+The "value" field under "rating" is mapped to "Restaurant Rating" in the output.

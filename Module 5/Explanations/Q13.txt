@@ -1,0 +1,8 @@
+In the corresponding transformation spec: 
+
+In the corresponding transformation spec: 
+
+For each employee, the "name" field is mapped to "@(1,id).name".
+The "@(1,id)" represents the value of the "id" field at the first level and is used as a reference to create a new field at the same level.
+The ".name" specifies that the "name" field value should be assigned to the newly created field.
+Similarly, the "department" field is mapped to "@(1,id).department" using the same logic.

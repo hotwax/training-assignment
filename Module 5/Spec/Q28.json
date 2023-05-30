@@ -1,0 +1,83 @@
+Input:
+[
+    {
+        "returnId": "151",
+        "returnItemAdjustments": [
+            {
+                "returnItemSeqId": "00001",
+                "amount": 28.64,
+                "returnAdjustmentTypeId": "RET_SALES_TAX_ADJ",
+                "description": "Return Sales Tax",
+                "createdDate": null,
+                "returnId": "151",
+                "returnAdjustmentId": "",
+                "comments": "Return Sales Tax",
+                "shipGroupSeqId": null
+            },
+            {
+                "returnItemSeqId": "00001",
+                "amount": 58.64,
+                "returnAdjustmentTypeId": "RET_SALES_TAX_ADJ",
+                "description": "Return Sales Tax",
+                "createdDate": null,
+                "returnId": "151",
+                "returnAdjustmentId": "",
+                "comments": "Return Sales Tax",
+                "shipGroupSeqId": null
+            }
+        ]
+    },
+    {
+        "returnId": "152",
+        "returnItemAdjustments": [
+            {
+                "returnItemSeqId": "00002",
+                "amount": 38.64,
+                "returnAdjustmentTypeId": "RET_SALES_TAX_ADJ",
+                "description": "Return Sales Tax",
+                "createdDate": null,
+                "returnId": "152",
+                "returnAdjustmentId": "",
+                "comments": "Return Sales Tax",
+                "shipGroupSeqId": null
+            }
+        ]
+    }
+]
+
+Output:
+[
+    {
+        "returnId": "151",
+        "returnTax": 87.28
+    },
+    {
+        "returnId": "152",
+        "returnTax": 38.64
+    }
+]
+
+Transformation Spec:
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "*": {
+                "returnId": "[#2].&",
+                "returnItemAdjustments": {
+                    "*": {
+                        "amount": "[#4].returnTax"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "*": {
+                "returnTax": "=doubleSum(@(1,returnTax))"
+            }
+        }
+    }
+]

@@ -1,0 +1,18 @@
+In the corresponding transformation spec: 
+
+Within each matched field, there are several transformations:
+"Return Id" field is mapped to "@(1,returnId)" in the output.
+The "@(1)" notation refers to the first index position in the input array.
+"returnQuantity" field is computed using the "divide" function with parameters 1 and the value of "returnQuantity".
+"Return Amount" field is computed using the "divide" function with parameters "returnPrice" and "returnQuantity".
+"Return Total Amount" field is computed using the "doubleSum" function with parameters "Return Amount" and "returnTax".
+The second operation is "remove" with the "spec" section specifying fields to be removed from the input JSON.
+The third operation is "shift" with the "spec" section defining transformations on the input JSON.
+"Return Id" field is mapped to the output field "[#2].&".
+"Return Amount" field is mapped to the output field "[#2].&".
+"Return Total Amount" field is mapped to the output field "[#2].&".
+The "[#2]" notation refers to the current index position in the output array.
+"country" field has conditional mappings based on its values:
+If the value is "USA", the output field is "[#4].Country" with the value "#United States of America".
+If the value is "CA", the output field is "[#4].Country" with the value "#Canada".
+If the value is empty (""), the output field is "[#4].Country" with the value "#NA".

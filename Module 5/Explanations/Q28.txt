@@ -1,0 +1,4 @@
+In the corresponding transformation spec: 
+I used shift operation, iterated the map using * and traverse the "returnItemAdjustments" and 
+iterated the map and replaced amount field by returnTax field.
+After that I used Modify-overwrite-beta and applied doubleSum function on returnTax field.

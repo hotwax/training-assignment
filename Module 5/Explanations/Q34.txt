@@ -1,0 +1,5 @@
+In the corresponding transformation spec: 
+I used Shift Operation and traversed the hobbies array and replaced
+name and level by hobby_1 and level_1 at index 0 and name and level by hobby_2 and 
+level_2 at index 1.
+ 

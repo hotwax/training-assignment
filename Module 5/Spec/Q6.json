@@ -1,0 +1,95 @@
+Input:
+{
+    "users": [
+        {
+            "name": "John Doe",
+            "age": 35,
+            "address": {
+                "street": "123 Main St",
+                "city": "Anytown",
+                "state": "CA",
+                "zip": "12345"
+            },
+            "hobbies": [
+                {
+                    "name": "reading",
+                    "type": "indoor"
+                },
+                {
+                    "name": "hiking",
+                    "type": "outdoor"
+                }
+            ]
+        },
+        {
+            "name": "Jane Doe",
+            "age": 30,
+            "address": {
+                "street": "456 First St",
+                "city": "Othertown",
+                "state": "NY",
+                "zip": "67890"
+            },
+            "hobbies": [
+                {
+                    "name": "swimming",
+                    "type": "outdoor"
+                },
+                {
+                    "name": "painting",
+                    "type": "indoor"
+                }
+            ]
+        }
+    ]
+}
+
+Output:
+[
+    {
+        "Name": "John Doe",
+        "Address": "123 Main St, Anytown, CA 12345",
+        "Hobbies": [
+            "reading",
+            "hiking"
+        ]
+    },
+    {
+        "Name": "Jane Doe",
+        "Address": "456 First St, Othertown, NY 67890",
+        "Hobbies": [
+            "swimming",
+            "painting"
+        ]
+    }
+]
+
+Transformation Spec:
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "users": {
+                "*": {
+                    "address": "=concat(@(0,street),', ',@(0,city),', ',@(0,state),' ',@(0,zip))"
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "users": {
+                "*": {
+                    "name": "[#2].Name",
+                    "address": "[#2].Address",
+                    "hobbies": {
+                        "*": {
+                            "name": "[#4].Hobbies"
+                        }
+                    }
+                }
+            }
+        }
+    }
+]

@@ -1,0 +1,9 @@
+In the corresponding transformation spec: 
+
+For each specific name, there are further mappings:
+For "John Doe":
+"@(2,name)" represents the name property at the second level and is mapped to 
+"employees[&3].name".
+"#1000" represents a specific value and is mapped to "employees[&3].bonus", likewise for other.
+The second operation is "modify-overwrite-beta" to modify and overwrite the "bonus" field as an 
+integer.

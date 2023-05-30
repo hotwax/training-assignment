@@ -1,0 +1,8 @@
+In the corresponding transformation spec: 
+
+For each employee, the "salary" field is modified using the "divideAndRound" function.
+
+The "divideAndRound(2, @(1,salary), 0.90909091)" divides the value of the "salary" field by 0.90909091 and rounds it to 2 decimal places.
+The result is assigned back to the "salary" field.
+The second operation is "modify-overwrite-beta". For each employee, the "salary" field is modified using the "toLong" function.
+The "toLong" function converts the value of the "salary" field to a long integer

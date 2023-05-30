@@ -1,0 +1,4 @@
+In the corresponding transformation spec: 
+I used the shift operation and traversed the person map and renamed the name field and then 
+traversed the employee map and in that traversed the office map and renamed 'city' field to
+'office_city' and 'state' field to 'office_state'.

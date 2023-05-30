@@ -1,0 +1,6 @@
+In the corresponding transformation spec: 
+
+Within "items", the "*" wildcard matches each individual item within the array.
+For each item, the "name" field is mapped to the "items[&1].itemName" path.
+Similarly, the "value" field is mapped to the "items[&1].itemValue" path.
+The "&1" represents the index of the current item being operated on and preserves the order of the items.

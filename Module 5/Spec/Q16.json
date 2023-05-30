@@ -1,0 +1,67 @@
+Input:
+{
+    "employees": [
+        {
+            "id": "1001",
+            "name": "John Doe",
+            "age": 25,
+            "skills": [
+                {
+                    "name": "Java",
+                    "level": "Intermediate"
+                },
+                {
+                    "name": "Python",
+                    "level": "Expert"
+                }
+            ]
+        },
+        {
+            "id": "1002",
+            "name": "Jane Doe",
+            "age": 30,
+            "skills": [
+                {
+                    "name": "Java",
+                    "level": "Expert"
+                }
+            ]
+        }
+    ]
+}
+
+Output:
+{
+    "Java": {
+        "Intermediate": [
+            "John Doe"
+        ],
+        "Expert": [
+            "Jane Doe"
+        ]
+    },
+    "Python": {
+        "Expert": [
+            "John Doe"
+        ]
+    }
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "skills": {
+                        "*": {
+                            "": "@(1,name).@(1,level)[]",
+                            "@(2,name)": "@(1,name).@(1,level)[]"
+                        }
+                    }
+                }
+            }
+        }
+    }
+]

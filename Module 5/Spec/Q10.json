@@ -1,0 +1,69 @@
+Input:
+{
+    "name": "John Smith",
+    "age": 35,
+    "address": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+    },
+    "phone_numbers": [
+        {
+            "type": "home",
+            "number": "555-1234"
+        },
+        {
+            "type": "work",
+            "number": "555-5678"
+        }
+    ]
+}
+
+Output:
+{
+    "first_name": "John",
+    "last_name": "Smith",
+    "age": 35,
+    "address": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+    },
+    "phone_numbers": [
+        {
+            "type": "home",
+            "number": "555-1234"
+        },
+        {
+            "type": "work",
+            "number": "555-5678"
+        }
+    ],
+    "phone_number_count": 2
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "name": "=split(' ',@(1,name))",
+            "first_name": "=firstElement(@(1,name))",
+            "last_name": "=lastElement(@(1,name))"
+        }
+    },
+    {
+        "operation": "modify-default-beta",
+        "spec": {
+            "phone_number_count": "=size(@(1,phone_numbers))"
+        }
+    },
+    {
+        "operation": "remove",
+        "spec": {
+            "name": ""
+        }
+    }
+]

@@ -1,0 +1,4 @@
+In the corresponding transformation spec: 
+I used shift opertion traverse inside person map and changed the 'name' and 'age' field with
+'person_name' and 'person_age' and then traversed the address map with * wildcard and replaced
+the respective fields with person_address_fieldName.

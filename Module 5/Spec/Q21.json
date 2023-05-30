@@ -1,0 +1,30 @@
+Input:
+{
+    "restaurant": {
+        "rating": {
+            "value": 3
+        },
+        "address": {
+            "value": "India"
+        }
+    }
+}
+
+Output:
+{
+    "Restaurant Rating": 3
+}
+
+Transformation Spec:
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "restaurant": {
+                "rating": {
+                    "value": "Restaurant Rating"
+                }
+            }
+        }
+    }
+]

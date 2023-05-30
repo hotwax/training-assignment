@@ -1,0 +1,5 @@
+In the corresponding transformation spec: 
+I used Modify-overwrite-beta traversed mutipled map and concatenated the values of id and 
+currency in 'Currencies' field.
+After that I used shift operation traversed inside multiple map and changed the name of 
+'Currencies' field to 'value'.

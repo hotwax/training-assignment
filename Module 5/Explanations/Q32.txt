@@ -1,0 +1,4 @@
+In the corresponding transformation spec: 
+I used shift operation traversed inside the data map and assigned the field 'value' as 
+@(1,x).@(1,y) i.e. Create map by the name of value of x (a,b) and Inside that map replace the 
+value field by the value of y (1,2).
