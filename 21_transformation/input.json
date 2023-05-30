@@ -1,0 +1,10 @@
+{
+    "restaurant": {
+      "rating": {
+        "value": 3
+      },
+      "address": {
+        "value": "India"
+      }
+    }
+  }

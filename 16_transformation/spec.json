@@ -1,0 +1,39 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2)": "@(1,name).[#4]"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "Java": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2,name)": "Java.@(1,level).[]"
+            }
+          }
+        }
+      },
+      "Python": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2,name)": "Python.@(1,level).[]"
+            }
+          }
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,11 @@
+{
+    "name" : "John",
+    "hobbies" : [ {
+      "level" : "advanced",
+      "name" : "reading"
+    }, {
+      "level" : "beginner",
+      "name" : "swimming"
+    } ]
+  }
+  
