@@ -35,7 +35,6 @@ Input:
 }
 
 Transformation:
-
 [
   {
     "operation": "modify-overwrite-beta",
@@ -44,7 +43,7 @@ Transformation:
         "*": {
           "phone": {
             "*": {
-              "temp": "=concat(@(1,type),'',Phone)"
+              "type": "=concat(@(1,type),'',Phone)"
             }
           }
         }
@@ -58,15 +57,17 @@ Transformation:
         "*": {
           "id": "employees.[#2].&",
           "name": "employees.[#2].&",
+          "department": "employees[#2].&",
           "phone": {
             "*": {
-              "@number": "employees.[#4].@temp"
+              "@number": "employees.[#4].@type"
             }
           }
         }
       }
     }
   }
+]
 
 
 Output:
@@ -75,12 +76,14 @@ Output:
   "employees" : [ {
     "id" : "001",
     "name" : "John",
-    "home_phone" : "555-555-1234",
-    "work_phone" : "555-555-5678"
+    "department" : "HR",
+    "homePhone" : "555-555-1234",
+    "workPhone" : "555-555-5678"
   }, {
     "id" : "002",
     "name" : "Jane",
-    "home_phone" : "555-555-4567",
-    "work_phone" : "555-555-8901"
+    "department" : "Sales",
+    "homePhone" : "555-555-4567",
+    "workPhone" : "555-555-8901"
   } ]
 }
