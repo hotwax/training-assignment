@@ -72,7 +72,7 @@ Input
         "*": "customers"
       }
     },
-  
+
     {
       "operation": "shift",
       "spec": {
@@ -80,8 +80,8 @@ Input
           "*": {
             "orders": {
               "*": {
-                "customerId": "customers[#4].idx",
-                "totalPrice": "customers[#4].totalamount",
+                "customerId": "customers[#4].idx[]",
+                "totalPrice": "customers[#4].totalamount[]",
                 "*": "customers[#4].orders[#2].&"
               }
             }
@@ -117,8 +117,9 @@ Input
         }
       }
     }
-  
+
   ]
+
 
   
   Output
@@ -163,7 +164,10 @@ Input
           "quantity" : 4
         } ]
       } ],
-      "name" : "Jane Doe"
+      "name" : "Jane Doe",
+      "id" : "customer2",
+      "totalAmount" : 160
     } ]
   }
+  
   

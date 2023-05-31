@@ -41,18 +41,6 @@ Input
 
   [
     {
-      "operation": "modify-overwrite-beta",
-      "spec": {
-        "employee": {
-          "*": {
-            "phone": {
-              "homePhone": "=firstElement(@(1,phone))"
-            }
-          }
-        }
-      }
-    },
-    {
       "operation": "shift",
       "spec": {
         "employees": {
