@@ -1,46 +1,15 @@
 [
-    {
-      "operation": "shift",
-      "spec": {
-        "person": {
-          "$": "personkey",
-          "*": {
-            "@": "&1.val",
-            "$": "&1.key"
-          },
-          "address": {
-            "$": "addresskey",
-            "*": {
-              "@": "&1.val",
-              "$": "&1.key"
-            }
-          }
-        }
-      }
-    },
-    {
-      "operation": "modify-overwrite-beta",
-      "spec": {
-        "name": {
-          "key": "=concat(@(2,personkey),'_',@(1,key))"
-        },
-        "age": {
-          "key": "=concat(@(2,personkey),'_',@(1,key))"
-        },
-        "city": {
-          "key": "=concat(@(2,personkey),'_',@(2,addresskey),'_',@(1,key))"
-        },
-        "state": {
-          "key": "=concat(@(2,personkey),'_',@(2,addresskey),'_',@(1,key))"
-        }
-      }
-    },
-    {
-      "operation": "shift",
-      "spec": {
-        "*": {
-          "@(val)": "@(1,key)"
+  {
+    "operation": "shift",
+    "spec": {
+      "person": {
+        "name": "&1_&",
+        "age": "&1_&",
+        "address": {
+          "city": "&2_&1_&",
+          "state": "&2_&1_&"
         }
       }
     }
-  ]
+  }
+]
