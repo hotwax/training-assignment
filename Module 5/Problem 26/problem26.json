@@ -29,38 +29,25 @@ Transformations:
     }
   },
   {
-    "operation": "modify-overwrite-beta",
+    "operation": "shift",
     "spec": {
       "*": {
-        "ReturnId": "@(1,returnId)"
-      }
-    }
-  },
-  {
-    "operation": "remove",
-    "spec": {
-      "*": {
-        "returnId": "",
-        "returnQuantity": "",
-        "returnPrice": "",
-        "temp": "",
-        "returnTax": ""
+        "returnId": "[#2].ReturnId",
+        "Return Amount|Return Total Amount": "[#2].&"
       }
     }
   }
-
-
 ]
 
 
 Output:
 
 [ {
+  "ReturnId" : "10051",
   "Return Amount" : 200.0,
-  "Return Total Amount" : 212.56,
-  "ReturnId" : "10051"
+  "Return Total Amount" : 212.56
 }, {
+  "ReturnId" : "10052",
   "Return Amount" : 875.0,
-  "Return Total Amount" : 904.85,
-  "ReturnId" : "10052"
+  "Return Total Amount" : 904.85
 } ]
