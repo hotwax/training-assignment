@@ -4,4 +4,6 @@
 
 ## Explanation:
 
-* 
+* In first operation **(shift)** i have assign a key to all objects of employees list. The key is nothing but the id of that object.
+
+* In the second operation **(remove)** i have removed the unwanted field `id` of every object.
