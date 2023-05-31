@@ -1,62 +1,47 @@
 [
-    {
-      "operation": "shift",
-      "spec": {
-        "products": {
-          "*": {
-            "id": {
-              "1001": {
-                "@2": "products[]"
-              },
-              "*": {
-                "@2": "products[&3].product[]"
-              }
+  {
+    "operation": "shift",
+    "spec": {
+      "products": {
+        "*": {
+          "id": {
+            "1001": {
+              "@2": "products[]"
+            },
+            "*": {
+              "@2": "products[&3].product[]"
             }
           }
         }
       }
+    }
     },
-    {
-      "operation": "modify-overwrite-beta",
-      "spec": {
-        "products": {
-          "*": {
-            "product": {
-              "*": {
-                "totals": "=divide(1,2)",
-                "price": "=divide(@(1,price),@(1,totals))"
-              }
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "products": {
+        "*": {
+          "product": {
+            "*": {
+              "price": "=doubleSum(@(1,price),@(1,price))"
             }
           }
         }
       }
-    },
-    {
-      "operation": "remove",
-      "spec": {
-        "products": {
-          "*": {
-            "product": {
-              "*": {
-                "totals": ""
-              }
-            }
-          }
-        }
-      }
+    }
     }, {
-      "operation": "shift",
-      "spec": {
-        "products": {
-          "*": {
-            "*": "products[&1].&",
-            "product": {
-              "*": {
-                "*": "products[&3].&"
-              }
+    "operation": "shift",
+    "spec": {
+      "products": {
+        "*": {
+          "*": "products[&1].&",
+          "product": {
+            "*": {
+              "*": "products[&3].&"
             }
           }
         }
       }
+    }
     }
   ]
