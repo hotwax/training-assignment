@@ -3,12 +3,12 @@
     "operation": "shift",
     "spec": {
       "person": {
-        "name": "name"
+        "name": "&"
       },
       "employee": {
         "office": {
-          "city": "office_city",
-          "state": "office_state"
+          "city": "&1_&",
+          "state": "&1_&"
         }
       }
     }
