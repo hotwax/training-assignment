@@ -1,0 +1,83 @@
+Input Json
+{
+    "employees": [
+        {
+            "id": "001",
+            "name": "John",
+            "department": "HR",
+            "phone": [
+                {
+                    "type": "home",
+                    "number": "555-555-1234"
+                },
+                {
+                    "type": "work",
+                    "number": "555-555-5678"
+                }
+            ]
+        },
+        {
+            "id": "002",
+            "name": "Jane",
+            "department": "Sales",
+            "phone": [
+                {
+                    "type": "home",
+                    "number": "555-555-4567"
+                },
+                {
+                    "type": "work",
+                    "number": "555-555-8901"
+                }
+            ]
+        }
+    ]
+}
+
+Json Spec
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "id": "employees.[#2].&",
+                    "name": "employees.[#2].&",
+                    "phone": {
+                        "*": {
+                            "@number": "employees.[#4].@type"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "*": "[#2].&",
+                    "home": "[#2].homePhone",
+                    "work": "[#2].workPhone"
+                }
+            }
+        }
+    }
+]
+
+Ouput Json
+[
+    {
+        "id": "001",
+        "name": "John",
+        "homePhone": "555-555-1234",
+        "workPhone": "555-555-5678"
+    },
+    {
+        "id": "002",
+        "name": "Jane",
+        "homePhone": "555-555-4567",
+        "workPhone": "555-555-8901"
+    }
+]

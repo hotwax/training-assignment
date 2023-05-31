@@ -1,0 +1,63 @@
+Input Json
+
+{
+    "products": [
+        {
+            "id": "1001",
+            "name": "Product 1",
+            "price": 10.99
+        },
+        {
+            "id": "1002",
+            "name": "Product 2",
+            "price": 15.99
+        },
+        {
+            "id": "1003",
+            "name": "Product 3",
+            "price": 20.99
+        }
+    ]
+}
+
+Json Spec
+[
+  {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+          "products": {
+              "*": {
+                  "price": "=doubleSum(@(1,price),@(1,price))"
+              }
+          }
+      }
+  },
+  {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+          "products": {
+              "[0]": {
+                  "price": "=divide(@(1,price),2)"
+              }
+          }
+      }
+  }
+]
+Output Json
+
+{
+    "products" : [ {
+      "id" : "1001",
+      "name" : "Product 1",
+      "price" : 10.99
+    }, {
+      "id" : "1002",
+      "name" : "Product 2",
+      "price" : 31.98
+    }, {
+      "id" : "1003",
+      "name" : "Product 3",
+      "price" : 41.98
+    } ]
+  }
+  

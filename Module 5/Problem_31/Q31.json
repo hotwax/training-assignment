@@ -1,0 +1,73 @@
+Input Json
+{
+    "items": [
+        {
+            "id": "1",
+            "name": "Book",
+            "prices": [
+                {
+                    "currency": "USD",
+                    "value": 10
+                },
+                {
+                    "currency": "EUR",
+                    "value": 8
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "Pen",
+            "prices": [
+                {
+                    "currency": "USD",
+                    "value": 2
+                },
+                {
+                    "currency": "EUR",
+                    "value": 1.5
+                }
+            ]
+        }
+    ]
+}
+
+Json Spec
+[
+    {
+        "operation": "modify-default-beta",
+        "spec": {
+            "items": {
+                "*": {
+                    "prices": {
+                        "*": {
+                            "temp": "=concat(@(3,id),'_',@(1,currency))"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "items": {
+                "*": {
+                    "prices": {
+                        "*": {
+                            "@value": "@temp"
+                        }
+                    }
+                }
+            }
+        }
+    }
+]
+
+Output Json
+{
+    "1_USD": 10,
+    "1_EUR": 8,
+    "2_USD": 2,
+    "2_EUR": 1.5
+}

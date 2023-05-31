@@ -1,0 +1,34 @@
+Input JSON
+{
+  "name": "John",
+  "age": 30,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  }
+}
+
+Jolt Spec
+[
+  {
+    "operation": "remove",
+    "spec": {
+      "address": {
+        "state": ""
+      }
+    }
+    }
+]
+
+Output JSON
+{
+  "name" : "John",
+  "age" : 30,
+  "address" : {
+    "street" : "123 Main St",
+    "city" : "Anytown",
+    "zip" : "12345"
+  }
+}
