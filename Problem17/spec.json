@@ -10,3 +10,18 @@
     }
  }
 ]
+
+Another approach 
+
+[
+  {
+    "operation": "default",
+    "spec": {
+      "products[]": {
+        "*": {
+          "available": false
+        }
+      }
+    }
+ }
+]

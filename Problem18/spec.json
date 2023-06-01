@@ -5,8 +5,7 @@
       "employees": {
         "*": {
           "temp": "=divide(@(1,salary),1000)",
-          "multi": "=divide(1,100)",
-          "ans": "=divide(@(1,temp),@(1,multi))",
+          "ans": "=divide(@(1,temp),0.01)",
           "salary": "=intSum(@(1,salary), @(1,ans))"
         }
       }

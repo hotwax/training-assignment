@@ -1,13 +1,30 @@
 [
   {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "temp": "=divide(1,@(1,returnQuantity))",
+        "Return Amount": "=divide(@(1,returnPrice),@(1,temp))",
+        "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))"
+      }
+    }
+  }
+  ,
+  {
     "operation": "shift",
     "spec": {
       "*": {
         "returnId": "[&1].Return Id",
-        "*": "[&1].&"
+        "Return Amount": "[&1].&",
+        "Return Total Amount": "[&1].&"
       }
     }
-  },
+  }
+]
+
+Another approch using #
+
+[
   {
     "operation": "modify-overwrite-beta",
     "spec": {
@@ -17,15 +34,15 @@
         "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))"
       }
     }
-  },
+  }
+  ,
   {
-    "operation": "remove",
+    "operation": "shift",
     "spec": {
       "*": {
-        "temp": "",
-        "returnPrice": "",
-        "returnTax": "",
-        "returnQuantity": ""
+        "returnId": "[#2].Return Id",
+        "Return Amount": "[#2].&",
+        "Return Total Amount": "[#2].&"
       }
     }
   }

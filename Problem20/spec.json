@@ -30,14 +30,52 @@
     "spec": {
       "*": "=recursivelySquashNulls"
     }
-	}
-,
+	},
   {
     "operation": "shift",
     "spec": {
-      "*": {
-        "*": "department[#2].&"
-      }
+      "*": "department.[]"
     }
 	}
+]
+
+another approch using #
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "department": {
+            "id": "@(1,id).&",
+            "name": "@(1,id).&",
+            "@(1,name)": "@(1,id).employee.[#3].name",
+            "@(1,age)": "@(1,id).employee.[#3].age"
+          }
+        }
+      }
+    }
+    },
+  {
+    "operation": "cardinality",
+    "spec": {
+      "*": {
+        "id": "ONE",
+        "name": "ONE"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": "=recursivelySquashNulls"
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": "department.[]"
+    }
+  }
 ]

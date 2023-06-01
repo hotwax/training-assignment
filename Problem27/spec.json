@@ -4,47 +4,65 @@
     "spec": {
       "*": {
         "temp": "=divide(1,@(1,returnQuantity))",
-        "temp1": "=divide(@(1,returnPrice),@(1,temp))",
-        "Return Amount": "=divide(@(1,returnPrice),@(1,temp))"
+        "Return Amount": "=divide(@(1,returnPrice),@(1,temp))",
+        "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))"
       }
     }
   }
- ,
+  ,
   {
     "operation": "shift",
     "spec": {
       "*": {
-        "temp1": "[&1].ans",
-        "returnTax": "[&1].ans",
         "returnId": "[&1].Return Id",
         "Return Amount": "[&1].&",
+        "Return Total Amount": "[&1].&",
         "country": {
           "USA": {
-            "#United States of America": "[&3].country"
+            "#United States of America": "[&3].Country"
           },
           "CA": {
-            "#Canada": "[&3].country"
+            "#Canada": "[&3].Country"
           },
           "": {
-            "#NA": "[&3].country"
+            "#NA": "[&3].Country"
           }
         }
       }
     }
-  },
+  }
+]
+
+Another approch using &
+[
   {
     "operation": "modify-overwrite-beta",
     "spec": {
       "*": {
-        "Return Total Amount": "=doubleSum(@(1,ans))"
+        "temp": "=divide(1,@(1,returnQuantity))",
+        "Return Amount": "=divide(@(1,returnPrice),@(1,temp))",
+        "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))"
       }
     }
   },
   {
-    "operation": "remove",
+    "operation": "shift",
     "spec": {
       "*": {
-        "ans": ""
+        "returnId": "[#2].Return Id",
+        "Return Amount": "[#2].&",
+        "Return Total Amount": "[#2].&",
+        "country": {
+          "USA": {
+            "#United States of America": "[#4].Country"
+          },
+          "CA": {
+            "#Canada": "[#4].Country"
+          },
+          "": {
+            "#NA": "[#4].Country"
+          }
+        }
       }
     }
   }

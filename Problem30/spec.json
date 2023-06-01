@@ -2,15 +2,13 @@
   {
     "operation": "shift",
     "spec": {
-      "person": {
-        "name": "&"
-      },
       "employee": {
+        "name": "&",
         "office": {
-          "city": "office_city",
-          "state": "office_state"
+          "city": "office_&",
+          "state": "office_&"
         }
       }
     }
-  }
+}
 ]

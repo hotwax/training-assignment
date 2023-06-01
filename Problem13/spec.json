@@ -4,16 +4,32 @@
     "spec": {
       "employees": {
         "*": {
-          "@": "employees.@(0,id)"
+          "name": "employees.@(1,id).&",
+          "department": "employees.@(1,id).&"
         }
       }
     }
-},
+  }
+]
+
+Another approach
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees.@(1,id).&"
+        }
+      }
+    }
+  },
   {
     "operation": "remove",
     "spec": {
       "employees": {
-        "00*": {
+        "*": {
           "id": ""
         }
       }

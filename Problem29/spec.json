@@ -3,11 +3,9 @@
     "operation": "shift",
     "spec": {
       "person": {
-        "name": "person_name",
-        "age": "person_age",
+        "*": "person_&",
         "address": {
-          "city": "person_address_city",
-          "state": "person_address_state"
+          "*": "person_address_&"
         }
       }
     }

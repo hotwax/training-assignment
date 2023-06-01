@@ -1,36 +1,33 @@
 [
   {
-    "operation": "modify-overwrite-beta",
+    "operation": "shift",
     "spec": {
       "hobbies": {
         "*": {
-          "hobby_name": "@(1,name)",
-          "hobby_level": "@(1,level)",
-          "id": "@(3,id)",
-          "name": "@(3,name)"
+          "name": "[#2].hobby_&",
+          "level": "[#2].hobby_&",
+          "@(3,id)": "[#2].id",
+          "@(3,name)": "[#2].name"
         }
       }
     }
-  },
-  {
-    "operation": "remove",
-    "spec": {
-      "id": "",
-      "name": "",
-      "hobbies": {
-        "*": {
-          "level": ""
-        }
-      }
-    }
-      }
-  ,
+}
+]
+
+Another approch
+
+[
   {
     "operation": "shift",
     "spec": {
       "hobbies": {
-        "*": "[&]"
+        "*": {
+          "name": "[&1].hobby_&",
+          "level": "[&1].hobby_&",
+          "@(3,id)": "[&1].id",
+          "@(3,name)": "[&1].name"
+        }
       }
     }
-      }
+}
 ]
