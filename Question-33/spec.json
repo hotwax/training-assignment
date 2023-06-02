@@ -1,37 +1,16 @@
 [
-    {
-      "operation": "modify-overwrite-beta",
-      "spec": {
-        "hobbies": {
+  {
+    "operation": "shift",
+    "spec": {
+      "hobbies": {
+        "*": {
+          "@(2,id)": "[&1].id",
+          "@(2,name)": "[&1].name",
           "*": {
-            "hobby_name": "@(1,name)",
-            "hobby_level": "@(1,level)",
-            "id": "@(3,id)",
-            "name": "@(3,name)"
+            "@": "[&2].hobby_&"
           }
         }
       }
-    },
-    {
-      "operation": "remove",
-      "spec": {
-        "id": "",
-        "name": "",
-        "hobbies": {
-          "*": {
-            "level": ""
-          }
-        }
-      }
-        }
-    ,
-    {
-      "operation": "shift",
-      "spec": {
-        "hobbies": {
-          "*": "[&]"
-        }
-      }
-        }
-  ]
-  
+    }
+  }
+]
