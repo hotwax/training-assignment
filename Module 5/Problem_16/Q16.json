@@ -1,0 +1,69 @@
+Input Json
+{
+  "employees": [
+    {
+      "id": "1001",
+      "name": "John Doe",
+      "age": 25,
+      "skills": [
+        {
+          "name": "Java",
+          "level": "Intermediate"
+        },
+        {
+          "name": "Python",
+          "level": "Expert"
+        }
+      ]
+    },
+    {
+      "id": "1002",
+      "name": "Jane Doe",
+      "age": 30,
+      "skills": [
+        {
+          "name": "Java",
+          "level": "Expert"
+        }
+      ]
+    }
+  ]
+}
+
+JSON Spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2,name)": "@name.@level[]"
+            }
+          }
+        }
+      }
+    }
+    }
+ ]
+
+
+Output
+{
+  "Java": {
+    "Intermediate": [
+      "John Doe"
+    ],
+    "Expert": [
+      "Jane Doe",
+      "John Doe"
+    ]
+  },
+  "Python": {
+    "Expert": [
+      "John Doe"
+    ]
+  }
+}

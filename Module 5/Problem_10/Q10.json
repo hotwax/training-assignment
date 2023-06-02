@@ -1,0 +1,70 @@
+Input JSON 
+{
+  "name": "John Smith",
+  "age": 35,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  },
+  "phone_numbers": [
+    {
+      "type": "home",
+      "number": "555-1234"
+    },
+    {
+      "type": "work",
+      "number": "555-5678"
+    }
+  ]
+}
+
+Jolt Spec
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "fullName": "=split(' ',@(2,name))",
+      "first_name": "=firstElement(@(1,fullName))",
+      "last_name": "=lastElement(@(1,fullName))",
+      "phone_number_count": "=size(@(1,phone_numbers))"
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "first_name": "&",
+      "last_name": "&",
+      "age": "&",
+      "address": "&",
+      "phone_numbers": "&",
+      "phone_number_count": "&"
+    }
+  }
+
+]
+
+Output JSON
+{
+  "first_name": "John",
+  "last_name": "Smith",
+  "age": 35,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  },
+  "phone_numbers": [
+    {
+      "type": "home",
+      "number": "555-1234"
+    },
+    {
+      "type": "work",
+      "number": "555-5678"
+    }
+  ],
+  "phone_number_count": 2
+}

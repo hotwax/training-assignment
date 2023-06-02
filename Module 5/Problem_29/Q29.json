@@ -1,0 +1,35 @@
+Input Json
+{
+  "person": {
+      "name": "John Doe",
+      "age": 30,
+      "address": {
+          "city": "New York",
+          "state": "NY"
+      }
+  }
+}
+
+Json Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "person": {
+        "name": "person_name",
+        "age": "person_age",
+        "address": {
+          "*": "person_address_&"
+        }
+      }
+    }
+    }
+]
+
+Output Json
+{
+  "person_name": "John Doe",
+  "person_age": 30,
+  "person_address_city": "New York",
+  "person_address_state": "NY"
+}

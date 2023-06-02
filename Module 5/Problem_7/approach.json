@@ -1,0 +1,7 @@
+### Number of operations: 2
+1. modify-overwrite-beta
+2. shift
+
+### Approach
+1. The modify-overwrite-beta operation is used to split the email id in the input json based on the seperator '@'.
+2. The shift operation is used in order to change the required keys and to use the second element of the list Email to be used as the value of the key Domain.
