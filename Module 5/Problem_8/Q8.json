@@ -28,6 +28,7 @@ Transformation:
           "totalBonus": 1000
         },
         "[1]": {
+          "department": "Marketing",
           "bonus": 1500,
           "totalBonus": 1500
         },
@@ -57,18 +58,25 @@ Transformation:
     }
   }]
 
+
 Output:
 {
   "employees" : [ {
-    "name" : [ "John Doe", "Jane Smith", "Bob Johnson" ]
-  }, {
-    "salary" : [ 50000, 60000 ],
-    "department" : "IT"
-  }, {
+    "name" : "John Doe",
+    "salary" : 50000,
     "department" : "Sales",
-    "bonus" : [ 1500, 900 ]
-  }, {
     "bonus" : 1000
+  }, {
+    "name" : "Jane Smith",
+    "salary" : 60000,
+    "department" : "Marketing",
+    "bonus" : 1500
+  }, {
+    "name" : "Bob Johnson",
+    "department" : "IT",
+    "salary" : 45000,
+    "bonus" : 900
   } ],
   "totalBonus" : 3400
 }
+

@@ -27,7 +27,7 @@ Jolt Spec
       "employees": {
         "*": {
           "temp": "=divideAndRound(0,@(1,salary),10)",
-          "salary": "=doubleSum(@(1,salary),@(1,temp))"
+          "salary": "=intSum(@(1,salary),@(1,temp))"
         }
       }
     }
@@ -35,27 +35,28 @@ Jolt Spec
   {
     "operation": "remove",
     "spec": {
-      "temp": ""
+      "employees": {
+        "*": {
+          "temp": ""
+        }
+      }
     }
   }
-] 
+]
 
 Output JSON
 {
   "employees" : [ {
     "name" : "John",
     "age" : 30,
-    "salary" : 5500.0,
-    "temp" : 500.0
+    "salary" : 5500
   }, {
     "name" : "Jane",
     "age" : 35,
-    "salary" : 6600.0,
-    "temp" : 600.0
+    "salary" : 6600
   }, {
     "name" : "Bob",
     "age" : 40,
-    "salary" : 7700.0,
-    "temp" : 700.0
+    "salary" : 7700
   } ]
 }

@@ -43,13 +43,12 @@ Jolt Spec
     }
  ]
  Output JSON
-  [ {
-    "Name" : "name",
-    "Age" : "age",
-    "Domain" : "example.com"
-  }, {
-    "Name" : "name",
-    "Age" : "age",
-    "Domain" : "example.com"
-  } 
-  ]
+ [ {
+  "Name" : "John Doe",
+  "Age" : 23,
+  "Domain" : "example.com"
+}, {
+  "Name" : "Jane Smith",
+  "Age" : 25,
+  "Domain" : "example.com"
+} ]

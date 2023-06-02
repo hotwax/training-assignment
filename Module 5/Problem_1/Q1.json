@@ -80,6 +80,11 @@ json Spec:
     "spec": {
       "orders": {
         "*": {
+          "items": {
+            "*": {
+              "price": "=toDouble(@(1,price))"
+            }
+          },
           "itemTemp": {
             "*": {
               "inverseValue": "=divide(1,@(1,price))",
@@ -137,6 +142,7 @@ json Spec:
     }
 ]
 
+
 Output:
 {
   "orders" : [ {
@@ -144,21 +150,20 @@ Output:
     "orderDate" : "2022-02-20T12:34:56Z",
     "customer" : {
       "customerId" : 1,
-      "firstName" : "John",
-      "lastName" : "Doe",
       "email" : "johndoe@example.com",
-      "address" : "123 Main St Anytown CA 12345"
+      "address" : "123 Main St Anytown CA 12345",
+      "fullname" : "John Doe"
     },
     "items" : [ {
       "itemId" : 1,
       "name" : "Product A",
       "quantity" : 2,
-      "price" : 10
+      "price" : 10.0
     }, {
       "itemId" : 2,
       "name" : "Product B",
       "quantity" : 1,
-      "price" : 20
+      "price" : 20.0
     } ],
     "total" : 40.0
   }, {
@@ -166,16 +171,15 @@ Output:
     "orderDate" : "2022-02-21T09:12:34Z",
     "customer" : {
       "customerId" : 2,
-      "firstName" : "Jane",
-      "lastName" : "Smith",
       "email" : "janesmith@example.com",
-      "address" : "456 Oak St Somewhere NY 67890"
+      "address" : "456 Oak St Somewhere NY 67890",
+      "fullname" : "Jane Smith"
     },
     "items" : [ {
       "itemId" : 3,
       "name" : "Product C",
       "quantity" : 3,
-      "price" : 15
+      "price" : 15.0
     } ],
     "total" : 45.0
   } ]
