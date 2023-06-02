@@ -1,0 +1,36 @@
+//json input
+{
+  "name": "John",
+  "age": 30,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  }
+}
+
+
+//json output
+{
+  "name" : "John",
+  "age" : 30,
+  "address" : {
+    "street" : "123 Main St",
+    "city" : "Anytown",
+    "zip" : "12345"
+  }
+}
+
+
+//json spec
+[
+  {
+    "operation": "remove",
+    "spec": {
+      "address": {
+        "state": ""
+      }
+    }
+  }
+]

@@ -1,0 +1,92 @@
+//json input
+[
+    {
+      "restaurant": {
+        "rating": {
+          "value": 9
+        },
+        "address": {
+          "value": "India"
+        }
+      },
+      "itemsList": [
+        {
+          "itemName": "Example 11",
+          "itemPrice": 120
+        },
+        {
+          "itemName": "Example 12",
+          "itemPrice": 150
+        }
+      ]
+    },
+    {
+      "restaurant": {
+        "rating": {
+          "value": 7
+        },
+        "address": {
+          "value": "United States"
+        }
+      },
+      "itemsList": [
+        {
+          "itemName": "Example 21",
+          "itemPrice": 100
+        },
+        {
+          "itemName": "Example 22",
+          "itemPrice": 190
+        }
+      ]
+    }
+  ]
+
+  //json output
+  [ {
+    "Restaurant Rating" : 9,
+    "Restaurant country" : "India",
+    "Dishes" : [ {
+      "Dish Name" : "Example 11",
+      "Dish Price" : 120
+    }, {
+      "Dish Name" : "Example 12",
+      "Dish Price" : 150
+    } ]
+  }, {
+    "Restaurant Rating" : 7,
+    "Restaurant country" : "United States",
+    "Dishes" : [ {
+      "Dish Name" : "Example 21",
+      "Dish Price" : 100
+    }, {
+      "Dish Name" : "Example 22",
+      "Dish Price" : 190
+    } ]
+  } ]
+
+  
+//json spec
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "restaurant": {
+            "rating": {
+              "value": "[#4].Restaurant Rating"
+            },
+            "address": {
+              "value": "[#4].Restaurant country"
+            }
+          },
+          "itemsList": {
+            "*": {
+              "itemName": "[#4].Dishes.[#2].Dish Name",
+              "itemPrice": "[#4].Dishes.[#2].Dish Price"
+            }
+          }
+        }
+      }
+    }
+    ]

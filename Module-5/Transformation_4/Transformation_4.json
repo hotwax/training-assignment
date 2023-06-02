@@ -1,0 +1,42 @@
+// json input
+
+{
+  "name": "John",
+  "age": 35,
+  "hobbies": [
+    "reading",
+    "movies",
+    "travel"
+  ]
+}
+
+//json output
+{
+  "Name" : "John",
+  "Age" : 35,
+  "Hobbies" : [ {
+    "Name" : "reading"
+  }, {
+    "Name" : "movies"
+  }, {
+    "Name" : "travel"
+  } ]
+}
+
+
+//json spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "hobbies": {
+        "*": {
+          "@": "Hobbies[].Name"
+        }
+      }
+    }
+   }
+ ]

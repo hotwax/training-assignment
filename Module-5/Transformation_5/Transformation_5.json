@@ -1,0 +1,48 @@
+//json input
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "johndoe@example.com",
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  }
+}
+
+//json output
+{
+  "email" : "johndoe@example.com",
+  "city" : "Anytown",
+  "zip" : "12345",
+  "fullname" : "John Doe"
+}
+
+
+//json spec
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "fullname": "=concat(@(1,firstName),' ',@(1,lastName))"
+    }
+   },
+  {
+    "operation": "shift",
+    "spec": {
+      "address": {
+        "city": "&",
+        "zip": "&"
+      },
+      "*": "&"
+     }
+    },
+  {
+    "operation": "remove",
+    "spec": {
+      "firstName": "",
+      "lastName": ""
+  }
+ }
+]

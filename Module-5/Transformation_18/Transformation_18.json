@@ -1,0 +1,64 @@
+//json input
+{
+    "employees": [
+      {
+        "name": "John",
+        "age": 30,
+        "salary": 5000
+      },
+      {
+        "name": "Jane",
+        "age": 35,
+        "salary": 6000
+      },
+      {
+        "name": "Bob",
+        "age": 40,
+        "salary": 7000
+      }
+    ]
+  }
+
+
+  //json output
+  {
+    "employees" : [ {
+      "name" : "John",
+      "age" : 30,
+      "salary" : 5500
+    }, {
+      "name" : "Jane",
+      "age" : 35,
+      "salary" : 6600
+    }, {
+      "name" : "Bob",
+      "age" : 40,
+      "salary" : 7700
+    } ]
+  }
+
+  
+  //json spec
+  [
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "TenPercent": "=divide(@(1,salary),10)",
+            "salary": "=intSum(@(1,TenPercent),@(1,salary))"
+          }
+        }
+      }
+    },
+    {
+      "operation": "remove",
+      "spec": {
+        "employees": {
+          "*": {
+            "TenPercent": ""
+          }
+        }
+      }
+    }
+  ]

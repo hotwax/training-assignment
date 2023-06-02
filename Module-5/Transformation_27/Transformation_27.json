@@ -1,0 +1,84 @@
+//json input
+[
+    {
+      "returnId": "10051",
+      "returnQuantity": 2,
+      "returnPrice": 100,
+      "returnTax": 12.56,
+      "country": "USA"
+    },
+    {
+      "returnId": "10052",
+      "returnQuantity": 25,
+      "returnPrice": 35,
+      "returnTax": 29.85,
+      "country": "CA"
+    },
+    {
+      "returnId": "10053",
+      "returnQuantity": 5,
+      "returnPrice": 55,
+      "returnTax": 9.85,
+      "country": ""
+    }
+  ]
+
+
+
+  //json output
+  [ {
+    "Country" : "United States od America",
+    "Return Amount" : 200.0,
+    "Return Total Amount" : 212.56,
+    "ReturnId" : "10051"
+  }, {
+    "Country" : "Canada",
+    "Return Amount" : 875.0,
+    "Return Total Amount" : 904.85,
+    "ReturnId" : "10052"
+  }, {
+    "Country" : "NA",
+    "Return Amount" : 275.0,
+    "Return Total Amount" : 284.85,
+    "ReturnId" : "10053"
+  } ]
+
+  
+  //json spec
+  [
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "temp": "=divide(1,@(1,returnQuantity))",
+          "Return Amount": "=divideAndRound(2,@(1,returnPrice),@(1,temp))",
+          "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))",
+          "ReturnId": "@(1,returnId)"
+        },
+        "[0]": {
+          "Country": "United States od America"
+        },
+        "[1]": {
+          "Country": "Canada"
+        },
+        "[2]": {
+          "Country": "NA"
+        }
+      }
+      },
+  
+    {
+      "operation": "remove",
+      "spec": {
+        "*": {
+          "returnId": "",
+          "returnQuantity": "",
+          "returnPrice": "",
+          "temp": "",
+          "returnTax": "",
+          "country": ""
+        }
+      }
+    }
+  ]
+  

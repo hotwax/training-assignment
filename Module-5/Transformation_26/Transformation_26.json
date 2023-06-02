@@ -1,0 +1,52 @@
+//json input
+[
+    {
+      "returnId": "10051",
+      "returnQuantity": 2,
+      "returnPrice": 100,
+      "returnTax": 12.56
+    },
+    {
+      "returnId": "10052",
+      "returnQuantity": 25,
+      "returnPrice": 35,
+      "returnTax": 29.85
+    }
+  ]
+
+  //json output
+  [ {
+    "Return Id" : "10051",
+    "Return Amount" : 200.0,
+    "Return Total Amount" : 212.56
+  }, {
+    "Return Id" : "10052",
+    "Return Amount" : 875.0,
+    "Return Total Amount" : 904.85
+  } ]
+
+  
+  //json spec
+  [
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "Temp": "=divide(1,@(1,returnQuantity))",
+          "Return Amount": "=divide(@(1,returnPrice),@(1,Temp))",
+          "Return Total Amount": "=doubleSum(@(1,returnTax),@(1,Return Amount))"
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "returnId": "[#2].Return Id",
+          "Return Amount": "[#2].&",
+          "Return Total Amount": "[#2].&"
+        }
+      }
+    }
+  ]
+  
