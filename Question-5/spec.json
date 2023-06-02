@@ -1,0 +1,21 @@
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "fullName": "=concat(@(1,firstName),' ',@(1,lastName))"
+      }
+      },
+    {
+      "operation": "shift",
+      "spec": {
+        "fullName": "fullName",
+        "email": "email",
+        "address": {
+          "city": "city",
+          "zip": "zip"
+        }
+      }
+      }
+  
+  ]
+  

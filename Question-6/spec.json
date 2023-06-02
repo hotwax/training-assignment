@@ -1,0 +1,30 @@
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "users": {
+          "*": {
+            "Address": "=concat(@(1,address.street),', ',@(1,address.city),', ',@(1,address.state),', ',@(1,address.zip))"
+          }
+        }
+      }
+      },
+    {
+      "operation": "shift",
+      "spec": {
+        "users": {
+          "*": {
+            "name": "[&1].Name",
+            "Address": "[&1].Address",
+            "hobbies": {
+              "*": {
+                "name": "[&3].Hobbies"
+              }
+            }
+          }
+        }
+      }
+      }
+  
+  ]
+  

@@ -1,0 +1,26 @@
+[
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "Return Id": "@(1,returnId)",
+          "divisor": "=divide(1,@(1,returnQuantity))",
+          "Return Amount": "=divide(@(1,returnPrice), @(1,divisor))",
+          "Return Total Amount": "=doubleSum(@(1,Return Amount), @(1,returnTax))"
+        }
+      }
+      },
+    {
+      "operation": "remove",
+      "spec": {
+        "*": {
+          "returnId": "",
+          "returnQuantity": "",
+          "returnPrice": "",
+          "returnTax": "",
+          "divisor": ""
+        }
+      }
+      }
+  ]
+  

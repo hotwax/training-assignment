@@ -1,0 +1,78 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": "@(0,customerId)[]"
+      }
+    }
+   },
+
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "*": "customers.[#2].orders[]",
+        "$": "customers.[#2].id"
+      }
+    }
+   },
+  {
+    "operation": "shift",
+    "spec": {
+      "customers": {
+        "@": "&",
+        "*": {
+          "orders": {
+            "*": {
+              "totalPrice": "&4.[#4].totalAmount"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "customers": {
+        "@": "&",
+        "*": {
+          "id": {
+            "customer1": {
+              "#John Smith": "&4.[#4].name"
+            },
+            "customer2": {
+              "#Jane Doe": "&4.[#4].name"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "customers": {
+        "*": {
+          "totalAmount": "=intSum(@(1,totalAmount))"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "customers": {
+        "*": {
+          "orders": {
+            "*": {
+              "customerId": ""
+            }
+          }
+        }
+      }
+    }
+  }
+
+]

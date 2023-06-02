@@ -1,0 +1,13 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "name": "employees.@(1,id).&",
+          "department": "employees.@(1,id).&"
+        }
+      }
+    }
+  }
+]

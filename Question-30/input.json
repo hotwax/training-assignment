@@ -1,0 +1,19 @@
+{
+    "person": {
+      "name": "John Doe",
+      "age": 30,
+      "address": {
+        "city": "New York",
+        "state": "NY"
+      }
+    }
+  
+    "employee": {
+      "name": "Jane Doe",
+      "salary": 50000,
+      "office": {
+        "city": "San Francisco",
+        "state": "CA"
+      }
+    }
+  }

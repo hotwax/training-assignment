@@ -1,0 +1,67 @@
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "department": "Marketting",
+          "salary": 45000
+        }
+      }
+    }
+    },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "onePercent": "=divide(@(1,salary),100)",
+          "check": "@(1,department)"
+        }
+      }
+    }
+    },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees.[&1].&",
+          "check": {
+            "Marketting": {
+              "#2.5": "employees.[&3].bonusPercentage"
+            },
+            "*": {
+              "#2": "employees.[&3].bonusPercentage"
+            }
+          }
+        }
+      }
+    }
+    },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "temp": "=divide(1,@(1,onePercent))",
+          "bonusInDecimal": "=divide(@(1,bonusPercentage),@(1,temp))",
+          "bonus": "=toInteger(@(1,bonusInDecimal))"
+        }
+      }
+    }
+    },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "onePercent": "",
+          "temp": "",
+          "bonusPercentage": "",
+          "bonusInDecimal": ""
+        }
+      }
+    }
+    }
+]

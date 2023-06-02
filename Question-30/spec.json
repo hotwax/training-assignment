@@ -1,0 +1,15 @@
+[{
+    "operation": "shift",
+    "spec": {
+      "person": {
+        "name": "name"
+      },
+      "employee": {
+        "office": {
+          "city": "office_city",
+          "state": "office_state"
+        }
+      }
+    }
+  }]
+  

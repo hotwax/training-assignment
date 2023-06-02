@@ -1,0 +1,15 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "Name",
+        "age": "Age",
+        "hobbies": {
+          "*": {
+            "@": "Hobbies[#2].Name"
+          }
+        }
+      }
+      }
+  ]
+  

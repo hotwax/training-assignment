@@ -1,0 +1,13 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "restaurant": {
+          "rating": {
+            "value": "Restaurant Rating"
+          }
+        }
+      }
+      }
+  ]
+  

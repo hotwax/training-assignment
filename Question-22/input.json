@@ -1,0 +1,22 @@
+[
+    {
+      "restaurant": {
+        "rating": {
+          "value": 9
+        },
+        "address": {
+          "value": "India"
+        }
+      }
+    },
+    {
+      "restaurant": {
+        "rating": {
+          "value": 7
+        },
+        "address": {
+          "value": "United States"
+        }
+      }
+    }
+  ]

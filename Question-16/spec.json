@@ -1,0 +1,18 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "skills": {
+            "*": {
+              "@(2,name)": "@(1,name).@(1,level).[]"
+            }
+          }
+        }
+      }
+    }
+  }
+]
+
+
