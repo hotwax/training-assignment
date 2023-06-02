@@ -33,5 +33,34 @@
         }
       }
     }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "orders": {
+        "*": {
+          "total": "=doubleSum"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "orders": {
+        "*": {
+          "customer": {
+            "firstName": "",
+            "lastName": ""
+          },
+          "items": {
+            "*": {
+              "temp": ""
+            }
+          }
+        }
+      }
+    }
   }
+
 ]
