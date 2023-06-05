@@ -28,7 +28,7 @@
           "items": {
             "*": {
               "*": "orders[&3].items[&1].&",
-              "newprice": "orders[&3].&"
+              "newprice": "orders[&3].total"
             }
           }
         }
@@ -40,7 +40,7 @@
     "spec": {
       "orders": {
         "*": {
-          "newprice": "=doubleSum(@(1,newprice))"
+          "total": "=doubleSum(@(1,total))"
         }
       }
     }

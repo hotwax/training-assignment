@@ -17,6 +17,6 @@ newPrice- using divide function to multiply the inverse of quantity to price and
 
 2. Used shift operation then to structure the fields to new location by shifting the newPrice in orders list.
 
-3. used modify-overwrite-beta to modify newPrice to double.
+3. used modify-overwrite-beta to modify total to double.
 
 4. Used remove operation removes unnecessary fields such as 'inverse' field from each item and the 'firstName' and 'lastName' fields from the customer.

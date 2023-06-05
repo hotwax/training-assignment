@@ -19,7 +19,7 @@
       "quantity" : 1,
       "price" : 20.0
     } ],
-    "newprice" : 40.0
+    "total" : 40.0
   }, {
     "orderId" : 2,
     "orderDate" : "2022-02-21T09:12:34Z",
@@ -35,6 +35,6 @@
       "quantity" : 3,
       "price" : 15.0
     } ],
-    "newprice" : 45.0
+    "total" : 45.0
   } ]
 }
