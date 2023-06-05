@@ -5,6 +5,6 @@
 
 ### Explanation:
 
-1. In modify-overwrite-beta, concate the firstname and lastname value into FullName key.
+1. In modify-overwrite-beta, concate the firstname and lastname value into fullName key.
 
-2. In shift operation, include FullName , email , street and city into single object.
+2. In shift operation, include fullName , email , city and zip into single object.

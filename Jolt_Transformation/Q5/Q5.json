@@ -19,30 +19,32 @@ Input
     {
       "operation": "modify-overwrite-beta",
       "spec": {
-        "FullName": "=concat(@(1,firstName),' ',@(1,lastName))"
+        "fullName": "=concat(@(1,firstName),' ',@(1,lastName))"
       }
     },
     {
       "operation": "shift",
       "spec": {
-        "FullName": "&",
+        "fullName": "&",
         "email": "&",
         "address": {
-          "street": "&",
-          "city": "&"
+          "city": "&",
+          "zip": "&"
         }
       }
     }
   ]
+
   
 
 
   Output
 
   {
-    "FullName" : "John Doe",
+    "fullName" : "John Doe",
     "email" : "johndoe@example.com",
-    "street" : "123 Main St",
-    "city" : "Anytown"
+    "city" : "Anytown",
+    "zip" : "12345"
   }
+  
   
