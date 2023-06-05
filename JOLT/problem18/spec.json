@@ -5,7 +5,7 @@
       "employees": {
         "*": {
           "increment": "=divide(@(1,salary),10)",
-          "salary": "=doubleSum(@(1,salary),@(1,increment))"
+          "salary": "=intSum(@(1,salary),@(1,increment))"
         }
       }
     }
