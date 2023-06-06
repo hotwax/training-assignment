@@ -1,2 +1,2 @@
 # training-assignment
-Traning assignment
+Training assignment
