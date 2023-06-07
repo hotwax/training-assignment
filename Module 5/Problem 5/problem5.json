@@ -1,4 +1,5 @@
 Input:
+
 {
   "firstName": "John",
   "lastName": "Doe",
@@ -24,11 +25,9 @@ Transformation:
   {
     "operation": "shift",
     "spec": {
-      "fullname": "fullname",
-      "email": "email",
+      "fullname|email": "&",
       "address": {
-        "city": "city",
-        "zip": "zip"
+        "city|zip":"&"
       }
     }
   }
