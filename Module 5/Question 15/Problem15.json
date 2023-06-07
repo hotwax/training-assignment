@@ -80,7 +80,7 @@ Json Spec
                     "orders": {
                         "*": {
                             "*": "customers[#4].orders[#2].&",
-                            "totalPrice": "customers[#4].totalAmount"
+                            "@totalPrice": "customers[#4].totalAmount"
                         }
                     }
                 }
@@ -117,24 +117,20 @@ Json Spec
                 }
             }
         }
-    },
-    {
-        "operation": "sort"
     }
 ]
-
+  
   
 Output Json
 
 {
     "customers": [
         {
-            "id": "customer1",
-            "name": "John Doe",
+            "totalAmount": 130,
             "orders": [
                 {
-                    "date": "2022-01-01T00:00:00Z",
                     "id": "order1",
+                    "date": "2022-01-01T00:00:00Z",
                     "items": [
                         {
                             "id": "item1",
@@ -148,11 +144,12 @@ Output Json
                             "price": 20,
                             "quantity": 1
                         }
-                    ]
+                    ],
+                    "totalPrice": 40
                 },
                 {
-                    "date": "2022-02-01T00:00:00Z",
                     "id": "order2",
+                    "date": "2022-02-01T00:00:00Z",
                     "items": [
                         {
                             "id": "item3",
@@ -160,18 +157,19 @@ Output Json
                             "price": 30,
                             "quantity": 3
                         }
-                    ]
+                    ],
+                    "totalPrice": 90
                 }
             ],
-            "totalAmount": 130
+            "name": "John Doe",
+            "id": "customer1"
         },
         {
-            "id": "customer2",
-            "name": "Jane Doe",
+            "totalAmount": 160,
             "orders": [
                 {
-                    "date": "2022-03-01T00:00:00Z",
                     "id": "order3",
+                    "date": "2022-03-01T00:00:00Z",
                     "items": [
                         {
                             "id": "item4",
@@ -179,10 +177,12 @@ Output Json
                             "price": 40,
                             "quantity": 4
                         }
-                    ]
+                    ],
+                    "totalPrice": 160
                 }
             ],
-            "totalAmount": 160
+            "name": "Jane Doe",
+            "id": "customer2"
         }
     ]
 }

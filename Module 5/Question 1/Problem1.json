@@ -81,7 +81,8 @@ Json Spec: [
                     "itemTemp": {
                         "*": {
                             "inverseValue": "=divide(1,@(1,price))",
-                            "temp": "=divideAndRound(2, @(1,quantity), @(1,inverseValue))"
+                            "temp": "=divideAndRound(2, @(1,quantity), @(1,inverseValue))",
+                            "price": "=toDouble(@(1,price))"
                         }
                     }
                 }
@@ -129,7 +130,7 @@ Json Spec: [
         }
     }
 ]
-
+ 
 
 Output Json: {
     "orders": [
@@ -148,13 +149,13 @@ Output Json: {
                     "itemId": 1,
                     "name": "Product A",
                     "quantity": 2,
-                    "price": 10
+                    "price": 10.0
                 },
                 {
                     "itemId": 2,
                     "name": "Product B",
                     "quantity": 1,
-                    "price": 20
+                    "price": 20.0
                 }
             ],
             "total": 40.0
@@ -174,7 +175,7 @@ Output Json: {
                     "itemId": 3,
                     "name": "Product C",
                     "quantity": 3,
-                    "price": 15
+                    "price": 15.0
                 }
             ],
             "total": 45.0
