@@ -25,20 +25,22 @@ Transformation:
   {
     "operation": "shift",
     "spec": {
+      "person": {
+        "name": "&"
+      },
       "employee": {
-        "name": "&",
         "office": {
-          "*": "office-&"
+          "*": "&1-&"
         }
       }
     }
   }
 ]
 
-
 Output:
+
 {
-  "name" : "Jane Doe",
+  "name" : "John Doe",
   "office-city" : "San Francisco",
   "office-state" : "CA"
 }
