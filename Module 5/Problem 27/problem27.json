@@ -27,7 +27,6 @@ Input:
 
 Transformation:
 
-
 [
   {
     "operation": "modify-overwrite-beta",
@@ -36,30 +35,29 @@ Transformation:
         "temp": "=divide(1,@(1,returnQuantity))",
         "Return Amount": "=divideAndRound(2,@(1,returnPrice),@(1,temp))",
         "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))",
-        "ReturnId": "@(1,returnId)"
-      },
-      "[0]": {
-        "Country": "United States od America"
-      },
-      "[1]": {
-        "Country": "Canada"
-      },
-      "[2]": {
-        "Country": "NA"
+        "Return Id": "@(1,returnId)"
       }
     }
     },
 
   {
-    "operation": "remove",
+    "operation": "shift",
     "spec": {
       "*": {
-        "returnId": "",
-        "returnQuantity": "",
-        "returnPrice": "",
-        "temp": "",
-        "returnTax": "",
-        "country": ""
+        "Return Id": "[#2].&",
+        "Return Amount": "[#2].&",
+        "Return Total Amount": "[#2].&",
+        "country": {
+          "USA": {
+            "#United States of America": "[#4].Country"
+          },
+          "CA": {
+            "#Canada": "[#4].Country"
+          },
+          "*": {
+            "#NA": "[#4].Country"
+          }
+        }
       }
     }
   }
@@ -69,18 +67,18 @@ Transformation:
 Output:
 
 [ {
-  "Country" : "United States od America",
+  "Return Id" : "10051",
   "Return Amount" : 200.0,
   "Return Total Amount" : 212.56,
-  "ReturnId" : "10051"
+  "Country" : "United States of America"
 }, {
-  "Country" : "Canada",
+  "Return Id" : "10052",
   "Return Amount" : 875.0,
   "Return Total Amount" : 904.85,
-  "ReturnId" : "10052"
+  "Country" : "Canada"
 }, {
-  "Country" : "NA",
+  "Return Id" : "10053",
   "Return Amount" : 275.0,
   "Return Total Amount" : 284.85,
-  "ReturnId" : "10053"
+  "Country" : "NA"
 } ]
