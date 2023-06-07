@@ -55,12 +55,10 @@ Transformation:
     "spec": {
       "employees": {
         "*": {
-          "id": "employees.[#2].&",
-          "name": "employees.[#2].&",
-          "department": "employees[#2].&",
+          "*": "&2.[#2].&",
           "phone": {
             "*": {
-              "@number": "employees.[#4].@type"
+              "@number": "&4.[#4].@type"
             }
           }
         }
@@ -69,9 +67,7 @@ Transformation:
   }
 ]
 
-
 Output:
-
 {
   "employees" : [ {
     "id" : "001",
@@ -87,3 +83,5 @@ Output:
     "workPhone" : "555-555-8901"
   } ]
 }
+
+
