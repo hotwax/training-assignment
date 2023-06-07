@@ -1,0 +1,19 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "name",
+        "hobby_*": "&(0,1).name",
+        "level_*": "&(0,1).level"
+      }
+      },
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "name",
+        "*": {
+          "@": "Hobbies[]"
+        }
+      }
+    }
+ ]

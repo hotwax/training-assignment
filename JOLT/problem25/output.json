@@ -1,0 +1,21 @@
+[ {
+    "Restaurant Rating" : 9,
+    "Restaurant Country" : "India",
+    "Dishes" : [ {
+      "Dish Name" : "Example 11",
+      "Dish Price" : 120
+    }, {
+      "Dish Name" : "Example 12",
+      "Dish Price" : 150
+    } ]
+  }, {
+    "Restaurant Rating" : 7,
+    "Restaurant Country" : "United States",
+    "Dishes" : [ {
+      "Dish Name" : "Example 21",
+      "Dish Price" : 100
+    }, {
+      "Dish Name" : "Example 22",
+      "Dish Price" : 190
+    } ]
+  } ]

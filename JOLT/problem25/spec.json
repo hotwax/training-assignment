@@ -1,0 +1,23 @@
+[
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "restaurant": {
+            "rating": {
+              "value": "[&3].Restaurant Rating"
+            },
+            "address": {
+              "value": "[&3].Restaurant Country"
+            }
+          },
+          "itemsList": {
+            "*": {
+              "itemName": "[&3].Dishes[&1].Dish Name",
+              "itemPrice": "[&3].Dishes[&1].Dish Price"
+            }
+          }
+        }
+      }
+    }
+]

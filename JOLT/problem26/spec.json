@@ -1,0 +1,22 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "quantity": "=divide(1,@(1,returnQuantity))",
+        "returnPrice": "=divide(@(1,returnPrice),@(1,quantity))",
+        "returnTotal": "=doubleSum(@(1,returnPrice),@(1,returnTax))"
+      }
+    }
+    },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "returnId": "[&1].Return Id",
+        "returnPrice": "[&1].Return Amount",
+        "returnTotal": "[&1].Return Total Amount"
+      }
+    }
+    }
+  ]
