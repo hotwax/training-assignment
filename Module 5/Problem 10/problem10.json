@@ -27,17 +27,21 @@ Transformation:
   {
     "operation": "modify-overwrite-beta",
     "spec": {
-      "fullname": "=split(' ',@(2,name))",
-      "first_name": "=firstElement(@(2,fullname))",
-      "last_name": "=lastElement(@(2,fullname))",
+      "fullname": "=split(' ',@(1,name))",
+      "first_name": "=firstElement(@(1,fullname))",
+      "last_name": "=lastElement(@(1,fullname))",
       "phone_number_count": "=size(1,phone_numbers)"
     }
   },
   {
-    "operation": "remove",
+    "operation": "shift",
     "spec": {
-      "fullname": "",
-      "name": ""
+      "first_name": "&",
+      "last_name": "&",
+      "age": "&",
+      "address": "&",
+      "phone_numbers": "&",
+      "phone_number_count": "&"
     }
   }
 ]
@@ -46,6 +50,8 @@ Transformation:
 Ouput:
 
 {
+  "first_name" : "John",
+  "last_name" : "Smith",
   "age" : 35,
   "address" : {
     "street" : "123 Main St",
@@ -60,8 +66,5 @@ Ouput:
     "type" : "work",
     "number" : "555-5678"
   } ],
-  "first_name" : "John",
-  "last_name" : "Smith",
   "phone_number_count" : 2
 }
-
