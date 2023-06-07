@@ -25,17 +25,14 @@ Transformation:
     "spec": {
       "employees": {
         "[0]": {
-          "bonus": 1000,
-          "tempBonus": 1000
+          "bonus": 1000
         },
         "[1]": {
           "bonus": 1500,
-          "tempBonus": 1500,
           "department": "Marketing"
         },
         "[2]": {
           "bonus": 900,
-          "tempBonus": 900,
           "salary": 45000
         }
       }
@@ -47,7 +44,7 @@ Transformation:
       "employees": {
         "*": {
           "*": "employees[&1].&",
-          "tempBonus": "totalBonus[]"
+          "@bonus": "totalBonus[]"
         }
       }
     }
@@ -58,13 +55,13 @@ Transformation:
       "totalBonus": "=intSum(@(1,totalBonus))"
     }
     }
-
 ]
 
 
 Output:
 
 {
+  "totalBonus" : 3400,
   "employees" : [ {
     "name" : "John Doe",
     "salary" : 50000,
@@ -80,6 +77,5 @@ Output:
     "department" : "IT",
     "bonus" : 900,
     "salary" : 45000
-  } ],
-  "totalBonus" : 3400
+  } ]
 }
