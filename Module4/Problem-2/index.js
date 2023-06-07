@@ -96,7 +96,7 @@ if(require.main===module){
     }
     
     // menu options for users.
-    loop:while(true){
+    while(true){
         console.log("Choose options from the menu.");
         console.log("1. Create a new employee.");
         console.log("2. Delete an employee.");
@@ -108,7 +108,7 @@ if(require.main===module){
             input = parseInt(prompt("Enter you choice: "));
         }catch(err){
             console.log("Invalid input please choose a number between 1 to 5.");
-            continue loop;
+            continue ;
         }
 
         switch(input){
@@ -129,7 +129,7 @@ if(require.main===module){
                 console.log(allEmployees);
                 break;
             case 5:
-                break loop;
+                process.exit([0])
             default:
                 console.log("Inavlid choice.");
         }
