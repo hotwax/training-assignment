@@ -1,0 +1,7 @@
+### Number of Operations: 1
+
+1. shift
+
+### Explanation:
+
+1. In shift operation, change the key name and created object named Contact with contains City and Phone keys

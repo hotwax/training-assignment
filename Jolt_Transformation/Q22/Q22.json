@@ -1,0 +1,51 @@
+Input
+
+[
+    {
+      "restaurant": {
+        "rating": {
+          "value": 9
+        },
+        "address": {
+          "value": "India"
+        }
+      }
+    },
+    {
+      "restaurant": {
+        "rating": {
+          "value": 7
+        },
+        "address": {
+          "value": "United States"
+        }
+      }
+    }
+  ]
+
+
+  Jolt Spec
+
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "restaurant": {
+            "rating": {
+              "value": "[&3].Restaurant Rating"
+            }
+          }
+        }
+      }
+    }
+  ]
+
+  Output
+
+  [ {
+    "Restaurant Rating" : 9
+  }, {
+    "Restaurant Rating" : 7
+  } ]
+  

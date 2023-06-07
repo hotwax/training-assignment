@@ -1,0 +1,63 @@
+Input
+
+{
+    "id": 1,
+    "name": "John",
+    "hobbies": [
+      {
+        "name": "reading",
+        "level": "advanced"
+      },
+      {
+        "name": "swimming",
+        "level": "beginner"
+      }
+    ]
+  }
+
+
+  Jolt Sepc
+
+  [
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "hobbies": {
+          "*": {
+            "id": "@(3,id)",
+            "name1": "@(3,name)"
+          }
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "hobbies": {
+          "*": {
+            "id": "[#2].&",
+            "name": "[#2].hobby_name",
+            "name1": "[#2].name",
+            "level": "[#2].hobby_level"
+          }
+        }
+      }
+    }
+  ]
+
+
+
+  Output
+
+  [ {
+    "id" : 1,
+    "hobby_name" : "reading",
+    "name" : "John",
+    "hobby_level" : "advanced"
+  }, {
+    "id" : 1,
+    "hobby_name" : "swimming",
+    "name" : "John",
+    "hobby_level" : "beginner"
+  } ]
+  

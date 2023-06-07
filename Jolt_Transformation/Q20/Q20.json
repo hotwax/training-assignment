@@ -1,0 +1,110 @@
+Input
+
+{
+    "employees": [
+      {
+        "name": "John",
+        "age": 30,
+        "department": {
+          "id": 1,
+          "name": "Sales"
+        }
+      },
+      {
+        "name": "Jane",
+        "age": 35,
+        "department": {
+          "id": 2,
+          "name": "Marketing"
+        }
+      },
+      {
+        "name": "Bob",
+        "age": 40,
+        "department": {
+          "id": 1,
+          "name": "Sales"
+        }
+      }
+    ]
+  }
+
+  
+
+  Jolt Spec
+
+  [
+
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "department": {
+              "id": "@(1,id).id",
+              "name": "@(1,id).name",
+              "@(1,name)": "@(1,id).employee[#3].name",
+              "@(1,age)": "@(1,id).employee[#3].age"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": {
+          "id": "=firstElement(@(1,id))",
+          "name": "=firstElement(@(1,name))"
+        }
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": {
+          "id": "departments[#2].id",
+          "name": "departments[#2].&",
+          "employee": {
+            "*": {
+              "name": "departments[#4].employee[#2].&",
+              "age": "departments[#4].employee[#2].&"
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "*": "=recursivelySquashNulls"
+      }
+    }
+  ]
+  
+
+  
+
+  Jolt Output
+
+  {
+    "departments" : [ {
+      "id" : 1,
+      "name" : "Sales",
+      "employee" : [ {
+        "name" : "John",
+        "age" : 30
+      }, {
+        "name" : "Bob",
+        "age" : 40
+      } ]
+    }, {
+      "id" : 2,
+      "name" : "Marketing",
+      "employee" : [ {
+        "name" : "Jane",
+        "age" : 35
+      } ]
+    } ]
+  }
+  

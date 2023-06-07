@@ -1,0 +1,47 @@
+Input
+
+{
+    "items": [
+      {
+        "name": "item1",
+        "value": 10
+      },
+      {
+        "name": "item2",
+        "value": 20
+      }
+    ]
+  }
+
+  
+
+  Jolt Spec
+
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "items": {
+          "*": {
+            "name": "items[&1].itemName",
+            "value": "items[&1].itemValue"
+          }
+        }
+      }
+    }
+  ]
+
+  Output
+
+  {
+    "items" : [ {
+      "itemName" : "item1",
+      "itemValue" : 10
+    }, {
+      "itemName" : "item2",
+      "itemValue" : 20
+    } ]
+  }
+
+  
+  

@@ -1,0 +1,102 @@
+Input 
+
+{
+    "employees": [
+      {
+        "id": "001",
+        "name": "John",
+        "department": "HR",
+        "phone": [
+          {
+            "type": "home",
+            "number": "555-555-1234"
+          },
+          {
+            "type": "work",
+            "number": "555-555-5678"
+          }
+        ]
+      },
+      {
+        "id": "002",
+        "name": "Jane",
+        "department": "Sales",
+        "phone": [
+          {
+            "type": "home",
+            "number": "555-555-4567"
+          },
+          {
+            "type": "work",
+            "number": "555-555-8901"
+          }
+        ]
+      }
+    ]
+  }
+
+  
+
+  Jolt Spec
+
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "employees": {
+          "*": {
+            "id": "employees.[&1].&",
+            "name": "employees.[&1].&",
+            "department": "employees.[&1].&",
+            "phone": {
+              "*": {
+                "number": "employees.[&3].&"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "homePhone": "=firstElement(@(1,number))",
+            "workPhone": "=lastElement(@(1,number))"
+          }
+        }
+      }
+    },
+    {
+      "operation": "remove",
+      "spec": {
+        "employees": {
+          "*": {
+            "number": ""
+          }
+        }
+      }
+    }
+  ]
+
+
+
+  Ouput
+
+  {
+    "employees" : [ {
+      "id" : "001",
+      "name" : "John",
+      "department" : "HR",
+      "homePhone" : "555-555-1234",
+      "workPhone" : "555-555-5678"
+    }, {
+      "id" : "002",
+      "name" : "Jane",
+      "department" : "Sales",
+      "homePhone" : "555-555-4567",
+      "workPhone" : "555-555-8901"
+    } ]
+  }
+  
