@@ -1,0 +1,104 @@
+Input Json
+
+{
+    "users": [
+        {
+            "name": "John Doe",
+            "age": 35,
+            "address": {
+                "street": "123 Main St",
+                "city": "Anytown",
+                "state": "CA",
+                "zip": "12345"
+            },
+            "hobbies": [
+                {
+                    "name": "reading",
+                    "type": "indoor"
+                },
+                {
+                    "name": "hiking",
+                    "type": "outdoor"
+                }
+            ]
+        },
+        {
+            "name": "Jane Doe",
+            "age": 30,
+            "address": {
+                "street": "456 First St",
+                "city": "Othertown",
+                "state": "NY",
+                "zip": "67890"
+            },
+            "hobbies": [
+                {
+                    "name": "swimming",
+                    "type": "outdoor"
+                },
+                {
+                    "name": "painting",
+                    "type": "indoor"
+                }
+            ]
+        }
+    ]
+}
+
+Json Spec
+
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "users": {
+                "*": {
+                    "Name": "@(1,name)",
+                    "Address": "=concat(@(1,address.street),', ',@(1,address.city),', ',@(1,address.state),', ',@(1,address.zip))",
+                    "hobbies": {
+                        "*": {
+                            "name": "@(1,name)"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "users": {
+                "*": {
+                    "Name": "[#2].Name",
+                    "Address": "[#2].Address",
+                    "hobbies": {
+                        "*": {
+                            "name": "[#4].Hobbies"
+                        }
+                    }
+                }
+            }
+        }
+    }
+]
+
+Output Json
+
+[
+    {
+        "Name": "John Doe",
+        "Address": "123 Main St, Anytown, CA, 12345",
+        "Hobbies": [
+            "reading",
+            "hiking"
+        ]
+    },
+    {
+        "Name": "Jane Doe",
+        "Address": "456 First St, Othertown, NY, 67890",
+        "Hobbies": [
+            "swimming",
+            "painting"
+        ]
+    }
+]

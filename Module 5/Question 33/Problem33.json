@@ -1,0 +1,68 @@
+Input Json
+
+{
+    "id": 1,
+    "name": "John",
+    "hobbies": [
+        {
+            "name": "reading",
+            "level": "advanced"
+        },
+        {
+            "name": "swimming",
+            "level": "beginner"
+        }
+    ]
+}
+
+
+Json Spec
+
+[
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "hobbies": {
+                "*": {
+                    "id": "@(3,id)",
+                    "name": "@(3,name)",
+                    "hobby_level": "@(1,level)",
+                    "hobby_name": "@(1,name)"
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "hobbies": {
+                "*": "[#1]"
+            }
+        }
+    },
+    {
+        "operation": "remove",
+        "spec": {
+            "*": {
+                "level": ""
+            }
+        }
+    }
+]
+
+Output Json
+
+[
+    {
+        "name": "John",
+        "id": 1,
+        "hobby_level": "advanced",
+        "hobby_name": "John"
+    },
+    {
+        "name": "John",
+        "id": 1,
+        "hobby_level": "beginner",
+        "hobby_name": "John"
+    }
+]

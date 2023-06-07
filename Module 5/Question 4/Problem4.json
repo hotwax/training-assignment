@@ -1,0 +1,45 @@
+Input JSON
+
+{
+    "name": "John",
+    "age": 35,
+    "hobbies": [
+        "reading",
+        "movies",
+        "travel"
+    ]
+}
+
+
+JSON Spec
+
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "name": "Name",
+            "age": "Age",
+            "hobbies": {
+                "*": "Hobbies[].Name"
+            }
+        }
+    }
+]
+  
+Output JSON
+
+{
+    "Name": "John",
+    "Age": 35,
+    "Hobbies": [
+        {
+            "Name": "reading"
+        },
+        {
+            "Name": "movies"
+        },
+        {
+            "Name": "travel"
+        }
+    ]
+}

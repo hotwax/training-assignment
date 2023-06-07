@@ -1,0 +1,54 @@
+Input Json
+
+{
+    "name": "John",
+    "hobby_1": "reading",
+    "level_1": "advanced",
+    "hobby_2": "swimming",
+    "level_2": "beginner"
+}
+
+Json Spec
+
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "name": "name",
+            "hobby_*": "hobbies[#2].&(0,1).name",
+            "level_*": "hobbies[#2].&(0,1).level"
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "name": "name",
+            "hobbies": {
+                "*": {
+                    "*": {
+                        "name": "hobbies[#2].name",
+                        "level": "hobbies[#2].level"
+                    }
+                }
+            }
+        }
+    }
+]
+
+Output Json
+
+{
+    "name": "John",
+    "hobbies": [
+        {
+            "1": {
+                "name": "reading",
+                "level": "advanced"
+            },
+            "2": {
+                "name": "swimming",
+                "level": "beginner"
+            }
+        }
+    ]
+}

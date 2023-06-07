@@ -1,0 +1,109 @@
+Input Json
+{
+    "employees": [
+        {
+            "name": "John Doe",
+            "salary": 50000,
+            "department": "Sales"
+        },
+        {
+            "name": "Jane Smith",
+            "salary": 60000
+        },
+        {
+            "name": "Bob Johnson",
+            "department": "IT"
+        }
+    ]
+}
+
+
+Json spec
+[
+    {
+        "operation": "default",
+        "spec": {
+            "employees[]": {
+                "*": {
+                    "department": "Marketing",
+                    "salary": 45000
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "*": "employees.[&1].&",
+                    "department": {
+                        "Marketing": {
+                            "#40": "employees.[#4].bonus"
+                        },
+                        "*": {
+                            "#50": "employees.[#4].bonus"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "employees": {
+                "*": {
+                    "bonus": "=divide(@(1,salary),@(1,bonus))"
+                }
+            }
+        }
+    },
+    {
+        "operation": "shift",
+        "spec": {
+            "employees": {
+                "*": {
+                    "@": "employees[&1]",
+                    "@bonus": "totalBonus"
+                }
+            }
+        }
+    },
+    {
+        "operation": "modify-overwrite-beta",
+        "spec": {
+            "employees": {
+                "*": {
+                    "bonus": "=toInteger"
+                }
+            },
+            "totalBonus": "=intSum(@(1,totalBonus))"
+        }
+    }
+]
+  
+
+
+Output Json
+
+{
+    "employees": [
+        {
+            "name": "John Doe",
+            "salary": 50000,
+            "bonus": 1000
+        },
+        {
+            "name": "Jane Smith",
+            "salary": 60000,
+            "bonus": 1500
+        },
+        {
+            "name": "Bob Johnson",
+            "bonus": 900,
+            "salary": 45000
+        }
+    ],
+    "totalBonus": 3400
+}
