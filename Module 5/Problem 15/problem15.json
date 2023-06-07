@@ -119,9 +119,6 @@ Transformation:
         }
       }
     }
-  },
-  {
-    "operation": "sort"
   }
 ]
 
@@ -129,11 +126,10 @@ Output:
 
 {
   "customers" : [ {
-    "id" : "customer1",
-    "name" : "John Doe",
+    "totalAmount" : 130,
     "orders" : [ {
-      "date" : "2022-01-01T00:00:00Z",
       "id" : "order1",
+      "date" : "2022-01-01T00:00:00Z",
       "items" : [ {
         "id" : "item1",
         "name" : "Product 1",
@@ -147,8 +143,8 @@ Output:
       } ],
       "totalPrice" : 40
     }, {
-      "date" : "2022-02-01T00:00:00Z",
       "id" : "order2",
+      "date" : "2022-02-01T00:00:00Z",
       "items" : [ {
         "id" : "item3",
         "name" : "Product 3",
@@ -157,13 +153,13 @@ Output:
       } ],
       "totalPrice" : 90
     } ],
-    "totalAmount" : 130
+    "name" : "John Doe",
+    "id" : "customer1"
   }, {
-    "id" : "customer2",
-    "name" : "Jane Doe",
+    "totalAmount" : 160,
     "orders" : [ {
-      "date" : "2022-03-01T00:00:00Z",
       "id" : "order3",
+      "date" : "2022-03-01T00:00:00Z",
       "items" : [ {
         "id" : "item4",
         "name" : "Product 4",
@@ -172,9 +168,11 @@ Output:
       } ],
       "totalPrice" : 160
     } ],
-    "totalAmount" : 160
+    "name" : "Jane Doe",
+    "id" : "customer2"
   } ]
 }
+
 
 
 
