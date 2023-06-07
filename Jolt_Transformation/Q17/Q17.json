@@ -39,6 +39,22 @@ Input
     }
   ]
 
+  or 
+
+  [
+    {
+      "operation": "default",
+      "spec": {
+        "products": {
+          "*": {
+            "available": "false"
+          }
+        }
+      }
+    }
+  ]
+
+
 
 
   Output

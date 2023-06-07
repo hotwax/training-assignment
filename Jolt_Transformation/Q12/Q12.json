@@ -27,37 +27,39 @@ Input
 
 
  [
-    {
-      "operation": "modify-overwrite-beta",
-      "spec": {
-        "name": "=concat(@(1,employee.firstName),' ',@(1,employee.lastName))",
-        "address": "=concat(@(1,employee.address.street),', ',@(1,employee.address.city),', ',@(1,employee.address.state),', ', @(1,employee.address.zip))"
-      }
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "name": "=concat(@(1,employee.firstName),' ',@(1,employee.lastName))",
+      "address": "=concat(@(1,employee.address.street),', ',@(1,employee.address.city),', ',@(1,employee.address.state),' ', @(1,employee.address.zip))"
+    }
     }
     ,
-    {
-      "operation": "shift",
-      "spec": {
-        "name": "&",
-        "address": "&",
-        "employee": {
-          "phones": "phoneNumbers"
-        }
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "&",
+      "address": "&",
+      "employee": {
+        "phones": "phoneNumbers"
       }
     }
+    }
   ]
+
 
 Output
 
 {
-    "name" : "John Doe",
-    "address" : "123 Main St, Anytown, CA, 12345",
-    "phoneNumbers" : [ {
-      "type" : "home",
-      "number" : "555-555-1234"
-    }, {
-      "type" : "work",
-      "number" : "555-555-5678"
-    } ]
-  }
+  "name" : "John Doe",
+  "address" : "123 Main St, Anytown, CA 12345",
+  "phoneNumbers" : [ {
+    "type" : "home",
+    "number" : "555-555-1234"
+  }, {
+    "type" : "work",
+    "number" : "555-555-5678"
+  } ]
+}
+
   

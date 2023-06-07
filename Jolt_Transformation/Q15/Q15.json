@@ -81,7 +81,7 @@ Input
             "orders": {
               "*": {
                 "customerId": "customers[#4].idx[]",
-                "totalPrice": "customers[#4].totalamount[]",
+                "totalPrice": ["customers[#4].totalamount[]", "customers[#4].orders[#2].&"],
                 "*": "customers[#4].orders[#2].&"
               }
             }
@@ -98,7 +98,7 @@ Input
             "totalAmount": "=intSum(@(1,totalamount))"
           },
           "[0]": {
-            "name": "John Doe"
+            "name": "John Smith"
           },
           "[1]": {
             "name": "Jane Doe"
@@ -121,6 +121,7 @@ Input
   ]
 
 
+
   
   Output
 
@@ -139,7 +140,8 @@ Input
           "name" : "Product 2",
           "price" : 20,
           "quantity" : 1
-        } ]
+        } ],
+        "totalPrice" : 40
       }, {
         "id" : "order2",
         "date" : "2022-02-01T00:00:00Z",
@@ -148,9 +150,10 @@ Input
           "name" : "Product 3",
           "price" : 30,
           "quantity" : 3
-        } ]
+        } ],
+        "totalPrice" : 90
       } ],
-      "name" : "John Doe",
+      "name" : "John Smith",
       "id" : "customer1",
       "totalAmount" : 130
     }, {
@@ -162,12 +165,11 @@ Input
           "name" : "Product 4",
           "price" : 40,
           "quantity" : 4
-        } ]
+        } ],
+        "totalPrice" : 160
       } ],
       "name" : "Jane Doe",
       "id" : "customer2",
       "totalAmount" : 160
     } ]
-  }
-  
-  
+  }  

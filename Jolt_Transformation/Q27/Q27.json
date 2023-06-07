@@ -35,7 +35,7 @@ Input
           "@": "@(1,returnId)"
         }
       }
-    },
+      },
     {
       "operation": "modify-overwrite-beta",
       "spec": {
@@ -54,7 +54,7 @@ Input
           "Return Total Amount": "=doubleSum(@(1,returnTax),@(1,Return Amount))"
         }
       }
-    },
+      },
   
     {
       "operation": "remove",
@@ -66,34 +66,39 @@ Input
           "returnTax": ""
         }
       }
-    },
+      },
     {
       "operation": "shift",
       "spec": {
         "*": {
-          "*": "[#2].&"
+          "returnId": "[#2].Return Id",
+          "Return Amount": "[#2].&",
+          "Return Total Amount": "[#2].&",
+          "country": "[#2].&"
         }
       }
-    }
-  ]
+      }
+    ]
+  
 
 
   Output
 
   [ {
-    "returnId" : "10051",
-    "country" : "United States of America",
+    "Return Id" : "10051",
     "Return Amount" : 200.0,
-    "Return Total Amount" : 212.56
+    "Return Total Amount" : 212.56,
+    "country" : "United States of America"
   }, {
-    "returnId" : "10052",
-    "country" : "Canada",
+    "Return Id" : "10052",
     "Return Amount" : 875.0,
-    "Return Total Amount" : 904.85
+    "Return Total Amount" : 904.85,
+    "country" : "Canada"
   }, {
-    "returnId" : "10053",
-    "country" : "NA",
+    "Return Id" : "10053",
     "Return Amount" : 275.0,
-    "Return Total Amount" : 284.85
+    "Return Total Amount" : 284.85,
+    "country" : "NA"
   } ]
+  
   

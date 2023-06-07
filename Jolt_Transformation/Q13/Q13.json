@@ -30,28 +30,32 @@ Input
       "spec": {
         "employees": {
           "*": {
-            "name": "@(1,id).name",
-            "department": "@(1,id).department"
+            "name": "employees.@(1,id).name",
+            "department": "employees.@(1,id).department"
           }
         }
       }
       }
   ]
 
+
   Output
 
   {
-    "001" : {
-      "name" : "John",
-      "department" : "HR"
-    },
-    "002" : {
-      "name" : "Jane",
-      "department" : "Sales"
-    },
-    "003" : {
-      "name" : "Bob",
-      "department" : "IT"
+    "employees" : {
+      "001" : {
+        "name" : "John",
+        "department" : "HR"
+      },
+      "002" : {
+        "name" : "Jane",
+        "department" : "Sales"
+      },
+      "003" : {
+        "name" : "Bob",
+        "department" : "IT"
+      }
     }
   }
+  
   

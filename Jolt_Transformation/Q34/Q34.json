@@ -13,22 +13,25 @@ Input
 
   Jolt Spec
 
-[
-  {
-    "operation": "shift",
-    "spec": {
-      "hobby_1": "hobbies[0].name",
-      "level_1": "hobbies[0].level",
-      "hobby_2": "hobbies[1].name",
-      "level_2": "hobbies[1].level"
+  [
+    {
+      "operation": "shift",
+      "spec": {
+        "name": "&",
+        "hobby_1": "hobbies[0].name",
+        "level_1": "hobbies[0].level",
+        "hobby_2": "hobbies[1].name",
+        "level_2": "hobbies[1].level"
+      }
     }
-  }
-]
+  ]
+  
 
 
 Output
 
 {
+  "name" : "John",
   "hobbies" : [ {
     "name" : "reading",
     "level" : "advanced"
