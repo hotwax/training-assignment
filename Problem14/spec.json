@@ -1,0 +1,23 @@
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "homePhone": "@(1,phone[0].number)",
+          "workPhone": "@(1,phone[1].number)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "phone": ""
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "Name" : "John",
+  "Age" : 35,
+  "Contact" : {
+    "City" : "New York",
+    "Phone" : "+1-555-123-4567"
+  }
+}

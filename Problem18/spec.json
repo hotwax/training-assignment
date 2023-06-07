@@ -1,0 +1,23 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "incrementby": "=divide(@(1,salary),10)",
+          "salary": "=intSum(@(1,salary),@(1,incrementby))"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "incrementby": ""
+        }
+      }
+    }
+    }
+]

@@ -1,0 +1,11 @@
+{
+  "name" : "John Doe",
+  "address" : "123 Main St, Anytown, CA 12345",
+  "PhoneNumbers" : [ {
+    "type" : "home",
+    "number" : "555-555-1234"
+  }, {
+    "type" : "work",
+    "number" : "555-555-5678"
+  } ]
+}

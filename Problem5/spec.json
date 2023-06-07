@@ -1,0 +1,20 @@
+[
+
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "fullName": "=concat(@(1,firstName),' ',@(1,lastName))"
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "fullName": "fullName",
+      "email": " email",
+      "*": {
+        "city": "city",
+        "zip": "zip"
+      }
+    }
+  }
+]
