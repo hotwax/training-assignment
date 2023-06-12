@@ -10,5 +10,3 @@ The transformation involves following operations:
 * `modify-overwrite-beta:`  It modifies the "customers" array by updating the total amount and customer ID. It also assigns names to the first two customers.
 
 * `remove:` It removes the "customerId" field from each order in the "cu.
-
-* `sort:` It sorts the "customers" array based on the default sorting order.
