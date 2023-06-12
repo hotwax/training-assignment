@@ -1,0 +1,46 @@
+Input:
+{
+  "name": "John",
+  "age": 35,
+  "hobbies": [
+    "reading",
+    "movies",
+    "travel"
+  ]
+}
+
+
+Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "hobbies": {
+        "*": {
+          "@": "Hobbies[].Name"
+        }
+      }
+    }
+  }
+]
+
+
+Output:
+
+{
+  "Name" : "John",
+  "Age" : 35,
+  "Hobbies" : [ {
+    "Name" : "reading"
+  }, {
+    "Name" : "movies"
+  }, {
+    "Name" : "travel"
+  } ]
+}
+
+
+

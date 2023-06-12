@@ -1,0 +1,70 @@
+Input:
+
+{
+  "name": "John Smith",
+  "age": 35,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zip": "12345"
+  },
+  "phone_numbers": [
+    {
+      "type": "home",
+      "number": "555-1234"
+    },
+    {
+      "type": "work",
+      "number": "555-5678"
+    }
+  ]
+}
+
+Transformation:
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "fullname": "=split(' ',@(1,name))",
+      "first_name": "=firstElement(@(1,fullname))",
+      "last_name": "=lastElement(@(1,fullname))",
+      "phone_number_count": "=size(1,phone_numbers)"
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "first_name": "&",
+      "last_name": "&",
+      "age": "&",
+      "address": "&",
+      "phone_numbers": "&",
+      "phone_number_count": "&"
+    }
+  }
+]
+
+
+Ouput:
+
+{
+  "first_name" : "John",
+  "last_name" : "Smith",
+  "age" : 35,
+  "address" : {
+    "street" : "123 Main St",
+    "city" : "Anytown",
+    "state" : "CA",
+    "zip" : "12345"
+  },
+  "phone_numbers" : [ {
+    "type" : "home",
+    "number" : "555-1234"
+  }, {
+    "type" : "work",
+    "number" : "555-5678"
+  } ],
+  "phone_number_count" : 2
+}

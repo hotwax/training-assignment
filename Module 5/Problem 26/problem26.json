@@ -1,0 +1,53 @@
+Input:
+
+[
+  {
+    "returnId": "10051",
+    "returnQuantity": 2,
+    "returnPrice": 100,
+    "returnTax": 12.56
+  },
+  {
+    "returnId": "10052",
+    "returnQuantity": 25,
+    "returnPrice": 35,
+    "returnTax": 29.85
+  }
+]
+
+Transformations:
+
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "*": {
+        "temp": "=divide(1,@(1,returnQuantity))",
+        "Return Amount": "=divideAndRound(2,@(1,returnPrice),@(1,temp))",
+        "Return Total Amount": "=doubleSum(@(1,Return Amount),@(1,returnTax))"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "returnId": "[#2].ReturnId",
+        "Return Amount|Return Total Amount": "[#2].&"
+      }
+    }
+  }
+]
+
+
+Output:
+
+[ {
+  "ReturnId" : "10051",
+  "Return Amount" : 200.0,
+  "Return Total Amount" : 212.56
+}, {
+  "ReturnId" : "10052",
+  "Return Amount" : 875.0,
+  "Return Total Amount" : 904.85
+} ]

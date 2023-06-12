@@ -1,0 +1,55 @@
+Input:
+
+{
+  "items": [
+    {
+      "name": "item1",
+      "value": 10
+    },
+    {
+      "name": "item2",
+      "value": 20
+    }
+  ]
+}
+
+
+Transformation:
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "items": {
+        "*": {
+          "itemName": "@(1,name)",
+          "itemValue": "@(1,value)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "items": {
+        "*": {
+          "name": "",
+          "value": ""
+        }
+      }
+    }
+  }
+]
+
+
+Output:
+
+{
+  "items" : [ {
+    "itemName" : "item1",
+    "itemValue" : 10
+  }, {
+    "itemName" : "item2",
+    "itemValue" : 20
+  } ]
+}

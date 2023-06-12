@@ -1,0 +1,46 @@
+Input:
+
+{
+  "person": {
+    "name": "John Doe",
+    "age": 30,
+    "address": {
+      "city": "New York",
+      "state": "NY"
+    }
+  },
+  "employee": {
+    "name": "Jane Doe",
+    "salary": 50000,
+    "office": {
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  }
+}
+
+Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "person": {
+        "name": "&"
+      },
+      "employee": {
+        "office": {
+          "*": "&1-&"
+        }
+      }
+    }
+  }
+]
+
+Output:
+
+{
+  "name" : "John Doe",
+  "office-city" : "San Francisco",
+  "office-state" : "CA"
+}

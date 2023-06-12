@@ -1,0 +1,178 @@
+Input:
+{
+  "orders": [
+    {
+      "id": "order1",
+      "date": "2022-01-01T00:00:00Z",
+      "customerId": "customer1",
+      "items": [
+        {
+          "id": "item1",
+          "name": "Product 1",
+          "price": 10,
+          "quantity": 2
+        },
+        {
+          "id": "item2",
+          "name": "Product 2",
+          "price": 20,
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 40
+    },
+    {
+      "id": "order2",
+      "date": "2022-02-01T00:00:00Z",
+      "customerId": "customer1",
+      "items": [
+        {
+          "id": "item3",
+          "name": "Product 3",
+          "price": 30,
+          "quantity": 3
+        }
+      ],
+      "totalPrice": 90
+    },
+    {
+      "id": "order3",
+      "date": "2022-03-01T00:00:00Z",
+      "customerId": "customer2",
+      "items": [
+        {
+          "id": "item4",
+          "name": "Product 4",
+          "price": 40,
+          "quantity": 4
+        }
+      ],
+      "totalPrice": 160
+    }
+  ]
+}
+
+
+
+
+Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": {
+          "@": "@(1,customerId).orders[]"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": "customers"
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "customers": {
+        "*": {
+          "orders": {
+            "*": {
+              "*": "customers[#4].orders[#2].&",
+              "@totalPrice": "customers[#4].totalAmount"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "customers": {
+        "*": {
+          "totalAmount": "=intSum(@(1,totalAmount))",
+          "id": "@(1,orders[0].customerId)"
+        },
+        "[0]": {
+          "name": "John Doe"
+        },
+        "[1]": {
+          "name": "Jane Doe"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "customers": {
+        "*": {
+          "orders": {
+            "*": {
+              "customerId": ""
+            }
+          }
+        }
+      }
+    }
+  }
+]
+
+Output:
+
+{
+  "customers" : [ {
+    "totalAmount" : 130,
+    "orders" : [ {
+      "id" : "order1",
+      "date" : "2022-01-01T00:00:00Z",
+      "items" : [ {
+        "id" : "item1",
+        "name" : "Product 1",
+        "price" : 10,
+        "quantity" : 2
+      }, {
+        "id" : "item2",
+        "name" : "Product 2",
+        "price" : 20,
+        "quantity" : 1
+      } ],
+      "totalPrice" : 40
+    }, {
+      "id" : "order2",
+      "date" : "2022-02-01T00:00:00Z",
+      "items" : [ {
+        "id" : "item3",
+        "name" : "Product 3",
+        "price" : 30,
+        "quantity" : 3
+      } ],
+      "totalPrice" : 90
+    } ],
+    "name" : "John Doe",
+    "id" : "customer1"
+  }, {
+    "totalAmount" : 160,
+    "orders" : [ {
+      "id" : "order3",
+      "date" : "2022-03-01T00:00:00Z",
+      "items" : [ {
+        "id" : "item4",
+        "name" : "Product 4",
+        "price" : 40,
+        "quantity" : 4
+      } ],
+      "totalPrice" : 160
+    } ],
+    "name" : "Jane Doe",
+    "id" : "customer2"
+  } ]
+}
+
+
+
+

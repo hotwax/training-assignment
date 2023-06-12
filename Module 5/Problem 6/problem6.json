@@ -1,0 +1,91 @@
+Input:
+
+{
+  "users": [
+    {
+      "name": "John Doe",
+      "age": 35,
+      "address": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+      },
+      "hobbies": [
+        {
+          "name": "reading",
+          "type": "indoor"
+        },
+        {
+          "name": "hiking",
+          "type": "outdoor"
+        }
+      ]
+    },
+    {
+      "name": "Jane Doe",
+      "age": 30,
+      "address": {
+        "street": "456 First St",
+        "city": "Othertown",
+        "state": "NY",
+        "zip": "67890"
+      },
+      "hobbies": [
+        {
+          "name": "swimming",
+          "type": "outdoor"
+        },
+        {
+          "name": "painting",
+          "type": "indoor"
+        }
+      ]
+    }
+  ]
+}
+
+Transformation:
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "users": {
+        "*": {
+          "address": "=concat(@(1,address.street),' ', @(1,address.city),' ', @(1,address.state),' ',@(1,address.zip))"
+        }
+      }
+    }
+      },
+  {
+    "operation": "shift",
+    "spec": {
+      "users": {
+        "*": {
+          "address": "[&1].Address",
+          "name": "[&1].Name",
+          "hobbies": {
+            "*": {
+              "name": "[&3].Hobbies"
+            }
+          }
+        }
+      }
+    }
+  }
+
+]
+
+
+Output:
+
+[ {
+  "Address" : "123 Main St Anytown CA 12345",
+  "Name" : "John Doe",
+  "Hobbies" : [ "reading", "hiking" ]
+}, {
+  "Address" : "456 First St Othertown NY 67890",
+  "Name" : "Jane Doe",
+  "Hobbies" : [ "swimming", "painting" ]
+} ]

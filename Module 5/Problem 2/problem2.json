@@ -1,0 +1,32 @@
+Input:
+
+{
+  "name": "John",
+  "age": 35,
+  "city": "New York"
+}
+
+
+Transformation:
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "city": "City"
+    }
+    }
+
+]
+
+
+Output:
+
+{
+  "Name" : "John",
+  "Age" : 35,
+  "City" : "New York"
+}
+

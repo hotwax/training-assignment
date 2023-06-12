@@ -1,0 +1,64 @@
+{
+    "employees": [
+      {
+        "name": "John",
+        "age": 30,
+        "salary": 5000
+      },
+      {
+        "name": "Jane",
+        "age": 35,
+        "salary": 6000
+      },
+      {
+        "name": "Bob",
+        "age": 40,
+        "salary": 7000
+      }
+    ]
+  }
+  
+  Trasformation:
+  
+  [
+    {
+      "operation": "modify-overwrite-beta",
+      "spec": {
+        "employees": {
+          "*": {
+            "temp": "=divideAndRound(0,@(1,salary),10)",
+            "salary": "=doubleSum(@(1,temp),@(1,salary))"
+          }
+        }
+      }
+    },
+    {
+      "operation": "remove",
+      "spec": {
+        "employees": {
+          "*": {
+            "temp": ""
+          }
+        }
+      }
+    }
+  ]
+  
+  
+  Output:
+  
+  {
+    "employees" : [ {
+      "name" : "John",
+      "age" : 30,
+      "salary" : 5500.0
+    }, {
+      "name" : "Jane",
+      "age" : 35,
+      "salary" : 6600.0
+    }, {
+      "name" : "Bob",
+      "age" : 40,
+      "salary" : 7700.0
+    } ]
+  }

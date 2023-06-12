@@ -1,0 +1,81 @@
+Input:
+{
+  "employees": [
+    {
+      "name": "John Doe",
+      "salary": 50000,
+      "department": "Sales"
+    },
+    {
+      "name": "Jane Smith",
+      "salary": 60000
+    },
+    {
+      "name": "Bob Johnson",
+      "department": "IT"
+    }
+  ]
+}
+
+
+Transformation:
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "employees": {
+        "[0]": {
+          "bonus": 1000
+        },
+        "[1]": {
+          "bonus": 1500,
+          "department": "Marketing"
+        },
+        "[2]": {
+          "bonus": 900,
+          "salary": 45000
+        }
+      }
+    }
+    },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees[&1].&",
+          "@bonus": "totalBonus[]"
+        }
+      }
+    }
+    },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "totalBonus": "=intSum(@(1,totalBonus))"
+    }
+    }
+]
+
+
+Output:
+
+{
+  "totalBonus" : 3400,
+  "employees" : [ {
+    "name" : "John Doe",
+    "salary" : 50000,
+    "department" : "Sales",
+    "bonus" : 1000
+  }, {
+    "name" : "Jane Smith",
+    "salary" : 60000,
+    "bonus" : 1500,
+    "department" : "Marketing"
+  }, {
+    "name" : "Bob Johnson",
+    "department" : "IT",
+    "bonus" : 900,
+    "salary" : 45000
+  } ]
+}
