@@ -1,0 +1,108 @@
+Test case -1 (Test case for Serialization when date is in String format)
+
+Input:
+
+javac SerializationTest.java
+java SerializationTest output1.ser
+
+Output:
+Kunal,11/15/2001,Bhopal,Madhya Pradesh,410001,India
+Raj,12/15/2001,Noida,Uttar Pradesh,612001,India    
+Akhil,02/02/2002,Nasik,Maharashtra,456221,India    
+Pranav,05/03/2003,Dewas,Madhya Pradesh,313346,India
+Serialization successful.Output1.ser
+
+-------------------------------------------------------------------------------------
+Test case -2 (Test case for Deserialization when date is in String format)
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output1.ser 
+
+Output:
+Kunal,11/15/2001,Bhopal,Madhya Pradesh,410001,India
+Raj,12/15/2001,Noida,Uttar Pradesh,612001,India    
+Akhil,02/02/2002,Nasik,Maharashtra,456221,India    
+Pranav,05/03/2003,Dewas,Madhya Pradesh,313346,India
+
+-------------------------------------------------------------------------------------
+Test case -3 (Test case for Serialization when date is in Date format)
+
+Input: 
+
+javac SerializationTest.java
+java SerializationTest output2.ser 
+
+Output:
+Kunal,Thu Nov 15 00:00:00 IST 2001,Bhopal,Madhya Pradesh,410001,India
+Raj,Sat Dec 15 00:00:00 IST 2001,Noida,Uttar Pradesh,612001,India
+Akhil,Sat Feb 02 00:00:00 IST 2002,Nasik,Maharashtra,456221,India
+Pranav,Sat May 03 00:00:00 IST 2003,Dewas,Madhya Pradesh,313346,India
+Serialization successful.Output2.ser
+
+-------------------------------------------------------------------------------------
+
+case 4: (Test case for Deserialization when date is in Date format)
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output2.ser 
+
+Output:
+Kunal,Thu Nov 15 00:00:00 IST 2001,Bhopal,Madhya Pradesh,410001,India
+Raj,Sat Dec 15 00:00:00 IST 2001,Noida,Uttar Pradesh,612001,India
+Akhil,Sat Feb 02 00:00:00 IST 2002,Nasik,Maharashtra,456221,India
+Pranav,Sat May 03 00:00:00 IST 2003,Dewas,Madhya Pradesh,313346,India
+
+-------------------------------------------------------------------------------------
+
+Case 5: File not found during deserialization
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output3.ser 
+
+Output:  
+java.io.FileNotFoundException: ProblemStatment-4\Output3.ser (The system cannot find the file specified)
+
+-------------------------------------------------------------------------------------
+
+Case 6: Empty file to deserialize (output3.ser)
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output3.ser
+
+Output:-
+    java.io.EOFException
+
+-------------------------------------------------------------------------------------
+
+Case 7: Deserializing after changing the datatype of dob from string to date
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output1.ser
+
+Output:  
+ Exception in thread "main" java.lang.ClassCastException: cannot assign instance of java.lang.String
+ to field Student.dateOfBirth of type java.util.Date in instance of Student
+
+--------------------------------------------------------------------------------------
+Case 8: Deserializing after changing the datatype of dob from string to Object
+
+Input: 
+
+javac DeserializationTest.java
+java DeserializationTest output1.ser
+
+Output:  
+Kunal,11/15/2001,Bhopal,Madhya Pradesh,410001,India
+Raj,12/15/2001,Noida,Uttar Pradesh,612001,India
+Akhil,02/02/2002,Nasik,Maharashtra,456221,India
+Pranav,05/03/2003,Dewas,Madhya Pradesh,313346,India
