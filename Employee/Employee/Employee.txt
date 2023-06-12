@@ -1,8 +1,0 @@
-1, Raj, 22, raj2@gmail.com, 15/12/2000
-2, Aman, 22, Aman3@gmail.com, 27/12/2000
-5, Gautam, 18, Gautam@gmail.com, 15/12/2005
-6, Yajendra, 20, Yajendra121@gmail.com, 05/05/2000
-8, Rishik, 23, rishik1@gmail.com, 31/05/2000
-9, Jatin, 23, jatin2@gmail.com, 12/01/2000
-10, Yash, 23, yash2@gmail.com, 17/02/2001
-11, Vaibhav, 24, vaibhav@gmail.com, 13-03-1999
