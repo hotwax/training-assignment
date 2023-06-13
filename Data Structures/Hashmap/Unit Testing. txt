@@ -1,0 +1,66 @@
+
+Test Case 1: Testing Insert method
+Input
+CAPACITY = 5
+key = 10, value = 20
+key = 15, value = 30
+key = 20, value = 40
+
+Expected Output
+Position 0 is connected to the keys are :
+Position 1 is connected to the keys are :
+Position 2 is connected to the keys are : 20->40
+Position 3 is connected to the keys are :
+Position 4 is connected to the keys are : 15->30 10->20
+
+Test Case 2: Testing deleteKey method
+Input
+CAPACITY = 5
+key = 10, value = 20
+key = 15, value = 30
+key = 20, value = 40
+key_to_delete = 15
+
+Expected Output
+Operation Successful
+Position 0 is connected to the keys are :
+Position 1 is connected to the keys are :
+Position 2 is connected to the keys are : 20->40
+Position 3 is connected to the keys are :
+Position 4 is connected to the keys are : 10->20
+
+Test Case 3: Testing searchKey method
+Input
+CAPACITY = 5
+key = 10, value = 20
+key = 15, value = 30
+key = 20, value = 40
+key_to_search = 20
+
+Expected Output
+Key Found and its Value is 40
+
+Test Case 4: Testing display method
+Input
+CAPACITY = 5
+key = 10, value = 20
+key = 15, value = 30
+key = 20, value = 40
+
+Expected Output
+Position 0 is connected to the keys are :
+Position 1 is connected to the keys are :
+Position 2 is connected to the keys are : 20->40
+Position 3 is connected to the keys are :
+Position 4 is connected to the keys are : 15->30 10->20
+
+Test Case 5: Testing getKey method
+Input
+CAPACITY = 5
+key = 10, value = 20
+key = 15, value = 30
+key = 20, value = 40
+key_to_get = 15
+
+Expected Output
+The Value of the Key 15 is 30

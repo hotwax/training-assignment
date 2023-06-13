@@ -1,0 +1,28 @@
+Testing insertNode() function:
+Input: root = NULL, value = 10
+Expected Output: A tree with root node having data 10 should be created
+
+Testing Search() function:
+Input: root = [Node with data=10, left = NULL, right = NULL], value = 10
+Expected Output: true
+
+Testing preorder() function:
+Input: root = [Node with data=10, left = [Node with data=5, left=NULL, right=NULL], right=[Node with data=15, left=NULL, right=NULL]]
+Expected Output: 10 5 15
+
+
+Testing postorder() function:
+Input: root = [Node with data=10, left = [Node with data=5, left=NULL, right=NULL], right=[Node with data=15, left=NULL, right=NULL]]
+Expected Output: 5 15 10
+
+Testing inorder() function:
+Input: root = [Node with data=10, left = [Node with data=5, left=NULL, right=NULL], right=[Node with data=15, left=NULL, right=NULL]]
+Expected Output: 5 10 15
+
+Testing findMin() function:
+Input: root = [Node with data=10, left = [Node with data=5, left=NULL, right=NULL], right=[Node with data=15, left=NULL, right=NULL]]
+Expected Output: Node with data 5 should be returned
+
+Testing deleteNode() function:
+Input: root = [Node with data=10, left = [Node with data=5, left=NULL, right=NULL], right=[Node with data=15, left=NULL, right=NULL]], value = 5
+Expected Output: A tree with root node having data 10 and right node having data 15 should be created
