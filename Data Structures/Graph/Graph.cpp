@@ -1,7 +1,74 @@
-#include <iostream>
+ #include <iostream>
 using namespace std;
 // Class Queue
-class Queue
+#include <iostream>
+
+class Queue {
+private:
+    struct Node {
+        int data;
+        Node* next;
+        Node(int val) : data(val), next(nullptr) {}
+    };
+
+    Node* front;
+    Node* rear;
+    int capacity;
+
+public:
+    // Constructor
+    Queue(int capacity) {
+        front = rear = nullptr;
+        this->capacity = capacity;
+    }
+
+    // Method push
+    void Push(int data) {
+        // Check if the queue is full
+        if (capacity == 0) {
+            std::cout << "Queue is full" << std::endl;
+            return;
+        }
+
+        Node* newNode = new Node(data);
+        // If the queue is empty
+        if (front == nullptr) {
+            front = rear = newNode;
+        } else {
+            rear->next = newNode;
+            rear = newNode;
+        }
+        capacity--;
+    }
+
+    // Method pop
+    void Pop() {
+        // Check if the queue is empty
+        if (Empty()) {
+            return;
+        }
+
+        Node* temp = front;
+        front = front->next;
+        delete temp;
+        capacity++;
+    }
+
+    // Method front
+    int Front() {
+        // Check if the queue is empty
+        if (Empty()) {
+            return -1;
+        }
+        return front->data;
+    }
+
+    // Method empty
+    bool Empty() {
+        return front == nullptr;
+    }
+};
+
 {
 public:
     int front, rear, capacity;
@@ -219,6 +286,7 @@ int main()
         cout << "4. Display" << endl;
         cout << "5. Exit" << endl;
         cout << "Enter Your Choice" << endl;
+        
         cin >> choice;
 
         // Menu

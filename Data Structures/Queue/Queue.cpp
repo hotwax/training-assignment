@@ -1,68 +1,87 @@
 #include <iostream>
-using namespace std;
 
-const int MAX_SIZE = 100; // maximum size of queue
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
 
 class Queue {
-    private:
-        int front;  // index of front element in queue
-        int rear;   // index of rear element in queue
-        int data[MAX_SIZE]; // array to store elements
+private:
+    Node* front; // pointer to the front element of the queue
+    Node* rear;  // pointer to the rear element of the queue
 
-    public:
-        Queue() { front = -1; rear = -1; } // constructor
+public:
+    Queue() {
+        front = nullptr;
+        rear = nullptr;
+    }
 
-        bool isEmpty() {
-            return front == -1;
+    bool isEmpty() {
+        return front == nullptr;
+    }
+
+    void enqueue(int value) {
+        Node* newNode = new Node(value);
+
+        if (isEmpty()) {
+            front = newNode;
+            rear = newNode;
+        } else {
+            rear->next = newNode;
+            rear = newNode;
         }
 
-        bool isFull() {
-            return rear == MAX_SIZE - 1;
+        std::cout << value << " enqueued to the queue.\n";
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty. Cannot dequeue element.\n";
+            return;
         }
 
-        void enqueue(int value) {
-            if (isFull()) {
-                cout << "Queue is full. Cannot enqueue element.\n";
-                return;
-            }
-            if (isEmpty()) {
-                front = 0;
-            }
-            data[++rear] = value;
-            cout << value << " enqueued to queue.\n";
+        Node* temp = front;
+        int value = temp->data;
+        front = front->next;
+
+        if (front == nullptr) {
+            rear = nullptr;
         }
 
-        void dequeue() {
-            if (isEmpty()) {
-                cout << "Queue is empty. Cannot dequeue element.\n";
-                return;
-            }
-            int value = data[front++];
-            if (front > rear) {
-                front = rear = -1;
-            }
-            cout << value << " dequeued from queue.\n";
+        delete temp;
+
+        std::cout << value << " dequeued from the queue.\n";
+    }
+
+    int peek() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty. No element to peek.\n";
+            return -1;
         }
 
-        int peek() {
-            if (isEmpty()) {
-                cout << "Queue is empty. No element to peek.\n";
-                return -1;
-            }
-            return data[front];
+        return front->data;
+    }
+
+    void display() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty.\n";
+            return;
         }
 
-        void display() {
-            if (isEmpty()) {
-                cout << "Queue is empty.\n";
-                return;
-            }
-            cout << "Queue contents: ";
-            for (int i = front; i <= rear; i++) {
-                cout << data[i] << " ";
-            }
-            cout << endl;
+        std::cout << "Queue contents: ";
+        Node* temp = front;
+        while (temp != nullptr) {
+            std::cout << temp->data << " ";
+            temp = temp->next;
         }
+        std::cout << std::endl;
+    }
 };
 
 int main() {
@@ -71,38 +90,38 @@ int main() {
 
     do {
         // Display menu
-        cout << "\nQueue Menu\n";
-        cout << "====================\n";
-        cout << "1. Enqueue\n";
-        cout << "2. Dequeue\n";
-        cout << "3. Peek\n";
-        cout << "4. Display\n";
-        cout << "5. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+        std::cout << "\nQueue Menu\n";
+        std::cout << "====================\n";
+        std::cout << "1. Enqueue\n";
+        std::cout << "2. Dequeue\n";
+        std::cout << "3. Peek\n";
+        std::cout << "4. Display\n";
+        std::cout << "5. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
 
-        switch(choice) {
+        switch (choice) {
             case 1:
-                cout << "Enter value to enqueue: ";
-                cin >> value;
+                std::cout << "Enter value to enqueue: ";
+                std::cin >> value;
                 queue.enqueue(value);
                 break;
             case 2:
                 queue.dequeue();
                 break;
             case 3:
-                cout << "Front element of queue: " << queue.peek() << endl;
+                std::cout << "Front element of queue: " << queue.peek() << std::endl;
                 break;
             case 4:
                 queue.display();
                 break;
             case 5:
-                cout << "Exiting program...\n";
+                std::cout << "Exiting program...\n";
                 break;
             default:
-                cout << "Invalid choice. Please try again.\n";
+                std::cout << "Invalid choice. Please try again.\n";
         }
-    } while(choice != 5);
+    } while (choice != 5);
 
     return 0;
 }

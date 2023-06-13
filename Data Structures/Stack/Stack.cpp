@@ -1,61 +1,72 @@
 #include <iostream>
-using namespace std;
 
-const int MAX_SIZE = 100; // maximum size of stack
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
 
 class Stack {
-    private:
-        int top;  // index of top element in stack
-        int data[MAX_SIZE]; // array to store elements
+private:
+    Node* top; // pointer to the top element of the stack
 
-    public:
-        Stack() { top = -1; } // constructor
+public:
+    Stack() {
+        top = nullptr;
+    }
 
-        bool isEmpty() {
-            return top == -1;
+    bool isEmpty() {
+        return top == nullptr;
+    }
+
+    void push(int value) {
+        Node* newNode = new Node(value);
+        newNode->next = top;
+        top = newNode;
+        std::cout << value << " pushed to stack.\n";
+    }
+
+    void pop() {
+        if (isEmpty()) {
+            std::cout << "Stack is empty. Cannot pop element.\n";
+            return;
         }
 
-        bool isFull() {
-            return top == MAX_SIZE - 1;
+        Node* temp = top;
+        int value = temp->data;
+        top = top->next;
+        delete temp;
+        std::cout << value << " popped from stack.\n";
+    }
+
+    int peek() {
+        if (isEmpty()) {
+            std::cout << "Stack is empty. No element to peek.\n";
+            return -1;
         }
 
-        void push(int value) {
-            if (isFull()) {
-                cout << "Stack is full. Cannot push element.\n";
-                return;
-            }
-            data[++top] = value;
-            cout << value << " pushed to stack.\n";
+        return top->data;
+    }
+
+    void display() {
+        if (isEmpty()) {
+            std::cout << "Stack is empty.\n";
+            return;
         }
 
-        void pop() {
-            if (isEmpty()) {
-                cout << "Stack is empty. Cannot pop element.\n";
-                return;
-            }
-            int value = data[top--];
-            cout << value << " popped from stack.\n";
+        std::cout << "Stack contents: ";
+        Node* temp = top;
+        while (temp != nullptr) {
+            std::cout << temp->data << " ";
+            temp = temp->next;
         }
-
-        int peek() {
-            if (isEmpty()) {
-                cout << "Stack is empty. No element to peek.\n";
-                return -1;
-            }
-            return data[top];
-        }
-
-        void display() {
-            if (isEmpty()) {
-                cout << "Stack is empty.\n";
-                return;
-            }
-            cout << "Stack contents: ";
-            for (int i = top; i >= 0; i--) {
-                cout << data[i] << " ";
-            }
-            cout << endl;
-        }
+        std::cout << std::endl;
+    }
 };
 
 int main() {
@@ -64,38 +75,38 @@ int main() {
 
     do {
         // Display menu
-        cout << "\nStack Menu\n";
-        cout << "====================\n";
-        cout << "1. Push\n";
-        cout << "2. Pop\n";
-        cout << "3. Peek\n";
-        cout << "4. Display\n";
-        cout << "5. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+        std::cout << "\nStack Menu\n";
+        std::cout << "====================\n";
+        std::cout << "1. Push\n";
+        std::cout << "2. Pop\n";
+        std::cout << "3. Peek\n";
+        std::cout << "4. Display\n";
+        std::cout << "5. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
 
-        switch(choice) {
+        switch (choice) {
             case 1:
-                cout << "Enter value to push: ";
-                cin >> value;
+                std::cout << "Enter value to push: ";
+                std::cin >> value;
                 stack.push(value);
                 break;
             case 2:
                 stack.pop();
                 break;
             case 3:
-                cout << "Top element of stack: " << stack.peek() << endl;
+                std::cout << "Top element of stack: " << stack.peek() << std::endl;
                 break;
             case 4:
                 stack.display();
                 break;
             case 5:
-                cout << "Exiting program...\n";
+                std::cout << "Exiting program...\n";
                 break;
             default:
-                cout << "Invalid choice. Please try again.\n";
+                std::cout << "Invalid choice. Please try again.\n";
         }
-    } while(choice != 5);
+    } while (choice != 5);
 
     return 0;
 }
