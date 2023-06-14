@@ -11,8 +11,9 @@
           "items": {
             "*": {
               "temp": "=divide(1,@(1,quantity))",
+              "price": "=toDouble(@(1,price))",
               "total": "=divide(@(1,price),@(1,temp))"
-            } 
+            }
           }
         }
       }
