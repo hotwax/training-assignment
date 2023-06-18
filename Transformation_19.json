@@ -1,0 +1,57 @@
+Input Json
+{
+  "products": [
+    {
+      "id": "1001",
+      "name": "Product 1",
+      "price": 10.99
+    },
+    {
+      "id": "1002",
+      "name": "Product 2",
+      "price": 15.99
+    },
+    {
+      "id": "1003",
+      "name": "Product 3",
+      "price": 20.99
+    }
+  ]
+}
+
+Output Json
+{
+  "products": [
+    {
+      "id": "1001",
+      "name": "Product 1",
+      "price": 10.99
+    },
+    {
+      "id": "1002",
+      "name": "Product 2",
+      "price": 31.98
+    },
+    {
+      "id": "1003",
+      "name": "Product 3",
+      "price": 41.98
+    }
+  ]
+}
+
+Jolt Spec
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "products": {
+        "[0]": "@(1,[0])",
+        "[1]|[2]": {
+          "price": "=doubleSum(@(1,price),@(1,price))"
+        }
+      }
+    }
+  }
+]

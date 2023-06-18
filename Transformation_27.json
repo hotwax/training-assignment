@@ -1,0 +1,88 @@
+Input Json
+[
+  {
+    "returnId": "10051",
+    "returnQuantity": 2,
+    "returnPrice": 100,
+    "returnTax": 12.56,
+    "country": "USA"
+  },
+  {
+    "returnId": "10052",
+    "returnQuantity": 25,
+    "returnPrice": 35,
+    "returnTax": 29.85,
+    "country": "CA"
+  },
+  {
+    "returnId": "10053",
+    "returnQuantity": 5,
+    "returnPrice": 55,
+    "returnTax": 9.85,
+    "country": ""
+  }
+]
+Output Json
+
+[ {
+  "Return Id" : "10051",
+  "Return Amount" : 200.0,
+  "Return Total Amount" : 212.56,
+  "Country" : "United States of America"
+}, {
+  "Return Id" : "10052",
+  "Return Amount" : 875.0,
+  "Return Total Amount" : 904.85,
+  "Country" : "Canada"
+}, {
+  "Return Id" : "10053",
+  "Return Amount" : 275.0,
+  "Return Total Amount" : 284.85,
+  "Country" : "NA"
+} ]
+
+Jolt Spec
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "Return Id": "@(1,returnId)",
+        "returnQuantity": "=divide(1,@(1,returnQuantity))",
+        "Return Amount": "=divide(@(1,returnPrice),@(1,returnQuantity))",
+        "Return Total Amount": "=doubleSum(@(1,Return Amount), @(1,returnTax))"
+      }
+    }
+    },
+  {
+    "operation": "remove",
+    "spec": {
+      "*": {
+        "returnQuantity": "",
+        "returnPrice": ""
+      }
+    }
+    },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "Return Id": "[#2].&",
+        "Return Amount": "[#2].&",
+        "Return Total Amount": "[#2].&",
+        "country": {
+          "USA": {
+            "#United States of America": "[#4].Country"
+          },
+          "CA": {
+            "#Canada": "[#4].Country"
+          },
+          "": {
+            "#NA": "[#4].Country"
+          }
+        }
+      }
+    }
+    }
+]

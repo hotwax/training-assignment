@@ -1,0 +1,36 @@
+Input Json
+{
+  "name": "John",
+  "hobby_1": "reading",
+  "level_1": "advanced",
+  "hobby_2": "swimming",
+  "level_2": "beginner"
+}
+Output Json
+{
+  "name": "John",
+  "hobbies": [
+    {
+      "name": "reading",
+      "level": "advanced"
+    },
+    {
+      "name": "swimming",
+      "level": "beginner"
+    }
+  ]
+}
+
+Jolt Spec
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "&",
+      "hobby_1": "hobbies.[0].name",
+      "level_1": "hobbies.[0].level",
+      "hobby_2": "hobbies.[1].name",
+      "level_2": "hobbies.[1].level"
+    }
+  }
+]

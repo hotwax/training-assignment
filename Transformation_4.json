@@ -1,0 +1,48 @@
+// Input json
+
+{
+  "name": "John",
+  "age": 35,
+  "hobbies": [
+    "reading",
+    "movies",
+    "travel"
+  ]
+}
+
+// output json
+
+{
+  "Name": "John",
+  "Age": 35,
+  "Hobbies": [
+    {
+      "Name": "reading"
+    },
+    {
+      "Name": "movies"
+    },
+    {
+      "Name": "travel"
+    }
+  ]
+}
+
+// Jolt Spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "hobbies": {
+        "*": {
+          "@": "Hobbies[].Name" 
+        }
+      }
+    }
+  }
+]
+
+// use * to loop through the hobbies array

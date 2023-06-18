@@ -1,0 +1,35 @@
+Input Json
+{
+  "person": {
+    "name": "John Doe",
+    "age": 30,
+    "address": {
+      "city": "New York",
+      "state": "NY"
+    }
+  }
+}
+
+Output Json
+{
+  "person_name": "John Doe",
+  "person_age": 30,
+  "person_address_city": "New York",
+  "person_address_state": "NY"
+}
+
+Jolt Spec
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "person": {
+        "*": "&1_&0",
+        "address": {
+          "*": "&2_&1_&0"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,68 @@
+Input Json
+{
+  "employees": [
+    {
+      "name": "John",
+      "age": 30,
+      "salary": 5000
+    },
+    {
+      "name": "Jane",
+      "age": 35,
+      "salary": 6000
+    },
+    {
+      "name": "Bob",
+      "age": 40,
+      "salary": 7000
+    }
+  ]
+}
+
+
+Output Json
+{
+  "employees": [
+    {
+      "name": "John",
+      "age": 30,
+      "salary": 5500
+    },
+    {
+      "name": "Jane",
+      "age": 35,
+      "salary": 6600
+    },
+    {
+      "name": "Bob",
+      "age": 40,
+      "salary": 7700
+    }
+  ]
+}
+
+Jolt Spec
+
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "add": "=divide(@(1,salary),10)",
+          "salary": "=intSum(@(1,add),@(1,salary))"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "add": ""
+        }
+      }
+    }
+  }
+]
