@@ -1,0 +1,31 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "products": {
+        "0": {
+          "*": "&2[&1].&",
+          "price": "zerothPrice"
+        },
+        "*": "&1[]"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "products": {
+        "*": {
+          "price": "=divide(@(1,price),0.5)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": "products",
+      "zerothPrice": "products[0].price"
+    }
+  }
+]

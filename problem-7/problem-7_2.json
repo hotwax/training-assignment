@@ -1,0 +1,18 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "students": {
+        "*": {
+          "name": "[&1].Name",
+          "age": "[&1].Age",
+          "email": {
+            "*\\@*": {
+              "$(0,2)": "[&3].Domain"
+            }
+          }
+        }
+      }
+    }
+  }
+]

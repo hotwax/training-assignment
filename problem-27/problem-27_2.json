@@ -1,0 +1,38 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "returnQuantityInv": "=divide(1,@(1,returnQuantity))",
+        "Return Amount": "=divide(@(1,returnPrice), @(1,returnQuantityInv))",
+        "Return Total Amount": "=doubleSum(@(1,Return Amount), @(1,returnTax))"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "returnId": "[&1].Return Id",
+        "Return Amount|Return Total Amount": "[&1].&"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "0": {
+        "#United States of America": "[0].Country",
+        "*": "[0].&"
+      },
+      "1": {
+        "#Canada": "[1].Country",
+        "*": "[1].&"
+      },
+      "2": {
+        "#NA": "[2].Country",
+        "*": "[2].&"
+      }
+    }
+  }
+]

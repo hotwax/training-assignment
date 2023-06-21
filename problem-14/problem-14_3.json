@@ -1,0 +1,28 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "&2[&1].&",
+          "phone": {
+            "*": {
+              "number": "&4[&3].@(1,type)"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "&2[&1].&",
+          "home|work": "&2[&1].&(0)Phone"
+        }
+      }
+    }
+  }
+]

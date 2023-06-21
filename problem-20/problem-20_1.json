@@ -1,0 +1,35 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": "departments.@(0,department.id).&1[]"
+      }
+    }
+  },
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "departments": {
+        "*": {
+          "id|name": "@(1,employees[0].department.&)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "departments": {
+        "*": {
+          "*": "&2[#2].&",
+          "employees": {
+            "*": {
+              "name|age": "&4[#4].&2[#2].&"
+            }
+          }
+        }
+      }
+    }
+  }
+]

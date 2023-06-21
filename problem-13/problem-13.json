@@ -1,0 +1,22 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "@": "&2.@(0,id)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "id": ""
+        }
+      }
+    }
+  }
+]

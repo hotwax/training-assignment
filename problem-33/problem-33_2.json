@@ -1,0 +1,31 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "hobbies": {
+        "*": {
+          "*": "&2[&1].hobby_&"
+        }
+      },
+      "*": "&"
+    }
+  },
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "hobbies": {
+        "*": {
+          "id|name": "@(3,&)"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "hobbies": {
+        "*": "[]"
+      }
+    }
+  }
+]
