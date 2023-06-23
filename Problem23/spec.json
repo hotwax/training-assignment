@@ -1,0 +1,37 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[&3].Restaurant Rating"
+          },
+          "address": {
+            "value": "[&3].Restaurant Country"
+          }
+        }
+      }
+    }
+    }
+]
+
+Another approch 
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[#4].Restaurant Rating"
+          },
+          "address": {
+            "value": "[#4].Restaurant Country"
+          }
+        }
+      }
+    }
+    }
+]

@@ -1,0 +1,117 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": "@(0,customerId).[]"
+      }
+    }
+  }
+,
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "*": {
+          "customerId": "@(1,customerId).id",
+          "id": "@(1,customerId).orders[#2].id",
+          "date": "@(1,customerId).orders[#2].date",
+          "items": "@(1,customerId).orders[#2].&",
+          "totalPrice": "@(1,customerId).orders[#2].&",
+          "@(0,totalPrice)": "@(1,customerId).totalAmount",
+          "@(0,customerId)": {
+            "customer1": {
+              "#John Smith": "@(3,customerId).name"
+            },
+            "customer2": {
+              "#Jane Doe": "@(3,customerId).name"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": "customers"
+    }
+  }
+  , {
+    "operation": "cardinality",
+    "spec": {
+      "customers": {
+        "*": {
+          "id": "ONE",
+          "name": "ONE"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "*": {
+          "totalAmount": "=intSum(@(1,totalAmount))"
+        }
+      }
+    }
+  }
+]
+
+Another approach
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "orders": {
+        "*": {
+          "customerId": "@(1,customerId).id",
+          "*": "@(1,customerId).orders[#2].&",
+          "totalPrice": "@(1,customerId).orders[#2].&",
+          "@(0,totalPrice)": "@(1,customerId).totalAmount",
+          "@(0,customerId)": {
+            "customer1": {
+              "#John Smith": "@(3,customerId).name"
+            },
+            "customer2": {
+              "#Jane Doe": "@(3,customerId).name"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "cardinality",
+    "spec": {
+      "*": {
+        "id": "ONE",
+        "name": "ONE"
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "totalAmount": "=intSum(@(1,totalAmount))"
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": "customers"
+    }
+  }
+  ,
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": "=recursivelySquashNulls"
+    }
+  }
+]

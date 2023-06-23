@@ -1,0 +1,29 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "items": {
+        "*": {
+          "name": "items.[&1].itemName",
+          "value": "items.[&1].itemValue"
+        }
+      }
+    }
+  }
+]
+
+another approch by #
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "items": {
+        "*": {
+          "name": "items.[#2].itemName",
+          "value": "items.[#2].itemValue"
+        }
+      }
+    }
+  }
+]

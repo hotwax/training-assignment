@@ -1,0 +1,31 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "hobbies": {
+        "*": {
+          "@": "Hobbies[#2].Name"
+        }
+      }
+    }
+  }
+]
+
+another approch using & 
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "name": "Name",
+      "age": "Age",
+      "hobbies": {
+        "*": {
+          "@": "hobbies[&1].Name"
+        }
+      }
+    }
+  }
+]

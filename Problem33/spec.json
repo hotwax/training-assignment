@@ -1,0 +1,33 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "hobbies": {
+        "*": {
+          "name": "[#2].hobby_&",
+          "level": "[#2].hobby_&",
+          "@(3,id)": "[#2].id",
+          "@(3,name)": "[#2].name"
+        }
+      }
+    }
+}
+]
+
+Another approch
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "hobbies": {
+        "*": {
+          "name": "[&1].hobby_&",
+          "level": "[&1].hobby_&",
+          "@(3,id)": "[&1].id",
+          "@(3,name)": "[&1].name"
+        }
+      }
+    }
+}
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees[#2].&",
+          "phone": {
+            "*": {
+              "type": {
+                "home": {
+                  "@(2,number)": "employees.[#6].homePhone"
+                },
+                "work": {
+                  "@(2,number)": "employees.[#6].workPhone"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]
+
+Another approach
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees[&1].&",
+          "phone": {
+            "*": {
+              "number": "employees[&3].Phone.@(1,type)"
+            }
+          }
+        }
+      }
+    }
+  }
+  ,
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees[&1].&",
+          "Phone": {
+            "*": "employees[&2].&Phone"
+          }
+        }
+      }
+    }
+    }
+]

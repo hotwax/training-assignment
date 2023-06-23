@@ -1,0 +1,26 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "employees": {
+        "*": {
+          "temp": "=divide(@(1,salary),1000)",
+          "ans": "=divide(@(1,temp),0.01)",
+          "salary": "=intSum(@(1,salary), @(1,ans))"
+        }
+      }
+    }
+ },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "temp": "",
+          "ans": "",
+          "multi": ""
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "name": "employees.@(1,id).&",
+          "department": "employees.@(1,id).&"
+        }
+      }
+    }
+  }
+]
+
+Another approach
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "employees": {
+        "*": {
+          "*": "employees.@(1,id).&"
+        }
+      }
+    }
+  },
+  {
+    "operation": "remove",
+    "spec": {
+      "employees": {
+        "*": {
+          "id": ""
+        }
+      }
+    }
+  }
+]

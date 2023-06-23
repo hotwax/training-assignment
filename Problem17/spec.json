@@ -1,0 +1,27 @@
+[
+  {
+    "operation": "modify-default-beta",
+    "spec": {
+      "products": {
+        "*": {
+          "available": false
+        }
+      }
+    }
+ }
+]
+
+Another approach 
+
+[
+  {
+    "operation": "default",
+    "spec": {
+      "products[]": {
+        "*": {
+          "available": false
+        }
+      }
+    }
+ }
+]

@@ -1,0 +1,49 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[&3].Restaurant Rating"
+          },
+          "address": {
+            "value": "[&3].Restaurant Country"
+          }
+        },
+        "itemsList": {
+          "*": {
+            "itemName": "[&3].Dishes.[&1].Dish Name",
+            "itemPrice": "[&3].Dishes.[&1].Dish Price"
+          }
+        }
+      }
+    }
+    }
+]
+
+Another approch
+
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "restaurant": {
+          "rating": {
+            "value": "[#4].Restaurant Rating"
+          },
+          "address": {
+            "value": "[#4].Restaurant Country"
+          }
+        },
+        "itemsList": {
+          "*": {
+            "itemName": "[#4].Dishes.[#2].Dish Name",
+            "itemPrice": "[#4].Dishes.[#2].Dish Price"
+          }
+        }
+      }
+    }
+    }
+]
