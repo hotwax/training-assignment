@@ -1,0 +1,84 @@
+Case 1: All urls are correct and words present in the word.txt file.
+
+Expected Output:
+https://www.geeksforgeeks.org/javascript/
+[ [ 'java', 319 ], [ 'javascript', 312 ], [ 'the', 73 ] ]
+***********************************************
+
+https://www.geeksforgeeks.org/java-tutorial/
+[ [ 'java', 381 ], [ 'the', 68 ], [ 'python', 17 ] ]
+***********************************************
+
+https://www.geeksforgeeks.org/python-3-basics/
+[ [ 'python', 607 ], [ 'the', 88 ], [ 'java', 17 ] ]
+***********************************************
+
+[
+  [ 'java', 717 ],
+  [ 'python', 624 ],
+  [ 'javascript', 312 ],
+  [ 'the', 229 ],
+  [ 'thejava', 0 ]
+]
+Actual Output:
+https://www.geeksforgeeks.org/javascript/
+[ [ 'java', 319 ], [ 'javascript', 312 ], [ 'the', 73 ] ]
+***********************************************
+
+https://www.geeksforgeeks.org/java-tutorial/
+[ [ 'java', 381 ], [ 'the', 68 ], [ 'python', 17 ] ]
+***********************************************
+
+https://www.geeksforgeeks.org/python-3-basics/
+[ [ 'python', 607 ], [ 'the', 88 ], [ 'java', 17 ] ]
+***********************************************
+
+[
+  [ 'java', 717 ],
+  [ 'python', 624 ],
+  [ 'javascript', 312 ],
+  [ 'the', 229 ],
+  [ 'thejava', 0 ]
+]
+
+
+Case 2: words.txt file is missing.
+
+Expected Output:
+Words.txt file does not exists in current directory.
+
+Actual Output:
+Words.txt file does not exists in current directory.
+
+Case 3: If word.txt file is empty.
+
+Expected Output:
+No words found...
+
+Actual Output:
+No words found...
+
+Case 4: If Urls.txt file is empty.
+
+Expected Output:
+No urls found...".
+
+Actual Output:
+No urls found...".
+
+Case 5: Invalid urls
+
+Expected Output:
+Invalid url 
+
+Actual Output:
+Invalid url
+
+
+Case 6: If Url.txt file is missing
+
+Expected Output:
+Urls.txt file does not exists in current directory.
+
+Actual Output:
+Urls.txt file does not exists in current directory.

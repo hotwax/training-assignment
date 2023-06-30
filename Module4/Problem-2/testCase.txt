@@ -1,0 +1,130 @@
+Choose options from the menu.
+1. Create a new employee.
+2. Delete an employee.
+3. Search an employee.
+4. Display all employees.
+5 Exit
+
+Case 1: For adding a new employee to the file.
+Input: 
+Enter your name: vishal singh
+Enter your email id: vishalsin66@gmail.com
+Enter your age: 22
+Enter your dob yyyy-mm-dd: 2001-03-28
+
+Output:
+Vishal is added to employees.txt
+
+
+Case 2: For deleting an existing employee from the file.
+Input: 
+Enter you choice: 2
+Enter the user id: 1    
+
+Output:
+Employee deleted successfully
+
+Case 3: For displaying all employee data.
+Input:
+Enter you choice: 4
+
+
+Output:
+[
+  Employee {
+    name: ' Alice',
+    email: '  alice@example.com',
+    age: '  25',
+    dob: '  9/9/1990\r',
+    id: '0'
+  },
+  Employee {
+    name: ' Peter',
+    email: '  peter@example.com',
+    age: '  28',
+    dob: '  9/9/1990\r',
+    id: '2'
+  },
+  Employee {
+    name: ' Neymar',
+    email: ' ney@example.com',
+    age: ' 34',
+    dob: ' 9/9/1990\r',
+    id: '3'
+  },
+  Employee {
+    name: ' Aditya',
+    email: '  adi@example.com',
+    age: '  29',
+    dob: '  9/9/1990\r',
+    id: '4'
+  },
+  Employee {
+    name: ' Gaurav',
+    email: '  gayrav@example.com',
+    age: '  21',
+    dob: '  9/9/1990\r',
+    id: '5'
+  },
+  Employee {
+    name: ' Adam',
+    email: '  adam@example.com',
+    age: '  38',
+    dob: '  9/9/1990\r',
+    id: '6'
+  },
+  Employee {
+    name: ' gilchrist',
+    email: '  gil@example.com',
+    age: '  26',
+    dob: '  9/9/1990\r',
+    id: '7'
+  },
+  Employee {
+    name: ' Sheriff',
+    email: '  sheriff@example.com',
+    age: '  24',
+    dob: '  9/9/1990\r',
+    id: '8'
+  },
+  Employee {
+    name: ' vishal singh',
+    email: '  vishalsin66@gmail.com',
+    age: '  21',
+    dob: '  9/9/1990',
+    id: '9'
+  }
+]
+
+Case 4: Handling an invalid option.
+Input:
+Enter you choice: 7
+
+
+Output:
+Inavlid choice.
+
+Case 5: For displaying employee data with invalid information. Here we can search the employee as per their id.
+Input:
+Enter you choice: 3
+Enter the text to search: 9
+
+Output:
+
+Order by (name, email, age, dob): name
+[
+  Employee {
+    name: ' vishal singh',
+    email: '  vishalsin66@gmail.com',
+    age: '  21',
+    dob: '  9/9/1990',
+    id: '9'
+  }
+]
+
+Case 6: Terminates the program.
+Input:
+Enter you choice: 5
+
+Output:
+Program terminates.
