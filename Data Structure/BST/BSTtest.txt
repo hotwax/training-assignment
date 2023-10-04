@@ -1,0 +1,159 @@
+Operations:
+
+1. Insert
+2. Delete
+3. Inorder Traversal
+4. Preorder Traversal
+5. Postorder Traversal
+6. Search
+7. Exit
+
+
+Test case-1 (Test case for insertion)
+
+choice- 1
+ input- 50
+choice- 1
+ input- 80
+choice- 1 
+ input- 30
+choice- 1 
+ input- 40
+choice- 1 
+ input- 20
+choice- 1  
+ input- 100
+choice - 3
+
+Output:- 
+Inorder Traversal: 20 30 40 50 80 100 
+
+------------------------------------------------------------------------------------------------  
+
+Test case-2 (Test case for deletion)
+
+choice- 1
+ input- 50
+choice- 1
+ input- 80
+choice-1 
+ input- 30
+choice- 1 
+ input- 40
+choice- 1 
+ input- 20
+choice- 1 
+ input- 100
+choice- 2
+ input - 50
+choice - 3
+
+Output:-
+ 
+Inorder Traversal:
+20 30 40 80 100
+
+------------------------------------------------------------------------------------------------   
+
+Test case-3 (Test case for inorder Traversal)
+
+choice- 1
+ input- 80
+choice- 1 
+ input- 30
+choice- 1 
+ input- 40
+choice- 1 
+ input- 20
+choice- 1 
+ input- 100
+choice - 3
+
+Output:-
+
+Inorder Traversal:
+20 30 40 80 100
+
+------------------------------------------------------------------------------------------------   
+
+Test case-4 (Test case for Preorder Traversal)
+
+choice- 1
+ input- 80
+choice- 1 
+ input- 30
+choice- 1 
+ input- 40
+choice- 1 
+ input- 20
+choice- 1 
+ input- 100
+choice - 4
+
+Output:- Preorder Traversal: 80 30 20 40 100 
+
+------------------------------------------------------------------------------------------------   
+
+Test case-5 (Test case for postorder Traversal)
+
+choice- 1
+ input- 80
+choice- 1 
+ input- 30
+choice- 1 
+ input- 40
+choice- 1 
+ input- 20
+choice- 1 
+ input- 100
+choice - 4
+
+Output:- Postorder Traversal: 20 40 30 100 80
+
+------------------------------------------------------------------------------------------------   
+
+Test case-6 (Test case for Searching)
+
+choice- 1
+ input- 80
+choice- 1 
+ input- 30
+choice- 1 
+ input- 40
+choice- 1 
+ input- 20
+choice- 1  
+ input- 100
+choice- 5
+ input - 100
+
+Output:- found in tree
+
+choice- 1
+ input- 80
+choice- 1 
+ input- 30
+choice- 1 
+ input- 40
+choice- 1 
+ input- 20
+choice- 1  
+ input- 100
+choice- 5
+ input- 200
+
+Output:- Not found
+
+------------------------------------------------------------------------------------------------   
+
+Test case-7 (Test case for Invalid user choice from Menu)
+
+choice- 8
+Output:- Invalid choice
+
+------------------------------------------------------------------------------------------------   
+
+Test case-8 (Test case for invalid input type)
+
+input- a
+Output:- java.util.InputMismatchException
