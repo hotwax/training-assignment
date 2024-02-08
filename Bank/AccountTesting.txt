@@ -1,0 +1,54 @@
+Test case - 1 (Test case for non-synchronized manner(unsafe))
+
+Input - 
+    Balance - 1000
+
+Output:-
+
+Akhil Completed withdraw of 200
+Kunal Completed withdraw of 200
+Akhil is going to withdraw 200
+Kunal is going to withdraw 200
+Akhil Completed withdraw of 200
+Kunal Completed withdraw of 200
+Akhil is going to withdraw 200
+Kunal is going to withdraw 200
+Akhil Completed withdraw of 200
+Kunal Completed withdraw of 200
+Account is Overdrawn
+Account is Overdrawn
+Not Enough Amount for Kunal  to withdraw -200
+Account is Overdrawn
+Not Enough Amount for Akhil  to withdraw -200
+Account is Overdrawn
+Not Enough Amount for Akhil  to withdraw -200
+Account is Overdrawn
+Not Enough Amount for Kunal  to withdraw -200
+Account is Overdrawn
+
+-------------------------------------------------------------------------------
+
+Test case -2 (Test case for synchronized manner(safe))
+
+Input - 
+    Balance - 1000
+
+Output:-
+
+Kunal is going to withdraw 200
+Kunal Completed withdraw of 200
+Kunal is going to withdraw 200
+Kunal Completed withdraw of 200
+Kunal is going to withdraw 200
+Kunal Completed withdraw of 200
+Kunal is going to withdraw 200
+Kunal Completed withdraw of 200
+Kunal is going to withdraw 200
+Kunal Completed withdraw of 200
+Not Enough Amount for Akhil  to withdraw 0
+Not Enough Amount for Akhil  to withdraw 0
+Not Enough Amount for Akhil  to withdraw 0
+Not Enough Amount for Akhil  to withdraw 0
+Not Enough Amount for Akhil  to withdraw 0
+
+-------------------------------------------------------------------------------
